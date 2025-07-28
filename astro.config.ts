@@ -71,9 +71,7 @@ export default defineConfig({
     }),
   ],
 
-  image: {
-    domains: ['cdn.pixabay.com'],
-  },
+  // Removed image.domains block!
 
   markdown: {
     remarkPlugins: [readingTimeRemarkPlugin],
