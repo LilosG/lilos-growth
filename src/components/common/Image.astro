@@ -1,80 +1,15 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-import { findImage } from '~/utils/images';
-import {
-  getImagesOptimized,
-  astroAssetsOptimizer,
-  unpicOptimizer,
-  isUnpicCompatible,
-  type ImageProps,
-} from '~/utils/images-optimization';
-
-type Props = ImageProps;
-type ImageType = {
-  src: string;
-  attributes: HTMLAttributes<'img'>;
-};
-
-const props = Astro.props;
+const { src, alt = '', class: className = '', ...rest } = Astro.props;
 
 // Require alt attribute (Astro best practice)
-if (props.alt === undefined || props.alt === null) {
+if (!alt) {
   throw new Error('Image alt attribute is required');
-}
-
-// Parse width/height if provided as string
-if (typeof props.width === 'string') {
-  props.width = parseInt(props.width);
-}
-if (typeof props.height === 'string') {
-  props.height = parseInt(props.height);
-}
-
-// Default lazy loading and async decoding
-if (!props.loading) {
-  props.loading = 'lazy';
-}
-if (!props.decoding) {
-  props.decoding = 'async';
-}
-
-// Special case for SVG files: skip optimization, just render <img>
-const isSVG = typeof props.src === "string" && props.src.endsWith('.svg');
-
-const _image = await findImage(props.src);
-
-let image: ImageType | undefined = undefined;
-
-if (
-  typeof _image === 'string' &&
-  (_image.startsWith('http://') || _image.startsWith('https://')) &&
-  isUnpicCompatible(_image)
-) {
-  image = await getImagesOptimized(_image, props, unpicOptimizer);
-} else if (_image) {
-  image = await getImagesOptimized(_image, props, astroAssetsOptimizer);
 }
 ---
 
-{isSVG ? (
-  <img
-    src={props.src}
-    alt={props.alt}
-    width={props.width}
-    height={props.height}
-    loading={props.loading}
-    decoding={props.decoding}
-    {...props}
-  />
-) : (
-  !image ? (
-    <Fragment />
-  ) : (
-    <img
-      src={image.src}
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-      {...image.attributes}
-    />
-  )
-)}
+<img
+  src={typeof src === 'string' ? src : src?.src}
+  alt={alt}
+  class={className}
+  {...rest}
+/>
