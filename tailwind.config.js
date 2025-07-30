@@ -1,23 +1,20 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
 import plugin from 'tailwindcss/plugin';
 import typographyPlugin from '@tailwindcss/typography';
 
 export default {
-  content: [
-    './src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}',
-  ],
+  content: ['./src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
       colors: {
-        primary: '#f56b2a',        // Vibrant orange
-        primaryHover: '#e65c1e',   // Darker orange for hover state
-        secondary: '#1f2d3d',      // Deep charcoal/navy
-        heading: '#1f2d3d',        // Heading text color
-        body: '#4a4a4a',           // Body text color
-        cream: '#fff9f6',          // Warm neutral
-        bluelight: '#f0f4f8',      // Adjusted for better accessibility
-        graylight: '#f8fafc',      // Ultra-light gray
-        pattern: '#eaeaea',        // Subtle pattern (optional)
+        primary: '#f56b2a', // Vibrant orange
+        primaryHover: '#e65c1e', // Darker orange for hover state
+        secondary: '#1f2d3d', // Deep charcoal/navy
+        heading: '#1f2d3d', // Heading text color
+        body: '#4a4a4a', // Body text color
+        cream: '#fff9f6', // Warm neutral
+        bluelight: '#f0f4f8', // Adjusted for better accessibility
+        graylight: '#f8fafc', // Ultra-light gray
+        pattern: '#eaeaea', // Subtle pattern (optional)
       },
       fontFamily: {
         heading: ['Poppins', 'sans-serif'],

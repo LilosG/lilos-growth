@@ -7,9 +7,4 @@ if (!alt) {
 }
 ---
 
-<img
-  src={typeof src === 'string' ? src : src?.src}
-  alt={alt}
-  class={className}
-  {...rest}
-/>
+<img src={typeof src === 'string' ? src : src?.src} alt={alt} class={className} {...rest} />
