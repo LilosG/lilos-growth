@@ -19,7 +19,7 @@ import Layout from '~/layouts/PageLayout.astro';
         Fill out the form below and a home service marketing expert will reach out within 24 hours.<br />
         Prefer email? <a href="mailto:hello@lilosgrowth.com" class="text-primary underline">hello@lilosgrowth.com</a>
       </p>
-      <form class="flex flex-col gap-5 w-full" name="contact" method="POST" netlify>
+      <form class="flex flex-col gap-5 w-full" name="contact" method="POST" data-netlify="true">
         <input type="hidden" name="form-name" value="contact" />
         <input type="text" name="name" placeholder="Your Name" required
           class="border border-gray-300 rounded-lg px-5 py-4 text-base focus:outline-primary transition" />

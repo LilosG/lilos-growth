@@ -1,5 +1,5 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
+import Layout from '~/layouts/Layout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
@@ -90,18 +90,14 @@ const metadata = {
       {
         src: '/paypal-svgrepo-com.svg',
         alt: 'Paypal',
-        width: 120,
-        height: 48,
       },
       {
         src: '/visa.svg',
         alt: 'Visa',
-        width: 120,
-        height: 48,
       },
       // Add more local logos here if you have them:
-      // { src: '/ebay.svg', alt: 'Ebay', width: 120, height: 48 },
-      // { src: '/google.svg', alt: 'Google', width: 120, height: 48 },
+      // { src: '/ebay.svg', alt: 'Ebay', height: 48 },
+      // { src: '/google.svg', alt: 'Google', height: 48 },
     ]}
   />
 
