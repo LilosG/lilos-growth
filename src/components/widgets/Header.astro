@@ -1,11 +1,6 @@
 ---
-const navLinks = [
-  { text: 'Home', href: '/' },
-  { text: 'Services', href: '/services' },
-  { text: 'Packages', href: '/packages' },
-  { text: 'About', href: '/about' },
-  { text: 'Contact', href: '/contact' }, // Remove if you don't want it
-];
+// Adjust the import path as needed!
+import { headerData } from '../../navigation';
 ---
 
 <header class="sticky top-0 z-50 bg-white/95 shadow-md border-b border-gray-100 transition-all duration-200">
@@ -20,13 +15,43 @@ const navLinks = [
       <!-- Navigation Center/Right -->
       <nav class="hidden md:flex space-x-10">
         {
-          navLinks.map((link) => (
-            <a
-              href={link.href}
-              class="text-heading font-medium text-lg hover:text-primary transition-colors duration-150"
-            >
-              {link.text}
-            </a>
+          headerData.links.map((link) => (
+            link.links ? (
+              // Dropdown menu item with fade animation
+              <div class="group relative inline-block">
+                <button
+                  class="text-heading font-medium text-lg hover:text-primary transition-colors duration-150 flex items-center"
+                  tabindex="0"
+                >
+                  {link.text}
+                  <svg class="ml-1 w-4 h-4 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6"></path>
+                  </svg>
+                </button>
+                <div
+                  class="pointer-events-none opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 group-focus-within:opacity-100 group-focus-within:scale-100 group-hover:pointer-events-auto group-focus-within:pointer-events-auto transition-all duration-200 absolute left-0 mt-2 w-52 bg-white border border-gray-100 rounded-2xl shadow-lg py-2 z-20"
+                  style="transition-property: opacity, transform;"
+                >
+                  {
+                    link.links.map((sublink) => (
+                      <a
+                        href={sublink.href}
+                        class="block px-5 py-2 text-heading text-base font-medium hover:bg-[#fff7f0] hover:text-primary rounded transition"
+                      >
+                        {sublink.text}
+                      </a>
+                    ))
+                  }
+                </div>
+              </div>
+            ) : (
+              <a
+                href={link.href}
+                class="text-heading font-medium text-lg hover:text-primary transition-colors duration-150"
+              >
+                {link.text}
+              </a>
+            )
           ))
         }
       </nav>
@@ -37,9 +62,9 @@ const navLinks = [
           class="bg-primary text-white px-7 py-3 rounded-full font-semibold text-base shadow hover:bg-secondary transition-all duration-150 flex items-center"
         >
           Book a Call
-          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
-            ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-          >
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M5 12h14M13 18l6-6-6-6"></path>
+          </svg>
         </a>
       </div>
       <!-- Mobile Menu Placeholder -->

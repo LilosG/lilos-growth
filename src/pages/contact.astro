@@ -13,26 +13,30 @@ import Layout from '~/layouts/PageLayout.astro';
   </head>
 
   <Layout>
+    <!-- CONTACT HERO & FORM -->
     <section class="bg-[#253242] min-h-[100vh] flex items-center justify-center py-20 px-4">
       <div
         class="bg-white rounded-3xl shadow-2xl border border-gray-100 px-8 py-12 md:p-16 flex flex-col items-center w-full max-w-xl mx-auto"
       >
         <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="mb-6 w-24" />
         <h1 class="text-3xl md:text-4xl font-heading font-extrabold text-heading text-center mb-3">
-          Let’s Grow Your Business.<br />Get in Touch!
+          Let's Grow Your Business.<br />Get in Touch!
         </h1>
         <p class="text-base text-body mb-7 text-center max-w-lg">
           Fill out the form below and a home service marketing expert will reach out within 24 hours.<br />
           Prefer email? <a href="mailto:hello@lilosgrowth.com" class="text-primary underline">hello@lilosgrowth.com</a>
         </p>
-        <form class="flex flex-col gap-5 w-full" name="contact" method="POST" data-netlify="true">
+        <form class="flex flex-col gap-5 w-full" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" autocomplete="on">
           <input type="hidden" name="form-name" value="contact" />
+          <!-- Honeypot for spam prevention -->
+          <input type="hidden" name="bot-field" />
           <input
             type="text"
             name="name"
             placeholder="Your Name"
             required
             class="border border-gray-300 rounded-lg px-5 py-4 text-base focus:outline-primary transition"
+            autocomplete="name"
           />
           <input
             type="email"
@@ -40,18 +44,22 @@ import Layout from '~/layouts/PageLayout.astro';
             placeholder="Email Address"
             required
             class="border border-gray-300 rounded-lg px-5 py-4 text-base focus:outline-primary transition"
+            autocomplete="email"
           />
           <input
             type="text"
             name="phone"
             placeholder="Phone Number (optional)"
             class="border border-gray-300 rounded-lg px-5 py-4 text-base focus:outline-primary transition"
+            autocomplete="tel"
           />
           <textarea
             name="message"
             rows="4"
+            required
             placeholder="How can we help you?"
-            class="border border-gray-300 rounded-lg px-5 py-4 text-base focus:outline-primary transition"></textarea>
+            class="border border-gray-300 rounded-lg px-5 py-4 text-base focus:outline-primary transition"
+          ></textarea>
           <button
             type="submit"
             class="mt-2 px-8 py-4 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#f34e00] transition flex items-center justify-center"
@@ -64,7 +72,8 @@ import Layout from '~/layouts/PageLayout.astro';
         </form>
         <div class="mt-8 text-center text-body text-sm">
           <div>
-            Email: <a href="mailto:hello@lilosgrowth.com" class="text-primary underline">hello@lilosgrowth.com</a>
+            <span class="font-medium text-heading">Email:</span>
+            <a href="mailto:hello@lilosgrowth.com" class="text-primary underline ml-1">hello@lilosgrowth.com</a>
           </div>
           <div>Serving home service businesses nationwide</div>
           <div class="mt-2 text-gray-400 text-xs">We’ll reply within 24 hours. Your info is always confidential.</div>
@@ -72,6 +81,4 @@ import Layout from '~/layouts/PageLayout.astro';
       </div>
     </section>
   </Layout>
-
-
 </html>
