@@ -2,50 +2,54 @@
 import Logo from '../Logo.astro'; // Adjust path if needed
 ---
 
-<footer class="bg-[#1f2d3d] border-t-4 border-[#f56b2a] shadow-md pt-10 pb-6 text-white">
-  <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-start gap-10">
-    <!-- Left: Logo & Tagline -->
-    <div class="flex flex-col items-start mb-8 md:mb-0">
-      <Logo class="mb-2" />
-      <span class="font-heading text-2xl font-bold mt-2">Lilos Growth</span>
-      <span class="text-base mt-2 mb-2 text-white/70">Growth Marketing for Home Service Businesses</span>
-      <div class="flex items-center gap-2 mt-1">
+<footer class="bg-[#1f2d3d] border-t-4 border-[#f56b2a] shadow-md pt-12 pb-6 text-white">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
+    <!-- Left: Branding -->
+    <div class="flex flex-col justify-between min-h-[180px]">
+      <div>
+        <Logo class="mb-2 w-28" />
+        <span class="font-heading text-2xl font-bold mt-2 block">Lilos Growth</span>
+        <span class="text-base mt-2 mb-2 text-white/70 block">Growth Marketing for Home Service Businesses</span>
+      </div>
+      <div class="flex items-center gap-2 mt-4">
         <svg class="h-5 w-5 text-[#f56b2a]" fill="currentColor" viewBox="0 0 20 20">
-          <path
-            d="M10 15l-4.472 2.951 1.352-4.76L3 9.549l4.902-.426L10 4.5l2.098 4.623 4.902.426-3.88 3.642 1.352 4.76z"
-          ></path>
+          <path d="M10 15l-4.472 2.951 1.352-4.76L3 9.549l4.902-.426L10 4.5l2.098 4.623 4.902.426-3.88 3.642 1.352 4.76z"/>
         </svg>
         <span class="text-[#f56b2a] text-sm font-semibold">5.0 Google Rated</span>
       </div>
     </div>
-
-    <!-- Middle: Quick Links -->
-    <nav class="flex flex-col gap-1 min-w-[170px]">
-      <h4 class="font-heading font-semibold mb-2 text-lg text-[#f56b2a]">Quick Links</h4>
-      <a href="/services" class="hover:text-[#f56b2a] transition">Services</a>
-      <a href="/packages" class="hover:text-[#f56b2a] transition">Packages</a>
-      <a href="/about" class="hover:text-[#f56b2a] transition">About</a>
-      <a href="/faq" class="hover:text-[#f56b2a] transition">FAQ</a>
-      <a href="/contact" class="hover:text-[#f56b2a] transition">Contact</a>
-    </nav>
-
-    <!-- Right: Contact -->
-    <div class="flex flex-col gap-2 min-w-[200px]">
-      <h4 class="font-heading font-semibold mb-2 text-lg text-[#f56b2a]">Contact</h4>
-      <a href="mailto:hello@lilosgrowth.com" class="hover:text-[#f56b2a] transition flex items-center gap-2">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <rect x="4" y="4" width="16" height="16" rx="2" />
-          <path d="M22 6l-10 7L2 6"></path>
-        </svg>
-        hello@lilosgrowth.com
-      </a>
-      <div class="mt-2 flex space-x-4 text-sm">
-        <a href="/privacy-policy" class="hover:text-[#f56b2a] text-white/80 transition">Privacy Policy</a>
-        <a href="/contact" class="hover:text-[#f56b2a] text-white/80 transition">Contact</a>
+    <!-- Right: Links & Contact -->
+    <div class="grid grid-cols-2 gap-8">
+      <!-- Quick Links -->
+      <nav>
+        <h4 class="font-heading font-semibold mb-3 text-lg text-[#f56b2a]">Quick Links</h4>
+        <ul class="flex flex-col gap-1">
+          <li><a href="/services" class="hover:text-[#f56b2a] transition">Services</a></li>
+          <li><a href="/packages" class="hover:text-[#f56b2a] transition">Packages</a></li>
+          <li><a href="/local-seo-tools" class="hover:text-[#f56b2a] transition">Local SEO Tools</a></li>
+          <li><a href="/about" class="hover:text-[#f56b2a] transition">About</a></li>
+          <li><a href="/contact" class="hover:text-[#f56b2a] transition">Contact</a></li>
+          <li><a href="/faq" class="hover:text-[#f56b2a] transition">FAQ</a></li>
+        </ul>
+      </nav>
+      <!-- Contact -->
+      <div>
+        <h4 class="font-heading font-semibold mb-3 text-lg text-[#f56b2a]">Contact</h4>
+        <a href="mailto:hello@lilosgrowth.com" class="hover:text-[#f56b2a] transition flex items-center gap-2 mb-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+            <path d="M22 6l-10 7L2 6"></path>
+          </svg>
+          hello@lilosgrowth.com
+        </a>
+        <div class="text-white/80 text-sm mb-2">Based in San Diego, CA</div>
+        <div class="flex flex-row gap-4 text-sm mt-2">
+          <a href="/privacy-policy" class="hover:text-[#f56b2a] transition">Privacy Policy</a>
+          <a href="/contact" class="hover:text-[#f56b2a] transition">Contact</a>
+        </div>
       </div>
     </div>
   </div>
-
   <div class="mt-10 text-center text-white/60 text-sm">
     &copy; 2025 Lilos Growth. All rights reserved.
   </div>

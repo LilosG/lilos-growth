@@ -1,0 +1,406 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+---
+
+<html lang="en">
+  <head>
+    <title>Local SEO Tools | Lilos Growth</title>
+    <meta
+      name="description"
+      content="Free, powerful local SEO tools for home service businesses. Generate review links, find keywords, create schema, and more—no signup required."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <Layout>
+    <!-- HERO -->
+    <section class="bg-[#253242] py-20 text-center text-white">
+      <div class="max-w-4xl mx-auto px-4">
+        <h1 class="text-5xl font-heading font-extrabold mb-3 text-white">Free Local SEO Tools</h1>
+        <p class="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+          A handpicked toolbox to help your business rank higher, get more leads, and look great online. No signup, just
+          value.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOOL GRID -->
+    <section class="max-w-7xl mx-auto px-4 py-20 grid gap-12 md:grid-cols-3">
+      <!-- FAQ Schema Generator -->
+      <div class="bg-white p-8 rounded-3xl shadow-lg flex flex-col items-center">
+        <h2 class="text-xl font-heading font-bold mb-3 text-heading text-center">FAQ Schema Generator</h2>
+        <p class="mb-5 text-body text-center text-sm leading-relaxed">
+          Convert your FAQs into Google-ready JSON-LD schema markup. Boost your visibility in search!
+        </p>
+        <form id="faq-form" class="w-full flex flex-col gap-3">
+          <textarea
+            id="faq-input"
+            required
+            rows="5"
+            placeholder="Paste FAQs (Question? Answer.) one per line"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f56b2a]"
+          ></textarea>
+          <button
+            type="submit"
+            class="w-full px-5 py-2 rounded-xl bg-[#f56b2a] text-white font-semibold shadow-lg hover:bg-[#c9400a] transition"
+          >
+            Generate Schema
+          </button>
+        </form>
+        <div id="faq-result" class="mt-5 w-full"></div>
+      </div>
+
+      <!-- Google SERP Preview Tool -->
+      <div class="bg-white p-8 rounded-3xl shadow-lg flex flex-col items-center">
+        <h2 class="text-xl font-heading font-bold mb-3 text-heading text-center">Google SERP Preview</h2>
+        <p class="mb-5 text-body text-center text-sm leading-relaxed">
+          See how your page will look in Google Search results.
+        </p>
+        <form id="serp-form" class="w-full flex flex-col gap-3">
+          <input
+            id="serp-title"
+            type="text"
+            required
+            maxlength="70"
+            placeholder="Title tag (max 70 chars)"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <input
+            id="serp-url"
+            type="text"
+            maxlength="80"
+            placeholder="URL (optional)"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <textarea
+            id="serp-desc"
+            required
+            maxlength="155"
+            placeholder="Meta description (max 155 chars)"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"></textarea>
+          <button
+            type="submit"
+            class="w-full px-5 py-2 rounded-xl bg-[#f56b2a] text-white font-semibold shadow-lg hover:bg-[#c9400a] transition"
+            >Preview SERP</button
+          >
+        </form>
+        <div id="serp-preview" class="mt-5 w-full"></div>
+      </div>
+
+      <!-- UTM Link Builder -->
+      <div class="bg-white p-8 rounded-3xl shadow-lg flex flex-col items-center">
+        <h2 class="text-xl font-heading font-bold mb-3 text-heading text-center">UTM Link Builder</h2>
+        <p class="mb-5 text-body text-center text-sm leading-relaxed">Create trackable URLs for Google Analytics.</p>
+        <form id="utm-form" class="w-full flex flex-col gap-3">
+          <input
+            id="utm-url"
+            type="url"
+            required
+            placeholder="Destination URL"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <input
+            id="utm-source"
+            type="text"
+            required
+            placeholder="Source (e.g. google, newsletter)"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <input
+            id="utm-medium"
+            type="text"
+            required
+            placeholder="Medium (e.g. cpc, email)"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <input
+            id="utm-campaign"
+            type="text"
+            required
+            placeholder="Campaign (e.g. summer-sale)"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <button
+            type="submit"
+            class="w-full px-5 py-2 rounded-xl bg-[#f56b2a] text-white font-semibold shadow-lg hover:bg-[#c9400a] transition"
+            >Build UTM Link</button
+          >
+        </form>
+        <div id="utm-result" class="mt-5 w-full break-all"></div>
+      </div>
+
+      <!-- Local Business Schema Generator -->
+      <div class="bg-white p-8 rounded-3xl shadow-lg flex flex-col items-center">
+        <h2 class="text-xl font-heading font-bold mb-3 text-heading text-center">Local Business Schema Generator</h2>
+        <p class="mb-5 text-body text-center text-sm leading-relaxed">
+          Generate structured data markup for your business (JSON-LD format).
+        </p>
+        <form id="lbschema-form" class="w-full flex flex-col gap-3">
+          <input
+            id="lb-name"
+            type="text"
+            required
+            placeholder="Business Name"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <input
+            id="lb-phone"
+            type="text"
+            required
+            placeholder="Phone Number"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <input
+            id="lb-address"
+            type="text"
+            required
+            placeholder="Street Address"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <input
+            id="lb-city"
+            type="text"
+            required
+            placeholder="City"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <input
+            id="lb-state"
+            type="text"
+            required
+            placeholder="State"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <input
+            id="lb-zip"
+            type="text"
+            required
+            placeholder="ZIP Code"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <button
+            type="submit"
+            class="w-full px-5 py-2 rounded-xl bg-[#f56b2a] text-white font-semibold shadow-lg hover:bg-[#c9400a] transition"
+            >Generate Schema</button
+          >
+        </form>
+        <div id="lbschema-result" class="mt-5 w-full"></div>
+      </div>
+
+      <!-- Google Maps Embed Generator -->
+      <div class="bg-white p-8 rounded-3xl shadow-lg flex flex-col items-center">
+        <h2 class="text-xl font-heading font-bold mb-3 text-heading text-center">Google Maps Embed Generator</h2>
+        <p class="mb-5 text-body text-center text-sm leading-relaxed">
+          Generate an embed code for your business location.
+        </p>
+        <form id="maps-form" class="w-full flex flex-col gap-3">
+          <input
+            id="maps-address"
+            type="text"
+            required
+            placeholder="Address or Place"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <button
+            type="submit"
+            class="w-full px-5 py-2 rounded-xl bg-[#f56b2a] text-white font-semibold shadow-lg hover:bg-[#c9400a] transition"
+            >Generate Embed</button
+          >
+        </form>
+        <div id="maps-result" class="mt-5 w-full"></div>
+      </div>
+
+      <!-- Local Keyword Generator -->
+      <div class="bg-white p-8 rounded-3xl shadow-lg flex flex-col items-center">
+        <h2 class="text-xl font-heading font-bold mb-3 text-heading text-center">Local Keyword Generator</h2>
+        <p class="mb-5 text-body text-center text-sm leading-relaxed">
+          Get powerful local keyword ideas for your next page or ad.
+        </p>
+        <form id="keyword-form" class="w-full flex flex-col gap-3">
+          <input
+            id="keyword-service"
+            type="text"
+            required
+            placeholder="Service (e.g. Plumbing)"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <input
+            id="keyword-location"
+            type="text"
+            required
+            placeholder="Location (City or Zip)"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300"
+          />
+          <button
+            type="submit"
+            class="w-full px-5 py-2 rounded-xl bg-[#f56b2a] text-white font-semibold shadow-lg hover:bg-[#c9400a] transition"
+            >Generate Ideas</button
+          >
+        </form>
+        <div id="keyword-result" class="mt-5 w-full"></div>
+      </div>
+    </section>
+
+    <script type="module" is:inline>
+      // FAQ Schema Generator
+      document.getElementById('faq-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const input = document.getElementById('faq-input').value.trim();
+        if (!input) return;
+        const lines = input
+          .split('\n')
+          .map((l) => l.trim())
+          .filter(Boolean);
+        const faqs = [];
+        let q = '',
+          a = '';
+        lines.forEach((line) => {
+          if (line.endsWith('?')) {
+            if (q && a) faqs.push({ q, a });
+            q = line;
+            a = '';
+          } else if (q && !a) {
+            a = line;
+          } else if (q && a) {
+            faqs.push({ q, a });
+            q = '';
+            a = '';
+          }
+        });
+        if (q && a) faqs.push({ q, a });
+        if (!faqs.length) {
+          document.getElementById('faq-result').innerHTML =
+            '<span class="text-red-600">Please format as Question? Answer. pairs.</span>';
+          return;
+        }
+        const schema = {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faqs.map((faq) => ({
+            '@type': 'Question',
+            name: faq.q,
+            acceptedAnswer: { '@type': 'Answer', text: faq.a },
+          })),
+        };
+        document.getElementById('faq-result').innerHTML = `
+          <textarea
+            rows="16"
+            readonly
+            class="w-full p-4 mt-4 rounded-xl border-2 border-[#f56b2a]/30 text-base bg-gray-50 font-mono select-all resize-y transition focus:ring-2 focus:ring-[#f56b2a]"
+            style="min-height:180px"
+          >${JSON.stringify(schema, null, 2)}</textarea>
+        `;
+      });
+
+      // Google SERP Preview Tool
+      document.getElementById('serp-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const title = document.getElementById('serp-title').value;
+        const url = document.getElementById('serp-url').value || 'www.example.com/your-page';
+        const desc = document.getElementById('serp-desc').value;
+        document.getElementById('serp-preview').innerHTML = `
+          <div class="bg-[#fff] border border-[#e3e6e8] rounded-xl p-4 mt-3 shadow">
+            <div class="text-[#1a0dab] text-xl font-semibold leading-tight">${title}</div>
+            <div class="text-[#006621] text-base mb-1">${url}</div>
+            <div class="text-[#545454] text-base">${desc}</div>
+          </div>
+        `;
+      });
+
+      // UTM Link Builder
+      document.getElementById('utm-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const url = document.getElementById('utm-url').value.trim();
+        const source = document.getElementById('utm-source').value.trim();
+        const medium = document.getElementById('utm-medium').value.trim();
+        const campaign = document.getElementById('utm-campaign').value.trim();
+        if (!url || !source || !medium || !campaign) return;
+        const utm = `${url}${url.includes('?') ? '&' : '?'}utm_source=${encodeURIComponent(source)}&utm_medium=${encodeURIComponent(medium)}&utm_campaign=${encodeURIComponent(campaign)}`;
+        document.getElementById('utm-result').innerHTML = `
+          <textarea
+            rows="4"
+            readonly
+            class="w-full p-4 mt-4 rounded-xl border-2 border-[#f56b2a]/30 text-base bg-gray-50 font-mono select-all resize-y transition"
+            style="min-height:70px"
+          >${utm}</textarea>
+        `;
+      });
+
+      // Local Business Schema Generator
+      document.getElementById('lbschema-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('lb-name').value.trim();
+        const phone = document.getElementById('lb-phone').value.trim();
+        const address = document.getElementById('lb-address').value.trim();
+        const city = document.getElementById('lb-city').value.trim();
+        const state = document.getElementById('lb-state').value.trim();
+        const zip = document.getElementById('lb-zip').value.trim();
+        if (!name || !phone || !address || !city || !state || !zip) return;
+        const schema = {
+          '@context': 'https://schema.org',
+          '@type': 'LocalBusiness',
+          name: name,
+          telephone: phone,
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: address,
+            addressLocality: city,
+            addressRegion: state,
+            postalCode: zip,
+          },
+        };
+        document.getElementById('lbschema-result').innerHTML = `
+          <textarea
+            rows="16"
+            readonly
+            class="w-full p-4 mt-4 rounded-xl border-2 border-[#f56b2a]/30 text-base bg-gray-50 font-mono select-all resize-y transition focus:ring-2 focus:ring-[#f56b2a]"
+            style="min-height:180px"
+          >${JSON.stringify(schema, null, 2)}</textarea>
+        `;
+      });
+
+      // Google Maps Embed Generator
+      document.getElementById('maps-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const address = document.getElementById('maps-address').value.trim();
+        if (!address) return;
+        const query = encodeURIComponent(address);
+        const embed = `<iframe src="https://www.google.com/maps?q=${query}&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`;
+        document.getElementById('maps-result').innerHTML = `
+          <textarea
+            rows="5"
+            readonly
+            class="w-full p-4 mt-4 rounded-xl border-2 border-[#f56b2a]/30 text-base bg-gray-50 font-mono select-all resize-y transition"
+            style="min-height:90px"
+          >${embed}</textarea>
+        `;
+      });
+
+      // Local Keyword Generator
+      document.getElementById('keyword-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const service = document.getElementById('keyword-service').value.trim();
+        const location = document.getElementById('keyword-location').value.trim();
+        if (!service || !location) return;
+        const keywords = [
+          `${service} near me`,
+          `${service} in ${location}`,
+          `best ${service} ${location}`,
+          `${location} ${service} services`,
+          `${service} company ${location}`,
+          `affordable ${service} in ${location}`,
+          `top rated ${service} ${location}`,
+        ];
+        document.getElementById('keyword-result').innerHTML = `
+          <textarea
+            rows="10"
+            readonly
+            class="w-full p-4 mt-4 rounded-xl border-2 border-[#f56b2a]/30 text-base bg-gray-50 font-mono select-all resize-y transition"
+            style="min-height:120px"
+          >${keywords.join('\n')}</textarea>
+        `;
+      });
+    </script>
+  </Layout>
+
+
+</html>
