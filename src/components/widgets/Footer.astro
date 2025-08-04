@@ -1,56 +1,65 @@
 ---
-import Logo from '../Logo.astro'; // Adjust path if needed
+import Logo from '../Logo.astro'; // Adjust if needed
 ---
 
 <footer class="bg-[#1f2d3d] border-t-4 border-[#f56b2a] shadow-md pt-12 pb-6 text-white">
-  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
-    <!-- Left: Branding -->
-    <div class="flex flex-col justify-between min-h-[180px]">
-      <div>
-        <Logo class="mb-2 w-28" />
-        <span class="font-heading text-2xl font-bold mt-2 block">Lilos Growth</span>
-        <span class="text-base mt-2 mb-2 text-white/70 block">Growth Marketing for Home Service Businesses</span>
-      </div>
-      <div class="flex items-center gap-2 mt-4">
-        <svg class="h-5 w-5 text-[#f56b2a]" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M10 15l-4.472 2.951 1.352-4.76L3 9.549l4.902-.426L10 4.5l2.098 4.623 4.902.426-3.88 3.642 1.352 4.76z"/>
-        </svg>
-        <span class="text-[#f56b2a] text-sm font-semibold">5.0 Google Rated</span>
-      </div>
-    </div>
-    <!-- Right: Links & Contact -->
-    <div class="grid grid-cols-2 gap-8">
-      <!-- Quick Links -->
-      <nav>
-        <h4 class="font-heading font-semibold mb-3 text-lg text-[#f56b2a]">Quick Links</h4>
-        <ul class="flex flex-col gap-1">
-          <li><a href="/services" class="hover:text-[#f56b2a] transition">Services</a></li>
-          <li><a href="/packages" class="hover:text-[#f56b2a] transition">Packages</a></li>
-          <li><a href="/local-seo-tools" class="hover:text-[#f56b2a] transition">Local SEO Tools</a></li>
-          <li><a href="/about" class="hover:text-[#f56b2a] transition">About</a></li>
-          <li><a href="/contact" class="hover:text-[#f56b2a] transition">Contact</a></li>
-          <li><a href="/faq" class="hover:text-[#f56b2a] transition">FAQ</a></li>
-        </ul>
-      </nav>
-      <!-- Contact -->
-      <div>
-        <h4 class="font-heading font-semibold mb-3 text-lg text-[#f56b2a]">Contact</h4>
-        <a href="mailto:hello@lilosgrowth.com" class="hover:text-[#f56b2a] transition flex items-center gap-2 mb-2">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <rect x="4" y="4" width="16" height="16" rx="2" />
-            <path d="M22 6l-10 7L2 6"></path>
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16 items-start">
+    <!-- Logo, Tagline, and Rating Tightly Grouped -->
+    <div class="flex flex-col items-start">
+      <Logo class="w-28 mb-2" />
+      <h2 class="text-xl font-bold font-heading mb-1">Lilos Growth</h2>
+      <div class="flex flex-col gap-1 mb-2">
+        <p class="text-base text-body">Home Service Marketing Experts</p>
+        <div class="flex items-center">
+          <svg class="w-5 h-5 text-[#f56b2a] mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <polygon points="10 1.5 12.59 7.36 18.97 7.76 14.19 12.14 15.63 18.4 10 15.16 4.37 18.4 5.81 12.14 1.03 7.76 7.41 7.36 10 1.5"/>
           </svg>
-          hello@lilosgrowth.com
-        </a>
-        <div class="text-white/80 text-sm mb-2">Based in San Diego, CA</div>
-        <div class="flex flex-row gap-4 text-sm mt-2">
-          <a href="/privacy-policy" class="hover:text-[#f56b2a] transition">Privacy Policy</a>
-          <a href="/contact" class="hover:text-[#f56b2a] transition">Contact</a>
+          <span class="font-medium text-[#f56b2a] text-base">5.0 Google Rated</span>
         </div>
       </div>
     </div>
+    <!-- Quick Links -->
+    <div class="flex flex-col items-start">
+      <h3 class="text-lg font-semibold text-[#f56b2a] mb-3">Quick Links</h3>
+      <ul class="space-y-1 text-base">
+        <li><a href="/services" class="hover:underline">Services</a></li>
+        <li><a href="/packages" class="hover:underline">Packages</a></li>
+        <li><a href="/seo-tools" class="hover:underline">Local SEO Tools</a></li>
+        <li><a href="/about" class="hover:underline">About</a></li>
+        <li><a href="/contact" class="hover:underline">Contact</a></li>
+        <li><a href="/faq" class="hover:underline">FAQ</a></li>
+      </ul>
+    </div>
+    <!-- Services -->
+    <div class="flex flex-col items-start">
+      <h3 class="text-lg font-semibold text-[#f56b2a] mb-3">Services</h3>
+      <ul class="space-y-1 text-base">
+        <li><a href="/services/local-seo" class="hover:underline">Local SEO</a></li>
+        <li><a href="/services/gbp-optimization" class="hover:underline">GBP Optimization</a></li>
+        <li><a href="/services/website-design" class="hover:underline">Website Design</a></li>
+        <li><a href="/services/reviews-reputation" class="hover:underline">Reviews & Reputation</a></li>
+        <li><a href="/services/seo-tools" class="hover:underline">SEO Tools</a></li>
+      </ul>
+    </div>
+    <!-- Contact -->
+    <div class="flex flex-col items-start">
+      <h3 class="text-lg font-semibold text-[#f56b2a] mb-3">Contact</h3>
+      <ul class="space-y-1 text-base mb-3">
+        <li class="flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 10.7V7a2 2 0 0 0-2-2h-2.18A2 2 0 0 1 15 4.18V3a2 2 0 0 0-2-2H7A2 2 0 0 0 5 3v14a2 2 0 0 0 2 2h6l3.29 3.29a1 1 0 0 0 1.7-.7V17a2 2 0 0 0 2-2v-4.3z"/>
+          </svg>
+          <a href="mailto:hello@lilosgrowth.com" class="hover:underline">hello@lilosgrowth.com</a>
+        </li>
+        <li class="text-gray-300">Based in San Diego, CA</li>
+      </ul>
+      <div class="flex gap-4 mt-2">
+        <a href="/privacy-policy" class="text-gray-300 hover:underline text-sm">Privacy Policy</a>
+        <a href="/contact" class="text-gray-300 hover:underline text-sm">Contact</a>
+      </div>
+    </div>
   </div>
-  <div class="mt-10 text-center text-white/60 text-sm">
-    &copy; 2025 Lilos Growth. All rights reserved.
+  <div class="text-xs text-gray-400 mt-10 text-center max-w-7xl mx-auto px-4">
+    © 2025 Lilos Growth. All rights reserved.
   </div>
 </footer>
