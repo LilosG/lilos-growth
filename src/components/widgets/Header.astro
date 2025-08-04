@@ -12,36 +12,40 @@ import { headerData } from '../../navigation';
       <a href="/" class="flex items-center">
         <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="w-24 md:w-28" />
       </a>
-      <!-- Navigation Center/Right -->
+      <!-- Navigation Center/Right (Desktop) -->
       <nav class="hidden md:flex space-x-10">
         {
-          headerData.links.map((link) => (
+          headerData.links.map((link) =>
             link.links ? (
-              // Dropdown menu item with fade animation
+              // Dropdown menu item
               <div class="group relative inline-block">
                 <button
                   class="text-heading font-medium text-lg hover:text-primary transition-colors duration-150 flex items-center"
                   tabindex="0"
                 >
                   {link.text}
-                  <svg class="ml-1 w-4 h-4 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path d="M6 9l6 6 6-6"></path>
+                  <svg
+                    class="ml-1 w-4 h-4 inline-block"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6 9l6 6 6-6" />
                   </svg>
                 </button>
                 <div
                   class="pointer-events-none opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 group-focus-within:opacity-100 group-focus-within:scale-100 group-hover:pointer-events-auto group-focus-within:pointer-events-auto transition-all duration-200 absolute left-0 mt-2 w-52 bg-white border border-gray-100 rounded-2xl shadow-lg py-2 z-20"
                   style="transition-property: opacity, transform;"
                 >
-                  {
-                    link.links.map((sublink) => (
-                      <a
-                        href={sublink.href}
-                        class="block px-5 py-2 text-heading text-base font-medium hover:bg-[#fff7f0] hover:text-primary rounded transition"
-                      >
-                        {sublink.text}
-                      </a>
-                    ))
-                  }
+                  {link.links.map((sublink) => (
+                    <a
+                      href={sublink.href}
+                      class="block px-5 py-2 text-heading text-base font-medium hover:bg-[#fff7f0] hover:text-primary rounded transition"
+                    >
+                      {sublink.text}
+                    </a>
+                  ))}
                 </div>
               </div>
             ) : (
@@ -52,10 +56,10 @@ import { headerData } from '../../navigation';
                 {link.text}
               </a>
             )
-          ))
+          )
         }
       </nav>
-      <!-- CTA Button Right -->
+      <!-- CTA Button Right (Desktop) -->
       <div class="hidden md:flex items-center space-x-2">
         <a
           href="#book"
@@ -67,9 +71,60 @@ import { headerData } from '../../navigation';
           </svg>
         </a>
       </div>
-      <!-- Mobile Menu Placeholder -->
-      <div class="md:hidden">
-        {/* Mobile nav/menu toggle goes here */}
+      <!-- Hamburger Button (same as before) -->
+      <div class="md:hidden flex items-center">
+        <button
+          id="mobile-menu-toggle"
+          aria-label="Open menu"
+          class="p-2 rounded focus:outline-none hover:bg-gray-100"
+          onclick="document.getElementById('mobile-menu-panel').classList.toggle('hidden')"
+        >
+          <svg class="w-8 h-8 text-heading" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+            <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Panel (Improved) -->
+      <div
+        id="mobile-menu-panel"
+        class="md:hidden hidden fixed inset-0 z-40 bg-[#253242] bg-opacity-95 flex flex-col pt-6 px-6"
+      >
+        <!-- Top: Logo & Close -->
+        <div class="flex justify-between items-center mb-6">
+          <a href="/">
+            <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="w-28" />
+          </a>
+          <button
+            onclick="document.getElementById('mobile-menu-panel').classList.add('hidden')"
+            class="text-white text-3xl font-bold px-3 py-1">&times;</button
+          >
+        </div>
+
+        <!-- Menu Links -->
+        <nav class="flex flex-col gap-2">
+          {
+            headerData.links.map((link) =>
+              link.links ? (
+                <div>
+                  <span class="block text-lg text-[#f56b2a] font-bold py-2">{link.text}</span>
+                  {link.links.map((sublink) => (
+                    <a
+                      href={sublink.href}
+                      class="block pl-6 py-2 text-base text-white hover:bg-[#fff7f0] hover:text-[#f56b2a] rounded transition"
+                    >
+                      {sublink.text}
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <a href={link.href} class="block text-lg text-white py-2 font-medium hover:text-[#f56b2a] transition">
+                  {link.text}
+                </a>
+              )
+            )
+          }
+        </nav>
       </div>
     </div>
   </div>
