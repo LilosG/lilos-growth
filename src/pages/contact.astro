@@ -82,23 +82,24 @@ import Layout from '~/layouts/PageLayout.astro';
       </div>
     </section>
 
-    <!-- CALENDLY SCHEDULER SECTION -->
+    <!-- CALENDLY SCHEDULER SECTION (wider container for side-by-side layout) -->
     <section class="bg-gray-50 py-20 px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading mb-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center mb-4">
           Book Your Free Local SEO Intro Call
         </h2>
-        <p class="text-body mb-10 max-w-2xl mx-auto">
-          Choose a date and time that works for you, and we’ll review your current online presence, discuss your goals,
+        <p class="text-body mb-10 max-w-2xl mx-auto text-center">
+          Choose a date and time that works for you. We’ll review your current online presence, discuss your goals,
           and share how we can help grow your business.
         </p>
 
-        <div class="max-w-3xl mx-auto px-4">
+        <!-- Give the Calendly iframe enough width to trigger its side-by-side layout -->
+        <div class="bg-white rounded-2xl shadow border border-gray-100 p-2 md:p-4">
           <!-- Calendly inline widget begin -->
           <div
             class="calendly-inline-widget"
             data-url="https://calendly.com/mprickett-bluedoorsp/30min?text_color=1f2d3d&primary_color=f56b2a"
-            style="min-width:320px;height:700px;">
+            style="min-width:320px;height:760px;width:100%;">
           </div>
           <!-- Calendly inline widget end -->
         </div>
@@ -118,7 +119,7 @@ import Layout from '~/layouts/PageLayout.astro';
               document.body.appendChild(script);
               observer.disconnect();
             }
-          });
+          }, { rootMargin: '200px' });
           observer.observe(calendlyWidget);
         }
       });
