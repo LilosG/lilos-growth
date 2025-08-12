@@ -13,7 +13,7 @@ import Layout from '~/layouts/PageLayout.astro';
   </head>
 
   <Layout>
-    <!-- CONTACT HERO & FORM -->
+    <!-- CONTACT FORM SECTION -->
     <section class="bg-[#253242] py-20 px-4">
       <div
         class="bg-white rounded-3xl shadow-2xl border border-gray-100 px-8 py-12 md:p-16 flex flex-col items-center w-full max-w-xl mx-auto"
@@ -26,9 +26,9 @@ import Layout from '~/layouts/PageLayout.astro';
           Fill out the form below and a home service marketing expert will reach out within 24 hours.<br />
           Prefer email? <a href="mailto:hello@lilosgrowth.com" class="text-primary underline">hello@lilosgrowth.com</a>
         </p>
+
         <form class="flex flex-col gap-5 w-full" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" autocomplete="on">
           <input type="hidden" name="form-name" value="contact" />
-          <!-- Honeypot for spam prevention -->
           <input type="hidden" name="bot-field" />
           <input
             type="text"
@@ -70,6 +70,7 @@ import Layout from '~/layouts/PageLayout.astro';
             Send Message
           </button>
         </form>
+
         <div class="mt-8 text-center text-body text-sm">
           <div>
             <span class="font-medium text-heading">Email:</span>
@@ -81,25 +82,46 @@ import Layout from '~/layouts/PageLayout.astro';
       </div>
     </section>
 
-    <!-- CALENDLY SECTION -->
+    <!-- CALENDLY SCHEDULER SECTION -->
     <section class="bg-gray-50 py-20 px-4">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center mb-10">
-          Schedule Your Intro Call – Local SEO
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading mb-4">
+          Book Your Free Local SEO Intro Call
         </h2>
-        <!-- Calendly inline widget begin -->
-        <div
-          class="calendly-inline-widget"
-          data-url="https://calendly.com/mprickett-bluedoorsp/30min?text_color=1f2d3d&primary_color=f56b2a"
-          style="min-width:320px;height:700px;">
+        <p class="text-body mb-10 max-w-2xl mx-auto">
+          Choose a date and time that works for you, and we’ll review your current online presence, discuss your goals,
+          and share how we can help grow your business.
+        </p>
+
+        <div class="max-w-3xl mx-auto px-4">
+          <!-- Calendly inline widget begin -->
+          <div
+            class="calendly-inline-widget"
+            data-url="https://calendly.com/mprickett-bluedoorsp/30min?text_color=1f2d3d&primary_color=f56b2a"
+            style="min-width:320px;height:700px;">
+          </div>
+          <!-- Calendly inline widget end -->
         </div>
-        <script
-          type="text/javascript"
-          src="https://assets.calendly.com/assets/external/widget.js"
-          async>
-        </script>
-        <!-- Calendly inline widget end -->
       </div>
     </section>
+
+    <!-- Lazy-load Calendly script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const calendlyWidget = document.querySelector('.calendly-inline-widget');
+        if (calendlyWidget) {
+          const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+              const script = document.createElement('script');
+              script.src = 'https://assets.calendly.com/assets/external/widget.js';
+              script.async = true;
+              document.body.appendChild(script);
+              observer.disconnect();
+            }
+          });
+          observer.observe(calendlyWidget);
+        }
+      });
+    </script>
   </Layout>
 </html>
