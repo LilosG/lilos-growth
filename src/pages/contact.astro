@@ -7,14 +7,14 @@ import Layout from '~/layouts/PageLayout.astro';
     <title>Contact Lilos Growth | Home Service Marketing Experts</title>
     <meta
       name="description"
-      content="Contact Lilos Growth for proven digital marketing and local SEO for home service businesses. Fill out the form or email us to get started."
+      content="Contact Lilos Growth for proven digital marketing and local SEO for home service businesses. Fill out the form or schedule a call to get started."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
 
   <Layout>
     <!-- CONTACT HERO & FORM -->
-    <section class="bg-[#253242] min-h-[100vh] flex items-center justify-center py-20 px-4">
+    <section class="bg-[#253242] py-20 px-4">
       <div
         class="bg-white rounded-3xl shadow-2xl border border-gray-100 px-8 py-12 md:p-16 flex flex-col items-center w-full max-w-xl mx-auto"
       >
@@ -78,6 +78,27 @@ import Layout from '~/layouts/PageLayout.astro';
           <div>Serving home service businesses nationwide</div>
           <div class="mt-2 text-gray-400 text-xs">We’ll reply within 24 hours. Your info is always confidential.</div>
         </div>
+      </div>
+    </section>
+
+    <!-- CALENDLY SECTION -->
+    <section class="bg-gray-50 py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center mb-10">
+          Schedule Your Intro Call – Local SEO
+        </h2>
+        <!-- Calendly inline widget begin -->
+        <div
+          class="calendly-inline-widget"
+          data-url="https://calendly.com/mprickett-bluedoorsp/30min?text_color=1f2d3d&primary_color=f56b2a"
+          style="min-width:320px;height:700px;">
+        </div>
+        <script
+          type="text/javascript"
+          src="https://assets.calendly.com/assets/external/widget.js"
+          async>
+        </script>
+        <!-- Calendly inline widget end -->
       </div>
     </section>
   </Layout>
