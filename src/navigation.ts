@@ -1,8 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 
 export const headerData = {
   links: [
-    
     {
       text: 'Services',
       links: [
