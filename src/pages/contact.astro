@@ -43,6 +43,9 @@ import Layout from '~/layouts/PageLayout.astro';
         </p>
 
         <form action="https://formspree.io/f/movlbqdk" method="POST" class="flex flex-col gap-5 w-full">
+          <!-- Redirect to thank-you page after submission -->
+          <input type="hidden" name="_redirect" value="https://lilosgrowth.com/thank-you" />
+
           <input
             type="text"
             name="name"
