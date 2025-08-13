@@ -11,7 +11,7 @@ metadata:
   title:
     default: Lilos Growth
     template: '%s — Lilos Growth'
-  description: "Helping home service businesses grow with Local SEO, Google Business Profile optimization, and high-converting websites."
+  description: 'Helping home service businesses grow with Local SEO, Google Business Profile optimization, and high-converting websites.'
   robots:
     index: true
     follow: true
