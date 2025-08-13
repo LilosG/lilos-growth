@@ -132,7 +132,7 @@ import Layout from '~/layouts/PageLayout.astro';
       </div>
     </section>
 
-    <!-- Calendly lazy-load + smooth scroll + ClientRouter support -->
+    <!-- Calendly preload after idle + smooth scroll -->
     <script is:inline>
       const ensureCalendly = () =>
         new Promise((resolve) => {
@@ -144,31 +144,30 @@ import Layout from '~/layouts/PageLayout.astro';
           document.body.appendChild(s);
         });
 
-      const initCalendlyOnView = () => {
+      const initCalendly = () => {
         const el = document.querySelector('.calendly-inline-widget');
         if (!el) return;
-
-        if (location.hash === '#book') {
-          queueMicrotask(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-        }
-
-        const io = new IntersectionObserver(
-          (entries) => {
-            if (entries[0].isIntersecting) {
-              ensureCalendly();
-              io.disconnect();
-            }
-          },
-          { rootMargin: '300px' }
-        );
-
-        io.observe(el);
+        ensureCalendly();
       };
 
-      if (document.readyState !== 'loading') initCalendlyOnView();
-      else document.addEventListener('DOMContentLoaded', initCalendlyOnView);
+      // Preload Calendly 2 seconds after page load
+      if (document.readyState !== 'loading') {
+        setTimeout(initCalendly, 2000);
+      } else {
+        document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(initCalendly, 2000);
+        });
+      }
 
-      document.addEventListener('astro:after-swap', initCalendlyOnView);
+      // Smooth scroll if arriving with #book
+      if (location.hash === '#book') {
+        queueMicrotask(() => {
+          const target = document.querySelector(location.hash);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      }
     </script>
   </Layout>
 </html>
