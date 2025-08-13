@@ -11,12 +11,5 @@
         }
       ]
     }
-  ],
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "destination": "https://lilosgrowth.com/$1",
-      "permanent": true
-    }
   ]
 }
