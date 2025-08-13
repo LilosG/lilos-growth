@@ -21,7 +21,7 @@ import Layout from '~/layouts/PageLayout.astro';
       @media (min-width: 1024px) {
         #book.calendly-inline-widget {
           min-width: 1000px !important; /* threshold where Calendly flips to 2-column */
-          height: 820px !important;     /* extra height to avoid inner scrollbars */
+          height: 820px !important; /* extra height to avoid inner scrollbars */
         }
       }
     </style>
@@ -84,8 +84,7 @@ import Layout from '~/layouts/PageLayout.astro';
             rows="4"
             required
             placeholder="How can we help you?"
-            class="border border-gray-300 rounded-lg px-5 py-4 text-base focus:outline-primary transition"
-          ></textarea>
+            class="border border-gray-300 rounded-lg px-5 py-4 text-base focus:outline-primary transition"></textarea>
 
           <button
             type="submit"
@@ -125,9 +124,10 @@ import Layout from '~/layouts/PageLayout.astro';
         <div
           id="book"
           class="calendly-inline-widget"
-          data-url="https://calendly.com/mprickett-bluedoorsp/30min?text_color=1f2d3d&amp;primary_color=f56b2a"
+          data-url="https://calendly.com/mprickett-bluedoorsp/30min?text_color=1f2d3d&primary_color=f56b2a"
           style="min-width:320px;height:820px;"
-        ></div>
+        >
+        </div>
         <!-- Calendly inline widget end -->
       </div>
     </section>
