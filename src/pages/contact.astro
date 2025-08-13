@@ -120,7 +120,6 @@ import Layout from '~/layouts/PageLayout.astro';
         </p>
 
         <!-- Calendly inline widget begin -->
-        <!-- anchor for floating CTA -->
         <div
           id="book"
           class="calendly-inline-widget"
@@ -132,7 +131,7 @@ import Layout from '~/layouts/PageLayout.astro';
       </div>
     </section>
 
-    <!-- Calendly preload after idle + smooth scroll -->
+    <!-- Calendly preload + init + smooth scroll -->
     <script is:inline>
       const ensureCalendly = () =>
         new Promise((resolve) => {
@@ -140,7 +139,12 @@ import Layout from '~/layouts/PageLayout.astro';
           const s = document.createElement('script');
           s.src = 'https://assets.calendly.com/assets/external/widget.js';
           s.async = true;
-          s.onload = resolve;
+          s.onload = () => {
+            if (typeof Calendly !== 'undefined') {
+              Calendly.initInlineWidgets();
+            }
+            resolve();
+          };
           document.body.appendChild(s);
         });
 
@@ -150,7 +154,7 @@ import Layout from '~/layouts/PageLayout.astro';
         ensureCalendly();
       };
 
-      // Preload Calendly 2 seconds after page load
+      // Preload Calendly after page load
       if (document.readyState !== 'loading') {
         setTimeout(initCalendly, 2000);
       } else {
@@ -159,7 +163,7 @@ import Layout from '~/layouts/PageLayout.astro';
         });
       }
 
-      // Smooth scroll if arriving with #book
+      // Smooth scroll to #book if present in URL
       if (location.hash === '#book') {
         queueMicrotask(() => {
           const target = document.querySelector(location.hash);
