@@ -20,8 +20,8 @@ import Layout from '~/layouts/PageLayout.astro';
     <style is:inline>
       @media (min-width: 1024px) {
         #book.calendly-inline-widget {
-          min-width: 1000px !important; /* threshold where Calendly flips to 2-column */
-          height: 820px !important; /* extra height to avoid inner scrollbars */
+          min-width: 1000px !important;
+          height: 820px !important;
         }
       }
     </style>
@@ -119,7 +119,6 @@ import Layout from '~/layouts/PageLayout.astro';
           and share how we can help grow your business.
         </p>
 
-        <!-- Calendly inline widget begin -->
         <div
           id="book"
           class="calendly-inline-widget"
@@ -127,43 +126,45 @@ import Layout from '~/layouts/PageLayout.astro';
           style="min-width:320px;height:820px;"
         >
         </div>
-        <!-- Calendly inline widget end -->
       </div>
     </section>
 
-    <!-- Calendly preload + init + smooth scroll -->
+    <!-- Calendly hover/tap load + manual scroll -->
     <script is:inline>
-      const ensureCalendly = () =>
-        new Promise((resolve) => {
-          if (window.Calendly) return resolve();
-          const s = document.createElement('script');
-          s.src = 'https://assets.calendly.com/assets/external/widget.js';
-          s.async = true;
-          s.onload = () => {
-            if (typeof Calendly !== 'undefined') {
-              Calendly.initInlineWidgets();
-            }
-            resolve();
-          };
-          document.body.appendChild(s);
-        });
-
-      const initCalendly = () => {
-        const el = document.querySelector('.calendly-inline-widget');
-        if (!el) return;
-        ensureCalendly();
+      // Global function to load Calendly script
+      window.loadCalendly = () => {
+        if (window.Calendly) return; // Already loaded
+        const s = document.createElement('script');
+        s.src = 'https://assets.calendly.com/assets/external/widget.js';
+        s.async = true;
+        s.onload = () => {
+          if (typeof Calendly !== 'undefined') {
+            Calendly.initInlineWidgets();
+          }
+        };
+        document.body.appendChild(s);
       };
 
-      // Preload Calendly after page load
-      if (document.readyState !== 'loading') {
-        setTimeout(initCalendly, 2000);
-      } else {
-        document.addEventListener('DOMContentLoaded', () => {
-          setTimeout(initCalendly, 2000);
-        });
-      }
+      // Observe calendar section for manual scroll
+      const observeCalendly = () => {
+        const el = document.querySelector('.calendly-inline-widget');
+        if (!el) return;
+        const io = new IntersectionObserver(
+          (entries) => {
+            if (entries[0].isIntersecting) {
+              window.loadCalendly();
+              io.disconnect();
+            }
+          },
+          { rootMargin: '300px' }
+        );
+        io.observe(el);
+      };
 
-      // Smooth scroll to #book if present in URL
+      if (document.readyState !== 'loading') observeCalendly();
+      else document.addEventListener('DOMContentLoaded', observeCalendly);
+
+      // Smooth scroll if arriving with #book
       if (location.hash === '#book') {
         queueMicrotask(() => {
           const target = document.querySelector(location.hash);
