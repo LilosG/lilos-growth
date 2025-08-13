@@ -1,3 +1,4 @@
+// astro.config.ts
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -6,29 +7,33 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
-import partytown from '@astrojs/partytown';
+// If you need Partytown later, re-enable it:
+// import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from 'astro-compress';
-import type { AstroIntegration } from 'astro';
 
 import astrowind from './vendor/integration';
 
-import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter';
+import {
+  readingTimeRemarkPlugin,
+  responsiveTablesRehypePlugin,
+  lazyImagesRehypePlugin,
+} from './src/utils/frontmatter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const hasExternalScripts = false;
-const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroIntegration)[] = []) =>
-  hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
+// Toggle if you want Partytown later
+const USE_PARTYTOWN = false;
 
 export default defineConfig({
+  // REQUIRED for correct sitemap URLs — set to your canonical domain
+  site: 'https://lilosgrowth.com',
+
   output: 'static',
 
   integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    sitemap(),
+    tailwind({ applyBaseStyles: false }),
+    sitemap(), // generates /sitemap-index.xml (and/or /sitemap.xml)
     mdx(),
     icon({
       include: {
@@ -47,11 +52,8 @@ export default defineConfig({
       },
     }),
 
-    ...whenExternalScripts(() =>
-      partytown({
-        config: { forward: ['dataLayer.push'] },
-      })
-    ),
+    // Re-enable if needed:
+    // ...(USE_PARTYTOWN ? [partytown({ config: { forward: ['dataLayer.push'] } })] : []),
 
     compress({
       CSS: true,
@@ -66,12 +68,8 @@ export default defineConfig({
       Logger: 1,
     }),
 
-    astrowind({
-      config: './src/config.yaml',
-    }),
+    astrowind({ config: './src/config.yaml' }),
   ],
-
-  // Removed image.domains block!
 
   markdown: {
     remarkPlugins: [readingTimeRemarkPlugin],
