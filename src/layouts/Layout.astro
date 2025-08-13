@@ -18,6 +18,9 @@ import SpeedInsights from '@vercel/speed-insights/astro';
 // Comment the line below to disable View Transitions
 import { ClientRouter } from 'astro:transitions';
 
+// Floating Calendly Button
+import FloatingCalendlyButton from '../components/FloatingCalendlyButton.astro';
+
 import type { MetaData as MetaDataType } from '~/types';
 
 export interface Props {
@@ -44,6 +47,10 @@ const { metadata = {} } = Astro.props;
 
   <body class="antialiased text-default bg-page tracking-tight">
     <slot />
+
+    <!-- Floating Calendly Button (shows on all pages) -->
+    <FloatingCalendlyButton />
+
     <BasicScripts />
 
     <!-- Vercel Web Analytics -->
