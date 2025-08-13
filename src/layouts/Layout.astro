@@ -60,7 +60,7 @@ const { metadata = {} } = Astro.props;
           if (window.va && typeof window.va.track === 'function') {
             window.va.track(String(name), data || {});
           }
-        } catch (e) {
+        } catch {
           // no-op: analytics failures shouldn't break UX
         }
       };
