@@ -51,5 +51,19 @@ const { metadata = {} } = Astro.props;
 
     <!-- Vercel Speed Insights -->
     <SpeedInsights />
+
+    <!-- Global custom analytics helper (inline JS so no tooling errors) -->
+    <script is:inline>
+      // Call anywhere: window.trackEvent("Book a Call", { location: "hero" })
+      window.trackEvent = (name, data) => {
+        try {
+          if (window.va && typeof window.va.track === 'function') {
+            window.va.track(String(name), data || {});
+          }
+        } catch (e) {
+          // no-op: analytics failures shouldn't break UX
+        }
+      };
+    </script>
   </body>
 </html>
