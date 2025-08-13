@@ -15,6 +15,16 @@ import Layout from '~/layouts/PageLayout.astro';
     <link rel="preconnect" href="https://assets.calendly.com" />
     <link rel="dns-prefetch" href="https://assets.calendly.com" />
     <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+
+    <!-- Force roomy desktop layout so Calendly renders two columns -->
+    <style is:inline>
+      @media (min-width: 1024px) {
+        #book.calendly-inline-widget {
+          min-width: 1000px !important; /* threshold where Calendly flips to 2-column */
+          height: 820px !important;     /* extra height to avoid inner scrollbars */
+        }
+      }
+    </style>
   </head>
 
   <Layout>
@@ -101,7 +111,7 @@ import Layout from '~/layouts/PageLayout.astro';
 
     <!-- CALENDLY SCHEDULER SECTION -->
     <section class="bg-gray-50 py-20 px-4">
-      <div class="max-w-4xl mx-auto text-center">
+      <div class="mx-auto px-4 md:px-6 lg:px-8 max-w-6xl text-center">
         <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading mb-4">
           Book Your Free Local SEO Intro Call
         </h2>
@@ -110,23 +120,20 @@ import Layout from '~/layouts/PageLayout.astro';
           and share how we can help grow your business.
         </p>
 
-        <div class="max-w-3xl mx-auto px-4">
-          <!-- Calendly inline widget begin -->
-          <!-- anchor for floating CTA -->
-          <div
-            id="book"
-            class="calendly-inline-widget"
-            data-url="https://calendly.com/mprickett-bluedoorsp/30min?text_color=1f2d3d&amp;primary_color=f56b2a"
-            style="min-width:320px;height:700px;"
-          ></div>
-          <!-- Calendly inline widget end -->
-        </div>
+        <!-- Calendly inline widget begin -->
+        <!-- anchor for floating CTA -->
+        <div
+          id="book"
+          class="calendly-inline-widget"
+          data-url="https://calendly.com/mprickett-bluedoorsp/30min?text_color=1f2d3d&amp;primary_color=f56b2a"
+          style="min-width:320px;height:820px;"
+        ></div>
+        <!-- Calendly inline widget end -->
       </div>
     </section>
 
     <!-- Calendly lazy-load + smooth scroll + ClientRouter support -->
     <script is:inline>
-      // Load Calendly JS once
       const ensureCalendly = () =>
         new Promise((resolve) => {
           if (window.Calendly) return resolve();
@@ -141,16 +148,14 @@ import Layout from '~/layouts/PageLayout.astro';
         const el = document.querySelector('.calendly-inline-widget');
         if (!el) return;
 
-        // Smooth-scroll if arriving via /contact#book
         if (location.hash === '#book') {
           queueMicrotask(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }));
         }
 
-        // Lazy-load Calendly when close to viewport
         const io = new IntersectionObserver(
           (entries) => {
             if (entries[0].isIntersecting) {
-              ensureCalendly(); // Calendly auto-initializes inline widgets
+              ensureCalendly();
               io.disconnect();
             }
           },
@@ -160,11 +165,9 @@ import Layout from '~/layouts/PageLayout.astro';
         io.observe(el);
       };
 
-      // Run on hard refresh
       if (document.readyState !== 'loading') initCalendlyOnView();
       else document.addEventListener('DOMContentLoaded', initCalendlyOnView);
 
-      // Run after Astro ClientRouter swaps the page
       document.addEventListener('astro:after-swap', initCalendlyOnView);
     </script>
   </Layout>
