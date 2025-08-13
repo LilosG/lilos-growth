@@ -1,4 +1,3 @@
-// astro.config.ts
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -7,7 +6,6 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
-// If you need Partytown later, re-enable it:
 // import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from 'astro-compress';
@@ -22,9 +20,6 @@ import {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Toggle if you want Partytown later
-const USE_PARTYTOWN = false;
-
 export default defineConfig({
   // REQUIRED for correct sitemap URLs — set to your canonical domain
   site: 'https://lilosgrowth.com',
@@ -33,7 +28,7 @@ export default defineConfig({
 
   integrations: [
     tailwind({ applyBaseStyles: false }),
-    sitemap(), // generates /sitemap-index.xml (and/or /sitemap.xml)
+    sitemap(),
     mdx(),
     icon({
       include: {
@@ -51,10 +46,6 @@ export default defineConfig({
         ],
       },
     }),
-
-    // Re-enable if needed:
-    // ...(USE_PARTYTOWN ? [partytown({ config: { forward: ['dataLayer.push'] } })] : []),
-
     compress({
       CSS: true,
       HTML: {
@@ -67,7 +58,6 @@ export default defineConfig({
       SVG: false,
       Logger: 1,
     }),
-
     astrowind({ config: './src/config.yaml' }),
   ],
 
