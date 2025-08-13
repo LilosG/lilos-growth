@@ -10,6 +10,9 @@ import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 
+// Vercel Web Analytics (aliased to avoid name conflict)
+import VercelAnalytics from '@vercel/analytics/astro';
+
 // Comment the line below to disable View Transitions
 import { ClientRouter } from 'astro:transitions';
 
@@ -40,5 +43,8 @@ const { metadata = {} } = Astro.props;
   <body class="antialiased text-default bg-page tracking-tight">
     <slot />
     <BasicScripts />
+
+    <!-- Vercel Web Analytics -->
+    <VercelAnalytics />
   </body>
 </html>
