@@ -12,6 +12,8 @@ import BasicScripts from '~/components/common/BasicScripts.astro';
 
 // Vercel Web Analytics (aliased to avoid name conflict)
 import VercelAnalytics from '@vercel/analytics/astro';
+// Vercel Speed Insights
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 // Comment the line below to disable View Transitions
 import { ClientRouter } from 'astro:transitions';
@@ -46,5 +48,8 @@ const { metadata = {} } = Astro.props;
 
     <!-- Vercel Web Analytics -->
     <VercelAnalytics />
+
+    <!-- Vercel Speed Insights -->
+    <SpeedInsights />
   </body>
 </html>
