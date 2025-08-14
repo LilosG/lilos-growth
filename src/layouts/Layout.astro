@@ -46,9 +46,12 @@ const { metadata = {} } = Astro.props;
   </head>
 
   <body class="antialiased text-default bg-page tracking-tight">
-    <slot />
+    <!-- Global scale wrapper: matches Home page feel (85% base, 90% at md+) -->
+    <div class="scale-[.85] md:scale-[.9] origin-top w-full">
+      <slot />
+    </div>
 
-    <!-- Floating Calendly Button (shows on all pages) -->
+    <!-- Floating Calendly Button (shows on all pages, kept outside scale so it stays native size) -->
     <FloatingCalendlyButton />
 
     <BasicScripts />
