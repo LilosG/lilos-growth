@@ -295,165 +295,181 @@ import Layout from '~/layouts/PageLayout.astro';
           Service Packages for Home Service Companies
           <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
         </h2>
-        <p class="text-xl text-body mb-14 text-center font-medium">
+        <p class="text-xl text-body mb-12 text-center font-medium">
           Choose the package that fits your goals. No contracts. Real results.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
-          <!-- GBP Card -->
-          <div class="bg-white rounded-2xl shadow-md border border-gray-200 px-7 pt-8 pb-6 flex flex-col min-h-[620px]">
-            <h3 class="text-xl font-heading font-bold text-heading mb-1 text-center">Google Business Profile</h3>
-            <div class="text-sm font-semibold mb-2 text-center">Base: Profile Management</div>
-            <span class="block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mb-4 font-semibold text-center">
-              Best for: Maintaining Your Google Presence
-            </span>
-            <div class="text-3xl font-bold text-[#f56b2a] mb-3 text-center">
-              $199<span class="text-base font-normal text-gray-500">/mo</span>
+        <!-- tighter grid gap -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+          <!-- GBP -->
+          <div class="bg-white rounded-2xl shadow-md border border-gray-200 px-6 py-8 flex flex-col min-h-[520px]">
+            <div class="text-center">
+              <h3 class="text-xl font-heading font-bold text-heading">Google Business Profile</h3>
+              <div class="text-sm font-semibold mt-1">Base: Profile Management</div>
+              <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold">
+                Best for: Maintaining Your Google Presence
+              </span>
+              <div class="text-3xl font-bold text-[#f56b2a] mt-4">
+                $199<span class="text-base font-normal text-gray-500">/mo</span>
+              </div>
             </div>
-            <ul class="text-body text-base mb-6 space-y-1 list-disc pl-5">
+
+            <!-- Base features (flex-1 so Boost starts at same vertical point across cards) -->
+            <ul class="text-body text-base space-y-2 list-disc pl-5 mt-5 flex-1">
               <li>GBP setup or audit</li>
               <li>Monthly listing updates & photos</li>
               <li>Category & keyword targeting</li>
               <li>Basic performance tracking</li>
             </ul>
 
-            <div class="mt-auto">
-              <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mb-6">
-                <div class="font-semibold text-[#f56b2a] mb-1">
-                  Boost Add‑on <span class="font-bold">+ $300/mo</span> (Total $499)
-                </div>
-                <ul class="text-body text-base space-y-1 list-disc pl-5">
-                  <li>Weekly posts & updates</li>
-                  <li>Review request & response strategy</li>
-                  <li>Competitor monitoring & insights</li>
-                  <li>Citation build & cleanup: 500+ listings + manual BBB, Bing, YP, Yelp</li>
-                </ul>
+            <!-- Boost, closer to base: mt-3 and tighter padding -->
+            <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-3">
+              <div class="font-semibold text-[#f56b2a] mb-1">
+                Boost Add‑on + <span class="font-bold">$300/mo</span> (Total $499)
               </div>
-              <a
-                href="#contact"
-                class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
-                >Get Started</a
-              >
+              <ul class="text-body text-base space-y-2 list-disc pl-5">
+                <li>Weekly posts & updates</li>
+                <li>Review request & response strategy</li>
+                <li>Competitor monitoring & insights</li>
+                <li>Citation build & cleanup: 500+ listings + manual BBB, Bing, YP, Yelp</li>
+              </ul>
             </div>
+
+            <a
+              href="#contact"
+              class="mt-4 w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
+            >
+              Get Started
+            </a>
           </div>
 
-          <!-- Local SEO (Website Only) -->
+          <!-- Local SEO (website only) -->
           <div
-            class="relative bg-white rounded-2xl shadow-md border border-gray-200 px-7 pt-8 pb-6 flex flex-col min-h-[620px]"
+            class="relative bg-white rounded-2xl shadow-md border border-gray-200 px-6 py-8 flex flex-col min-h-[520px]"
           >
             <div
-              class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#f56b2a] text-white text-xs font-bold px-6 py-1 rounded-full shadow z-10"
+              class="absolute -top-6 left-1/2 -translate-x-1/2 bg-[#f56b2a] text-white text-xs font-bold px-5 py-1 rounded-full shadow"
             >
               Most Popular
             </div>
-            <h3 class="text-xl font-heading font-bold text-heading mb-1 text-center mt-2">Local SEO (Website Only)</h3>
-            <div class="text-sm font-semibold mb-2 text-center">Base: Growth Essentials</div>
-            <span class="block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mb-4 font-semibold text-center">
-              Best for: Steady Organic Growth
-            </span>
-            <div class="text-3xl font-bold text-[#f56b2a] mb-3 text-center">
-              $499<span class="text-base font-normal text-gray-500">/mo</span>
+
+            <div class="text-center mt-1">
+              <h3 class="text-xl font-heading font-bold text-heading">Local SEO (Website Only)</h3>
+              <div class="text-sm font-semibold mt-1">Base: Growth Essentials</div>
+              <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold">
+                Best for: Steady Organic Growth
+              </span>
+              <div class="text-3xl font-bold text-[#f56b2a] mt-4">
+                $499<span class="text-base font-normal text-gray-500">/mo</span>
+              </div>
             </div>
-            <ul class="text-body text-base mb-6 space-y-1 list-disc pl-5">
+
+            <ul class="text-body text-base space-y-2 list-disc pl-5 mt-5 flex-1">
               <li>SEO audit, keyword research & on‑page fixes</li>
               <li>Technical SEO improvements</li>
               <li><span class="font-semibold">5</span> new service/location pages / mo</li>
               <li><span class="font-semibold">5</span> blog posts / mo</li>
             </ul>
 
-            <div class="mt-auto">
-              <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mb-6">
-                <div class="font-semibold text-[#f56b2a] mb-1">
-                  Boost Add‑on <span class="font-bold">+ $300/mo</span> (Total $799)
-                </div>
-                <ul class="text-body text-base space-y-1 list-disc pl-5">
-                  <li><span class="font-semibold">10–15</span> new service/location pages / mo</li>
-                  <li><span class="font-semibold">10</span> blog posts / mo</li>
-                  <li>Citation build & cleanup (software + manual core listings)</li>
-                  <li>Competitor tracking & monthly strategy call</li>
-                </ul>
+            <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-3">
+              <div class="font-semibold text-[#f56b2a] mb-1">
+                Boost Add‑on + <span class="font-bold">$300/mo</span> (Total $799)
               </div>
-              <a
-                href="#contact"
-                class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
-                >Get Started</a
-              >
+              <ul class="text-body text-base space-y-2 list-disc pl-5">
+                <li><span class="font-semibold">10–15</span> new service/location pages / mo</li>
+                <li><span class="font-semibold">10</span> blog posts / mo</li>
+                <li>Citation build & cleanup (software + manual core listings)</li>
+                <li>Competitor tracking & monthly strategy call</li>
+              </ul>
             </div>
+
+            <a
+              href="#contact"
+              class="mt-4 w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
+            >
+              Get Started
+            </a>
           </div>
 
-          <!-- Website as a Service (WaaS) -->
-          <div class="bg-white rounded-2xl shadow-md border border-gray-200 px-7 pt-8 pb-6 flex flex-col min-h-[620px]">
-            <h3 class="text-xl font-heading font-bold text-heading mb-1 text-center">Website as a Service</h3>
-            <div class="text-sm font-semibold mb-2 text-center">Base: Website Essentials</div>
-            <span class="block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mb-4 font-semibold text-center">
-              Best for: Modern, Conversion‑Ready Sites
-            </span>
-            <div class="text-3xl font-bold text-[#f56b2a] mb-3 text-center">
-              $250<span class="text-base font-normal text-gray-500">/mo</span>
+          <!-- Website as a Service -->
+          <div class="bg-white rounded-2xl shadow-md border border-gray-200 px-6 py-8 flex flex-col min-h-[520px]">
+            <div class="text-center">
+              <h3 class="text-xl font-heading font-bold text-heading">Website as a Service</h3>
+              <div class="text-sm font-semibold mt-1">Base: Website Essentials</div>
+              <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold">
+                Best for: Modern, Conversion‑Ready Sites
+              </span>
+              <div class="text-3xl font-bold text-[#f56b2a] mt-4">
+                $250<span class="text-base font-normal text-gray-500">/mo</span>
+              </div>
             </div>
-            <ul class="text-body text-base mb-6 space-y-1 list-disc pl-5">
+
+            <ul class="text-body text-base space-y-2 list-disc pl-5 mt-5 flex-1">
               <li>Mobile‑friendly, SEO‑ready design</li>
               <li>Secure hosting & monitoring</li>
               <li>Updates for up to 5 pages / mo</li>
               <li>Lead form integration & monthly health check</li>
             </ul>
 
-            <div class="mt-auto">
-              <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mb-6">
-                <div class="font-semibold text-[#f56b2a] mb-1">
-                  Boost Add‑on <span class="font-bold">+ $500/mo</span> (Total $750)
-                </div>
-                <ul class="text-body text-base space-y-1 list-disc pl-5">
-                  <li>Updates for up to 15 pages / mo</li>
-                  <li>New landing pages & CRO improvements</li>
-                  <li>Quarterly design refresh & content review</li>
-                  <li>Priority support (48‑hour turnaround)</li>
-                </ul>
+            <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-3">
+              <div class="font-semibold text-[#f56b2a] mb-1">
+                Boost Add‑on + <span class="font-bold">$500/mo</span> (Total $750)
               </div>
-              <a
-                href="#contact"
-                class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
-                >Get Started</a
-              >
+              <ul class="text-body text-base space-y-2 list-disc pl-5">
+                <li>Updates for up to 15 pages / mo</li>
+                <li>New landing pages & CRO improvements</li>
+                <li>Quarterly design refresh & content review</li>
+                <li>Priority support (48‑hour turnaround)</li>
+              </ul>
             </div>
+
+            <a
+              href="#contact"
+              class="mt-4 w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
+            >
+              Get Started
+            </a>
           </div>
 
-          <!-- Local SEO + GBP Management (Bundle) -->
-          <div class="bg-white rounded-2xl shadow-md border border-gray-200 px-7 pt-8 pb-6 flex flex-col min-h-[620px]">
-            <h3 class="text-xl font-heading font-bold text-heading mb-1 text-center">Local SEO + GBP Management</h3>
-            <div class="text-sm font-semibold mb-2 text-center">Base: Complete Local Presence</div>
-            <span class="block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mb-4 font-semibold text-center">
-              Best for: Map Pack + Organic Results
-            </span>
-            <div class="text-3xl font-bold text-[#f56b2a] mb-3 text-center">
-              $799<span class="text-base font-normal text-gray-500">/mo</span>
+          <!-- Local SEO + GBP Mgmt -->
+          <div class="bg-white rounded-2xl shadow-md border border-gray-200 px-6 py-8 flex flex-col min-h-[520px]">
+            <div class="text-center">
+              <h3 class="text-xl font-heading font-bold text-heading">Local SEO + GBP Mgmt</h3>
+              <div class="text-sm font-semibold mt-1">Base: Complete Local Presence</div>
+              <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold">
+                Best for: Map Pack + Organic Results
+              </span>
+              <div class="text-3xl font-bold text-[#f56b2a] mt-4">
+                $799<span class="text-base font-normal text-gray-500">/mo</span>
+              </div>
             </div>
-            <ul class="text-body text-base mb-6 space-y-1 list-disc pl-5">
+
+            <ul class="text-body text-base space-y-2 list-disc pl-5 mt-5 flex-1">
               <li>Includes Local SEO Base + GBP Base</li>
               <li>Unified reporting dashboard</li>
               <li>Monthly rank/map visibility review</li>
               <li>Quarterly competitor snapshot</li>
             </ul>
 
-            <div class="mt-auto">
-              <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mb-6">
-                <div class="font-semibold text-[#f56b2a] mb-1">
-                  Boost Package <span class="font-bold">$1,299/mo</span>
-                </div>
-                <ul class="text-body text-base space-y-1 list-disc pl-5">
-                  <li>Includes Local SEO Boost + GBP Boost</li>
-                  <li>Citation build & cleanup (software + manual core listings)</li>
-                  <li>Quarterly local growth plan (keywords, pages, GBP themes)</li>
-                  <li>GBP heatmap tracking across service area</li>
-                  <li>Priority support for urgent changes & launches</li>
-                </ul>
+            <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-3">
+              <div class="font-semibold text-[#f56b2a] mb-1">
+                Boost Package <span class="font-bold">$1,299/mo</span>
               </div>
-              <a
-                href="#contact"
-                class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
-                >Get Started</a
-              >
+              <ul class="text-body text-base space-y-2 list-disc pl-5">
+                <li>Includes Local SEO Boost + GBP Boost</li>
+                <li>Citation build & cleanup (software + manual core listings)</li>
+                <li>Custom quarterly local growth plan</li>
+                <li>GBP heatmap tracking across service area</li>
+                <li>Priority support for urgent changes & launches</li>
+              </ul>
             </div>
+
+            <a
+              href="#contact"
+              class="mt-4 w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
+            >
+              Get Started
+            </a>
           </div>
         </div>
       </div>
