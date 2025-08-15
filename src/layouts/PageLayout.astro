@@ -8,16 +8,15 @@ import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
 import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
+import BasicScripts from '~/components/common/BasicScripts.astro';
+
 import VercelAnalytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
+
 import { ClientRouter } from 'astro:transitions';
+import FloatingCalendlyButton from '../components/FloatingCalendlyButton.astro';
 
-// NOTE: your header lives here:
-import Header from '~/components/widgets/Header.astro';
-
-import FloatingCalendlyButton from '~/components/FloatingCalendlyButton.astro';
 import type { MetaData as MetaDataType } from '~/types';
-
 export interface Props {
   metadata?: MetaDataType;
 }
@@ -37,32 +36,102 @@ const { metadata = {} } = Astro.props;
     <ClientRouter fallback="swap" />
   </head>
 
+  <!-- Full-height flex column so the footer sticks and no extra gap appears -->
   <body
     class="antialiased text-default bg-page tracking-tight min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip"
   >
-    <!-- Header OUTSIDE the scaled main so mobile drawer fills the screen -->
-    <Header />
-
-    <main id="page" class="flex-1 flex flex-col">
-      <!-- visual downscale without affecting document height -->
+    <div class="flex-1 flex flex-col">
       <div
         class="w-full origin-top will-change-transform md:scale-[.90] xl:scale-[.87] 2xl:scale-[.85]"
         style="transform-origin: top center;"
       >
         <slot />
       </div>
-    </main>
+    </div>
 
     <FloatingCalendlyButton />
 
+    <BasicScripts />
     <VercelAnalytics />
     <SpeedInsights />
+
+    <!-- Analytics helper: no 'any', no empty catch -->
     <script is:inline>
-      // helper for custom analytics; no empty catch/try
       window.trackEvent = (name, data) => {
-        const t = window?.va?.track;
-        if (typeof t === 'function') t(String(name), data || {});
+        try {
+          if (window.va && typeof window.va.track === 'function') {
+            window.va.track(String(name), data || {});
+          }
+        } catch (_err) {
+          /* optional analytics; ignore failures */
+        }
       };
+    </script>
+
+    <!-- GLOBAL NAV BOOTSTRAPPER (works after Astro transitions, avoids double-binding) -->
+    <script is:inline>
+      (function () {
+        function $(sel) {
+          return document.querySelector(sel);
+        }
+
+        function findToggleBtn() {
+          return document.getElementById('navToggle') || $('[data-nav-toggle]');
+        }
+        function findMenu() {
+          return document.getElementById('mobileMenu') || $('[data-mobile-menu]');
+        }
+        function findCloseBtn(menu) {
+          return document.getElementById('navClose') || menu.querySelector('[data-nav-close]');
+        }
+        function findScrim(menu) {
+          return menu.querySelector('[data-close]');
+        }
+
+        function wireNav() {
+          const btn = findToggleBtn();
+          const menu = findMenu();
+          if (!btn || !menu) return;
+
+          // Avoid duplicate listeners if Astro re-renders
+          if (btn.hasAttribute('data-lg-wired')) return;
+          btn.setAttribute('data-lg-wired', '1');
+
+          const closeBtn = findCloseBtn(menu);
+          const scrim = findScrim(menu);
+          const links = menu.querySelectorAll('a');
+
+          function open(ev) {
+            if (ev && typeof ev.preventDefault === 'function') ev.preventDefault();
+            menu.classList.remove('hidden');
+            btn.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+          }
+          function close() {
+            menu.classList.add('hidden');
+            btn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+          }
+
+          btn.addEventListener('click', open);
+          closeBtn && closeBtn.addEventListener('click', close);
+          scrim && scrim.addEventListener('click', close);
+          links.forEach((a) => a.addEventListener('click', close));
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') close();
+          });
+          document.addEventListener('astro:before-swap', close);
+        }
+
+        // First load
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', wireNav, { once: true });
+        } else {
+          wireNav();
+        }
+        // After client-side navigations
+        document.addEventListener('astro:page-load', wireNav);
+      })();
     </script>
   </body>
 </html>
