@@ -19,7 +19,7 @@ const routes = {
       <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-7 w-auto" />
     </a>
 
-    <!-- DESKTOP NAV -->
+    <!-- DESKTOP NAV (restored) -->
     <nav class="hidden lg:flex items-center gap-8 text-[15px] font-medium text-heading">
       <a href={routes.services} class="hover:text-primary">Services</a>
       <a href={routes.additional} class="hover:text-primary">Additional Services</a>
@@ -89,14 +89,16 @@ const routes = {
   </div>
 </div>
 
-<!-- SCRIPT -->
+<!-- LINT-SAFE SCRIPT (no IIFE, no TS casts) -->
 <script is:inline>
-  (() => {
+  function lgSetupMobileNav() {
     const btn = document.getElementById('navToggle');
     const menu = document.getElementById('mobileMenu');
     const closeBtn = document.getElementById('navClose');
 
     if (!btn || !menu) return;
+    if (btn.dataset.bound === '1') return; // prevent double-binding on SPA transitions
+    btn.dataset.bound = '1';
 
     const open = () => {
       menu.classList.remove('hidden');
@@ -110,29 +112,29 @@ const routes = {
       document.body.style.overflow = '';
     };
 
-    if (!window.__lgNavBound) {
-      btn.addEventListener('click', (e) => { e.preventDefault(); open(); });
-      closeBtn && closeBtn.addEventListener('click', close);
+    btn.addEventListener('click', (e) => { e.preventDefault(); open(); });
+    if (closeBtn) closeBtn.addEventListener('click', close);
 
-      // ✅ pure JS guard (no TS assertion)
-      menu.addEventListener('click', (e) => {
-        const t = e.target;
-        if (t && t instanceof HTMLElement && t.hasAttribute('data-close')) {
-          close();
-        }
-      });
+    // Click scrim to close
+    menu.addEventListener('click', (e) => {
+      const t = e.target;
+      if (t && t instanceof HTMLElement && t.hasAttribute('data-close')) close();
+    });
 
-      // Close when navigating via any link inside the sheet
-      menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
+    // Navigate closes menu
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
 
-      // Esc to close
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    // ESC to close
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 
-      // Close on page transitions (Astro view transitions)
-      document.addEventListener('astro:before-swap', close);
-      document.addEventListener('astro:page-load', close);
+    // Astro view transitions
+    document.addEventListener('astro:before-swap', close);
+    document.addEventListener('astro:page-load', close);
+  }
 
-      window.__lgNavBound = true;
-    }
-  })();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', lgSetupMobileNav, { once: true });
+  } else {
+    lgSetupMobileNav();
+  }
 </script>
