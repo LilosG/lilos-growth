@@ -44,10 +44,24 @@ const { metadata = {} } = Astro.props;
        * We set a single --scale var by breakpoint, and make the scaled area tall
        * enough so that (min-height * scale) >= 100dvh. That kills the footer gap.
        */
-      :root { --scale: 1; }
-      @media (min-width: 768px)   { :root { --scale: 0.90; } }  /* md */
-      @media (min-width: 1280px)  { :root { --scale: 0.87; } }  /* xl */
-      @media (min-width: 1536px)  { :root { --scale: 0.85; } }  /* 2xl */
+      :root {
+        --scale: 1;
+      }
+      @media (min-width: 768px) {
+        :root {
+          --scale: 0.9;
+        }
+      } /* md */
+      @media (min-width: 1280px) {
+        :root {
+          --scale: 0.87;
+        }
+      } /* xl */
+      @media (min-width: 1536px) {
+        :root {
+          --scale: 0.85;
+        }
+      } /* 2xl */
 
       /* Safety: ensure the very last block inside the page content can't add trailing space */
       main#page > :is(section, div):last-child,
@@ -87,8 +101,9 @@ const { metadata = {} } = Astro.props;
 
     <script is:inline>
       window.trackEvent = (name, data) => {
-        try { if (window.va && typeof window.va.track === 'function') window.va.track(String(name), data || {}); }
-        catch {}
+        try {
+          if (window.va && typeof window.va.track === 'function') window.va.track(String(name), data || {});
+        } catch {}
       };
     </script>
   </body>

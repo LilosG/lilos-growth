@@ -95,24 +95,54 @@ import Layout from '~/layouts/PageLayout.astro';
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
           <!-- Card 1 -->
           <div class="flex flex-col items-center bg-bluelight rounded-2xl shadow-md p-8 border border-gray-100">
-            <svg class="w-20 h-20 mb-4 text-[#f56b2a]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 48 48">
+            <svg
+              class="w-20 h-20 mb-4 text-[#f56b2a]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 48 48"
+            >
               <circle cx="24" cy="21" r="7" stroke="#f56b2a" stroke-width="3" fill="none"></circle>
-              <path d="M24 42c8-10 12-16 12-21a12 12 0 10-24 0c0 5 4 11 12 21z" stroke="#f56b2a" stroke-width="3" fill="none"></path>
+              <path
+                d="M24 42c8-10 12-16 12-21a12 12 0 10-24 0c0 5 4 11 12 21z"
+                stroke="#f56b2a"
+                stroke-width="3"
+                fill="none"></path>
             </svg>
-            <h3 class="text-lg font-heading font-bold text-heading mb-2 text-center">Google Is Where Customers Start</h3>
+            <h3 class="text-lg font-heading font-bold text-heading mb-2 text-center">
+              Google Is Where Customers Start
+            </h3>
             <p class="text-body text-center text-base">93% of local experiences begin with an online search.</p>
           </div>
           <!-- Card 2 -->
           <div class="flex flex-col items-center bg-bluelight rounded-2xl shadow-md p-8 border border-gray-100">
-            <svg class="w-20 h-20 mb-4 text-[#f56b2a]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 48 48">
-              <path d="M16 20c2.5 5 6.5 9 11.5 11.5l3.5-3.5a2 2 0 012.2-.5c2 .8 4.2 1.5 6.3 2.1a2 2 0 011.4 2v5.5A2 2 0 0138 40a28 28 0 01-28-28 2 2 0 012-2h5.5a2 2 0 012 1.4c.6 2.1 1.3 4.3 2.1 6.3a2 2 0 01-.5 2.2l-3.5 3.5z" stroke="#f56b2a" stroke-width="3" fill="none"></path>
+            <svg
+              class="w-20 h-20 mb-4 text-[#f56b2a]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 48 48"
+            >
+              <path
+                d="M16 20c2.5 5 6.5 9 11.5 11.5l3.5-3.5a2 2 0 012.2-.5c2 .8 4.2 1.5 6.3 2.1a2 2 0 011.4 2v5.5A2 2 0 0138 40a28 28 0 01-28-28 2 2 0 012-2h5.5a2 2 0 012 1.4c.6 2.1 1.3 4.3 2.1 6.3a2 2 0 01-.5 2.2l-3.5 3.5z"
+                stroke="#f56b2a"
+                stroke-width="3"
+                fill="none"></path>
             </svg>
-            <h3 class="text-lg font-heading font-bold text-heading mb-2 text-center">Map Pack = Calls &amp; Booked Jobs</h3>
+            <h3 class="text-lg font-heading font-bold text-heading mb-2 text-center">
+              Map Pack = Calls &amp; Booked Jobs
+            </h3>
             <p class="text-body text-center text-base">Most service calls come from the top 3 Map Pack results.</p>
           </div>
           <!-- Card 3 -->
           <div class="flex flex-col items-center bg-bluelight rounded-2xl shadow-md p-8 border border-gray-100">
-            <svg class="w-20 h-20 mb-4 text-[#f56b2a]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 48 48">
+            <svg
+              class="w-20 h-20 mb-4 text-[#f56b2a]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 48 48"
+            >
               <rect x="12" y="10" width="24" height="18" rx="8" stroke="#f56b2a" stroke-width="3" fill="none"></rect>
               <path d="M24 28v8M18 36h12" stroke="#f56b2a" stroke-width="3"></path>
             </svg>
@@ -134,23 +164,31 @@ import Layout from '~/layouts/PageLayout.astro';
           Our strategy covers everything you need for steady, long-term growth—no shortcuts, no tricks, just results.
         </p>
         <div class="space-y-8">
-          {['Audit & Local Strategy','On-Page SEO','GBP & Maps SEO','Links & Citations','Reporting & Calls'].map((step, i) => (
-            <div class="bg-white rounded-2xl p-8 shadow flex flex-col items-center">
-              <div class="w-10 h-10 mb-2 flex items-center justify-center rounded-full bg-[#f56b2a]/10 text-[#f56b2a] text-xl font-extrabold">
-                {i + 1}
-              </div>
-              <div>
-                <div class="font-bold mb-1 text-heading">{step}</div>
-                <div class="text-body">
-                  {i===0 && 'We analyze your current rankings, competition, and website. You get a clear, actionable roadmap.'}
-                  {i===1 && 'We optimize service & location pages, technical SEO, keywords, and content for local search.'}
-                  {i===2 && 'We boost your Google Business Profile and Map Pack rankings for high-intent local leads.'}
-                  {i===3 && 'We earn powerful local links, clean up citations, and build your business’s trust and authority.'}
-                  {i===4 && 'You get regular reports and strategy calls—so you always know your ROI.'}
+          {
+            ['Audit & Local Strategy', 'On-Page SEO', 'GBP & Maps SEO', 'Links & Citations', 'Reporting & Calls'].map(
+              (step, i) => (
+                <div class="bg-white rounded-2xl p-8 shadow flex flex-col items-center">
+                  <div class="w-10 h-10 mb-2 flex items-center justify-center rounded-full bg-[#f56b2a]/10 text-[#f56b2a] text-xl font-extrabold">
+                    {i + 1}
+                  </div>
+                  <div>
+                    <div class="font-bold mb-1 text-heading">{step}</div>
+                    <div class="text-body">
+                      {i === 0 &&
+                        'We analyze your current rankings, competition, and website. You get a clear, actionable roadmap.'}
+                      {i === 1 &&
+                        'We optimize service & location pages, technical SEO, keywords, and content for local search.'}
+                      {i === 2 &&
+                        'We boost your Google Business Profile and Map Pack rankings for high-intent local leads.'}
+                      {i === 3 &&
+                        'We earn powerful local links, clean up citations, and build your business’s trust and authority.'}
+                      {i === 4 && 'You get regular reports and strategy calls—so you always know your ROI.'}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              )
+            )
+          }
         </div>
       </div>
     </section>
@@ -224,7 +262,9 @@ import Layout from '~/layouts/PageLayout.astro';
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
           <!-- GBP -->
-          <article class="bg-white rounded-2xl shadow-md border border-gray-200 px-8 pt-8 pb-6 flex flex-col items-center min-h-[600px]">
+          <article
+            class="bg-white rounded-2xl shadow-md border border-gray-200 px-8 pt-8 pb-6 flex flex-col items-center min-h-[600px]"
+          >
             <h3 class="text-xl font-heading font-bold text-heading mb-2 text-center">Google Business Profile</h3>
             <div class="text-base font-semibold mb-1 text-center">Base: Profile Management</div>
             <span class="block text-sm bg-[#f56b2a] text-white px-4 py-2 rounded-full mb-4 font-semibold text-center">
@@ -244,7 +284,9 @@ import Layout from '~/layouts/PageLayout.astro';
               <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mb-6 flex items-start gap-3">
                 <input type="checkbox" class="mt-1 accent-[#f56b2a]" disabled />
                 <div>
-                  <div class="font-semibold text-[#f56b2a] mb-1">Boost Add-on + <span class="font-bold">$300/mo</span> (Total $499)</div>
+                  <div class="font-semibold text-[#f56b2a] mb-1">
+                    Boost Add-on + <span class="font-bold">$300/mo</span> (Total $499)
+                  </div>
                   <ul class="text-body text-base space-y-1 text-left list-disc pl-5">
                     <li>Weekly posts &amp; updates</li>
                     <li>Review request &amp; response strategy</li>
@@ -254,13 +296,19 @@ import Layout from '~/layouts/PageLayout.astro';
                 </div>
               </div>
               <div class="mt-auto pt-4 border-t border-gray-100 w-full">
-                <a href="#contact" class="block mx-auto w-5/6 text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition">Get Started</a>
+                <a
+                  href="#contact"
+                  class="block mx-auto w-5/6 text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
+                  >Get Started</a
+                >
               </div>
             </div>
           </article>
 
           <!-- Website as a Service -->
-          <article class="bg-white rounded-2xl shadow-md border border-gray-200 px-8 pt-8 pb-6 flex flex-col items-center min-h-[600px]">
+          <article
+            class="bg-white rounded-2xl shadow-md border border-gray-200 px-8 pt-8 pb-6 flex flex-col items-center min-h-[600px]"
+          >
             <h3 class="text-xl font-heading font-bold text-heading mb-2 text-center">Website as a Service</h3>
             <div class="text-base font-semibold mb-1 text-center">Base: Website Essentials</div>
             <span class="block text-sm bg-[#f56b2a] text-white px-4 py-2 rounded-full mb-4 font-semibold text-center">
@@ -279,7 +327,9 @@ import Layout from '~/layouts/PageLayout.astro';
               <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mb-6 flex items-start gap-3">
                 <input type="checkbox" class="mt-1 accent-[#f56b2a]" disabled />
                 <div>
-                  <div class="font-semibold text-[#f56b2a] mb-1">Boost Add-on + <span class="font-bold">$500/mo</span> (Total $750)</div>
+                  <div class="font-semibold text-[#f56b2a] mb-1">
+                    Boost Add-on + <span class="font-bold">$500/mo</span> (Total $750)
+                  </div>
                   <ul class="text-body text-base space-y-1 text-left list-disc pl-5">
                     <li>Updates for up to 15 pages / mo</li>
                     <li>New landing pages &amp; CRO improvements</li>
@@ -289,13 +339,19 @@ import Layout from '~/layouts/PageLayout.astro';
                 </div>
               </div>
               <div class="mt-auto pt-4 border-t border-gray-100 w-full">
-                <a href="#contact" class="block mx-auto w-5/6 text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition">Get Started</a>
+                <a
+                  href="#contact"
+                  class="block mx-auto w-5/6 text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
+                  >Get Started</a
+                >
               </div>
             </div>
           </article>
 
           <!-- One-Time Website Build (replacing Local SEO card) -->
-          <article class="bg-white rounded-2xl shadow-md border border-gray-200 px-8 pt-8 pb-6 flex flex-col items-center min-h-[600px]">
+          <article
+            class="bg-white rounded-2xl shadow-md border border-gray-200 px-8 pt-8 pb-6 flex flex-col items-center min-h-[600px]"
+          >
             <h3 class="text-xl font-heading font-bold text-heading mb-2 text-center">One-Time Website Build</h3>
             <div class="text-base font-semibold mb-1 text-center">Base: Up to 10 Pages</div>
             <span class="block text-sm bg-[#f56b2a] text-white px-4 py-2 rounded-full mb-4 font-semibold text-center">
@@ -314,7 +370,9 @@ import Layout from '~/layouts/PageLayout.astro';
               <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mb-6 flex items-start gap-3">
                 <input type="checkbox" class="mt-1 accent-[#f56b2a]" disabled />
                 <div>
-                  <div class="font-semibold text-[#f56b2a] mb-1">Add-on: Boost Package <span class="font-bold">$3,000</span></div>
+                  <div class="font-semibold text-[#f56b2a] mb-1">
+                    Add-on: Boost Package <span class="font-bold">$3,000</span>
+                  </div>
                   <ul class="text-body text-base space-y-1 text-left list-disc pl-5">
                     <li>Up to 20 total pages</li>
                     <li>Advanced conversion features (sticky CTAs, booking/chat)</li>
@@ -324,13 +382,19 @@ import Layout from '~/layouts/PageLayout.astro';
                 </div>
               </div>
               <div class="mt-auto pt-4 border-t border-gray-100 w-full">
-                <a href="#contact" class="block mx-auto w-5/6 text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition">Get Started</a>
+                <a
+                  href="#contact"
+                  class="block mx-auto w-5/6 text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
+                  >Get Started</a
+                >
               </div>
             </div>
           </article>
 
           <!-- Local SEO + GBP Mgmt -->
-          <article class="bg-white rounded-2xl shadow-md border border-gray-200 px-8 pt-8 pb-6 flex flex-col items-center min-h-[600px]">
+          <article
+            class="bg-white rounded-2xl shadow-md border border-gray-200 px-8 pt-8 pb-6 flex flex-col items-center min-h-[600px]"
+          >
             <h3 class="text-xl font-heading font-bold text-heading mb-2 text-center">Local SEO + GBP Mgmt</h3>
             <div class="text-base font-semibold mb-1 text-center">Base: Complete Local Presence</div>
             <span class="block text-sm bg-[#f56b2a] text-white px-4 py-2 rounded-full mb-4 font-semibold text-center">
@@ -349,7 +413,9 @@ import Layout from '~/layouts/PageLayout.astro';
               <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mb-6 flex items-start gap-3">
                 <input type="checkbox" class="mt-1 accent-[#f56b2a]" disabled />
                 <div>
-                  <div class="font-semibold text-[#f56b2a] mb-1">Boost Add-on + <span class="font-bold">$500/mo</span> (Total $1,299)</div>
+                  <div class="font-semibold text-[#f56b2a] mb-1">
+                    Boost Add-on + <span class="font-bold">$500/mo</span> (Total $1,299)
+                  </div>
                   <ul class="text-body text-base space-y-1 text-left list-disc pl-5">
                     <li>Includes Local SEO Boost + GBP Boost</li>
                     <li>Citation build &amp; cleanup (software + manual core listings)</li>
@@ -360,7 +426,11 @@ import Layout from '~/layouts/PageLayout.astro';
                 </div>
               </div>
               <div class="mt-auto pt-4 border-t border-gray-100 w-full">
-                <a href="#contact" class="block mx-auto w-5/6 text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition">Get Started</a>
+                <a
+                  href="#contact"
+                  class="block mx-auto w-5/6 text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
+                  >Get Started</a
+                >
               </div>
             </div>
           </article>
@@ -397,11 +467,14 @@ import Layout from '~/layouts/PageLayout.astro';
             </p>
           </div>
           <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
-            <h3 class="font-heading text-lg font-semibold mb-2 text-heading">Will I get reports and recommendations?</h3>
+            <h3 class="font-heading text-lg font-semibold mb-2 text-heading">
+              Will I get reports and recommendations?
+            </h3>
             <p class="text-body text-base">You’ll get transparent reports and a dedicated strategist.</p>
           </div>
         </div>
       </div>
     </section>
   </Layout>
+
 </html>

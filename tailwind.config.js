@@ -6,15 +6,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#f56b2a',          // Vibrant orange
-        primaryHover: '#e65c1e',     // Darker orange for hover state
-        secondary: '#1f2d3d',        // Deep charcoal/navy
-        heading: '#1f2d3d',          // Heading text color
-        body: '#4a4a4a',             // Body text color
-        cream: '#fff9f6',            // Warm neutral
-        bluelight: '#f0f4f8',        // Adjusted for better accessibility
-        graylight: '#f8fafc',        // Ultra-light gray
-        pattern: '#eaeaea',          // Subtle pattern (optional)
+        primary: '#f56b2a', // Vibrant orange
+        primaryHover: '#e65c1e', // Darker orange for hover state
+        secondary: '#1f2d3d', // Deep charcoal/navy
+        heading: '#1f2d3d', // Heading text color
+        body: '#4a4a4a', // Body text color
+        cream: '#fff9f6', // Warm neutral
+        bluelight: '#f0f4f8', // Adjusted for better accessibility
+        graylight: '#f8fafc', // Ultra-light gray
+        pattern: '#eaeaea', // Subtle pattern (optional)
       },
       fontFamily: {
         heading: ['Poppins', 'sans-serif'],
@@ -89,22 +89,22 @@ export default {
       // ---- Global page chrome / sticky-footer base ----
       addBase({
         'html, body': { height: '100%' },
-        'html': { scrollBehavior: 'smooth' },
-        'body': {
-          minHeight: '100svh',                 // supports mobile viewport units
+        html: { scrollBehavior: 'smooth' },
+        body: {
+          minHeight: '100svh', // supports mobile viewport units
           display: 'flex',
           flexDirection: 'column',
           margin: '0',
-          paddingBottom: '0',                  // neutralize accidental bottom padding
+          paddingBottom: '0', // neutralize accidental bottom padding
           overflowX: 'hidden',
           backgroundColor: theme('colors.white'),
         },
         // Let main consume the available height so the footer sits flush
-        'main': { flex: '1 1 auto' },
+        main: { flex: '1 1 auto' },
         // If a page uses #page wrapper, make sure the last section can't add blank space
         '#page > section:last-child': { marginBottom: '0', paddingBottom: '0' },
         // As a safety, ensure footer auto-sticks at the end of flex column
-        'footer': { marginTop: 'auto' },
+        footer: { marginTop: 'auto' },
       });
 
       // ---- Utilities ----
