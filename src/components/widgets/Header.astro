@@ -111,55 +111,73 @@ const routes = {
 
 <!-- LINT-SAFE SCRIPT (no IIFE, no TS casts) -->
 <script is:inline>
-  function lgSetupMobileNav() {
-    const btn = document.getElementById('navToggle');
-    const menu = document.getElementById('mobileMenu');
-    const closeBtn = document.getElementById('navClose');
+  (() => {
+    // Bind (and re-bind) menu behavior
+    const bindMenu = () => {
+      // Support either your current data-attrs or older ones
+      const btn =
+        document.querySelector('[data-nav-toggle]') ||
+        document.querySelector('[data-menu-toggle]') ||
+        document.querySelector('[aria-controls="mobile-menu"]');
 
-    if (!btn || !menu) return;
-    if (btn.dataset.bound === '1') return; // prevent double-binding on SPA transitions
-    btn.dataset.bound = '1';
+      const panel =
+        document.querySelector('[data-nav-panel]') ||
+        document.querySelector('[data-menu-panel]') ||
+        document.getElementById('mobile-menu');
 
-    const open = () => {
-      menu.classList.remove('hidden');
-      btn.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
+      if (!btn || !panel) return;
+
+      // Ensure panel doesn't block taps when "closed"
+      panel.classList.add('hidden');
+
+      const open = () => {
+        panel.classList.remove('hidden'); // make visible & clickable
+        btn.setAttribute('aria-expanded', 'true');
+        document.documentElement.classList.add('overflow-hidden'); // lock scroll
+        document.body.classList.add('overflow-hidden');
+      };
+
+      const close = () => {
+        panel.classList.add('hidden'); // fully remove hitbox
+        btn.setAttribute('aria-expanded', 'false');
+        document.documentElement.classList.remove('overflow-hidden');
+        document.body.classList.remove('overflow-hidden');
+      };
+
+      // Toggle on button tap
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (panel.classList.contains('hidden')) open();
+        else close();
+      });
+
+      // Close on overlay or any element marked as a closer
+      panel.addEventListener('click', (e) => {
+        const t = e.target;
+        if (
+          (t && t.closest && t.closest('[data-nav-close]')) ||
+          (t && t.closest && t.closest('[data-menu-close]')) ||
+          t === panel
+        ) {
+          close();
+        }
+      });
+
+      // ESC to close
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close();
+      });
     };
 
-    const close = () => {
-      menu.classList.add('hidden');
-      btn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    };
+    // Run now…
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bindMenu, { once: true });
+    } else {
+      bindMenu();
+    }
 
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      open();
-    });
-    if (closeBtn) closeBtn.addEventListener('click', close);
-
-    // Click scrim to close
-    menu.addEventListener('click', (e) => {
-      const t = e.target;
-      if (t && t instanceof HTMLElement && t.hasAttribute('data-close')) close();
-    });
-
-    // Navigate closes menu
-    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
-
-    // ESC to close
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') close();
-    });
-
-    // Astro view transitions
-    document.addEventListener('astro:before-swap', close);
-    document.addEventListener('astro:page-load', close);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', lgSetupMobileNav, { once: true });
-  } else {
-    lgSetupMobileNav();
-  }
+    // …and re-run whenever Astro swaps pages (view transitions / ClientRouter)
+    addEventListener('astro:page-load', bindMenu);
+    addEventListener('astro:after-swap', bindMenu);
+  })();
 </script>
