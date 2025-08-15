@@ -1,8 +1,4 @@
 ---
-/**
- * Header with accessible desktop + mobile nav.
- * Update any paths below if your routes differ.
- */
 const routes = {
   home: '/',
   services: '/services',
@@ -23,17 +19,14 @@ const routes = {
       <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-7 w-auto" />
     </a>
 
-    <!-- DESKTOP NAV (reverted) -->
+    <!-- DESKTOP NAV -->
     <nav class="hidden lg:flex items-center gap-8 text-[15px] font-medium text-heading">
       <a href={routes.services} class="hover:text-primary">Services</a>
       <a href={routes.additional} class="hover:text-primary">Additional Services</a>
       <a href={routes.seoTools} class="hover:text-primary">Free SEO Tools</a>
       <a href={routes.about} class="hover:text-primary">About</a>
       <a href={routes.contact} class="hover:text-primary">Contact</a>
-      <a
-        href="#contact"
-        class="ml-2 inline-flex items-center px-4 py-2 rounded-xl bg-primary text-white hover:bg-primaryHover transition"
-      >
+      <a href="#contact" class="ml-2 inline-flex items-center px-4 py-2 rounded-xl bg-primary text-white hover:bg-primaryHover transition">
         Schedule a Call
       </a>
     </nav>
@@ -48,7 +41,7 @@ const routes = {
       type="button"
     >
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M4 7h16M4 12h16M4 17h16"></path>
+        <path d="M4 7h16M4 12h16M4 17h16" />
       </svg>
     </button>
   </div>
@@ -63,13 +56,9 @@ const routes = {
   <div class="absolute inset-x-0 top-0 mx-auto w-full max-w-xl bg-[#1b2a3b] text-white rounded-b-3xl shadow-2xl">
     <div class="flex items-center justify-between px-5 h-14">
       <span class="text-base font-semibold">Menu</span>
-      <button
-        id="navClose"
-        class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/10 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-primary"
-        aria-label="Close menu"
-      >
+      <button id="navClose" class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/10 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-primary" aria-label="Close menu">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M6 6l12 12M18 6l-12 12"></path>
+          <path d="M6 6l12 12M18 6l-12 12" />
         </svg>
       </button>
     </div>
@@ -82,29 +71,18 @@ const routes = {
         <li><a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.services}>All Services</a></li>
 
         <li class="mt-2 text-xs uppercase tracking-wide text-white/60 px-3">Core Services</li>
-        <li>
-          <a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.gbp}
-            >Google Business Profile Optimization</a>
-        </li>
+        <li><a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.gbp}>Google Business Profile Optimization</a></li>
         <li><a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.localSeo}>Local SEO</a></li>
-        <li>
-          <a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.webDesign}
-            >Website Design & Development</a>
-        </li>
+        <li><a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.webDesign}>Website Design & Development</a></li>
 
         <li class="mt-4 text-xs uppercase tracking-wide text-white/60 px-3">Company</li>
-        <li>
-          <a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.additional}>Additional Services</a>
-        </li>
+        <li><a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.additional}>Additional Services</a></li>
         <li><a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.seoTools}>Free SEO Tools</a></li>
         <li><a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.about}>About</a></li>
         <li><a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.contact}>Contact</a></li>
       </ul>
 
-      <a
-        href="#contact"
-        class="mt-5 mb-4 block text-center px-5 py-3 rounded-xl bg-primary font-semibold hover:bg-primaryHover transition"
-      >
+      <a href="#contact" class="mt-5 mb-4 block text-center px-5 py-3 rounded-xl bg-primary font-semibold hover:bg-primaryHover transition">
         Schedule a Call
       </a>
     </nav>
@@ -133,20 +111,27 @@ const routes = {
     };
 
     if (!window.__lgNavBound) {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        open();
-      });
-      closeBtn?.addEventListener('click', close);
+      btn.addEventListener('click', (e) => { e.preventDefault(); open(); });
+      closeBtn && closeBtn.addEventListener('click', close);
+
+      // ✅ pure JS guard (no TS assertion)
       menu.addEventListener('click', (e) => {
-        if ((e.target as HTMLElement).hasAttribute?.('data-close')) close();
+        const t = e.target;
+        if (t && t instanceof HTMLElement && t.hasAttribute('data-close')) {
+          close();
+        }
       });
+
+      // Close when navigating via any link inside the sheet
       menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') close();
-      });
+
+      // Esc to close
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+      // Close on page transitions (Astro view transitions)
       document.addEventListener('astro:before-swap', close);
       document.addEventListener('astro:page-load', close);
+
       window.__lgNavBound = true;
     }
   })();
