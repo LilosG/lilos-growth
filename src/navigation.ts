@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
+import { getPermalink } from './utils/permalinks';
 
 export const headerData = {
   links: [
@@ -48,7 +47,7 @@ export const headerData = {
   actions: [
     {
       text: 'Book a Call',
-      href: '/contact', // Update this to your booking/contact link if you have one
+      href: getPermalink('/contact'),
     },
   ],
-};
+} as const;

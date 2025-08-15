@@ -1,183 +1,165 @@
 ---
-const routes = {
-  home: '/',
-  services: '/services',
-  gbp: '/services/google-business-profile-optimization',
-  localSeo: '/services/local-seo',
-  webDesign: '/services/web-design',
-  additional: '/services#additional-services',
-  seoTools: '/seo-tools',
-  about: '/about',
-  contact: '/contact',
-};
+import { headerData } from '~/navigation';
+
+/** Strong, safe types that match your navigation structure */
+type SubLink = { text: string; href: string; description?: string };
+
+// A top-level nav item is either a flat link OR a group with children.
+type FlatLink = { text: string; href: string; links?: never };
+type GroupLink = { text: string; href?: never; links: readonly SubLink[] };
+type NavItem = FlatLink | GroupLink;
+
+type Action = { text: string; href: string };
+
+/** `navigation.ts` exports arrays with `as const` (readonly). Keep them readonly. */
+const topLinks = (headerData.links ?? []) as readonly NavItem[];
+const actions  = (headerData.actions ?? []) as readonly Action[];
+
+/** Type guard so TS knows when an item has children */
+const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArray(i.links);
 ---
 
-<header class="relative z-40 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
-  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-    <!-- Logo -->
-    <a href={routes.home} class="flex items-center gap-2">
-      <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-7 w-auto" />
-    </a>
-
-    <!-- DESKTOP NAV (restored) -->
-    <nav class="hidden lg:flex items-center gap-8 text-[15px] font-medium text-heading">
-      <a href={routes.services} class="hover:text-primary">Services</a>
-      <a href={routes.additional} class="hover:text-primary">Additional Services</a>
-      <a href={routes.seoTools} class="hover:text-primary">Free SEO Tools</a>
-      <a href={routes.about} class="hover:text-primary">About</a>
-      <a href={routes.contact} class="hover:text-primary">Contact</a>
-      <a
-        href="#contact"
-        class="ml-2 inline-flex items-center px-4 py-2 rounded-xl bg-primary text-white hover:bg-primaryHover transition"
-      >
-        Schedule a Call
+<header class="relative z-[80] w-full">
+  <div class="mx-auto w-full max-w-7xl px-4">
+    <div class="flex h-16 items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <img
+          src="/Lilos_Growth_Logo_Corrected.svg"
+          alt="Lilos Growth"
+          class="h-8 w-auto"
+          loading="eager"
+          decoding="async"
+        />
+        <span class="sr-only">Lilos Growth</span>
       </a>
-    </nav>
 
-    <!-- MOBILE TOGGLE -->
-    <button
-      id="navToggle"
-      class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl bg-secondary/90 text-white shadow focus:outline-none focus:ring-2 focus:ring-primary"
-      aria-controls="mobileMenu"
-      aria-expanded="false"
-      aria-label="Open menu"
-      type="button"
-    >
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M4 7h16M4 12h16M4 17h16"></path>
-      </svg>
-    </button>
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6">
+        {
+          topLinks.map((item) => (
+            hasChildren(item) ? (
+              /* Dropdown for items with children (e.g., Services) */
+              <div class="relative group">
+                <button
+                  class="inline-flex items-center gap-2 font-medium text-[#253242] hover:text-black transition"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {item.text}
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" stroke-width="2"></path>
+                  </svg>
+                </button>
+                <div
+                  class="invisible absolute left-0 mt-3 w-[320px] rounded-2xl border border-gray-200 bg-white shadow-xl opacity-0 transition
+                         group-hover:visible group-hover:opacity-100"
+                >
+                  <div class="p-2">
+                    {
+                      item.links.map((sub) => (
+                        <a href={sub.href} class="block rounded-xl px-4 py-3 hover:bg-gray-50">
+                          <div class="text-sm font-semibold text-[#253242]">{sub.text}</div>
+                          {sub.description ? <div class="text-xs text-gray-500">{sub.description}</div> : null}
+                        </a>
+                      ))
+                    }
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* Flat link (no children) */
+              <a href={item.href} class="font-medium text-[#253242] hover:text-black transition">
+                {item.text}
+              </a>
+            )
+          ))
+        }
+
+        {actions.map((a) => (
+          <a
+            href={a.href}
+            class="inline-flex items-center rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-semibold shadow-sm hover:shadow transition"
+          >
+            {a.text}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Mobile Hamburger -->
+      <div class="md:hidden">
+        <!-- Toggle (no JS) -->
+        <input id="nav-open" type="checkbox" class="peer hidden" />
+        <label
+          for="nav-open"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white shadow-sm"
+          aria-label="Open menu"
+        >
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke-width="2"></path>
+          </svg>
+        </label>
+
+        <!-- Fullscreen Overlay -->
+        <div class="fixed inset-0 z-[90] hidden bg-[#253242] peer-checked:block" aria-hidden="true"></div>
+
+        <!-- Mobile Panel -->
+        <nav
+          class="fixed inset-0 z-[100] hidden flex-col gap-6 p-6 text-white peer-checked:flex"
+          role="dialog"
+          aria-label="Mobile Navigation"
+        >
+          <div class="flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+              <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-8 w-auto" />
+              <span class="sr-only">Lilos Growth</span>
+            </a>
+
+            <!-- Close -->
+            <label for="nav-open" class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-white/10" aria-label="Close menu">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <path d="M6 6l12 12M6 18L18 6" stroke-width="2"></path>
+              </svg>
+            </label>
+          </div>
+
+          <div class="mt-4 grid gap-4">
+            {
+              topLinks.map((item) => (
+                hasChildren(item) ? (
+                  <div class="rounded-2xl border border-white/15 bg-white/5">
+                    <div class="px-4 pb-2 pt-4 text-xs font-semibold uppercase tracking-wide text-white/70">
+                      {item.text}
+                    </div>
+                    <div class="p-2">
+                      {item.links.map((sub) => (
+                        <a href={sub.href} class="block rounded-xl px-4 py-3 hover:bg-white/10">{sub.text}</a>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <a href={item.href} class="block rounded-2xl border border-white/15 bg-white/5 px-4 py-3 hover:bg-white/10">
+                    {item.text}
+                  </a>
+                )
+              ))
+            }
+          </div>
+
+          <!-- Actions + Close -->
+          <div class="mt-auto grid gap-3">
+            {actions.map((a) => (
+              <a
+                href={a.href}
+                class="inline-flex items-center justify-center rounded-2xl bg-white px-4 py-3 font-semibold text-[#253242] shadow-sm"
+              >
+                {a.text}
+              </a>
+            ))}
+            <label for="nav-open" class="text-center text-sm text-white/70">Close</label>
+          </div>
+        </nav>
+      </div>
+    </div>
   </div>
 </header>
-
-<!-- MOBILE OVERLAY MENU -->
-<div id="mobileMenu" class="fixed inset-0 z-[80] hidden">
-  <!-- Scrim -->
-  <div class="absolute inset-0 bg-[#0b1522]/70 backdrop-blur-sm" data-close></div>
-
-  <!-- Sheet -->
-  <div class="absolute inset-x-0 top-0 mx-auto w-full max-w-xl bg-[#1b2a3b] text-white rounded-b-3xl shadow-2xl">
-    <div class="flex items-center justify-between px-5 h-14">
-      <span class="text-base font-semibold">Menu</span>
-      <button
-        id="navClose"
-        class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/10 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-primary"
-        aria-label="Close menu"
-      >
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M6 6l12 12M18 6l-12 12"></path>
-        </svg>
-      </button>
-    </div>
-
-    <div class="border-t border-white/10"></div>
-
-    <!-- Links -->
-    <nav class="px-5 py-4">
-      <ul class="space-y-2 text-[17px]">
-        <li><a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.services}>All Services</a></li>
-
-        <li class="mt-2 text-xs uppercase tracking-wide text-white/60 px-3">Core Services</li>
-        <li>
-          <a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.gbp}
-            >Google Business Profile Optimization</a
-          >
-        </li>
-        <li><a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.localSeo}>Local SEO</a></li>
-        <li>
-          <a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.webDesign}
-            >Website Design & Development</a
-          >
-        </li>
-
-        <li class="mt-4 text-xs uppercase tracking-wide text-white/60 px-3">Company</li>
-        <li>
-          <a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.additional}>Additional Services</a>
-        </li>
-        <li><a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.seoTools}>Free SEO Tools</a></li>
-        <li><a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.about}>About</a></li>
-        <li><a class="block px-3 py-2 rounded-lg hover:bg-white/10" href={routes.contact}>Contact</a></li>
-      </ul>
-
-      <a
-        href="#contact"
-        class="mt-5 mb-4 block text-center px-5 py-3 rounded-xl bg-primary font-semibold hover:bg-primaryHover transition"
-      >
-        Schedule a Call
-      </a>
-    </nav>
-  </div>
-</div>
-
-<!-- LINT-SAFE SCRIPT (no IIFE, no TS casts) -->
-<script is:inline>
-  (() => {
-    // Bind (and re-bind) menu behavior
-    const bindMenu = () => {
-      // Support either your current data-attrs or older ones
-      const btn =
-        document.querySelector('[data-nav-toggle]') ||
-        document.querySelector('[data-menu-toggle]') ||
-        document.querySelector('[aria-controls="mobile-menu"]');
-
-      const panel =
-        document.querySelector('[data-nav-panel]') ||
-        document.querySelector('[data-menu-panel]') ||
-        document.getElementById('mobile-menu');
-
-      if (!btn || !panel) return;
-
-      // Ensure panel doesn't block taps when "closed"
-      panel.classList.add('hidden');
-
-      const open = () => {
-        panel.classList.remove('hidden'); // make visible & clickable
-        btn.setAttribute('aria-expanded', 'true');
-        document.documentElement.classList.add('overflow-hidden'); // lock scroll
-        document.body.classList.add('overflow-hidden');
-      };
-
-      const close = () => {
-        panel.classList.add('hidden'); // fully remove hitbox
-        btn.setAttribute('aria-expanded', 'false');
-        document.documentElement.classList.remove('overflow-hidden');
-        document.body.classList.remove('overflow-hidden');
-      };
-
-      // Toggle on button tap
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (panel.classList.contains('hidden')) open();
-        else close();
-      });
-
-      // Close on overlay or any element marked as a closer
-      panel.addEventListener('click', (e) => {
-        const t = e.target;
-        if (
-          (t && t.closest && t.closest('[data-nav-close]')) ||
-          (t && t.closest && t.closest('[data-menu-close]')) ||
-          t === panel
-        ) {
-          close();
-        }
-      });
-
-      // ESC to close
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') close();
-      });
-    };
-
-    // Run now…
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', bindMenu, { once: true });
-    } else {
-      bindMenu();
-    }
-
-    // …and re-run whenever Astro swaps pages (view transitions / ClientRouter)
-    addEventListener('astro:page-load', bindMenu);
-    addEventListener('astro:after-swap', bindMenu);
-  })();
-</script>
