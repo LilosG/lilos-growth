@@ -1,219 +1,131 @@
 ---
-// Adjust the import path as needed!
-import { headerData } from '../../navigation';
+const nav = [
+  { label: 'All Services', href: '/services' },
+  { label: 'Google Business Profile Optimization', href: '/services/google-business-profile-optimization' },
+  { label: 'Local SEO', href: '/services/local-seo' }, // ← change to /services/local-seo-content if that’s your slug
+  { label: 'Website Design & Development', href: '/services/web-design' },
+];
 ---
 
-<header
-  class="sticky top-0 z-50 bg-white/95 supports-[backdrop-filter]:bg-white/80 backdrop-blur border-b border-gray-100 shadow-sm transition-all duration-200"
->
-  <div class="relative">
-    <!-- Orange accent bar (brand underline) -->
-    <div class="absolute bottom-0 left-0 w-full h-1 bg-[#f56b2a]"></div>
+<header class="sticky top-0 z-[60] bg-white/80 backdrop-blur border-b border-gray-200">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2">
+      <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-8 w-auto" />
+    </a>
 
-    <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-2 md:py-3 relative z-10">
-      <!-- Logo Left -->
-      <a href="/" class="flex items-center" aria-label="Lilos Growth home">
-        <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="w-24 md:w-28" />
-      </a>
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-8">
+      {
+        nav.map((n) => (
+          <a href={n.href} class="text-sm font-semibold text-heading hover:text-primary transition-colors">
+            {n.label}
+          </a>
+        ))
+      }
+      <a
+        href="#contact"
+        class="px-4 py-2 rounded-xl bg-primary text-white font-semibold hover:bg-primaryHover transition"
+        >Schedule a Call</a
+      >
+    </nav>
 
-      <!-- Navigation Center/Right (Desktop) -->
-      <nav class="hidden md:flex items-center gap-10" aria-label="Primary">
-        {
-          headerData.links.map((link) =>
-            link.links ? (
-              // Dropdown menu item
-              <div class="group relative inline-block">
-                <button
-                  class="text-heading font-medium text-lg hover:text-primary transition-colors duration-150 flex items-center"
-                  tabindex="0"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  {link.text}
-                  <svg
-                    class="ml-1 w-4 h-4 inline-block"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-                <div
-                  class="pointer-events-none opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 group-focus-within:opacity-100 group-focus-within:scale-100 group-hover:pointer-events-auto group-focus-within:pointer-events-auto transition-all duration-200 absolute left-0 mt-2 w-56 bg-white border border-gray-100 rounded-2xl shadow-lg py-2 z-20"
-                  style="transition-property: opacity, transform;"
-                >
-                  {link.links.map((sublink) => (
-                    <a
-                      href={sublink.href}
-                      class="block px-5 py-2 text-heading text-base font-medium hover:bg-[#fff7f0] hover:text-primary rounded transition"
-                    >
-                      {sublink.text}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <a
-                href={link.href}
-                class="text-heading font-medium text-lg hover:text-primary transition-colors duration-150"
-              >
-                {link.text}
-              </a>
-            )
-          )
-        }
-      </nav>
+    <!-- Mobile button -->
+    <button
+      id="menuBtn"
+      class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl bg-white/70 shadow border border-gray-200"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobileDrawer"
+      type="button"
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-heading">
+        <path stroke-width="2.2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+    </button>
+  </div>
 
-      <!-- CTA Button Right (Desktop) -->
-      <div class="hidden md:flex items-center">
-        <a
-          href="#book"
-          class="bg-primary text-white px-7 py-3 rounded-full font-semibold text-base shadow hover:bg-secondary transition-all duration-150 flex items-center"
-        >
-          Book a Call
-          <svg
-            class="ml-2 w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14M13 18l6-6-6-6"></path>
-          </svg>
-        </a>
-      </div>
+  <!-- Mobile drawer (outside page scale) -->
+  <div id="mobileDrawer" data-open="false" class="fixed inset-0 z-[100] pointer-events-none">
+    <!-- Backdrop -->
+    <div
+      id="drawerBackdrop"
+      class="absolute inset-0 opacity-0 transition-opacity duration-300 bg-secondary/80 backdrop-blur-sm"
+    >
+    </div>
 
-      <!-- Hamburger Button (Mobile) -->
-      <div class="md:hidden flex items-center">
+    <!-- Panel -->
+    <aside
+      id="drawerPanel"
+      class="absolute right-0 top-0 h-full w-[86%] max-w-[420px] translate-x-full transition-transform duration-300
+             bg-[#253242] text-white shadow-2xl"
+    >
+      <div class="p-5 flex items-center justify-between border-b border-white/10">
+        <span class="text-base font-semibold">Menu</span>
         <button
-          id="mobile-menu-toggle"
-          aria-label="Open menu"
-          aria-controls="mobile-menu-panel"
-          aria-expanded="false"
-          class="p-2 rounded focus:outline-none hover:bg-gray-100"
+          id="closeBtn"
+          class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/10"
+          aria-label="Close menu"
           type="button"
         >
-          <svg
-            class="w-8 h-8 text-heading"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6l-12 12"></path>
           </svg>
         </button>
       </div>
 
-      <!-- Mobile Menu Panel -->
-      <div
-        id="mobile-menu-panel"
-        class="md:hidden hidden fixed inset-0 z-40 bg-[#253242] bg-opacity-95 flex flex-col pt-6 px-6"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="mobile-menu-title"
-      >
-        <!-- Top: Logo & Close -->
-        <div class="flex justify-between items-center mb-6">
-          <a href="/" aria-label="Lilos Growth home">
-            <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="w-28" />
-          </a>
-          <button
-            id="mobile-menu-close"
-            class="text-white text-3xl font-bold px-3 py-1"
-            type="button"
-            aria-label="Close menu"
-          >
-            &times;
-          </button>
-        </div>
-
-        <!-- Menu Links -->
-        <nav class="flex flex-col gap-2" aria-label="Mobile">
-          <h2 id="mobile-menu-title" class="sr-only">Main menu</h2>
-          {
-            headerData.links.map((link) =>
-              link.links ? (
-                <div>
-                  <span class="block text-lg text-[#f56b2a] font-bold py-2">{link.text}</span>
-                  {link.links.map((sublink) => (
-                    <a
-                      href={sublink.href}
-                      class="block pl-6 py-2 text-base text-white hover:bg-[#fff7f0] hover:text-[#f56b2a] rounded transition"
-                      data-close-menu
-                    >
-                      {sublink.text}
-                    </a>
-                  ))}
-                </div>
-              ) : (
-                <a
-                  href={link.href}
-                  class="block text-lg text-white py-2 font-medium hover:text-[#f56b2a] transition"
-                  data-close-menu
-                >
-                  {link.text}
-                </a>
-              )
-            )
-          }
-        </nav>
-      </div>
-    </div>
+      <nav class="px-5 py-4 space-y-4">
+        {
+          nav.map((n) => (
+            <a href={n.href} class="block text-lg font-semibold text-white/90 hover:text-white">
+              {n.label}
+            </a>
+          ))
+        }
+        <a
+          href="#contact"
+          class="mt-2 inline-flex items-center justify-center w-full px-5 py-3 rounded-xl bg-primary font-semibold hover:bg-primaryHover"
+        >
+          Schedule a Call
+        </a>
+      </nav>
+    </aside>
   </div>
+
+  <script is:inline>
+    (() => {
+      const btn = document.getElementById('menuBtn');
+      const drawer = document.getElementById('mobileDrawer');
+      const panel = document.getElementById('drawerPanel');
+      const backdrop = document.getElementById('drawerBackdrop');
+      const closeBtn = document.getElementById('closeBtn');
+      if (!btn || !drawer || !panel || !backdrop || !closeBtn) return;
+
+      let open = false;
+
+      const setOpen = (v) => {
+        open = v;
+        drawer.dataset.open = String(v);
+        btn.setAttribute('aria-expanded', String(v));
+        // visuals
+        panel.style.transform = v ? 'translateX(0)' : 'translateX(100%)';
+        backdrop.style.opacity = v ? '1' : '0';
+        drawer.style.pointerEvents = v ? 'auto' : 'none';
+        // lock body scroll
+        document.documentElement.classList.toggle('overflow-hidden', v);
+        document.body.classList.toggle('overflow-hidden', v);
+      };
+
+      const onKey = (e) => {
+        if (e.key === 'Escape' && open) setOpen(false);
+      };
+
+      btn.addEventListener('click', () => setOpen(true));
+      closeBtn.addEventListener('click', () => setOpen(false));
+      backdrop.addEventListener('click', () => setOpen(false));
+      document.addEventListener('keydown', onKey, { passive: true });
+
+      // Close on route change (Astro view transitions)
+      document.addEventListener('astro:after-swap', () => setOpen(false));
+    })();
+  </script>
 </header>
-
-<!-- Inline script to manage mobile menu behavior, scroll lock, and a11y -->
-<script is:inline>
-  (function () {
-    const toggle = document.getElementById('mobile-menu-toggle');
-    const panel = document.getElementById('mobile-menu-panel');
-    const closeBtn = document.getElementById('mobile-menu-close');
-    if (!toggle || !panel || !closeBtn) return;
-
-    const html = document.documentElement;
-
-    function openMenu() {
-      panel.classList.remove('hidden');
-      toggle.setAttribute('aria-expanded', 'true');
-      html.classList.add('overflow-hidden'); // lock scroll
-      // Move focus to the close button for accessibility
-      closeBtn.focus({ preventScroll: true });
-    }
-
-    function closeMenu() {
-      panel.classList.add('hidden');
-      toggle.setAttribute('aria-expanded', 'false');
-      html.classList.remove('overflow-hidden'); // unlock scroll
-      toggle.focus({ preventScroll: true });
-    }
-
-    toggle.addEventListener('click', openMenu);
-    closeBtn.addEventListener('click', closeMenu);
-
-    // Close on ESC
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !panel.classList.contains('hidden')) {
-        closeMenu();
-      }
-    });
-
-    // Close menu when a link inside the panel is clicked
-    panel.addEventListener('click', (e) => {
-      const target = e.target;
-      if (target && target.closest && target.closest('[data-close-menu]')) {
-        closeMenu();
-      }
-    });
-
-    // Close if user clicks the dark backdrop area (outside inner content)
-    panel.addEventListener('mousedown', (e) => {
-      if (e.target === panel) closeMenu();
-    });
-  })();
-</script>
