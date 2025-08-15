@@ -1,33 +1,30 @@
 ---
 import { headerData } from '~/navigation';
 
-/** Strong, safe types that match your navigation structure */
+/** Types matching your navigation structure */
 type SubLink = { text: string; href: string; description?: string };
-
-// A top-level nav item is either a flat link OR a group with children.
 type FlatLink = { text: string; href: string; links?: never };
 type GroupLink = { text: string; href?: never; links: readonly SubLink[] };
 type NavItem = FlatLink | GroupLink;
-
 type Action = { text: string; href: string };
 
-/** `navigation.ts` exports arrays with `as const` (readonly). Keep them readonly. */
 const topLinks = (headerData.links ?? []) as readonly NavItem[];
 const actions = (headerData.actions ?? []) as readonly Action[];
 
-/** Type guard so TS knows when an item has children */
-const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArray(i.links);
+/** Type guard */
+const hasChildren = (i: NavItem): i is GroupLink =>
+  'links' in i && Array.isArray(i.links);
 ---
 
 <header class="relative z-[80] w-full">
   <div class="mx-auto w-full max-w-7xl px-4">
     <div class="flex h-16 items-center justify-between">
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 group">
+      <!-- Logo (smaller on mobile) -->
+      <a href="/" class="flex items-center gap-3 group shrink-0">
         <img
           src="/Lilos_Growth_Logo_Corrected.svg"
           alt="Lilos Growth"
-          class="h-8 w-auto"
+          class="h-6 w-auto md:h-8"   <!-- mobile = h-6, md+ = h-8 -->
           loading="eager"
           decoding="async"
         />
@@ -37,9 +34,9 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
       <!-- Desktop Nav -->
       <nav class="hidden md:flex items-center gap-6">
         {
-          topLinks.map((item) =>
+          topLinks.map((item) => (
             hasChildren(item) ? (
-              /* Dropdown for items with children (e.g., Services) */
+              /* Dropdown (Services) */
               <div class="relative group">
                 <button
                   class="inline-flex items-center gap-2 font-medium text-[#253242] hover:text-black transition"
@@ -48,7 +45,7 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
                 >
                   {item.text}
                   <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                    <path d="M6 9l6 6 6-6" stroke-width="2" />
+                    <path d="M6 9l6 6 6-6" stroke-width="2"></path>
                   </svg>
                 </button>
                 <div
@@ -66,29 +63,26 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
                 </div>
               </div>
             ) : (
-              /* Flat link (no children) */
+              /* Flat link */
               <a href={item.href} class="font-medium text-[#253242] hover:text-black transition">
                 {item.text}
               </a>
             )
-          )
-        }
-
-        {
-          actions.map((a) => (
-            <a
-              href={a.href}
-              class="inline-flex items-center rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-semibold shadow-sm hover:shadow transition"
-            >
-              {a.text}
-            </a>
           ))
         }
+
+        {actions.map((a) => (
+          <a
+            href={a.href}
+            class="inline-flex items-center rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-semibold shadow-sm hover:shadow transition"
+          >
+            {a.text}
+          </a>
+        ))}
       </nav>
 
-      <!-- Mobile Hamburger -->
+      <!-- Mobile Hamburger (CSS-only) -->
       <div class="md:hidden">
-        <!-- Toggle (no JS) -->
         <input id="nav-open" type="checkbox" class="peer hidden" />
         <label
           for="nav-open"
@@ -100,27 +94,22 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
           </svg>
         </label>
 
-        <!-- Fullscreen Overlay -->
-        <div class="fixed inset-0 z-[90] hidden bg-[#253242] peer-checked:block" aria-hidden="true"></div>
+        <!-- Solid overlay (ensure above hero, below panel) -->
+        <div class="fixed inset-0 z-[100] hidden bg-[#253242] peer-checked:block" aria-hidden="true"></div>
 
-        <!-- Mobile Panel -->
+        <!-- Mobile panel -->
         <nav
-          class="fixed inset-0 z-[100] hidden flex-col gap-6 p-6 text-white peer-checked:flex"
+          class="fixed inset-0 z-[110] hidden flex-col gap-6 p-6 text-white peer-checked:flex"
           role="dialog"
           aria-label="Mobile Navigation"
         >
           <div class="flex items-center justify-between">
             <a href="/" class="flex items-center gap-3">
-              <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-8 w-auto" />
+              <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-6 w-auto" />
               <span class="sr-only">Lilos Growth</span>
             </a>
 
-            <!-- Close -->
-            <label
-              for="nav-open"
-              class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-white/10"
-              aria-label="Close menu"
-            >
+            <label for="nav-open" class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-white/10" aria-label="Close menu">
               <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                 <path d="M6 6l12 12M6 18L18 6" stroke-width="2"></path>
               </svg>
@@ -129,7 +118,7 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
 
           <div class="mt-4 grid gap-4">
             {
-              topLinks.map((item) =>
+              topLinks.map((item) => (
                 hasChildren(item) ? (
                   <div class="rounded-2xl border border-white/15 bg-white/5">
                     <div class="px-4 pb-2 pt-4 text-xs font-semibold uppercase tracking-wide text-white/70">
@@ -137,36 +126,28 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
                     </div>
                     <div class="p-2">
                       {item.links.map((sub) => (
-                        <a href={sub.href} class="block rounded-xl px-4 py-3 hover:bg-white/10">
-                          {sub.text}
-                        </a>
+                        <a href={sub.href} class="block rounded-xl px-4 py-3 hover:bg-white/10">{sub.text}</a>
                       ))}
                     </div>
                   </div>
                 ) : (
-                  <a
-                    href={item.href}
-                    class="block rounded-2xl border border-white/15 bg-white/5 px-4 py-3 hover:bg-white/10"
-                  >
+                  <a href={item.href} class="block rounded-2xl border border-white/15 bg-white/5 px-4 py-3 hover:bg-white/10">
                     {item.text}
                   </a>
                 )
-              )
+              ))
             }
           </div>
 
-          <!-- Actions + Close -->
           <div class="mt-auto grid gap-3">
-            {
-              actions.map((a) => (
-                <a
-                  href={a.href}
-                  class="inline-flex items-center justify-center rounded-2xl bg-white px-4 py-3 font-semibold text-[#253242] shadow-sm"
-                >
-                  {a.text}
-                </a>
-              ))
-            }
+            {actions.map((a) => (
+              <a
+                href={a.href}
+                class="inline-flex items-center justify-center rounded-2xl bg-white px-4 py-3 font-semibold text-[#253242] shadow-sm"
+              >
+                {a.text}
+              </a>
+            ))}
             <label for="nav-open" class="text-center text-sm text-white/70">Close</label>
           </div>
         </nav>

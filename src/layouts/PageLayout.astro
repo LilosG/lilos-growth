@@ -13,7 +13,10 @@ import BasicScripts from '~/components/common/BasicScripts.astro';
 // View Transitions (optional)
 import { ClientRouter } from 'astro:transitions';
 
-// Floating Calendly Button (keep its z-index below the mobile menu overlay)
+// Header mounted globally
+import Header from '~/components/widgets/Header.astro';
+
+// Floating Calendly Button
 import FloatingCalendlyButton from '~/components/FloatingCalendlyButton.astro';
 
 import type { MetaData as MetaDataType } from '~/types';
@@ -21,7 +24,6 @@ import type { MetaData as MetaDataType } from '~/types';
 export interface Props {
   metadata?: MetaDataType;
 }
-
 const { metadata = {} } = Astro.props as Props;
 ---
 
@@ -38,38 +40,34 @@ const { metadata = {} } = Astro.props as Props;
     <ClientRouter fallback="swap" />
   </head>
 
-  <!-- Sticky footer layout: full-height column -->
   <body class="antialiased text-default bg-page tracking-tight min-h-[100dvh] flex flex-col overflow-x-clip">
+    <!-- Global header -->
+    <Header />
+
     <!-- Page content -->
     <main id="app" class="flex-1 flex flex-col">
       <slot />
     </main>
 
-    <!-- Floating Calendly -->
     <FloatingCalendlyButton />
 
-    <!-- Core scripts -->
     <BasicScripts />
 
     <!-- Vercel Web Analytics + Speed Insights -->
-    <script type="module">
+    <script is:inline type="module">
       import { inject } from '@vercel/analytics';
       import { injectSpeedInsights } from '@vercel/speed-insights';
-      try {
-        inject();
-      } catch {}
-      try {
-        injectSpeedInsights();
-      } catch {}
+      try { inject(); } catch {}
+      try { injectSpeedInsights(); } catch {}
     </script>
 
-    <!-- Plain JS analytics helper (no unused var in catch) -->
+    <!-- Plain JS analytics helper -->
     <script is:inline>
       (function () {
-        if (typeof window.trackEvent !== 'function') {
+        if (typeof window.trackEvent !== "function") {
           window.trackEvent = function (name, data) {
             try {
-              if (window.va && typeof window.va.track === 'function') {
+              if (window.va && typeof window.va.track === "function") {
                 window.va.track(String(name), data || {});
               }
             } catch {}
