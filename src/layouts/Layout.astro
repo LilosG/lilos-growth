@@ -1,4 +1,5 @@
 ---
+// src/layouts/Layout.astro
 import '~/assets/styles/tailwind.css';
 
 import CommonMeta from '~/components/common/CommonMeta.astro';
@@ -10,11 +11,15 @@ import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 
+// Vercel Web Analytics
 import VercelAnalytics from '@vercel/analytics/astro';
+// Vercel Speed Insights
 import SpeedInsights from '@vercel/speed-insights/astro';
 
+// View Transitions (optional)
 import { ClientRouter } from 'astro:transitions';
 
+// Floating Calendly Button (kept full size, outside the scaler)
 import FloatingCalendlyButton from '../components/FloatingCalendlyButton.astro';
 
 import type { MetaData as MetaDataType } from '~/types';
@@ -37,56 +42,18 @@ const { metadata = {} } = Astro.props;
     <SiteVerification />
     <Analytics />
     <ClientRouter fallback="swap" />
-
-    <style is:global>
-      /* 
-       * SCALE + HEIGHT COMPENSATION
-       * We set a single --scale var by breakpoint, and make the scaled area tall
-       * enough so that (min-height * scale) >= 100dvh. That kills the footer gap.
-       */
-      :root {
-        --scale: 1;
-      }
-      @media (min-width: 768px) {
-        :root {
-          --scale: 0.9;
-        }
-      } /* md */
-      @media (min-width: 1280px) {
-        :root {
-          --scale: 0.87;
-        }
-      } /* xl */
-      @media (min-width: 1536px) {
-        :root {
-          --scale: 0.85;
-        }
-      } /* 2xl */
-
-      /* Safety: ensure the very last block inside the page content can't add trailing space */
-      main#page > :is(section, div):last-child,
-      body > :is(section, div):last-child {
-        margin-bottom: 0 !important;
-        padding-bottom: 0 !important;
-      }
-
-      /* Optional: if a background band ever shows, make the body default white. 
-         Comment this out if you want the site-wide bg color instead. */
-      /* body { background: #fff; } */
-    </style>
   </head>
 
-  <body class="antialiased text-default bg-page tracking-tight min-h-[100dvh] flex flex-col overflow-x-clip">
-    <!-- Scaled page canvas -->
+  <!-- Sticky-footer safe: full-height flex column on the BODY -->
+  <body
+    class="antialiased text-default bg-page tracking-tight min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip"
+  >
+    <!-- Scaled page canvas: scales ALL page content (header, hero, cards, footer) without affecting layout height -->
     <div class="flex-1 flex flex-col">
       <div
-        id="scaled-canvas"
-        class="w-full will-change-transform"
-        style="
-          transform-origin: top center;
-          transform: scale(var(--scale));
-          min-height: calc(100dvh / var(--scale));
-        "
+        class="w-full origin-top will-change-transform
+               md:scale-[.90] xl:scale-[.87] 2xl:scale-[.85]"
+        style="transform-origin: top center;"
       >
         <slot />
       </div>
@@ -100,10 +67,17 @@ const { metadata = {} } = Astro.props;
     <SpeedInsights />
 
     <script is:inline>
+      // Safe helper for analytics; swallow non-critical errors to avoid breaking UX.
       window.trackEvent = (name, data) => {
         try {
-          if (window.va && typeof window.va.track === 'function') window.va.track(String(name), data || {});
-        } catch {}
+          const va = window.va;
+          if (va && typeof va.track === 'function') {
+            va.track(String(name), data || {});
+          }
+        } catch (e) {
+          // Intentionally ignore analytics errors; keep a statement to satisfy ESLint.
+          void e;
+        }
       };
     </script>
   </body>
