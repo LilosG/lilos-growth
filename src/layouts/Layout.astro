@@ -10,15 +10,11 @@ import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 
-// Vercel Web Analytics (aliased to avoid name conflict)
 import VercelAnalytics from '@vercel/analytics/astro';
-// Vercel Speed Insights
 import SpeedInsights from '@vercel/speed-insights/astro';
 
-// Comment the line below to disable View Transitions
 import { ClientRouter } from 'astro:transitions';
 
-// Floating Calendly Button
 import FloatingCalendlyButton from '../components/FloatingCalendlyButton.astro';
 
 import type { MetaData as MetaDataType } from '~/types';
@@ -31,7 +27,7 @@ const { metadata = {} } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" dir="ltr" class="2xl:text-[20px]">
+<html lang="en" dir="ltr" class="h-full 2xl:text-[20px]">
   <head>
     <CommonMeta />
     <Favicons />
@@ -40,39 +36,59 @@ const { metadata = {} } = Astro.props;
     <Metadata {...metadata} />
     <SiteVerification />
     <Analytics />
-
-    <!-- Comment the line below to disable View Transitions -->
     <ClientRouter fallback="swap" />
+
+    <style is:global>
+      /* 
+       * SCALE + HEIGHT COMPENSATION
+       * We set a single --scale var by breakpoint, and make the scaled area tall
+       * enough so that (min-height * scale) >= 100dvh. That kills the footer gap.
+       */
+      :root { --scale: 1; }
+      @media (min-width: 768px)   { :root { --scale: 0.90; } }  /* md */
+      @media (min-width: 1280px)  { :root { --scale: 0.87; } }  /* xl */
+      @media (min-width: 1536px)  { :root { --scale: 0.85; } }  /* 2xl */
+
+      /* Safety: ensure the very last block inside the page content can't add trailing space */
+      main#page > :is(section, div):last-child,
+      body > :is(section, div):last-child {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+
+      /* Optional: if a background band ever shows, make the body default white. 
+         Comment this out if you want the site-wide bg color instead. */
+      /* body { background: #fff; } */
+    </style>
   </head>
 
-  <body class="antialiased text-default bg-page tracking-tight">
-    <!-- Global scale wrapper: matches Home page feel (85% base, 90% at md+) -->
-    <div class="scale-[.85] md:scale-[.9] origin-top w-full">
-      <slot />
+  <body class="antialiased text-default bg-page tracking-tight min-h-[100dvh] flex flex-col overflow-x-clip">
+    <!-- Scaled page canvas -->
+    <div class="flex-1 flex flex-col">
+      <div
+        id="scaled-canvas"
+        class="w-full will-change-transform"
+        style="
+          transform-origin: top center;
+          transform: scale(var(--scale));
+          min-height: calc(100dvh / var(--scale));
+        "
+      >
+        <slot />
+      </div>
     </div>
 
-    <!-- Floating Calendly Button (shows on all pages, kept outside scale so it stays native size) -->
+    <!-- Floating Calendly stays native size -->
     <FloatingCalendlyButton />
 
     <BasicScripts />
-
-    <!-- Vercel Web Analytics -->
     <VercelAnalytics />
-
-    <!-- Vercel Speed Insights -->
     <SpeedInsights />
 
-    <!-- Global custom analytics helper (inline JS so no tooling errors) -->
     <script is:inline>
-      // Call anywhere: window.trackEvent("Book a Call", { location: "hero" })
       window.trackEvent = (name, data) => {
-        try {
-          if (window.va && typeof window.va.track === 'function') {
-            window.va.track(String(name), data || {});
-          }
-        } catch {
-          // no-op: analytics failures shouldn't break UX
-        }
+        try { if (window.va && typeof window.va.track === 'function') window.va.track(String(name), data || {}); }
+        catch {}
       };
     </script>
   </body>

@@ -3,551 +3,432 @@ import Layout from '~/layouts/PageLayout.astro';
 ---
 
 <Layout>
-  <!-- SCALE WRAPPER: scales entire page down for desktop, keeps mobile full size -->
-  <div class="scale-[.85] md:scale-[.9] origin-top w-full">
-    <!-- HERO SECTION -->
-    <section class="bg-[#253242] min-h-[680px] flex items-center pt-10 pb-20 relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159] pointer-events-none"></div>
-      <div class="relative z-10 max-w-6xl mx-auto w-full flex flex-col md:flex-row md:items-center gap-14 px-4">
-        <!-- Left Column: Logo, Headline, CTA -->
-        <div class="flex-1">
-          <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="mb-10 w-44" />
-          <h1
-            class="text-5xl md:text-7xl font-heading text-white font-extrabold mb-2 leading-tight text-left tracking-tight"
-          >
-            Local SEO & Digital Marketing<br class="hidden md:block" />
-            <span class="block text-2xl md:text-4xl font-semibold mt-3 mb-2 text-[#f56b2a] tracking-wider uppercase">
-              For Home Service Businesses
-            </span>
-          </h1>
-          <div class="h-2 w-32 bg-[#f56b2a] rounded-full mb-8"></div>
-          <p class="text-xl md:text-2xl text-white/80 mb-10 max-w-lg font-medium">
-            Get more calls, book more jobs, and gain peace of mind—without tech overwhelm. Lilos Growth delivers
-            actionable marketing for local service pros.
-          </p>
-          <div class="flex flex-wrap gap-4">
-            <a
-              href="#contact"
-              class="inline-flex items-center px-10 py-4 rounded-2xl bg-[#f56b2a] hover:bg-[#f34e00] text-white font-heading font-semibold text-xl shadow transition"
-            >
-              Get More Calls Today
-              <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
-                ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-              >
-            </a>
-            <a
-              href="#packages"
-              class="inline-flex items-center px-8 py-4 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-lg shadow transition"
-            >
-              See Our Services
-              <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
-                ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-              >
-            </a>
-          </div>
-        </div>
-        <!-- Right Column: Lead Form -->
-        <div class="flex-1 max-w-md mx-auto md:mx-0 bg-white p-10 rounded-3xl shadow-xl border border-gray-100">
-          <h2 class="text-2xl font-heading text-heading font-bold mb-5 text-left">
-            Free SEO Website Audit for Home Service Pros!
-          </h2>
-          <form class="flex flex-col gap-5" data-netlify="true">
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              class="border border-gray-300 rounded-lg px-5 py-4 text-base focus:outline-primary"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              class="border border-gray-300 rounded-lg px-5 py-4 text-base focus:outline-primary"
-              required
-            />
-            <input
-              type="text"
-              name="company"
-              placeholder="Company Name"
-              class="border border-gray-300 rounded-lg px-5 py-4 text-base"
-            />
-            <input
-              type="text"
-              name="website"
-              placeholder="Website"
-              class="border border-gray-300 rounded-lg px-5 py-4 text-base"
-              required
-            />
-            <button
-              type="submit"
-              class="mt-2 px-8 py-4 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#f34e00] transition"
-            >
-              Get My Free Audit
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHO WE HELP -->
-    <section class="py-14 bg-cream border-t border-gray-100" id="who-we-help">
-      <div class="max-w-5xl mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-7">Who We Help</h2>
-        <h3 class="text-lg font-semibold text-heading mb-2">Home Service Businesses We Work With:</h3>
-        <div class="flex flex-wrap gap-4 justify-center mb-3">
-          <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Plumbers</span>
-          <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">HVAC</span>
-          <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Electricians</span>
-          <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Roofers</span>
-          <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Cleaning</span>
-          <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Pest Control</span>
-          <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Landscaping</span>
-          <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Other Trades</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- FULLY MANAGED LOCAL SEO SECTION (unchanged) -->
-    <section class="py-24 bg-cream border-t border-gray-100" id="included-services">
-      <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-4xl md:text-5xl font-heading text-heading font-bold mb-4 text-center">
-          Fully Managed Local SEO for Home Service Businesses
-        </h2>
-        <p class="text-xl text-body mb-14 text-center font-medium">
-          Complete, end-to-end SEO management that puts your business at the top of local search results.<br />
-          We handle everything so you can focus on what you do best.
+  <!-- HERO SECTION -->
+  <section class="bg-[#253242] min-h-[680px] flex items-center pt-10 pb-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159] pointer-events-none"></div>
+    <div class="relative z-10 max-w-6xl mx-auto w-full flex flex-col md:flex-row md:items-center gap-14 px-4">
+      <!-- Left Column: Logo, Headline, CTA -->
+      <div class="flex-1">
+        <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="mb-10 w-44" />
+        <h1
+          class="text-5xl md:text-7xl font-heading text-white font-extrabold mb-2 leading-tight text-left tracking-tight"
+        >
+          Local SEO & Digital Marketing<br class="hidden md:block" />
+          <span class="block text-2xl md:text-4xl font-semibold mt-3 mb-2 text-[#f56b2a] tracking-wider uppercase">
+            For Home Service Businesses
+          </span>
+        </h1>
+        <div class="h-2 w-32 bg-[#f56b2a] rounded-full mb-8"></div>
+        <p class="text-xl md:text-2xl text-white/80 mb-10 max-w-lg font-medium">
+          Get more calls, book more jobs, and gain peace of mind—without tech overwhelm. Lilos Growth delivers
+          actionable marketing for local service pros.
         </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-10">
-          <!-- Card 1 -->
-          <article
-            class="bg-white rounded-2xl border-2 border-[#f56b2a]/10 shadow-xl shadow-[#f56b2a]/10 p-8 flex flex-col items-start h-full transition-transform duration-200 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#f56b2a]/20"
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="#contact"
+            class="inline-flex items-center px-10 py-4 rounded-2xl bg-[#f56b2a] hover:bg-[#f34e00] text-white font-heading font-semibold text-xl shadow transition"
           >
-            <div class="mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                class="w-10 h-10 text-[#f56b2a]"
-              >
-                <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3"></path>
-              </svg>
-            </div>
-            <h3 class="text-2xl font-semibold mb-2 text-heading">Google Business Profile Management</h3>
-            <p class="text-body mb-4">
-              Get seen in Google Maps and local search results with a fully optimized, always up-to-date profile.
-            </p>
-            <ul class="text-body list-disc list-inside space-y-1">
-              <li>Complete setup and full optimization for your main services and service areas</li>
-              <li>Consistent photo, update, and post management</li>
-              <li>Monthly profile audits to stay ahead of algorithm changes</li>
-            </ul>
-          </article>
-          <!-- Card 2 -->
-          <article
-            class="bg-white rounded-2xl border-2 border-[#f56b2a]/10 shadow-xl shadow-[#f56b2a]/10 p-8 flex flex-col items-start h-full transition-transform duration-200 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#f56b2a]/20"
+            Get More Calls Today
+            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+              <path d="M5 12h14M13 18l6-6-6-6"></path>
+            </svg>
+          </a>
+          <a
+            href="#packages"
+            class="inline-flex items-center px-8 py-4 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-lg shadow transition"
           >
-            <div class="mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                class="w-10 h-10 text-[#f56b2a]"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
-                <circle cx="12" cy="9" r="2.5"></circle>
-              </svg>
-            </div>
-            <h3 class="text-2xl font-semibold mb-2 text-heading">Local Citation Building</h3>
-            <p class="text-body mb-4">
-              Build trust and local authority with accurate, consistent listings everywhere your customers search.
-            </p>
-            <ul class="text-body list-disc list-inside space-y-1">
-              <li>Business info (NAP) cleanup and accuracy across core directories</li>
-              <li>Submissions to top industry and local sites</li>
-              <li>Ongoing updates and audit checks for accuracy</li>
-            </ul>
-          </article>
-          <!-- Card 3 -->
-          <article
-            class="bg-white rounded-2xl border-2 border-[#f56b2a]/10 shadow-xl shadow-[#f56b2a]/10 p-8 flex flex-col items-start h-full transition-transform duration-200 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#f56b2a]/20"
-          >
-            <div class="mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                class="w-10 h-10 text-[#f56b2a]"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13.828 10.172a4 4 0 010 5.656l-3.536 3.536a4 4 0 01-5.656-5.656l1.414-1.414"></path>
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M10.172 13.828a4 4 0 010-5.656l3.536-3.536a4 4 0 015.656 5.656l-1.414 1.414"></path>
-              </svg>
-            </div>
-            <h3 class="text-2xl font-semibold mb-2 text-heading">Local Link Building</h3>
-            <p class="text-body mb-4">
-              Boost your rankings and authority with strategic local backlinks that make a difference.
-            </p>
-            <ul class="text-body list-disc list-inside space-y-1">
-              <li>Outreach to local sites, blogs, and organizations</li>
-              <li>Earning placements on trusted, relevant domains</li>
-              <li>Community-based link strategies for long-term growth</li>
-            </ul>
-          </article>
-          <!-- Card 4 -->
-          <article
-            class="bg-white rounded-2xl border-2 border-[#f56b2a]/10 shadow-xl shadow-[#f56b2a]/10 p-8 flex flex-col items-start h-full transition-transform duration-200 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#f56b2a]/20"
-          >
-            <div class="mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                class="w-10 h-10 text-[#f56b2a]"
-              >
-                <rect x="5" y="4" width="14" height="16" rx="2"></rect>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9h8M8 13h6"></path>
-              </svg>
-            </div>
-            <h3 class="text-2xl font-semibold mb-2 text-heading">Content & On-Page SEO</h3>
-            <p class="text-body mb-4">
-              Turn searchers into customers with content and site improvements that drive results.
-            </p>
-            <ul class="text-body list-disc list-inside space-y-1">
-              <li>SEO-focused service area and location pages</li>
-              <li>Blog content that answers real customer questions</li>
-              <li>On-page optimization: keywords, meta tags, internal links</li>
-            </ul>
-          </article>
-          <!-- Card 5 -->
-          <article
-            class="bg-white rounded-2xl border-2 border-[#f56b2a]/10 shadow-xl shadow-[#f56b2a]/10 p-8 flex flex-col items-start h-full transition-transform duration-200 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#f56b2a]/20"
-          >
-            <div class="mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                class="w-10 h-10 text-[#f56b2a]"
-              >
-                <rect x="3" y="6" width="18" height="12" rx="2"></rect>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h8"></path>
-              </svg>
-            </div>
-            <h3 class="text-2xl font-semibold mb-2 text-heading">Website Build & Optimization</h3>
-            <p class="text-body mb-4">
-              Modern websites built for speed, trust, and more leads—ready for Google’s latest standards.
-            </p>
-            <ul class="text-body list-disc list-inside space-y-1">
-              <li>Fast, mobile-first, and conversion-focused design</li>
-              <li>Technical SEO built in: site speed, structure, schema, Core Web Vitals</li>
-              <li>Easy updates and built-in tracking for your growth</li>
-            </ul>
-          </article>
-          <!-- Card 6 -->
-          <article
-            class="bg-white rounded-2xl border-2 border-[#f56b2a]/10 shadow-xl shadow-[#f56b2a]/10 p-8 flex flex-col items-start h-full transition-transform duration-200 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#f56b2a]/20"
-          >
-            <div class="mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                class="w-10 h-10 text-[#f56b2a]"
-              >
-                <polygon points="12,2 15,10 24,10 17,15 19,23 12,18 5,23 7,15 0,10 9,10"></polygon>
-              </svg>
-            </div>
-            <h3 class="text-2xl font-semibold mb-2 text-heading">Review Management</h3>
-            <p class="text-body mb-4">Stand out from competitors and build trust with a proven review strategy.</p>
-            <ul class="text-body list-disc list-inside space-y-1">
-              <li>Request and automate new review invites</li>
-              <li>Monitor, respond, and manage all reviews in one place</li>
-              <li>Guidance for building a five-star reputation</li>
-            </ul>
-          </article>
+            See Our Services
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+              <path d="M5 12h14M13 18l6-6-6-6"></path>
+            </svg>
+          </a>
         </div>
       </div>
-    </section>
 
-    <!-- SERVICE PACKAGES SECTION (updated to 4 cards) -->
-    <section class="py-24 bg-bluelight border-t border-gray-100 shadow-xl" id="packages">
-      <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-4xl md:text-5xl font-heading text-heading font-bold mb-4 text-center relative">
-          Service Packages for Home Service Companies
-          <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+      <!-- Right Column: Lead Form -->
+      <div class="flex-1 max-w-md mx-auto md:mx-0 bg-white p-10 rounded-3xl shadow-xl border border-gray-100">
+        <h2 class="text-2xl font-heading text-heading font-bold mb-5 text-left">
+          Free SEO Website Audit for Home Service Pros!
         </h2>
-        <p class="text-xl text-body mb-12 text-center font-medium">
-          Choose the package that fits your goals. No contracts. Real results.
-        </p>
-
-        <!-- tighter grid gap -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-          <!-- GBP -->
-          <div class="bg-white rounded-2xl shadow-md border border-gray-200 px-6 py-8 flex flex-col min-h-[520px]">
-            <div class="text-center">
-              <h3 class="text-xl font-heading font-bold text-heading">Google Business Profile</h3>
-              <div class="text-sm font-semibold mt-1">Base: Profile Management</div>
-              <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold">
-                Best for: Maintaining Your Google Presence
-              </span>
-              <div class="text-3xl font-bold text-[#f56b2a] mt-4">
-                $199<span class="text-base font-normal text-gray-500">/mo</span>
-              </div>
-            </div>
-
-            <!-- Base features (flex-1 so Boost starts at same vertical point across cards) -->
-            <ul class="text-body text-base space-y-2 list-disc pl-5 mt-5 flex-1">
-              <li>GBP setup or audit</li>
-              <li>Monthly listing updates & photos</li>
-              <li>Category & keyword targeting</li>
-              <li>Basic performance tracking</li>
-            </ul>
-
-            <!-- Boost, closer to base: mt-3 and tighter padding -->
-            <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-3">
-              <div class="font-semibold text-[#f56b2a] mb-1">
-                Boost Add‑on + <span class="font-bold">$300/mo</span> (Total $499)
-              </div>
-              <ul class="text-body text-base space-y-2 list-disc pl-5">
-                <li>Weekly posts & updates</li>
-                <li>Review request & response strategy</li>
-                <li>Competitor monitoring & insights</li>
-                <li>Citation build & cleanup: 500+ listings + manual BBB, Bing, YP, Yelp</li>
-              </ul>
-            </div>
-
-            <a
-              href="#contact"
-              class="mt-4 w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
-            >
-              Get Started
-            </a>
-          </div>
-
-          <!-- Local SEO (website only) -->
-          <div
-            class="relative bg-white rounded-2xl shadow-md border border-gray-200 px-6 py-8 flex flex-col min-h-[520px]"
+        <form class="flex flex-col gap-5" data-netlify="true">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            class="border border-gray-300 rounded-lg px-5 py-4 text-base focus:outline-primary"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            class="border border-gray-300 rounded-lg px-5 py-4 text-base"
+            required
+          />
+          <input
+            type="text"
+            name="company"
+            placeholder="Company Name"
+            class="border border-gray-300 rounded-lg px-5 py-4 text-base"
+          />
+          <input
+            type="text"
+            name="website"
+            placeholder="Website"
+            class="border border-gray-300 rounded-lg px-5 py-4 text-base"
+            required
+          />
+          <button
+            type="submit"
+            class="mt-2 px-8 py-4 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#f34e00] transition"
           >
-            <div
-              class="absolute -top-6 left-1/2 -translate-x-1/2 bg-[#f56b2a] text-white text-xs font-bold px-5 py-1 rounded-full shadow"
-            >
-              Most Popular
-            </div>
-
-            <div class="text-center mt-1">
-              <h3 class="text-xl font-heading font-bold text-heading">Local SEO (Website Only)</h3>
-              <div class="text-sm font-semibold mt-1">Base: Growth Essentials</div>
-              <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold">
-                Best for: Steady Organic Growth
-              </span>
-              <div class="text-3xl font-bold text-[#f56b2a] mt-4">
-                $499<span class="text-base font-normal text-gray-500">/mo</span>
-              </div>
-            </div>
-
-            <ul class="text-body text-base space-y-2 list-disc pl-5 mt-5 flex-1">
-              <li>SEO audit, keyword research & on‑page fixes</li>
-              <li>Technical SEO improvements</li>
-              <li><span class="font-semibold">5</span> new service/location pages / mo</li>
-              <li><span class="font-semibold">5</span> blog posts / mo</li>
-            </ul>
-
-            <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-3">
-              <div class="font-semibold text-[#f56b2a] mb-1">
-                Boost Add‑on + <span class="font-bold">$300/mo</span> (Total $799)
-              </div>
-              <ul class="text-body text-base space-y-2 list-disc pl-5">
-                <li><span class="font-semibold">10–15</span> new service/location pages / mo</li>
-                <li><span class="font-semibold">10</span> blog posts / mo</li>
-                <li>Citation build & cleanup (software + manual core listings)</li>
-                <li>Competitor tracking & monthly strategy call</li>
-              </ul>
-            </div>
-
-            <a
-              href="#contact"
-              class="mt-4 w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
-            >
-              Get Started
-            </a>
-          </div>
-
-          <!-- Website as a Service -->
-          <div class="bg-white rounded-2xl shadow-md border border-gray-200 px-6 py-8 flex flex-col min-h-[520px]">
-            <div class="text-center">
-              <h3 class="text-xl font-heading font-bold text-heading">Website as a Service</h3>
-              <div class="text-sm font-semibold mt-1">Base: Website Essentials</div>
-              <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold">
-                Best for: Modern, Conversion‑Ready Sites
-              </span>
-              <div class="text-3xl font-bold text-[#f56b2a] mt-4">
-                $250<span class="text-base font-normal text-gray-500">/mo</span>
-              </div>
-            </div>
-
-            <ul class="text-body text-base space-y-2 list-disc pl-5 mt-5 flex-1">
-              <li>Mobile‑friendly, SEO‑ready design</li>
-              <li>Secure hosting & monitoring</li>
-              <li>Updates for up to 5 pages / mo</li>
-              <li>Lead form integration & monthly health check</li>
-            </ul>
-
-            <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-3">
-              <div class="font-semibold text-[#f56b2a] mb-1">
-                Boost Add‑on + <span class="font-bold">$500/mo</span> (Total $750)
-              </div>
-              <ul class="text-body text-base space-y-2 list-disc pl-5">
-                <li>Updates for up to 15 pages / mo</li>
-                <li>New landing pages & CRO improvements</li>
-                <li>Quarterly design refresh & content review</li>
-                <li>Priority support (48‑hour turnaround)</li>
-              </ul>
-            </div>
-
-            <a
-              href="#contact"
-              class="mt-4 w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
-            >
-              Get Started
-            </a>
-          </div>
-
-          <!-- Local SEO + GBP Mgmt -->
-          <div class="bg-white rounded-2xl shadow-md border border-gray-200 px-6 py-8 flex flex-col min-h-[520px]">
-            <div class="text-center">
-              <h3 class="text-xl font-heading font-bold text-heading">Local SEO + GBP Mgmt</h3>
-              <div class="text-sm font-semibold mt-1">Base: Complete Local Presence</div>
-              <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold">
-                Best for: Map Pack + Organic Results
-              </span>
-              <div class="text-3xl font-bold text-[#f56b2a] mt-4">
-                $799<span class="text-base font-normal text-gray-500">/mo</span>
-              </div>
-            </div>
-
-            <ul class="text-body text-base space-y-2 list-disc pl-5 mt-5 flex-1">
-              <li>Includes Local SEO Base + GBP Base</li>
-              <li>Unified reporting dashboard</li>
-              <li>Monthly rank/map visibility review</li>
-              <li>Quarterly competitor snapshot</li>
-            </ul>
-
-            <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-3">
-              <div class="font-semibold text-[#f56b2a] mb-1">
-                Boost Package <span class="font-bold">$1,299/mo</span>
-              </div>
-              <ul class="text-body text-base space-y-2 list-disc pl-5">
-                <li>Includes Local SEO Boost + GBP Boost</li>
-                <li>Citation build & cleanup (software + manual core listings)</li>
-                <li>Custom quarterly local growth plan</li>
-                <li>GBP heatmap tracking across service area</li>
-                <li>Priority support for urgent changes & launches</li>
-              </ul>
-            </div>
-
-            <a
-              href="#contact"
-              class="mt-4 w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition"
-            >
-              Get Started
-            </a>
-          </div>
-        </div>
+            Get My Free Audit
+          </button>
+        </form>
       </div>
-    </section>
-
-    <!-- Wavy Divider -->
-    <div class="w-full overflow-hidden leading-none -mb-1">
-      <svg viewBox="0 0 1440 60" class="block w-full h-10 text-white"
-        ><path fill="currentColor" d="M0,32L1440,0V60H0Z"></path></svg
-      >
     </div>
+  </section>
 
-    <!-- FAQ SECTION (unchanged) -->
-    <section class="py-20 bg-white" id="faq">
-      <div class="max-w-4xl mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-heading text-heading font-bold mb-8 text-center relative">
-          Frequently Asked Questions About Home Service Marketing
-          <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
-        </h2>
-        <div class="space-y-6">
-          <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
-            <h3 class="font-heading text-lg font-semibold mb-2 text-heading">
-              How quickly will I see results from local SEO?
-            </h3>
-            <p class="text-body text-base">
-              Most home service companies start seeing more calls, leads, and improved rankings within 30-60
-              days—sometimes faster. Your results can depend on your market and competition, but we focus on quick wins
-              from day one.
-            </p>
+  <!-- WHO WE HELP -->
+  <section class="py-14 bg-white border-t border-gray-100" id="who-we-help">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-heading font-bold mb-7">Who We Help</h2>
+      <h3 class="text-lg font-semibold text-heading mb-2">Home Service Businesses We Work With:</h3>
+      <div class="flex flex-wrap gap-4 justify-center mb-3">
+        <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Plumbers</span>
+        <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">HVAC</span>
+        <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Electricians</span>
+        <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Roofers</span>
+        <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Cleaning</span>
+        <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Pest Control</span>
+        <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Landscaping</span>
+        <span class="px-5 py-2 rounded-xl bg-bluelight font-heading font-semibold">Other Trades</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULLY MANAGED LOCAL SEO SECTION -->
+  <section class="py-24 bg-cream border-t border-gray-100" id="included-services">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-4xl md:text-5xl font-heading text-heading font-bold mb-4 text-center">
+        Fully Managed Local SEO for Home Service Businesses
+      </h2>
+      <p class="text-xl text-body mb-14 text-center font-medium">
+        Complete, end-to-end SEO management that puts your business at the top of local search results.<br />
+        We handle everything so you can focus on what you do best.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-10">
+        <!-- Card 1 -->
+        <article
+          class="bg-white rounded-3xl border-2 border-[#f56b2a]/10 shadow-xl shadow-[#f56b2a]/10 p-8 flex flex-col items-start h-full transition-transform duration-200 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#f56b2a]/20"
+        >
+          <div class="mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-10 h-10 text-[#f56b2a]">
+              <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3"></path>
+            </svg>
           </div>
-          <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
-            <h3 class="font-heading text-lg font-semibold mb-2 text-heading">Are there any setup fees?</h3>
-            <p class="text-body text-base">
-              Some services—like website development or complete SEO overhauls—may require a one-time setup fee. We’ll
-              always be transparent about costs before starting, so you know exactly what to expect. Most of our ongoing
-              marketing services are billed month-to-month with no long-term contracts.
-            </p>
+          <h3 class="text-2xl font-semibold mb-2 text-heading">Google Business Profile Management</h3>
+          <p class="text-body mb-4">Get seen in Google Maps and local search results with a fully optimized, always up-to-date profile.</p>
+          <ul class="text-body list-disc list-inside space-y-1">
+            <li>Complete setup and full optimization for your main services and service areas</li>
+            <li>Consistent photo, update, and post management</li>
+            <li>Monthly profile audits to stay ahead of algorithm changes</li>
+          </ul>
+        </article>
+
+        <!-- Card 2 -->
+        <article
+          class="bg-white rounded-3xl border-2 border-[#f56b2a]/10 shadow-xl shadow-[#f56b2a]/10 p-8 flex flex-col items-start h-full transition-transform duration-200 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#f56b2a]/20"
+        >
+          <div class="mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-10 h-10 text-[#f56b2a]">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
+              <circle cx="12" cy="9" r="2.5"></circle>
+            </svg>
           </div>
-          <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
-            <h3 class="font-heading text-lg font-semibold mb-2 text-heading">
-              Do I need to understand SEO or websites to get results?
-            </h3>
-            <p class="text-body text-base">
-              Not at all! You run your business, we handle all the marketing and website details. We keep things simple
-              and communicate in plain English—no tech jargon.
-            </p>
+          <h3 class="text-2xl font-semibold mb-2 text-heading">Local Citation Building</h3>
+          <p class="text-body mb-4">Build trust and local authority with accurate, consistent listings everywhere your customers search.</p>
+          <ul class="text-body list-disc list-inside space-y-1">
+            <li>Business info (NAP) cleanup and accuracy across core directories</li>
+            <li>Submissions to top industry and local sites</li>
+            <li>Ongoing updates and audit checks for accuracy</li>
+          </ul>
+        </article>
+
+        <!-- Card 3 -->
+        <article
+          class="bg-white rounded-3xl border-2 border-[#f56b2a]/10 shadow-xl shadow-[#f56b2a]/10 p-8 flex flex-col items-start h-full transition-transform duration-200 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#f56b2a]/20"
+        >
+          <div class="mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-10 h-10 text-[#f56b2a]">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 010 5.656l-3.536 3.536a4 4 0 01-5.656-5.656l1.414-1.414"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.172 13.828a4 4 0 010-5.656l3.536-3.536a4 4 0 015.656 5.656l-1.414 1.414"></path>
+            </svg>
           </div>
-          <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
-            <h3 class="font-heading text-lg font-semibold mb-2 text-heading">
-              Can you help if I already have a website or GBP listing?
-            </h3>
-            <p class="text-body text-base">
-              Absolutely. We can improve your existing website and Google Business Profile, or help with a full redesign
-              and re-optimization if you want a fresh start.
-            </p>
+          <h3 class="text-2xl font-semibold mb-2 text-heading">Local Link Building</h3>
+          <p class="text-body mb-4">Boost your rankings and authority with strategic local backlinks that make a difference.</p>
+          <ul class="text-body list-disc list-inside space-y-1">
+            <li>Outreach to local sites, blogs, and organizations</li>
+            <li>Earning placements on trusted, relevant domains</li>
+            <li>Community-based link strategies for long-term growth</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE PACKAGES SECTION -->
+  <section class="py-24 bg-bluelight border-t border-gray-100 shadow-xl" id="packages">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-4xl md:text-5xl font-heading text-heading font-bold mb-4 text-center relative">
+        Service Packages for Home Service Companies
+        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+      </h2>
+      <p class="text-xl text-body mb-12 text-center font-medium">
+        Choose the package that fits your goals. No contracts. Real results.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 items-stretch">
+        <!-- GBP -->
+        <article class="h-full bg-white rounded-3xl shadow-md border border-gray-200 p-8 flex flex-col relative">
+          <header class="text-center">
+            <h3 class="text-xl font-heading font-bold text-heading">Google Business Profile</h3>
+            <div class="text-sm font-semibold mt-1">Base: Profile Management</div>
+            <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold">
+              Best for: Maintaining Your Google Presence
+            </span>
+            <div class="text-3xl font-bold text-[#f56b2a] mt-4">
+              $199<span class="text-base font-normal text-gray-500">/mo</span>
+            </div>
+          </header>
+
+          <ul class="text-body text-base space-y-2 list-disc pl-5 mt-5">
+            <li>GBP setup or audit</li>
+            <li>Monthly listing updates & photos</li>
+            <li>Category & keyword targeting</li>
+            <li>Basic performance tracking</li>
+            <li>Q&A and Services setup for key offerings</li>
+          </ul>
+
+          <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-4">
+            <div class="font-semibold text-[#f56b2a] mb-1">
+              Boost Add-on + <span class="font-bold">$300/mo</span> (Total $499)
+            </div>
+            <ul class="text-body text-base space-y-2 list-disc pl-5">
+              <li>Weekly posts & updates</li>
+              <li>Review request & response strategy</li>
+              <li>Competitor monitoring & insights</li>
+              <li>Citation build & cleanup: 500+ listings + manual BBB, Bing, YP, Yelp</li>
+            </ul>
           </div>
-          <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
-            <h3 class="font-heading text-lg font-semibold mb-2 text-heading">
-              Will I have a dedicated point of contact?
-            </h3>
-            <p class="text-body text-base">
-              Yes! You’ll always work directly with a home service marketing strategist—no call centers, account manager
-              runarounds, or agency handoffs.
-            </p>
+
+          <div class="mt-auto pt-4 border-t border-gray-100">
+            <a href="#contact" class="w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition">
+              Get Started
+            </a>
           </div>
-          <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
-            <h3 class="font-heading text-lg font-semibold mb-2 text-heading">Can you work with my existing website?</h3>
-            <p class="text-body text-base">
-              In most cases, yes! We specialize in <span class="font-semibold text-[#f56b2a]">WordPress</span>, <span
-                class="font-semibold text-[#f56b2a]">Webflow</span
-              >, and <span class="font-semibold text-[#f56b2a]">Duda</span>, but can work with most major platforms. If
-              your current site is built with Wix, Squarespace, Weebly, or a similar basic builder, we’ll recommend
-              what’s best for long-term SEO—whether that means optimizing your existing site or building you a new one
-              that gets better results.
-            </p>
+        </article>
+
+        <!-- Local SEO (boost shifted down a touch to align visually) -->
+        <article class="h-full bg-white rounded-3xl shadow-md border border-gray-200 p-8 flex flex-col relative">
+          <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-[#f56b2a] text-white text-xs font-bold px-5 py-1 rounded-full shadow">
+            Most Popular
           </div>
+
+          <header class="text-center">
+            <h3 class="text-xl font-heading font-bold text-heading">Local SEO</h3>
+            <div class="text-sm font-semibold mt-1">Base: Growth Essentials</div>
+            <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold">
+              Best for: Steady Organic Growth
+            </span>
+            <div class="text-3xl font-bold text-[#f56b2a] mt-4">
+              $499<span class="text-base font-normal text-gray-500">/mo</span>
+            </div>
+          </header>
+
+          <ul class="text-body text-base space-y-2 list-disc pl-5 mt-5">
+            <li>SEO audit, keyword research & on-page fixes</li>
+            <li>Technical SEO improvements</li>
+            <li><span class="font-semibold">5</span> new service/location pages / mo</li>
+            <li><span class="font-semibold">5</span> blog posts / mo</li>
+          </ul>
+
+          <!-- Only this card: add a little extra top margin to align the orange boxes -->
+          <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-6">
+            <div class="font-semibold text-[#f56b2a] mb-1">
+              Boost Add-on + <span class="font-bold">$300/mo</span> (Total $799)
+            </div>
+            <ul class="text-body text-base space-y-2 list-disc pl-5">
+              <li><span class="font-semibold">10–15</span> new service/location pages / mo</li>
+              <li><span class="font-semibold">10</span> blog posts / mo</li>
+              <li>Citation build & cleanup (software + manual core listings)</li>
+              <li>Competitor tracking & monthly strategy call</li>
+            </ul>
+          </div>
+
+          <div class="mt-auto pt-4 border-t border-gray-100">
+            <a href="#contact" class="w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition">
+              Get Started
+            </a>
+          </div>
+        </article>
+
+        <!-- Website as a Service -->
+        <article class="h-full bg-white rounded-3xl shadow-md border border-gray-200 p-8 flex flex-col relative">
+          <header class="text-center">
+            <h3 class="text-xl font-heading font-bold text-heading">Website as a Service</h3>
+            <div class="text-sm font-semibold mt-1">Base: Website Essentials</div>
+            <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold">
+              Best for: Modern, Conversion-Ready Sites
+            </span>
+            <div class="text-3xl font-bold text-[#f56b2a] mt-4">
+              $250<span class="text-base font-normal text-gray-500">/mo</span>
+            </div>
+          </header>
+
+          <ul class="text-body text-base space-y-2 list-disc pl-5 mt-5">
+            <li>Mobile-friendly, SEO-ready design</li>
+            <li>Secure hosting & monitoring</li>
+            <li>Updates for up to 5 pages / mo</li>
+            <li>Lead form integration & monthly health check</li>
+          </ul>
+
+          <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-4">
+            <div class="font-semibold text-[#f56b2a] mb-1">
+              Boost Add-on + <span class="font-bold">$500/mo</span> (Total $750)
+            </div>
+            <ul class="text-body text-base space-y-2 list-disc pl-5">
+              <li>Updates for up to 15 pages / mo</li>
+              <li>New landing pages & CRO improvements</li>
+              <li>Quarterly design refresh & content review</li>
+              <li>Priority support (48-hour turnaround)</li>
+            </ul>
+          </div>
+
+          <div class="mt-auto pt-4 border-t border-gray-100">
+            <a href="#contact" class="w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition">
+              Get Started
+            </a>
+          </div>
+        </article>
+
+        <!-- Local SEO + GBP Mgmt -->
+        <article class="h-full bg-white rounded-3xl shadow-md border border-gray-200 p-8 flex flex-col relative">
+          <header class="text-center">
+            <h3 class="text-xl font-heading font-bold text-heading">Local SEO + GBP Mgmt</h3>
+            <div class="text-sm font-semibold mt-1">Base: Complete Local Presence</div>
+            <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold">
+              Best for: Map Pack + Organic Results
+            </span>
+            <div class="text-3xl font-bold text-[#f56b2a] mt-4">
+              $799<span class="text-base font-normal text-gray-500">/mo</span>
+            </div>
+          </header>
+
+          <ul class="text-body text-base space-y-2 list-disc pl-5 mt-5">
+            <li>Includes Local SEO Base + GBP Base</li>
+            <li>Unified reporting dashboard</li>
+            <li>Monthly rank/map visibility review</li>
+            <li>Quarterly competitor snapshot</li>
+          </ul>
+
+          <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-4">
+            <div class="font-semibold text-[#f56b2a] mb-1">
+              Boost Add-on + <span class="font-bold">$500/mo</span> (Total $1,299)
+            </div>
+            <ul class="text-body text-base space-y-2 list-disc pl-5">
+              <li>Includes Local SEO Boost + GBP Boost</li>
+              <li>Citation build & cleanup (software + manual core listings)</li>
+              <li>Custom quarterly local growth plan</li>
+              <li>GBP heatmap tracking across service area</li>
+              <li>Priority support</li>
+            </ul>
+          </div>
+
+          <div class="mt-auto pt-4 border-t border-gray-100">
+            <a href="#contact" class="w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#c9400a] transition">
+              Get Started
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wavy Divider -->
+  <div class="w-full overflow-hidden leading-none -mb-1">
+    <svg viewBox="0 0 1440 60" class="block w-full h-10 text-white">
+      <path fill="currentColor" d="M0,32L1440,0V60H0Z"></path>
+    </svg>
+  </div>
+
+  <!-- FAQ SECTION -->
+  <section class="py-20 bg-white" id="faq">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-heading text-heading font-bold mb-8 text-center relative">
+        Frequently Asked Questions About Home Service Marketing
+        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+      </h2>
+      <div class="space-y-6">
+        <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
+          <h3 class="font-heading text-lg font-semibold mb-2 text-heading">
+            How quickly will I see results from local SEO?
+          </h3>
+          <p class="text-body text-base">
+            Most home service companies start seeing more calls, leads, and improved rankings within 30-60
+            days—sometimes faster. Your results can depend on your market and competition, but we focus on quick wins
+            from day one.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
+          <h3 class="font-heading text-lg font-semibold mb-2 text-heading">Are there any setup fees?</h3>
+          <p class="text-body text-base">
+            Some services—like website development or complete SEO overhauls—may require a one-time setup fee. We’ll
+            always be transparent about costs before starting, so you know exactly what to expect. Most of our ongoing
+            marketing services are billed month-to-month with no long-term contracts.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
+          <h3 class="font-heading text-lg font-semibold mb-2 text-heading">
+            Do I need to understand SEO or websites to get results?
+          </h3>
+          <p class="text-body text-base">
+            Not at all! You run your business, we handle all the marketing and website details. We keep things simple
+            and communicate in plain English—no tech jargon.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
+          <h3 class="font-heading text-lg font-semibold mb-2 text-heading">
+            Can you help if I already have a website or GBP listing?
+          </h3>
+          <p class="text-body text-base">
+            Absolutely. We can improve your existing website and Google Business Profile, or help with a full redesign
+            and re-optimization if you want a fresh start.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
+          <h3 class="font-heading text-lg font-semibold mb-2 text-heading">
+            Will I have a dedicated point of contact?
+          </h3>
+          <p class="text-body text-base">
+            Yes! You’ll always work directly with a home service marketing strategist—no call centers, account manager
+            runarounds, or agency handoffs.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
+          <h3 class="font-heading text-lg font-semibold mb-2 text-heading">Can you work with my existing website?</h3>
+          <p class="text-body text-base">
+            In most cases, yes! We specialize in <span class="font-semibold text-[#f56b2a]">WordPress</span>,
+            <span class="font-semibold text-[#f56b2a]">Webflow</span>, and
+            <span class="font-semibold text-[#f56b2a]">Duda</span>, but can work with most major platforms. If
+            your current site is built with Wix, Squarespace, Weebly, or a similar basic builder, we’ll recommend
+            what’s best for long-term SEO—whether that means optimizing your existing site or building you a new one
+            that gets better results.
+          </p>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </Layout>

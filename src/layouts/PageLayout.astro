@@ -16,17 +16,25 @@ const { metadata } = Astro.props;
 ---
 
 <Layout metadata={metadata}>
-  <slot name="announcement">
-    <Announcement />
-  </slot>
-  <slot name="header">
-    <Header {...headerData} isSticky showRssFeed showToggleTheme />
-  </slot>
-  <main>
-    <slot />
-  </main>
-  <slot name="footer">
-    <Footer />
-    <!-- No props needed -->
-  </slot>
+  <!-- Full-height column so the footer pins to the bottom on short pages -->
+  <div class="min-h-screen min-h-[100dvh] flex flex-col">
+    <slot name="announcement">
+      <Announcement />
+    </slot>
+
+    <slot name="header">
+      <Header {...headerData} isSticky showRssFeed showToggleTheme />
+    </slot>
+
+    <!-- MAIN content (no scaling here anymore; scaling is global in Layout.astro) -->
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <div class="mt-auto">
+      <slot name="footer">
+        <Footer />
+      </slot>
+    </div>
+  </div>
 </Layout>
