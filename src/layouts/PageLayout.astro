@@ -13,7 +13,7 @@ import BasicScripts from '~/components/common/BasicScripts.astro';
 // View Transitions (optional)
 import { ClientRouter } from 'astro:transitions';
 
-// Header mounted globally
+// Global header
 import Header from '~/components/widgets/Header.astro';
 
 // Floating Calendly Button
@@ -61,14 +61,15 @@ const { metadata = {} } = Astro.props as Props;
       try { injectSpeedInsights(); } catch {}
     </script>
 
-    <!-- Plain JS analytics helper -->
+    <!-- Plain JS analytics helper (typed safely) -->
     <script is:inline>
       (function () {
-        if (typeof window.trackEvent !== "function") {
-          window.trackEvent = function (name, data) {
+        // use bracket-notation so TypeScript doesn't complain about custom window props
+        if (typeof window['trackEvent'] !== "function") {
+          window['trackEvent'] = function (name, data) {
             try {
-              if (window.va && typeof window.va.track === "function") {
-                window.va.track(String(name), data || {});
+              if (window['va'] && typeof window['va'].track === "function") {
+                window['va'].track(String(name), data || {});
               }
             } catch {}
           };

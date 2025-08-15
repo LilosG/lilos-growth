@@ -19,12 +19,12 @@ const hasChildren = (i: NavItem): i is GroupLink =>
 <header class="relative z-[80] w-full">
   <div class="mx-auto w-full max-w-7xl px-4">
     <div class="flex h-16 items-center justify-between">
-      <!-- Logo (smaller on mobile) -->
+      <!-- Logo (mobile smaller, md+ larger) -->
       <a href="/" class="flex items-center gap-3 group shrink-0">
         <img
           src="/Lilos_Growth_Logo_Corrected.svg"
           alt="Lilos Growth"
-          class="h-6 w-auto md:h-8"   <!-- mobile = h-6, md+ = h-8 -->
+          class="h-6 w-auto md:h-8"
           loading="eager"
           decoding="async"
         />
@@ -94,7 +94,7 @@ const hasChildren = (i: NavItem): i is GroupLink =>
           </svg>
         </label>
 
-        <!-- Solid overlay (ensure above hero, below panel) -->
+        <!-- Solid overlay -->
         <div class="fixed inset-0 z-[100] hidden bg-[#253242] peer-checked:block" aria-hidden="true"></div>
 
         <!-- Mobile panel -->
