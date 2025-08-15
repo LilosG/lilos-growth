@@ -57,18 +57,22 @@ const { metadata = {} } = Astro.props as Props;
     <script is:inline type="module">
       import { inject } from '@vercel/analytics';
       import { injectSpeedInsights } from '@vercel/speed-insights';
-      try { inject(); } catch {}
-      try { injectSpeedInsights(); } catch {}
+      try {
+        inject();
+      } catch {}
+      try {
+        injectSpeedInsights();
+      } catch {}
     </script>
 
     <!-- Plain JS analytics helper (typed safely) -->
     <script is:inline>
       (function () {
         // use bracket-notation so TypeScript doesn't complain about custom window props
-        if (typeof window['trackEvent'] !== "function") {
+        if (typeof window['trackEvent'] !== 'function') {
           window['trackEvent'] = function (name, data) {
             try {
-              if (window['va'] && typeof window['va'].track === "function") {
+              if (window['va'] && typeof window['va'].track === 'function') {
                 window['va'].track(String(name), data || {});
               }
             } catch {}
