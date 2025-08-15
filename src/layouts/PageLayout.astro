@@ -18,7 +18,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
 // View Transitions (optional)
 import { ClientRouter } from 'astro:transitions';
 
-// Floating Calendly Button (stays full size)
+// Floating Calendly Button (kept at natural size)
 import FloatingCalendlyButton from '../components/FloatingCalendlyButton.astro';
 
 import type { MetaData as MetaDataType } from '~/types';
@@ -43,32 +43,40 @@ const { metadata = {} } = Astro.props;
     <ClientRouter fallback="swap" />
   </head>
 
-  <!-- Sticky-footer safe: full-height flex column on the BODY -->
-  <body class="antialiased text-default bg-page tracking-tight min-h-screen min-h-dvh flex flex-col overflow-x-hidden">
-    <!-- Main page content (no scaling wrapper to avoid footer gap) -->
-    <main id="content" class="flex-1 flex flex-col w-full">
+  <!-- Sticky footer layout: full-height column -->
+  <body
+    class="antialiased text-default bg-page tracking-tight min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip"
+  >
+    <!-- Page content -->
+    <main id="app" class="flex-1 flex flex-col">
       <slot />
     </main>
 
-    <!-- Floating Calendly stays native size -->
+    <!-- Floating Calendly -->
     <FloatingCalendlyButton />
 
+    <!-- Scripts -->
     <BasicScripts />
     <VercelAnalytics />
     <SpeedInsights />
 
-    <!-- Your analytics helper: optional convenience wrapper around Vercel Analytics -->
-    <script is:inline>
-      // @ts-ignore: define a tiny global helper without adding window typing
-      window.trackEvent = (name, data) => {
+ <!-- Your analytics helper -->
+<script is:inline>
+  // Plain JS (no TypeScript) so browsers & ESLint are happy
+  (function () {
+    if (typeof window.trackEvent !== "function") {
+      window.trackEvent = function (name, data) {
         try {
-          if (window.va && typeof window.va.track === 'function') {
+          if (window.va && typeof window.va.track === "function") {
             window.va.track(String(name), data || {});
           }
-        } catch (_err) {
-          // keep quiet if analytics is unavailable (satisfies eslint 'no-empty')
+        } catch (e) {
+          // no-op
         }
       };
-    </script>
+    }
+  })();
+</script>
+
   </body>
 </html>
