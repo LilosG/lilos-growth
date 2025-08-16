@@ -28,7 +28,7 @@ const { metadata = {} } = Astro.props as Props;
 ---
 
 <!doctype html>
-<html lang="en" dir="ltr" class="h-full 2xl:text-[20px]">
+<html lang="en" dir="ltr" class="h-full">
   <head>
     <CommonMeta />
     <Favicons />
@@ -39,38 +39,38 @@ const { metadata = {} } = Astro.props as Props;
     <Analytics />
     <ClientRouter fallback="swap" />
 
-    <!-- Global scale: make content feel ~85–90% size on desktop, full size on phones. -->
+    <!-- Global scale: shrink overall UI on desktop without transforms -->
     <style is:global>
-      /* Phones: keep readability 100% */
+      /* Phones: keep readability */
       html {
         font-size: 100%;
       }
 
-      /* md ≥768px: ~90% */
+      /* md ≥768px: ~88% */
       @media (min-width: 768px) {
         html {
-          font-size: 90%;
+          font-size: 88%;
         }
       }
 
-      /* xl ≥1280px: ~87.5% */
+      /* xl ≥1280px: ~82.5% */
       @media (min-width: 1280px) {
         html {
-          font-size: 87.5%;
+          font-size: 82.5%;
         }
       }
 
-      /* 2xl ≥1536px: ~85% */
+      /* 2xl ≥1536px: ~80% */
       @media (min-width: 1536px) {
         html {
-          font-size: 85%;
+          font-size: 80%;
         }
       }
     </style>
   </head>
 
   <body class="antialiased text-default bg-page tracking-tight min-h-[100dvh] flex flex-col overflow-x-clip">
-    <!-- Global header (remains full-width; our header uses explicit px for nav text so it won’t get too tiny) -->
+    <!-- Global header -->
     <Header />
 
     <!-- Page content -->
