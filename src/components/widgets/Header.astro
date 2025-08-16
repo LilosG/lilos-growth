@@ -20,23 +20,16 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
   <div class="absolute inset-x-0 bottom-0 h-[2px] bg-primary/90 pointer-events-none"></div>
 
   <div class="mx-auto w-full max-w-7xl px-4">
-    <!-- Taller bar so the logo can breathe -->
     <div class="flex h-16 items-center gap-4">
-      <!-- BIGGER LOGO -->
+      <!-- Logo -->
       <a href="/" class="flex items-center gap-3 shrink-0">
         <img
           src="/Lilos_Growth_Logo_Corrected.svg"
           alt="Lilos Growth"
           class="h-10 w-auto md:h-12"
-          <!--
-          🔧
-          mobile
-          ~40px,
-          desktop
-          ~48px
-          --
+          loading="eager"
+          decoding="async"
         />
-        loading="eager" decoding="async" />
         <span class="sr-only">Lilos Growth</span>
       </a>
 
