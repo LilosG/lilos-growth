@@ -147,8 +147,8 @@
         }
 
         renderError('No matching place found. Try adding city/state or ZIP.');
-      } catch (_err) {
-        // use an underscore to satisfy @typescript-eslint/no-unused-vars
+      } catch {
+        // parameter-less catch avoids @typescript-eslint/no-unused-vars
         renderError('Something went wrong. Please try again.');
       }
     });
