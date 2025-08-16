@@ -15,30 +15,26 @@ const actions = (headerData.actions ?? []) as readonly Action[];
 const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArray(i.links);
 ---
 
-<!--
-  Light header bar with a thin primary underline,
-  compact desktop links, and CSS-only mobile menu.
--->
+<!-- Light header bar with primary underline; centered nav; CTA on right -->
 <header class="relative z-[80] w-full bg-white">
-  <!-- thin primary underline to match the comps -->
   <div class="absolute inset-x-0 bottom-0 h-[2px] bg-primary/90 pointer-events-none"></div>
 
   <div class="mx-auto w-full max-w-7xl px-4">
-    <div class="flex h-14 items-center justify-between">
-      <!-- Logo (mobile smaller, md+ larger) -->
+    <div class="flex h-14 items-center gap-3">
+      <!-- Logo (larger on mobile than before) -->
       <a href="/" class="flex items-center gap-3 shrink-0">
         <img
           src="/Lilos_Growth_Logo_Corrected.svg"
           alt="Lilos Growth"
-          class="h-6 w-auto md:h-7"
+          class="h-8 w-auto md:h-9"
           loading="eager"
           decoding="async"
         />
         <span class="sr-only">Lilos Growth</span>
       </a>
 
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-7">
+      <!-- Desktop: centered nav -->
+      <nav class="hidden md:flex flex-1 items-center justify-center gap-7">
         {
           topLinks.map((item) =>
             hasChildren(item) ? (
@@ -76,7 +72,10 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
             )
           )
         }
+      </nav>
 
+      <!-- Desktop: CTA on the far right -->
+      <div class="hidden md:flex shrink-0">
         {
           actions.map((a) => (
             <a
@@ -87,10 +86,10 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
             </a>
           ))
         }
-      </nav>
+      </div>
 
-      <!-- Mobile Hamburger (CSS-only) -->
-      <div class="md:hidden">
+      <!-- Mobile: hamburger (kept last so it sits on the right) -->
+      <div class="md:hidden ml-auto">
         <input id="nav-open" type="checkbox" class="peer hidden" />
         <label
           for="nav-open"
@@ -113,7 +112,7 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
         >
           <div class="flex items-center justify-between">
             <a href="/" class="flex items-center gap-3">
-              <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-6 w-auto" />
+              <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-7 w-auto" />
               <span class="sr-only">Lilos Growth</span>
             </a>
 
