@@ -20,39 +20,45 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
   <div class="absolute inset-x-0 bottom-0 h-[2px] bg-primary/90 pointer-events-none"></div>
 
   <div class="mx-auto w-full max-w-7xl px-4">
-    <div class="flex h-14 items-center gap-3">
-      <!-- Logo (larger on mobile than before) -->
+    <!-- Taller bar so the logo can breathe -->
+    <div class="flex h-16 items-center gap-4">
+      <!-- BIGGER LOGO -->
       <a href="/" class="flex items-center gap-3 shrink-0">
         <img
           src="/Lilos_Growth_Logo_Corrected.svg"
           alt="Lilos Growth"
-          class="h-8 w-auto md:h-9"
-          loading="eager"
-          decoding="async"
+          class="h-10 w-auto md:h-12"
+          <!--
+          🔧
+          mobile
+          ~40px,
+          desktop
+          ~48px
+          --
         />
+        loading="eager" decoding="async" />
         <span class="sr-only">Lilos Growth</span>
       </a>
 
       <!-- Desktop: centered nav -->
-      <nav class="hidden md:flex flex-1 items-center justify-center gap-7">
+      <nav class="hidden md:flex flex-1 items-center justify-center gap-8">
         {
           topLinks.map((item) =>
             hasChildren(item) ? (
-              /* Dropdown (Services) */
               <div class="relative group">
                 <button
-                  class="inline-flex items-center gap-1.5 text-sm font-medium text-[#253242] hover:text-black transition"
+                  class="inline-flex items-center gap-1.5 text-[15px] font-medium text-[#253242] hover:text-black transition"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
                   {item.text}
-                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                     <path d="M6 9l6 6 6-6" stroke-width="2" />
                   </svg>
                 </button>
                 <div
                   class="invisible absolute left-0 mt-3 w-[320px] rounded-2xl border border-gray-200 bg-white shadow-xl opacity-0 transition
-                         group-hover:visible group-hover:opacity-100"
+                       group-hover:visible group-hover:opacity-100"
                 >
                   <div class="p-2">
                     {item.links.map((sub) => (
@@ -65,8 +71,7 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
                 </div>
               </div>
             ) : (
-              /* Flat link */
-              <a href={item.href} class="text-sm font-medium text-[#253242] hover:text-black transition">
+              <a href={item.href} class="text-[15px] font-medium text-[#253242] hover:text-black transition">
                 {item.text}
               </a>
             )
@@ -80,7 +85,7 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
           actions.map((a) => (
             <a
               href={a.href}
-              class="inline-flex items-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm hover:shadow transition"
+              class="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:shadow transition"
             >
               {a.text}
             </a>
@@ -88,7 +93,7 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
         }
       </div>
 
-      <!-- Mobile: hamburger (kept last so it sits on the right) -->
+      <!-- Mobile: hamburger (right aligned) -->
       <div class="md:hidden ml-auto">
         <input id="nav-open" type="checkbox" class="peer hidden" />
         <label
@@ -112,7 +117,7 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
         >
           <div class="flex items-center justify-between">
             <a href="/" class="flex items-center gap-3">
-              <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-7 w-auto" />
+              <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-9 w-auto" />
               <span class="sr-only">Lilos Growth</span>
             </a>
 
