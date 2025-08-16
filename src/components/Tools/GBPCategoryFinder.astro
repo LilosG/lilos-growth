@@ -1,184 +1,126 @@
 ---
-const categories: string[] = [
-  'Plumber',
-  'HVAC contractor',
-  'Electrician',
-  'Roofer',
-  'Landscaper',
-  'Pest control service',
-  'House cleaning service',
-  'Locksmith',
-  'Carpet cleaning service',
-  'Painter',
-  'Garage door supplier',
-  'Moving company',
-  'Tree service',
-  'Window cleaning service',
-  'Handyman',
-  'Appliance repair service',
-  'Pool cleaning service',
-  'Auto repair shop',
-  'Flooring contractor',
-  'Fencing contractor',
-  'Concrete contractor',
-  'Mold remediation',
-  'Water damage restoration service',
-  'Gutter cleaning service',
-  'Solar energy company',
-  'Window installation service',
-  'Bathroom remodeler',
-  'Kitchen remodeler',
-  'Deck builder',
-  'Siding contractor',
-  'Insulation contractor',
-  'Lawn care service',
-  'Irrigation equipment supplier',
-  'Countertop store',
-  'Granite supplier',
-  'Paving contractor',
-  'Asphalt contractor',
-  'Foundation contractor',
-  'Excavating contractor',
-  'Dumpster rental service',
-  'Junk removal service',
-  'Roof cleaning service',
-  'Pressure washing service',
-  'General contractor',
-];
+/**
+ * GBP Primary Category Finder (client-only)
+ * - Simple keyword → category suggestions
+ * - No unused placeholders; no bare expressions that trip no-unused-expressions
+ */
 ---
 
-<div class="bg-white p-6 rounded-3xl shadow-lg">
-  <h3 class="text-xl font-heading font-bold mb-2 text-heading">GBP Category Finder</h3>
-  <p class="text-sm text-body/80 mb-4">Type a service to see recommended Google Business Profile categories.</p>
+<section class="bg-white p-8 rounded-3xl shadow-lg">
+  <h2 class="text-xl font-heading font-bold mb-3 text-heading">Google Business Profile Category Finder</h2>
+  <p class="text-sm text-body/80 mb-5">
+    Type what you do (e.g., “plumber”, “roof repair”). We’ll suggest Google Business Profile categories you can use.
+  </p>
 
-  <input
-    id="cat-q"
-    class="rounded-xl border border-gray-300 px-3 py-2 w-full"
-    placeholder="e.g., plumber, roof repair, drain cleaning"
-  />
-
-  <div class="grid gap-2 mt-3">
-    <div class="text-sm text-gray-600">Top suggestions</div>
-    <ul id="cat-results" class="grid gap-1"></ul>
-  </div>
-
-  <div class="mt-3 flex flex-wrap gap-2">
-    <button id="cat-copy" class="rounded-xl border px-4 py-2 text-sm">Copy</button>
+  <form id="gbp-cat-form" class="flex flex-col gap-3">
+    <input
+      id="gbp-cat-keyword"
+      type="text"
+      required
+      placeholder="Service keyword (e.g., plumber)"
+      class="w-full px-4 py-2 rounded-xl border border-gray-300"
+    />
     <button
-      id="cat-export"
-      class="rounded-xl bg-[#f56b2a] px-4 py-2 text-sm font-semibold text-white shadow-lg hover:bg-[#c9400a]"
-      >Export CSV</button
+      type="submit"
+      class="w-full px-5 py-2 rounded-xl bg-[#f56b2a] text-white font-semibold shadow-lg hover:bg-[#c9400a] transition"
     >
-  </div>
+      Find Categories
+    </button>
+  </form>
 
-  <div id="cat-email-wrap" class="hidden mt-2">
-    <div class="flex gap-2">
-      <input id="cat-email" type="email" class="flex-1 rounded-xl border px-3 py-2" placeholder="you@company.com" />
-      <button id="cat-email-save" class="rounded-xl bg-[#253242] text-white px-3 py-2 font-semibold">Unlock</button>
-    </div>
-    <div class="text-[11px] text-gray-500 mt-1">Stored locally to unlock exports.</div>
-  </div>
+  <div id="gbp-cat-results" class="mt-5 text-sm"></div>
 
-  <div id="cat-msg" class="text-sm text-amber-700 mt-2 hidden"></div>
+  <script is:inline>
+    // A compact list of common GBP categories for home services.
+    // You can expand this list anytime; matching is fuzzy-contains.
+    const GBP_CATEGORIES = [
+      'Plumber',
+      'Plumbing Supply Store',
+      'HVAC Contractor',
+      'Air Conditioning Repair Service',
+      'Heating Contractor',
+      'Electrician',
+      'Electrical Supply Store',
+      'Roofer',
+      'Roofing Contractor',
+      'Garage Door Supplier',
+      'Appliance Repair Service',
+      'Water Damage Restoration Service',
+      'Carpet Cleaning Service',
+      'House Cleaning Service',
+      'Landscape Designer',
+      'Landscaper',
+      'Lawn Care Service',
+      'Tree Service',
+      'Pool Cleaning Service',
+      'Pest Control Service',
+      'Exterminator',
+      'Painter',
+      'Painting',
+      'Masonry Contractor',
+      'Concrete Contractor',
+      'Fence Contractor',
+      'Flooring Contractor',
+      'Handyman',
+      'Locksmith',
+      'Window Installation Service',
+      'Siding Contractor',
+      'Gutter Cleaning Service',
+      'Solar Energy Contractor',
+      'Septic System Service',
+      'Moving Company',
+      'Junk Removal',
+    ];
 
-  <script is:inline data-cats={JSON.stringify(categories)}>
-    (function () {
-      const $ = (s, el) => (el || document).querySelector(s);
-      const q = $('#cat-q'),
-        ul = $('#cat-results');
-      const copy = $('#cat-copy'),
-        exp = $('#cat-export');
-      const msg = $('#cat-msg'),
-        emailWrap = $('#cat-email-wrap');
-      const emailIn = $('#cat-email'),
-        emailSave = $('#cat-email-save');
-      const cats = JSON.parse(document.currentScript.dataset.cats);
+    const form = document.getElementById('gbp-cat-form');
+    const input = document.getElementById('gbp-cat-keyword');
+    const results = document.getElementById('gbp-cat-results');
 
-      function track(evt, data) {
-        try {
-          window.trackEvent && window.trackEvent(evt, data || {});
-        } catch (_) {}
-      }
-      function setMsg(t) {
-        msg.textContent = t || '';
-        msg.classList.toggle('hidden', !t);
-      }
-      function ensureEmail() {
-        const e = localStorage.getItem('tools_email') || '';
-        emailWrap.classList.toggle('hidden', !!e);
-      }
-      ensureEmail();
-
-      emailSave &&
-        emailSave.addEventListener('click', () => {
-          const v = (emailIn.value || '').trim();
-          if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) return setMsg('Enter a valid email to unlock export.');
-          localStorage.setItem('tools_email', v);
-          setMsg('Saved. Export unlocked.');
-          ensureEmail();
-          track('tools_lead_saved', { tool: 'gbp_category', email: 'stored' });
-        });
-
-      function score(term, cat) {
-        const a = term.toLowerCase().trim(),
-          b = cat.toLowerCase().trim();
-        if (!a) return 0;
-        let s = 0;
-        if (b.includes(a)) s += 0.7;
-        if (b.startsWith(a)) s += 0.2;
-        const at = a.split(/\s+/),
-          bt = b.split(/\s+/);
-        const inter = at.filter((t) => bt.includes(t)).length;
-        s += Math.min(0.3, inter * 0.15);
-        return s;
+    function renderList(items) {
+      if (!Array.isArray(items) || items.length === 0) {
+        results.innerHTML =
+          '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">No matches. Try a broader keyword.</div>';
+        return;
       }
 
-      function render(list) {
-        ul.innerHTML = '';
-        list.slice(0, 12).forEach((c) => {
-          const li = document.createElement('li');
-          li.className = 'rounded-lg border px-3 py-2 text-sm';
-          li.textContent = c;
-          ul.appendChild(li);
-        });
+      const html = [
+        '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">',
+        '<div class="font-semibold mb-2">Suggested categories</div>',
+        '<ul class="list-disc pl-5 space-y-1">',
+      ];
+      for (let i = 0; i < items.length; i++) {
+        html.push(`<li>${items[i]}</li>`);
+      }
+      html.push('</ul></div>');
+      results.innerHTML = html.join('');
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const q = String(input.value || '')
+        .trim()
+        .toLowerCase();
+      if (q.length === 0) {
+        results.innerHTML =
+          '<div class="rounded-xl border border-red-200 p-4 bg-red-50 text-red-700">Please enter a keyword.</div>';
+        return;
       }
 
-      function search() {
-        const term = (q.value || '').trim();
-        if (!term) {
-          ul.innerHTML = '';
-          return;
+      const matches = [];
+      for (let i = 0; i < GBP_CATEGORIES.length; i++) {
+        const cat = GBP_CATEGORIES[i];
+        if (cat.toLowerCase().includes(q)) {
+          matches.push(cat);
         }
-        const ranked = cats.slice().sort((a, b) => score(term, b) - score(term, a));
-        render(ranked);
-        track('tool_result', { tool: 'gbp_category' });
       }
 
-      q.addEventListener('input', search);
-
-      copy.addEventListener('click', async () => {
-        const items = [...ul.querySelectorAll('li')].map((li) => li.textContent).join('\n');
-        try {
-          await navigator.clipboard.writeText(items);
-          setMsg('Copied.');
-          track('tool_copy', { tool: 'gbp_category' });
-        } catch {}
+      // Show up to 12 matches, sorted by length (rough relevance heuristic)
+      matches.sort(function (a, b) {
+        return a.length - b.length;
       });
 
-      exp.addEventListener('click', () => {
-        const email = localStorage.getItem('tools_email') || '';
-        if (!email) return setMsg('Enter your email to unlock export.');
-        const items = [...ul.querySelectorAll('li')].map((li) => li.textContent);
-        const csv = 'Category\n' + items.join('\n');
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'gbp-categories.csv';
-        a.click();
-        URL.revokeObjectURL(a.href);
-        setMsg('Exported CSV.');
-        track('tool_export', { tool: 'gbp_category' });
-      });
-    })();
+      renderList(matches.slice(0, 12));
+    });
   </script>
-</div>
+</section>

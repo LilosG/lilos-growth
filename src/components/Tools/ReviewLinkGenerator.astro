@@ -1,186 +1,156 @@
 ---
 /**
- * Review Link + QR Generator
- * - Auto-finds Place ID via /api/places (if GOOGLE_MAPS_API_KEY is set on Vercel)
- * - Otherwise accepts manual Place ID
- * - Generates review link + QR (Google Chart API)
- * - Download gated by a locally stored email (no backend required)
+ * Review Link + QR generator
+ * - Uses /api/places to resolve a single Place (server-side with Places API)
+ * - Builds profile & write-review links
+ * - Generates a QR via a simple <img> endpoint
  */
 ---
+<section class="bg-white p-8 rounded-3xl shadow-lg">
+  <h2 class="text-xl font-heading font-bold mb-3 text-heading">Google Review Link &amp; QR</h2>
+  <p class="text-sm text-body/80 mb-5">
+    Find your business in Google and get one-click links for customers to leave a review. Works best when you include
+    city and state/ZIP.
+  </p>
 
-<div class="bg-white p-6 rounded-3xl shadow-lg">
-  <h3 class="text-xl font-heading font-bold mb-2 text-heading">Google Review Link Generator</h3>
-  <p class="text-sm text-body/80 mb-4">Create a direct “Write a review” link and QR code for your GBP.</p>
+  <form id="rev-form" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+    <input
+      id="rev-name"
+      type="text"
+      required
+      placeholder="Business name (e.g., Acme Plumbing)"
+      class="w-full px-4 py-2 rounded-xl border border-gray-300"
+    />
+    <input
+      id="rev-city"
+      type="text"
+      placeholder="City (e.g., Denver)"
+      class="w-full px-4 py-2 rounded-xl border border-gray-300"
+    />
+    <input
+      id="rev-region"
+      type="text"
+      placeholder="State or ZIP (e.g., CO or 80202)"
+      class="w-full px-4 py-2 rounded-xl border border-gray-300"
+    />
 
-  <form id="rlg-form" class="grid gap-3">
-    <input
-      id="rlg-name"
-      class="rounded-xl border border-gray-300 px-3 py-2"
-      placeholder="Business Name (e.g., Acme Plumbing)"
-    />
-    <input
-      id="rlg-city"
-      class="rounded-xl border border-gray-300 px-3 py-2"
-      placeholder="City / State (e.g., Denver, CO)"
-    />
-    <input
-      id="rlg-place"
-      class="rounded-xl border border-gray-300 px-3 py-2"
-      placeholder="Place ID (optional if auto-lookup works)"
-    />
-    <div class="flex gap-3">
+    <div class="md:col-span-3">
       <button
         type="submit"
-        class="rounded-xl bg-[#f56b2a] px-4 py-2 font-semibold text-white shadow-lg hover:bg-[#c9400a]"
-        >Generate Link</button
+        class="w-full px-5 py-2 rounded-xl bg-[#f56b2a] text-white font-semibold shadow-lg hover:bg-[#c9400a] transition"
       >
-      <button type="button" id="rlg-clear" class="rounded-xl border px-4 py-2">Clear</button>
+        Find Place
+      </button>
     </div>
   </form>
 
-  <div id="rlg-result" class="mt-5 hidden">
-    <div class="rounded-2xl border border-gray-200 p-4">
-      <div class="text-sm text-gray-600 mb-2">Review link</div>
-      <div class="flex items-center justify-between gap-3">
-        <a id="rlg-link" href="#" target="_blank" rel="noopener" class="truncate text-sm underline text-[#253242]"></a>
-        <button id="rlg-copy" class="rounded-lg border px-3 py-1.5 text-sm">Copy</button>
-      </div>
-
-      <div class="mt-4 grid md:grid-cols-[200px_1fr] gap-4 items-start">
-        <img id="rlg-qr" alt="QR Code" class="h-[200px] w-[200px] rounded-lg border" />
-        <div class="grid gap-2">
-          <div class="text-sm text-gray-700">Share & download</div>
-          <div class="flex flex-wrap gap-2">
-            <a
-              id="rlg-download"
-              download="review-qr.png"
-              class="rounded-xl bg-[#f56b2a] px-4 py-2 text-sm font-semibold text-white shadow-lg hover:bg-[#c9400a] cursor-pointer"
-              >Download QR</a
-            >
-            <button id="rlg-email-open" class="rounded-xl border px-4 py-2 text-sm">Email me a printable poster</button>
-          </div>
-          <div id="rlg-email-wrap" class="hidden mt-2">
-            <div class="flex gap-2">
-              <input
-                id="rlg-email"
-                type="email"
-                class="flex-1 rounded-xl border px-3 py-2"
-                placeholder="you@company.com"
-              />
-              <button id="rlg-email-save" class="rounded-xl bg-[#253242] text-white px-3 py-2 font-semibold"
-                >Save</button
-              >
-            </div>
-            <div class="text-[11px] text-gray-500 mt-1">
-              Stored locally to unlock downloads. Hook to your CRM later.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="rlg-msg" class="mt-3 text-sm text-amber-700 hidden"></div>
+  <div id="rev-result" class="mt-5 text-sm"></div>
 
   <script is:inline>
-    (function () {
-      const $ = (s, el) => (el || document).querySelector(s);
-      const form = $('#rlg-form');
-      const name = $('#rlg-name');
-      const city = $('#rlg-city');
-      const place = $('#rlg-place');
-      const msg = $('#rlg-msg');
-      const res = $('#rlg-result');
-      const link = $('#rlg-link');
-      const copy = $('#rlg-copy');
-      const qr = $('#rlg-qr');
-      const dl = $('#rlg-download');
-      const clearBtn = $('#rlg-clear');
-      const emailOpen = $('#rlg-email-open');
-      const emailWrap = $('#rlg-email-wrap');
-      const emailIn = $('#rlg-email');
-      const emailSave = $('#rlg-email-save');
+    const form = document.getElementById('rev-form');
+    const nameEl = document.getElementById('rev-name');
+    const cityEl = document.getElementById('rev-city');
+    const regionEl = document.getElementById('rev-region');
+    const result = document.getElementById('rev-result');
 
-      function track(evt, data) {
-        try {
-          window.trackEvent && window.trackEvent(evt, data || {});
-        } catch (_) {}
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function renderError(msg) {
+      result.innerHTML =
+        '<div class="rounded-xl border border-red-200 p-4 bg-red-50 text-red-700">' + escapeHtml(msg) + '</div>';
+    }
+
+    function renderLinks(place) {
+      const placeId = place.place_id;
+      const displayName = place.name || '';
+      const address = place.address || '';
+
+      const profileUrl = 'https://www.google.com/maps/place/?q=place_id:' + encodeURIComponent(placeId);
+      const reviewUrl = 'https://search.google.com/local/writereview?placeid=' + encodeURIComponent(placeId);
+      const qrUrl =
+        'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(reviewUrl);
+
+      const html = [
+        '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50 space-y-3">',
+        '<div class="font-semibold">Match</div>',
+        '<div class="text-gray-700">',
+        escapeHtml(displayName),
+        '</div>',
+        '<div class="text-gray-500">',
+        escapeHtml(address),
+        '</div>',
+        '<div class="flex flex-col sm:flex-row gap-3 pt-2">',
+        '<a class="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-white border border-gray-300 hover:bg-gray-50 transition" target="_blank" rel="nofollow noopener" href="',
+        profileUrl,
+        '">Open Profile</a>',
+        '<a class="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-[#f56b2a] text-white hover:bg-[#c9400a] transition" target="_blank" rel="nofollow noopener" href="',
+        reviewUrl,
+        '">Write a Review</a>',
+        '</div>',
+        '<div class="pt-4">',
+        '<div class="text-xs uppercase tracking-wide text-gray-500 mb-2">QR for review link</div>',
+        '<img class="rounded-xl border border-gray-200 bg-white" width="180" height="180" alt="Review QR" src="',
+        qrUrl,
+        '" />',
+        '</div>',
+        '</div>',
+      ];
+      result.innerHTML = html.join('');
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const name = String(nameEl.value || '').trim();
+      const city = String(cityEl.value || '').trim();
+      const region = String(regionEl.value || '').trim();
+
+      if (name.length === 0) {
+        renderError('Please enter a business name.');
+        return;
       }
-      function setMsg(t) {
-        msg.textContent = t || '';
-        msg.classList.toggle('hidden', !t);
+
+      let q = name;
+      if (city.length > 0) {
+        q += ' ' + city;
       }
-      function unlockIfEmail() {
-        const saved = localStorage.getItem('tools_email') || '';
-        if (saved) {
-          emailWrap.classList.add('hidden');
-          emailOpen.classList.add('hidden');
-          dl.classList.remove('pointer-events-none', 'opacity-60');
-        } else {
-          emailOpen.classList.remove('hidden');
-          dl.classList.add('pointer-events-none', 'opacity-60');
+      if (region.length > 0) {
+        q += ' ' + region;
+      }
+
+      result.innerHTML =
+        '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50 text-gray-600">Searching…</div>';
+
+      try {
+        const res = await fetch('/api/places?q=' + encodeURIComponent(q));
+        if (!res.ok) {
+          renderError('Request failed. Please try again.');
+          return;
         }
-      }
-      unlockIfEmail();
+        const data = await res.json();
 
-      emailOpen.addEventListener('click', () => emailWrap.classList.remove('hidden'));
-      emailSave.addEventListener('click', () => {
-        const v = (emailIn.value || '').trim();
-        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) return setMsg('Please enter a valid email to unlock downloads.');
-        localStorage.setItem('tools_email', v);
-        setMsg('Saved. Downloads unlocked.');
-        unlockIfEmail();
-        track('tools_lead_saved', { tool: 'review_link', email: 'stored' });
-      });
-
-      function buildReviewURL(pid) {
-        return `https://search.google.com/local/writereview?placeid=${encodeURIComponent(pid)}`;
-      }
-      function setResult(pid) {
-        const url = buildReviewURL(pid);
-        link.href = url;
-        link.textContent = url;
-        const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(url)}`;
-        qr.src = qrUrl;
-        dl.setAttribute('href', qrUrl);
-        res.classList.remove('hidden');
-        setMsg('');
-        track('tool_result', { tool: 'review_link' });
-      }
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        res.classList.add('hidden');
-        setMsg('');
-        track('tool_submit', { tool: 'review_link' });
-        const manual = (place.value || '').trim();
-        if (manual) return setResult(manual);
-        const q = `${(name.value || '').trim()} ${(city.value || '').trim()}`.trim();
-        if (!q) return setMsg('Enter business name and city/state, or paste a Place ID.');
-        try {
-          const r = await fetch(`/api/places?q=${encodeURIComponent(q)}`);
-          if (r.status === 501) return setMsg('Auto-lookup disabled. Paste your Place ID to continue.');
-          const data = await r.json();
-          if (!r.ok || !data.place_id)
-            return setMsg('Could not find a Place ID. Try adding state/zip, or paste it manually.');
-          setResult(data.place_id);
-        } catch {
-          setMsg('Lookup failed. Paste your Place ID to continue.');
+        if (data && data.place_id) {
+          renderLinks(data);
+          return;
         }
-      });
 
-      copy.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(link.href);
-          setMsg('Copied link to clipboard.');
-          track('tool_copy', { tool: 'review_link' });
-        } catch {}
-      });
-      clearBtn.addEventListener('click', () => {
-        [name, city, place].forEach((i) => (i.value = ''));
-        res.classList.add('hidden');
-        setMsg('');
-      });
-    })();
+        if (data && typeof data.error === 'string') {
+          renderError(data.error);
+          return;
+        }
+
+        renderError('No matching place found. Try adding city/state or ZIP.');
+      } catch (_err) {
+        // use an underscore to satisfy @typescript-eslint/no-unused-vars
+        renderError('Something went wrong. Please try again.');
+      }
+    });
   </script>
-</div>
+</section>
