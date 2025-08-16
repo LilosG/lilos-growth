@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import ToolsNewSection from '~/components/Tools/ToolsNewSection.astro';
 ---
 
 <html lang="en">
@@ -23,7 +24,10 @@ import Layout from '~/layouts/PageLayout.astro';
       </div>
     </section>
 
-    <!-- TOOL GRID -->
+    <!-- NEW LEAD-GEN TOOLS -->
+    <ToolsNewSection />
+
+    <!-- EXISTING TOOL GRID -->
     <section class="max-w-7xl mx-auto px-4 py-20 grid gap-12 md:grid-cols-3">
       <!-- FAQ Schema Generator -->
       <div class="bg-white p-8 rounded-3xl shadow-lg flex flex-col items-center">
@@ -251,19 +255,15 @@ import Layout from '~/layouts/PageLayout.astro';
           .map((l) => l.trim())
           .filter(Boolean);
         const faqs = [];
-        let q = '',
-          a = '';
+        let q = '', a = '';
         lines.forEach((line) => {
           if (line.endsWith('?')) {
             if (q && a) faqs.push({ q, a });
-            q = line;
-            a = '';
+            q = line; a = '';
           } else if (q && !a) {
             a = line;
           } else if (q && a) {
-            faqs.push({ q, a });
-            q = '';
-            a = '';
+            faqs.push({ q, a }); q = ''; a = '';
           }
         });
         if (q && a) faqs.push({ q, a });
@@ -401,6 +401,4 @@ import Layout from '~/layouts/PageLayout.astro';
       });
     </script>
   </Layout>
-
-
 </html>
