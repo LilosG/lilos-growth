@@ -20,13 +20,14 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
   <div class="absolute inset-x-0 bottom-0 h-[2px] bg-primary/90 pointer-events-none"></div>
 
   <div class="mx-auto w-full max-w-7xl px-4">
-    <div class="flex h-16 items-center gap-4">
-      <!-- Logo -->
+    <!-- Taller bar so the logo can be larger on mobile -->
+    <div class="flex h-20 items-center gap-4">
+      <!-- Larger mobile logo -->
       <a href="/" class="flex items-center gap-3 shrink-0">
         <img
           src="/Lilos_Growth_Logo_Corrected.svg"
           alt="Lilos Growth"
-          class="h-10 w-auto md:h-12"
+          class="h-12 w-auto md:h-12"
           loading="eager"
           decoding="async"
         />
@@ -86,15 +87,15 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
         }
       </div>
 
-      <!-- Mobile: hamburger (right aligned) -->
+      <!-- Mobile: hamburger (right aligned) with larger touch target to match taller header -->
       <div class="md:hidden ml-auto">
         <input id="nav-open" type="checkbox" class="peer hidden" />
         <label
           for="nav-open"
-          class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white shadow-sm"
+          class="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-gray-200 bg-white shadow-sm"
           aria-label="Open menu"
         >
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
             <path d="M3 6h18M3 12h18M3 18h18" stroke-width="2"></path>
           </svg>
         </label>
@@ -110,7 +111,7 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
         >
           <div class="flex items-center justify-between">
             <a href="/" class="flex items-center gap-3">
-              <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-9 w-auto" />
+              <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-10 w-auto" />
               <span class="sr-only">Lilos Growth</span>
             </a>
 
