@@ -255,15 +255,19 @@ import ToolsNewSection from '~/components/Tools/ToolsNewSection.astro';
           .map((l) => l.trim())
           .filter(Boolean);
         const faqs = [];
-        let q = '', a = '';
+        let q = '',
+          a = '';
         lines.forEach((line) => {
           if (line.endsWith('?')) {
             if (q && a) faqs.push({ q, a });
-            q = line; a = '';
+            q = line;
+            a = '';
           } else if (q && !a) {
             a = line;
           } else if (q && a) {
-            faqs.push({ q, a }); q = ''; a = '';
+            faqs.push({ q, a });
+            q = '';
+            a = '';
           }
         });
         if (q && a) faqs.push({ q, a });
@@ -401,4 +405,5 @@ import ToolsNewSection from '~/components/Tools/ToolsNewSection.astro';
       });
     </script>
   </Layout>
+
 </html>

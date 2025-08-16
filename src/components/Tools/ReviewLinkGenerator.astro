@@ -7,16 +7,33 @@
  * - Download gated by a locally stored email (no backend required)
  */
 ---
+
 <div class="bg-white p-6 rounded-3xl shadow-lg">
   <h3 class="text-xl font-heading font-bold mb-2 text-heading">Google Review Link Generator</h3>
   <p class="text-sm text-body/80 mb-4">Create a direct “Write a review” link and QR code for your GBP.</p>
 
   <form id="rlg-form" class="grid gap-3">
-    <input id="rlg-name" class="rounded-xl border border-gray-300 px-3 py-2" placeholder="Business Name (e.g., Acme Plumbing)" />
-    <input id="rlg-city" class="rounded-xl border border-gray-300 px-3 py-2" placeholder="City / State (e.g., Denver, CO)" />
-    <input id="rlg-place" class="rounded-xl border border-gray-300 px-3 py-2" placeholder="Place ID (optional if auto-lookup works)" />
+    <input
+      id="rlg-name"
+      class="rounded-xl border border-gray-300 px-3 py-2"
+      placeholder="Business Name (e.g., Acme Plumbing)"
+    />
+    <input
+      id="rlg-city"
+      class="rounded-xl border border-gray-300 px-3 py-2"
+      placeholder="City / State (e.g., Denver, CO)"
+    />
+    <input
+      id="rlg-place"
+      class="rounded-xl border border-gray-300 px-3 py-2"
+      placeholder="Place ID (optional if auto-lookup works)"
+    />
     <div class="flex gap-3">
-      <button type="submit" class="rounded-xl bg-[#f56b2a] px-4 py-2 font-semibold text-white shadow-lg hover:bg-[#c9400a]">Generate Link</button>
+      <button
+        type="submit"
+        class="rounded-xl bg-[#f56b2a] px-4 py-2 font-semibold text-white shadow-lg hover:bg-[#c9400a]"
+        >Generate Link</button
+      >
       <button type="button" id="rlg-clear" class="rounded-xl border px-4 py-2">Clear</button>
     </div>
   </form>
@@ -34,15 +51,29 @@
         <div class="grid gap-2">
           <div class="text-sm text-gray-700">Share & download</div>
           <div class="flex flex-wrap gap-2">
-            <a id="rlg-download" download="review-qr.png" class="rounded-xl bg-[#f56b2a] px-4 py-2 text-sm font-semibold text-white shadow-lg hover:bg-[#c9400a] cursor-pointer">Download QR</a>
+            <a
+              id="rlg-download"
+              download="review-qr.png"
+              class="rounded-xl bg-[#f56b2a] px-4 py-2 text-sm font-semibold text-white shadow-lg hover:bg-[#c9400a] cursor-pointer"
+              >Download QR</a
+            >
             <button id="rlg-email-open" class="rounded-xl border px-4 py-2 text-sm">Email me a printable poster</button>
           </div>
           <div id="rlg-email-wrap" class="hidden mt-2">
             <div class="flex gap-2">
-              <input id="rlg-email" type="email" class="flex-1 rounded-xl border px-3 py-2" placeholder="you@company.com" />
-              <button id="rlg-email-save" class="rounded-xl bg-[#253242] text-white px-3 py-2 font-semibold">Save</button>
+              <input
+                id="rlg-email"
+                type="email"
+                class="flex-1 rounded-xl border px-3 py-2"
+                placeholder="you@company.com"
+              />
+              <button id="rlg-email-save" class="rounded-xl bg-[#253242] text-white px-3 py-2 font-semibold"
+                >Save</button
+              >
             </div>
-            <div class="text-[11px] text-gray-500 mt-1">Stored locally to unlock downloads. Hook to your CRM later.</div>
+            <div class="text-[11px] text-gray-500 mt-1">
+              Stored locally to unlock downloads. Hook to your CRM later.
+            </div>
           </div>
         </div>
       </div>
@@ -70,12 +101,25 @@
       const emailIn = $('#rlg-email');
       const emailSave = $('#rlg-email-save');
 
-      function track(evt, data) { try { window.trackEvent && window.trackEvent(evt, data || {}); } catch(_){} }
-      function setMsg(t){ msg.textContent = t || ''; msg.classList.toggle('hidden', !t); }
-      function unlockIfEmail(){
+      function track(evt, data) {
+        try {
+          window.trackEvent && window.trackEvent(evt, data || {});
+        } catch (_) {}
+      }
+      function setMsg(t) {
+        msg.textContent = t || '';
+        msg.classList.toggle('hidden', !t);
+      }
+      function unlockIfEmail() {
         const saved = localStorage.getItem('tools_email') || '';
-        if (saved) { emailWrap.classList.add('hidden'); emailOpen.classList.add('hidden'); dl.classList.remove('pointer-events-none','opacity-60'); }
-        else { emailOpen.classList.remove('hidden'); dl.classList.add('pointer-events-none','opacity-60'); }
+        if (saved) {
+          emailWrap.classList.add('hidden');
+          emailOpen.classList.add('hidden');
+          dl.classList.remove('pointer-events-none', 'opacity-60');
+        } else {
+          emailOpen.classList.remove('hidden');
+          dl.classList.add('pointer-events-none', 'opacity-60');
+        }
       }
       unlockIfEmail();
 
@@ -89,32 +133,54 @@
         track('tools_lead_saved', { tool: 'review_link', email: 'stored' });
       });
 
-      function buildReviewURL(pid){ return `https://search.google.com/local/writereview?placeid=${encodeURIComponent(pid)}`; }
-      function setResult(pid){
+      function buildReviewURL(pid) {
+        return `https://search.google.com/local/writereview?placeid=${encodeURIComponent(pid)}`;
+      }
+      function setResult(pid) {
         const url = buildReviewURL(pid);
-        link.href = url; link.textContent = url;
+        link.href = url;
+        link.textContent = url;
         const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(url)}`;
-        qr.src = qrUrl; dl.setAttribute('href', qrUrl);
-        res.classList.remove('hidden'); setMsg('');
+        qr.src = qrUrl;
+        dl.setAttribute('href', qrUrl);
+        res.classList.remove('hidden');
+        setMsg('');
         track('tool_result', { tool: 'review_link' });
       }
 
       form.addEventListener('submit', async (e) => {
-        e.preventDefault(); res.classList.add('hidden'); setMsg(''); track('tool_submit', { tool: 'review_link' });
-        const manual = (place.value || '').trim(); if (manual) return setResult(manual);
+        e.preventDefault();
+        res.classList.add('hidden');
+        setMsg('');
+        track('tool_submit', { tool: 'review_link' });
+        const manual = (place.value || '').trim();
+        if (manual) return setResult(manual);
         const q = `${(name.value || '').trim()} ${(city.value || '').trim()}`.trim();
         if (!q) return setMsg('Enter business name and city/state, or paste a Place ID.');
         try {
           const r = await fetch(`/api/places?q=${encodeURIComponent(q)}`);
           if (r.status === 501) return setMsg('Auto-lookup disabled. Paste your Place ID to continue.');
           const data = await r.json();
-          if (!r.ok || !data.place_id) return setMsg('Could not find a Place ID. Try adding state/zip, or paste it manually.');
+          if (!r.ok || !data.place_id)
+            return setMsg('Could not find a Place ID. Try adding state/zip, or paste it manually.');
           setResult(data.place_id);
-        } catch { setMsg('Lookup failed. Paste your Place ID to continue.'); }
+        } catch {
+          setMsg('Lookup failed. Paste your Place ID to continue.');
+        }
       });
 
-      copy.addEventListener('click', async () => { try { await navigator.clipboard.writeText(link.href); setMsg('Copied link to clipboard.'); track('tool_copy', { tool: 'review_link' }); } catch {} });
-      clearBtn.addEventListener('click', () => { [name, city, place].forEach(i => i.value=''); res.classList.add('hidden'); setMsg(''); });
+      copy.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(link.href);
+          setMsg('Copied link to clipboard.');
+          track('tool_copy', { tool: 'review_link' });
+        } catch {}
+      });
+      clearBtn.addEventListener('click', () => {
+        [name, city, place].forEach((i) => (i.value = ''));
+        res.classList.add('hidden');
+        setMsg('');
+      });
     })();
   </script>
 </div>
