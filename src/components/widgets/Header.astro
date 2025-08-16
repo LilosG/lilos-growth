@@ -1,71 +1,81 @@
 ---
 import { headerData } from '~/navigation';
 
-/** Types matching your navigation structure */
 type SubLink = { text: string; href: string; description?: string };
-type FlatLink = { text: string; href: string; links?: never };
-type GroupLink = { text: string; href?: never; links: readonly SubLink[] };
-type NavItem = FlatLink | GroupLink;
+type NavItem = { text: string; href?: string; links?: SubLink[] };
 type Action = { text: string; href: string };
 
-const topLinks = (headerData.links ?? []) as readonly NavItem[];
-const actions = (headerData.actions ?? []) as readonly Action[];
-
-/** Type guard */
-const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArray(i.links);
+const topLinks = (Array.isArray(headerData?.links) ? headerData.links : []) satisfies NavItem[];
+const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) satisfies Action[];
 ---
 
-<!-- Light header bar with primary underline; centered nav; CTA on right -->
-<header class="relative z-[80] w-full bg-white">
-  <div class="absolute inset-x-0 bottom-0 h-[2px] bg-primary/90 pointer-events-none"></div>
-
+<header
+  class="sticky top-0 z-[100] w-full bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-orange-500/70"
+>
   <div class="mx-auto w-full max-w-7xl px-4">
-    <!-- Taller bar so the logo can be larger on mobile -->
-    <div class="flex h-20 items-center gap-4">
-      <!-- Larger mobile logo -->
-      <a href="/" class="flex items-center gap-3 shrink-0">
+    <div class="flex h-20 items-center justify-between">
+      <a href="/" class="shrink-0 inline-flex items-center">
         <img
           src="/Lilos_Growth_Logo_Corrected.svg"
           alt="Lilos Growth"
-          class="h-12 w-auto md:h-12"
+          class="h-9 w-auto md:h-12 lg:h-14 xl:h-16"
           loading="eager"
           decoding="async"
         />
-        <span class="sr-only">Lilos Growth</span>
       </a>
 
-      <!-- Desktop: centered nav -->
-      <nav class="hidden md:flex flex-1 items-center justify-center gap-8">
+      <nav class="hidden md:flex items-center gap-8">
         {
           topLinks.map((item) =>
-            hasChildren(item) ? (
-              <div class="relative group">
-                <button
-                  class="inline-flex items-center gap-1.5 text-[15px] font-medium text-[#253242] hover:text-black transition"
+            item?.links && item.links.length ? (
+              <div class="relative group" data-has-submenu="true">
+                <a
+                  href={item.href ?? '#'}
+                  class="inline-flex items-center gap-1 py-2 text-[15px] font-medium text-[#253242] hover:text-black transition"
+                  role="button"
                   aria-haspopup="true"
                   aria-expanded="false"
+                  tabindex="0"
                 >
                   {item.text}
-                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                    <path d="M6 9l6 6 6-6" stroke-width="2" />
+                  <svg
+                    class="h-4 w-4 opacity-70 group-hover:opacity-100 transition"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" />
                   </svg>
-                </button>
-                <div
-                  class="invisible absolute left-0 mt-3 w-[320px] rounded-2xl border border-gray-200 bg-white shadow-xl opacity-0 transition
-                       group-hover:visible group-hover:opacity-100"
-                >
-                  <div class="p-2">
-                    {item.links.map((sub) => (
-                      <a href={sub.href} class="block rounded-xl px-4 py-3 hover:bg-gray-50">
-                        <div class="text-sm font-semibold text-[#253242]">{sub.text}</div>
-                        {sub.description ? <div class="text-xs text-gray-500">{sub.description}</div> : null}
-                      </a>
-                    ))}
+                </a>
+
+                <div class="absolute left-0 top-full pt-3 z-[120]">
+                  <div
+                    data-menu
+                    class="min-w-[240px] rounded-2xl border border-gray-200 bg-white shadow-xl
+                           opacity-0 translate-y-2 pointer-events-none
+                           group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto
+                           group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto
+                           transition"
+                  >
+                    <div class="p-2">
+                      {item.links.map((sub) => (
+                        <a
+                          href={sub.href}
+                          class="block rounded-xl px-4 py-3 text-[15px] text-[#253242] hover:bg-gray-50 hover:text-black transition"
+                        >
+                          <div class="font-semibold">{sub.text}</div>
+                          {sub.description ? <div class="mt-0.5 text-xs text-gray-500">{sub.description}</div> : null}
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             ) : (
-              <a href={item.href} class="text-[15px] font-medium text-[#253242] hover:text-black transition">
+              <a
+                href={item.href ?? '#'}
+                class="text-[15px] font-medium text-[#253242] hover:text-black transition py-2"
+              >
                 {item.text}
               </a>
             )
@@ -73,102 +83,156 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
         }
       </nav>
 
-      <!-- Desktop: CTA on the far right -->
-      <div class="hidden md:flex shrink-0">
+      <div class="flex items-center gap-3">
         {
-          actions.map((a) => (
+          actions?.[0]?.href ? (
             <a
-              href={a.href}
-              class="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:shadow transition"
+              href={actions[0].href}
+              class="hidden md:inline-flex items-center justify-center rounded-full bg-[#f56b2a] px-4 py-2 text-white text-sm font-semibold shadow hover:bg-[#e85718] transition"
             >
-              {a.text}
+              {actions[0].text}
             </a>
-          ))
+          ) : null
         }
-      </div>
 
-      <!-- Mobile: hamburger (right aligned) with larger touch target to match taller header -->
-      <div class="md:hidden ml-auto">
-        <input id="nav-open" type="checkbox" class="peer hidden" />
-        <label
-          for="nav-open"
-          class="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-gray-200 bg-white shadow-sm"
-          aria-label="Open menu"
+        <button
+          id="mobileMenuBtn"
+          class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-[#253242]"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
         >
-          <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-            <path d="M3 6h18M3 12h18M3 18h18" stroke-width="2"></path>
+          <span class="sr-only">Open menu</span>
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"></path>
           </svg>
-        </label>
-
-        <!-- Solid overlay -->
-        <div class="fixed inset-0 z-[100] hidden bg-[#253242] peer-checked:block" aria-hidden="true"></div>
-
-        <!-- Mobile panel -->
-        <nav
-          class="fixed inset-0 z-[110] hidden flex-col gap-6 p-6 text-white peer-checked:flex"
-          role="dialog"
-          aria-label="Mobile Navigation"
-        >
-          <div class="flex items-center justify-between">
-            <a href="/" class="flex items-center gap-3">
-              <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-10 w-auto" />
-              <span class="sr-only">Lilos Growth</span>
-            </a>
-
-            <label
-              for="nav-open"
-              class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-white/10"
-              aria-label="Close menu"
-            >
-              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                <path d="M6 6l12 12M6 18L18 6" stroke-width="2"></path>
-              </svg>
-            </label>
-          </div>
-
-          <div class="mt-4 grid gap-4">
-            {
-              topLinks.map((item) =>
-                hasChildren(item) ? (
-                  <div class="rounded-2xl border border-white/15 bg-white/5">
-                    <div class="px-4 pb-2 pt-4 text-xs font-semibold uppercase tracking-wide text-white/70">
-                      {item.text}
-                    </div>
-                    <div class="p-2">
-                      {item.links.map((sub) => (
-                        <a href={sub.href} class="block rounded-xl px-4 py-3 hover:bg-white/10">
-                          {sub.text}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <a
-                    href={item.href}
-                    class="block rounded-2xl border border-white/15 bg-white/5 px-4 py-3 hover:bg-white/10"
-                  >
-                    {item.text}
-                  </a>
-                )
-              )
-            }
-          </div>
-
-          <div class="mt-auto grid gap-3">
-            {
-              actions.map((a) => (
-                <a
-                  href={a.href}
-                  class="inline-flex items-center justify-center rounded-2xl bg-white px-4 py-3 font-semibold text-[#253242] shadow-sm"
-                >
-                  {a.text}
-                </a>
-              ))
-            }
-            <label for="nav-open" class="text-center text-sm text-white/70">Close</label>
-          </div>
-        </nav>
+        </button>
       </div>
     </div>
   </div>
+
+  <div id="mobileMenu" class="fixed inset-0 z-[110] hidden" aria-hidden="true">
+    <div class="absolute inset-0 bg-black/40"></div>
+
+    <div class="absolute right-0 top-0 h-full w-[88%] max-w-[22rem] bg-white shadow-xl p-6 overflow-y-auto">
+      <div class="flex items-center justify-between">
+        <a href="/" class="inline-flex items-center">
+          <img
+            src="/Lilos_Growth_Logo_Corrected.svg"
+            alt="Lilos Growth"
+            class="h-7 w-auto"
+            loading="eager"
+            decoding="async"
+          />
+        </a>
+        <button
+          id="mobileMenuClose"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-[#253242]"
+        >
+          <span class="sr-only">Close menu</span>
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="mt-6 space-y-6">
+        {
+          topLinks.map((item) =>
+            item?.links && item.links.length ? (
+              <div class="space-y-2">
+                <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">{item.text}</div>
+                <div class="grid gap-1">
+                  {item.links.map((sub) => (
+                    <a href={sub.href} class="block rounded-xl px-3 py-3 text-[15px] text-[#253242] hover:bg-gray-50">
+                      {sub.text}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <a href={item.href ?? '#'} class="block rounded-xl px-3 py-3 text-[15px] text-[#253242] hover:bg-gray-50">
+                {item.text}
+              </a>
+            )
+          )
+        }
+
+        {
+          actions?.[0]?.href ? (
+            <a
+              href={actions[0].href}
+              class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#f56b2a] px-4 py-3 text-white text-sm font-semibold shadow hover:bg-[#e85718] transition"
+            >
+              {actions[0].text}
+            </a>
+          ) : null
+        }
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      function bind() {
+        const btn = document.getElementById('mobileMenuBtn');
+        const closeBtn = document.getElementById('mobileMenuClose');
+        const panel = document.getElementById('mobileMenu');
+        if (!btn || !panel) return;
+
+        const open = () => {
+          panel.classList.remove('hidden');
+          btn.setAttribute('aria-expanded', 'true');
+          document.body.style.overflow = 'hidden';
+        };
+        const closeMenu = () => {
+          panel.classList.add('hidden');
+          btn.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        };
+
+        btn.addEventListener('click', open);
+        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+        panel.addEventListener('click', (e) => {
+          if (e.target === panel) closeMenu();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeMenu();
+        });
+
+        const groups = Array.from(document.querySelectorAll('[data-has-submenu="true"]'));
+        groups.forEach((group) => {
+          const trigger = group.querySelector('a');
+          if (!trigger) return;
+
+          // Don’t navigate on parent; allow hover/focus to open
+          trigger.addEventListener('click', (e) => e.preventDefault());
+
+          let hideTimer;
+          const setExpanded = (val) => trigger.setAttribute('aria-expanded', String(val));
+
+          group.addEventListener('mouseenter', () => {
+            if (hideTimer) clearTimeout(hideTimer);
+            setExpanded(true);
+          });
+          group.addEventListener('mouseleave', () => {
+            hideTimer = setTimeout(() => setExpanded(false), 80);
+          });
+          group.addEventListener('focusin', () => setExpanded(true));
+          group.addEventListener('focusout', () => {
+            hideTimer = setTimeout(() => setExpanded(false), 80);
+          });
+
+          trigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              setExpanded(true);
+            }
+          });
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', bind);
+      document.addEventListener('astro:page-load', bind);
+    })();
+  </script>
 </header>
