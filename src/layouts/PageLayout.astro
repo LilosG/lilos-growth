@@ -38,10 +38,39 @@ const { metadata = {} } = Astro.props as Props;
     <SiteVerification />
     <Analytics />
     <ClientRouter fallback="swap" />
+
+    <!-- Global scale: make content feel ~85–90% size on desktop, full size on phones. -->
+    <style is:global>
+      /* Phones: keep readability 100% */
+      html {
+        font-size: 100%;
+      }
+
+      /* md ≥768px: ~90% */
+      @media (min-width: 768px) {
+        html {
+          font-size: 90%;
+        }
+      }
+
+      /* xl ≥1280px: ~87.5% */
+      @media (min-width: 1280px) {
+        html {
+          font-size: 87.5%;
+        }
+      }
+
+      /* 2xl ≥1536px: ~85% */
+      @media (min-width: 1536px) {
+        html {
+          font-size: 85%;
+        }
+      }
+    </style>
   </head>
 
   <body class="antialiased text-default bg-page tracking-tight min-h-[100dvh] flex flex-col overflow-x-clip">
-    <!-- Global header -->
+    <!-- Global header (remains full-width; our header uses explicit px for nav text so it won’t get too tiny) -->
     <Header />
 
     <!-- Page content -->
@@ -65,10 +94,9 @@ const { metadata = {} } = Astro.props as Props;
       } catch {}
     </script>
 
-    <!-- Plain JS analytics helper (typed safely) -->
+    <!-- Plain JS analytics helper -->
     <script is:inline>
       (function () {
-        // use bracket-notation so TypeScript doesn't complain about custom window props
         if (typeof window['trackEvent'] !== 'function') {
           window['trackEvent'] = function (name, data) {
             try {
