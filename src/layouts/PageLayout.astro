@@ -38,43 +38,15 @@ const { metadata = {} } = Astro.props as Props;
     <SiteVerification />
     <Analytics />
     <ClientRouter fallback="swap" />
-
-    <!-- Global scale: shrink overall UI on desktop without transforms -->
-    <style is:global>
-      /* Phones: keep readability */
-      html {
-        font-size: 100%;
-      }
-
-      /* md ≥768px: ~88% */
-      @media (min-width: 768px) {
-        html {
-          font-size: 88%;
-        }
-      }
-
-      /* xl ≥1280px: ~82.5% */
-      @media (min-width: 1280px) {
-        html {
-          font-size: 82.5%;
-        }
-      }
-
-      /* 2xl ≥1536px: ~80% */
-      @media (min-width: 1536px) {
-        html {
-          font-size: 80%;
-        }
-      }
-    </style>
   </head>
 
+  <!-- Sticky footer layout -->
   <body class="antialiased text-default bg-page tracking-tight min-h-[100dvh] flex flex-col overflow-x-clip">
-    <!-- Global header -->
+    <!-- Header stays full-size -->
     <Header />
 
-    <!-- Page content -->
-    <main id="app" class="flex-1 flex flex-col">
+    <!-- CONTENT SCALE ONLY (typography), spacing/layout unaffected -->
+    <main id="app" class="flex-1 flex flex-col text-[95%] md:text-[88%] xl:text-[84%] 2xl:text-[82%]">
       <slot />
     </main>
 
