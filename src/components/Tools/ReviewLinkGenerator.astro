@@ -6,6 +6,7 @@
  * - Generates a QR via a simple <img> endpoint
  */
 ---
+
 <section class="bg-white p-8 rounded-3xl shadow-lg">
   <h2 class="text-xl font-heading font-bold mb-3 text-heading">Google Review Link &amp; QR</h2>
   <p class="text-sm text-body/80 mb-5">
@@ -74,8 +75,7 @@
 
       const profileUrl = 'https://www.google.com/maps/place/?q=place_id:' + encodeURIComponent(placeId);
       const reviewUrl = 'https://search.google.com/local/writereview?placeid=' + encodeURIComponent(placeId);
-      const qrUrl =
-        'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(reviewUrl);
+      const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(reviewUrl);
 
       const html = [
         '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50 space-y-3">',
@@ -125,8 +125,7 @@
         q += ' ' + region;
       }
 
-      result.innerHTML =
-        '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50 text-gray-600">Searching…</div>';
+      result.innerHTML = '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50 text-gray-600">Searching…</div>';
 
       try {
         const res = await fetch('/api/places?q=' + encodeURIComponent(q));
