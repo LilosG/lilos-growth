@@ -15,15 +15,22 @@ const actions = (headerData.actions ?? []) as readonly Action[];
 const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArray(i.links);
 ---
 
-<header class="relative z-[80] w-full">
+<!--
+  Light header bar with a thin primary underline,
+  compact desktop links, and CSS-only mobile menu.
+-->
+<header class="relative z-[80] w-full bg-white">
+  <!-- thin primary underline to match the comps -->
+  <div class="absolute inset-x-0 bottom-0 h-[2px] bg-primary/90 pointer-events-none"></div>
+
   <div class="mx-auto w-full max-w-7xl px-4">
-    <div class="flex h-16 items-center justify-between">
+    <div class="flex h-14 items-center justify-between">
       <!-- Logo (mobile smaller, md+ larger) -->
-      <a href="/" class="flex items-center gap-3 group shrink-0">
+      <a href="/" class="flex items-center gap-3 shrink-0">
         <img
           src="/Lilos_Growth_Logo_Corrected.svg"
           alt="Lilos Growth"
-          class="h-6 w-auto md:h-8"
+          class="h-6 w-auto md:h-7"
           loading="eager"
           decoding="async"
         />
@@ -31,19 +38,19 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-6">
+      <nav class="hidden md:flex items-center gap-7">
         {
           topLinks.map((item) =>
             hasChildren(item) ? (
               /* Dropdown (Services) */
               <div class="relative group">
                 <button
-                  class="inline-flex items-center gap-2 font-medium text-[#253242] hover:text-black transition"
+                  class="inline-flex items-center gap-1.5 text-sm font-medium text-[#253242] hover:text-black transition"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
                   {item.text}
-                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                     <path d="M6 9l6 6 6-6" stroke-width="2" />
                   </svg>
                 </button>
@@ -63,7 +70,7 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
               </div>
             ) : (
               /* Flat link */
-              <a href={item.href} class="font-medium text-[#253242] hover:text-black transition">
+              <a href={item.href} class="text-sm font-medium text-[#253242] hover:text-black transition">
                 {item.text}
               </a>
             )
@@ -74,7 +81,7 @@ const hasChildren = (i: NavItem): i is GroupLink => 'links' in i && Array.isArra
           actions.map((a) => (
             <a
               href={a.href}
-              class="inline-flex items-center rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-semibold shadow-sm hover:shadow transition"
+              class="inline-flex items-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm hover:shadow transition"
             >
               {a.text}
             </a>
