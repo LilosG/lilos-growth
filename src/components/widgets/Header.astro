@@ -9,16 +9,14 @@ const topLinks = (Array.isArray(headerData?.links) ? headerData.links : []) sati
 const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) satisfies Action[];
 ---
 
-<header
-  class="sticky top-0 z-[100] w-full bg-[#253242]/95 backdrop-blur supports-[backdrop-filter]:bg-[#253242]/85 border-b border-[#f56b2a]/70"
->
+<header class="sticky top-0 z-[100] w-full bg-white border-b border-gray-200 shadow-sm">
   <div class="mx-auto w-full max-w-7xl px-4">
-    <div class="flex h-[110px] items-center justify-between">
+    <div class="flex h-[120px] md:h-[128px] items-center justify-between">
       <a href="/" class="shrink-0 inline-flex items-center">
         <img
           src="/Lilos_Growth_Logo_Corrected.svg"
           alt="Lilos Growth"
-          class="h-[56px] md:h-[72px] lg:h-[88px] xl:h-[96px] w-auto"
+          class="h-[80px] md:h-[96px] lg:h-[104px] xl:h-[112px] w-auto"
           loading="eager"
           decoding="async"
         />
@@ -31,7 +29,7 @@ const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) s
               <div class="relative group" data-has-submenu="true">
                 <a
                   href={item.href ?? '#'}
-                  class="inline-flex items-center gap-1 py-2 text-[15px] font-medium text-white/90 hover:text-white transition"
+                  class="inline-flex items-center gap-1 py-2 text-[15px] font-medium text-[#253242] hover:text-[#1f2d3d] transition"
                   role="button"
                   aria-haspopup="true"
                   aria-expanded="false"
@@ -39,7 +37,7 @@ const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) s
                 >
                   {item.text}
                   <svg
-                    class="h-4 w-4 opacity-80 group-hover:opacity-100 transition"
+                    class="h-4 w-4 opacity-70 group-hover:opacity-100 transition"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                     aria-hidden="true"
@@ -61,7 +59,7 @@ const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) s
                       {item.links.map((sub) => (
                         <a
                           href={sub.href}
-                          class="block rounded-xl px-4 py-3 text-[15px] text-[#253242] hover:bg-gray-50 hover:text-black transition"
+                          class="block rounded-xl px-4 py-3 text-[15px] text-[#253242] hover:bg-gray-50 hover:text-[#1f2d3d] transition"
                         >
                           <div class="font-semibold">{sub.text}</div>
                           {sub.description ? <div class="mt-0.5 text-xs text-gray-500">{sub.description}</div> : null}
@@ -72,7 +70,10 @@ const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) s
                 </div>
               </div>
             ) : (
-              <a href={item.href ?? '#'} class="text-[15px] font-medium text-white/90 hover:text-white transition py-2">
+              <a
+                href={item.href ?? '#'}
+                class="text-[15px] font-medium text-[#253242] hover:text-[#1f2d3d] transition py-2"
+              >
                 {item.text}
               </a>
             )
@@ -85,7 +86,7 @@ const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) s
           actions?.[0]?.href ? (
             <a
               href={actions[0].href}
-              class="hidden md:inline-flex items-center justify-center rounded-full bg-[#f56b2a] px-4 py-2 text-white text-sm font-semibold shadow hover:bg-[#e85718] transition"
+              class="hidden md:inline-flex items-center justify-center rounded-full bg-[#f56b2a] px-5 py-3 text-white text-sm font-semibold shadow hover:bg-[#e85718] transition"
             >
               {actions[0].text}
             </a>
@@ -94,12 +95,12 @@ const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) s
 
         <button
           id="mobileMenuBtn"
-          class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/30 text-white"
+          class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-300 text-[#253242]"
           aria-controls="mobileMenu"
           aria-expanded="false"
         >
           <span class="sr-only">Open menu</span>
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"></path>
           </svg>
         </button>
@@ -107,9 +108,10 @@ const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) s
     </div>
   </div>
 
+  <div class="h-0.5 w-full bg-[#f56b2a]/80"></div>
+
   <div id="mobileMenu" class="fixed inset-0 z-[110] hidden" aria-hidden="true">
     <div class="absolute inset-0 bg-black/40"></div>
-
     <div class="absolute right-0 top-0 h-full w-[88%] max-w-[22rem] bg-white shadow-xl p-6 overflow-y-auto">
       <div class="flex items-center justify-between">
         <a href="/" class="inline-flex items-center">
@@ -200,6 +202,7 @@ const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) s
         groups.forEach((group) => {
           const trigger = group.querySelector('a');
           if (!trigger) return;
+
           trigger.addEventListener('click', (e) => e.preventDefault());
 
           let hideTimer;
@@ -225,6 +228,7 @@ const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) s
           });
         });
       }
+
       document.addEventListener('DOMContentLoaded', bind);
       document.addEventListener('astro:page-load', bind);
     })();
