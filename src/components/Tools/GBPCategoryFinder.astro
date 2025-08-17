@@ -1,38 +1,33 @@
 ---
-/**
- * GBP Primary Category Finder (client-only)
- * - Simple keyword → category suggestions
- * - No unused placeholders; no bare expressions that trip no-unused-expressions
- */
+/* Client-only, no imports. Uses form guard + preventDefault to avoid refresh */
 ---
 
-<section class="bg-white p-8 rounded-3xl shadow-lg">
-  <h2 class="text-xl font-heading font-bold mb-3 text-heading">Google Business Profile Category Finder</h2>
-  <p class="text-sm text-body/80 mb-5">
+<div class="space-y-4">
+  <h3 class="text-2xl font-heading font-bold text-heading">Google Business Profile Category Finder</h3>
+  <p class="text-body/80">
     Type what you do (e.g., “plumber”, “roof repair”). We’ll suggest Google Business Profile categories you can use.
   </p>
 
-  <form id="gbp-cat-form" class="flex flex-col gap-3">
+  <form id="gbp-cat-form" class="flex flex-col gap-3" onsubmit="return false;">
     <input
       id="gbp-cat-keyword"
       type="text"
       required
       placeholder="Service keyword (e.g., plumber)"
-      class="w-full px-4 py-2 rounded-xl border border-gray-300"
+      class="h-12 w-full rounded-2xl border border-gray-300 px-4 text-[15px] text-heading focus:outline-none focus:ring-2 focus:ring-[#f56b2a] focus:border-[#f56b2a]"
     />
     <button
       type="submit"
-      class="w-full px-5 py-2 rounded-xl bg-[#f56b2a] text-white font-semibold shadow-lg hover:bg-[#c9400a] transition"
+      class="h-12 rounded-2xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
     >
       Find Categories
     </button>
   </form>
 
-  <div id="gbp-cat-results" class="mt-5 text-sm"></div>
+  <div id="gbp-cat-results" class="mt-4 text-sm"></div>
 
   <script is:inline>
-    // A compact list of common GBP categories for home services.
-    // You can expand this list anytime; matching is fuzzy-contains.
+    // Common GBP categories for home services (yours, preserved)
     const GBP_CATEGORIES = [
       'Plumber',
       'Plumbing Supply Store',
@@ -82,26 +77,26 @@
           '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">No matches. Try a broader keyword.</div>';
         return;
       }
-
       const html = [
         '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">',
-        '<div class="font-semibold mb-2">Suggested categories</div>',
-        '<ul class="list-disc pl-5 space-y-1">',
+        '<div class="font-semibold mb-2 text-heading">Suggested categories</div>',
+        '<ul class="list-disc pl-5 space-y-1 text-heading">',
       ];
       for (let i = 0; i < items.length; i++) {
-        html.push(`<li>${items[i]}</li>`);
+        html.push('<li>' + items[i] + '</li>');
       }
       html.push('</ul></div>');
       results.innerHTML = html.join('');
     }
 
     form.addEventListener('submit', function (e) {
+      // Hard stop against navigation
       e.preventDefault();
 
       const q = String(input.value || '')
         .trim()
         .toLowerCase();
-      if (q.length === 0) {
+      if (!q) {
         results.innerHTML =
           '<div class="rounded-xl border border-red-200 p-4 bg-red-50 text-red-700">Please enter a keyword.</div>';
         return;
@@ -110,17 +105,14 @@
       const matches = [];
       for (let i = 0; i < GBP_CATEGORIES.length; i++) {
         const cat = GBP_CATEGORIES[i];
-        if (cat.toLowerCase().includes(q)) {
-          matches.push(cat);
-        }
+        if (cat.toLowerCase().includes(q)) matches.push(cat);
       }
 
-      // Show up to 12 matches, sorted by length (rough relevance heuristic)
+      // Show up to 12 matches, sorted by length (simple relevance heuristic)
       matches.sort(function (a, b) {
         return a.length - b.length;
       });
-
       renderList(matches.slice(0, 12));
     });
   </script>
-</section>
+</div>
