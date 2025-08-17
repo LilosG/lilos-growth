@@ -1,22 +1,23 @@
 ---
-/* Client-only, no imports. Uses form guard + preventDefault to avoid refresh */
+/* Client-only, fully scoped — no global IDs so it won’t collide or miss bindings */
 ---
 
-<div class="space-y-4">
+<div data-gbp-cat class="space-y-4">
   <h3 class="text-2xl font-heading font-bold text-heading">Google Business Profile Category Finder</h3>
   <p class="text-body/80">
     Type what you do (e.g., “plumber”, “roof repair”). We’ll suggest Google Business Profile categories you can use.
   </p>
 
-  <form id="gbp-cat-form" class="flex flex-col gap-3" onsubmit="return false;">
+  <form data-role="form" class="flex flex-col gap-3">
     <input
-      id="gbp-cat-keyword"
+      data-role="input"
       type="text"
       required
       placeholder="Service keyword (e.g., plumber)"
       class="h-12 w-full rounded-2xl border border-gray-300 px-4 text-[15px] text-heading focus:outline-none focus:ring-2 focus:ring-[#f56b2a] focus:border-[#f56b2a]"
     />
     <button
+      data-role="submit"
       type="submit"
       class="h-12 rounded-2xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
     >
@@ -24,95 +25,99 @@
     </button>
   </form>
 
-  <div id="gbp-cat-results" class="mt-4 text-sm"></div>
+  <div data-role="results" class="mt-4 text-sm" aria-live="polite"></div>
 
   <script is:inline>
-    // Common GBP categories for home services (yours, preserved)
-    const GBP_CATEGORIES = [
-      'Plumber',
-      'Plumbing Supply Store',
-      'HVAC Contractor',
-      'Air Conditioning Repair Service',
-      'Heating Contractor',
-      'Electrician',
-      'Electrical Supply Store',
-      'Roofer',
-      'Roofing Contractor',
-      'Garage Door Supplier',
-      'Appliance Repair Service',
-      'Water Damage Restoration Service',
-      'Carpet Cleaning Service',
-      'House Cleaning Service',
-      'Landscape Designer',
-      'Landscaper',
-      'Lawn Care Service',
-      'Tree Service',
-      'Pool Cleaning Service',
-      'Pest Control Service',
-      'Exterminator',
-      'Painter',
-      'Painting',
-      'Masonry Contractor',
-      'Concrete Contractor',
-      'Fence Contractor',
-      'Flooring Contractor',
-      'Handyman',
-      'Locksmith',
-      'Window Installation Service',
-      'Siding Contractor',
-      'Gutter Cleaning Service',
-      'Solar Energy Contractor',
-      'Septic System Service',
-      'Moving Company',
-      'Junk Removal',
-    ];
+    // Use the script tag itself to scope all queries to this component instance
+    const scriptEl = document.currentScript;
+    const root = scriptEl && scriptEl.closest('[data-gbp-cat]');
 
-    const form = document.getElementById('gbp-cat-form');
-    const input = document.getElementById('gbp-cat-keyword');
-    const results = document.getElementById('gbp-cat-results');
+    if (root) {
+      const form = root.querySelector('[data-role="form"]');
+      const input = root.querySelector('[data-role="input"]');
+      const results = root.querySelector('[data-role="results"]');
+      const submitBtn = root.querySelector('[data-role="submit"]');
 
-    function renderList(items) {
-      if (!Array.isArray(items) || items.length === 0) {
-        results.innerHTML =
-          '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">No matches. Try a broader keyword.</div>';
-        return;
-      }
-      const html = [
-        '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">',
-        '<div class="font-semibold mb-2 text-heading">Suggested categories</div>',
-        '<ul class="list-disc pl-5 space-y-1 text-heading">',
+      // Preserved list (your original, compacted)
+      const GBP_CATEGORIES = [
+        'Plumber',
+        'Plumbing Supply Store',
+        'HVAC Contractor',
+        'Air Conditioning Repair Service',
+        'Heating Contractor',
+        'Electrician',
+        'Electrical Supply Store',
+        'Roofer',
+        'Roofing Contractor',
+        'Garage Door Supplier',
+        'Appliance Repair Service',
+        'Water Damage Restoration Service',
+        'Carpet Cleaning Service',
+        'House Cleaning Service',
+        'Landscape Designer',
+        'Landscaper',
+        'Lawn Care Service',
+        'Tree Service',
+        'Pool Cleaning Service',
+        'Pest Control Service',
+        'Exterminator',
+        'Painter',
+        'Painting',
+        'Masonry Contractor',
+        'Concrete Contractor',
+        'Fence Contractor',
+        'Flooring Contractor',
+        'Handyman',
+        'Locksmith',
+        'Window Installation Service',
+        'Siding Contractor',
+        'Gutter Cleaning Service',
+        'Solar Energy Contractor',
+        'Septic System Service',
+        'Moving Company',
+        'Junk Removal',
       ];
-      for (let i = 0; i < items.length; i++) {
-        html.push('<li>' + items[i] + '</li>');
-      }
-      html.push('</ul></div>');
-      results.innerHTML = html.join('');
-    }
 
-    form.addEventListener('submit', function (e) {
-      // Hard stop against navigation
-      e.preventDefault();
-
-      const q = String(input.value || '')
-        .trim()
-        .toLowerCase();
-      if (!q) {
+      function renderList(items) {
+        if (!Array.isArray(items) || items.length === 0) {
+          results.innerHTML =
+            '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">No matches. Try a broader keyword.</div>';
+          return;
+        }
+        const lis = items.map((t) => '<li>' + t + '</li>').join('');
         results.innerHTML =
-          '<div class="rounded-xl border border-red-200 p-4 bg-red-50 text-red-700">Please enter a keyword.</div>';
-        return;
+          '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">' +
+          '<div class="font-semibold mb-2 text-heading">Suggested categories</div>' +
+          '<ul class="list-disc pl-5 space-y-1 text-heading">' +
+          lis +
+          '</ul>' +
+          '</div>';
       }
 
-      const matches = [];
-      for (let i = 0; i < GBP_CATEGORIES.length; i++) {
-        const cat = GBP_CATEGORIES[i];
-        if (cat.toLowerCase().includes(q)) matches.push(cat);
+      function findMatches(q) {
+        const query = String(q || '')
+          .trim()
+          .toLowerCase();
+        if (!query) return [];
+        const matches = [];
+        for (let i = 0; i < GBP_CATEGORIES.length; i++) {
+          const cat = GBP_CATEGORIES[i];
+          if (cat.toLowerCase().includes(query)) matches.push(cat);
+        }
+        matches.sort((a, b) => a.length - b.length);
+        return matches.slice(0, 12);
       }
 
-      // Show up to 12 matches, sorted by length (simple relevance heuristic)
-      matches.sort(function (a, b) {
-        return a.length - b.length;
-      });
-      renderList(matches.slice(0, 12));
-    });
+      function handleSubmit(e) {
+        if (e) e.preventDefault(); // stop navigation no matter what
+        const q = input ? input.value : '';
+        const items = findMatches(q);
+        renderList(items);
+      }
+
+      // Belt & suspenders: bind both submit and button click
+      form && form.addEventListener('submit', handleSubmit);
+      submitBtn && submitBtn.addEventListener('click', handleSubmit);
+    }
   </script>
 </div>
