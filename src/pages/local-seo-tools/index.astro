@@ -374,12 +374,12 @@ A: Yes — call before 2pm."
           let q = '',
             a = '';
           for (const line of lines) {
-            if (/^q[:\-]/i.test(line) || line.endsWith('?')) {
+            if (/^q[:-]/i.test(line) || line.endsWith('?')) {
               if (q && a) faqs.push({ q, a });
-              q = line.replace(/^q[:\-]\s*/i, '');
+              q = line.replace(/^q[:-]\s*/i, '');
               a = '';
-            } else if (/^a[:\-]/i.test(line)) {
-              a = line.replace(/^a[:\-]\s*/i, '');
+            } else if (/^a[:-]/i.test(line)) {
+              a = line.replace(/^a[:-]\s*/i, '');
             } else if (!q) {
               q = line;
             } else {

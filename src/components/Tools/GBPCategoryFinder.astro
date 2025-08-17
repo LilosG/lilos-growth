@@ -36,9 +36,7 @@
     const root = scriptEl ? scriptEl.closest('[data-gbp-cat]') : null;
     if (!root) {
       console.warn('GBP Category Finder: root not found');
-      // Stop cleanly if something is off
-      // (avoids breaking other widgets on the page)
-      // eslint-disable-next-line no-useless-return
+      // Stop cleanly if something is off (avoids breaking other widgets on the page)
       return;
     }
 
