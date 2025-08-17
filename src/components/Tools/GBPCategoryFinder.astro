@@ -1,5 +1,5 @@
 ---
-/* Client-only, fully scoped — no global IDs so it won’t collide or miss bindings */
+/* Client-only, fully scoped; no short-circuit statements (passes no-unused-expressions) */
 ---
 
 <div data-gbp-cat class="space-y-4">
@@ -28,96 +28,102 @@
   <div data-role="results" class="mt-4 text-sm" aria-live="polite"></div>
 
   <script is:inline>
-    // Use the script tag itself to scope all queries to this component instance
+    // Scope everything to this component instance
     const scriptEl = document.currentScript;
-    const root = scriptEl && scriptEl.closest('[data-gbp-cat]');
+    const root = scriptEl ? scriptEl.closest('[data-gbp-cat]') : null;
+    if (!root) {
+      // If something is really off, just stop.
+      throw new Error('GBP Category Finder root not found');
+    }
 
-    if (root) {
-      const form = root.querySelector('[data-role="form"]');
-      const input = root.querySelector('[data-role="input"]');
-      const results = root.querySelector('[data-role="results"]');
-      const submitBtn = root.querySelector('[data-role="submit"]');
+    const form = root.querySelector('[data-role="form"]');
+    const input = root.querySelector('[data-role="input"]');
+    const results = root.querySelector('[data-role="results"]');
+    const submitBtn = root.querySelector('[data-role="submit"]');
 
-      // Preserved list (your original, compacted)
-      const GBP_CATEGORIES = [
-        'Plumber',
-        'Plumbing Supply Store',
-        'HVAC Contractor',
-        'Air Conditioning Repair Service',
-        'Heating Contractor',
-        'Electrician',
-        'Electrical Supply Store',
-        'Roofer',
-        'Roofing Contractor',
-        'Garage Door Supplier',
-        'Appliance Repair Service',
-        'Water Damage Restoration Service',
-        'Carpet Cleaning Service',
-        'House Cleaning Service',
-        'Landscape Designer',
-        'Landscaper',
-        'Lawn Care Service',
-        'Tree Service',
-        'Pool Cleaning Service',
-        'Pest Control Service',
-        'Exterminator',
-        'Painter',
-        'Painting',
-        'Masonry Contractor',
-        'Concrete Contractor',
-        'Fence Contractor',
-        'Flooring Contractor',
-        'Handyman',
-        'Locksmith',
-        'Window Installation Service',
-        'Siding Contractor',
-        'Gutter Cleaning Service',
-        'Solar Energy Contractor',
-        'Septic System Service',
-        'Moving Company',
-        'Junk Removal',
-      ];
+    // Common GBP categories for home services (from your version)
+    const GBP_CATEGORIES = [
+      'Plumber',
+      'Plumbing Supply Store',
+      'HVAC Contractor',
+      'Air Conditioning Repair Service',
+      'Heating Contractor',
+      'Electrician',
+      'Electrical Supply Store',
+      'Roofer',
+      'Roofing Contractor',
+      'Garage Door Supplier',
+      'Appliance Repair Service',
+      'Water Damage Restoration Service',
+      'Carpet Cleaning Service',
+      'House Cleaning Service',
+      'Landscape Designer',
+      'Landscaper',
+      'Lawn Care Service',
+      'Tree Service',
+      'Pool Cleaning Service',
+      'Pest Control Service',
+      'Exterminator',
+      'Painter',
+      'Painting',
+      'Masonry Contractor',
+      'Concrete Contractor',
+      'Fence Contractor',
+      'Flooring Contractor',
+      'Handyman',
+      'Locksmith',
+      'Window Installation Service',
+      'Siding Contractor',
+      'Gutter Cleaning Service',
+      'Solar Energy Contractor',
+      'Septic System Service',
+      'Moving Company',
+      'Junk Removal',
+    ];
 
-      function renderList(items) {
-        if (!Array.isArray(items) || items.length === 0) {
-          results.innerHTML =
-            '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">No matches. Try a broader keyword.</div>';
-          return;
-        }
-        const lis = items.map((t) => '<li>' + t + '</li>').join('');
+    function renderList(items) {
+      if (!Array.isArray(items) || items.length === 0) {
         results.innerHTML =
-          '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">' +
-          '<div class="font-semibold mb-2 text-heading">Suggested categories</div>' +
-          '<ul class="list-disc pl-5 space-y-1 text-heading">' +
-          lis +
-          '</ul>' +
-          '</div>';
+          '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">No matches. Try a broader keyword.</div>';
+        return;
       }
+      const lis = items.map((t) => '<li>' + t + '</li>').join('');
+      results.innerHTML =
+        '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">' +
+        '<div class="font-semibold mb-2 text-heading">Suggested categories</div>' +
+        '<ul class="list-disc pl-5 space-y-1 text-heading">' +
+        lis +
+        '</ul>' +
+        '</div>';
+    }
 
-      function findMatches(q) {
-        const query = String(q || '')
-          .trim()
-          .toLowerCase();
-        if (!query) return [];
-        const matches = [];
-        for (let i = 0; i < GBP_CATEGORIES.length; i++) {
-          const cat = GBP_CATEGORIES[i];
-          if (cat.toLowerCase().includes(query)) matches.push(cat);
-        }
-        matches.sort((a, b) => a.length - b.length);
-        return matches.slice(0, 12);
+    function findMatches(q) {
+      const query = String(q || '')
+        .trim()
+        .toLowerCase();
+      if (!query) return [];
+      const matches = [];
+      for (let i = 0; i < GBP_CATEGORIES.length; i++) {
+        const cat = GBP_CATEGORIES[i];
+        if (cat.toLowerCase().includes(query)) matches.push(cat);
       }
+      matches.sort((a, b) => a.length - b.length);
+      return matches.slice(0, 12);
+    }
 
-      function handleSubmit(e) {
-        if (e) e.preventDefault(); // stop navigation no matter what
-        const q = input ? input.value : '';
-        const items = findMatches(q);
-        renderList(items);
-      }
+    function handleSubmit(e) {
+      if (e) e.preventDefault(); // ensure no navigation
+      const q = input ? input.value : '';
+      const items = findMatches(q);
+      renderList(items);
+    }
 
-      // Belt & suspenders: bind both submit and button click
-      form && form.addEventListener('submit', handleSubmit);
-      submitBtn && submitBtn.addEventListener('click', handleSubmit);
+    // Bind with explicit if-blocks (no short-circuit expressions)
+    if (form) {
+      form.addEventListener('submit', handleSubmit);
+    }
+    if (submitBtn) {
+      submitBtn.addEventListener('click', handleSubmit);
     }
   </script>
 </div>
