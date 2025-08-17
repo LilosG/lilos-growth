@@ -1,7 +1,9 @@
 ---
+// src/pages/local-seo-tools/index.astro
 import Layout from '~/layouts/PageLayout.astro';
 
 // Featured tools (case-sensitive paths)
+import ToolCard from '~/components/Tools/ToolCard.astro';
 import ReviewLinkGenerator from '~/components/Tools/ReviewLinkGenerator.astro';
 import GBPCategoryFinder from '~/components/Tools/GBPCategoryFinder.astro';
 import LandingPageOutlineGenerator from '~/components/Tools/LandingPageOutlineGenerator.astro';
@@ -79,24 +81,9 @@ export const description =
       </h2>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-        <!-- Uniform card shell around each working component -->
-        <article
-          class="h-full bg-white rounded-2xl shadow-md border border-gray-200 px-6 pt-6 pb-6 sm:px-7 sm:pt-7 sm:pb-7 flex flex-col"
-        >
-          <ReviewLinkGenerator />
-        </article>
-
-        <article
-          class="h-full bg-white rounded-2xl shadow-md border border-gray-200 px-6 pt-6 pb-6 sm:px-7 sm:pt-7 sm:pb-7 flex flex-col"
-        >
-          <GBPCategoryFinder />
-        </article>
-
-        <article
-          class="h-full bg-white rounded-2xl shadow-md border border-gray-200 px-6 pt-6 pb-6 sm:px-7 sm:pt-7 sm:pb-7 flex flex-col"
-        >
-          <LandingPageOutlineGenerator />
-        </article>
+        <ToolCard><ReviewLinkGenerator /></ToolCard>
+        <ToolCard><GBPCategoryFinder /></ToolCard>
+        <ToolCard><LandingPageOutlineGenerator /></ToolCard>
       </div>
     </div>
   </section>
@@ -111,14 +98,12 @@ export const description =
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
         <!-- FAQ Schema Generator -->
-        <article
-          class="bg-white rounded-2xl shadow-md border border-gray-200 px-6 pt-6 pb-6 sm:px-7 sm:pt-7 sm:pb-7 h-full flex flex-col"
-        >
-          <header>
+        <ToolCard>
+          <div slot="header">
             <h3 class="text-lg md:text-xl font-heading font-bold text-heading">FAQ Schema Generator</h3>
             <p class="mt-1 text-sm md:text-base text-body">Convert your FAQs into Google-ready JSON-LD (FAQPage).</p>
-          </header>
-          <form id="faq-form" class="mt-4 flex flex-col gap-3" onsubmit="return false;">
+          </div>
+          <form id="faq-form" class="mt-4 flex flex-col gap-3">
             <label for="faq-input" class="sr-only">FAQ lines</label>
             <textarea
               id="faq-input"
@@ -131,24 +116,23 @@ A: Yes — call before 2pm."
             ></textarea>
             <button
               type="submit"
-              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-semibold shadow hover:bg-[#c9400a] transition"
-              >Generate Schema</button
+              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
             >
+              Generate Schema
+            </button>
           </form>
-          <div id="faq-result" class="mt-4"></div>
-        </article>
+          <div id="faq-result" class="mt-4" aria-live="polite"></div>
+        </ToolCard>
 
         <!-- Google SERP Preview -->
-        <article
-          class="bg-white rounded-2xl shadow-md border border-gray-200 px-6 pt-6 pb-6 sm:px-7 sm:pt-7 sm:pb-7 h-full flex flex-col"
-        >
-          <header>
+        <ToolCard>
+          <div slot="header">
             <h3 class="text-lg md:text-xl font-heading font-bold text-heading">Google SERP Preview</h3>
             <p class="mt-1 text-sm md:text-base text-body">
               Preview how your title and description may render in search.
             </p>
-          </header>
-          <form id="serp-form" class="mt-4 flex flex-col gap-3" onsubmit="return false;">
+          </div>
+          <form id="serp-form" class="mt-4 flex flex-col gap-3">
             <label for="serp-title" class="sr-only">Title tag</label>
             <input
               id="serp-title"
@@ -164,7 +148,7 @@ A: Yes — call before 2pm."
               type="text"
               maxlength="80"
               placeholder="URL (optional)"
-              class="h-11 w-full rounded- xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+              class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
             />
             <label for="serp-desc" class="sr-only">Meta description</label>
             <textarea
@@ -176,22 +160,21 @@ A: Yes — call before 2pm."
             ></textarea>
             <button
               type="submit"
-              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-semibold shadow hover:bg-[#c9400a] transition"
-              >Preview SERP</button
+              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
             >
+              Preview SERP
+            </button>
           </form>
-          <div id="serp-preview" class="mt-4"></div>
-        </article>
+          <div id="serp-preview" class="mt-4" aria-live="polite"></div>
+        </ToolCard>
 
         <!-- UTM Link Builder -->
-        <article
-          class="bg-white rounded-2xl shadow-md border border-gray-200 px-6 pt-6 pb-6 sm:px-7 sm:pt-7 sm:pb-7 h-full flex flex-col"
-        >
-          <header>
+        <ToolCard>
+          <div slot="header">
             <h3 class="text-lg md:text-xl font-heading font-bold text-heading">UTM Link Builder</h3>
             <p class="mt-1 text-sm md:text-base text-body">Create trackable URLs for Google Analytics.</p>
-          </header>
-          <form id="utm-form" class="mt-4 flex flex-col gap-3" onsubmit="return false;">
+          </div>
+          <form id="utm-form" class="mt-4 flex flex-col gap-3">
             <label for="utm-url" class="sr-only">Destination URL</label>
             <input
               id="utm-url"
@@ -226,22 +209,21 @@ A: Yes — call before 2pm."
             />
             <button
               type="submit"
-              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-semibold shadow hover:bg-[#c9400a] transition"
-              >Build UTM Link</button
+              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
             >
+              Build UTM Link
+            </button>
           </form>
-          <div id="utm-result" class="mt-4 break-all"></div>
-        </article>
+          <div id="utm-result" class="mt-4 break-all" aria-live="polite"></div>
+        </ToolCard>
 
         <!-- Local Business Schema Generator -->
-        <article
-          class="bg-white rounded-2xl shadow-md border border-gray-200 px-6 pt-6 pb-6 sm:px-7 sm:pt-7 sm:pb-7 h-full flex flex-col"
-        >
-          <header>
+        <ToolCard>
+          <div slot="header">
             <h3 class="text-lg md:text-xl font-heading font-bold text-heading">Local Business Schema Generator</h3>
             <p class="mt-1 text-sm md:text-base text-body">Generate JSON-LD for your business details.</p>
-          </header>
-          <form id="lbschema-form" class="mt-4 flex flex-col gap-3" onsubmit="return false;">
+          </div>
+          <form id="lbschema-form" class="mt-4 flex flex-col gap-3">
             <label for="lb-name" class="sr-only">Business Name</label>
             <input
               id="lb-name"
@@ -292,22 +274,21 @@ A: Yes — call before 2pm."
             />
             <button
               type="submit"
-              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-semibold shadow hover:bg-[#c9400a] transition"
-              >Generate Schema</button
+              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
             >
+              Generate Schema
+            </button>
           </form>
-          <div id="lbschema-result" class="mt-4"></div>
-        </article>
+          <div id="lbschema-result" class="mt-4" aria-live="polite"></div>
+        </ToolCard>
 
         <!-- Google Maps Embed Generator -->
-        <article
-          class="bg-white rounded-2xl shadow-md border border-gray-200 px-6 pt-6 pb-6 sm:px-7 sm:pt-7 sm:pb-7 h-full flex flex-col"
-        >
-          <header>
+        <ToolCard>
+          <div slot="header">
             <h3 class="text-lg md:text-xl font-heading font-bold text-heading">Google Maps Embed Generator</h3>
             <p class="mt-1 text-sm md:text-base text-body">Generate an embed code for your location.</p>
-          </header>
-          <form id="maps-form" class="mt-4 flex flex-col gap-3" onsubmit="return false;">
+          </div>
+          <form id="maps-form" class="mt-4 flex flex-col gap-3">
             <label for="maps-address" class="sr-only">Address or Place</label>
             <input
               id="maps-address"
@@ -318,22 +299,21 @@ A: Yes — call before 2pm."
             />
             <button
               type="submit"
-              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-semibold shadow hover:bg-[#c9400a] transition"
-              >Generate Embed</button
+              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
             >
+              Generate Embed
+            </button>
           </form>
-          <div id="maps-result" class="mt-4"></div>
-        </article>
+          <div id="maps-result" class="mt-4" aria-live="polite"></div>
+        </ToolCard>
 
         <!-- Local Keyword Generator -->
-        <article
-          class="bg-white rounded-2xl shadow-md border border-gray-200 px-6 pt-6 pb-6 sm:px-7 sm:pt-7 sm:pb-7 h-full flex flex-col"
-        >
-          <header>
+        <ToolCard>
+          <div slot="header">
             <h3 class="text-lg md:text-xl font-heading font-bold text-heading">Local Keyword Generator</h3>
             <p class="mt-1 text-sm md:text-base text-body">Quick ideas for service + location targeting.</p>
-          </header>
-          <form id="keyword-form" class="mt-4 flex flex-col gap-3" onsubmit="return false;">
+          </div>
+          <form id="keyword-form" class="mt-4 flex flex-col gap-3">
             <label for="keyword-service" class="sr-only">Service</label>
             <input
               id="keyword-service"
@@ -352,83 +332,94 @@ A: Yes — call before 2pm."
             />
             <button
               type="submit"
-              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-semibold shadow hover:bg-[#c9400a] transition"
-              >Generate Ideas</button
+              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
             >
+              Generate Ideas
+            </button>
           </form>
-          <div id="keyword-result" class="mt-4"></div>
-        </article>
+          <div id="keyword-result" class="mt-4" aria-live="polite"></div>
+        </ToolCard>
       </div>
     </div>
   </section>
 
   <!-- Inline vanilla JS for the 6 utilities -->
   <script is:inline>
+    // Helpers
+    const byId = (id) => /** @type {HTMLElement|null} */ (document.getElementById(id));
     const val = (id) => {
-      const el = document.getElementById(id);
+      const el = /** @type {HTMLInputElement|HTMLTextAreaElement|null} */ (document.getElementById(id));
       return el && 'value' in el ? String(el.value).trim() : '';
     };
 
-    // FAQ Schema
-    const faqForm = document.getElementById('faq-form');
-    if (faqForm) {
-      faqForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const raw = val('faq-input');
-        if (!raw) return;
-        const lines = raw
-          .split('\n')
-          .map((l) => l.trim())
-          .filter(Boolean);
-        const faqs = [];
-        let q = '',
-          a = '';
-        lines.forEach((line) => {
-          if (line.endsWith('?')) {
-            if (q && a) faqs.push({ q, a });
-            q = line;
-            a = '';
-          } else if (q && !a) {
-            a = line;
-          } else if (q && a) {
-            faqs.push({ q, a });
-            q = '';
-            a = '';
+    // 1) FAQ Schema Generator
+    {
+      const form = /** @type {HTMLFormElement|null} */ (byId('faq-form'));
+      const out = byId('faq-result');
+      if (form && out) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const raw = val('faq-input');
+          if (!raw) {
+            out.textContent = 'Please paste Q/A pairs.';
+            return;
           }
-        });
-        if (q && a) faqs.push({ q, a });
-        const out = document.getElementById('faq-result');
-        if (!faqs.length) {
-          if (out) out.innerHTML = '<span class="text-red-600">Use: Question? then Answer.</span>';
-          return;
-        }
-        const schema = {
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: faqs.map((f) => ({
-            '@type': 'Question',
-            name: f.q,
-            acceptedAnswer: { '@type': 'Answer', text: f.a },
-          })),
-        };
-        if (out)
+          // Parse "Q: ..." then "A: ..." pairs
+          const lines = raw
+            .split('\n')
+            .map((l) => l.trim())
+            .filter(Boolean);
+          /** @type {{q:string,a:string}[]} */
+          const faqs = [];
+          let q = '',
+            a = '';
+          for (const line of lines) {
+            if (/^q[:\-]/i.test(line) || line.endsWith('?')) {
+              if (q && a) faqs.push({ q, a });
+              q = line.replace(/^q[:\-]\s*/i, '');
+              a = '';
+            } else if (/^a[:\-]/i.test(line)) {
+              a = line.replace(/^a[:\-]\s*/i, '');
+            } else if (!q) {
+              q = line;
+            } else {
+              a = (a ? a + ' ' : '') + line;
+            }
+          }
+          if (q && a) faqs.push({ q, a });
+
+          if (!faqs.length) {
+            out.textContent = 'Could not detect Q/A pairs. Use lines starting with Q: and A:';
+            return;
+          }
+
+          const schema = {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: faqs.map(({ q, a }) => ({
+              '@type': 'Question',
+              name: q,
+              acceptedAnswer: { '@type': 'Answer', text: a },
+            })),
+          };
           out.innerHTML =
-            '<textarea rows="16" readonly class="w-full p-4 mt-4 rounded-xl border-2 border-[#f56b2a]/30 bg-gray-50 font-mono resize-y">' +
+            '<textarea rows="16" readonly class="w-full p-4 rounded-xl border-2 border-[#f56b2a]/30 bg-gray-50 font-mono resize-y">' +
             JSON.stringify(schema, null, 2) +
             '</textarea>';
-      });
+        });
+      }
     }
 
-    // SERP Preview
-    const serpForm = document.getElementById('serp-form');
-    if (serpForm) {
-      serpForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const title = val('serp-title');
-        const url = val('serp-url') || 'www.example.com/your-page';
-        const desc = val('serp-desc');
-        const preview = document.getElementById('serp-preview');
-        if (preview)
+    // 2) SERP Preview
+    {
+      const form = /** @type {HTMLFormElement|null} */ (byId('serp-form'));
+      const preview = byId('serp-preview');
+      if (form && preview) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const title = val('serp-title');
+          const url = val('serp-url') || 'www.example.com/your-page';
+          const desc = val('serp-desc');
           preview.innerHTML =
             '<div class="bg-white border border-[#e3e6e8] rounded-xl p-4 mt-3 shadow">' +
             '<div class="text-[#1a0dab] text-xl font-semibold leading-tight">' +
@@ -441,116 +432,144 @@ A: Yes — call before 2pm."
             desc +
             '</div>' +
             '</div>';
-      });
+        });
+      }
     }
 
-    // UTM Builder
-    const utmForm = document.getElementById('utm-form');
-    if (utmForm) {
-      utmForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const url = val('utm-url');
-        const source = val('utm-source');
-        const medium = val('utm-medium');
-        const campaign = val('utm-campaign');
-        if (!url || !source || !medium || !campaign) return;
-        const full =
-          url +
-          (url.includes('?') ? '&' : '?') +
-          'utm_source=' +
-          encodeURIComponent(source) +
-          '&utm_medium=' +
-          encodeURIComponent(medium) +
-          '&utm_campaign=' +
-          encodeURIComponent(campaign);
-        const out = document.getElementById('utm-result');
-        if (out)
+    // 3) UTM Link Builder
+    {
+      const form = /** @type {HTMLFormElement|null} */ (byId('utm-form'));
+      const out = byId('utm-result');
+      if (form && out) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const base = val('utm-url');
+          const source = val('utm-source');
+          const medium = val('utm-medium');
+          const campaign = val('utm-campaign');
+          if (!base || !source || !medium || !campaign) {
+            out.textContent = 'Fill all fields.';
+            return;
+          }
+          const join = base.includes('?') ? '&' : '?';
+          const url =
+            base +
+            join +
+            'utm_source=' +
+            encodeURIComponent(source) +
+            '&utm_medium=' +
+            encodeURIComponent(medium) +
+            '&utm_campaign=' +
+            encodeURIComponent(campaign);
           out.innerHTML =
-            '<textarea rows="4" readonly class="w-full p-4 mt-4 rounded-xl border-2 border-[#f56b2a]/30 bg-gray-50 font-mono resize-y">' +
-            full +
+            '<textarea rows="4" readonly class="w-full p-4 rounded-xl border-2 border-[#f56b2a]/30 bg-gray-50 font-mono resize-y">' +
+            url +
             '</textarea>';
-      });
+        });
+      }
     }
 
-    // Local Business Schema
-    const lbForm = document.getElementById('lbschema-form');
-    if (lbForm) {
-      lbForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = val('lb-name'),
-          phone = val('lb-phone'),
-          address = val('lb-address'),
-          city = val('lb-city'),
-          state = val('lb-state'),
-          zip = val('lb-zip');
-        if (!name || !phone || !address || !city || !state || !zip) return;
-        const schema = {
-          '@context': 'https://schema.org',
-          '@type': 'LocalBusiness',
-          name,
-          telephone: phone,
-          address: {
-            '@type': 'PostalAddress',
-            streetAddress: address,
-            addressLocality: city,
-            addressRegion: state,
-            postalCode: zip,
-          },
-        };
-        const out = document.getElementById('lbschema-result');
-        if (out)
+    // 4) Local Business Schema Generator
+    {
+      const form = /** @type {HTMLFormElement|null} */ (byId('lbschema-form'));
+      const out = byId('lbschema-result');
+      if (form && out) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = val('lb-name');
+          const phone = val('lb-phone');
+          const street = val('lb-address');
+          const city = val('lb-city');
+          const region = val('lb-state');
+          const zip = val('lb-zip');
+
+          if (!name || !phone || !street || !city || !region || !zip) {
+            out.textContent = 'Fill all fields.';
+            return;
+          }
+
+          const schema = {
+            '@context': 'https://schema.org',
+            '@type': 'LocalBusiness',
+            name,
+            telephone: phone,
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: street,
+              addressLocality: city,
+              addressRegion: region,
+              postalCode: zip,
+            },
+          };
           out.innerHTML =
-            '<textarea rows="16" readonly class="w-full p-4 mt-4 rounded-xl border-2 border-[#f56b2a]/30 bg-gray-50 font-mono resize-y">' +
+            '<textarea rows="14" readonly class="w-full p-4 rounded-xl border-2 border-[#f56b2a]/30 bg-gray-50 font-mono resize-y">' +
             JSON.stringify(schema, null, 2) +
             '</textarea>';
-      });
+        });
+      }
     }
 
-    // Maps Embed
-    const mapsForm = document.getElementById('maps-form');
-    if (mapsForm) {
-      mapsForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const address = val('maps-address');
-        if (!address) return;
-        const query = encodeURIComponent(address);
-        const embed =
-          '<iframe src="https://www.google.com/maps?q=' +
-          query +
-          '&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';
-        const out = document.getElementById('maps-result');
-        if (out)
+    // 5) Google Maps Embed Generator
+    {
+      const form = /** @type {HTMLFormElement|null} */ (byId('maps-form'));
+      const out = byId('maps-result');
+      if (form && out) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const addr = val('maps-address');
+          if (!addr) {
+            out.textContent = 'Enter an address or place.';
+            return;
+          }
+          const src = 'https://www.google.com/maps?q=' + encodeURIComponent(addr) + '&output=embed';
           out.innerHTML =
-            '<textarea rows="5" readonly class="w-full p-4 mt-4 rounded-xl border-2 border-[#f56b2a]/30 bg-gray-50 font-mono resize-y">' +
-            embed +
-            '</textarea>';
-      });
+            '<div class="rounded-xl border border-gray-200 overflow-hidden">' +
+            '<iframe src="' +
+            src +
+            '" width="100%" height="280" loading="lazy" style="border:0"></iframe>' +
+            '</div>';
+        });
+      }
     }
 
-    // Local Keyword Ideas
-    const kwForm = document.getElementById('keyword-form');
-    if (kwForm) {
-      kwForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const service = val('keyword-service');
-        const location = val('keyword-location');
-        if (!service || !location) return;
-        const list = [
-          service + ' near me',
-          service + ' in ' + location,
-          'best ' + service + ' ' + location,
-          location + ' ' + service + ' services',
-          service + ' company ' + location,
-          'affordable ' + service + ' in ' + location,
-          'top rated ' + service + ' ' + location,
-        ];
-        const out = document.getElementById('keyword-result');
-        if (out)
+    // 6) Local Keyword Generator
+    {
+      const form = /** @type {HTMLFormElement|null} */ (byId('keyword-form'));
+      const out = byId('keyword-result');
+      if (form && out) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const service = val('keyword-service');
+          const location = val('keyword-location');
+          if (!service || !location) {
+            out.textContent = 'Enter service and location.';
+            return;
+          }
+
+          const s = service.trim();
+          const loc = location.trim();
+          const combos = [
+            `${s} near ${loc}`,
+            `${loc} ${s} services`,
+            `${s} company in ${loc}`,
+            `${s} contractors ${loc}`,
+            `best ${s} in ${loc}`,
+            `emergency ${s} ${loc}`,
+            `affordable ${s} ${loc}`,
+            `${s} ${loc} reviews`,
+            `${s} ${loc} phone number`,
+            `${s} ${loc} hours`,
+          ];
+
           out.innerHTML =
-            '<textarea rows="10" readonly class="w-full p-4 mt-4 rounded-xl border-2 border-[#f56b2a]/30 bg-gray-50 font-mono resize-y">' +
-            list.join('\n') +
-            '</textarea>';
-      });
+            '<div class="rounded-xl border border-gray-200 p-4 bg-white">' +
+            '<div class="font-semibold mb-2 text-heading">Keyword ideas</div>' +
+            '<ul class="list-disc pl-5 space-y-1 text-heading">' +
+            combos.map((k) => `<li>${k}</li>`).join('') +
+            '</ul>' +
+            '</div>';
+        });
+      }
     }
   </script>
 </Layout>

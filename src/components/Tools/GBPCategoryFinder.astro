@@ -1,20 +1,23 @@
 ---
-/* Client-only, fully scoped; no short-circuit statements (passes no-unused-expressions) */
+// src/components/Tools/GBPCategoryFinder.astro
 ---
 
 <div data-gbp-cat class="space-y-4">
   <h3 class="text-2xl font-heading font-bold text-heading">Google Business Profile Category Finder</h3>
   <p class="text-body/80">
-    Type what you do (e.g., “plumber”, “roof repair”). We’ll suggest Google Business Profile categories you can use.
+    Type what you do (e.g., “plumber”, “roof repair”). We’ll suggest Google Business Profile categories.
   </p>
 
   <form data-role="form" class="flex flex-col gap-3">
+    <label class="sr-only" for="gbp-cat-input">Service keyword</label>
     <input
+      id="gbp-cat-input"
       data-role="input"
       type="text"
       required
       placeholder="Service keyword (e.g., plumber)"
       class="h-12 w-full rounded-2xl border border-gray-300 px-4 text-[15px] text-heading focus:outline-none focus:ring-2 focus:ring-[#f56b2a] focus:border-[#f56b2a]"
+      autocomplete="off"
     />
     <button
       data-role="submit"
@@ -28,20 +31,22 @@
   <div data-role="results" class="mt-4 text-sm" aria-live="polite"></div>
 
   <script is:inline>
-    // Scope everything to this component instance
+    // Scope to this component instance
     const scriptEl = document.currentScript;
     const root = scriptEl ? scriptEl.closest('[data-gbp-cat]') : null;
     if (!root) {
-      // If something is really off, just stop.
-      throw new Error('GBP Category Finder root not found');
+      console.warn('GBP Category Finder: root not found');
+      // Stop cleanly if something is off
+      // (avoids breaking other widgets on the page)
+      // eslint-disable-next-line no-useless-return
+      return;
     }
 
     const form = root.querySelector('[data-role="form"]');
     const input = root.querySelector('[data-role="input"]');
     const results = root.querySelector('[data-role="results"]');
-    const submitBtn = root.querySelector('[data-role="submit"]');
 
-    // Common GBP categories for home services (from your version)
+    // Curated GBP categories (home-services leaning)
     const GBP_CATEGORIES = [
       'Plumber',
       'Plumbing Supply Store',
@@ -65,7 +70,6 @@
       'Pest Control Service',
       'Exterminator',
       'Painter',
-      'Painting',
       'Masonry Contractor',
       'Concrete Contractor',
       'Fence Contractor',
@@ -82,6 +86,7 @@
     ];
 
     function renderList(items) {
+      if (!results) return;
       if (!Array.isArray(items) || items.length === 0) {
         results.innerHTML =
           '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">No matches. Try a broader keyword.</div>';
@@ -102,28 +107,18 @@
         .trim()
         .toLowerCase();
       if (!query) return [];
-      const matches = [];
-      for (let i = 0; i < GBP_CATEGORIES.length; i++) {
-        const cat = GBP_CATEGORIES[i];
-        if (cat.toLowerCase().includes(query)) matches.push(cat);
-      }
+      const matches = GBP_CATEGORIES.filter((cat) => cat.toLowerCase().includes(query));
       matches.sort((a, b) => a.length - b.length);
       return matches.slice(0, 12);
     }
 
     function handleSubmit(e) {
-      if (e) e.preventDefault(); // ensure no navigation
-      const q = input ? input.value : '';
-      const items = findMatches(q);
-      renderList(items);
+      if (e) e.preventDefault(); // stop navigation
+      renderList(findMatches(input ? input.value : ''));
     }
 
-    // Bind with explicit if-blocks (no short-circuit expressions)
     if (form) {
       form.addEventListener('submit', handleSubmit);
-    }
-    if (submitBtn) {
-      submitBtn.addEventListener('click', handleSubmit);
     }
   </script>
 </div>
