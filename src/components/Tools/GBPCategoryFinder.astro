@@ -2,17 +2,18 @@
 // src/components/Tools/GBPCategoryFinder.astro
 ---
 
-<div data-gbp-cat class="space-y-4">
+<div class="space-y-4">
   <h3 class="text-2xl font-heading font-bold text-heading">Google Business Profile Category Finder</h3>
   <p class="text-body/80">
     Type what you do (e.g., “plumber”, “roof repair”). We’ll suggest Google Business Profile categories.
   </p>
 
-  <form data-role="form" class="flex flex-col gap-3">
+  <!-- The module binds to this form (data-gbp-cat) -->
+  <form id="gbp-cat-form" data-gbp-cat data-result="#gbp-cat-results" class="flex flex-col gap-3">
     <label class="sr-only" for="gbp-cat-input">Service keyword</label>
     <input
       id="gbp-cat-input"
-      data-role="input"
+      name="query"
       type="text"
       required
       placeholder="Service keyword (e.g., plumber)"
@@ -20,7 +21,6 @@
       autocomplete="off"
     />
     <button
-      data-role="submit"
       type="submit"
       class="h-12 rounded-2xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
     >
@@ -28,95 +28,9 @@
     </button>
   </form>
 
-  <div data-role="results" class="mt-4 text-sm" aria-live="polite"></div>
-
-  <script is:inline>
-    // Scope to this component instance
-    const scriptEl = document.currentScript;
-    const root = scriptEl ? scriptEl.closest('[data-gbp-cat]') : null;
-    if (!root) {
-      console.warn('GBP Category Finder: root not found');
-      // Stop cleanly if something is off (avoids breaking other widgets on the page)
-      return;
-    }
-
-    const form = root.querySelector('[data-role="form"]');
-    const input = root.querySelector('[data-role="input"]');
-    const results = root.querySelector('[data-role="results"]');
-
-    // Curated GBP categories (home-services leaning)
-    const GBP_CATEGORIES = [
-      'Plumber',
-      'Plumbing Supply Store',
-      'HVAC Contractor',
-      'Air Conditioning Repair Service',
-      'Heating Contractor',
-      'Electrician',
-      'Electrical Supply Store',
-      'Roofer',
-      'Roofing Contractor',
-      'Garage Door Supplier',
-      'Appliance Repair Service',
-      'Water Damage Restoration Service',
-      'Carpet Cleaning Service',
-      'House Cleaning Service',
-      'Landscape Designer',
-      'Landscaper',
-      'Lawn Care Service',
-      'Tree Service',
-      'Pool Cleaning Service',
-      'Pest Control Service',
-      'Exterminator',
-      'Painter',
-      'Masonry Contractor',
-      'Concrete Contractor',
-      'Fence Contractor',
-      'Flooring Contractor',
-      'Handyman',
-      'Locksmith',
-      'Window Installation Service',
-      'Siding Contractor',
-      'Gutter Cleaning Service',
-      'Solar Energy Contractor',
-      'Septic System Service',
-      'Moving Company',
-      'Junk Removal',
-    ];
-
-    function renderList(items) {
-      if (!results) return;
-      if (!Array.isArray(items) || items.length === 0) {
-        results.innerHTML =
-          '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">No matches. Try a broader keyword.</div>';
-        return;
-      }
-      const lis = items.map((t) => '<li>' + t + '</li>').join('');
-      results.innerHTML =
-        '<div class="rounded-xl border border-gray-200 p-4 bg-gray-50">' +
-        '<div class="font-semibold mb-2 text-heading">Suggested categories</div>' +
-        '<ul class="list-disc pl-5 space-y-1 text-heading">' +
-        lis +
-        '</ul>' +
-        '</div>';
-    }
-
-    function findMatches(q) {
-      const query = String(q || '')
-        .trim()
-        .toLowerCase();
-      if (!query) return [];
-      const matches = GBP_CATEGORIES.filter((cat) => cat.toLowerCase().includes(query));
-      matches.sort((a, b) => a.length - b.length);
-      return matches.slice(0, 12);
-    }
-
-    function handleSubmit(e) {
-      if (e) e.preventDefault(); // stop navigation
-      renderList(findMatches(input ? input.value : ''));
-    }
-
-    if (form) {
-      form.addEventListener('submit', handleSubmit);
-    }
-  </script>
+  <!-- Results -->
+  <div id="gbp-cat-results" class="mt-4 text-sm" aria-live="polite" role="status"></div>
 </div>
+
+<!-- Load external module from /public -->
+<script type="module" src="/scripts/gbp-category-finder.js"></script>
