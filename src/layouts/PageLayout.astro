@@ -23,8 +23,11 @@ import type { MetaData as MetaDataType } from '~/types';
 
 export interface Props {
   metadata?: MetaDataType;
+  title?: string;
+  description?: string;
 }
-const { metadata = {} } = Astro.props as Props;
+
+const { metadata = {}, title, description } = Astro.props as Props;
 ---
 
 <!doctype html>
@@ -38,6 +41,13 @@ const { metadata = {} } = Astro.props as Props;
     <SiteVerification />
     <Analytics />
     <ClientRouter fallback="swap" />
+
+    <!-- Meta title + description -->
+    <title>{title ?? metadata.title ?? 'Lilos Growth'}</title>
+    <meta
+      name="description"
+      content={description ?? metadata.description ?? 'Local SEO, websites, and Google Business Profile optimization for home service businesses.'}
+    />
   </head>
 
   <!-- Sticky footer layout -->
