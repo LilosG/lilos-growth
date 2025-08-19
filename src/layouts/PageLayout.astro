@@ -46,7 +46,9 @@ const { metadata = {}, title, description } = Astro.props as Props;
     <title>{title ?? metadata.title ?? 'Lilos Growth'}</title>
     <meta
       name="description"
-      content={description ?? metadata.description ?? 'Local SEO, websites, and Google Business Profile optimization for home service businesses.'}
+      content={description ??
+        metadata.description ??
+        'Local SEO, websites, and Google Business Profile optimization for home service businesses.'}
     />
   </head>
 
