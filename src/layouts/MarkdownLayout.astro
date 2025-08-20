@@ -1,26 +1,50 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-
-import type { MetaData } from '~/types';
+import Layout from '~/layouts/Layout.astro';
+import type { MetaData as MetaDataType } from '~/types';
 
 export interface Props {
-  frontmatter: {
-    title?: string;
-  };
+  frontmatter?: Record<string, any>;
+  /** Optional metadata object used by <Layout />/<Metadata /> */
+  metadata?: MetaDataType;
+  /** Optional direct overrides */
+  title?: string;
+  description?: string;
+  lang?: string;
+  bodyClass?: string;
 }
 
-const { frontmatter } = Astro.props;
+const {
+  frontmatter = {},
+  metadata: inputMetadata,
+  title,
+  description,
+  lang = 'en',
+  bodyClass = '',
+} = Astro.props as Props;
 
-const metadata: MetaData = {
-  title: frontmatter?.title,
+/**
+ * Build a metadata object that always has a title.
+ * Priority: explicit title prop > inputMetadata.title > frontmatter.title
+ */
+const metadata: MetaDataType = {
+  ...(inputMetadata ?? {}),
+  title: title ?? inputMetadata?.title ?? frontmatter?.title,
 };
 ---
 
-<Layout metadata={metadata}>
+<Layout metadata={metadata} {title} {description} {lang} {bodyClass}>
   <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
-    <h1 class="font-bold font-heading text-4xl md:text-5xl leading-tighter tracking-tighter">{frontmatter.title}</h1>
+    {
+      frontmatter?.title && (
+        <h1 class="font-bold font-heading text-4xl md:text-5xl leading-tighter tracking-tighter">
+          {frontmatter.title}
+        </h1>
+      )
+    }
+
     <div
-      class="mx-auto prose prose-lg max-w-4xl dark:prose-invert dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8"
+      class="mx-auto prose prose-lg max-w-4xl dark:prose-invert
+             dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading"
     >
       <slot />
     </div>

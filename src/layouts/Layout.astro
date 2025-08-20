@@ -11,28 +11,41 @@ import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 
-// Vercel Web Analytics
+// Vercel Web Analytics (SINGLE owner here) — default import for your versions
 import VercelAnalytics from '@vercel/analytics/astro';
-// Vercel Speed Insights
+// Vercel Speed Insights — default import for your versions
 import SpeedInsights from '@vercel/speed-insights/astro';
 
 // View Transitions (optional)
 import { ClientRouter } from 'astro:transitions';
 
-// Floating Calendly Button (kept full size, outside the scaler)
-import FloatingCalendlyButton from '../components/FloatingCalendlyButton.astro';
-
 import type { MetaData as MetaDataType } from '~/types';
 
+// Only declare our helper; do NOT redeclare window.va (the package already does)
+declare global {
+  interface Window {
+    trackEvent?: (name: string, data?: Record<string, unknown>) => void;
+  }
+}
+
 export interface Props {
+  /** Optional per-page SEO title override */
+  title?: string;
+  /** Optional per-page meta description override */
+  description?: string;
+  /** Document language */
+  lang?: string;
+  /** Extra classes to append to <body> */
+  bodyClass?: string;
+  /** Your existing metadata object used by <Metadata /> */
   metadata?: MetaDataType;
 }
 
-const { metadata = {} } = Astro.props;
+const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro.props as Props;
 ---
 
 <!doctype html>
-<html lang="en" dir="ltr" class="h-full 2xl:text-[20px]">
+<html lang={lang} dir="ltr" class="h-full 2xl:text-[20px]">
   <head>
     <CommonMeta />
     <Favicons />
@@ -42,11 +55,14 @@ const { metadata = {} } = Astro.props;
     <SiteVerification />
     <Analytics />
     <ClientRouter fallback="swap" />
+
+    {title && <title>{title}</title>}
+    {description && <meta name="description" content={description} />}
   </head>
 
   <!-- Sticky-footer safe: full-height flex column on the BODY -->
   <body
-    class="antialiased text-default bg-page tracking-tight min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip"
+    class={`antialiased text-default bg-page tracking-tight min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip ${bodyClass}`}
   >
     <!-- Scaled page canvas: scales ALL page content (header, hero, cards, footer) without affecting layout height -->
     <div class="flex-1 flex flex-col">
@@ -59,25 +75,18 @@ const { metadata = {} } = Astro.props;
       </div>
     </div>
 
-    <!-- Floating Calendly stays native size -->
-    <FloatingCalendlyButton />
-
     <BasicScripts />
     <VercelAnalytics />
     <SpeedInsights />
 
+    <!-- Inline helper using the correct event API. No npm imports here. -->
     <script is:inline>
-      // Safe helper for analytics; swallow non-critical errors to avoid breaking UX.
-      window.trackEvent = (name, data) => {
+      window.trackEvent = (name, data = {}) => {
         try {
-          const va = window.va;
-          if (va && typeof va.track === 'function') {
-            va.track(String(name), data || {});
+          if (typeof window.va === 'function') {
+            window.va('event', { name: String(name), data });
           }
-        } catch (e) {
-          // Intentionally ignore analytics errors; keep a statement to satisfy ESLint.
-          void e;
-        }
+        } catch {}
       };
     </script>
   </body>
