@@ -1,5 +1,6 @@
 declare module '@vercel/speed-insights/astro' {
-  const SpeedInsights: any;
+  import type { AstroComponentFactory } from 'astro';
+  const SpeedInsights: AstroComponentFactory;
   export default SpeedInsights;
   export { SpeedInsights };
 }

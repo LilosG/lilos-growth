@@ -1,5 +1,6 @@
 declare module '@vercel/analytics/astro' {
-  const Analytics: any;
+  import type { AstroComponentFactory } from 'astro';
+  const Analytics: AstroComponentFactory;
   export default Analytics;
   export { Analytics };
 }
