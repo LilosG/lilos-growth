@@ -3,10 +3,8 @@ import Layout from '~/layouts/Layout.astro';
 import type { MetaData as MetaDataType } from '~/types';
 
 export interface Props {
-  frontmatter?: Record<string, any>;
-  /** Optional metadata object used by <Layout />/<Metadata /> */
+  frontmatter?: Record<string, unknown>;
   metadata?: MetaDataType;
-  /** Optional direct overrides */
   title?: string;
   description?: string;
   lang?: string;
@@ -22,25 +20,28 @@ const {
   bodyClass = '',
 } = Astro.props as Props;
 
-/**
- * Build a metadata object that always has a title.
- * Priority: explicit title prop > inputMetadata.title > frontmatter.title
- */
+// Build a safe title (string | undefined)
+const metaTitle =
+  typeof title === 'string'
+    ? title
+    : typeof inputMetadata?.title === 'string'
+      ? (inputMetadata.title as string)
+      : typeof frontmatter?.title === 'string'
+        ? (frontmatter.title as string)
+        : undefined;
+
 const metadata: MetaDataType = {
   ...(inputMetadata ?? {}),
-  title: title ?? inputMetadata?.title ?? frontmatter?.title,
+  title: metaTitle,
 };
+
+// Helper to read a string safely from frontmatter
+const fmTitle = typeof frontmatter?.title === 'string' ? (frontmatter.title as string) : undefined;
 ---
 
 <Layout metadata={metadata} {title} {description} {lang} {bodyClass}>
   <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
-    {
-      frontmatter?.title && (
-        <h1 class="font-bold font-heading text-4xl md:text-5xl leading-tighter tracking-tighter">
-          {frontmatter.title}
-        </h1>
-      )
-    }
+    {fmTitle && <h1 class="font-bold font-heading text-4xl md:text-5xl leading-tighter tracking-tighter">{fmTitle}</h1>}
 
     <div
       class="mx-auto prose prose-lg max-w-4xl dark:prose-invert
