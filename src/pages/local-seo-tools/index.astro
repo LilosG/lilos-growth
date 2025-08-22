@@ -1,367 +1,421 @@
 ---
-// src/pages/local-seo-tools/index.astro
-import Layout from '../../layouts/PageLayout.astro';
+import Layout from '~/layouts/PageLayout.astro';
 
-import ToolCard from '../../components/Tools/ToolCard.astro';
-import ReviewLinkGenerator from '../../components/Tools/ReviewLinkGenerator.astro';
-import GBPCategoryFinder from '../../components/Tools/GBPCategoryFinder.astro';
-import LandingPageOutlineGenerator from '../../components/Tools/LandingPageOutlineGenerator.astro';
-
-export const title = 'Free Local SEO Tools | Lilos Growth';
+export const title = 'Free Local SEO Tools for Home Service Businesses | Lilos Growth';
 export const description =
-  'High-quality tools to help home service businesses rank higher, earn more leads, and look great online — free and no signup.';
+  'Practical, fast tools to win the Map Pack, polish your Google Business Profile, and ship on-brand SEO assets—built for plumbers, HVAC, roofers, and other home service pros.';
 ---
 
-<Layout>
+<Layout {title} {description}>
   <!-- HERO -->
-  <section
-    class="bg-[#253242] min-h-[440px] flex flex-col items-center justify-center pt-16 pb-20 relative overflow-hidden"
-  >
-    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159] pointer-events-none"></div>
-    <div class="relative z-10 w-full max-w-3xl flex flex-col items-center gap-7 px-4 mx-auto text-center">
-      <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="mb-6 w-36 mx-auto" />
-      <h1 class="text-4xl md:text-5xl font-heading text-white font-extrabold mb-1 leading-tight tracking-tight">
-        Free Local SEO Tools
-      </h1>
-      <span class="block text-xl md:text-2xl font-semibold mt-2 mb-2 text-[#f56b2a] tracking-wider uppercase">
+  <section class="bg-[#253242] relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]" aria-hidden="true"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-4 py-20 text-center">
+      <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="mx-auto w-24 opacity-70 mb-6" />
+      <h1 class="text-4xl md:text-5xl font-heading font-extrabold text-white tracking-tight">Free Local SEO Tools</h1>
+      <p class="mt-2 text-[#f56b2a] tracking-widest font-semibold uppercase text-sm md:text-base">
         For Home Service Businesses
-      </span>
-      <p class="text-lg md:text-xl text-white/80 mb-2 max-w-2xl font-medium">
-        Practical, on-brand tools to help you win the Map Pack, polish your profile, and convert more local leads.
       </p>
-      <div class="flex flex-wrap gap-4 justify-center">
+      <p class="mt-6 text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+        Practical, on-brand tools to help you win the Map Pack, polish your profile, and convert more local leads — no
+        logins, no fluff.
+      </p>
+
+      <div class="mt-8 flex items-center justify-center gap-3.5">
         <a
           href="#featured-tools"
-          class="inline-flex items-center px-8 py-4 rounded-2xl bg-[#f56b2a] hover:bg-[#c9400a] text-white font-heading font-semibold text-lg shadow transition"
+          class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-6 py-3 text-white font-heading font-semibold"
         >
           Start Using Tools
-          <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
-            ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
+          <svg
+            class="ml-2 h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
           >
+            <path d="M5 12h14M13 18l6-6-6-6"></path>
+          </svg>
         </a>
         <a
           href="#more-utilities"
-          class="inline-flex items-center px-8 py-4 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-lg shadow transition"
+          class="inline-flex items-center rounded-2xl bg-[#2b3b50] px-5 py-3 text-white font-heading font-semibold"
         >
           More Utilities
-          <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
-            ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
+          <svg
+            class="ml-2 h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
           >
+            <path d="M5 12h14M13 18l6-6-6-6"></path>
+          </svg>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- OVERVIEW / PILL ROW -->
-  <section class="py-16 bg-cream border-t border-gray-100">
-    <div class="max-w-5xl mx-auto px-4 text-center">
-      <h2 class="text-3xl md:text-4xl font-heading font-bold mb-5 text-heading">
+  <!-- PROMISE STRIP -->
+  <section class="bg-cream border-t border-gray-100">
+    <div class="max-w-6xl mx-auto px-4 py-12 text-center">
+      <h2 class="text-2xl md:text-3xl font-heading font-bold text-heading">
         A Clean, Fast Toolbox Built for Local Wins
       </h2>
-      <p class="text-lg text-body mb-6">
+      <p class="mt-3 text-body max-w-2xl mx-auto">
         Create conversion-ready pages, dial in your Google Business Profile, and ship SEO assets quickly — no logins, no
         fluff.
       </p>
-      <div class="flex flex-wrap gap-3 justify-center">
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">No Signups</span>
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">Free to Use</span>
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">On-Brand UI</span>
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">Copy-Paste Outputs</span>
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm">
+        <span class="px-3 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm">No Signups</span>
+        <span class="px-3 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm">Free to Use</span>
+        <span class="px-3 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm">On-Brand UI</span>
+        <span class="px-3 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm">Copy-Paste Outputs</span>
       </div>
     </div>
   </section>
 
   <!-- FEATURED TOOLS -->
-  <section id="featured-tools" class="py-20 bg-white border-t border-gray-100">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-4xl md:text-5xl font-heading text-heading font-bold mb-8 text-center">
-        Featured Tools
-        <span class="block mx-auto mt-2 h-1 w-20 bg-[#f56b2a] rounded"></span>
-      </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-        <ToolCard><ReviewLinkGenerator /></ToolCard>
-        <ToolCard><GBPCategoryFinder /></ToolCard>
-        <ToolCard><LandingPageOutlineGenerator /></ToolCard>
+  <section id="featured-tools" class="bg-white">
+    <div class="max-w-6xl mx-auto px-4 py-14">
+      <h3 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">Featured Tools</h3>
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Card: Review Link & QR -->
+        <article class="bg-white rounded-3xl border border-gray-200 shadow-md p-6 md:p-8 flex flex-col">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-8 h-8 rounded-full bg-[#fff7f0] text-[#f56b2a] grid place-items-center" aria-hidden="true">
+              🔗
+            </div>
+            <h4 class="text-xl font-heading font-bold text-heading">Google Review Link &amp; QR</h4>
+          </div>
+          <p class="text-body text-[15px]">
+            Find your business in Google and get one-click links for customers to leave a review. Best when you include
+            city and state/ZIP.
+          </p>
+
+          <form class="mt-5 grid gap-3">
+            <label class="sr-only" for="review-business">Business</label>
+            <input
+              id="review-business"
+              type="text"
+              placeholder="Business name"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+            />
+            <div class="grid grid-cols-3 gap-3">
+              <input type="text" placeholder="City" class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]" />
+              <input type="text" placeholder="State" class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]" />
+              <input type="text" placeholder="ZIP" class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]" />
+            </div>
+            <button
+              type="button"
+              class="mt-2 inline-flex justify-center rounded-xl bg-[#f56b2a] px-5 py-3 text-white font-heading font-semibold"
+            >
+              Find Place
+            </button>
+          </form>
+        </article>
+
+        <!-- Card: GBP Category Finder -->
+        <article class="bg-white rounded-3xl border border-gray-200 shadow-md p-6 md:p-8 flex flex-col">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-8 h-8 rounded-full bg-[#fff7f0] text-[#f56b2a] grid place-items-center" aria-hidden="true">
+              📇
+            </div>
+            <h4 class="text-xl font-heading font-bold text-heading">Google Business Profile Category Finder</h4>
+          </div>
+          <p class="text-body text-[15px]">
+            Type what you do (e.g., “plumber”, “roof repair”). We’ll suggest Google Business Profile categories.
+          </p>
+
+          <form class="mt-5 grid gap-3">
+            <label class="sr-only" for="category-service">Service keyword</label>
+            <input
+              id="category-service"
+              type="text"
+              placeholder="Service keyword (e.g., plumber)"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+            />
+            <button
+              type="button"
+              class="mt-2 inline-flex justify-center rounded-xl bg-[#f56b2a] px-5 py-3 text-white font-heading font-semibold"
+            >
+              Find Categories
+            </button>
+          </form>
+        </article>
+
+        <!-- Card: Landing Page Outline -->
+        <article class="bg-white rounded-3xl border border-gray-200 shadow-md p-6 md:p-8 flex flex-col">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-8 h-8 rounded-full bg-[#fff7f0] text-[#f56b2a] grid place-items-center" aria-hidden="true">
+              📝
+            </div>
+            <h4 class="text-xl font-heading font-bold text-heading">Landing Page Outline Generator</h4>
+          </div>
+          <p class="text-body text-[15px]">
+            Generate a proven, conversion-friendly outline for a local service landing page.
+          </p>
+
+          <form class="mt-5 grid gap-3">
+            <input
+              type="text"
+              placeholder="Service (e.g., Water Heater)"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Service"
+            />
+            <input
+              type="text"
+              placeholder="City/Area (e.g., Denver, CO)"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="City or Area"
+            />
+            <input
+              type="text"
+              placeholder="Audience (optional)"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Audience"
+            />
+            <input
+              type="text"
+              placeholder="Primary CTA (optional)"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Primary call to action"
+            />
+            <button
+              type="button"
+              class="mt-2 inline-flex justify-center rounded-xl bg-[#f56b2a] px-5 py-3 text-white font-heading font-semibold"
+            >
+              Generate Outline
+            </button>
+          </form>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- MORE UTILITIES (short version; JS module handles outputs) -->
-  <section id="more-utilities" class="py-24 bg-bluelight border-t border-gray-100">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-4xl md:text-5xl font-heading text-heading font-bold mb-8 text-center">
-        More Free Utilities
-        <span class="block mx-auto mt-2 h-1 w-20 bg-[#f56b2a] rounded"></span>
-      </h2>
+  <!-- MORE UTILITIES -->
+  <section id="more-utilities" class="bg-[#e9f0f7]">
+    <div class="max-w-6xl mx-auto px-4 py-16">
+      <h3 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">More Free Utilities</h3>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- FAQ Schema -->
-        <ToolCard>
-          <div slot="header">
-            <h3 class="text-lg md:text-xl font-heading font-bold text-heading">FAQ Schema Generator</h3>
-            <p class="mt-1 text-sm md:text-base text-body">Convert a Q&A pair into Google-ready JSON-LD (FAQPage).</p>
-          </div>
-          <form id="faq-schema-form" data-tool="faq" data-result="#faq-schema-result" class="mt-4 flex flex-col gap-3">
+        <article class="bg-white rounded-3xl border border-gray-200 shadow-md p-6 md:p-8">
+          <h4 class="text-lg font-heading font-bold text-heading mb-2">FAQ Schema Generator</h4>
+          <p class="text-body text-[15px] mb-4">Convert a Q&amp;A pair into Google-ready JSON-LD (FAQPage).</p>
+          <form class="grid gap-3">
             <input
-              id="faq-q"
-              name="question"
               type="text"
-              required
               placeholder="Question"
-              class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Question"
             />
             <textarea
-              id="faq-a"
-              name="answer"
-              required
-              rows="4"
+              rows="3"
               placeholder="Answer"
-              class="w-full rounded-xl border border-gray-200 px-3 py-2 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
-            ></textarea>
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Answer"></textarea>
             <button
-              type="submit"
-              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
+              type="button"
+              class="inline-flex justify-center rounded-xl bg-[#f56b2a] px-5 py-3 text-white font-heading font-semibold"
               >Generate Schema</button
             >
           </form>
-          <div id="faq-schema-result" class="mt-4" aria-live="polite" role="status"></div>
-        </ToolCard>
+        </article>
 
         <!-- SERP Preview -->
-        <ToolCard>
-          <div slot="header">
-            <h3 class="text-lg md:text-xl font-heading font-bold text-heading">Google SERP Preview</h3>
-            <p class="mt-1 text-sm md:text-base text-body">Preview how your title & description may render.</p>
-          </div>
-          <form
-            id="serp-preview-form"
-            data-tool="serp"
-            data-result="#serp-preview-result"
-            class="mt-4 flex flex-col gap-3"
-          >
+        <article class="bg-white rounded-3xl border border-gray-200 shadow-md p-6 md:p-8">
+          <h4 class="text-lg font-heading font-bold text-heading mb-2">Google SERP Preview</h4>
+          <p class="text-body text-[15px] mb-4">Preview how your title &amp; description may render.</p>
+          <form class="grid gap-3">
             <input
-              id="serp-title"
-              name="title"
               type="text"
-              required
-              maxlength="70"
               placeholder="Title (~70 chars)"
-              class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Title"
             />
             <input
-              id="serp-url"
-              name="url"
-              type="text"
-              maxlength="80"
+              type="url"
               placeholder="URL (optional)"
-              class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="URL"
             />
             <textarea
-              id="serp-desc"
-              name="description"
-              required
-              maxlength="155"
+              rows="3"
               placeholder="Meta description (~155 chars)"
-              class="h-24 w-full rounded-xl border border-gray-200 px-3 py-2 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
-            ></textarea>
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Meta description"></textarea>
             <button
-              type="submit"
-              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
+              type="button"
+              class="inline-flex justify-center rounded-xl bg-[#f56b2a] px-5 py-3 text-white font-heading font-semibold"
               >Preview SERP</button
             >
           </form>
-          <div id="serp-preview-result" class="mt-4" aria-live="polite" role="status"></div>
-        </ToolCard>
+        </article>
 
         <!-- UTM Builder -->
-        <ToolCard>
-          <div slot="header">
-            <h3 class="text-lg md:text-xl font-heading font-bold text-heading">UTM Link Builder</h3>
-            <p class="mt-1 text-sm md:text-base text-body">Create trackable URLs for Google Analytics.</p>
-          </div>
-          <form
-            id="utm-builder-form"
-            data-tool="utm"
-            data-result="#utm-builder-result"
-            class="mt-4 flex flex-col gap-3"
-          >
+        <article class="bg-white rounded-3xl border border-gray-200 shadow-md p-6 md:p-8">
+          <h4 class="text-lg font-heading font-bold text-heading mb-2">UTM Link Builder</h4>
+          <p class="text-body text-[15px] mb-4">Create trackable URLs for Google Analytics.</p>
+          <form class="grid gap-3">
             <input
-              id="utm-url"
-              name="url"
               type="url"
-              required
               placeholder="Destination URL"
-              class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Destination URL"
             />
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="grid grid-cols-3 gap-3">
               <input
-                id="utm-source"
-                name="utm_source"
                 type="text"
-                required
-                placeholder="Source (e.g., google)"
-                class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+                placeholder="Source"
+                class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+                aria-label="Source"
               />
               <input
-                id="utm-medium"
-                name="utm_medium"
                 type="text"
-                required
-                placeholder="Medium (e.g., cpc)"
-                class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+                placeholder="Medium"
+                class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+                aria-label="Medium"
+              />
+              <input
+                type="text"
+                placeholder="Campaign"
+                class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+                aria-label="Campaign"
               />
             </div>
-            <input
-              id="utm-campaign"
-              name="utm_campaign"
-              type="text"
-              required
-              placeholder="Campaign (e.g., spring-sale)"
-              class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
-            />
             <button
-              type="submit"
-              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
+              type="button"
+              class="inline-flex justify-center rounded-xl bg-[#f56b2a] px-5 py-3 text-white font-heading font-semibold"
               >Build UTM Link</button
             >
           </form>
-          <div id="utm-builder-result" class="mt-4 break-all" aria-live="polite" role="status"></div>
-        </ToolCard>
+        </article>
 
         <!-- Local Business Schema -->
-        <ToolCard>
-          <div slot="header">
-            <h3 class="text-lg md:text-xl font-heading font-bold text-heading">Local Business Schema Generator</h3>
-            <p class="mt-1 text-sm md:text-base text-body">Generate JSON-LD for your business details.</p>
-          </div>
-          <form
-            id="local-business-schema-form"
-            data-tool="lbschema"
-            data-result="#local-business-schema-result"
-            class="mt-4 flex flex-col gap-3"
-          >
+        <article class="bg-white rounded-3xl border border-gray-200 shadow-md p-6 md:p-8">
+          <h4 class="text-lg font-heading font-bold text-heading mb-2">Local Business Schema Generator</h4>
+          <p class="text-body text-[15px] mb-4">Generate JSON-LD for your business details.</p>
+          <form class="grid gap-3">
             <input
-              id="lb-name"
-              name="name"
               type="text"
-              required
               placeholder="Business Name"
-              class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Business Name"
             />
             <input
-              id="lb-phone"
-              name="telephone"
-              type="text"
-              required
+              type="tel"
               placeholder="Phone Number"
-              class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Phone Number"
             />
             <input
-              id="lb-street"
-              name="streetAddress"
               type="text"
-              required
               placeholder="Street Address"
-              class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Street Address"
             />
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="grid grid-cols-3 gap-3">
               <input
-                id="lb-city"
-                name="addressLocality"
                 type="text"
-                required
                 placeholder="City"
-                class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+                class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+                aria-label="City"
               />
               <input
-                id="lb-state"
-                name="addressRegion"
                 type="text"
-                required
                 placeholder="State"
-                class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+                class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+                aria-label="State"
               />
               <input
-                id="lb-zip"
-                name="postalCode"
                 type="text"
-                required
                 placeholder="ZIP"
-                class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+                class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+                aria-label="ZIP"
               />
             </div>
             <input
-              id="lb-url"
-              name="url"
               type="url"
               placeholder="Website URL (optional)"
-              class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Website URL"
             />
             <button
-              type="submit"
-              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
+              type="button"
+              class="inline-flex justify-center rounded-xl bg-[#f56b2a] px-5 py-3 text-white font-heading font-semibold"
               >Generate Schema</button
             >
           </form>
-          <div id="local-business-schema-result" class="mt-4" aria-live="polite" role="status"></div>
-        </ToolCard>
+        </article>
 
-        <!-- Maps Embed -->
-        <ToolCard>
-          <div slot="header">
-            <h3 class="text-lg md:text-xl font-heading font-bold text-heading">Google Maps Embed Generator</h3>
-            <p class="mt-1 text-sm md:text-base text-body">Generate an embed code for your location.</p>
-          </div>
-          <form id="maps-embed-form" data-tool="map" data-result="#maps-embed-result" class="mt-4 flex flex-col gap-3">
+        <!-- Google Maps Embed -->
+        <article class="bg-white rounded-3xl border border-gray-200 shadow-md p-6 md:p-8">
+          <h4 class="text-lg font-heading font-bold text-heading mb-2">Google Maps Embed Generator</h4>
+          <p class="text-body text-[15px] mb-4">Generate an embed code for your location.</p>
+          <form class="grid gap-3">
             <input
-              id="maps-q"
-              name="q"
               type="text"
-              required
               placeholder="Address or Place"
-              class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Address or Place"
             />
             <button
-              type="submit"
-              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
+              type="button"
+              class="inline-flex justify-center rounded-xl bg-[#f56b2a] px-5 py-3 text-white font-heading font-semibold"
               >Generate Embed</button
             >
           </form>
-          <div id="maps-embed-result" class="mt-4" aria-live="polite" role="status"></div>
-        </ToolCard>
+        </article>
 
-        <!-- Keyword Ideas -->
-        <ToolCard>
-          <div slot="header">
-            <h3 class="text-lg md:text-xl font-heading font-bold text-heading">Local Keyword Generator</h3>
-            <p class="mt-1 text-sm md:text-base text-body">Quick ideas for service + location targeting.</p>
-          </div>
-          <form
-            id="keyword-ideas-form"
-            data-tool="keywords"
-            data-result="#keyword-ideas-result"
-            class="mt-4 flex flex-col gap-3"
-          >
+        <!-- Local Keyword Ideas -->
+        <article class="bg-white rounded-3xl border border-gray-200 shadow-md p-6 md:p-8">
+          <h4 class="text-lg font-heading font-bold text-heading mb-2">Local Keyword Generator</h4>
+          <p class="text-body text-[15px] mb-4">Quick ideas for service + location targeting.</p>
+          <form class="grid gap-3">
             <input
-              id="kw-seed"
-              name="seed"
               type="text"
-              required
               placeholder="e.g., pest control"
-              class="h-11 w-full rounded-xl border border-gray-200 px-3 text-[15px] text-heading focus:outline-none focus:border-[#f56b2a] focus:ring-2 focus:ring-[#f56b2a]/40"
+              class="rounded-lg border border-gray-300 px-4 py-3 text-[15px]"
+              aria-label="Service"
             />
             <button
-              type="submit"
-              class="h-11 w-full rounded-xl bg-[#f56b2a] text-white font-heading font-semibold shadow hover:bg-[#c9400a] transition"
+              type="button"
+              class="inline-flex justify-center rounded-xl bg-[#f56b2a] px-5 py-3 text-white font-heading font-semibold"
               >Generate Ideas</button
             >
           </form>
-          <div id="keyword-ideas-result" class="mt-4" aria-live="polite" role="status"></div>
-        </ToolCard>
+        </article>
+      </div>
+
+      <!-- CTA back to funnel -->
+      <div class="mt-12 text-center">
+        <a
+          href="/contact#book"
+          class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-6 py-3 text-white font-heading font-semibold"
+        >
+          Book a Free Intro Call
+          <svg
+            class="ml-2 h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M13 18l6-6-6-6"></path>
+          </svg>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Page handlers (CSP-safe, from /public) -->
-  <script type="module" src="/scripts/local-seo-tools-page.js"></script>
+  <!-- Wavy Divider to footer -->
+  <div class="w-full overflow-hidden leading-none -mb-1">
+    <svg viewBox="0 0 1440 60" class="block w-full h-10 text-white" aria-hidden="true">
+      <path fill="currentColor" d="M0,32L1440,0V60H0Z"></path>
+    </svg>
+  </div>
 </Layout>

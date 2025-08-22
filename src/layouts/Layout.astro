@@ -11,9 +11,9 @@ import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 
-// Vercel Web Analytics (SINGLE owner here) — default import for your versions
+// Vercel Web Analytics (SINGLE owner here)
 import VercelAnalytics from '@vercel/analytics/astro';
-// Vercel Speed Insights — default import for your versions
+// Vercel Speed Insights
 import SpeedInsights from '@vercel/speed-insights/astro';
 
 // View Transitions (optional)
@@ -45,7 +45,16 @@ const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro
 ---
 
 <!doctype html>
-<html lang={lang} dir="ltr" class="h-full 2xl:text-[20px]">
+<!--
+  Site-wide scale knob:
+  We reduce the root font size on all breakpoints (no transforms), which
+  makes the UI feel ~85–90% of the prior size. Remove or tweak values to taste.
+-->
+<html
+  lang={lang}
+  dir="ltr"
+  class="h-full text-[14px] sm:text-[14px] md:text-[14.5px] lg:text-[14.5px] xl:text-[14.5px] 2xl:text-[14.5px]"
+>
   <head>
     <CommonMeta />
     <Favicons />
@@ -64,15 +73,9 @@ const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro
   <body
     class={`antialiased text-default bg-page tracking-tight min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip ${bodyClass}`}
   >
-    <!-- Scaled page canvas: scales ALL page content (header, hero, cards, footer) without affecting layout height -->
+    <!-- Full-width page content; no transform scales -->
     <div class="flex-1 flex flex-col">
-      <div
-        class="w-full origin-top will-change-transform
-               md:scale-[.90] xl:scale-[.87] 2xl:scale-[.85]"
-        style="transform-origin: top center;"
-      >
-        <slot />
-      </div>
+      <slot />
     </div>
 
     <BasicScripts />
