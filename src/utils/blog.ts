@@ -1,3 +1,4 @@
+import type { Taxonomy } from '~/types';
 import type { PaginateFunction } from 'astro';
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
@@ -198,7 +199,7 @@ export const getStaticPathsBlogCategory = async ({ paginate }: { paginate: Pagin
   if (!isBlogEnabled || !isBlogCategoryRouteEnabled) return [];
 
   const posts = await fetchPosts();
-  const categories: Record<string, any> = {};
+  const categories: Record<string, Taxonomy> = {};
   posts.map((post) => {
     if (post.category?.slug) {
       categories[post.category?.slug] = post.category;
@@ -222,7 +223,7 @@ export const getStaticPathsBlogTag = async ({ paginate }: { paginate: PaginateFu
   if (!isBlogEnabled || !isBlogTagRouteEnabled) return [];
 
   const posts = await fetchPosts();
-  const tags: Record<string, any> = {};
+  const tags: Record<string, Taxonomy> = {};
   posts.map((post) => {
     if (Array.isArray(post.tags)) {
       post.tags.map((tag) => {

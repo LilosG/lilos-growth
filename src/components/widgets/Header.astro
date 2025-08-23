@@ -9,7 +9,7 @@ const nav = (Array.isArray(headerData?.links) ? headerData.links : []) as unknow
 const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) as unknown as Action[];
 
 // DO NOT reference `Astro` directly — use globalThis so the editor doesn't complain.
-const currentPath: string = (globalThis as any)?.Astro?.url?.pathname ?? '/';
+const currentPath: string = (globalThis as { Astro?: { url?: { pathname?: string } } })?.Astro?.url?.pathname ?? '/';
 const isActive = (href?: string) => !!href && (currentPath === href || (href !== '/' && currentPath.startsWith(href)));
 ---
 
