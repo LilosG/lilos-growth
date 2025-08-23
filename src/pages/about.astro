@@ -3,7 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 
 export const title = 'About Lilos Growth | Built by Home Service Owners';
 export const description =
-  'Lilos Growth is a marketing agency founded by home service business owners. We know the industry firsthand and deliver proven SEO, websites, and GBP management that drive real growth.';
+  'Lilos Growth is a marketing agency founded by home service business owners. We deliver proven Local SEO, websites, and Google Business Profile management that drive real, measurable growth.';
 ---
 
 <html lang="en">
@@ -11,111 +11,276 @@ export const description =
     <title>About Us | Lilos Growth</title>
     <meta
       name="description"
-      content="Lilos Growth is a digital marketing agency founded by home service business owners, built for real results—no fluff, just honest, effective marketing for local pros."
+      content="Lilos Growth is a digital marketing agency founded by home service business owners—built for real results. No fluff, no long-term contracts—just more calls, booked jobs, and measurable growth."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
+
   <Layout>
-    <!-- HERO/INTRO SECTION -->
-    <section class="bg-[#253242] min-h-[380px] flex items-center pt-14 pb-16 relative overflow-hidden">
+    <!-- HERO -->
+    <section class="bg-[#253242] min-h-[440px] flex items-center pt-16 pb-20 relative overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159] pointer-events-none"></div>
       <div class="relative z-10 max-w-4xl mx-auto w-full px-4 text-center flex flex-col items-center">
         <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="mb-6 w-36 mx-auto" />
-        <h1 class="text-4xl md:text-5xl font-heading text-white font-extrabold mb-4 leading-tight tracking-tight">
+        <h1 class="text-4xl md:text-5xl font-heading text-white font-extrabold leading-tight tracking-tight">
           About Lilos Growth
         </h1>
-        <div class="h-1 w-16 bg-[#f56b2a] rounded-full mx-auto mb-4"></div>
-        <p class="text-xl text-white/90 font-medium max-w-2xl mx-auto">
+        <span class="mt-3 text-white/90 text-lg md:text-xl max-w-2xl">
           We built the agency <span class="text-[#f56b2a] font-bold">we always wanted to hire</span> as home service business
           owners.
-        </p>
+        </span>
+
+        <!-- trust badge -->
+        <div class="mt-6 flex items-center gap-2">
+          <svg class="w-5 h-5 text-[#f6b100]" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 15l-5.878 3.09L5.854 12 1 7.91l6.066-.49L10 2l2.934 5.42L19 7.91 14.146 12l1.732 6.09z"></path>
+          </svg>
+          <span class="text-white/90 font-semibold">5-Star Rated by Local Businesses</span>
+        </div>
       </div>
     </section>
 
-    <!-- OUR STORY/WHY SECTION -->
-    <section class="py-16 bg-white border-t border-gray-100">
-      <div class="max-w-3xl mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6 text-heading">From the Client Side to Your Side</h2>
-        <p class="text-lg text-body mb-6">
-          Lilos Growth was founded by a team who's been in your shoes. Before digital marketing, we owned and ran
-          successful home service businesses in pest control and general contracting.
+    <!-- OUR STORY -->
+    <section class="py-20 bg-white border-t border-gray-100">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4 text-heading">
+          From the Client Side to Your Side
+          <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        </h2>
+        <p class="text-lg text-body mt-6">
+          Lilos Growth was founded by a team who’s been in your shoes. Before marketing, we owned and ran successful
+          home service businesses in pest control and general contracting.
         </p>
-        <p class="text-lg text-body mb-6">
-          Like many local business owners, we spent thousands on marketing agencies who overpromised and underdelivered.
-          We were tired of fluffy reports, confusing jargon, and paying for "busy work" instead of booked jobs. So we
-          built Lilos Growth to do things differently.
+        <p class="text-lg text-body mt-4">
+          Like many local owners, we spent thousands on agencies that overpromised and underdelivered. We were tired of
+          fluffy reports, confusing jargon, and paying for “busy work” instead of booked jobs. So we built Lilos Growth
+          to do things differently.
         </p>
-        <p class="text-lg text-body mb-4">
-          Our agency is designed for <span class="font-semibold text-heading">real results</span> — not vanity metrics. We
-          focus on what actually moves the needle: more calls, more jobs, and measurable growth.
+        <p class="text-lg text-body mt-4">
+          Our agency is designed for <span class="font-semibold text-heading">real results</span>—not vanity metrics. We
+          focus on what moves the needle: <span class="font-semibold">more calls, more jobs, more reviews</span>, and
+          measurable growth you can see every month.
         </p>
-        <div class="flex justify-center mt-8">
-          <span class="inline-block px-7 py-3 bg-[#f56b2a] text-white rounded-xl font-heading font-semibold shadow">
+
+        <div class="mt-8">
+          <span class="inline-block px-6 py-3 bg-[#f56b2a] text-white rounded-xl font-heading font-semibold shadow">
             No Fluff. No Contracts. Just Results.
           </span>
         </div>
       </div>
     </section>
 
-    <!-- VALUES / DIFFERENCE SECTION -->
-    <section class="py-16 bg-cream border-t border-gray-100">
+    <!-- QUICK CREDIBILITY STATS -->
+    <section class="py-14 bg-cream border-t border-gray-100">
       <div class="max-w-5xl mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-heading font-bold mb-8 text-heading text-center">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div class="bg-white rounded-2xl shadow p-6 border border-[#f56b2a]/10">
+            <div class="text-3xl font-extrabold text-heading">10+ yrs</div>
+            <div class="text-body mt-1">in local services & marketing</div>
+          </div>
+          <div class="bg-white rounded-2xl shadow p-6 border border-[#f56b2a]/10">
+            <div class="text-3xl font-extrabold text-heading">30+</div>
+            <div class="text-body mt-1">trades & niches served</div>
+          </div>
+          <div class="bg-white rounded-2xl shadow p-6 border border-[#f56b2a]/10">
+            <div class="text-3xl font-extrabold text-heading">100%</div>
+            <div class="text-body mt-1">month-to-month plans</div>
+          </div>
+          <div class="bg-white rounded-2xl shadow p-6 border border-[#f56b2a]/10">
+            <div class="text-3xl font-extrabold text-heading">48 hrs</div>
+            <div class="text-body mt-1">avg. response time</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="py-24 bg-white border-t border-gray-100">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-10 text-heading text-center">
           Why Home Service Pros Choose Lilos Growth
+          <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
         </h2>
-        <div class="grid md:grid-cols-2 gap-10">
-          <div class="bg-white rounded-2xl shadow p-8">
-            <h3 class="font-heading text-xl font-bold mb-2 text-[#f56b2a]">We've Been on Your Side</h3>
-            <p>
-              We know the difference between what sounds good on paper and what actually gets the phone ringing. Every
-              strategy is built from first-hand experience.
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div class="flex flex-col items-center bg-bluelight rounded-2xl p-8 shadow-lg border border-[#f56b2a]/10">
+            <span class="mb-4 flex items-center justify-center w-14 h-14 rounded-xl bg-[#f56b2a]/10">
+              <svg class="w-7 h-7 text-[#f56b2a]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                ><path d="M3 12l6 6l12-12"></path></svg
+              >
+            </span>
+            <h3 class="text-lg font-heading font-bold text-heading mb-2 text-center">We’ve Been in the Field</h3>
+            <p class="text-body text-center">
+              We know what gets phones ringing because we’ve done it for our own companies.
             </p>
           </div>
-          <div class="bg-white rounded-2xl shadow p-8">
-            <h3 class="font-heading text-xl font-bold mb-2 text-[#f56b2a]">Straightforward & Human</h3>
-            <p>
-              No agency jargon, no "black box" tactics. You get honest answers, transparent pricing, and clear reporting
-              — always.
+
+          <div class="flex flex-col items-center bg-bluelight rounded-2xl p-8 shadow-lg border border-[#f56b2a]/10">
+            <span class="mb-4 flex items-center justify-center w-14 h-14 rounded-xl bg-[#f56b2a]/10">
+              <svg class="w-7 h-7 text-[#f56b2a]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                ><circle cx="12" cy="12" r="10"></circle></svg
+              >
+            </span>
+            <h3 class="text-lg font-heading font-bold text-heading mb-2 text-center">Straightforward & Human</h3>
+            <p class="text-body text-center">Plain English, transparent pricing, clear reporting—always.</p>
+          </div>
+
+          <div class="flex flex-col items-center bg-bluelight rounded-2xl p-8 shadow-lg border border-[#f56b2a]/10">
+            <span class="mb-4 flex items-center justify-center w-14 h-14 rounded-xl bg-[#f56b2a]/10">
+              <svg class="w-7 h-7 text-[#f56b2a]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                ><path d="M5 12l5 5L20 7"></path></svg
+              >
+            </span>
+            <h3 class="text-lg font-heading font-bold text-heading mb-2 text-center">Results You Can See</h3>
+            <p class="text-body text-center">Local rankings, calls, leads, and booked jobs—tracked and reported.</p>
+          </div>
+
+          <div class="flex flex-col items-center bg-bluelight rounded-2xl p-8 shadow-lg border border-[#f56b2a]/10">
+            <span class="mb-4 flex items-center justify-center w-14 h-14 rounded-xl bg-[#f56b2a]/10">
+              <svg class="w-7 h-7 text-[#f56b2a]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                ><path d="M12 8v4l3 3"></path></svg
+              >
+            </span>
+            <h3 class="text-lg font-heading font-bold text-heading mb-2 text-center">No Long-Term Contracts</h3>
+            <p class="text-body text-center">Month-to-month. We earn your business with results.</p>
+          </div>
+
+          <div class="flex flex-col items-center bg-bluelight rounded-2xl p-8 shadow-lg border border-[#f56b2a]/10">
+            <span class="mb-4 flex items-center justify-center w-14 h-14 rounded-xl bg-[#f56b2a]/10">
+              <svg class="w-7 h-7 text-[#f56b2a]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                ><path d="M4 7l8 8l8-8"></path></svg
+              >
+            </span>
+            <h3 class="text-lg font-heading font-bold text-heading mb-2 text-center">Specialists in Home Services</h3>
+            <p class="text-body text-center">Plumbing, HVAC, pest, cleaning, lawn, electrical, roofing, and more.</p>
+          </div>
+
+          <div class="flex flex-col items-center bg-bluelight rounded-2xl p-8 shadow-lg border border-[#f56b2a]/10">
+            <span class="mb-4 flex items-center justify-center w-14 h-14 rounded-xl bg-[#f56b2a]/10">
+              <svg class="w-7 h-7 text-[#f56b2a]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                ><circle cx="9" cy="10" r="1"></circle><circle cx="15" cy="10" r="1"></circle><path
+                  d="M8 15s1.5-2 4-2 4 2 4 2"></path></svg
+              >
+            </span>
+            <h3 class="text-lg font-heading font-bold text-heading mb-2 text-center">Easy, Honest, & Human</h3>
+            <p class="text-body text-center">A dedicated strategist. No call centers or handoffs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR APPROACH -->
+    <section class="py-24 bg-cream border-t border-gray-100">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-8 text-heading text-center">
+          A Simple, Proven Approach
+          <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        </h2>
+        <p class="text-lg text-center text-body mb-12">
+          No black boxes. Here’s how we help local service companies grow.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {
+            [
+              [
+                'Discovery & Goals',
+                'We learn your market, services, and capacity—so growth fits your crew and schedule.',
+              ],
+              ['Fix & Foundation', 'We repair technical issues and optimize your website + Google Business Profile.'],
+              ['Content & Authority', 'We publish service/location pages & blogs and build high-quality local links.'],
+              ['Measure & Improve', 'Transparent reporting, review growth, and ongoing optimization each month.'],
+            ].map(([title, copy], i) => (
+              <div class="bg-white rounded-2xl shadow-xl border-2 border-[#f56b2a]/10 p-8 flex flex-col items-center">
+                <div class="w-14 h-14 mb-4 flex items-center justify-center rounded-full bg-[#f56b2a]/10 text-[#f56b2a] text-2xl font-extrabold">
+                  {i + 1}
+                </div>
+                <h3 class="text-lg font-heading font-bold text-heading mb-2 text-center">{title}</h3>
+                <p class="text-body text-center">{copy}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- MINI TESTIMONIAL -->
+    <section class="py-12 bg-white border-t border-gray-100">
+      <div class="max-w-3xl mx-auto px-4">
+        <div class="bg-cream rounded-2xl shadow p-8 text-center mx-auto">
+          <p class="text-lg font-medium mb-2">
+            “After 60 days we went from the bottom of Google Maps to the top 3. The phones ring every week now.”
+          </p>
+          <div class="flex items-center justify-center gap-2 text-sm text-body/70">
+            <span>— John T., Plumbing Business Owner</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIGHT FAQ -->
+    <section class="py-16 bg-white border-t border-gray-100">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-heading font-bold mb-6 text-heading text-center">
+          Common Questions
+          <span class="block mx-auto mt-2 h-1 w-12 bg-[#f56b2a] rounded"></span>
+        </h2>
+        <div class="grid gap-6">
+          <div class="bg-bluelight rounded-2xl shadow border border-gray-100 p-6">
+            <h3 class="font-heading text-lg font-semibold mb-2 text-heading">Do you work with my trade or niche?</h3>
+            <p class="text-body">
+              Almost certainly. We focus on local services—plumbing, HVAC, pest, cleaning, lawn, electrical, roofing,
+              restoration, and more. If you book jobs in a service area, we can help.
             </p>
           </div>
-          <div class="bg-white rounded-2xl shadow p-8">
-            <h3 class="font-heading text-xl font-bold mb-2 text-[#f56b2a]">100% Service, 0% BS</h3>
-            <p>
-              We only recommend what we'd do for our own business. No lock-in contracts, no wasted budget, no agency
-              runaround. If it doesn't help you grow, we don't do it.
+          <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
+            <h3 class="font-heading text-lg font-semibold mb-2 text-heading">Are there contracts or setup fees?</h3>
+            <p class="text-body">
+              No long-term contracts. Most services are month-to-month with transparent pricing. If a one-time setup is
+              needed (e.g., a full site build), we’ll outline it clearly before starting.
             </p>
           </div>
-          <div class="bg-white rounded-2xl shadow p-8">
-            <h3 class="font-heading text-xl font-bold mb-2 text-[#f56b2a]">Built for Local Service Companies</h3>
-            <p>
-              We specialize in marketing for home service pros — plumbers, HVAC, pest control, cleaning, trades, and
-              more. No cookie-cutter plans, ever.
+          <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
+            <h3 class="font-heading text-lg font-semibold mb-2 text-heading">
+              Will I have a dedicated point of contact?
+            </h3>
+            <p class="text-body">
+              Yes—every client works directly with a home-service strategist. No call centers or endless handoffs.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA TO CONTACT / STRATEGY CALL -->
-    <section class="py-16 bg-white border-t border-gray-100 text-center">
-      <div class="max-w-2xl mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-heading font-bold mb-4 text-heading">Curious if We're the Right Fit?</h2>
+    <!-- FINAL CTA -->
+    <section class="py-20 bg-bluelight border-t border-gray-100">
+      <div class="max-w-3xl mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-3 text-heading">
+          Curious if We’re the Right Fit?
+          <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        </h2>
         <p class="text-lg text-body mb-8">
-          Book a free strategy call or send us a message. We'll review your business and show exactly how we can help
-          you grow — no obligations, ever.
+          Book a free strategy call. We’ll review your market, show opportunities, and map a plan—no pressure.
         </p>
-        <a
-          href="/contact"
-          class="inline-flex items-center px-8 py-4 rounded-2xl bg-[#f56b2a] hover:bg-[#f34e00] text-white font-heading font-semibold text-lg shadow transition"
-        >
-          Book Free Strategy Call
-          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-            <path d="M5 12h14M13 18l6-6-6-6"></path>
-          </svg>
-        </a>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-[#f56b2a] hover:bg-[#c9400a] text-white font-heading font-semibold text-lg shadow transition"
+          >
+            Book Free Strategy Call
+            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+              <path d="M5 12h14M13 18l6-6-6-6"></path>
+            </svg>
+          </a>
+          <a
+            href="/#packages"
+            class="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-lg shadow transition"
+          >
+            View Services & Pricing
+          </a>
+        </div>
       </div>
     </section>
   </Layout>
-
 
 </html>

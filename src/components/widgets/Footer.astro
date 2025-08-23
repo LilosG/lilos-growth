@@ -1,83 +1,87 @@
 ---
-import Logo from '../Logo.astro'; // Adjust if needed
+import Logo from '../Logo.astro';
+import { getPermalink } from '~/utils/permalinks';
 ---
 
-<footer class="bg-[#1f2d3d] border-t-4 border-[#f56b2a] shadow-md pt-12 pb-6 text-white">
-  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-16 items-start">
-    <!-- Logo, Tagline, and Rating -->
-    <div class="flex flex-col items-start">
-      <Logo class="w-28 mb-2" />
-      <h2 class="text-xl font-bold font-heading mb-1">Lilos Growth</h2>
-      <div class="flex flex-col gap-1 mb-2">
-        <p class="text-base text-body">Home Service Marketing Experts</p>
-        <div class="flex items-center">
-          <svg class="w-5 h-5 text-[#f56b2a] mr-2" fill="currentColor" viewBox="0 0 20 20">
-            <polygon
-              points="10 1.5 12.59 7.36 18.97 7.76 14.19 12.14 15.63 18.4 10 15.16 4.37 18.4 5.81 12.14 1.03 7.76 7.41 7.36 10 1.5"
-            ></polygon>
-          </svg>
-          <span class="font-medium text-[#f56b2a] text-base">5.0 Google Rated</span>
-        </div>
-      </div>
-    </div>
-    <!-- Quick Links -->
-    <div class="flex flex-col items-start">
-      <h3 class="text-lg font-semibold text-[#f56b2a] mb-3">Quick Links</h3>
-      <ul class="space-y-1 text-base">
-        <li><a href="/services" class="hover:underline">Services</a></li>
-        <li><a href="/packages" class="hover:underline">Packages</a></li>
-        <li><a href="/local-seo-tools" class="hover:underline">Local SEO Tools</a></li>
-        <li><a href="/about" class="hover:underline">About</a></li>
-        <li><a href="/contact" class="hover:underline">Contact</a></li>
-        <li><a href="/faq" class="hover:underline">FAQ</a></li>
-      </ul>
-    </div>
-    <!-- Services -->
-    <div class="flex flex-col items-start">
-      <h3 class="text-lg font-semibold text-[#f56b2a] mb-3">Services</h3>
-      <ul class="space-y-1 text-base">
-        <li><a href="/services/local-seo" class="hover:underline">Local SEO</a></li>
-        <li><a href="/services/google-business-profile-optimization" class="hover:underline">GBP Optimization</a></li>
-        <li><a href="/services/web-design" class="hover:underline">Website Design</a></li>
-        <li><a href="/services/reviews-reputation" class="hover:underline">Reviews & Reputation</a></li>
-        <li><a href="/local-seo-tools" class="hover:underline">SEO Tools</a></li>
-      </ul>
-    </div>
-    <!-- Additional Services -->
-    <div class="flex flex-col items-start">
-      <h3 class="text-lg font-semibold text-[#f56b2a] mb-3">Additional Services</h3>
-      <ul class="space-y-1 text-base">
-        <li><a href="/additional-services" class="hover:underline">Citation Builder</a></li>
-        <li><a href="/additional-services" class="hover:underline">Google Business Profile Setup</a></li>
-        <li><a href="/additional-services" class="hover:underline">GBP 30-Day Optimization</a></li>
-        <li>
-          <a href="/additional-services" class="hover:underline">
-            <span class="whitespace-nowrap">SEO Consulting &amp; Website Tune-Up</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <!-- Contact -->
-    <div class="flex flex-col items-start">
-      <h3 class="text-lg font-semibold text-[#f56b2a] mb-3">Contact</h3>
-      <ul class="space-y-1 text-base mb-3">
-        <li class="flex items-center">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<footer class="bg-[#253242] text-white border-t-4 border-[#f56b2a]">
+  <div class="max-w-6xl mx-auto px-4 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <!-- Brand / Info -->
+      <section aria-labelledby="footer-brand">
+        <Logo class="w-28 mb-3" />
+        <h2 id="footer-brand" class="text-xl font-heading font-bold">Lilos Growth</h2>
+        <p class="mt-2 text-white/85">Home Service Marketing Experts</p>
+
+        <div class="mt-3 inline-flex items-center gap-2">
+          <svg class="w-5 h-5 text-[#f56b2a]" viewBox="0 0 20 20" fill="currentColor">
             <path
-              d="M21 10.7V7a2 2 0 0 0-2-2h-2.18A2 2 0 0 1 15 4.18V3a2 2 0 0 0-2-2H7A2 2 0 0 0 5 3v14a2 2 0 0 0 2 2h6l3.29 3.29a1 1 0 0 0 1.7-.7V17a2 2 0 0 0 2-2v-4.3z"
+              d="M10 1.5 12.6 7.4l6.38.36-4.78 4.38 1.46 6.26L10 15.18 4.34 18.4l1.46-6.26L1.02 7.76l6.38-.36L10 1.5z"
             ></path>
           </svg>
+          <span class="text-[#f56b2a] font-medium">5.0 Google Rated</span>
+        </div>
+
+        <div class="mt-4 space-y-1 text-sm text-white/75">
           <a href="mailto:hello@lilosgrowth.com" class="hover:underline">hello@lilosgrowth.com</a>
-        </li>
-        <li class="text-gray-300">Based in San Diego, CA</li>
-      </ul>
-      <div class="flex gap-4 mt-2">
-        <a href="/privacy-policy" class="text-gray-300 hover:underline text-sm">Privacy Policy</a>
-        <a href="/contact" class="text-gray-300 hover:underline text-sm">Contact</a>
+          <div>Based in San Diego, CA</div>
+        </div>
+      </section>
+
+      <!-- Quick Links -->
+      <nav aria-labelledby="footer-quick">
+        <h3 id="footer-quick" class="text-lg font-semibold text-[#f56b2a] mb-3">Quick Links</h3>
+        <ul class="space-y-2 text-white/90">
+          <li><a href={getPermalink('/services')} class="hover:underline">Services</a></li>
+          <li><a href={getPermalink('/packages')} class="hover:underline">Packages</a></li>
+          <li><a href={getPermalink('/local-seo-tools')} class="hover:underline">Local SEO Tools</a></li>
+          <li><a href={getPermalink('/about')} class="hover:underline">About</a></li>
+          <li><a href={getPermalink('/contact')} class="hover:underline">Contact</a></li>
+          <li><a href={getPermalink('/faq')} class="hover:underline">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Core Services -->
+      <nav aria-labelledby="footer-services">
+        <h3 id="footer-services" class="text-lg font-semibold text-[#f56b2a] mb-3">Services</h3>
+        <ul class="space-y-2 text-white/90">
+          <li><a href={getPermalink('/services/local-seo')} class="hover:underline">Local SEO</a></li>
+          <li>
+            <a href={getPermalink('/services/google-business-profile-optimization')} class="hover:underline"
+              >Google Business Profile</a>
+          </li>
+          <li><a href={getPermalink('/services/web-design')} class="hover:underline">Website Design</a></li>
+          <li><a href={getPermalink('/additional-services')} class="hover:underline">Additional Services</a></li>
+        </ul>
+      </nav>
+
+      <!-- Additional Services (deep links) -->
+      <nav aria-labelledby="footer-additional">
+        <h3 id="footer-additional" class="text-lg font-semibold text-[#f56b2a] mb-3">Additional Services</h3>
+        <ul class="space-y-2 text-white/90">
+          <li><a href={getPermalink('/additional-services#citation')} class="hover:underline">Citation Builder</a></li>
+          <li>
+            <a href={getPermalink('/additional-services#gbp-setup')} class="hover:underline"
+              >Google Business Profile Setup</a>
+          </li>
+          <li>
+            <a href={getPermalink('/additional-services#gbp-30')} class="hover:underline">GBP 30-Day Optimization</a>
+          </li>
+          <li>
+            <a href={getPermalink('/additional-services#seo-tune')} class="hover:underline"
+              >SEO Consulting &amp; Website Tune-Up</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div
+      class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/70"
+    >
+      <div>© 2025 Lilos Growth. All rights reserved.</div>
+      <div class="flex items-center gap-4">
+        <a href={getPermalink('/privacy-policy')} class="hover:underline">Privacy Policy</a>
+        <a href={getPermalink('/contact')} class="hover:underline">Contact</a>
       </div>
     </div>
-  </div>
-  <div class="text-xs text-gray-400 mt-10 text-center max-w-7xl mx-auto px-4">
-    © 2025 Lilos Growth. All rights reserved.
   </div>
 </footer>
