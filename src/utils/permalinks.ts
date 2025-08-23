@@ -24,9 +24,7 @@ export const BLOG_BASE = cleanSlug(APP_BLOG?.list?.pathname);
 export const CATEGORY_BASE = cleanSlug(APP_BLOG?.category?.pathname);
 export const TAG_BASE = cleanSlug(APP_BLOG?.tag?.pathname) || 'tag';
 
-export const POST_PERMALINK_PATTERN = trimSlash(
-  APP_BLOG?.post?.permalink || `${BLOG_BASE}/%slug%`
-);
+export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `${BLOG_BASE}/%slug%`);
 
 /** */
 export const getCanonical = (path = ''): string | URL => {
@@ -102,13 +100,10 @@ export const getAsset = (path: string): string =>
     .join('/');
 
 /** */
-const definitivePermalink = (permalink: string): string =>
-  createPath(BASE_PATHNAME, permalink);
+const definitivePermalink = (permalink: string): string => createPath(BASE_PATHNAME, permalink);
 
 /** */
-export const applyGetPermalinks = (
-  menu: Record<string, any> | any[] = {} as any
-): any => {
+export const applyGetPermalinks = (menu: Record<string, any> | any[] = {} as any): any => {
   if (Array.isArray(menu)) {
     return menu.map((item) => applyGetPermalinks(item));
   } else if (typeof menu === 'object' && menu !== null) {
@@ -125,10 +120,7 @@ export const applyGetPermalinks = (
           } else if ((menu as any)[key].type === 'asset') {
             obj[key] = getAsset((menu as any)[key].url);
           } else if ((menu as any)[key].url) {
-            obj[key] = getPermalink(
-              (menu as any)[key].url,
-              (menu as any)[key].type
-            );
+            obj[key] = getPermalink((menu as any)[key].url, (menu as any)[key].type);
           }
         }
       } else {

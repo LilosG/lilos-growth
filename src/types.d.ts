@@ -1,4 +1,4 @@
-import type { AstroComponent } from "astro";
+import type { AstroComponent } from 'astro';
 import type { HTMLAttributes, ImageMetadata } from 'astro/types';
 
 export interface Post {

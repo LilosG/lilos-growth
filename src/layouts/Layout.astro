@@ -41,13 +41,7 @@ export interface Props {
   metadata?: MetaDataType;
 }
 
-const {
-  title,
-  description,
-  lang = 'en',
-  bodyClass = '',
-  metadata = {},
-} = Astro.props as Props;
+const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro.props as Props;
 ---
 
 <!doctype html>
@@ -66,7 +60,9 @@ const {
   </head>
 
   <!-- Sticky-footer safe: full-height flex column on the BODY -->
-  <body class={`antialiased text-default bg-page tracking-tight min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip ${bodyClass}`}>
+  <body
+    class={`antialiased text-default bg-page tracking-tight min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip ${bodyClass}`}
+  >
     <!-- Page content -->
     <div class="flex-1 flex flex-col">
       <slot />
