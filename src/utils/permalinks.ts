@@ -1,7 +1,6 @@
 import slugify from 'limax';
 
 import { SITE, APP_BLOG } from 'astrowind:config';
-
 import { trim } from '~/utils/utils';
 
 export const trimSlash = (s: string) => trim(trim(s, '/'));
@@ -25,7 +24,9 @@ export const BLOG_BASE = cleanSlug(APP_BLOG?.list?.pathname);
 export const CATEGORY_BASE = cleanSlug(APP_BLOG?.category?.pathname);
 export const TAG_BASE = cleanSlug(APP_BLOG?.tag?.pathname) || 'tag';
 
-export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `${BLOG_BASE}/%slug%`);
+export const POST_PERMALINK_PATTERN = trimSlash(
+  APP_BLOG?.post?.permalink || `${BLOG_BASE}/%slug%`
+);
 
 /** */
 export const getCanonical = (path = ''): string | URL => {
@@ -101,31 +102,37 @@ export const getAsset = (path: string): string =>
     .join('/');
 
 /** */
-const definitivePermalink = (permalink: string): string => createPath(BASE_PATHNAME, permalink);
+const definitivePermalink = (permalink: string): string =>
+  createPath(BASE_PATHNAME, permalink);
 
 /** */
-export const applyGetPermalinks = (menu: object = {}) => {
+export const applyGetPermalinks = (
+  menu: Record<string, any> | any[] = {} as any
+): any => {
   if (Array.isArray(menu)) {
     return menu.map((item) => applyGetPermalinks(item));
   } else if (typeof menu === 'object' && menu !== null) {
-    const obj = {};
+    const obj: Record<string, any> = {};
     for (const key in menu) {
       if (key === 'href') {
-        if (typeof menu[key] === 'string') {
-          obj[key] = getPermalink(menu[key]);
-        } else if (typeof menu[key] === 'object') {
-          if (menu[key].type === 'home') {
+        if (typeof (menu as any)[key] === 'string') {
+          obj[key] = getPermalink((menu as any)[key]);
+        } else if (typeof (menu as any)[key] === 'object') {
+          if ((menu as any)[key].type === 'home') {
             obj[key] = getHomePermalink();
-          } else if (menu[key].type === 'blog') {
+          } else if ((menu as any)[key].type === 'blog') {
             obj[key] = getBlogPermalink();
-          } else if (menu[key].type === 'asset') {
-            obj[key] = getAsset(menu[key].url);
-          } else if (menu[key].url) {
-            obj[key] = getPermalink(menu[key].url, menu[key].type);
+          } else if ((menu as any)[key].type === 'asset') {
+            obj[key] = getAsset((menu as any)[key].url);
+          } else if ((menu as any)[key].url) {
+            obj[key] = getPermalink(
+              (menu as any)[key].url,
+              (menu as any)[key].type
+            );
           }
         }
       } else {
-        obj[key] = applyGetPermalinks(menu[key]);
+        obj[key] = applyGetPermalinks((menu as any)[key]);
       }
     }
     return obj;
