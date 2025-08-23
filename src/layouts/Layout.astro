@@ -1,5 +1,9 @@
 ---
-// src/layouts/Layout.astro
+/**
+ * Global site layout — loads Tailwind, meta components, and site-wide scripts.
+ * Includes Vercel Analytics + Speed Insights using their official Astro adapters.
+ */
+
 import '~/assets/styles/tailwind.css';
 
 import CommonMeta from '~/components/common/CommonMeta.astro';
@@ -8,22 +12,18 @@ import CustomStyles from '~/components/CustomStyles.astro';
 import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
 import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
-import Analytics from '~/components/common/Analytics.astro';
+import Analytics from '~/components/common/Analytics.astro'; // keep if you use GTM/GA/etc.
 import BasicScripts from '~/components/common/BasicScripts.astro';
 
-// Vercel Web Analytics (SINGLE owner here)
+// Vercel Web Analytics & Speed Insights (official)
 import VercelAnalytics from '@vercel/analytics/astro';
-// Vercel Speed Insights
 import SpeedInsights from '@vercel/speed-insights/astro';
-
-// View Transitions (optional)
-import { ClientRouter } from 'astro:transitions';
 
 import type { MetaData as MetaDataType } from '~/types';
 
-// Only declare our helper; do NOT redeclare window.va (the package already does)
 declare global {
   interface Window {
+    /** Helper for custom events that forwards to Vercel Analytics when available */
     trackEvent?: (name: string, data?: Record<string, unknown>) => void;
   }
 }
@@ -41,20 +41,17 @@ export interface Props {
   metadata?: MetaDataType;
 }
 
-const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro.props as Props;
+const {
+  title,
+  description,
+  lang = 'en',
+  bodyClass = '',
+  metadata = {},
+} = Astro.props as Props;
 ---
 
 <!doctype html>
-<!--
-  Site-wide scale knob:
-  We reduce the root font size on all breakpoints (no transforms), which
-  makes the UI feel ~85–90% of the prior size. Remove or tweak values to taste.
--->
-<html
-  lang={lang}
-  dir="ltr"
-  class="h-full text-[14px] sm:text-[14px] md:text-[14.5px] lg:text-[14.5px] xl:text-[14.5px] 2xl:text-[14.5px]"
->
+<html lang={lang} dir="ltr" class="h-full">
   <head>
     <CommonMeta />
     <Favicons />
@@ -63,26 +60,26 @@ const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro
     <Metadata {...metadata} />
     <SiteVerification />
     <Analytics />
-    <ClientRouter fallback="swap" />
 
     {title && <title>{title}</title>}
     {description && <meta name="description" content={description} />}
   </head>
 
   <!-- Sticky-footer safe: full-height flex column on the BODY -->
-  <body
-    class={`antialiased text-default bg-page tracking-tight min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip ${bodyClass}`}
-  >
-    <!-- Full-width page content; no transform scales -->
+  <body class={`antialiased text-default bg-page tracking-tight min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip ${bodyClass}`}>
+    <!-- Page content -->
     <div class="flex-1 flex flex-col">
       <slot />
     </div>
 
+    <!-- Site scripts -->
     <BasicScripts />
+
+    <!-- Vercel analytics (do not duplicate elsewhere) -->
     <VercelAnalytics />
     <SpeedInsights />
 
-    <!-- Inline helper using the correct event API. No npm imports here. -->
+    <!-- Small helper to send custom events to Vercel Analytics -->
     <script is:inline>
       window.trackEvent = (name, data = {}) => {
         try {

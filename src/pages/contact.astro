@@ -8,7 +8,7 @@ export const description =
 
 <Layout {title} {description}>
   <!-- HEAD EXTRAS (kept Astro-native & CSP-safe via the named head slot) -->
-  <Fragment slot="head">
+  <div slot="head">
     <!-- Calendly performance + styles -->
     <link rel="preconnect" href="https://assets.calendly.com" />
     <link rel="dns-prefetch" href="https://assets.calendly.com" />
@@ -29,7 +29,7 @@ export const description =
         }
       }
     </style>
-  </Fragment>
+  </div>
 
   <!-- CONTACT FORM SECTION -->
   <section class="bg-[#253242] py-20 px-4">

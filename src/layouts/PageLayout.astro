@@ -1,41 +1,32 @@
 ---
 /**
- * Page wrapper used by most pages.
- * IMPORTANT:
- *  - Do NOT import or render analytics here (owned by Layout.astro).
- *  - Keep Calendly import EXACTLY as requested.
+ * Page wrapper layout — prints Header, your page <slot />, then Footer.
+ * Passes through SEO props to the global Layout so each page can set title/description.
  */
-import BaseLayout from '~/layouts/Layout.astro';
+
+import Layout from './Layout.astro';
 import Header from '~/components/widgets/Header.astro';
 import Footer from '~/components/widgets/Footer.astro';
-import FloatingCalendlyButton from '~/components/widgets/FloatingCalendlyButton.astro';
 
 import type { MetaData as MetaDataType } from '~/types';
 
 export interface Props {
-  metadata?: MetaDataType;
   title?: string;
   description?: string;
   lang?: string;
   bodyClass?: string;
+  metadata?: MetaDataType;
 }
 
-const { metadata, title, description, lang = 'en', bodyClass = '' } = Astro.props as Props;
+const props = Astro.props as Props;
 ---
 
-<BaseLayout {metadata} {title} {description} {lang} {bodyClass}>
-  <!-- Optional head passthrough for pages that provide a named head slot -->
-  <slot slot="head" name="head" />
-
-  <!-- Site chrome -->
+<Layout {...props}>
   <Header />
 
-  <main>
+  <main id="main" class="flex-1 focus:outline-none">
     <slot />
   </main>
 
   <Footer />
-
-  <!-- Calendly floating button (kept exactly as requested) -->
-  <FloatingCalendlyButton />
-</BaseLayout>
+</Layout>

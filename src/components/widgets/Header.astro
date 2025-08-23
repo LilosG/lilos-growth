@@ -5,41 +5,17 @@ type SubLink = { text: string; href: string; description?: string };
 type NavItem = { text: string; href?: string; links?: SubLink[] };
 type Action = { text: string; href: string };
 
-// sensible defaults in case headerData is missing anything
-const nav: NavItem[] = (
-  Array.isArray(headerData?.links) && headerData.links.length
-    ? headerData.links
-    : [
-        {
-          text: 'Services',
-          links: [
-            { text: 'Local SEO', href: '/services/local-seo' },
-            { text: 'Google Business Profile', href: '/services/google-business-profile-optimization' },
-            { text: 'Website Design', href: '/services/web-design' },
-            { text: 'Additional Services', href: '/additional-services' },
-          ],
-        },
-        { text: 'Packages', href: '/packages' },
-        { text: 'Local SEO Tools', href: '/local-seo-tools' },
-        { text: 'About', href: '/about' },
-        { text: 'Contact', href: '/contact' },
-      ]
-) satisfies NavItem[];
+const nav = (Array.isArray(headerData?.links) ? headerData.links : []) as unknown as NavItem[];
+const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) as unknown as Action[];
 
-const actions: Action[] = (
-  Array.isArray(headerData?.actions) && headerData.actions.length
-    ? headerData.actions
-    : [{ text: 'Book a Call', href: '/contact' }]
-) satisfies Action[];
-
-const currentPath = Astro.url.pathname;
-const isActive = (href?: string) => !!href && (currentPath === href || (href !== '/' && currentPath.startsWith(href)));
+// DO NOT reference `Astro` directly — use globalThis so the editor doesn't complain.
+const currentPath: string = (globalThis as any)?.Astro?.url?.pathname ?? '/';
+const isActive = (href?: string) =>
+  !!href && (currentPath === href || (href !== '/' && currentPath.startsWith(href)));
 ---
 
-<header
-  class="sticky top-0 z-[100] w-full bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-gray-200"
->
-  <div class="mx-auto w-full max-w-6xl px-4">
+<header class="sticky top-0 z-[100] w-full bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-gray-200">
+  <div class="mx-auto w-full max-w-7xl px-4">
     <div class="flex h-20 items-center justify-between gap-4">
       <a href="/" class="shrink-0 inline-flex items-center" aria-label="Lilos Growth — Home">
         <img
@@ -51,87 +27,72 @@ const isActive = (href?: string) => !!href && (currentPath === href || (href !==
         />
       </a>
 
-      <!-- desktop nav -->
       <nav class="hidden md:flex items-center gap-6">
-        {
-          nav.map((item) =>
-            item?.links && item.links.length ? (
-              <div class="relative group" data-has-submenu="true">
-                <button
-                  class="inline-flex items-center gap-1 py-2 text-[15px] font-medium text-[#253242] hover:text-[#1f2d3d] transition"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  {item.text}
-                  <svg
-                    class="h-4 w-4 opacity-70 group-hover:opacity-100 transition"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" />
-                  </svg>
-                </button>
+        {nav.map((item) =>
+          item?.links?.length ? (
+            <div class="relative group" data-has-submenu="true">
+              <a
+                href={item.href ?? '#'}
+                class="inline-flex items-center gap-1 py-2 text-[15px] font-medium text-[#253242] hover:text-[#1f2d3d] transition"
+              >
+                {item.text}
+                <svg class="h-4 w-4 opacity-70 group-hover:opacity-100 transition" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" />
+                </svg>
+              </a>
 
-                <div class="absolute left-0 top-full pt-3 z-[120]">
-                  <div
-                    class="min-w-[260px] rounded-2xl border border-gray-200 bg-white shadow-xl
-                           opacity-0 translate-y-2 pointer-events-none
-                           group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto
-                           focus-within:opacity-100 focus-within:translate-y-0 focus-within:pointer-events-auto
-                           transition"
-                  >
-                    <ul class="p-2">
-                      {item.links.map((sub) => (
-                        <li>
-                          <a
-                            href={sub.href}
-                            class="block rounded-xl px-4 py-3 text-[15px] text-[#253242] hover:bg-gray-50 hover:text-[#1f2d3d] transition"
-                          >
-                            <div class="font-semibold">{sub.text}</div>
-                            {sub.description ? <div class="mt-0.5 text-xs text-gray-500">{sub.description}</div> : null}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+              <div class="absolute left-0 top-full pt-3 z-[120]">
+                <div
+                  data-menu
+                  class="min-w-[240px] rounded-2xl border border-gray-200 bg-white shadow-xl
+                         opacity-0 translate-y-2 pointer-events-none
+                         group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto
+                         group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto
+                         transition"
+                >
+                  <div class="p-2">
+                    {item.links.map((sub) => (
+                      <a
+                        href={sub.href}
+                        class="block rounded-xl px-4 py-3 text-[15px] text-[#253242] hover:bg-gray-50 hover:text-[#1f2d3d] transition"
+                      >
+                        <div class="font-semibold">{sub.text}</div>
+                        {sub.description ? (
+                          <div class="mt-0.5 text-xs text-gray-500">{sub.description}</div>
+                        ) : null}
+                      </a>
+                    ))}
                   </div>
                 </div>
               </div>
-            ) : (
-              <a
-                href={item.href ?? '#'}
-                class={`relative text-[15px] font-medium py-2 transition ${
-                  isActive(item.href) ? 'text-[#f56b2a]' : 'text-[#253242] hover:text-[#1f2d3d]'
-                }`}
-                aria-current={isActive(item.href) ? 'page' : undefined}
-              >
-                {item.text}
-                {isActive(item.href) ? (
-                  <span class="absolute -bottom-1 left-0 h-0.5 w-full bg-[#f56b2a] rounded" />
-                ) : null}
-              </a>
-            )
+            </div>
+          ) : (
+            <a
+              href={item.href ?? '#'}
+              class:list={[
+                'py-2 text-[15px] font-medium transition',
+                isActive(item.href) ? 'text-[#f56b2a]' : 'text-[#253242] hover:text-[#1f2d3d]',
+              ]}
+            >
+              {item.text}
+            </a>
           )
-        }
+        )}
       </nav>
 
       <div class="flex items-center gap-3">
-        {
-          actions?.[0]?.href ? (
-            <a
-              href={actions[0].href}
-              class="hidden md:inline-flex items-center justify-center rounded-2xl bg-[#f56b2a] px-5 py-3 text-white text-sm font-semibold shadow hover:bg-[#c9400a] transition"
-              aria-label={actions[0].text}
-            >
-              {actions[0].text}
-            </a>
-          ) : null
-        }
+        {actions?.[0]?.href ? (
+          <a
+            href={actions[0].href}
+            class="hidden md:inline-flex items-center justify-center rounded-full bg-[#f56b2a] px-5 py-3 text-white text-sm font-semibold shadow hover:bg-[#e85718] transition"
+          >
+            {actions[0].text}
+          </a>
+        ) : null}
 
-        <!-- mobile trigger -->
         <button
           id="mobileMenuBtn"
-          class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-xl border border-gray-300 text-[#253242]"
+          class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-300 text-[#253242]"
           aria-controls="mobileMenu"
           aria-expanded="false"
         >
@@ -144,18 +105,17 @@ const isActive = (href?: string) => !!href && (currentPath === href || (href !==
     </div>
   </div>
 
-  <!-- mobile drawer -->
+  <div class="h-0.5 w-full bg-[#f56b2a]/80"></div>
+
+  <!-- Mobile drawer -->
   <div id="mobileMenu" class="fixed inset-0 z-[110] hidden" aria-hidden="true">
     <div class="absolute inset-0 bg-black/40"></div>
     <div class="absolute right-0 top-0 h-full w-[88%] max-w-[22rem] bg-white shadow-xl p-6 overflow-y-auto">
       <div class="flex items-center justify-between">
-        <a href="/" class="inline-flex items-center" aria-label="Lilos Growth — Home">
-          <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-10 w-auto" />
+        <a href="/" class="inline-flex items-center">
+          <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-10 w-auto" loading="eager" decoding="async" />
         </a>
-        <button
-          id="mobileMenuClose"
-          class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-gray-300 text-[#253242]"
-        >
+        <button id="mobileMenuClose" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-[#253242]">
           <span class="sr-only">Close menu</span>
           <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -164,43 +124,33 @@ const isActive = (href?: string) => !!href && (currentPath === href || (href !==
       </div>
 
       <div class="mt-6 space-y-6">
-        {
-          nav.map((item) =>
-            item?.links && item.links.length ? (
-              <div class="space-y-2">
-                <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">{item.text}</div>
-                <div class="grid gap-1">
-                  {item.links.map((sub) => (
-                    <a href={sub.href} class="block rounded-xl px-3 py-3 text-[15px] text-[#253242] hover:bg-gray-50">
-                      {sub.text}
-                    </a>
-                  ))}
-                </div>
+        {nav.map((item) =>
+          item?.links?.length ? (
+            <div class="space-y-2">
+              <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">{item.text}</div>
+              <div class="grid gap-1">
+                {item.links.map((sub) => (
+                  <a href={sub.href} class="block rounded-xl px-3 py-3 text-[15px] text-[#253242] hover:bg-gray-50">
+                    {sub.text}
+                  </a>
+                ))}
               </div>
-            ) : (
-              <a
-                href={item.href ?? '#'}
-                class={`block rounded-xl px-3 py-3 text-[15px] ${
-                  isActive(item.href) ? 'text-[#f56b2a]' : 'text-[#253242] hover:bg-gray-50'
-                }`}
-                aria-current={isActive(item.href) ? 'page' : undefined}
-              >
-                {item.text}
-              </a>
-            )
-          )
-        }
-
-        {
-          actions?.[0]?.href ? (
-            <a
-              href={actions[0].href}
-              class="mt-4 inline-flex w-full items-center justify-center rounded-2xl bg-[#f56b2a] px-4 py-3 text-white text-sm font-semibold shadow hover:bg-[#c9400a] transition"
-            >
-              {actions[0].text}
+            </div>
+          ) : (
+            <a href={item.href ?? '#'} class="block rounded-xl px-3 py-3 text-[15px] text-[#253242] hover:bg-gray-50">
+              {item.text}
             </a>
-          ) : null
-        }
+          )
+        )}
+
+        {actions?.[0]?.href ? (
+          <a
+            href={actions[0].href}
+            class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#f56b2a] px-4 py-3 text-white text-sm font-semibold shadow hover:bg-[#e85718] transition"
+          >
+            {actions[0].text}
+          </a>
+        ) : null}
       </div>
     </div>
   </div>
@@ -226,34 +176,8 @@ const isActive = (href?: string) => !!href && (currentPath === href || (href !==
 
         btn.addEventListener('click', open);
         if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-        panel.addEventListener('click', (e) => {
-          if (e.target === panel) closeMenu();
-        });
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') closeMenu();
-        });
-
-        const groups = Array.from(document.querySelectorAll('[data-has-submenu="true"]'));
-        groups.forEach((group) => {
-          const trigger = group.querySelector('button');
-          if (!trigger) return;
-          let hideTimer;
-          const setExpanded = (v) => trigger.setAttribute('aria-expanded', String(v));
-          group.addEventListener('mouseenter', () => {
-            if (hideTimer) clearTimeout(hideTimer);
-            setExpanded(true);
-          });
-          group.addEventListener('mouseleave', () => {
-            hideTimer = setTimeout(() => setExpanded(false), 80);
-          });
-          group.addEventListener('focusin', () => setExpanded(true));
-          group.addEventListener('focusout', () => {
-            hideTimer = setTimeout(() => setExpanded(false), 80);
-          });
-          trigger.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') e.preventDefault();
-          });
-        });
+        panel.addEventListener('click', (e) => { if (e.target === panel) closeMenu(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
       }
       document.addEventListener('DOMContentLoaded', bind);
       document.addEventListener('astro:page-load', bind);
