@@ -4,8 +4,7 @@
   'use strict';
 
   const CAL_URL_ATTRS = ['data-cal-url', 'data-calendly-url'];
-  const SELECTOR =
-    '[data-calendly="open"], [data-cal-open="true"], #calendlyBtn, .calendly-open';
+  const SELECTOR = '[data-calendly="open"], [data-cal-open="true"], #calendlyBtn, .calendly-open';
 
   function ready(fn) {
     if (document.readyState === 'loading') {
