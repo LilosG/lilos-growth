@@ -1,10 +1,11 @@
 /* Calendly hybrid loader: binds to elements and opens the popup widget safely. */
 /* eslint-env browser */
-(function () {
+(() => {
   'use strict';
 
-  var CAL_URL_ATTRS = ['data-cal-url', 'data-calendly-url'];
-  var SELECTOR = '[data-calendly="open"], [data-cal-open="true"], #calendlyBtn, .calendly-open';
+  const CAL_URL_ATTRS = ['data-cal-url', 'data-calendly-url'];
+  const SELECTOR =
+    '[data-calendly="open"], [data-cal-open="true"], #calendlyBtn, .calendly-open';
 
   function ready(fn) {
     if (document.readyState === 'loading') {
@@ -15,60 +16,52 @@
   }
 
   function getCalendlyUrlFrom(el) {
-    for (var i = 0; i < CAL_URL_ATTRS.length; i++) {
-      var attr = CAL_URL_ATTRS[i];
-      var val = el.getAttribute(attr);
+    for (const attr of CAL_URL_ATTRS) {
+      const val = el.getAttribute(attr);
       if (val) return val;
     }
-    var href = el.getAttribute('href');
+    const href = el.getAttribute('href');
     return href || '';
   }
 
   function loadScriptOnce(src) {
-    return new Promise(function (resolve, reject) {
-      if (document.querySelector('script[src="' + src + '"]')) {
+    return new Promise((resolve, reject) => {
+      if (document.querySelector(`script[src="${src}"]`)) {
         resolve();
         return;
       }
-      var s = document.createElement('script');
+      const s = document.createElement('script');
       s.src = src;
       s.async = true;
-      s.onload = function () {
-        resolve();
-      };
-      s.onerror = function (e) {
-        reject(e);
-      };
+      s.onload = () => resolve();
+      s.onerror = (e) => reject(e);
       document.head.appendChild(s);
     });
   }
 
   function openCalendly(url) {
-    // If Calendly is available, open popup; otherwise navigate to URL.
     if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
-      window.Calendly.initPopupWidget({ url: url });
+      window.Calendly.initPopupWidget({ url });
       return;
     }
     if (url) window.location.href = url;
   }
 
-  ready(function () {
-    var targets = Array.prototype.slice.call(document.querySelectorAll(SELECTOR));
+  ready(() => {
+    const targets = Array.from(document.querySelectorAll(SELECTOR));
     if (targets.length === 0) return;
 
-    targets.forEach(function (el) {
+    targets.forEach((el) => {
       el.addEventListener(
         'click',
-        function (e) {
-          var url = getCalendlyUrlFrom(el);
+        (e) => {
+          const url = getCalendlyUrlFrom(el);
           if (!url) return;
           e.preventDefault();
           loadScriptOnce('https://assets.calendly.com/assets/external/widget.js')
-            .then(function () {
-              openCalendly(url);
-            })
-            .catch(function () {
-              // Fallback: navigate directly
+            .then(() => openCalendly(url))
+            .catch(() => {
+              // Fallback: navigate directly if the widget fails to load
               window.location.href = url;
             });
         },
