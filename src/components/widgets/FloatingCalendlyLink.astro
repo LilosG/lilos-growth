@@ -1,0 +1,41 @@
+---
+/**
+ * Hybrid floating CTA:
+ * - Visible on all screens (bottom-right).
+ * - DESKTOP (>= breakpointPx): opens Calendly popup.
+ * - MOBILE: navigates to /contact#book (or your fallback).
+ */
+interface Props {
+  url?: string; // Calendly scheduling URL
+  text?: string; // Button label
+  fallbackHref?: string; // Contact page anchor
+  className?: string; // Extra classes if needed
+  breakpointPx?: number; // Desktop popup threshold (default 768)
+}
+
+const {
+  url = 'https://calendly.com/lilosgrowth/intro-call',
+  text = 'Schedule a Call',
+  fallbackHref = '/contact#book',
+  className = '',
+  breakpointPx = 768,
+} = Astro.props;
+---
+
+<a
+  href={fallbackHref}
+  data-cal-hybrid
+  data-cal-url={url}
+  data-cal-breakpoint={String(breakpointPx)}
+  class:list={[
+    'fixed bottom-6 right-6 bg-[#f56b2a] text-white font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-[#d85a20] transition-all duration-200 z-50',
+    className,
+  ]}
+  title={text}
+  aria-label={text}
+>
+  {text}
+</a>
+
+<!-- Hybrid loader (CSP-safe) -->
+<script type="module" src="/scripts/calendly-hybrid.js"></script>

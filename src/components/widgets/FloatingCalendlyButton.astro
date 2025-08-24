@@ -1,13 +1,41 @@
 ---
-const calendlyUrl = '/contact#book'; // Direct link to Calendly section
+/**
+ * Floating Calendly CTA (bottom-right, always visible)
+ * Hybrid behavior:
+ *  - Desktop (>= breakpointPx): open Calendly popup (with 2.5s fallback).
+ *  - Mobile: navigate directly to /contact#book (or custom).
+ */
+interface Props {
+  url?: string;
+  text?: string;
+  fallbackHref?: string;
+  className?: string;
+  breakpointPx?: number;
+}
+const {
+  url = 'https://calendly.com/lilosgrowth/intro-call',
+  text = 'Schedule a Call',
+  fallbackHref = '/contact#book',
+  className = '',
+  breakpointPx = 768,
+} = Astro.props;
+
+const classes =
+  `fixed bottom-6 right-6 z-[1000] inline-flex items-center justify-center ` +
+  `rounded-full px-4 py-2 font-semibold print:hidden ` +
+  `bg-[#f56b2a] text-white shadow-lg hover:bg-[#d85a20] transition-all duration-200`;
 ---
 
 <a
-  href={calendlyUrl}
-  onmouseenter="window.loadCalendly && window.loadCalendly()"
-  ontouchstart="window.loadCalendly && window.loadCalendly()"
-  class="fixed bottom-6 right-6 bg-[#f56b2a] text-white font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-[#d85a20] transition-all duration-200 z-50"
-  title="Schedule a Call"
+  href={fallbackHref}
+  data-cal-hybrid
+  data-cal-url={url}
+  data-cal-breakpoint={String(breakpointPx)}
+  class={`${classes} ${className}`.trim()}
+  title={text}
+  aria-label={text}
 >
-  Schedule a Call
+  {text}
 </a>
+
+<script type="module" src="/scripts/calendly-hybrid.js"></script>

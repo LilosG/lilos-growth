@@ -1,5 +1,6 @@
 ---
 import { headerData } from '~/navigation';
+import FloatingCalendlyButton from '~/components/widgets/FloatingCalendlyButton.astro';
 
 type SubLink = { text: string; href: string; description?: string };
 type NavItem = { text: string; href?: string; links?: SubLink[] };
@@ -8,133 +9,151 @@ type Action = { text: string; href: string };
 const nav = (Array.isArray(headerData?.links) ? headerData.links : []) as unknown as NavItem[];
 const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) as unknown as Action[];
 
-// DO NOT reference `Astro` directly — use globalThis so the editor doesn't complain.
-const currentPath: string = (globalThis as { Astro?: { url?: { pathname?: string } } })?.Astro?.url?.pathname ?? '/';
-const isActive = (href?: string) => !!href && (currentPath === href || (href !== '/' && currentPath.startsWith(href)));
+// Use globalThis (not Astro) so editors don't complain.
+const currentPath: string =
+  (globalThis as { Astro?: { url?: { pathname?: string } } })?.Astro?.url?.pathname ?? '/';
+const isActive = (href?: string) =>
+  !!href && (currentPath === href || (href !== '/' && currentPath.startsWith(href)));
 ---
 
-<header
-  class="sticky top-0 z-[100] w-full bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-gray-200"
->
-  <div class="mx-auto w-full max-w-7xl px-4">
-    <div class="flex h-20 items-center justify-between gap-4">
-      <a href="/" class="shrink-0 inline-flex items-center" aria-label="Lilos Growth — Home">
-        <img
-          src="/Lilos_Growth_Logo_Corrected.svg"
-          alt="Lilos Growth"
-          class="h-10 md:h-12 w-auto"
-          loading="eager"
-          decoding="async"
-        />
+<!-- Sticky header with subtle bottom border for separation on light sections -->
+<header class="sticky top-0 z-[100] w-full bg-white border-b border-gray-100">
+  <div class="mx-auto w-full max-w-7xl px-4 md:px-6">
+    <div class="grid grid-cols-[auto,1fr,auto] items-center gap-4 py-4 md:py-6">
+      <!-- Logo (larger visual presence; interim scale/crop until SVG is trimmed) -->
+      <a href="/" class="inline-flex items-center" aria-label="Lilos Growth — Home">
+        <span class="inline-flex h-16 sm:h-[68px] md:h-[72px] items-center overflow-hidden">
+          <img
+            src="/Lilos_Growth_Logo_Corrected.svg"
+            alt="Lilos Growth"
+            class="h-[150%] w-auto object-contain transform-gpu origin-left lg:scale-[1.06] -ml-1"
+            loading="eager"
+            decoding="async"
+          />
+        </span>
       </a>
 
-      <nav class="hidden md:flex items-center gap-6">
-        {
-          nav.map((item) =>
-            item?.links?.length ? (
-              <div class="relative group" data-has-submenu="true">
-                <a
-                  href={item.href ?? '#'}
-                  class="inline-flex items-center gap-1 py-2 text-[15px] font-medium text-[#253242] hover:text-[#1f2d3d] transition"
-                >
-                  {item.text}
-                  <svg
-                    class="h-4 w-4 opacity-70 group-hover:opacity-100 transition"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
+      <!-- Desktop nav (centered, no underlines) -->
+      <nav class="hidden md:flex justify-center">
+        <div class="flex items-center gap-9 lg:gap-10">
+          {
+            nav.map((item) =>
+              item?.links?.length ? (
+                <div class="relative group">
+                  <a
+                    href={item.href ?? '#'}
+                    class="inline-flex items-center gap-1 py-2 text-[15px] md:text-[16px] font-medium transition text-[#253242] hover:text-[#1f2d3d]"
                   >
-                    <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" />
-                  </svg>
-                </a>
+                    {item.text}
+                    <svg class="h-4 w-4 opacity-70 group-hover:opacity-100 transition" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" />
+                    </svg>
+                  </a>
 
-                <div class="absolute left-0 top-full pt-3 z-[120]">
-                  <div
-                    data-menu
-                    class="min-w-[240px] rounded-2xl border border-gray-200 bg-white shadow-xl
-                         opacity-0 translate-y-2 pointer-events-none
-                         group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto
-                         group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto
-                         transition"
-                  >
-                    <div class="p-2">
-                      {item.links.map((sub) => (
-                        <a
-                          href={sub.href}
-                          class="block rounded-xl px-4 py-3 text-[15px] text-[#253242] hover:bg-gray-50 hover:text-[#1f2d3d] transition"
-                        >
-                          <div class="font-semibold">{sub.text}</div>
-                          {sub.description ? <div class="mt-0.5 text-xs text-gray-500">{sub.description}</div> : null}
-                        </a>
-                      ))}
+                  <!-- Dropdown -->
+                  <div class="absolute left-0 top-full pt-3 z-[120]">
+                    <div
+                      class="min-w-[240px] rounded-2xl border border-gray-200 bg-white shadow-xl
+                             opacity-0 translate-y-2 pointer-events-none
+                             group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto
+                             group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto
+                             transition"
+                    >
+                      <div class="p-2">
+                        {item.links.map((sub) => (
+                          <a
+                            href={sub.href}
+                            class="block rounded-xl px-4 py-3 text-[15px] text-[#253242] hover:bg-gray-50 hover:text-[#1f2d3d] transition"
+                          >
+                            <div class="font-semibold">{sub.text}</div>
+                            {sub.description ? (
+                              <div class="mt-0.5 text-xs text-gray-500">{sub.description}</div>
+                            ) : null}
+                          </a>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ) : (
-              <a
-                href={item.href ?? '#'}
-                class:list={[
-                  'py-2 text-[15px] font-medium transition',
-                  isActive(item.href) ? 'text-[#f56b2a]' : 'text-[#253242] hover:text-[#1f2d3d]',
-                ]}
-              >
-                {item.text}
-              </a>
+              ) : (
+                <a
+                  href={item.href ?? '#'}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                  class:list={[
+                    'py-2 text-[15px] md:text-[16px] font-medium transition',
+                    isActive(item.href)
+                      ? 'text-[#f56b2a] font-semibold'
+                      : 'text-[#253242] hover:text-[#1f2d3d]',
+                  ]}
+                >
+                  {item.text}
+                </a>
+              )
             )
-          )
-        }
+          }
+        </div>
       </nav>
 
-      <div class="flex items-center gap-3">
-        {
-          actions?.[0]?.href ? (
-            <a
-              href={actions[0].href}
-              class="hidden md:inline-flex items-center justify-center rounded-full bg-[#f56b2a] px-5 py-3 text-white text-sm font-semibold shadow hover:bg-[#e85718] transition"
-            >
-              {actions[0].text}
-            </a>
-          ) : null
-        }
+      <!-- CTA (right column) + mobile trigger -->
+      <div class="flex items-center justify-end gap-3">
+        {actions?.[0]?.href ? (
+          <!-- T1: Tint → Fill on hover, now with ORANGE text by default -->
+          <a
+            href={actions[0].href}
+            class="hidden md:inline-flex group items-center gap-2 rounded-full border-2 border-[#f56b2a] bg-[#fff4ed] px-5 py-2.5
+                   text-[15px] font-semibold text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.02)] transition
+                   hover:bg-[#f56b2a] hover:text-white focus:outline-none
+                   focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
+          >
+            <span>{actions[0].text}</span>
+            <svg viewBox="0 0 24 24" class="h-5 w-5 transform transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6"/>
+            </svg>
+          </a>
+        ) : null}
 
+        <!-- Mobile Menu pill (modern alternative to hamburger) -->
         <button
           id="mobileMenuBtn"
-          class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-300 text-[#253242]"
+          class="md:hidden inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-3.5 py-2 text-[15px] font-medium text-[#253242] shadow-sm transition hover:border-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
           aria-controls="mobileMenu"
           aria-expanded="false"
         >
           <span class="sr-only">Open menu</span>
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"></path>
+          <!-- 3×3 dots grid icon -->
+          <svg viewBox="0 0 20 20" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+            <circle cx="3" cy="3" r="1.5"></circle><circle cx="10" cy="3" r="1.5"></circle><circle cx="17" cy="3" r="1.5"></circle>
+            <circle cx="3" cy="10" r="1.5"></circle><circle cx="10" cy="10" r="1.5"></circle><circle cx="17" cy="10" r="1.5"></circle>
+            <circle cx="3" cy="17" r="1.5"></circle><circle cx="10" cy="17" r="1.5"></circle><circle cx="17" cy="17" r="1.5"></circle>
           </svg>
+          <span>Menu</span>
         </button>
       </div>
     </div>
   </div>
 
-  <div class="h-0.5 w-full bg-[#f56b2a]/80"></div>
-
   <!-- Mobile drawer -->
   <div id="mobileMenu" class="fixed inset-0 z-[110] hidden" aria-hidden="true">
-    <div class="absolute inset-0 bg-black/40"></div>
+    <div id="mobileMenuOverlay" class="absolute inset-0 bg-black/40"></div>
+
     <div class="absolute right-0 top-0 h-full w-[88%] max-w-[22rem] bg-white shadow-xl p-6 overflow-y-auto">
       <div class="flex items-center justify-between">
-        <a href="/" class="inline-flex items-center">
+        <a href="/" class="inline-flex items-center" aria-label="Lilos Growth — Home">
           <img
             src="/Lilos_Growth_Logo_Corrected.svg"
             alt="Lilos Growth"
-            class="h-10 w-auto"
+            class="h-11 w-auto object-contain"
             loading="eager"
             decoding="async"
           />
         </a>
         <button
           id="mobileMenuClose"
-          class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-[#253242]"
+          class="inline-flex h-10 items-center justify-center rounded-full border border-gray-300 px-4 text-[#253242] bg-white shadow-sm hover:border-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
+          aria-label="Close menu"
         >
           <span class="sr-only">Close menu</span>
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
@@ -162,50 +181,21 @@ const isActive = (href?: string) => !!href && (currentPath === href || (href !==
           )
         }
 
-        {
-          actions?.[0]?.href ? (
-            <a
-              href={actions[0].href}
-              class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#f56b2a] px-4 py-3 text-white text-sm font-semibold shadow hover:bg-[#e85718] transition"
-            >
-              {actions[0].text}
-            </a>
-          ) : null
-        }
+        {actions?.[0]?.href ? (
+          <a
+            href={actions[0].href}
+            class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#f56b2a] px-4 py-3 text-white text-sm font-semibold shadow-md hover:bg-[#e85718] transition"
+          >
+            {actions[0].text}
+          </a>
+        ) : null}
       </div>
     </div>
   </div>
 
-  <script is:inline>
-    (function () {
-      function bind() {
-        const btn = document.getElementById('mobileMenuBtn');
-        const closeBtn = document.getElementById('mobileMenuClose');
-        const panel = document.getElementById('mobileMenu');
-        if (!btn || !panel) return;
-
-        const open = () => {
-          panel.classList.remove('hidden');
-          btn.setAttribute('aria-expanded', 'true');
-          document.body.style.overflow = 'hidden';
-        };
-        const closeMenu = () => {
-          panel.classList.add('hidden');
-          btn.setAttribute('aria-expanded', 'false');
-          document.body.style.overflow = '';
-        };
-
-        btn.addEventListener('click', open);
-        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-        panel.addEventListener('click', (e) => {
-          if (e.target === panel) closeMenu();
-        });
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') closeMenu();
-        });
-      }
-      document.addEventListener('DOMContentLoaded', bind);
-      document.addEventListener('astro:page-load', bind);
-    })();
-  </script>
+  <!-- CSP-safe drawer controller -->
+  <script type="module" src="/scripts/mobile-menu.js"></script>
 </header>
+
+<!-- Floating CTA rendered outside header so it truly floats bottom-right -->
+<FloatingCalendlyButton />
