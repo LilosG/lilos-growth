@@ -1,7 +1,8 @@
 ---
 /**
  * Global site layout — loads Tailwind, meta components, and site-wide scripts.
- * Includes Vercel Analytics + Speed Insights using their official Astro adapters.
+ * Web Analytics (Vercel) is injected by the @astrojs/vercel adapter (see astro.config.*).
+ * Speed Insights is added here via the Astro component.
  */
 
 import '~/assets/styles/tailwind.css';
@@ -12,32 +13,27 @@ import CustomStyles from '~/components/CustomStyles.astro';
 import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
 import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
-import Analytics from '~/components/common/Analytics.astro'; // keep if you use GTM/GA/etc.
+import Analytics from '~/components/common/Analytics.astro'; // your GA/GTM/etc (optional)
 import BasicScripts from '~/components/common/BasicScripts.astro';
 
-// Vercel Web Analytics & Speed Insights (official)
-import VercelAnalytics from '@vercel/analytics/astro';
+// Keep Speed Insights as an Astro component
 import SpeedInsights from '@vercel/speed-insights/astro';
 
 import type { MetaData as MetaDataType } from '~/types';
 
 declare global {
   interface Window {
-    /** Helper for custom events that forwards to Vercel Analytics when available */
+    /** Helper for custom events that forwards to Vercel Web Analytics when available */
     trackEvent?: (name: string, data?: Record<string, unknown>) => void;
+    va?: (type: string, payload: Record<string, unknown>) => void;
   }
 }
 
 export interface Props {
-  /** Optional per-page SEO title override */
   title?: string;
-  /** Optional per-page meta description override */
   description?: string;
-  /** Document language */
   lang?: string;
-  /** Extra classes to append to <body> */
   bodyClass?: string;
-  /** Your existing metadata object used by <Metadata /> */
   metadata?: MetaDataType;
 }
 
@@ -71,11 +67,10 @@ const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro
     <!-- Site scripts -->
     <BasicScripts />
 
-    <!-- Vercel analytics (do not duplicate elsewhere) -->
-    <VercelAnalytics />
+    <!-- Speed Insights (kept here; no issues) -->
     <SpeedInsights />
 
-    <!-- Small helper to send custom events to Vercel Analytics -->
+    <!-- Small helper to send custom events to Vercel Web Analytics (no-op if not enabled) -->
     <script is:inline>
       window.trackEvent = (name, data = {}) => {
         try {

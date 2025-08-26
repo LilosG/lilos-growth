@@ -3,18 +3,24 @@ import typographyPlugin from '@tailwindcss/typography';
 
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: 'class',
+
   theme: {
+    container: {
+      center: true,
+      padding: { DEFAULT: '1rem', md: '1.5rem' },
+    },
     extend: {
       colors: {
-        primary: '#f56b2a', // Vibrant orange
-        primaryHover: '#e65c1e', // Darker orange for hover state
-        secondary: '#1f2d3d', // Deep charcoal/navy
-        heading: '#1f2d3d', // Heading text color
-        body: '#4a4a4a', // Body text color
-        cream: '#fff9f6', // Warm neutral
-        bluelight: '#f0f4f8', // Adjusted for better accessibility
-        graylight: '#f8fafc', // Ultra-light gray
-        pattern: '#eaeaea', // Subtle pattern (optional)
+        primary: '#f56b2a',
+        primaryHover: '#e65c1e',
+        secondary: '#1f2d3d',
+        heading: '#1f2d3d',
+        body: '#4a4a4a',
+        cream: '#fff9f6',
+        bluelight: '#f0f4f8',
+        graylight: '#f8fafc',
+        pattern: '#eaeaea',
       },
       fontFamily: {
         heading: ['Poppins', 'sans-serif'],
@@ -52,15 +58,8 @@ export default {
         28: '7rem',
         32: '8rem',
       },
-      borderRadius: {
-        xl: '1rem',
-        '2xl': '1.5rem',
-        '3xl': '2rem',
-        full: '9999px',
-      },
-      animation: {
-        fade: 'fadeInUp 1s both',
-      },
+      borderRadius: { xl: '1rem', '2xl': '1.5rem', '3xl': '2rem', full: '9999px' },
+      animation: { fade: 'fadeInUp 1s both' },
       keyframes: {
         fadeInUp: {
           '0%': { opacity: 0, transform: 'translateY(2rem)' },
@@ -68,63 +67,115 @@ export default {
         },
       },
       boxShadow: {
-        xl: '0 10px 40px -10px rgba(31, 45, 61, 0.12), 0 2px 8px 0 rgba(31, 45, 61, 0.06)',
+        xl: '0 10px 40px -10px rgba(31,45,61,.12), 0 2px 8px rgba(31,45,61,.06)',
         'outline-primary': '0 0 0 3px #f56b2a40',
       },
-      borderWidth: {
-        3: '3px',
-        6: '6px',
-      },
-      zIndex: {
-        60: '60', // for sticky CTA above content/footer
-      },
+      borderWidth: { 3: '3px', 6: '6px' },
+      zIndex: { 60: '60' },
+
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            '--tw-prose-body': theme('colors.body'),
+            '--tw-prose-headings': theme('colors.heading'),
+            '--tw-prose-links': theme('colors.heading'),
+            '--tw-prose-bold': theme('colors.heading'),
+            '--tw-prose-bullets': theme('colors.body'),
+            maxWidth: '100%',
+            a: {
+              textDecoration: 'underline',
+              textDecorationThickness: '1px',
+              textUnderlineOffset: '4px',
+              '&:hover': { color: theme('colors.primary') },
+            },
+            h1: { letterSpacing: '-0.02em', lineHeight: '1.15', marginBottom: '0.5em' },
+            h2: { letterSpacing: '-0.01em', lineHeight: '1.2', marginTop: '1.2em', marginBottom: '0.6em' },
+            h3: { letterSpacing: '-0.005em', lineHeight: '1.25', marginTop: '1em', marginBottom: '0.5em' },
+            p: { lineHeight: '1.75' },
+            ul: { marginTop: '0.75em', marginBottom: '0.75em' },
+            'ul > li': { marginTop: '0.35em', marginBottom: '0.35em' },
+            'code, kbd': {
+              backgroundColor: theme('colors.graylight'),
+              padding: '0.15em 0.35em',
+              borderRadius: '0.375rem',
+            },
+          },
+        },
+        invert: {
+          css: {
+            '--tw-prose-body': 'rgba(255,255,255,0.8)',
+            '--tw-prose-headings': '#fff',
+            '--tw-prose-links': theme('colors.primary'),
+            '--tw-prose-bold': '#fff',
+            '--tw-prose-bullets': 'rgba(255,255,255,0.8)',
+            a: { '&:hover': { color: theme('colors.primaryHover') } },
+            'code, kbd': { backgroundColor: 'rgba(255,255,255,0.08)' },
+          },
+        },
+      }),
     },
   },
+
   plugins: [
     typographyPlugin,
-    plugin(({ addVariant, addBase, addUtilities, theme }) => {
-      // Your existing custom variant
+    plugin(({ addVariant, addBase, addUtilities, addComponents, theme }) => {
       addVariant('intersect', '&:not([no-intersect])');
 
-      // ---- Global page chrome / sticky-footer base ----
       addBase({
         'html, body': { height: '100%' },
         html: { scrollBehavior: 'smooth' },
         body: {
-          minHeight: '100svh', // supports mobile viewport units
+          minHeight: '100svh',
           display: 'flex',
           flexDirection: 'column',
           margin: '0',
-          paddingBottom: '0', // neutralize accidental bottom padding
+          paddingBottom: '0',
           overflowX: 'hidden',
           backgroundColor: theme('colors.white'),
         },
-        // Let main consume the available height so the footer sits flush
         main: { flex: '1 1 auto' },
-        // If a page uses #page wrapper, make sure the last section can't add blank space
         '#page > section:last-child': { marginBottom: '0', paddingBottom: '0' },
-        // As a safety, ensure footer auto-sticks at the end of flex column
         footer: { marginTop: 'auto' },
       });
 
-      // ---- Utilities ----
       addUtilities(
         {
-          // Fixed CTA button that *does not* affect page layout
           '.sticky-cta': {
             position: 'fixed',
             right: '1rem',
             bottom: 'max(1rem, env(safe-area-inset-bottom))',
             zIndex: theme('zIndex.60'),
           },
-
-          // Optional content scale helpers if you want that ~85–95% “zoomed out” feel per section
           '.content-scale-95': { transform: 'scale(0.95)', transformOrigin: 'top center' },
           '.content-scale-90': { transform: 'scale(0.90)', transformOrigin: 'top center' },
         },
         ['responsive']
       );
+
+      // NOTE: each '@apply …' key must be a single, literal string.
+      addComponents({
+        '.focus-ring': {
+          '@apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]': {},
+        },
+        '.link-underline': {
+          '@apply decoration-1 underline-offset-4 hover:underline focus:underline focus-visible:underline': {},
+        },
+
+        '.btn': {
+          '@apply inline-flex items-center justify-center rounded-full font-semibold transition shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]':
+            {},
+        },
+        '.btn-sm': { '@apply px-4 py-2 text-[14px] leading-[22px]': {} },
+        '.btn-md': { '@apply px-5 py-2.5 text-[15px] leading-[22px]': {} },
+        '.btn-lg': { '@apply px-6 py-3 text-base leading-[24px]': {} },
+        '.btn-primary': { '@apply bg-[#f56b2a] text-white border border-[#f56b2a] hover:bg-[#e65c1e]': {} },
+        '.btn-secondary': {
+          '@apply bg-white text-[#253242] border border-gray-300 hover:bg-gray-50 hover:border-gray-400': {},
+        },
+        '.btn-outline-primary': {
+          '@apply bg-white text-[#f56b2a] border border-[#f56b2a] hover:bg-[#f56b2a] hover:text-white': {},
+        },
+      });
     }),
   ],
-  darkMode: 'class',
 };

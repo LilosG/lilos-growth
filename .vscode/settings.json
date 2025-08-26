@@ -1,15 +1,12 @@
 {
-  "css.customData": ["./vscode.tailwind.json"],
-  "eslint.validate": ["javascript", "javascriptreact", "astro", "typescript", "typescriptreact"],
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore",
   "files.associations": {
-    "*.mdx": "markdown"
+    "**/src/assets/styles/tailwind.css": "postcss"
   },
-  "prettier.documentSelectors": ["**/*.astro"],
-  "[astro]": {
-    "editor.defaultFormatter": "astro-build.astro-vscode"
-  },
-  "yaml.schemas": {
-    "./.vscode/astrowind/config-schema.json": "/src/config.yaml"
-  },
-  "eslint.useFlatConfig": true
+  "tailwindCSS.includeLanguages": {
+    "postcss": "css",
+    "plaintext": "html"
+  }
 }

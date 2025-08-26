@@ -1,7 +1,8 @@
 ---
 /**
  * Page wrapper layout — prints Header, your page <slot />, then Footer.
- * Passes through SEO props to the global Layout so each page can set title/description.
+ * Adds (A) an accessible skip link and (C) safe anchor offset for the sticky header.
+ * No visual changes for typical users; preserves your current look & feel.
  */
 
 import Layout from './Layout.astro';
@@ -22,11 +23,41 @@ const props = Astro.props as Props;
 ---
 
 <Layout {...props}>
+  <!-- A) Skip link (hidden until focused) -->
+  <a
+    href="#main"
+    class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-2 focus-visible:left-2 focus-visible:z-[1000] focus-visible:bg-white focus-visible:text-[#253242] focus-visible:px-4 focus-visible:py-2 focus-visible:rounded-full focus-visible:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
+  >
+    Skip to content
+  </a>
+
   <Header />
 
-  <main id="main" class="flex-1 focus:outline-none">
+  <main id="main" class="flex-1 focus:outline-none" tabindex="-1">
     <slot />
   </main>
 
   <Footer />
+
+  <!-- C) Anchor offset so in-page links aren't hidden beneath sticky header -->
+  <style is:global>
+    :root {
+      /* Base offset used by scroll-margin-top targets */
+      --site-anchor-offset: 88px;
+    }
+    @media (max-width: 1023.98px) {
+      :root {
+        --site-anchor-offset: 72px;
+      }
+    }
+    @media (max-width: 767.98px) {
+      :root {
+        --site-anchor-offset: 64px;
+      }
+    }
+    /* Apply to common anchorable elements */
+    :where(h1[id], h2[id], h3[id], h4[id], section[id], [data-anchor]) {
+      scroll-margin-top: var(--site-anchor-offset);
+    }
+  </style>
 </Layout>
