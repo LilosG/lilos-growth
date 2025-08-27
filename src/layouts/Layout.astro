@@ -13,10 +13,9 @@ import CustomStyles from '~/components/CustomStyles.astro';
 import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
 import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
-import Analytics from '~/components/common/Analytics.astro'; // your GA/GTM/etc (optional)
+import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 
-// Keep Speed Insights as an Astro component
 import SpeedInsights from '@vercel/speed-insights/astro';
 
 import type { MetaData as MetaDataType } from '~/types';
@@ -29,7 +28,7 @@ declare global {
   }
 }
 
-/** Allow pages to pass minimal meta without using `any`. */
+/** Allow pages to pass minimal meta (no `any`). */
 type MetaInput = Partial<MetaDataType> & {
   title?: string;
   description?: string;
@@ -44,16 +43,6 @@ export interface Props {
 }
 
 const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro.props as Props;
-
-/** Centralized page-title builder with brand suffix (no double-branding). */
-const siteName = 'Lilos Growth';
-const needsSuffix = (t: string) => !t.toLowerCase().includes(siteName.toLowerCase());
-
-const baseTitle = (title?.trim() ?? '') || (metadata.title?.trim() ?? '');
-
-const resolvedTitle = baseTitle ? (needsSuffix(baseTitle) ? `${baseTitle} | ${siteName}` : baseTitle) : siteName;
-
-const resolvedDescription = (description?.trim() ?? '') || (metadata.description?.trim() ?? '');
 ---
 
 <!doctype html>
@@ -63,12 +52,10 @@ const resolvedDescription = (description?.trim() ?? '') || (metadata.description
     <Favicons />
     <CustomStyles />
     <ApplyColorMode />
-    <Metadata {...metadata} />
+    <!-- Centralized SEO: AstroLib component emits <title>, description, canonical, OG/Twitter, robots, etc. -->
+    <Metadata {...metadata} title={title} description={description} />
     <SiteVerification />
     <Analytics />
-
-    <title>{resolvedTitle}</title>
-    {resolvedDescription && <meta name="description" content={resolvedDescription} />}
   </head>
 
   <!-- Sticky-footer safe: full-height flex column on the BODY -->
@@ -83,7 +70,7 @@ const resolvedDescription = (description?.trim() ?? '') || (metadata.description
     <!-- Site scripts -->
     <BasicScripts />
 
-    <!-- Speed Insights (kept here; no issues) -->
+    <!-- Speed Insights -->
     <SpeedInsights />
 
     <!-- Small helper to send custom events to Vercel Web Analytics (no-op if not enabled) -->
