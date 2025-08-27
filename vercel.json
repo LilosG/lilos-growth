@@ -11,5 +11,12 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/faq",
+      "destination": "/#faq",
+      "permanent": true
+    }
   ]
 }
