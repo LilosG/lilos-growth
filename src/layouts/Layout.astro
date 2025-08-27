@@ -41,14 +41,7 @@ export interface Props {
   metadata?: MetaInput;
 }
 
-const {
-  title,
-  description,
-  ignoreTitleTemplate,
-  lang = 'en',
-  bodyClass = '',
-  metadata = {},
-} = Astro.props as Props;
+const { title, description, ignoreTitleTemplate, lang = 'en', bodyClass = '', metadata = {} } = Astro.props as Props;
 
 /** Fallback titles for routes that don’t provide one (prevents dupes/overlong defaults). */
 const pathname = Astro.url.pathname;

@@ -164,15 +164,25 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
         >
           <span class="sr-only">Open menu</span>
           <svg viewBox="0 0 20 20" class="h-5 w-5" fill="currentColor" aria-hidden="true">
-            <circle cx="3" cy="3" r="1.5"></circle><circle cx="10" cy="3" r="1.5"></circle><circle cx="17" cy="3" r="1.5"></circle>
-            <circle cx="3" cy="10" r="1.5"></circle><circle cx="10" cy="10" r="1.5"></circle><circle cx="17" cy="10" r="1.5"></circle>
-            <circle cx="3" cy="17" r="1.5"></circle><circle cx="10" cy="17" r="1.5"></circle><circle cx="17" cy="17" r="1.5"></circle>
+            <circle cx="3" cy="3" r="1.5"></circle><circle cx="10" cy="3" r="1.5"></circle><circle
+              cx="17"
+              cy="3"
+              r="1.5"></circle>
+            <circle cx="3" cy="10" r="1.5"></circle><circle cx="10" cy="10" r="1.5"></circle><circle
+              cx="17"
+              cy="10"
+              r="1.5"></circle>
+            <circle cx="3" cy="17" r="1.5"></circle><circle cx="10" cy="17" r="1.5"></circle><circle
+              cx="17"
+              cy="17"
+              r="1.5"></circle>
           </svg>
           <span>Menu</span>
         </button>
       </div>
     </div>
-  </div> <!-- /max-w container -->
+  </div>
+  <!-- /max-w container -->
 
   <!-- Mobile drawer -->
   <div id="mobileMenu" class="fixed inset-0 z-[110] hidden" aria-hidden="true">
@@ -252,29 +262,45 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
     border-bottom-color: rgba(255, 255, 255, 0.12);
     backdrop-filter: saturate(160%) blur(4px);
   }
-  header.site-header .logo { transition: height 0.2s ease; }
-  header.site-header .header-bar { transition: padding 0.2s ease; }
+  header.site-header .logo {
+    transition: height 0.2s ease;
+  }
+  header.site-header .header-bar {
+    transition: padding 0.2s ease;
+  }
 
   /* Make dark-on-dark logo readable without changing the asset colors */
   header.site-header .logo-on-dark {
-    filter:
-      drop-shadow(0 0 0.75px rgba(255, 255, 255, 0.85))
-      drop-shadow(0 0 10px rgba(255, 255, 255, 0.18))
-      contrast(1.05)
-      brightness(1.05);
+    filter: drop-shadow(0 0 0.75px rgba(255, 255, 255, 0.85)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.18))
+      contrast(1.05) brightness(1.05);
   }
 
   /* Shrink targets for ~15% compaction */
   @media (min-width: 1024px) {
-    header.site-header.is-shrunk .logo { height: 3.5rem !important; } /* ~56px (from 66px) */
-    header.site-header.is-shrunk .header-bar { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    header.site-header.is-shrunk .logo {
+      height: 3.5rem !important;
+    } /* ~56px (from 66px) */
+    header.site-header.is-shrunk .header-bar {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
   }
   @media (min-width: 768px) and (max-width: 1023.98px) {
-    header.site-header.is-shrunk .logo { height: 3rem !important; } /* ~48px (from 56px) */
-    header.site-header.is-shrunk .header-bar { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    header.site-header.is-shrunk .logo {
+      height: 3rem !important;
+    } /* ~48px (from 56px) */
+    header.site-header.is-shrunk .header-bar {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
   }
   @media (max-width: 767.98px) {
-    header.site-header.is-shrunk .logo { height: 2.5rem !important; } /* ~40px (from 44px) */
-    header.site-header.is-shrunk .header-bar { padding-top: 0.375rem; padding-bottom: 0.375rem; }
+    header.site-header.is-shrunk .logo {
+      height: 2.5rem !important;
+    } /* ~40px (from 44px) */
+    header.site-header.is-shrunk .header-bar {
+      padding-top: 0.375rem;
+      padding-bottom: 0.375rem;
+    }
   }
 </style>
