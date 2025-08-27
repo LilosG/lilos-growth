@@ -43,30 +43,17 @@ export interface Props {
   metadata?: MetaInput;
 }
 
-const {
-  title,
-  description,
-  lang = 'en',
-  bodyClass = '',
-  metadata = {}
-} = Astro.props as Props;
+const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro.props as Props;
 
 /** Centralized page-title builder with brand suffix (no double-branding). */
 const siteName = 'Lilos Growth';
-const needsSuffix = (t: string) =>
-  !t.toLowerCase().includes(siteName.toLowerCase());
+const needsSuffix = (t: string) => !t.toLowerCase().includes(siteName.toLowerCase());
 
-const baseTitle =
-  (title?.trim() ?? '') ||
-  (metadata.title?.trim() ?? '');
+const baseTitle = (title?.trim() ?? '') || (metadata.title?.trim() ?? '');
 
-const resolvedTitle = baseTitle
-  ? (needsSuffix(baseTitle) ? `${baseTitle} | ${siteName}` : baseTitle)
-  : siteName;
+const resolvedTitle = baseTitle ? (needsSuffix(baseTitle) ? `${baseTitle} | ${siteName}` : baseTitle) : siteName;
 
-const resolvedDescription =
-  (description?.trim() ?? '') ||
-  (metadata.description?.trim() ?? '');
+const resolvedDescription = (description?.trim() ?? '') || (metadata.description?.trim() ?? '');
 ---
 
 <!doctype html>
