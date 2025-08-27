@@ -29,31 +29,44 @@ declare global {
   }
 }
 
+/** Allow pages to pass minimal meta without using `any`. */
+type MetaInput = Partial<MetaDataType> & {
+  title?: string;
+  description?: string;
+};
+
 export interface Props {
   title?: string;
   description?: string;
   lang?: string;
   bodyClass?: string;
-  metadata?: MetaDataType;
+  metadata?: MetaInput;
 }
 
-const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro.props as Props;
+const {
+  title,
+  description,
+  lang = 'en',
+  bodyClass = '',
+  metadata = {}
+} = Astro.props as Props;
 
 /** Centralized page-title builder with brand suffix (no double-branding). */
 const siteName = 'Lilos Growth';
-const needsSuffix = (t: string) => !t.toLowerCase().includes(siteName.toLowerCase());
+const needsSuffix = (t: string) =>
+  !t.toLowerCase().includes(siteName.toLowerCase());
 
 const baseTitle =
-  (typeof title === 'string' && title.trim()) ||
-  (typeof (metadata as any)?.title === 'string' && (metadata as any).title.trim()) ||
-  '';
+  (title?.trim() ?? '') ||
+  (metadata.title?.trim() ?? '');
 
-const resolvedTitle = baseTitle ? (needsSuffix(baseTitle) ? `${baseTitle} | ${siteName}` : baseTitle) : siteName;
+const resolvedTitle = baseTitle
+  ? (needsSuffix(baseTitle) ? `${baseTitle} | ${siteName}` : baseTitle)
+  : siteName;
 
 const resolvedDescription =
-  (typeof description === 'string' && description.trim()) ||
-  (typeof (metadata as any)?.description === 'string' && (metadata as any).description.trim()) ||
-  '';
+  (description?.trim() ?? '') ||
+  (metadata.description?.trim() ?? '');
 ---
 
 <!doctype html>
