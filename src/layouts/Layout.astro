@@ -1,8 +1,8 @@
 ---
 /**
- * Global site layout — loads Tailwind, meta components, and site-wide scripts.
- * Web Analytics (Vercel) is injected by the @astrojs/vercel adapter (see astro.config.*).
- * Speed Insights is added here via the Astro component.
+ * Site page layout — loads Tailwind, meta components, and site-wide scripts.
+ * Titles/descriptions are centralized here via <Metadata />, so pages
+ * can simply `export const title/description` (optional).
  */
 
 import '~/assets/styles/tailwind.css';
@@ -15,20 +15,18 @@ import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
-
 import SpeedInsights from '@vercel/speed-insights/astro';
 
 import type { MetaData as MetaDataType } from '~/types';
 
 declare global {
   interface Window {
-    /** Helper for custom events that forwards to Vercel Web Analytics when available */
     trackEvent?: (name: string, data?: Record<string, unknown>) => void;
     va?: (type: string, payload: Record<string, unknown>) => void;
   }
 }
 
-/** Allow pages to pass minimal meta (no `any`). */
+/** Allow pages to pass minimal meta (typed; no `any`) */
 type MetaInput = Partial<MetaDataType> & {
   title?: string;
   description?: string;
@@ -43,6 +41,20 @@ export interface Props {
 }
 
 const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro.props as Props;
+
+/** Fallback titles for routes that were missing one (prevents duplicates) */
+const pathname = Astro.url.pathname;
+let fallbackTitle: string | undefined;
+
+if (!title) {
+  if (pathname === '/' || pathname === '/index') {
+    // Home
+    fallbackTitle = 'Local SEO & Websites for Home Service Pros';
+  } else if (pathname.startsWith('/additional-services')) {
+    fallbackTitle = 'Additional Services for Home Service Businesses';
+  }
+}
+const effectiveTitle = title ?? fallbackTitle;
 ---
 
 <!doctype html>
@@ -52,28 +64,22 @@ const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro
     <Favicons />
     <CustomStyles />
     <ApplyColorMode />
-    <!-- Centralized SEO: AstroLib component emits <title>, description, canonical, OG/Twitter, robots, etc. -->
-    <Metadata {...metadata} title={title} description={description} />
+    <!-- Centralized SEO: emits <title>, meta description, canonical, OG/Twitter, robots, etc. -->
+    <Metadata {...metadata} title={effectiveTitle} description={description} />
     <SiteVerification />
     <Analytics />
   </head>
 
-  <!-- Sticky-footer safe: full-height flex column on the BODY -->
   <body
     class={`antialiased text-default bg-page tracking-tight min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip ${bodyClass}`}
   >
-    <!-- Page content -->
     <div class="flex-1 flex flex-col">
       <slot />
     </div>
 
-    <!-- Site scripts -->
     <BasicScripts />
-
-    <!-- Speed Insights -->
     <SpeedInsights />
 
-    <!-- Small helper to send custom events to Vercel Web Analytics (no-op if not enabled) -->
     <script is:inline>
       window.trackEvent = (name, data = {}) => {
         try {
