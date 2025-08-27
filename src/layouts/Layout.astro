@@ -1,8 +1,8 @@
 ---
 /**
  * Site page layout — loads Tailwind, meta components, and site-wide scripts.
- * Titles/descriptions are centralized here via <Metadata />, so pages
- * can simply `export const title/description` (optional).
+ * Titles/descriptions are centralized here via <Metadata />.
+ * Pages set values via frontmatter (title, description, ignoreTitleTemplate).
  */
 
 import '~/assets/styles/tailwind.css';
@@ -35,14 +35,22 @@ type MetaInput = Partial<MetaDataType> & {
 export interface Props {
   title?: string;
   description?: string;
+  ignoreTitleTemplate?: boolean;
   lang?: string;
   bodyClass?: string;
   metadata?: MetaInput;
 }
 
-const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro.props as Props;
+const {
+  title,
+  description,
+  ignoreTitleTemplate,
+  lang = 'en',
+  bodyClass = '',
+  metadata = {},
+} = Astro.props as Props;
 
-/** Fallback titles for routes that were missing one (prevents duplicates) */
+/** Fallback titles for routes that don’t provide one (prevents dupes/overlong defaults). */
 const pathname = Astro.url.pathname;
 let fallbackTitle: string | undefined;
 
@@ -51,7 +59,8 @@ if (!title) {
     // Home
     fallbackTitle = 'Local SEO & Websites for Home Service Pros';
   } else if (pathname.startsWith('/additional-services')) {
-    fallbackTitle = 'Additional Services for Home Service Businesses';
+    // Shorter than the previous version to keep under ~60 chars
+    fallbackTitle = 'Additional Services for Home Service Pros';
   }
 }
 const effectiveTitle = title ?? fallbackTitle;
@@ -64,8 +73,13 @@ const effectiveTitle = title ?? fallbackTitle;
     <Favicons />
     <CustomStyles />
     <ApplyColorMode />
-    <!-- Centralized SEO: emits <title>, meta description, canonical, OG/Twitter, robots, etc. -->
-    <Metadata {...metadata} title={effectiveTitle} description={description} />
+    <!-- Centralized SEO: emits <title>, description, canonical, OG/Twitter, robots, etc. -->
+    <Metadata
+      {...metadata}
+      title={effectiveTitle}
+      description={description}
+      ignoreTitleTemplate={ignoreTitleTemplate}
+    />
     <SiteVerification />
     <Analytics />
   </head>

@@ -4,9 +4,16 @@ import Layout from '~/layouts/PageLayout.astro';
 export const title = 'Local SEO & Websites for Home Service Pros | Lilos Growth';
 export const description =
   'Get more calls and booked jobs with Local SEO, Google Business Profile management, and conversion-ready websites—built for plumbers, HVAC, pest control, and other service pros.';
+
+// Pass page-specific SEO to the global <Metadata /> via Layout
+export const metadata = {
+  title,
+  description,
+  ignoreTitleTemplate: true,
+};
 ---
 
-<Layout>
+<Layout title={title} description={description} metadata={metadata}>
   <!-- HERO SECTION -->
   <section class="bg-[#253242] min-h-[680px] flex items-center pt-10 pb-20 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159] pointer-events-none"></div>
