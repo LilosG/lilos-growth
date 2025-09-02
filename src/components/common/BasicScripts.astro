@@ -1,13 +1,10 @@
 ---
 /**
  * Site-wide progressive enhancements:
- * 1) External link hardening (target=_blank + rel=noopener,noreferrer)
- * 2) CTA click tracking via window.trackEvent() -> Vercel Analytics
- *    - Works on any element with [data-track] or [data-track-event]
- * 3) Page view tracking on load (+ after Astro client navigations)
- * 4) Lightweight UTM/referrer attribution stored in sessionStorage
- *
- * No theme changes. CSP-safe inline script.
+ * 1) External link hardening
+ * 2) CTA click tracking via window.trackEvent()
+ * 3) Page view tracking on load + after Astro navigations
+ * 4) Simple UTM/referrer attribution in sessionStorage
  */
 ---
 
@@ -44,7 +41,9 @@
       };
 
       try {
-        window.trackEvent && window.trackEvent(name, payload);
+        if (typeof window.trackEvent === 'function') {
+          window.trackEvent(name, payload);
+        }
       } catch {}
     };
     document.addEventListener('click', clickHandler, { passive: true });
@@ -101,7 +100,9 @@
         utm: attrib.lastTouch || null,
       };
       try {
-        window.trackEvent && window.trackEvent('page_view', payload);
+        if (typeof window.trackEvent === 'function') {
+          window.trackEvent('page_view', payload);
+        }
       } catch {}
     }
 

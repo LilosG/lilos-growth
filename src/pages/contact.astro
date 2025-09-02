@@ -4,40 +4,13 @@ import Layout from '~/layouts/PageLayout.astro';
 export const title = 'Contact Lilos Growth | Free Local SEO Audit & Consultation';
 export const description =
   'Have a home service business? Contact Lilos Growth to schedule a free SEO audit or strategy call. We’ll respond within 24 hours and help you start generating more calls.';
-
-const pageUrl = Astro.url.href;
-const siteUrl = 'https://lilosgrowth.com'; // keep consistent with astro.config.ts
-const logoUrl = '/Lilos_Growth_Logo_Corrected.svg';
-const email = 'hello@lilosgrowth.com';
 ---
 
 <Layout {title} {description}>
-  <!-- HEAD EXTRAS (kept Astro-native & CSP-safe via the named head slot) -->
   <div slot="head">
-    <!-- Calendly performance + styles (only on this page) -->
     <link rel="preconnect" href="https://assets.calendly.com" />
     <link rel="dns-prefetch" href="https://assets.calendly.com" />
     <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
-
-    <!-- Optional: fonts preconnect (safe even if loaded in CSS) -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-
-    <!-- LocalBusiness schema (SEO) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Lilos Growth",
-        "url": "${siteUrl}",
-        "logo": "${logoUrl}",
-        "email": "mailto:${email}",
-        "areaServed": "US",
-        "description": "Local SEO & digital marketing for home service businesses."
-      }
-    </script>
-
-    <!-- Ensure consistent inline-widget height (Calendly uses iframes) -->
     <style is:inline>
       #book .calendly-inline-widget {
         min-width: 320px;
@@ -51,19 +24,12 @@ const email = 'hello@lilosgrowth.com';
     </style>
   </div>
 
-  <!-- CONTACT FORM SECTION -->
+  <!-- CONTACT FORM -->
   <section class="bg-[#253242] py-20 px-4">
     <div
       class="bg-white rounded-3xl shadow-2xl border border-gray-100 px-8 py-12 md:p-16 flex flex-col items-center w-full max-w-xl mx-auto"
     >
-      <img
-        src="/Lilos_Growth_Logo_Corrected.svg"
-        alt="Lilos Growth Logo"
-        class="mb-6 w-24"
-        width="96"
-        height="96"
-        loading="lazy"
-      />
+      <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="mb-6 w-24" />
       <h1 class="text-3xl md:text-4xl font-heading font-extrabold text-heading text-center mb-3">
         Let's Grow Your Business.<br />Get in Touch!
       </h1>
@@ -72,35 +38,8 @@ const email = 'hello@lilosgrowth.com';
         Prefer email? <a href="mailto:hello@lilosgrowth.com" class="text-primary underline">hello@lilosgrowth.com</a>
       </p>
 
-      <form
-        id="contact-form"
-        action="https://formspree.io/f/movlbqdk"
-        method="POST"
-        class="flex flex-col gap-5 w-full"
-        autocomplete="on"
-        novalidate
-      >
-        <!-- Redirect to thank-you page after submission -->
+      <form action="https://formspree.io/f/movlbqdk" method="POST" class="flex flex-col gap-5 w-full">
         <input type="hidden" name="_redirect" value="https://lilosgrowth.com/thank-you" />
-
-        <!-- UTM + attribution (filled by inline script) -->
-        <input type="hidden" name="page_url" value={pageUrl} />
-        <input type="hidden" name="referrer" value="" />
-        <input type="hidden" name="utm_source" value="" />
-        <input type="hidden" name="utm_medium" value="" />
-        <input type="hidden" name="utm_campaign" value="" />
-        <input type="hidden" name="utm_term" value="" />
-        <input type="hidden" name="utm_content" value="" />
-
-        <!-- Honeypot to reduce spam (bots will fill it) -->
-        <input
-          type="text"
-          name="hp_field"
-          tabindex="-1"
-          autocomplete="off"
-          aria-hidden="true"
-          style="position:absolute;left:-5000px;width:1px;height:1px;opacity:0;"
-        />
 
         <label class="sr-only" for="name">Your Name</label>
         <input
@@ -109,7 +48,6 @@ const email = 'hello@lilosgrowth.com';
           name="name"
           placeholder="Your Name"
           required
-          minlength="2"
           class="border border-gray-300 rounded-lg px-5 py-4 text-base focus:outline-primary transition"
           autocomplete="name"
         />
@@ -118,10 +56,9 @@ const email = 'hello@lilosgrowth.com';
         <input
           id="email"
           type="email"
-          name="email"
+          name="_replyto"
           placeholder="Email Address"
           required
-          inputmode="email"
           class="border border-gray-300 rounded-lg px-5 py-4 text-base focus:outline-primary transition"
           autocomplete="email"
         />
@@ -138,6 +75,8 @@ const email = 'hello@lilosgrowth.com';
         <button
           type="submit"
           class="mt-2 px-8 py-4 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-lg shadow hover:bg-[#f34e00] transition flex items-center justify-center"
+          data-track
+          data-track-event="contact_submit"
         >
           <svg
             class="mr-2 w-6 h-6"
@@ -145,10 +84,8 @@ const email = 'hello@lilosgrowth.com';
             stroke="currentColor"
             stroke-width="3"
             viewBox="0 0 24 24"
-            aria-hidden="true"
+            aria-hidden="true"><path d="M5 13l4 4L19 7"></path></svg
           >
-            <path d="M5 13l4 4L19 7"></path>
-          </svg>
           Send Message
         </button>
       </form>
@@ -164,11 +101,10 @@ const email = 'hello@lilosgrowth.com';
     </div>
   </section>
 
-  <!-- CALENDLY SCHEDULER SECTION (Description + Calendar side-by-side on lg+) -->
+  <!-- CALENDLY SCHEDULER -->
   <section class="bg-gray-50 py-20 px-4">
     <div class="mx-auto max-w-6xl">
       <div class="grid items-start gap-10 lg:grid-cols-2">
-        <!-- Left: description & expectations -->
         <div class="lg:pr-6">
           <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading mb-3">
             Book Your Free Local SEO Intro Call
@@ -177,7 +113,6 @@ const email = 'hello@lilosgrowth.com';
             Choose a date and time that works for you. In this 30-minute call, we’ll review your current online
             presence, discuss your goals, and share actionable next steps to grow calls and booked jobs.
           </p>
-
           <ul class="text-body space-y-2 mb-8">
             <li class="flex gap-2"><span aria-hidden="true">•</span><span>30-min Zoom or phone — your choice</span></li>
             <li class="flex gap-2">
@@ -187,10 +122,11 @@ const email = 'hello@lilosgrowth.com';
               <span aria-hidden="true">•</span><span>We’ll send a quick recap after the call</span>
             </li>
           </ul>
-
           <a
             href="#book"
             class="inline-flex items-center rounded-xl bg-[#f56b2a] px-5 py-3 text-white font-heading font-semibold"
+            data-track
+            data-track-event="jump_to_calendar"
           >
             Jump to Calendar
             <svg
@@ -199,12 +135,9 @@ const email = 'hello@lilosgrowth.com';
               fill="none"
               stroke="currentColor"
               stroke-width="3"
-              aria-hidden="true"
+              aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
             >
-              <path d="M5 12h14M13 18l6-6-6-6"></path>
-            </svg>
           </a>
-
           <noscript>
             <p class="mt-4 text-sm">
               JavaScript is required to load the calendar. You can book directly
@@ -217,7 +150,6 @@ const email = 'hello@lilosgrowth.com';
           </noscript>
         </div>
 
-        <!-- Right: Calendly inline embed -->
         <div id="book" role="region" aria-label="Schedule a call">
           <div
             class="calendly-inline-widget rounded-2xl bg-white shadow border border-gray-100"
@@ -230,26 +162,8 @@ const email = 'hello@lilosgrowth.com';
     </div>
   </section>
 
-  <!-- Calendly hover/tap load + manual scroll (lazy + accessible) & UTM capture -->
+  <!-- Lazy-load Calendly -->
   <script is:inline>
-    // UTM + attribution mapping into hidden fields
-    (function () {
-      try {
-        const params = new URLSearchParams(location.search);
-        const set = (name, val) => {
-          const input = document.querySelector('input[name="' + name + '"]');
-          if (input) input.value = val || '';
-        };
-        set('referrer', document.referrer || '');
-        set('utm_source', params.get('utm_source'));
-        set('utm_medium', params.get('utm_medium'));
-        set('utm_campaign', params.get('utm_campaign'));
-        set('utm_term', params.get('utm_term'));
-        set('utm_content', params.get('utm_content'));
-      } catch {}
-    })();
-
-    // Calendly loader only when needed
     window.loadCalendly = () => {
       if (window.Calendly) return;
       const s = document.createElement('script');
@@ -276,20 +190,13 @@ const email = 'hello@lilosgrowth.com';
       io.observe(el);
     };
 
-    // Prime loader if user clicks "Jump to Calendar"
-    document.addEventListener('click', (e) => {
-      const a = e.target.closest('a[href="#book"]');
-      if (a) window.loadCalendly();
-    });
-
     if (document.readyState !== 'loading') observeCalendly();
     else document.addEventListener('DOMContentLoaded', observeCalendly);
 
-    // If user lands with #book, scroll after paint
     if (location.hash === '#book') {
       queueMicrotask(() => {
-        const target = document.querySelector(location.hash);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const t = document.querySelector(location.hash);
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
   </script>
