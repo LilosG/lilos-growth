@@ -6,6 +6,11 @@ export const headerData = {
       text: 'Services',
       links: [
         {
+          text: 'Client Results',
+          href: getPermalink('/results'),
+          description: 'Proof from real clients—traffic, GBP visibility, and leads',
+        },
+        {
           text: 'All Services',
           href: getPermalink('/services'),
         },
@@ -47,7 +52,7 @@ export const headerData = {
   actions: [
     {
       text: 'Book a Call',
-      href: getPermalink('/contact'),
+      href: getPermalink('/contact#book'), // go directly to the scheduler section
     },
   ],
 } as const;

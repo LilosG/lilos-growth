@@ -1,13 +1,10 @@
 ---
-import { GoogleAnalytics } from '@astrolib/analytics';
-import { ANALYTICS } from 'astrowind:config';
+/**
+ * Vercel Analytics for Astro (default import).
+ * Alias the import to avoid a name collision with this file’s implicit component name.
+ * No visual output; safe to include on every page.
+ */
+import VercelAnalytics from '@vercel/analytics/astro';
 ---
 
-{
-  ANALYTICS?.vendors?.googleAnalytics?.id ? (
-    <GoogleAnalytics
-      id={String(ANALYTICS.vendors.googleAnalytics.id)}
-      partytown={ANALYTICS?.vendors?.googleAnalytics?.partytown}
-    />
-  ) : null
-}
+<VercelAnalytics />

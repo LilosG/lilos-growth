@@ -1,45 +1,31 @@
 ---
 /**
- * Floating Calendly CTA (bottom-right, always visible)
- * Design: compact pill, safe-area aware, strong focus ring.
- * Behavior: desktop (>= breakpointPx) opens popup via calendly-hybrid.js; mobile goes to fallbackHref.
+ * Floating CTA (bottom-right, no Calendly coupling).
+ * - Default goes to /contact#book (your existing funnel section).
+ * - If you need a different target later, pass `href="/your-target"`.
  */
 interface Props {
-  url?: string;
+  href?: string; // final destination (internal anchor or external link)
   text?: string;
-  fallbackHref?: string;
-  className?: string;
-  breakpointPx?: number;
+  className?: string; // extra utility classes
 }
 
-const {
-  url = 'https://calendly.com/lilosgrowth/intro-call',
-  text = 'Book a Call', // copy per selection
-  fallbackHref = '/contact#book',
-  className = '',
-  breakpointPx = 768, // keep current hybrid breakpoint
-} = Astro.props;
+const { href = '/contact#book', text = 'Book a Call', className = '' } = Astro.props as Props;
 
 const classes =
-  `fixed bottom-6 right-6 z-[1000] inline-flex items-center justify-center ` +
-  `rounded-full h-11 px-4 text-[15px] font-semibold print:hidden ` +
-  `bg-[#f56b2a] text-white border border-[#f56b2a] shadow-lg ` +
-  `hover:bg-[#e85718] hover:shadow-xl transition-[transform,background-color,box-shadow] duration-200 ` +
-  `focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-white`;
+  'fixed bottom-6 right-6 z-[100] inline-flex items-center justify-center rounded-full h-11 px-4 ' +
+  'text-[15px] font-semibold print:hidden bg-[#f56b2a] text-white border border-[#f56b2a] shadow-lg ' +
+  'hover:bg-[#e85718] hover:shadow-xl transition-[transform,background-color,box-shadow] duration-200 ' +
+  'focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-white';
 ---
 
 <a
-  href={fallbackHref}
-  data-cal-hybrid
-  data-cal-url={url}
-  data-cal-breakpoint={String(breakpointPx)}
+  href={href}
   class={`${classes} ${className}`.trim()}
   title={text}
   aria-label={text}
+  rel="nofollow noopener"
   style={`bottom: calc(1.25rem + env(safe-area-inset-bottom)); right: calc(1.25rem + env(safe-area-inset-right));`}
 >
   {text}
-</a>
-
-<!-- Hybrid Calendly controller (CSP-safe) -->
-<script is:inline type="module" src="/scripts/calendly-hybrid.js"></script>
+</a>=

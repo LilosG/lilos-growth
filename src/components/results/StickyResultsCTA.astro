@@ -1,0 +1,82 @@
+---
+export interface Props {
+  text?: string;
+  primaryHref?: string;
+  primaryText?: string;
+  secondaryHref?: string;
+  secondaryText?: string;
+}
+const {
+  text = 'Ready to grow consistent, local leads?',
+  primaryHref = '/contact',
+  primaryText = 'Book a Call',
+  secondaryHref = '/services',
+  secondaryText = 'See Services',
+} = Astro.props;
+---
+
+<div
+  id="sticky-results-cta"
+  class="pointer-events-none fixed inset-x-0 bottom-4 z-40 opacity-0 translate-y-4 transition"
+>
+  <div class="pointer-events-auto mx-auto max-w-6xl px-4">
+    <div
+      class="rounded-2xl bg-white shadow-lg ring-1 ring-black/5 border border-gray-200 p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-3"
+    >
+      <div class="flex-1">
+        <p class="text-lg text-heading font-heading font-bold tracking-tight">{text}</p>
+        <p class="text-sm text-body">We’ll outline quick wins and a 90-day plan.</p>
+      </div>
+      <div class="flex gap-2 md:gap-3">
+        <a
+          href={secondaryHref}
+          data-astro-prefetch
+          aria-label={secondaryText}
+          class="inline-flex items-center justify-center rounded-2xl px-4 py-2 border border-gray-300 text-heading bg-transparent hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-400"
+          >{secondaryText}</a
+        >
+        <a
+          href={primaryHref}
+          data-astro-prefetch
+          aria-label={primaryText}
+          class="inline-flex items-center justify-center rounded-2xl px-4 py-2 text-white bg-[#f56b2a] hover:bg-[#f34e00] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a] shadow-sm font-heading font-semibold"
+          >{primaryText}</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const bar = document.getElementById('sticky-results-cta');
+    const hero = document.getElementById('results-hero');
+    if (!bar || !hero || !('IntersectionObserver' in window)) return;
+
+    let visible = false;
+    const show = () => {
+      if (visible) return;
+      visible = true;
+      bar.classList.remove('opacity-0', 'translate-y-4');
+      bar.classList.add('opacity-100', 'translate-y-0');
+    };
+    const hide = () => {
+      if (!visible) return;
+      visible = false;
+      bar.classList.remove('opacity-100', 'translate-y-0');
+      bar.classList.add('opacity-0', 'translate-y-4');
+    };
+
+    // Slightly higher threshold & negative rootMargin to avoid flicker near fold
+    const io = new IntersectionObserver(
+      (entries) => {
+        const e = entries[0];
+        if (!e) return;
+        if (e.intersectionRatio > 0.2) hide();
+        else show();
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: [0, 0.2, 1] }
+    );
+    io.observe(hero);
+  })();
+</script>

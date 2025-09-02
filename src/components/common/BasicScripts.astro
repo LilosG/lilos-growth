@@ -1,255 +1,114 @@
 ---
-import { UI } from 'astrowind:config';
+/**
+ * Site-wide progressive enhancements:
+ * 1) External link hardening (target=_blank + rel=noopener,noreferrer)
+ * 2) CTA click tracking via window.trackEvent() -> Vercel Analytics
+ *    - Works on any element with [data-track] or [data-track-event]
+ * 3) Page view tracking on load (+ after Astro client navigations)
+ * 4) Lightweight UTM/referrer attribution stored in sessionStorage
+ *
+ * No theme changes. CSP-safe inline script.
+ */
 ---
 
-<script is:inline define:vars={{ defaultTheme: UI.theme }}>
-  if (window.basic_script) {
-    return;
-  }
-
-  window.basic_script = true;
-
-  function applyTheme(theme) {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }
-
-  const initTheme = function () {
-    if ((defaultTheme && defaultTheme.endsWith(':only')) || (!localStorage.theme && defaultTheme !== 'system')) {
-      applyTheme(defaultTheme.replace(':only', ''));
-    } else if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      applyTheme('dark');
-    } else {
-      applyTheme('light');
-    }
-  };
-  initTheme();
-
-  function attachEvent(selector, event, fn) {
-    const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
-    if (matches && matches.length) {
-      matches.forEach((elem) => {
-        elem.addEventListener(event, (e) => fn(e, elem), false);
-      });
-    }
-  }
-
-  const onLoad = function () {
-    let lastKnownScrollPosition = window.scrollY;
-    let ticking = true;
-
-    attachEvent('#header nav', 'click', function () {
-      document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');
-      document.body.classList.remove('overflow-hidden');
-      document.getElementById('header')?.classList.remove('h-screen');
-      document.getElementById('header')?.classList.remove('expanded');
-      document.getElementById('header')?.classList.remove('bg-page');
-      document.querySelector('#header nav')?.classList.add('hidden');
-      document.querySelector('#header > div > div:last-child')?.classList.add('hidden');
-    });
-
-    attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
-      elem.classList.toggle('expanded');
-      document.body.classList.toggle('overflow-hidden');
-      document.getElementById('header')?.classList.toggle('h-screen');
-      document.getElementById('header')?.classList.toggle('expanded');
-      document.getElementById('header')?.classList.toggle('bg-page');
-      document.querySelector('#header nav')?.classList.toggle('hidden');
-      document.querySelector('#header > div > div:last-child')?.classList.toggle('hidden');
-    });
-
-    attachEvent('[data-aw-toggle-color-scheme]', 'click', function () {
-      if (defaultTheme.endsWith(':only')) {
-        return;
-      }
-      document.documentElement.classList.toggle('dark');
-      localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-    });
-
-    attachEvent('[data-aw-social-share]', 'click', function (_, elem) {
-      const network = elem.getAttribute('data-aw-social-share');
-      const url = encodeURIComponent(elem.getAttribute('data-aw-url'));
-      const text = encodeURIComponent(elem.getAttribute('data-aw-text'));
-
-      let href;
-      switch (network) {
-        case 'facebook':
-          href = `https://www.facebook.com/sharer.php?u=${url}`;
-          break;
-        case 'twitter':
-          href = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
-          break;
-        case 'linkedin':
-          href = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${text}`;
-          break;
-        case 'whatsapp':
-          href = `https://wa.me/?text=${text}%20${url}`;
-          break;
-        case 'mail':
-          href = `mailto:?subject=%22${text}%22&body=${text}%20${url}`;
-          break;
-
-        default:
-          return;
-      }
-
-      const newlink = document.createElement('a');
-      newlink.target = '_blank';
-      newlink.href = href;
-      newlink.click();
-    });
-
-    const screenSize = window.matchMedia('(max-width: 767px)');
-    screenSize.addEventListener('change', function () {
-      document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');
-      document.body.classList.remove('overflow-hidden');
-      document.getElementById('header')?.classList.remove('h-screen');
-      document.getElementById('header')?.classList.remove('expanded');
-      document.getElementById('header')?.classList.remove('bg-page');
-      document.querySelector('#header nav')?.classList.add('hidden');
-      document.querySelector('#header > div > div:last-child')?.classList.add('hidden');
-    });
-
-    function applyHeaderStylesOnScroll() {
-      const header = document.querySelector('#header[data-aw-sticky-header]');
-      if (!header) return;
-      if (lastKnownScrollPosition > 60 && !header.classList.contains('scroll')) {
-        header.classList.add('scroll');
-      } else if (lastKnownScrollPosition <= 60 && header.classList.contains('scroll')) {
-        header.classList.remove('scroll');
-      }
-      ticking = false;
-    }
-    applyHeaderStylesOnScroll();
-
-    attachEvent([document], 'scroll', function () {
-      lastKnownScrollPosition = window.scrollY;
-
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          applyHeaderStylesOnScroll();
-        });
-        ticking = true;
-      }
-    });
-  };
-  const onPageShow = function () {
-    document.documentElement.classList.add('motion-safe:scroll-smooth');
-    const elem = document.querySelector('[data-aw-toggle-menu]');
-    if (elem) {
-      elem.classList.remove('expanded');
-    }
-    document.body.classList.remove('overflow-hidden');
-    document.getElementById('header')?.classList.remove('h-screen');
-    document.getElementById('header')?.classList.remove('expanded');
-    document.querySelector('#header nav')?.classList.add('hidden');
-  };
-
-  window.onload = onLoad;
-  window.onpageshow = onPageShow;
-
-  document.addEventListener('astro:after-swap', () => {
-    initTheme();
-    onLoad();
-    onPageShow();
-  });
-</script>
-
 <script is:inline>
-  /* Inspired by: https://github.com/heidkaemper/tailwindcss-intersect */
-  const Observer = {
-    observer: null,
-    delayBetweenAnimations: 100,
-    animationCounter: 0,
+  (function () {
+    // ---------- 1) External link normalization ----------
+    try {
+      const host = location.host;
+      document.querySelectorAll('a[href^="http"]').forEach((a) => {
+        try {
+          const url = new URL(a.href);
+          if (url.host !== host) {
+            if (!a.target) a.target = '_blank';
+            const rel = (a.getAttribute('rel') || '').split(/\s+/);
+            if (!rel.includes('noopener')) rel.push('noopener');
+            if (!rel.includes('noreferrer')) rel.push('noreferrer');
+            a.setAttribute('rel', rel.join(' ').trim());
+          }
+        } catch {}
+      });
+    } catch {}
 
-    start() {
-      const selectors = [
-        '[class*=" intersect:"]',
-        '[class*=":intersect:"]',
-        '[class^="intersect:"]',
-        '[class="intersect"]',
-        '[class*=" intersect "]',
-        '[class^="intersect "]',
-        '[class$=" intersect"]',
+    // ---------- 2) CTA analytics ----------
+    const clickHandler = (e) => {
+      const el = e.target && (e.target.closest('[data-track]') || e.target.closest('[data-track-event]'));
+      if (!el) return;
+
+      const name = el.getAttribute('data-track-event') || 'click_cta';
+      const payload = {
+        href: el.getAttribute('href') || null,
+        id: el.id || null,
+        text: (el.textContent || '').trim().slice(0, 120),
+        path: location.pathname,
+      };
+
+      try {
+        window.trackEvent && window.trackEvent(name, payload);
+      } catch {}
+    };
+    document.addEventListener('click', clickHandler, { passive: true });
+
+    // ---------- 3) Page view tracking + UTM/referrer ----------
+    const STORAGE_KEY = 'lg_attribution';
+
+    function parseUTM() {
+      const p = new URLSearchParams(location.search);
+      const keys = [
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content',
+        'gclid',
+        'fbclid',
+        'msclkid',
       ];
-
-      const elements = Array.from(document.querySelectorAll(selectors.join(',')));
-
-      const getThreshold = (element) => {
-        if (element.classList.contains('intersect-full')) return 0.99;
-        if (element.classList.contains('intersect-half')) return 0.5;
-        if (element.classList.contains('intersect-quarter')) return 0.25;
-        return 0;
-      };
-
-      elements.forEach((el) => {
-        el.setAttribute('no-intersect', '');
-        el._intersectionThreshold = getThreshold(el);
+      const utm = {};
+      keys.forEach((k) => {
+        const v = p.get(k);
+        if (v) utm[k] = v;
       });
+      return utm;
+    }
 
-      const callback = (entries) => {
-        entries.forEach((entry) => {
-          requestAnimationFrame(() => {
-            const target = entry.target;
-            const intersectionRatio = entry.intersectionRatio;
-            const threshold = target._intersectionThreshold;
+    function updateAttribution() {
+      let data = {};
+      try {
+        data = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}');
+      } catch {}
+      const now = Date.now();
+      const utm = parseUTM();
+      const ref = document.referrer || null;
 
-            if (target.classList.contains('intersect-no-queue')) {
-              if (entry.isIntersecting) {
-                target.removeAttribute('no-intersect');
-                if (target.classList.contains('intersect-once')) {
-                  this.observer.unobserve(target);
-                }
-              } else {
-                target.setAttribute('no-intersect', '');
-              }
-              return;
-            }
+      if (!data.firstTouch) {
+        data.firstTouch = { ts: now, referrer: ref, landing: location.pathname + location.search, ...utm };
+      }
+      data.lastTouch = { ts: now, referrer: ref, path: location.pathname, ...utm };
 
-            if (intersectionRatio >= threshold) {
-              if (!target.hasAttribute('data-animated')) {
-                target.removeAttribute('no-intersect');
-                target.setAttribute('data-animated', 'true');
+      try {
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      } catch {}
+      return data;
+    }
 
-                const delay = this.animationCounter * this.delayBetweenAnimations;
-                this.animationCounter++;
-
-                target.style.transitionDelay = `${delay}ms`;
-                target.style.animationDelay = `${delay}ms`;
-
-                if (target.classList.contains('intersect-once')) {
-                  this.observer.unobserve(target);
-                }
-              }
-            } else {
-              target.setAttribute('no-intersect', '');
-              target.removeAttribute('data-animated');
-              target.style.transitionDelay = '';
-              target.style.animationDelay = '';
-
-              this.animationCounter = 0;
-            }
-          });
-        });
+    function sendPageView() {
+      const attrib = updateAttribution();
+      const payload = {
+        path: location.pathname,
+        title: document.title,
+        referrer: document.referrer || null,
+        utm: attrib.lastTouch || null,
       };
+      try {
+        window.trackEvent && window.trackEvent('page_view', payload);
+      } catch {}
+    }
 
-      this.observer = new IntersectionObserver(callback.bind(this), { threshold: [0, 0.25, 0.5, 0.99] });
+    if (document.readyState !== 'loading') sendPageView();
+    else document.addEventListener('DOMContentLoaded', sendPageView, { once: true });
 
-      elements.forEach((el) => {
-        this.observer.observe(el);
-      });
-    },
-  };
-
-  Observer.start();
-
-  document.addEventListener('astro:after-swap', () => {
-    Observer.start();
-  });
+    // Fires after Astro client-side navigations (if used)
+    document.addEventListener('astro:page-load', sendPageView);
+  })();
 </script>

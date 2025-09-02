@@ -9,30 +9,21 @@ type Action = { text: string; href: string };
 const nav = (Array.isArray(headerData?.links) ? headerData.links : []) as unknown as NavItem[];
 const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) as unknown as Action[];
 
-// Current path helper (CSP-safe; avoids editor warnings)
 const currentPath: string = (globalThis as { Astro?: { url?: { pathname?: string } } })?.Astro?.url?.pathname ?? '/';
 const isActive = (href?: string) => !!href && (currentPath === href || (href !== '/' && currentPath.startsWith(href)));
 
 const primary = actions?.[0] ?? null;
 const secondaryFromData = actions?.[1] ?? null;
-
-// Secondary CTA: prefer config; otherwise fall back to "Services"
 const secondary: Action | null = secondaryFromData ?? { text: 'Services', href: '/services' };
-
-// Avoid duplicate CTAs if both would resolve to same href
 const showSecondary = !!secondary && (!primary || secondary.href !== primary.href);
 ---
 
-<!-- Sticky header on TRUE charcoal with compact rhythm, left-aligned nav, and dual CTAs -->
 <header
   class="site-header sticky top-0 z-[100] w-full bg-[#212529] border-b border-white/10 transition-[box-shadow,border-color] supports-[backdrop-filter]:backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-[4px]"
 >
   <div class="mx-auto w-full max-w-7xl px-4 md:px-6">
-    <!-- Base bar (shrinks on scroll via .is-shrunk) -->
     <div class="header-bar flex items-center justify-between gap-4 py-3 md:py-4">
-      <!-- LEFT: Logo + Desktop Nav -->
       <div class="flex items-center gap-6 min-w-0">
-        <!-- Logo (add subtle white edge glow so it reads on dark) -->
         <a href="/" class="inline-flex items-center shrink-0" aria-label="Lilos Growth — Home">
           <img
             src="/Lilos_Growth_Logo_Corrected.svg"
@@ -43,8 +34,8 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
           />
         </a>
 
-        <!-- Desktop nav (shown at sm+ to keep full bar on small laptops) -->
-        <nav class="hidden sm:flex">
+        <!-- Add a landmark for SRs -->
+        <nav class="hidden sm:flex" aria-label="Primary">
           <div class="flex items-center gap-7 lg:gap-9">
             {
               nav.map((item) =>
@@ -52,6 +43,8 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
                   <div class="relative group">
                     <a
                       href={item.href ?? '#'}
+                      aria-haspopup="true"
+                      aria-expanded="false"
                       class="inline-flex items-center gap-1 py-2 text-[15px] leading-[22px] font-medium transition
                              text-white/90 hover:text-white
                              hover:underline focus:underline focus-visible:underline underline-offset-4 decoration-2 decoration-[#f56b2a]/60
@@ -68,7 +61,6 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
                       </svg>
                     </a>
 
-                    {/* Dropdown (kept light surface for readability) */}
                     <div class="absolute left-0 top-full pt-3 z-[120]">
                       <div
                         class="min-w-[240px] rounded-2xl border border-gray-200 bg-white shadow-xl
@@ -115,16 +107,15 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
         </nav>
       </div>
 
-      <!-- RIGHT: CTAs + Mobile Trigger -->
       <div class="flex items-center justify-end gap-3">
         {
           showSecondary ? (
             <a
               href={secondary!.href}
               class="hidden sm:inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/0 px-4 py-2
-                     text-[14px] leading-[22px] font-semibold text-white shadow-sm transition
-                     hover:bg-white/10 hover:border-white/35 focus:outline-none
-                     focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-[#212529]"
+                   text-[14px] leading-[22px] font-semibold text-white shadow-sm transition
+                   hover:bg-white/10 hover:border-white/35 focus:outline-none
+                   focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-[#212529]"
             >
               <span>{secondary!.text}</span>
             </a>
@@ -136,9 +127,9 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
             <a
               href={primary.href}
               class="hidden sm:inline-flex group items-center gap-2 rounded-full border border-transparent bg-[#f56b2a] px-5 py-2.5
-                     text-[15px] leading-[22px] font-semibold text-white shadow transition
-                     hover:bg-[#e85718] focus:outline-none
-                     focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-[#212529]"
+                   text-[15px] leading-[22px] font-semibold text-white shadow transition
+                   hover:bg-[#e85718] focus:outline-none
+                   focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-[#212529]"
             >
               <span>{primary.text}</span>
               <svg
@@ -155,34 +146,29 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
           ) : null
         }
 
-        <!-- Mobile Menu pill -->
         <button
           id="mobileMenuBtn"
           class="sm:hidden inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-2 text-[15px] leading-[22px] font-medium text-white shadow-sm transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-[#212529]"
           aria-controls="mobileMenu"
           aria-expanded="false"
+          aria-label="Open menu"
         >
-          <span class="sr-only">Open menu</span>
           <svg viewBox="0 0 20 20" class="h-5 w-5" fill="currentColor" aria-hidden="true">
-            <circle cx="3" cy="3" r="1.5"></circle><circle cx="10" cy="3" r="1.5"></circle><circle
-              cx="17"
-              cy="3"
-              r="1.5"></circle>
-            <circle cx="3" cy="10" r="1.5"></circle><circle cx="10" cy="10" r="1.5"></circle><circle
-              cx="17"
-              cy="10"
-              r="1.5"></circle>
-            <circle cx="3" cy="17" r="1.5"></circle><circle cx="10" cy="17" r="1.5"></circle><circle
-              cx="17"
-              cy="17"
-              r="1.5"></circle>
+            <circle cx="3" cy="3" r="1.5"></circle>
+            <circle cx="10" cy="3" r="1.5"></circle>
+            <circle cx="17" cy="3" r="1.5"></circle>
+            <circle cx="3" cy="10" r="1.5"></circle>
+            <circle cx="10" cy="10" r="1.5"></circle>
+            <circle cx="17" cy="10" r="1.5"></circle>
+            <circle cx="3" cy="17" r="1.5"></circle>
+            <circle cx="10" cy="17" r="1.5"></circle>
+            <circle cx="17" cy="17" r="1.5"></circle>
           </svg>
           <span>Menu</span>
         </button>
       </div>
     </div>
   </div>
-  <!-- /max-w container -->
 
   <!-- Mobile drawer -->
   <div id="mobileMenu" class="fixed inset-0 z-[110] hidden" aria-hidden="true">
@@ -204,7 +190,6 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
           class="inline-flex h-10 items-center justify-center rounded-full border border-gray-300 px-4 text-[#253242] bg-white shadow-sm hover:border-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
           aria-label="Close menu"
         >
-          <span class="sr-only">Close menu</span>
           <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
@@ -247,16 +232,15 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
     </div>
   </div>
 
-  <!-- CSP-safe controllers -->
-  <script is:inline type="module" src="/scripts/mobile-menu.js"></script>
-  <script is:inline type="module" src="/scripts/header-scroll.js"></script>
+  <!-- CSP-safe controllers (external; no is:inline) -->
+  <script type="module" src="/scripts/mobile-menu.js"></script>
+  <script type="module" src="/scripts/header-scroll.js"></script>
 </header>
 
 <!-- Floating CTA rendered outside header so it truly floats bottom-right -->
 <FloatingCalendlyButton />
 
 <style>
-  /* Subtle shrink-on-scroll without layout thrash (tuned for dark header) */
   header.site-header.is-shrunk {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     border-bottom-color: rgba(255, 255, 255, 0.12);
@@ -268,18 +252,14 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
   header.site-header .header-bar {
     transition: padding 0.2s ease;
   }
-
-  /* Make dark-on-dark logo readable without changing the asset colors */
   header.site-header .logo-on-dark {
     filter: drop-shadow(0 0 0.75px rgba(255, 255, 255, 0.85)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.18))
       contrast(1.05) brightness(1.05);
   }
-
-  /* Shrink targets for ~15% compaction */
   @media (min-width: 1024px) {
     header.site-header.is-shrunk .logo {
       height: 3.5rem !important;
-    } /* ~56px (from 66px) */
+    }
     header.site-header.is-shrunk .header-bar {
       padding-top: 0.5rem;
       padding-bottom: 0.5rem;
@@ -288,7 +268,7 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
   @media (min-width: 768px) and (max-width: 1023.98px) {
     header.site-header.is-shrunk .logo {
       height: 3rem !important;
-    } /* ~48px (from 56px) */
+    }
     header.site-header.is-shrunk .header-bar {
       padding-top: 0.5rem;
       padding-bottom: 0.5rem;
@@ -297,7 +277,7 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
   @media (max-width: 767.98px) {
     header.site-header.is-shrunk .logo {
       height: 2.5rem !important;
-    } /* ~40px (from 44px) */
+    }
     header.site-header.is-shrunk .header-bar {
       padding-top: 0.375rem;
       padding-bottom: 0.375rem;

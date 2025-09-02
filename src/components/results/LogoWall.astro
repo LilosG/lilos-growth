@@ -1,0 +1,63 @@
+---
+export interface Props {
+  items: import('~/data/results').LogoItem[];
+}
+const { items } = Astro.props;
+
+// Initials for a simple monogram when no logo exists
+const getInitials = (name: string) =>
+  (name || '')
+    .split(' ')
+    .filter(Boolean)
+    .map((s) => s[0])
+    .join('')
+    .slice(0, 3)
+    .toUpperCase();
+
+const tileBase =
+  'h-16 w-[220px] md:h-16 md:w-[220px] flex items-center justify-center rounded-xl border border-gray-200 bg-white/60 hover:bg-white transition';
+---
+
+<section aria-labelledby="logo-wall" class="w-full">
+  <h2 id="logo-wall" class="sr-only">Clients</h2>
+
+  <div class="flex flex-wrap justify-center items-center gap-5 md:gap-6">
+    {
+      items.map((item) =>
+        item.href ? (
+          <a href={item.href} aria-label={item.name} class={tileBase}>
+            {item.src ? (
+              <img
+                src={item.src}
+                alt={item.name}
+                loading="lazy"
+                decoding="async"
+                width="220"
+                height="64"
+                class="max-h-14 md:max-h-16 w-auto object-contain opacity-80 grayscale hover:opacity-100 hover:grayscale-0 transition"
+              />
+            ) : (
+              <span class="text-sm tracking-wide text-gray-500 font-semibold">{getInitials(item.name)}</span>
+            )}
+          </a>
+        ) : (
+          <div aria-label={item.name} class={tileBase}>
+            {item.src ? (
+              <img
+                src={item.src}
+                alt={item.name}
+                loading="lazy"
+                decoding="async"
+                width="220"
+                height="64"
+                class="max-h-14 md:max-h-16 w-auto object-contain opacity-80 grayscale hover:opacity-100 hover:grayscale-0 transition"
+              />
+            ) : (
+              <span class="text-sm tracking-wide text-gray-500 font-semibold">{getInitials(item.name)}</span>
+            )}
+          </div>
+        )
+      )
+    }
+  </div>
+</section>
