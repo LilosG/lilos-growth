@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars, no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars, no-unused-vars */
 /** Types */
 export type ResultsStat = {
   id: string;
