@@ -1,12 +1,12 @@
 ---
-import PageLayout from '~/layouts/PageLayout.astro';
+import Layout from '~/layouts/PageLayout.astro';
 
 export const title = 'Plans & Pricing | Websites, Local SEO & GBP | Lilos Growth';
 export const description =
   'Choose a transparent, no-contract package for websites, Local SEO, and Google Business Profile optimization. Affordable monthly pricing designed for home service businesses.';
 ---
 
-<PageLayout title={title} description={description}>
+<Layout title={title} description={description}>
   <!-- HERO -->
   <section class="bg-[#253242] min-h-[340px] flex items-center justify-center pt-14 pb-14 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159] pointer-events-none"></div>
@@ -19,17 +19,17 @@ export const description =
       <div class="mt-6 flex flex-wrap justify-center gap-4">
         <a
           href="#packages"
-          data-track
-          data-track-event="click_view_packages"
           class="inline-flex items-center px-8 py-3 rounded-2xl bg-[#f56b2a] hover:bg-[#f34e00] text-white font-heading font-semibold text-lg shadow transition"
+          data-track
+          data-track-event="view_packages"
         >
           View Packages
         </a>
         <a
           href="#faq"
-          data-track
-          data-track-event="click_faq"
           class="inline-flex items-center px-8 py-3 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-lg shadow transition"
+          data-track
+          data-track-event="view_faq"
         >
           Frequently Asked Questions
         </a>
@@ -107,7 +107,7 @@ export const description =
     </div>
   </section>
 
-  <!-- WHY CHOOSE US -->
+  <!-- WHY CHOOSE US (matches home page) -->
   <section class="bg-[#f7fafd] py-16 border-t border-gray-100">
     <div class="max-w-6xl mx-auto px-4 text-center">
       <h2 class="font-heading text-heading text-3xl md:text-4xl font-extrabold mb-10">Why Choose Lilos Growth?</h2>
@@ -150,8 +150,9 @@ export const description =
         >
           <span
             class="block text-xs bg-[#f56b2a]/10 text-[#f56b2a] px-3 py-1 rounded-full mb-3 font-heading font-semibold uppercase tracking-wide"
-            >Get Online Fast</span
           >
+            Get Online Fast
+          </span>
           <h3 class="font-heading text-heading text-2xl font-bold mb-2">Website as a Service</h3>
           <div class="text-4xl font-heading text-primary font-bold mb-2">
             $750<span class="text-lg font-normal text-gray-500">/mo</span>
@@ -160,26 +161,31 @@ export const description =
             Great for service businesses who want a modern, mobile-ready website—fast.
           </p>
           <ul class="font-body text-body text-base mb-8 space-y-1 list-disc list-inside">
-            <li>Responsive, modern web design</li><li>Content & image development</li><li>
-              Unlimited edits & easy updates
-            </li><li>Month-to-month support</li><li>Secure hosting & fast launch</li>
+            <li>Responsive, modern web design</li>
+            <li>Content & image development</li>
+            <li>Unlimited edits & easy updates</li>
+            <li>Month-to-month support</li>
+            <li>Secure hosting & fast launch</li>
           </ul>
           <a
-            href="/contact#book"
-            data-track
-            data-track-event="cta_get_started_waas"
+            href="#contact"
             class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition w-full text-center"
-            >Get Started</a
+            data-track
+            data-track-event="get_started_waas"
           >
+            Get Started
+          </a>
         </div>
+
         <!-- GBP/Maps Only -->
         <div
           class="bg-bluelight rounded-2xl shadow-xl border border-gray-100 flex flex-col p-8 items-start hover:shadow-2xl transition"
         >
           <span
             class="block text-xs bg-[#f56b2a]/10 text-[#f56b2a] px-3 py-1 rounded-full mb-3 font-heading font-semibold uppercase tracking-wide"
-            >Maps Pack Rankings</span
           >
+            Maps Pack Rankings
+          </span>
           <h3 class="font-heading text-heading text-2xl font-bold mb-2">Google Business Profile Package</h3>
           <div class="text-4xl font-heading text-primary font-bold mb-2">
             $499<span class="text-lg font-normal text-gray-500">/mo</span>
@@ -188,27 +194,30 @@ export const description =
             Perfect for local businesses focused on Google Maps rankings and reviews.
           </p>
           <ul class="font-body text-body text-base mb-8 space-y-1 list-disc list-inside">
-            <li>Full GBP setup & optimization</li><li>Ongoing monthly management</li><li>Reviews, posts & photos</li><li
-            >
-              Reputation guidance
-            </li>
+            <li>Full GBP setup & optimization</li>
+            <li>Ongoing monthly management</li>
+            <li>Reviews, posts & photos</li>
+            <li>Reputation guidance</li>
           </ul>
           <a
-            href="/contact#book"
-            data-track
-            data-track-event="cta_get_started_gbp"
+            href="#contact"
             class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition w-full text-center"
-            >Get Started</a
+            data-track
+            data-track-event="get_started_gbp"
           >
+            Get Started
+          </a>
         </div>
+
         <!-- SEO Only -->
         <div
           class="bg-bluelight rounded-2xl shadow-xl border border-gray-100 flex flex-col p-8 items-start hover:shadow-2xl transition"
         >
           <span
             class="block text-xs bg-[#f56b2a]/10 text-[#f56b2a] px-3 py-1 rounded-full mb-3 font-heading font-semibold uppercase tracking-wide"
-            >Grow Organic Leads</span
           >
+            Grow Organic Leads
+          </span>
           <h3 class="font-heading text-heading text-2xl font-bold mb-2">Local SEO Package</h3>
           <div class="text-4xl font-heading text-primary font-bold mb-2">
             $499<span class="text-lg font-normal text-gray-500">/mo</span>
@@ -217,22 +226,26 @@ export const description =
             Great for those who want to dominate organic search in their service area.
           </p>
           <ul class="font-body text-body text-base mb-8 space-y-1 list-disc list-inside">
-            <li>Local keyword research & tracking</li><li>On-page SEO & content</li><li>
-              Citation building/cleanup
-            </li><li>Google Map ranking</li><li>Weekly blog/content posting</li>
+            <li>Local keyword research & tracking</li>
+            <li>On-page SEO & content</li>
+            <li>Citation building/cleanup</li>
+            <li>Google Map ranking</li>
+            <li>Weekly blog/content posting</li>
           </ul>
           <a
-            href="/contact#book"
-            data-track
-            data-track-event="cta_get_started_seo"
+            href="#contact"
             class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition w-full text-center"
-            >Get Started</a
+            data-track
+            data-track-event="get_started_seo"
           >
+            Get Started
+          </a>
         </div>
       </div>
 
-      <!-- Bundles -->
+      <!-- Bundles (highlighted) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <!-- SEO + GBP BUNDLE -->
         <div
           class="bg-white rounded-2xl shadow-2xl border-2 border-primary flex flex-col p-10 items-start relative hover:shadow-3xl transition"
         >
@@ -243,8 +256,9 @@ export const description =
           </div>
           <span
             class="block text-xs bg-[#f56b2a]/10 text-[#f56b2a] px-3 py-1 rounded-full mb-3 font-heading font-semibold uppercase tracking-wide"
-            >SEO & Maps Pack Bundle</span
           >
+            SEO & Maps Pack Bundle
+          </span>
           <h3 class="font-heading text-heading text-2xl font-bold mb-2">Local SEO + GBP Bundle</h3>
           <div class="text-4xl font-heading text-primary font-bold mb-2">
             $799<span class="text-lg font-normal text-gray-500">/mo</span>
@@ -253,19 +267,22 @@ export const description =
             Serious about growth? Bundle local SEO & Google Maps management for best results.
           </p>
           <ul class="font-body text-body text-base mb-8 space-y-1 list-disc list-inside">
-            <li>Everything from GBP & Local SEO</li><li>Double the posts, more reviews</li><li>
-              Advanced Map Pack & ranking tactics
-            </li><li>Monthly strategy/report call</li>
+            <li>Everything from GBP & Local SEO</li>
+            <li>Double the posts, more reviews</li>
+            <li>Advanced Map Pack & ranking tactics</li>
+            <li>Monthly strategy/report call</li>
           </ul>
           <a
-            href="/contact#book"
-            data-track
-            data-track-event="cta_get_started_bundle"
+            href="#contact"
             class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition w-full text-center"
-            >Get Started</a
+            data-track
+            data-track-event="get_started_bundle"
           >
+            Get Started
+          </a>
         </div>
 
+        <!-- ALL-IN BUNDLE -->
         <div
           class="bg-primary rounded-2xl shadow-2xl border-2 border-primary flex flex-col p-10 items-start relative hover:shadow-3xl transition"
         >
@@ -276,8 +293,9 @@ export const description =
           </div>
           <span
             class="block text-xs bg-white/20 text-white px-3 py-1 rounded-full mb-3 font-heading font-semibold uppercase tracking-wide"
-            >Website + SEO + GBP</span
           >
+            Website + SEO + GBP
+          </span>
           <h3 class="font-heading text-white text-2xl font-bold mb-2">Website + Local SEO + GBP</h3>
           <div class="text-4xl font-heading text-white font-bold mb-2">
             $1299<span class="text-lg font-normal text-white/70">/mo</span>
@@ -286,23 +304,26 @@ export const description =
             Everything you need: a modern site, organic rankings, and top-3 map pack placement—done for you.
           </p>
           <ul class="font-body text-white/90 text-base mb-8 space-y-1 list-disc list-inside">
-            <li>Modern site build or redesign</li><li>All Local SEO & GBP services</li><li>
-              Full site hosting & editing
-            </li><li>Premium support, strategy & analytics</li><li>Everything above, bundled for less</li>
+            <li>Modern site build or redesign</li>
+            <li>All Local SEO & GBP services</li>
+            <li>Full site hosting & editing</li>
+            <li>Premium support, strategy & analytics</li>
+            <li>Everything above, bundled for less</li>
           </ul>
           <a
-            href="/contact#book"
-            data-track
-            data-track-event="cta_get_started_allin"
+            href="#contact"
             class="mt-auto px-6 py-3 rounded-xl bg-white text-primary font-heading font-semibold text-lg shadow hover:bg-bluelight transition w-full text-center"
-            >Get Started</a
+            data-track
+            data-track-event="get_started_all_in_one"
           >
+            Get Started
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- COMPARE PACKAGES TABLE -->
+  <!-- COMPARE PACKAGES TABLE (MATCHED WIDTH & STYLE) -->
   <section class="bg-[#f7fafd] py-16 border-t border-gray-100">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="font-heading text-heading text-2xl md:text-3xl font-extrabold mb-8 text-center">Compare Packages</h2>
@@ -319,50 +340,78 @@ export const description =
             </tr>
           </thead>
           <tbody class="text-body text-base font-body">
-            <tr class="border-t"
-              ><td class="py-3 px-6">Modern Website Build</td><td class="text-center">Yes</td><td class="text-center"
-                >-</td
-              ><td class="text-center">-</td><td class="text-center">-</td><td class="text-center">Yes</td></tr
-            >
-            <tr class="border-t"
-              ><td class="py-3 px-6">GBP Optimization & Mgmt</td><td class="text-center">-</td><td class="text-center"
-                >Yes</td
-              ><td class="text-center">Yes</td><td class="text-center">Yes</td><td class="text-center">Yes</td></tr
-            >
-            <tr class="border-t"
-              ><td class="py-3 px-6">Local Keyword Research</td><td class="text-center">-</td><td class="text-center"
-                >-</td
-              ><td class="text-center">Yes</td><td class="text-center">Yes</td><td class="text-center">Yes</td></tr
-            >
-            <tr class="border-t"
-              ><td class="py-3 px-6">On-Page SEO</td><td class="text-center">-</td><td class="text-center">-</td><td
-                class="text-center">Yes</td
-              ><td class="text-center">Yes</td><td class="text-center">Yes</td></tr
-            >
-            <tr class="border-t"
-              ><td class="py-3 px-6">Weekly Content Posting</td><td class="text-center">-</td><td class="text-center"
-                >-</td
-              ><td class="text-center">Yes</td><td class="text-center">Yes</td><td class="text-center">Yes</td></tr
-            >
-            <tr class="border-t"
-              ><td class="py-3 px-6">Citation Building/Cleanup</td><td class="text-center">-</td><td class="text-center"
-                >-</td
-              ><td class="text-center">Yes</td><td class="text-center">Yes</td><td class="text-center">Yes</td></tr
-            >
-            <tr class="border-t"
-              ><td class="py-3 px-6">Reputation Guidance</td><td class="text-center">-</td><td class="text-center"
-                >Yes</td
-              ><td class="text-center">Yes</td><td class="text-center">Yes</td><td class="text-center">Yes</td></tr
-            >
-            <tr class="border-t"
-              ><td class="py-3 px-6">Monthly Strategy Call</td><td class="text-center">-</td><td class="text-center"
-                >-</td
-              ><td class="text-center">-</td><td class="text-center">Yes</td><td class="text-center">Yes</td></tr
-            >
-            <tr class="border-t"
-              ><td class="py-3 px-6">Premium Support</td><td class="text-center">Yes</td><td class="text-center">Yes</td
-              ><td class="text-center">Yes</td><td class="text-center">Yes</td><td class="text-center">Yes</td></tr
-            >
+            <tr class="border-t">
+              <td class="py-3 px-6">Modern Website Build</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">-</td>
+              <td class="text-center">-</td>
+              <td class="text-center">-</td>
+              <td class="text-center">Yes</td>
+            </tr>
+            <tr class="border-t">
+              <td class="py-3 px-6">GBP Optimization & Mgmt</td>
+              <td class="text-center">-</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+            </tr>
+            <tr class="border-t">
+              <td class="py-3 px-6">Local Keyword Research</td>
+              <td class="text-center">-</td>
+              <td class="text-center">-</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+            </tr>
+            <tr class="border-t">
+              <td class="py-3 px-6">On-Page SEO</td>
+              <td class="text-center">-</td>
+              <td class="text-center">-</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+            </tr>
+            <tr class="border-t">
+              <td class="py-3 px-6">Weekly Content Posting</td>
+              <td class="text-center">-</td>
+              <td class="text-center">-</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+            </tr>
+            <tr class="border-t">
+              <td class="py-3 px-6">Citation Building/Cleanup</td>
+              <td class="text-center">-</td>
+              <td class="text-center">-</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+            </tr>
+            <tr class="border-t">
+              <td class="py-3 px-6">Reputation Guidance</td>
+              <td class="text-center">-</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+            </tr>
+            <tr class="border-t">
+              <td class="py-3 px-6">Monthly Strategy Call</td>
+              <td class="text-center">-</td>
+              <td class="text-center">-</td>
+              <td class="text-center">-</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+            </tr>
+            <tr class="border-t">
+              <td class="py-3 px-6">Premium Support</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+              <td class="text-center">Yes</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -416,8 +465,7 @@ export const description =
         <div class="bg-white rounded-2xl shadow border border-gray-100 p-8">
           <h3 class="font-heading text-heading text-xl font-bold mb-2">Do you offer custom packages?</h3>
           <p class="font-body text-body text-lg">
-            Absolutely. If you need something different, <a href="/contact#book" class="text-primary underline"
-              >contact us</a
+            Absolutely. If you need something different, <a href="#contact" class="text-primary underline">contact us</a
             > and we’ll build a solution for your business.
           </p>
         </div>
@@ -441,13 +489,13 @@ export const description =
         Book your free website & SEO audit—no hard sell, just actionable insights.
       </p>
       <a
-        href="/contact#book"
-        data-track
-        data-track-event="cta_footer_book_audit"
+        href="#contact"
         class="inline-flex items-center px-8 py-4 rounded-2xl bg-white hover:bg-bluelight text-primary font-heading font-semibold text-lg shadow transition"
+        data-track
+        data-track-event="final_cta_click"
       >
         Book My Free Audit
       </a>
     </div>
   </section>
-</PageLayout>
+</Layout>

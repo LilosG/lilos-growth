@@ -1,10 +1,9 @@
 ---
 /**
- * Site-wide progressive enhancements:
+ * Site-wide progressive enhancements (safe + CSP-friendly):
  * 1) External link hardening
- * 2) CTA click tracking via window.trackEvent()
- * 3) Page view tracking on load + after Astro navigations
- * 4) Simple UTM/referrer attribution in sessionStorage
+ * 2) CTA click tracking via window.trackEvent() -> Vercel Analytics custom event
+ *    (Page views are handled automatically by <Analytics />, so we DO NOT send our own page_view.)
  */
 ---
 
@@ -27,12 +26,12 @@
       });
     } catch {}
 
-    // ---------- 2) CTA analytics ----------
+    // ---------- 2) CTA analytics (custom events only when user acts) ----------
     const clickHandler = (e) => {
       const el = e.target && (e.target.closest('[data-track]') || e.target.closest('[data-track-event]'));
       if (!el) return;
 
-      const name = el.getAttribute('data-track-event') || 'click_cta';
+      const name = el.getAttribute('data-track-event') || 'cta_click';
       const payload = {
         href: el.getAttribute('href') || null,
         id: el.id || null,
@@ -43,73 +42,13 @@
       try {
         if (typeof window.trackEvent === 'function') {
           window.trackEvent(name, payload);
+        } else if (typeof window.va === 'function') {
+          // direct fallback: send via Vercel Web Analytics
+          window.va('event', { name: String(name), data: payload });
         }
       } catch {}
     };
+
     document.addEventListener('click', clickHandler, { passive: true });
-
-    // ---------- 3) Page view tracking + UTM/referrer ----------
-    const STORAGE_KEY = 'lg_attribution';
-
-    function parseUTM() {
-      const p = new URLSearchParams(location.search);
-      const keys = [
-        'utm_source',
-        'utm_medium',
-        'utm_campaign',
-        'utm_term',
-        'utm_content',
-        'gclid',
-        'fbclid',
-        'msclkid',
-      ];
-      const utm = {};
-      keys.forEach((k) => {
-        const v = p.get(k);
-        if (v) utm[k] = v;
-      });
-      return utm;
-    }
-
-    function updateAttribution() {
-      let data = {};
-      try {
-        data = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}');
-      } catch {}
-      const now = Date.now();
-      const utm = parseUTM();
-      const ref = document.referrer || null;
-
-      if (!data.firstTouch) {
-        data.firstTouch = { ts: now, referrer: ref, landing: location.pathname + location.search, ...utm };
-      }
-      data.lastTouch = { ts: now, referrer: ref, path: location.pathname, ...utm };
-
-      try {
-        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      } catch {}
-      return data;
-    }
-
-    function sendPageView() {
-      const attrib = updateAttribution();
-      const payload = {
-        path: location.pathname,
-        title: document.title,
-        referrer: document.referrer || null,
-        utm: attrib.lastTouch || null,
-      };
-      try {
-        if (typeof window.trackEvent === 'function') {
-          window.trackEvent('page_view', payload);
-        }
-      } catch {}
-    }
-
-    if (document.readyState !== 'loading') sendPageView();
-    else document.addEventListener('DOMContentLoaded', sendPageView, { once: true });
-
-    // Fires after Astro client-side navigations (if used)
-    document.addEventListener('astro:page-load', sendPageView);
   })();
 </script>
