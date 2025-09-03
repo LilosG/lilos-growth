@@ -1,7 +1,6 @@
 ---
 /**
- * Minimal GA4 loader (only when PUBLIC_GOOGLE_MEASUREMENT_ID is present).
- * Pass GA ID via data attribute; read it with document.currentScript.
+ * Minimal GA4 loader (runs only when PUBLIC_GOOGLE_MEASUREMENT_ID exists).
  */
 const GA_ID = (import.meta.env.PUBLIC_GOOGLE_MEASUREMENT_ID ?? '').trim();
 const enabled = GA_ID.length > 0;
@@ -12,23 +11,25 @@ const enabled = GA_ID.length > 0;
     <link rel="preconnect" href="https://www.google-analytics.com" />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
 
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+    <!-- Explicit is:inline silences Astro hint -->
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
 
     <script is:inline data-ga-id={GA_ID}>
-      (function () {
-        var s = document.currentScript;
-        var GA_ID = s && s.getAttribute('data-ga-id');
-        if (!GA_ID) return;
+      (() => {
+        const s = document.currentScript;
+        const id = s && s.getAttribute('data-ga-id');
+        if (!id) return;
 
+        // dataLayer + gtag (no 'var', no 'arguments')
+         
         window.dataLayer = window.dataLayer || [];
-        function gtag(){ window.dataLayer.push(arguments); }
+        const gtag = (...args) => { window.dataLayer.push(args); };
 
-        // expose for other scripts (Layout event bridge)
-        // @ts-ignore
+        // expose for other scripts without ts-ignore
         window.gtag = window.gtag || gtag;
 
         gtag('js', new Date());
-        gtag('config', GA_ID, { anonymize_ip: true, transport_type: 'beacon' });
+        gtag('config', id, { anonymize_ip: true, transport_type: 'beacon' });
       })();
     </script>
   </>

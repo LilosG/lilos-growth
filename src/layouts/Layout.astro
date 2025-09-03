@@ -107,7 +107,7 @@ declare global {
         } catch {}
 
         try {
-          // @ts-ignore: gtag exists only if GA loaded
+          // @ts-expect-error: gtag exists only if GA loaded
           window.gtag?.('event', String(name), data);
         } catch {}
       };

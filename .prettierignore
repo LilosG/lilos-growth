@@ -3,3 +3,6 @@ src/data/post/markdown-elements-demo.post.mdx
 
 # (Optional) ignore the whole demo folder if you prefer
 # src/data/post/
+# CI: skip files with parser quirks
+src/components/common/GoogleAnalytics.astro
+src/data/post/markdown-elements-demo-post.mdx

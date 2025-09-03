@@ -7,7 +7,7 @@ const { faqs = [] } = Astro.props;
 
 <div class="divide-y divide-gray-200 rounded-2xl border border-gray-200 bg-white">
   {
-    faqs.map((f, i) => (
+    faqs.map((f) => (
       <details class="group p-5 [&[open]>summary_svg]:rotate-45">
         <summary class="flex items-center justify-between gap-4 cursor-pointer list-none focus-ring">
           <h3 class="text-[15px] font-semibold text-heading">{f.q}</h3>
