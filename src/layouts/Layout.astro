@@ -1,7 +1,7 @@
 ---
 /**
- * Site page layout — loads Tailwind, meta components, and site-wide scripts.
- * Keeps your original look & feel. Safe Analytics + SpeedInsights included.
+ * Site page layout — loads Tailwind, meta components, analytics, and global scripts.
+ * Pages pass title/description/metadata; SEO is centralized via <Metadata />.
  */
 
 import '~/assets/styles/tailwind.css';
@@ -12,13 +12,21 @@ import CustomStyles from '~/components/CustomStyles.astro';
 import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
 import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
-import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
+
+import GoogleAnalytics from '~/components/common/GoogleAnalytics.astro';
+
+// Use the official Vercel Analytics package; alias to avoid any name conflicts.
+import VercelAnalytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 
 import type { MetaData as MetaDataType } from '~/types';
 
-type MetaInput = Partial<MetaDataType> & { title?: string; description?: string };
+/** Page meta input */
+type MetaInput = Partial<MetaDataType> & {
+  title?: string;
+  description?: string;
+};
 
 export interface Props {
   title?: string;
@@ -31,14 +39,24 @@ export interface Props {
 
 const { title, description, ignoreTitleTemplate, lang = 'en', bodyClass = '', metadata = {} } = Astro.props as Props;
 
-/** Keep your previous fallback title logic minimal/safe */
+/** Conservative fallback titles when a page doesn't provide one */
 const pathname = Astro.url.pathname;
 let fallbackTitle: string | undefined;
 if (!title) {
-  if (pathname === '/' || pathname === '/index') fallbackTitle = 'Local SEO & Websites for Home Service Pros';
-  else if (pathname.startsWith('/additional-services')) fallbackTitle = 'Additional Services for Home Service Pros';
+  if (pathname === '/' || pathname === '/index') {
+    fallbackTitle = 'Local SEO & Websites for Home Service Pros';
+  } else if (pathname.startsWith('/additional-services')) {
+    fallbackTitle = 'Additional Services for Home Service Pros';
+  }
 }
 const effectiveTitle = title ?? fallbackTitle;
+
+/** Narrow, safe global surface: only expose trackEvent */
+declare global {
+  interface Window {
+    trackEvent?: (name: string, data?: Record<string, unknown>) => void;
+  }
+}
 ---
 
 <!doctype html>
@@ -57,13 +75,13 @@ const effectiveTitle = title ?? fallbackTitle;
       ignoreTitleTemplate={ignoreTitleTemplate}
     />
 
-    <!-- Allow pages to inject head extras (Calendly CSS, preconnects, etc.) -->
-    <slot name="head" />
-
     <SiteVerification />
 
-    <!-- Emits /_vercel/insights/script.js; no visual output -->
-    <Analytics />
+    <!-- GA4 loader (uses PUBLIC_GOOGLE_MEASUREMENT_ID) -->
+    <GoogleAnalytics />
+
+    <!-- Allow pages to push extra head assets (e.g., Calendly CSS/preconnect) -->
+    <slot name="head" />
   </head>
 
   <body
@@ -73,16 +91,24 @@ const effectiveTitle = title ?? fallbackTitle;
       <slot />
     </div>
 
+    <!-- Site-wide small helpers -->
     <BasicScripts />
+
+    <!-- Analytics (Vercel) + Performance -->
+    <VercelAnalytics />
     <SpeedInsights />
 
-    <!-- Custom event helper (uses window.va provided by Vercel) -->
+    <!-- Event bridge: window.trackEvent -> Vercel (va) & GA4 (gtag) if available -->
     <script is:inline>
       window.trackEvent = (name, data = {}) => {
         try {
-          if (typeof window.va === 'function') {
-            window.va('event', { name: String(name), data });
-          }
+          const va = /** @type {any} */ (window).va;
+          if (typeof va === 'function') va('event', { name: String(name), data });
+        } catch {}
+
+        try {
+          // @ts-ignore: gtag exists only if GA loaded
+          window.gtag?.('event', String(name), data);
         } catch {}
       };
     </script>
