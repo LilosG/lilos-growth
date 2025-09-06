@@ -44,7 +44,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
 
 <PageLayout title="Client Results" description="Proof points, success stories, and how we get results.">
   <main id="results-main" class="min-h-screen">
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
 
     <!-- HERO -->
     <section
@@ -205,7 +205,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
   </main>
 </PageLayout>
 
-<script type="application/ld+json">
+<script type="application/ld+json" is:inline>
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
