@@ -82,8 +82,6 @@ declare global {
 
     <!-- Allow pages to push extra head assets (e.g., Calendly CSS/preconnect) -->
     <slot name="head" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
 
   <body

@@ -1,0 +1,460 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+export const title = 'Additional Marketing Services for Home Service Businesses | Lilos Growth';
+export const description =
+  'Order stand-alone services like citation building, Google Business Profile setup, and one-time SEO tune-ups. No contracts — just fast, transparent work built for local home services.';
+---
+
+<Layout>
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-[#253242] pt-16 pb-20">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]"></div>
+    <div class="relative z-10 mx-auto max-w-3xl px-4 text-center">
+      <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="mx-auto mb-6 w-36" />
+      <h1 class="font-heading tracking-tight text-white mb-1 text-4xl font-extrabold leading-tight md:text-5xl">
+        Additional Services &amp; One-Time Projects
+      </h1>
+      <span
+        class="mt-2 mb-2 block font-heading text-[#f56b2a] text-xl font-semibold uppercase tracking-wider md:text-2xl"
+        >No Contract • No Commitment • Just Results</span
+      >
+      <p class="text-white/80 mx-auto mb-7 max-w-2xl text-lg md:text-xl">
+        Stand-alone services and quick projects you can order anytime. Pay only for what you need — no long-term
+        commitments or fluff.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="#services"
+          class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-8 py-4 text-lg font-semibold text-white shadow transition hover:bg-[#f34e00]"
+        >
+          Explore Services
+          <svg
+            class="ml-2 h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M13 18l6-6-6-6"></path>
+          </svg>
+        </a>
+        <a
+          href="#faq"
+          class="inline-flex items-center rounded-2xl bg-secondary px-8 py-4 text-lg font-semibold text-white shadow transition hover:bg-[#27394b]"
+        >
+          FAQ
+          <svg
+            class="ml-2 h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M13 18l6-6-6-6"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES GRID -->
+  <section id="services" class="bg-white border-t border-gray-100 py-24">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="font-heading text-heading text-center text-4xl font-bold md:text-5xl mb-8">
+        Order Additional Services Individually
+        <span class="mx-auto mt-2 block h-1 w-16 rounded bg-[#f56b2a]"></span>
+      </h2>
+      <p class="text-body mx-auto mb-12 max-w-3xl text-center text-lg">
+        Every option below is available as a one-time purchase — no monthly plan required.
+      </p>
+
+      <!-- Equal-height cards w/ aligned CTAs -->
+      <div class="grid gap-8 md:grid-cols-2">
+        <!-- Citation Builder -->
+        <article
+          id="citation"
+          class="scroll-mt-32 flex h-full flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-md transition hover:shadow-lg"
+        >
+          <header class="mb-3 flex items-center gap-3">
+            <span
+              class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#f56b2a]/10"
+              aria-hidden="true"
+            >
+              <!-- pin -->
+              <svg
+                width="22"
+                height="22"
+                fill="none"
+                stroke="#f56b2a"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+                ></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </span>
+            <h3 class="font-heading text-xl font-bold text-heading">Citation Builder</h3>
+          </header>
+
+          <div class="mb-2">
+            <span class="text-heading text-2xl font-extrabold">$49</span>
+            <span class="text-body/70 text-base font-medium">/ month</span>
+          </div>
+          <p class="mb-2">
+            <span
+              class="inline-block rounded-full bg-[#f56b2a]/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#f56b2a]"
+            >
+              Best for: New locations &amp; ranking boosts
+            </span>
+          </p>
+
+          <p class="text-body mb-3">List your business on 250+ top directories to build consistent citations.</p>
+          <ul class="text-body mb-6 list-inside list-disc space-y-1">
+            <li>Clean, accurate NAP across 100+ directories</li>
+            <li>Consistent brand &amp; category data</li>
+            <li>Improved local rankings over time</li>
+          </ul>
+
+          <a
+            href="#contact"
+            class="mt-auto w-full rounded-xl bg-[#f56b2a] px-6 py-3 text-center font-heading text-base font-bold text-white shadow transition hover:bg-[#c94c13]"
+            >Order Now</a
+          >
+        </article>
+
+        <!-- GBP Setup -->
+        <article
+          id="gbp-setup"
+          class="scroll-mt-32 flex h-full flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-md transition hover:shadow-lg"
+        >
+          <header class="mb-3 flex items-center gap-3">
+            <span
+              class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#f56b2a]/10"
+              aria-hidden="true"
+            >
+              <!-- briefcase -->
+              <svg
+                width="22"
+                height="22"
+                fill="none"
+                stroke="#f56b2a"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+              >
+                <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path>
+                <rect width="20" height="14" x="2" y="6" rx="2"></rect>
+                <path d="M22 13a18.15 18.15 0 0 1-20 0"></path>
+              </svg>
+            </span>
+            <h3 class="font-heading text-xl font-bold text-heading">Google Business Profile Setup</h3>
+          </header>
+
+          <div class="mb-2">
+            <span class="text-heading text-2xl font-extrabold">$399</span>
+            <span class="text-body/70 text-base font-medium">/ one-time</span>
+          </div>
+          <p class="mb-2">
+            <span
+              class="inline-block rounded-full bg-[#f56b2a]/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#f56b2a]"
+            >
+              Best for: New businesses or GBP resets
+            </span>
+          </p>
+
+          <p class="text-body mb-3">
+            Complete profile creation &amp; verification — optimized and ready to attract new customers.
+          </p>
+          <ul class="text-body mb-6 list-inside list-disc space-y-1">
+            <li>Full GBP creation &amp; verification</li>
+            <li>Business info, logo &amp; photos added</li>
+            <li>First Google Post &amp; Q&amp;A</li>
+            <li>Login &amp; live profile link delivered</li>
+          </ul>
+
+          <a
+            href="#contact"
+            class="mt-auto w-full rounded-xl bg-[#f56b2a] px-6 py-3 text-center font-heading text-base font-bold text-white shadow transition hover:bg-[#c94c13]"
+            >Order Now</a
+          >
+        </article>
+
+        <!-- GBP 30-Day Optimization -->
+        <article
+          id="gbp-30"
+          class="scroll-mt-32 flex h-full flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-md transition hover:shadow-lg"
+        >
+          <header class="mb-3 flex items-center gap-3">
+            <span
+              class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#f56b2a]/10"
+              aria-hidden="true"
+            >
+              <!-- star -->
+              <svg
+                width="22"
+                height="22"
+                fill="none"
+                stroke="#f56b2a"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="m12 3 2.31 4.68a2 2 0 0 0 1.6 1.15l5.17.76-3.74 3.64a2 2 0 0 0-.61 1.88l.88 5.14L12 17.88 6.39 20.25l.88-5.14a2 2 0 0 0-.61-1.88L2.9 9.59l5.17-.76A2 2 0 0 0 9.67 7.7L12 3z"
+                ></path>
+              </svg>
+            </span>
+            <h3 class="font-heading text-xl font-bold text-heading">GBP 30-Day Optimization</h3>
+          </header>
+
+          <div class="mb-2">
+            <span class="text-heading text-2xl font-extrabold">$499</span>
+            <span class="text-body/70 text-base font-medium">/ one-time</span>
+          </div>
+          <p class="mb-2">
+            <span
+              class="inline-block rounded-full bg-[#f56b2a]/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#f56b2a]"
+            >
+              Best for: Fast visibility &amp; profile fixes
+            </span>
+          </p>
+
+          <p class="text-body mb-3">
+            A focused 30-day sprint to clean up, optimize, and grow visibility in the Map Pack.
+          </p>
+          <ul class="text-body mb-6 list-inside list-disc space-y-1">
+            <li>Full audit &amp; expert optimizations</li>
+            <li>Keyword-rich services &amp; categories</li>
+            <li>Weekly posts &amp; photo updates</li>
+            <li>Review responses &amp; reporting</li>
+          </ul>
+
+          <a
+            href="#contact"
+            class="mt-auto w-full rounded-xl bg-[#f56b2a] px-6 py-3 text-center font-heading text-base font-bold text-white shadow transition hover:bg-[#c94c13]"
+            >Order Now</a
+          >
+        </article>
+
+        <!-- SEO Consulting & Website Tune-Up -->
+        <article
+          id="seo-tune"
+          class="scroll-mt-32 flex h-full flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-md transition hover:shadow-lg"
+        >
+          <header class="mb-3 flex items-center gap-3">
+            <span
+              class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#f56b2a]/10"
+              aria-hidden="true"
+            >
+              <!-- trending -->
+              <svg
+                width="22"
+                height="22"
+                fill="none"
+                stroke="#f56b2a"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 16v5M16 14v7M20 10v11M2 15l6.65-6.65a.5.5 0 0 1 .7 0l3.29 3.3a.5.5 0 0 0 .71 0L22 3"
+                ></path>
+              </svg>
+            </span>
+            <h3 class="font-heading text-xl font-bold text-heading">SEO Consulting &amp; Website Tune-Up</h3>
+          </header>
+
+          <div class="mb-2">
+            <span class="text-heading text-2xl font-extrabold">$499</span>
+            <span class="text-body/70 text-base font-medium">/ 30 days</span>
+          </div>
+          <p class="mb-2">
+            <span
+              class="inline-block rounded-full bg-[#f56b2a]/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#f56b2a]"
+            >
+              Best for: Quick website wins &amp; SEO clarity
+            </span>
+          </p>
+
+          <p class="text-body mb-3">A clear SEO roadmap plus a 30-day execution burst on the highest-impact fixes.</p>
+          <ul class="text-body mb-6 list-inside list-disc space-y-1">
+            <li>Website SEO audit &amp; strategy call</li>
+            <li>Meta, headings, content &amp; internal links</li>
+            <li>Tech &amp; UX tune-ups as needed</li>
+            <li>Results report with next steps</li>
+          </ul>
+
+          <a
+            href="#contact"
+            class="mt-auto w-full rounded-xl bg-[#f56b2a] px-6 py-3 text-center font-heading text-base font-bold text-white shadow transition hover:bg-[#c94c13]"
+            >Order Now</a
+          >
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="border-t border-gray-100 bg-cream py-24">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="font-heading text-heading text-center text-3xl font-bold md:text-4xl mb-8">
+        How Our Additional Services Work
+      </h2>
+      <p class="text-body mx-auto mb-12 max-w-3xl text-center text-lg">
+        Simple, fast, and transparent — no pushy sales calls, just a straightforward process.
+      </p>
+
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+        <div class="flex flex-col items-center rounded-2xl border bg-white p-8 shadow">
+          <span class="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[#f56b2a]/10">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              fill="none"
+              stroke="#f56b2a"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </span>
+          <h3 class="font-heading mb-2 text-center font-bold">Pick Your Service</h3>
+          <p class="text-body text-center text-base">
+            Choose any one-time service above — or ask for a custom solution.
+          </p>
+        </div>
+
+        <div class="flex flex-col items-center rounded-2xl border bg-white p-8 shadow">
+          <span class="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[#f56b2a]/10">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              fill="none"
+              stroke="#f56b2a"
+              stroke-width="2"
+            >
+              <circle cx="14" cy="14" r="10"></circle>
+            </svg>
+          </span>
+          <h3 class="font-heading mb-2 text-center font-bold">Share Your Details</h3>
+          <p class="text-body text-center text-base">
+            We’ll collect essentials with a quick form so we can get started.
+          </p>
+        </div>
+
+        <div class="flex flex-col items-center rounded-2xl border bg-white p-8 shadow">
+          <span class="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[#f56b2a]/10">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              fill="none"
+              stroke="#f56b2a"
+              stroke-width="2"
+            >
+              <circle cx="14" cy="14" r="2"></circle>
+              <path d="M14 2v2M14 24v-2M2 14h2M24 14h-2"></path>
+            </svg>
+          </span>
+          <h3 class="font-heading mb-2 text-center font-bold">We Get to Work</h3>
+          <p class="text-body text-center text-base">Our experts implement the work quickly and keep you updated.</p>
+        </div>
+
+        <div class="flex flex-col items-center rounded-2xl border bg-white p-8 shadow">
+          <span class="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[#f56b2a]/10">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              fill="none"
+              stroke="#f56b2a"
+              stroke-width="2"
+            >
+              <polyline points="6 12 12 18 18 12"></polyline>
+            </svg>
+          </span>
+          <h3 class="font-heading mb-2 text-center font-bold">You Get Results</h3>
+          <p class="text-body text-center text-base">Receive a clear report, outcomes, and recommendations — done.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="border-t border-gray-100 bg-white py-20">
+    <div class="mx-auto max-w-4xl px-4">
+      <h2 class="font-heading text-heading relative mb-8 text-center text-3xl font-bold md:text-4xl">
+        Additional Services FAQ
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
+      </h2>
+
+      <div class="space-y-7">
+        <div class="rounded-2xl border-l-4 border-[#f56b2a] bg-white p-6 shadow-md">
+          <h3 class="font-heading mb-2 text-lg font-bold text-[#f56b2a]">
+            Can I order an additional service without a monthly package?
+          </h3>
+          <p class="text-body text-base">
+            <span class="font-semibold text-[#f56b2a]">Yes.</span> Every service on this page is available individually —
+            no contract or ongoing bundle required.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border-l-4 border-[#f56b2a] bg-white p-6 shadow-md">
+          <h3 class="font-heading mb-2 text-lg font-bold text-[#f56b2a]">
+            What if I need help choosing the right service?
+          </h3>
+          <p class="text-body text-base">
+            Just <a href="#contact" class="underline text-[#f56b2a] hover:text-[#e25c15]">contact us</a>
+            and we’ll recommend the best fit for your goals and budget.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border-l-4 border-[#f56b2a] bg-white p-6 shadow-md">
+          <h3 class="font-heading mb-2 text-lg font-bold text-[#f56b2a]">How fast will I get results?</h3>
+          <p class="text-body text-base">
+            Most one-time services are completed in
+            <span class="font-bold text-[#f56b2a]">7–14 days</span>. We’ll keep you updated the whole way.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border-l-4 border-[#f56b2a] bg-white p-6 shadow-md">
+          <h3 class="font-heading mb-2 text-lg font-bold text-[#f56b2a]">
+            Can I combine these with a monthly package?
+          </h3>
+          <p class="text-body text-base">
+            Absolutely. Many monthly plans include these services for added savings — ask for details.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border-l-4 border-[#f56b2a] bg-white p-6 shadow-md">
+          <h3 class="font-heading mb-2 text-lg font-bold text-[#f56b2a]">
+            Is there support after the service is complete?
+          </h3>
+          <p class="text-body text-base">
+            Yes — you’ll get a results report, actionable next steps, and 14 days of email support.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border-l-4 border-[#f56b2a] bg-white p-6 shadow-md">
+          <h3 class="font-heading mb-2 text-lg font-bold text-[#f56b2a]">Can I talk to someone before ordering?</h3>
+          <p class="text-body text-base">
+            Definitely. <a href="#contact" class="underline text-[#f56b2a] hover:text-[#e25c15]">Reach out</a>
+            for honest, pressure-free advice from a strategist.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

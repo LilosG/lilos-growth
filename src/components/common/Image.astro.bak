@@ -1,0 +1,10 @@
+---
+const { src, alt = '', class: className = '', ...rest } = Astro.props;
+
+// Require alt attribute (Astro best practice)
+if (!alt) {
+  throw new Error('Image alt attribute is required');
+}
+---
+
+<img src={typeof src === 'string' ? src : src?.src} alt={alt} class={className} {...rest} />

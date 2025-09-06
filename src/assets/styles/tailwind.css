@@ -131,3 +131,15 @@ header.site-header.is-shrunk .header-bar { @apply py-2; }
 .dd *:first-child {
   margin-top: 0;
 }
+
+/* ---------- CTA mapping (by data-evt) ---------- */
+@layer components {
+  /* Any instrumented CTA becomes a branded primary button */
+  [data-evt^='cta_'] {
+    @apply btn btn-primary;
+  }
+  /* Opt-in secondary (outline) when data-cta="secondary" */
+  [data-evt^='cta_'][data-cta='secondary'] {
+    @apply btn btn-outline-primary;
+  }
+}

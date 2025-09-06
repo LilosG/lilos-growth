@@ -1,12 +1,9 @@
 {
-  "css.lint.unknownAtRules": "ignore",
-  "scss.lint.unknownAtRules": "ignore",
-  "less.lint.unknownAtRules": "ignore",
-  "files.associations": {
-    "**/src/assets/styles/tailwind.css": "postcss"
-  },
-  "tailwindCSS.includeLanguages": {
-    "postcss": "css",
-    "plaintext": "html"
-  }
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.includeLanguages": { "astro": "html", "plaintext": "html" },
+
+  // Silence the built-in CSS/SCSS/LESS validators
+  "css.validate": false,
+  "scss.validate": false,
+  "less.validate": false
 }

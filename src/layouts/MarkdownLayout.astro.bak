@@ -1,0 +1,53 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import type { MetaData as MetaDataType } from '~/types';
+
+export interface Props {
+  frontmatter?: Record<string, unknown>;
+  metadata?: MetaDataType;
+  title?: string;
+  description?: string;
+  lang?: string;
+  bodyClass?: string;
+}
+
+const {
+  frontmatter = {},
+  metadata: inputMetadata,
+  title,
+  description,
+  lang = 'en',
+  bodyClass = '',
+} = Astro.props as Props;
+
+// Build a safe title (string | undefined)
+const metaTitle =
+  typeof title === 'string'
+    ? title
+    : typeof inputMetadata?.title === 'string'
+      ? (inputMetadata.title as string)
+      : typeof frontmatter?.title === 'string'
+        ? (frontmatter.title as string)
+        : undefined;
+
+const metadata: MetaDataType = {
+  ...(inputMetadata ?? {}),
+  title: metaTitle,
+};
+
+// Helper to read a string safely from frontmatter
+const fmTitle = typeof frontmatter?.title === 'string' ? (frontmatter.title as string) : undefined;
+---
+
+<Layout metadata={metadata} {title} {description} {lang} {bodyClass}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
+    {fmTitle && <h1 class="font-bold font-heading text-4xl md:text-5xl leading-tighter tracking-tighter">{fmTitle}</h1>}
+
+    <div
+      class="mx-auto prose prose-lg max-w-4xl dark:prose-invert
+             dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading"
+    >
+      <slot />
+    </div>
+  </section>
+</Layout>

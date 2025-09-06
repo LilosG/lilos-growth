@@ -1,0 +1,22 @@
+---
+import type { ResultsStat } from '~/data/results';
+const { stat } = Astro.props as { stat: ResultsStat };
+
+type StatWithNote = ResultsStat & { note?: string };
+const note = (stat as StatWithNote).note;
+---
+
+<figure
+  class="h-full min-h-[128px] rounded-2xl border border-gray-200 bg-white px-5 py-5 flex flex-col justify-center shadow-sm"
+>
+  <figcaption class="text-[11px] uppercase tracking-wide text-gray-500 leading-none">
+    {stat.label}
+  </figcaption>
+  <div
+    class="mt-2 text-[28px] md:text-[30px] font-semibold text-gray-900 leading-tight"
+    aria-label={note ?? stat.value}
+  >
+    {stat.value}
+  </div>
+  {note ? <p class="mt-1 text-xs text-gray-500">{note}</p> : null}
+</figure>

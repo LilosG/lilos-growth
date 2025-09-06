@@ -74,8 +74,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
             data-astro-prefetch
             aria-label="Book a call to discuss a growth plan"
             class="inline-flex items-center px-8 py-4 rounded-2xl bg-[#f56b2a] hover:bg-[#f34e00] text-white font-heading font-semibold text-lg shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
-            data-evt="cta_results_book_call"
-          >
+           data-evt="cta_results_book_call">
             Book a Call
             <svg
               class="ml-2 w-4 h-4"
@@ -182,7 +181,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
             data-astro-prefetch
             aria-label="Book a call"
             class="inline-flex items-center px-7 py-3 rounded-2xl bg-[#f56b2a] hover:bg-[#f34e00] text-white font-heading font-semibold shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
-            data-evt="cta_results_book_call">Book a Call</a
+             data-evt="cta_results_book_call">Book a Call</a
           >
           <a
             href="/services"
@@ -204,14 +203,3 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
     />
   </main>
 </PageLayout>
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://lilosgrowth.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Results", "item": "https://lilosgrowth.com/results" }
-    ]
-  }
-</script>
