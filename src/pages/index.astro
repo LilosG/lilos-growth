@@ -55,6 +55,7 @@ export const metadata = {
           <a
             href="#packages"
             class="inline-flex items-center px-6 py-3 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-base shadow transition"
+            data-evt="cta_hero_see_services"
           >
             See Our Services
             <svg
@@ -151,6 +152,7 @@ export const metadata = {
           <button
             type="submit"
             class="mt-1.5 px-7 py-3.5 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#f34e00] transition"
+            data-evt="cta_hero_free_audit"
           >
             Get My Free Audit
           </button>
@@ -745,3 +747,57 @@ export const metadata = {
     </div>
   </section>
 </Layout>
+<!-- SEO/AEO: Organization + LocalBusiness + WebSite + Service + Breadcrumb -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://lilosgrowth.com/#org",
+        "name": "Lilos Growth",
+        "url": "https://lilosgrowth.com",
+        "logo": { "@type": "ImageObject", "url": "https://lilosgrowth.com/assets/images/default.png" },
+        "email": "hello@lilosgrowth.com"
+      },
+      {
+        "@type": ["LocalBusiness", "ProfessionalService"],
+        "@id": "https://lilosgrowth.com/#local",
+        "name": "Lilos Growth",
+        "url": "https://lilosgrowth.com",
+        "image": "https://lilosgrowth.com/assets/images/default.png",
+        "email": "hello@lilosgrowth.com",
+        "areaServed": { "@type": "Country", "name": "United States" },
+        "address": { "@type": "PostalAddress", "addressCountry": "US" },
+        "priceRange": "$",
+        "parentOrganization": { "@id": "https://lilosgrowth.com/#org" },
+        "knowsAbout": [
+          "Local SEO",
+          "Google Business Profile",
+          "Website Design",
+          "Review Management",
+          "Content & On-Page SEO"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://lilosgrowth.com/#website",
+        "url": "https://lilosgrowth.com",
+        "name": "Lilos Growth"
+      },
+      {
+        "@type": "Service",
+        "@id": "https://lilosgrowth.com/#service",
+        "serviceType": "Local SEO & Digital Marketing for Home Service Businesses",
+        "provider": { "@id": "https://lilosgrowth.com/#local" },
+        "areaServed": { "@type": "Country", "name": "United States" },
+        "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://lilosgrowth.com/#bread",
+        "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://lilosgrowth.com/" }]
+      }
+    ]
+  }
+</script>

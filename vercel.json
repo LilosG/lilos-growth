@@ -1,21 +1,11 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "headers": [
-    {
-      "source": "/_astro/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    }
-  ],
   "redirects": [
     {
-      "source": "/faq",
-      "destination": "/#faq",
+      "source": "/(.*)",
+      "has": [
+        { "type": "host", "value": "www.lilosgrowth.com" }
+      ],
+      "destination": "https://lilosgrowth.com/:1",
       "permanent": true
     }
   ]
