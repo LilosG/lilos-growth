@@ -24,7 +24,7 @@ export default defineConfig({
 
   integrations: [
     tailwind({ applyBaseStyles: false }),
-    sitemap({ customPages: ["https://lilosgrowth.com/blog"] })
+    sitemap({ customPages: ['https://lilosgrowth.com/blog'] }),
     mdx(),
     icon({
       include: {

@@ -1,7 +1,9 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
 import SinglePost from '~/components/blog/SinglePost.astro';
-import { getStaticPathsBlogPost, blogPostRobots } from '~/utils/blog';
+import { getStaticPathsBlogPost } from '~/utils/blog';
+
+export const robots = 'index, follow';
 
 /** Remap old { params: { blog } } → new { params: { slug } } */
 export async function getStaticPaths() {
@@ -12,9 +14,7 @@ export async function getStaticPaths() {
     props: e.props,
   }));
 }
-export const robots = blogPostRobots;
 
-// Derive fields without using `any`
 const props = Astro.props as Record<string, unknown>;
 const post = props['post'] as Record<string, unknown> | undefined;
 
@@ -26,7 +26,6 @@ const baseTitle = asString(post?.['title']) ?? 'Post';
 const fullTitle = `${baseTitle} | Lilos Growth`;
 const description = asString(post?.['description']) ?? asString(post?.['excerpt']) ?? '';
 
-// Match your Crumb type exactly
 const breadcrumbs: { name: string; item: string }[] = [
   { name: 'Home', item: '/' },
   { name: 'Blog', item: '/blog' },
