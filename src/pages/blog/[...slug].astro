@@ -17,15 +17,14 @@ export const robots = blogPostRobots;
 const { post } = Astro.props as any;
 const title = post?.title ? `${post.title} | Lilos Growth` : 'Post | Lilos Growth';
 const description = post?.description || post?.excerpt || '';
+
+// Keep breadcrumbs; cast to any to avoid strict Crumb typing mismatch
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Blog', href: '/blog' },
+] as any;
 ---
 
-<PageLayout
-  {title}
-  {description}
-  breadcrumbs={[
-    { label: 'Home', href: '/' },
-    { label: 'Blog', href: '/blog' },
-  ]}
->
+<PageLayout {title} {description} {breadcrumbs}>
   <SinglePost post={post} url={Astro.url.pathname} />
 </PageLayout>
