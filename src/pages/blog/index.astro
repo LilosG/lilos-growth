@@ -6,11 +6,11 @@ const title = 'Blog | Lilos Growth';
 const description =
   'Insights on Local SEO, Google Business Profile, and conversion-focused websites for home-service pros.';
 
-// Keep breadcrumbs; cast to any to avoid strict Crumb typing mismatch
-const breadcrumbs = [
-  { name: 'Home', href: '/' },
-  { name: 'Blog', href: '/blog' },
-] as any;
+// Match your Crumb type exactly
+const breadcrumbs: { name: string; item: string }[] = [
+  { name: 'Home', item: '/' },
+  { name: 'Blog', item: '/blog' },
+];
 ---
 
 <PageLayout {title} {description} {breadcrumbs}>

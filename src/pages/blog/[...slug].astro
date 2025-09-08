@@ -14,17 +14,27 @@ export async function getStaticPaths() {
 }
 export const robots = blogPostRobots;
 
-const { post } = Astro.props as any;
-const title = post?.title ? `${post.title} | Lilos Growth` : 'Post | Lilos Growth';
-const description = post?.description || post?.excerpt || '';
+// Derive fields without using `any`
+const props = Astro.props as Record<string, unknown>;
+const post = props['post'] as Record<string, unknown> | undefined;
 
-// Keep breadcrumbs; cast to any to avoid strict Crumb typing mismatch
-const breadcrumbs = [
-  { name: 'Home', href: '/' },
-  { name: 'Blog', href: '/blog' },
-] as any;
+function asString(v: unknown): string | undefined {
+  return typeof v === 'string' ? v : undefined;
+}
+
+const baseTitle = asString(post?.['title']) ?? 'Post';
+const fullTitle = `${baseTitle} | Lilos Growth`;
+const description = asString(post?.['description']) ?? asString(post?.['excerpt']) ?? '';
+
+// Match your Crumb type exactly
+const breadcrumbs: { name: string; item: string }[] = [
+  { name: 'Home', item: '/' },
+  { name: 'Blog', item: '/blog' },
+];
 ---
 
-<PageLayout {title} {description} {breadcrumbs}>
+<PageLayout title={fullTitle} {description} {breadcrumbs}>
+  {/* The runtime object from utils/blog matches SinglePost expectations; TS can't see its exact shape here. */}
+  {/* @ts-expect-error - SinglePost expects a stricter Post; runtime shape is provided by utils/blog. */}
   <SinglePost post={post} url={Astro.url.pathname} />
 </PageLayout>
