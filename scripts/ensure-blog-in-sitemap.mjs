@@ -21,12 +21,12 @@ function walk(dir) {
 }
 
 const files = walk(blogDir);
-const urls = files.map(f => {
+const urls = files.map((f) => {
   const rel = '/' + path.posix.relative(dist, path.dirname(f)).replace(/\\/g, '/');
   return SITE + rel;
 });
 
-const urlset = urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n');
+const urlset = urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n');
 const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlset}\n</urlset>\n`;
 fs.writeFileSync(path.join(dist, 'sitemap-blog.xml'), xml, 'utf8');
 
