@@ -233,12 +233,12 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
   </div>
 
   <!-- CSP-safe controllers (external; no is:inline) -->
-  <script type="module" src="/scripts/mobile-menu.js"></script>
-  <script type="module" src="/scripts/header-scroll.js"></script>
+  <script type="module" src="/scripts/mobile-menu.js" is:inline></script>
+  <script type="module" src="/scripts/header-scroll.js" is:inline></script>
 </header>
 
 <!-- Floating CTA rendered outside header so it truly floats bottom-right -->
-<FloatingCalendlyButton />
+<FloatingCalendlyButton href={import.meta.env.PUBLIC_CALENDLY_URL} />
 
 <style>
   header.site-header.is-shrunk {

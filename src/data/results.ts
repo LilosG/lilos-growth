@@ -56,7 +56,7 @@ export type FaqItem = {
 };
 
 /** Placeholder (for cards without logos) */
-const PLACEHOLDER_21_9 =
+const _PLACEHOLDER_21_9 =
   'data:image/svg+xml;utf8,' +
   encodeURIComponent(
     `<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='514'>

@@ -29,7 +29,7 @@ const inlineGA = enabled
 
 {enabled && (
   <>
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${id}`}></script>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${id}`} is:inline></script>
     <script is:inline set:html={inlineGA}></script>
   </>
 )}

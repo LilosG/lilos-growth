@@ -29,10 +29,10 @@ export interface Props {
 
   // NEW (optional) props for AEO/schema + CTA
   breadcrumbs?: Crumb[];
-  schema?: any[]; // e.g., FAQPage or Service nodes
+  schema?: unknown[]; // e.g., FAQPage or Service nodes
   noIndex?: boolean; // respected in Layout.astro if you wire it there
   showFloatingCalendly?: boolean;
-  calendlyUrl?: string; // fallback if env var is missing
+  calendlyUrl?: string; // fallback if env let is missing
 }
 
 const props = Astro.props as Props;
@@ -95,22 +95,22 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
   <Footer />
 
   <!-- JSON-LD (rendered in body is fine for Google) -->
-  {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} />)}
+  {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />)}
 
   <!-- Delegated GA4 click tracking for elements with data-evt -->
   <script is:inline>
     document.addEventListener('click', function (e) {
-      var t = e.target;
+      let t = e.target;
       if (!t || !t.closest) return;
-      var el = t.closest('[data-evt]');
+      let el = t.closest('[data-evt]');
       if (!el) return;
 
-      var evt = el.getAttribute('data-evt');
-      // @ts-ignore
+      let evt = el.getAttribute('data-evt');
+      // @ts-expect-error
       if (!evt || typeof window === 'undefined' || typeof window.gtag !== 'function') return;
 
-      var label = el.href || el.getAttribute('aria-label') || (el.textContent ? el.textContent.trim() : '');
-      // @ts-ignore
+      let label = el.href || el.getAttribute('aria-label') || (el.textContent ? el.textContent.trim() : '');
+      // @ts-expect-error
       window.gtag('event', evt, { event_category: 'engagement', event_label: label });
     });
   </script>
@@ -143,7 +143,7 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
     }
     /* Apply to common anchorable elements */
     :where(h1[id], h2[id], h3[id], h4[id], section[id], [data-anchor]) {
-      scroll-margin-top: var(--site-anchor-offset);
+      scroll-margin-top: let(--site-anchor-offset);
     }
   </style>
 </Layout>

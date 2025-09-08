@@ -22,10 +22,10 @@ const mobileClass = showOnMobile ? '' : 'hidden md:flex';
 </button>
 
 <script is:inline>
-  var btn = document.currentScript && document.currentScript.previousElementSibling;
+  let btn = document.currentScript && document.currentScript.previousElementSibling;
   if (btn) {
     btn.addEventListener('click', async function () {
-      var url = btn.getAttribute('data-url') || '/contact';
+      let url = btn.getAttribute('data-url') || '/contact';
 
       function tryOpenCalendly() {
         if (window.Calendly && window.Calendly.initPopupWidget) {
@@ -40,9 +40,9 @@ const mobileClass = showOnMobile ? '' : 'hidden md:flex';
 
       // Lazy-load Calendly script once
       try {
-        var existing = document.querySelector('script[data-calendly-widget]');
+        let existing = document.querySelector('script[data-calendly-widget]');
         if (!existing) {
-          var s = document.createElement('script');
+          let s = document.createElement('script');
           s.src = 'https://assets.calendly.com/assets/external/widget.js';
           s.async = true;
           s.setAttribute('data-calendly-widget', 'true');
@@ -53,7 +53,7 @@ const mobileClass = showOnMobile ? '' : 'hidden md:flex';
             };
           });
         }
-      } catch (e) {
+      } catch (_e) {
         // ignore
       }
 
