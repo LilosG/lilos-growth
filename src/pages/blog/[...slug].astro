@@ -1,7 +1,6 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
 import SinglePost from '~/components/blog/SinglePost.astro';
-import RelatedPosts from '~/components/blog/RelatedPosts.astro';
 import { getStaticPathsBlogPost, blogPostRobots } from '~/utils/blog';
 
 /** Remap old { params: { blog } } → new { params: { slug } } */
@@ -15,19 +14,18 @@ export async function getStaticPaths() {
 }
 export const robots = blogPostRobots;
 
-const { post } = Astro.props;
-const title = post?.frontmatter?.title ? `${post.frontmatter.title} | Lilos Growth` : 'Post | Lilos Growth';
-const description = post?.frontmatter?.description || post?.frontmatter?.excerpt || '';
+const { post } = Astro.props as any;
+const title = post?.title ? `${post.title} | Lilos Growth` : 'Post | Lilos Growth';
+const description = post?.description || post?.excerpt || '';
 ---
 
 <PageLayout
   {title}
   {description}
   breadcrumbs={[
-    { name: 'Home', url: '/' },
-    { name: 'Blog', url: '/blog' },
+    { label: 'Home', href: '/' },
+    { label: 'Blog', href: '/blog' },
   ]}
 >
-  <SinglePost post={post} />
-  {post?.relatedPosts && <RelatedPosts posts={post.relatedPosts} />}
+  <SinglePost post={post} url={Astro.url.pathname} />
 </PageLayout>
