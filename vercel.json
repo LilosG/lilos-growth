@@ -3,7 +3,7 @@
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.lilosgrowth.com" }],
-      "destination": "https://lilosgrowth.com/:1",
+      "destination": "https://lilosgrowth.com/$1",
       "permanent": true
     }
   ]
