@@ -100,17 +100,17 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
   <!-- Delegated GA4 click tracking for elements with data-evt -->
   <script is:inline>
     document.addEventListener('click', function (e) {
-      let t = e.target;
+      const t = e.target;
       if (!t || !t.closest) return;
-      let el = t.closest('[data-evt]');
+      const el = t.closest('[data-evt]');
       if (!el) return;
 
-      let evt = el.getAttribute('data-evt');
-      // @ts-expect-error
+      const evt = el.getAttribute('data-evt');
+      // @ts-expect-error -- safe: element may be null / dataset missing under SSR
       if (!evt || typeof window === 'undefined' || typeof window.gtag !== 'function') return;
 
-      let label = el.href || el.getAttribute('aria-label') || (el.textContent ? el.textContent.trim() : '');
-      // @ts-expect-error
+      const label = el.href || el.getAttribute('aria-label') || (el.textContent ? el.textContent.trim() : '');
+      // @ts-expect-error -- safe: element may be null / dataset missing under SSR
       window.gtag('event', evt, { event_category: 'engagement', event_label: label });
     });
   </script>
