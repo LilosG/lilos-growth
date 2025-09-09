@@ -6,7 +6,7 @@ type NavLink = { text: string; href: string };
 type Action = { text: string; href: string };
 type UnknownRecord = Record<string, unknown>;
 
-const DEFAULT_LINKS: NavLink[] = [
+const FALLBACK_LINKS: NavLink[] = [
   { text: 'Services', href: '/services' },
   { text: 'Packages', href: '/packages' },
   { text: 'Additional Services', href: '/additional-services' },
@@ -15,35 +15,35 @@ const DEFAULT_LINKS: NavLink[] = [
   { text: 'Contact', href: '/contact' },
 ];
 
-const DEFAULT_ACTIONS: Action[] = [
+const FALLBACK_ACTIONS: Action[] = [
   { text: 'Book a Call', href: '/contact' },
   { text: 'Services', href: '/services' },
 ];
 
-const toStringOr = (fallback: string, v: unknown): string => (typeof v === 'string' && v.trim().length ? v : fallback);
+const s = (v: unknown, d = '') => (typeof v === 'string' && v.trim() ? v : d);
 
 const normalizeLinks = (input: unknown): NavLink[] => {
-  if (!Array.isArray(input)) return DEFAULT_LINKS;
+  if (!Array.isArray(input)) return FALLBACK_LINKS;
   const out: NavLink[] = [];
   for (const item of input) {
-    const obj = (item ?? {}) as UnknownRecord;
-    const text = toStringOr('', obj.text);
-    const href = toStringOr('#', obj.href);
+    const o = (item ?? {}) as UnknownRecord;
+    const text = s(o.text);
+    const href = s(o.href, '#');
     if (text) out.push({ text, href });
   }
-  return out.length ? out : DEFAULT_LINKS;
+  return out.length ? out : FALLBACK_LINKS;
 };
 
 const normalizeActions = (input: unknown): Action[] => {
-  if (!Array.isArray(input)) return DEFAULT_ACTIONS;
+  if (!Array.isArray(input)) return FALLBACK_ACTIONS;
   const out: Action[] = [];
   for (const item of input) {
-    const obj = (item ?? {}) as UnknownRecord;
-    const text = toStringOr('', obj.text);
-    const href = toStringOr('#', obj.href);
+    const o = (item ?? {}) as UnknownRecord;
+    const text = s(o.text);
+    const href = s(o.href, '#');
     if (text) out.push({ text, href });
   }
-  return out.length ? out : DEFAULT_ACTIONS;
+  return out.length ? out : FALLBACK_ACTIONS;
 };
 
 const links: NavLink[] = normalizeLinks((headerData as UnknownRecord | undefined)?.['links']);
@@ -58,7 +58,7 @@ const showSecondary = secondary.href !== primary.href;
 ---
 
 <header
-  class="site-header fixed inset-x-0 top-0 z-[100] w-full bg-white border-b border-gray-200 shadow-[0_2px_10px_rgba(0,0,0,0.04)] transition-[box-shadow,transform] will-change-transform"
+  class="site-header fixed inset-x-0 top-0 z-[9999] isolate w-full bg-white border-b border-gray-200 shadow-[0_2px_10px_rgba(0,0,0,0.04)] transition-[box-shadow,transform] will-change-transform"
   role="banner"
 >
   <div class="mx-auto w-full max-w-7xl px-4 md:px-6">
@@ -85,12 +85,11 @@ const showSecondary = secondary.href !== primary.href;
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
                 class={`py-2 text-[15px] leading-[22px] font-medium tracking-[0.005em] transition
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white underline-offset-4
-                  ${
-                    isActive(item.href)
-                      ? 'text-[#1f2d3d] font-semibold'
-                      : 'text-[#1f2d3d]/80 hover:text-[#1f2d3d] hover:underline decoration-2 decoration-[#f56b2a]/60'
-                  }`}
+                  text-[#1f2d3d]/85 hover:text-[#1f2d3d]
+                  hover:underline underline-offset-4 decoration-2 decoration-[#f56b2a]/60
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white
+                  ${isActive(item.href) ? 'text-[#1f2d3d] font-semibold' : ''}`}
+                style="mix-blend-mode: normal"
               >
                 {item.text}
               </a>
@@ -203,25 +202,25 @@ const showSecondary = secondary.href !== primary.href;
   <script type="module" src="/scripts/header-scroll.js"></script>
 </header>
 
-<!-- Spacer whose height is kept in sync by header-scroll.js -->
+<!-- Spacer kept in sync by header-scroll.js -->
 <div id="header-spacer" aria-hidden="true" style="height: var(--header-h, 72px)"></div>
 
 <!-- Floating CTA (Calendly safe) -->
 <FloatingCalendlyButton href={import.meta.env.PUBLIC_CALENDLY_URL} />
 
 <style>
-  /* Solid white always (prevents dark hero bleed). */
+  /* Force solid white in both states; prevent blending/bleed through hero overlays */
   header.site-header {
     background: #ffffff !important;
+    color: #1f2d3d;
   }
-
   header.site-header.is-shrunk {
     background: #ffffff !important;
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
-    border-bottom-color: rgba(0, 0, 0, 0.08);
-    transform: translateZ(0); /* helps keep things crisp on scroll */
   }
-
+  header.site-header a {
+    color: #1f2d3d;
+  }
   header.site-header .logo {
     transition: height 0.2s ease;
   }
@@ -229,6 +228,7 @@ const showSecondary = secondary.href !== primary.href;
     transition: padding 0.2s ease;
   }
 
+  /* Shrink polish */
   @media (min-width: 1024px) {
     header.site-header.is-shrunk .logo {
       height: 2.9rem !important;
