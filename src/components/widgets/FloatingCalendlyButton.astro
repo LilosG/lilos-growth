@@ -1,65 +1,61 @@
----
-export interface Props {
-  href: string; // Calendly link preferred; falls back to open in a new tab
-  label?: string;
-  position?: 'right' | 'left';
-  showOnMobile?: boolean;
-}
-const { href, label = 'Book a Call', position = 'right', showOnMobile = true } = Astro.props;
+PATH: src/components/widgets/FloatingCalendlyButton.astro
 
-const sideClass = position === 'left' ? 'left-4 md:left-6' : 'right-4 md:right-6';
-const mobileClass = showOnMobile ? '' : 'hidden md:flex';
----
-
+/* @ts-nocheck */ /* No front-matter vars; reference Astro.props directly in the template */
 <button
   type="button"
-  class={`fixed ${mobileClass} bottom-4 md:bottom-6 ${sideClass} z-50 shadow-lg rounded-full px-5 py-3 text-white bg-[#f56b2a] hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]`}
+  class={`fixed ${Astro.props.showOnMobile === false ? 'hidden md:flex' : ''} bottom-4 md:bottom-6 ${Astro.props.position === 'left' ? 'left-4 md:left-6' : 'right-4 md:right-6'} z-50 shadow-lg rounded-full px-5 py-3 text-white bg-[#f56b2a] hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]`}
   data-evt="cta_floating_calendly"
-  data-url={href}
-  aria-label={label}
+  data-url={Astro.props.href ?? '/contact'}
+  aria-label={Astro.props.label ?? 'Book a Call'}
 >
-  {label}
+  {Astro.props.label ?? 'Book a Call'}
 </button>
 
 <script is:inline>
-  const btn = document.currentScript && document.currentScript.previousElementSibling;
-  if (btn) {
-    btn.addEventListener('click', async function () {
-      const url = btn.getAttribute('data-url') || '/contact';
+  (() => {
+    const btn = document.currentScript?.previousElementSibling;
+    if (!btn) return;
 
-      function tryOpenCalendly() {
-        if (window.Calendly && window.Calendly.initPopupWidget) {
-          window.Calendly.initPopupWidget({ url: url });
+    const openCalendly = (url) => {
+      try {
+        if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+          window.Calendly.initPopupWidget({ url });
           return true;
         }
-        return false;
-      }
+      } catch {}
+      return false;
+    };
 
-      // Try immediately
-      if (tryOpenCalendly()) return;
-
-      // Lazy-load Calendly script once
+    const ensureCalendlyLoaded = () => {
       try {
-        const existing = document.querySelector('script[data-calendly-widget]');
-        if (!existing) {
+        if (window.__calendlyLoaded) return Promise.resolve(true);
+        const existing =
+          document.querySelector('script[src*="assets.calendly.com/assets/external/widget.js"]') ||
+          document.querySelector('script[data-calendly-widget]');
+        if (existing) {
+          window.__calendlyLoaded = true;
+          return Promise.resolve(true);
+        }
+        return new Promise((resolve) => {
           const s = document.createElement('script');
           s.src = 'https://assets.calendly.com/assets/external/widget.js';
           s.async = true;
           s.setAttribute('data-calendly-widget', 'true');
+          s.onload = () => {
+            window.__calendlyLoaded = true;
+            resolve(true);
+          };
           document.head.appendChild(s);
-          await new Promise(function (res) {
-            s.onload = function () {
-              res(null);
-            };
-          });
-        }
-      } catch {
-        // ignore
-      }
+        });
+      } catch {}
+      return Promise.resolve(false);
+    };
 
-      if (!tryOpenCalendly()) {
-        window.open(url, '_blank', 'noopener,noreferrer');
-      }
+    btn.addEventListener('click', async () => {
+      const url = btn.getAttribute('data-url') || '/contact';
+      if (openCalendly(url)) return;
+      await ensureCalendlyLoaded();
+      if (!openCalendly(url)) window.open(url, '_blank', 'noopener,noreferrer');
     });
-  }
+  })();
 </script>
