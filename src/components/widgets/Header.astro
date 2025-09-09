@@ -5,30 +5,59 @@ import FloatingCalendlyButton from '~/components/widgets/FloatingCalendlyButton.
 type NavLink = { text: string; href: string };
 type Action = { text: string; href: string };
 
-const links = Array.isArray(headerData?.links)
-  ? ((headerData!.links as any[]).map((l) => ({ text: String(l.text), href: String(l.href ?? '#') })) as NavLink[])
-  : ([
-      { text: 'Services', href: '/services' },
-      { text: 'Packages', href: '/packages' },
-      { text: 'Additional Services', href: '/additional-services' },
-      { text: 'Local SEO Tools', href: '/local-seo-tools' },
-      { text: 'About', href: '/about' },
-      { text: 'Contact', href: '/contact' },
-    ] as NavLink[]);
+type UnknownRecord = Record<string, unknown>;
 
-const actions = Array.isArray(headerData?.actions)
-  ? ((headerData!.actions as any[]).map((a) => ({ text: String(a.text), href: String(a.href ?? '#') })) as Action[])
-  : ([
-      { text: 'Book a Call', href: '/contact' },
-      { text: 'Services', href: '/services' },
-    ] as Action[]);
+const DEFAULT_LINKS: NavLink[] = [
+  { text: 'Services', href: '/services' },
+  { text: 'Packages', href: '/packages' },
+  { text: 'Additional Services', href: '/additional-services' },
+  { text: 'Local SEO Tools', href: '/local-seo-tools' },
+  { text: 'About', href: '/about' },
+  { text: 'Contact', href: '/contact' },
+];
+
+const DEFAULT_ACTIONS: Action[] = [
+  { text: 'Book a Call', href: '/contact' },
+  { text: 'Services', href: '/services' },
+];
+
+function toStringOr(defaultValue: string, v: unknown): string {
+  return typeof v === 'string' && v.trim().length > 0 ? v : defaultValue;
+}
+
+function normalizeLinks(input: unknown): NavLink[] {
+  if (!Array.isArray(input)) return DEFAULT_LINKS;
+  const out: NavLink[] = [];
+  for (const item of input) {
+    const obj = (item ?? {}) as UnknownRecord;
+    const text = toStringOr('', obj.text);
+    const href = toStringOr('#', (obj as UnknownRecord).href);
+    if (text) out.push({ text, href });
+  }
+  return out.length ? out : DEFAULT_LINKS;
+}
+
+function normalizeActions(input: unknown): Action[] {
+  if (!Array.isArray(input)) return DEFAULT_ACTIONS;
+  const out: Action[] = [];
+  for (const item of input) {
+    const obj = (item ?? {}) as UnknownRecord;
+    const text = toStringOr('', obj.text);
+    const href = toStringOr('#', obj.href);
+    if (text) out.push({ text, href });
+  }
+  return out.length ? out : DEFAULT_ACTIONS;
+}
+
+const links: NavLink[] = normalizeLinks((headerData as UnknownRecord | undefined)?.['links']);
+const actions: Action[] = normalizeActions((headerData as UnknownRecord | undefined)?.['actions']);
 
 const currentPath = Astro.url.pathname;
 const isActive = (href: string) => !!href && (currentPath === href || (href !== '/' && currentPath.startsWith(href)));
 
 const primary: Action = actions[0] ?? { text: 'Book a Call', href: '/contact' };
 const secondary: Action = actions[1] ?? { text: 'Services', href: '/services' };
-const showSecondary = !!secondary && secondary.href !== primary.href;
+const showSecondary = secondary.href !== primary.href;
 ---
 
 <header
