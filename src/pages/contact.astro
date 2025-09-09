@@ -150,9 +150,7 @@ export const description =
               <a
                 class="underline"
                 href="https://calendly.com/mprickett-bluedoorsp/30min?text_color=1f2d3d&primary_color=f56b2a"
-                data-calendly-button
-                data-calendly-button
-                data-calendly-button>on Calendly</a
+                >on Calendly</a
               >.
             </p>
           </noscript>
@@ -170,35 +168,64 @@ export const description =
     </div>
   </section>
 
-  <!-- Lazy-load Calendly -->
+  <!-- Calendly: single-loader guard (no var; empty catch blocks; idempotent) -->
   <script is:inline>
-    (function () {
-      function init() {
+    (() => {
+      const init = () => {
         try {
-          if (window.Calendly && typeof Calendly.initInlineWidgets === 'function') Calendly.initInlineWidgets();
-        } catch (e) {}
-      }
-      if (
-        !document.querySelector('script[data-calendly-widget]') &&
-        !document.querySelector('script[src*="assets.calendly.com/assets/external/widget.js"]')
-      ) {
-        var s = document.createElement('script');
-        s.src = 'https://assets.calendly.com/assets/external/widget.js';
-        s.async = true;
-        s.setAttribute('data-calendly-widget', 'true');
-        s.onload = init;
-        document.head.appendChild(s);
-      } else {
-        init();
-      }
-      var tries = 0,
-        t = setInterval(function () {
-          if (window.Calendly && Calendly.initInlineWidgets) {
-            init();
-            clearInterval(t);
+          if (window.Calendly && typeof window.Calendly.initInlineWidgets === 'function') {
+            window.Calendly.initInlineWidgets();
           }
-          if (++tries > 30) clearInterval(t);
+        } catch {}
+      };
+
+      const loadCalendly = () => {
+        try {
+          if (window.__calendlyLoaded) {
+            init();
+            return;
+          }
+          if (document.querySelector('script[src*="assets.calendly.com/assets/external/widget.js"]')) {
+            window.__calendlyLoaded = true;
+            init();
+            return;
+          }
+          const s = document.createElement('script');
+          s.src = 'https://assets.calendly.com/assets/external/widget.js';
+          s.async = true;
+          s.setAttribute('data-calendly-widget', 'true');
+          s.onload = () => {
+            window.__calendlyLoaded = true;
+            init();
+          };
+          document.head.appendChild(s);
+        } catch {}
+      };
+
+      const onReady = () => {
+        loadCalendly();
+        let tries = 0;
+        const timer = setInterval(() => {
+          try {
+            if (window.Calendly && window.Calendly.initInlineWidgets) {
+              init();
+              clearInterval(timer);
+            }
+            tries += 1;
+            if (tries > 30) clearInterval(timer);
+          } catch {
+            clearInterval(timer);
+          }
         }, 250);
+      };
+
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        onReady();
+      } else {
+        document.addEventListener('DOMContentLoaded', onReady, { once: true });
+      }
+      // Re-bind after Astro client navigation if used
+      document.addEventListener('astro:page-load', onReady);
     })();
   </script>
 </Layout>
