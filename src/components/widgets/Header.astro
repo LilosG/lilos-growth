@@ -58,97 +58,99 @@ const showSecondary = secondary.href !== primary.href;
 ---
 
 <header
-  class="site-header fixed inset-x-0 top-0 z-[9999] isolate w-full bg-white border-b border-gray-200 shadow-[0_2px_10px_rgba(0,0,0,0.04)] transition-[box-shadow,transform] will-change-transform"
+  class="site-header fixed inset-x-0 top-0 z-[99999] isolate w-full border-b border-gray-200 transition-[box-shadow,transform] will-change-transform"
   role="banner"
 >
-  <div class="mx-auto w-full max-w-7xl px-4 md:px-6">
-    <div class="header-bar flex items-center justify-between gap-4 py-3 md:py-4">
-      <!-- Brand -->
-      <a href="/" class="inline-flex items-center shrink-0" aria-label="Lilos Growth — Home">
-        <img
-          src="/Lilos_Growth_Logo_Corrected.svg"
-          alt="Lilos Growth"
-          class="logo h-10 sm:h-11 md:h-12 lg:h-[54px] w-auto object-contain"
-          loading="eager"
-          decoding="async"
-          width="160"
-          height="44"
-        />
-      </a>
-
-      <!-- Desktop nav -->
-      <nav class="hidden sm:flex" aria-label="Primary">
-        <div class="flex items-center gap-6 lg:gap-8">
-          {
-            links.map((item) => (
-              <a
-                href={item.href}
-                aria-current={isActive(item.href) ? 'page' : undefined}
-                class={`py-2 text-[15px] leading-[22px] font-medium tracking-[0.005em] transition
-                  text-[#1f2d3d]/85 hover:text-[#1f2d3d]
-                  hover:underline underline-offset-4 decoration-2 decoration-[#f56b2a]/60
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white
-                  ${isActive(item.href) ? 'text-[#1f2d3d] font-semibold' : ''}`}
-                style="mix-blend-mode: normal"
-              >
-                {item.text}
-              </a>
-            ))
-          }
-        </div>
-      </nav>
-
-      <!-- Actions + Mobile -->
-      <div class="flex items-center justify-end gap-3">
-        {
-          showSecondary ? (
-            <a
-              href={secondary.href}
-              class="hidden sm:inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-[14px] leading-[22px] font-semibold text-[#1f2d3d] shadow-sm transition hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white"
-            >
-              <span>{secondary.text}</span>
-            </a>
-          ) : null
-        }
-
-        <a
-          href={primary.href}
-          class="hidden sm:inline-flex group items-center gap-2 rounded-full border border-transparent bg-[#f56b2a] px-5 py-2.5 text-[15px] leading-[22px] font-semibold text-white shadow transition hover:bg-[#e85718] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white"
-        >
-          <span>{primary.text}</span>
-          <svg
-            viewBox="0 0 24 24"
-            class="h-5 w-5 transform transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            aria-hidden="true"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6"></path>
-          </svg>
+  <!-- Surface: everything inside sits above the backplate -->
+  <div class="header-surface relative z-[1]">
+    <div class="mx-auto w-full max-w-7xl px-4 md:px-6">
+      <div class="header-bar flex items-center justify-between gap-4 py-3 md:py-4">
+        <!-- Brand -->
+        <a href="/" class="inline-flex items-center shrink-0" aria-label="Lilos Growth — Home">
+          <img
+            src="/Lilos_Growth_Logo_Corrected.svg"
+            alt="Lilos Growth"
+            class="logo h-10 sm:h-11 md:h-12 lg:h-[54px] w-auto object-contain"
+            loading="eager"
+            decoding="async"
+            width="160"
+            height="44"
+          />
         </a>
 
-        <!-- Mobile menu button -->
-        <button
-          id="mobileMenuBtn"
-          class="sm:hidden inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-3.5 py-2 text-[15px] leading-[22px] font-medium text-[#1f2d3d] shadow-sm transition hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white"
-          aria-controls="mobileMenu"
-          aria-expanded="false"
-          aria-label="Open menu"
-        >
-          <svg viewBox="0 0 20 20" class="h-5 w-5" fill="currentColor" aria-hidden="true">
-            <circle cx="3" cy="3" r="1.5"></circle>
-            <circle cx="10" cy="3" r="1.5"></circle>
-            <circle cx="17" cy="3" r="1.5"></circle>
-            <circle cx="3" cy="10" r="1.5"></circle>
-            <circle cx="10" cy="10" r="1.5"></circle>
-            <circle cx="17" cy="10" r="1.5"></circle>
-            <circle cx="3" cy="17" r="1.5"></circle>
-            <circle cx="10" cy="17" r="1.5"></circle>
-            <circle cx="17" cy="17" r="1.5"></circle>
-          </svg>
-          <span>Menu</span>
-        </button>
+        <!-- Desktop nav -->
+        <nav class="hidden sm:flex" aria-label="Primary">
+          <div class="flex items-center gap-6 lg:gap-8">
+            {
+              links.map((item) => (
+                <a
+                  href={item.href}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                  class={`py-2 text-[15px] leading-[22px] font-medium tracking-[0.005em] transition
+                    text-[#1f2d3d]/85 hover:text-[#1f2d3d]
+                    hover:underline underline-offset-4 decoration-2 decoration-[#f56b2a]/60
+                    focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white
+                    ${isActive(item.href) ? 'text-[#1f2d3d] font-semibold' : ''}`}
+                >
+                  {item.text}
+                </a>
+              ))
+            }
+          </div>
+        </nav>
+
+        <!-- Actions + Mobile -->
+        <div class="flex items-center justify-end gap-3">
+          {
+            showSecondary ? (
+              <a
+                href={secondary.href}
+                class="hidden sm:inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-[14px] leading-[22px] font-semibold text-[#1f2d3d] shadow-sm transition hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white"
+              >
+                <span>{secondary.text}</span>
+              </a>
+            ) : null
+          }
+
+          <a
+            href={primary.href}
+            class="hidden sm:inline-flex group items-center gap-2 rounded-full border border-transparent bg-[#f56b2a] px-5 py-2.5 text-[15px] leading-[22px] font-semibold text-white shadow transition hover:bg-[#e85718] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white"
+          >
+            <span>{primary.text}</span>
+            <svg
+              viewBox="0 0 24 24"
+              class="h-5 w-5 transform transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6"></path>
+            </svg>
+          </a>
+
+          <!-- Mobile menu button -->
+          <button
+            id="mobileMenuBtn"
+            class="sm:hidden inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-3.5 py-2 text-[15px] leading-[22px] font-medium text-[#1f2d3d] shadow-sm transition hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white"
+            aria-controls="mobileMenu"
+            aria-expanded="false"
+            aria-label="Open menu"
+          >
+            <svg viewBox="0 0 20 20" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+              <circle cx="3" cy="3" r="1.5"></circle>
+              <circle cx="10" cy="3" r="1.5"></circle>
+              <circle cx="17" cy="3" r="1.5"></circle>
+              <circle cx="3" cy="10" r="1.5"></circle>
+              <circle cx="10" cy="10" r="1.5"></circle>
+              <circle cx="17" cy="10" r="1.5"></circle>
+              <circle cx="3" cy="17" r="1.5"></circle>
+              <circle cx="10" cy="17" r="1.5"></circle>
+              <circle cx="17" cy="17" r="1.5"></circle>
+            </svg>
+            <span>Menu</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -209,18 +211,25 @@ const showSecondary = secondary.href !== primary.href;
 <FloatingCalendlyButton href={import.meta.env.PUBLIC_CALENDLY_URL} />
 
 <style>
-  /* Force solid white in both states; prevent blending/bleed through hero overlays */
+  /* Backplate: a solid white layer INSIDE the header’s own stacking context. */
   header.site-header {
-    background: #ffffff !important;
-    color: #1f2d3d;
+    position: fixed;
   }
-  header.site-header.is-shrunk {
-    background: #ffffff !important;
+  header.site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    z-index: 0; /* sits under .header-surface (z:1) but above the page */
+    pointer-events: none;
+  }
+  header.site-header.is-shrunk::before {
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
   }
-  header.site-header a {
-    color: #1f2d3d;
-  }
+
+  /* Typography + motion polish */
   header.site-header .logo {
     transition: height 0.2s ease;
   }
@@ -228,7 +237,7 @@ const showSecondary = secondary.href !== primary.href;
     transition: padding 0.2s ease;
   }
 
-  /* Shrink polish */
+  /* Shrink states */
   @media (min-width: 1024px) {
     header.site-header.is-shrunk .logo {
       height: 2.9rem !important;
