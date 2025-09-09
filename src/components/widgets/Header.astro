@@ -2,150 +2,104 @@
 import { headerData } from '~/navigation';
 import FloatingCalendlyButton from '~/components/widgets/FloatingCalendlyButton.astro';
 
-type SubLink = { text: string; href: string; description?: string };
-type NavItem = { text: string; href?: string; links?: SubLink[] };
+type NavLink = { text: string; href: string };
 type Action = { text: string; href: string };
 
-const nav = (Array.isArray(headerData?.links) ? headerData.links : []) as unknown as NavItem[];
-const actions = (Array.isArray(headerData?.actions) ? headerData.actions : []) as unknown as Action[];
+const links = Array.isArray(headerData?.links)
+  ? ((headerData!.links as any[]).map((l) => ({ text: String(l.text), href: String(l.href ?? '#') })) as NavLink[])
+  : ([
+      { text: 'Services', href: '/services' },
+      { text: 'Packages', href: '/packages' },
+      { text: 'Additional Services', href: '/additional-services' },
+      { text: 'Local SEO Tools', href: '/local-seo-tools' },
+      { text: 'About', href: '/about' },
+      { text: 'Contact', href: '/contact' },
+    ] as NavLink[]);
 
-const currentPath: string = (globalThis as { Astro?: { url?: { pathname?: string } } })?.Astro?.url?.pathname ?? '/';
-const isActive = (href?: string) => !!href && (currentPath === href || (href !== '/' && currentPath.startsWith(href)));
+const actions = Array.isArray(headerData?.actions)
+  ? ((headerData!.actions as any[]).map((a) => ({ text: String(a.text), href: String(a.href ?? '#') })) as Action[])
+  : ([
+      { text: 'Book a Call', href: '/contact' },
+      { text: 'Services', href: '/services' },
+    ] as Action[]);
 
-const primary = actions?.[0] ?? null;
-const secondaryFromData = actions?.[1] ?? null;
-const secondary: Action | null = secondaryFromData ?? { text: 'Services', href: '/services' };
-const showSecondary = !!secondary && (!primary || secondary.href !== primary.href);
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) => !!href && (currentPath === href || (href !== '/' && currentPath.startsWith(href)));
+
+const primary: Action = actions[0] ?? { text: 'Book a Call', href: '/contact' };
+const secondary: Action = actions[1] ?? { text: 'Services', href: '/services' };
+const showSecondary = !!secondary && secondary.href !== primary.href;
 ---
 
 <header
-  class="site-header sticky top-0 z-[100] w-full bg-white/95 border-b border-gray-200 shadow-[0_2px_10px_rgba(0,0,0,0.04)] transition-[box-shadow,background-color,border-color] supports-[backdrop-filter]:backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-[6px]"
+  class="site-header fixed inset-x-0 top-0 z-[100] w-full bg-white/95 border-b border-gray-200 shadow-[0_2px_10px_rgba(0,0,0,0.04)] transition-[box-shadow,background-color,border-color] supports-[backdrop-filter]:backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-[6px]"
+  role="banner"
 >
   <div class="mx-auto w-full max-w-7xl px-4 md:px-6">
     <div class="header-bar flex items-center justify-between gap-4 py-3 md:py-4">
-      <div class="flex items-center gap-6 min-w-0">
-        <a href="/" class="inline-flex items-center shrink-0" aria-label="Lilos Growth — Home">
-          <img
-            src="/Lilos_Growth_Logo_Corrected.svg"
-            alt="Lilos Growth"
-            class="logo h-10 sm:h-11 md:h-12 lg:h-[54px] w-auto object-contain"
-            loading="eager"
-            decoding="async"
-          />
-        </a>
+      <!-- Brand -->
+      <a href="/" class="inline-flex items-center shrink-0" aria-label="Lilos Growth — Home">
+        <img
+          src="/Lilos_Growth_Logo_Corrected.svg"
+          alt="Lilos Growth"
+          class="logo h-10 sm:h-11 md:h-12 lg:h-[54px] w-auto object-contain"
+          loading="eager"
+          decoding="async"
+          width="160"
+          height="44"
+        />
+      </a>
 
-        <!-- Primary nav -->
-        <nav class="hidden sm:flex" aria-label="Primary">
-          <div class="flex items-center gap-7 lg:gap-9">
-            {
-              nav.map((item) =>
-                item?.links?.length ? (
-                  <div class="relative group">
-                    <a
-                      href={item.href ?? '#'}
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      class="inline-flex items-center gap-1 py-2 text-[15px] leading-[22px] font-medium transition
-                             text-[#1f2d3d]/80 hover:text-[#1f2d3d]
-                             hover:underline focus:underline focus-visible:underline underline-offset-4 decoration-2 decoration-[#f56b2a]/60
-                             focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white"
-                    >
-                      {item.text}
-                      <svg
-                        class="h-4 w-4 opacity-70 group-hover:opacity-100 transition"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" />
-                      </svg>
-                    </a>
+      <!-- Desktop nav -->
+      <nav class="hidden sm:flex" aria-label="Primary">
+        <div class="flex items-center gap-7 lg:gap-9">
+          {
+            links.map((item) => (
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class={`py-2 text-[15px] leading-[22px] font-medium transition hover:underline focus:underline focus-visible:underline underline-offset-4 decoration-2 decoration-[#f56b2a]/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white ${
+                  isActive(item.href) ? 'text-[#f56b2a] font-semibold' : 'text-[#1f2d3d]/80 hover:text-[#1f2d3d]'
+                }`}
+              >
+                {item.text}
+              </a>
+            ))
+          }
+        </div>
+      </nav>
 
-                    <div class="absolute left-0 top-full pt-3 z-[120]">
-                      <div
-                        class="min-w-[240px] rounded-2xl border border-gray-200 bg-white shadow-xl
-                               opacity-0 translate-y-2 pointer-events-none
-                               group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto
-                               group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto
-                               transition"
-                      >
-                        <div class="p-2">
-                          {item.links.map((sub) => (
-                            <a
-                              href={sub.href}
-                              class="block rounded-xl px-4 py-3 text-[14px] leading-[22px] text-[#253242]
-                                     hover:bg-gray-50 hover:text-[#1f2d3d] transition
-                                     focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
-                            >
-                              <div class="font-semibold">{sub.text}</div>
-                              {sub.description ? (
-                                <div class="mt-0.5 text-[12.5px] leading-[20px] text-gray-500">{sub.description}</div>
-                              ) : null}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <a
-                    href={item.href ?? '#'}
-                    aria-current={isActive(item.href) ? 'page' : undefined}
-                    class:list={[
-                      'py-2 text-[15px] leading-[22px] font-medium transition',
-                      'hover:underline focus:underline focus-visible:underline underline-offset-4 decoration-2 decoration-[#f56b2a]/60',
-                      'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white',
-                      isActive(item.href) ? 'text-[#f56b2a] font-semibold' : 'text-[#1f2d3d]/80 hover:text-[#1f2d3d]',
-                    ]}
-                  >
-                    {item.text}
-                  </a>
-                )
-              )
-            }
-          </div>
-        </nav>
-      </div>
-
+      <!-- Actions + Mobile -->
       <div class="flex items-center justify-end gap-3">
         {
           showSecondary ? (
             <a
-              href={secondary!.href}
-              class="hidden sm:inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2
-                     text-[14px] leading-[22px] font-semibold text-[#1f2d3d] shadow-sm transition
-                     hover:bg-gray-50 hover:border-gray-400 focus:outline-none
-                     focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white"
+              href={secondary.href}
+              class="hidden sm:inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-[14px] leading-[22px] font-semibold text-[#1f2d3d] shadow-sm transition hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white"
             >
-              <span>{secondary!.text}</span>
+              <span>{secondary.text}</span>
             </a>
           ) : null
         }
 
-        {
-          primary?.href ? (
-            <a
-              href={primary.href}
-              class="hidden sm:inline-flex group items-center gap-2 rounded-full border border-transparent bg-[#f56b2a] px-5 py-2.5
-                     text-[15px] leading-[22px] font-semibold text-white shadow transition
-                     hover:bg-[#e85718] focus:outline-none
-                     focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white"
-            >
-              <span>{primary.text}</span>
-              <svg
-                viewBox="0 0 24 24"
-                class="h-5 w-5 transform transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                aria-hidden="true"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6" />
-              </svg>
-            </a>
-          ) : null
-        }
+        <a
+          href={primary.href}
+          class="hidden sm:inline-flex group items-center gap-2 rounded-full border border-transparent bg-[#f56b2a] px-5 py-2.5 text-[15px] leading-[22px] font-semibold text-white shadow transition hover:bg-[#e85718] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white"
+        >
+          <span>{primary.text}</span>
+          <svg
+            viewBox="0 0 24 24"
+            class="h-5 w-5 transform transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6"></path>
+          </svg>
+        </a>
 
+        <!-- Mobile menu button -->
         <button
           id="mobileMenuBtn"
           class="sm:hidden inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-3.5 py-2 text-[15px] leading-[22px] font-medium text-[#1f2d3d] shadow-sm transition hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white"
@@ -173,7 +127,6 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
   <!-- Mobile drawer -->
   <div id="mobileMenu" class="fixed inset-0 z-[110] hidden" aria-hidden="true">
     <div id="mobileMenuOverlay" class="absolute inset-0 bg-black/40"></div>
-
     <div class="absolute right-0 top-0 h-full w-[88%] max-w-[22rem] bg-white shadow-xl p-6 overflow-y-auto">
       <div class="flex items-center justify-between">
         <a href="/" class="inline-flex items-center" aria-label="Lilos Growth — Home">
@@ -196,48 +149,34 @@ const showSecondary = !!secondary && (!primary || secondary.href !== primary.hre
         </button>
       </div>
 
-      <div class="mt-6 space-y-6">
+      <div class="mt-6 space-y-2">
         {
-          nav.map((item) =>
-            item?.links?.length ? (
-              <div class="space-y-2">
-                <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">{item.text}</div>
-                <div class="grid gap-1">
-                  {item.links.map((sub) => (
-                    <a href={sub.href} class="block rounded-xl px-3 py-3 text-[15px] text-[#253242] hover:bg-gray-50">
-                      {sub.text}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <a href={item.href ?? '#'} class="block rounded-xl px-3 py-3 text-[15px] text-[#253242] hover:bg-gray-50">
-                {item.text}
-              </a>
-            )
-          )
+          links.map((item) => (
+            <a href={item.href} class="block rounded-xl px-3 py-3 text-[15px] text-[#253242] hover:bg-gray-50">
+              {item.text}
+            </a>
+          ))
         }
 
-        {
-          primary?.href ? (
-            <a
-              href={primary.href}
-              class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#f56b2a] px-4 py-3 text-white text-sm font-semibold shadow-md hover:bg-[#e85718] transition"
-            >
-              {primary.text}
-            </a>
-          ) : null
-        }
+        <a
+          href={primary.href}
+          class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#f56b2a] px-4 py-3 text-white text-sm font-semibold shadow-md hover:bg-[#e85718] transition"
+        >
+          {primary.text}
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- Behavior controllers -->
-  <script type="module" src="/scripts/mobile-menu.js" is:inline></script>
-  <script type="module" src="/scripts/header-scroll.js" is:inline></script>
+  <!-- Controllers -->
+  <script type="module" src="/scripts/mobile-menu.js"></script>
+  <script type="module" src="/scripts/header-scroll.js"></script>
 </header>
 
-<!-- Floating CTA (Calendly loads only from FAB/Contact) -->
+<!-- Spacer whose height is kept in sync by header-scroll.js -->
+<div id="header-spacer" aria-hidden="true" style="height: var(--header-h, 72px)"></div>
+
+<!-- Floating CTA (Calendly safe) -->
 <FloatingCalendlyButton href={import.meta.env.PUBLIC_CALENDLY_URL} />
 
 <style>
