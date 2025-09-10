@@ -1,41 +1,112 @@
 ---
 /**
- * Hybrid floating CTA:
- * - Visible on all screens (bottom-right).
- * - DESKTOP (>= breakpointPx): opens Calendly popup.
- * - MOBILE: navigates to /contact#book (or your fallback).
+ * Floating Calendly Link (safe)
+ * - No hang: loader has timeout + onerror
+ * - Fallback: navigates to URL if Calendly fails
+ * - Defaults to "/#contact" (Home audit form)
+ * Props:
+ *  - href?: string
+ *  - label?: string
+ *  - position?: 'left' | 'right'
+ *  - showOnMobile?: boolean
  */
-interface Props {
-  url?: string; // Calendly scheduling URL
-  text?: string; // Button label
-  fallbackHref?: string; // Contact page anchor
-  className?: string; // Extra classes if needed
-  breakpointPx?: number; // Desktop popup threshold (default 768)
-}
-
-const {
-  url = 'https://calendly.com/lilosgrowth/intro-call',
-  text = 'Schedule a Call',
-  fallbackHref = '/contact#book',
-  className = '',
-  breakpointPx = 768,
-} = Astro.props;
+const { href = '/#contact', label = 'Book a Call', position = 'right', showOnMobile = true } = Astro.props;
 ---
 
-<a
-  href={fallbackHref}
-  data-cal-hybrid
-  data-cal-url={url}
-  data-cal-breakpoint={String(breakpointPx)}
-  class:list={[
-    'fixed bottom-6 right-6 bg-[#f56b2a] text-white font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-[#d85a20] transition-all duration-200 z-50',
-    className,
-  ]}
-  title={text}
-  aria-label={text}
+<button
+  type="button"
+  class={`fixed ${showOnMobile === false ? 'hidden md:flex' : ''} bottom-4 md:bottom-6 ${position === 'left' ? 'left-4 md:left-6' : 'right-4 md:right-6'} z-50 shadow-lg rounded-full px-5 py-3 text-white bg-[#f56b2a] hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]`}
+  data-evt="cta_floating_calendly"
+  data-url={href}
+  aria-label={label}
 >
-  {text}
-</a>
+  {label}
+</button>
 
-<!-- Hybrid loader (CSP-safe) -->
-<script is:inline type="module" src="/scripts/calendly-hybrid.js"></script>
+<noscript>
+  <a
+    href={href}
+    aria-label={label}
+    class={`fixed ${showOnMobile === false ? 'hidden md:flex' : ''} bottom-4 md:bottom-6 ${position === 'left' ? 'left-4 md:left-6' : 'right-4 md:right-6'} z-50 shadow-lg rounded-full px-5 py-3 text-white bg-[#f56b2a]`}
+  >
+    {label}
+  </a>
+</noscript>
+
+<script is:inline>
+  (() => {
+    const btn = document.currentScript?.previousElementSibling;
+    if (!(btn instanceof HTMLElement)) return;
+
+    let busy = false;
+
+    const openCalendly = (url) => {
+      try {
+        if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+          window.Calendly.initPopupWidget({ url });
+          return true;
+        }
+      } catch {}
+      return false;
+    };
+
+    const ensureCalendlyLoaded = () =>
+      new Promise((resolve) => {
+        try {
+          if (window.__calendlyLoaded) return resolve(true);
+
+          const existing =
+            document.querySelector('script[src*="assets.calendly.com/assets/external/widget.js"]') ||
+            document.querySelector('script[data-calendly-widget]');
+          if (existing) {
+            window.__calendlyLoaded = true;
+            return resolve(true);
+          }
+
+          const s = document.createElement('script');
+          s.src = 'https://assets.calendly.com/assets/external/widget.js';
+          s.async = true;
+          s.crossOrigin = 'anonymous';
+          s.referrerPolicy = 'no-referrer-when-downgrade';
+          s.setAttribute('data-calendly-widget', 'true');
+          s.onload = () => {
+            window.__calendlyLoaded = true;
+            resolve(true);
+          };
+          s.onerror = () => resolve(false);
+          document.head.appendChild(s);
+        } catch {
+          resolve(false);
+        }
+      });
+
+    btn.addEventListener(
+      'click',
+      async () => {
+        if (busy) return;
+        busy = true;
+        btn.setAttribute('aria-busy', 'true');
+
+        const url = btn.getAttribute('data-url') || '/#contact';
+
+        // Safety: never hang waiting for Calendly
+        const loaded = await Promise.race([
+          ensureCalendlyLoaded(),
+          new Promise((r) => setTimeout(() => r(false), 2500)),
+        ]);
+
+        if (!openCalendly(url)) {
+          try {
+            window.location.href = url; // reliable fallback
+          } catch {}
+        }
+
+        setTimeout(() => {
+          busy = false;
+          btn.removeAttribute('aria-busy');
+        }, 300);
+      },
+      { passive: true }
+    );
+  })();
+</script>
