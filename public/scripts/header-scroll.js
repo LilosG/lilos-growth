@@ -1,54 +1,36 @@
-// Tiny, CSP-safe scroll listener to toggle a shrink class on the header
-// and keep the spacer height in sync. No theme or color changes here.
-
+/**
+ * Tiny, CSP-safe scroll listener to toggle a shrink class on the header.
+ * No unused vars; plays nice with eslint(no-unused-vars) and TS configs.
+ */
 (() => {
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
 
-  const header = document.querySelector('header.site-header');
-  const spacer = document.getElementById('header-spacer');
-  if (!header || !spacer) return;
+  const header = document.querySelector('header.site-header') || document.querySelector('header.site-header-legacy');
+  if (!header) return;
 
-  const setHeaderHeight = () => {
-    const h = Math.ceil(header.getBoundingClientRect().height || 72);
-    document.documentElement.style.setProperty('--header-h', `${h}px`);
-    // keep the inline fallback height in case CSS var is overridden
-    spacer.style.height = `var(--header-h, ${h}px)`;
+  const threshold = 8; // pixels before we consider the header "shrunk"
+
+  const apply = () => {
+    const shouldShrink = (window.scrollY || 0) > threshold;
+    const hasClass = header.classList.contains('is-shrunk');
+    if (shouldShrink !== hasClass) {
+      header.classList.toggle('is-shrunk', shouldShrink);
+    }
   };
 
-  // Keep height synced when the header shrinks or on viewport changes
-  try {
-    const ro = new ResizeObserver(() => setHeaderHeight());
-    ro.observe(header);
-  } catch (_err) {
-    // Older browsers: fall back to resize event
-    window.addEventListener('resize', setHeaderHeight, { passive: true });
-  }
-
-  // Throttled scroll handler (rAF) – only toggles shrink state
-  const threshold = 8;
+  // Initial state + throttled scroll via rAF
+  apply();
   let ticking = false;
-  const onScroll = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const shrunk = window.scrollY > threshold;
-      header.classList.toggle('is-shrunk', shrunk);
-      ticking = false;
-    });
-  };
-
-  // Init
-  setHeaderHeight();
-  onScroll();
-
-  window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener(
-    'orientationchange',
+    'scroll',
     () => {
-      setTimeout(() => {
-        setHeaderHeight();
-        onScroll();
-      }, 50);
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          apply();
+          ticking = false;
+        });
+      }
     },
     { passive: true }
   );
