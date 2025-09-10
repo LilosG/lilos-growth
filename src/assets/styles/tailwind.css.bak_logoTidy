@@ -178,79 +178,17 @@ header.site-header.is-shrunk .nav-link {
   color: #1f2d3d !important;
 }
 /* ==== /FINAL OVERRIDE ==== */
-header.site-header:not(.is-shrunk) .logo--color {
-  display: inline-block !important;
+/* ==== Logo readability on dark overlay (top-of-page only) ==== */
+/* ==== /Logo readability ==== */
+/* -- Top-of-page color logo treatment (no white asset) -- */
+/* ------------------------------------------------------ */
+/* -- Top-of-page color logo treatment (no white asset) -- */
+/* ------------------------------------------------------ */
+/* -- Top-of-page color logo treatment (no white asset) -- */
+header.site-header:not(.is-shrunk) .logo--color{
+  display:inline-block !important;
   mix-blend-mode: screen;
   filter: brightness(1.35) contrast(1.06);
-  opacity: 0.98;
+  opacity:.98;
 }
-/* --- Logo chip: improves contrast only at top-of-page (overlay) --- */
-header.site-header a[aria-label='Lilos Growth — Home'] {
-  position: relative;
-  display: inline-flex;
-}
-header.site-header a[aria-label='Lilos Growth — Home'] .logo {
-  position: relative;
-  z-index: 1;
-}
-header.site-header:not(.is-shrunk) a[aria-label='Lilos Growth — Home']::before {
-  content: '';
-  position: absolute;
-  inset: -6px -10px;
-  border-radius: 16px;
-  background: rgba(10, 18, 27, 0.38);
-  -webkit-backdrop-filter: saturate(120%) blur(2px);
-  backdrop-filter: saturate(120%) blur(2px);
-}
-/* ──────────────────────────────────────────────────────────────
-   Lilos Growth — Header contrast & CLS lock (no deps, CSS-only)
-   Targets either .site-header or .site-header-legacy and relies
-   on your existing .is-shrunk class toggle from the scroll script.
-   ────────────────────────────────────────────────────────────── */
-@layer components {
-  /* Support both legacy and current header class names */
-  header.site-header,
-  header.site-header-legacy {
-    --header-h: 4rem; /* 64px: keeps layout stable, CLS≤0.02 */
-  }
-
-  header.site-header > div:first-child,
-  header.site-header-legacy > div:first-child {
-    min-height: var(--header-h);
-    @apply transition-colors duration-300;
-  }
-
-  /* Base (top of page): always readable text */
-  header.site-header:not(.is-shrunk) > div:first-child,
-  header.site-header-legacy:not(.is-shrunk) > div:first-child {
-    @apply text-[#1f2d3d];
-  }
-
-  /* Shrunk (on scroll): high-contrast background + blur + shadow */
-  header.site-header.is-shrunk > div:first-child,
-  header.site-header-legacy.is-shrunk > div:first-child {
-    @apply bg-white/95 md:bg-white/90 supports-[backdrop-filter]:backdrop-blur-md shadow-sm text-[#1f2d3d];
-  }
-
-  /* Ensure nav links/buttons remain readable, with brand hover */
-  header.site-header a,
-  header.site-header button,
-  header.site-header-legacy a,
-  header.site-header-legacy button {
-    @apply text-[#1f2d3d];
-  }
-  header.site-header a:hover,
-  header.site-header button:hover,
-  header.site-header-legacy a:hover,
-  header.site-header-legacy button:hover {
-    @apply text-[#f56b2a];
-  }
-
-  /* Visible focus (a11y) */
-  header.site-header a:focus-visible,
-  header.site-header button:focus-visible,
-  header.site-header-legacy a:focus-visible,
-  header.site-header-legacy button:focus-visible {
-    @apply outline-none ring-2 ring-[#f56b2a] ring-offset-2 ring-offset-white;
-  }
-}
+/* ------------------------------------------------------ */

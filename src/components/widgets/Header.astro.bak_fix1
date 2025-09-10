@@ -68,17 +68,17 @@ const showSecondary = secondary.href !== primary.href;
     <div class="mx-auto w-full max-w-7xl px-6 md:px-8">
       <div class="header-bar flex items-center justify-between gap-4 py-4 md:py-5">
         <!-- Brand -->
-        <a href="/" class="inline-flex items-center shrink-0" aria-label="Lilos Growth — Home"
-          ><img
-            src="/Lilos_Growth_Logo_Corrected.svg"
-            alt="Lilos Growth"
-            class="logo logo--color h-12 md:h-14 w-auto object-contain"
-            loading="eager"
-            decoding="async"
-            width="176"
-            height="48"
-            fetchpriority="high"
-          />
+        <a href="/" class="inline-flex items-center shrink-0" aria-label="Lilos Growth — Home">
+          
+    <img src="/Lilos_Growth_Logo_White.svg"
+         alt="Lilos Growth"
+         class="logo logo--white h-12 md:h-14 w-auto object-contain"
+         loading="eager" decoding="async" width="176" height="48" />
+    <img src="/Lilos_Growth_Logo_Corrected.svg"
+         alt="Lilos Growth"
+         class="logo logo--color h-12 md:h-14 w-auto object-contain"
+         loading="eager" decoding="async" width="176" height="48" />
+  
         </a>
 
         <!-- Desktop nav -->
@@ -216,8 +216,8 @@ const showSecondary = secondary.href !== primary.href;
   /* ——— Theming via CSS variables (no new classes) ——— */
   header.site-header {
     /* Top-of-page (overlay) defaults */
-    --hdr-bg: rgba(31, 45, 61, 0.965); /* navy with alpha */
-    --hdr-border: transparent;
+    --hdr-bg: rgba(31,45,61,0.92); /* navy with alpha */
+    --hdr-border: rgba(255, 255, 255, 0.14);
     --hdr-link: rgba(255, 255, 255, 0.92);
     --hdr-link-hover: #ffffff;
     --hdr-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
@@ -312,4 +312,10 @@ const showSecondary = secondary.href !== primary.href;
       transition: none !important;
     }
   }
-</style>
+
+  /* Logo swap visibility */
+  header.site-header:not\(.is-shrunk\) .logo--color{display:none}
+  header.site-header.is-shrunk .logo--white{display:none}
+  /* Neutralize blend/filter for the white asset */
+  header.site-header:not\(.is-shrunk\) .logo--white{mix-blend-mode:normal;opacity:1;filter:none}
+\1

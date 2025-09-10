@@ -216,7 +216,7 @@ const showSecondary = secondary.href !== primary.href;
   /* ——— Theming via CSS variables (no new classes) ——— */
   header.site-header {
     /* Top-of-page (overlay) defaults */
-    --hdr-bg: rgba(31, 45, 61, 0.965); /* navy with alpha */
+    --hdr-bg: rgba(31, 45, 61, 0.92); /* navy with alpha */
     --hdr-border: transparent;
     --hdr-link: rgba(255, 255, 255, 0.92);
     --hdr-link-hover: #ffffff;
