@@ -4,7 +4,8 @@
  * Adds:
  *  - JSON-LD support (LocalBusiness always; optional BreadcrumbList + extra schema[])
  *  - Lightweight GA4 click-event tracking (delegated [data-evt])
- *  - Optional floating Calendly button
+ *  - Optional floating Calendly button (lazy + fallback)
+ * Keeps your existing Layout.astro in charge of <html> and <head>.
  */
 
 import Layout from './Layout.astro';
@@ -16,7 +17,7 @@ import type { MetaData as MetaDataType } from '~/types';
 
 export interface Crumb {
   name: string;
-  item: string;
+  item: string; // absolute or relative URL
 }
 
 export interface Props {
@@ -25,6 +26,7 @@ export interface Props {
   lang?: string;
   bodyClass?: string;
   metadata?: MetaDataType;
+
   breadcrumbs?: Crumb[];
   schema?: unknown[];
   noIndex?: boolean;
@@ -33,17 +35,11 @@ export interface Props {
 }
 
 const props = Astro.props as Props;
-const {
-  title,
-  description,
-  lang,
-  bodyClass,
-  metadata,
-  breadcrumbs = [],
-  schema: schemaExtras = [],
-  showFloatingCalendly = true,
-  calendlyUrl, // <-- FIX: bring into scope
-} = props;
+const { title, description, lang, bodyClass, metadata } = props;
+
+const breadcrumbs = props.breadcrumbs ?? [];
+const schemaExtras = props.schema ?? [];
+const showFloatingCalendly = props.showFloatingCalendly ?? true;
 
 // Build site URL for absolute breadcrumb items
 const site = Astro.site?.toString() ?? 'https://lilosgrowth.com';
@@ -94,21 +90,25 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
 
   {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />)}
 
+  <!-- Delegated GA4 click tracking for elements with data-evt -->
   <script is:inline>
     document.addEventListener('click', function (e) {
       const t = e.target;
       if (!t || !t.closest) return;
       const el = t.closest('[data-evt]');
       if (!el) return;
+
       const evt = el.getAttribute('data-evt');
-      // @ts-expect-error: gtag is optional
+      // @ts-expect-error -- safe: element may be null / dataset missing under SSR
       if (!evt || typeof window === 'undefined' || typeof window.gtag !== 'function') return;
+
       const label = el.href || el.getAttribute('aria-label') || (el.textContent ? el.textContent.trim() : '');
-      // @ts-expect-error: gtag is optional
+      // @ts-expect-error -- safe: element may be null / dataset missing under SSR
       window.gtag('event', evt, { event_category: 'engagement', event_label: label });
     });
   </script>
 
+  <!-- Optional floating Calendly button -->
   {
     showFloatingCalendly && (
       <FloatingCalendlyButton
@@ -118,6 +118,7 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
     )
   }
 
+  <!-- C) Anchor offset so in-page links aren't hidden beneath sticky header -->
   <style is:global>
     :root {
       --site-anchor-offset: 88px;
@@ -132,6 +133,7 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
         --site-anchor-offset: 64px;
       }
     }
+    /* Apply to common anchorable elements */
     :where(h1[id], h2[id], h3[id], h4[id], section[id], [data-anchor]) {
       scroll-margin-top: var(--site-anchor-offset);
     }
