@@ -8,7 +8,7 @@
   window.__lgCalendlyHybridInit = true;
 
   const SELECTOR = [
-    '[data-cal-hybrid]', // primary (floating CTA, etc.)
+    '[data-cal-hybrid]',
     '[data-calendly="open"]',
     '[data-cal-open="true"]',
     '#calendlyBtn',
@@ -39,8 +39,7 @@
 
   const isCalendlyUrl = (u) => {
     try {
-      const s = String(u || '');
-      return /calendly\.com/i.test(s);
+      return /calendly\.com/i.test(String(u || ''));
     } catch {
       return false;
     }
@@ -95,13 +94,13 @@
           const bp = getBreakpoint(el) ?? 768;
           const w = window.innerWidth || document.documentElement.clientWidth || 0;
 
-          // Non-Calendly links (anchors like #contact, internal pages): do nothing; let browser handle it.
+          // Non-Calendly links (/#contact, /contact, etc.): let browser handle it.
           if (!isCal) return;
 
-          // Mobile: let it navigate normally to the Calendly URL (no preventDefault).
+          // Mobile: allow normal navigation to Calendly URL.
           if (w < bp) return;
 
-          // Desktop & Calendly URL: prevent default and try popup with hard fallback.
+          // Desktop + Calendly: try popup, with hard fallback (new tab).
           e.preventDefault();
 
           if (tryPopup(url)) return;
@@ -110,21 +109,17 @@
           const navigate = () => {
             if (!navigated) {
               navigated = true;
-              // Open Calendly URL in a new tab so we never trap the user.
               window.open(url, '_blank', 'noopener,noreferrer');
             }
           };
 
           const timeoutMs = Number(el.getAttribute('data-cal-timeout') || 2000);
-          const fallbackTimer = setTimeout(navigate, timeoutMs);
+          const timer = setTimeout(navigate, timeoutMs);
 
           ensureScript()
             .then(() => {
-              if (tryPopup(url)) {
-                clearTimeout(fallbackTimer);
-              } else {
-                navigate();
-              }
+              if (tryPopup(url)) clearTimeout(timer);
+              else navigate();
             })
             .catch(navigate);
         },

@@ -1,112 +1,26 @@
 ---
 /**
- * Floating Calendly Link (safe)
- * - No hang: loader has timeout + onerror
- * - Fallback: navigates to URL if Calendly fails
- * - Defaults to "/#contact" (Home audit form)
+ * Floating “Book a Call” — NO JAVASCRIPT (cannot freeze).
  * Props:
- *  - href?: string
- *  - label?: string
- *  - position?: 'left' | 'right'
- *  - showOnMobile?: boolean
+ *  - href?: string (default '/#contact')
+ *  - label?: string (default 'Book a Call')
+ *  - position?: 'left' | 'right' (default 'right')
+ *  - showOnMobile?: boolean (default true)
  */
 const { href = '/#contact', label = 'Book a Call', position = 'right', showOnMobile = true } = Astro.props;
+
+const isCalendly = typeof href === 'string' && href.includes('calendly.com');
+const target = isCalendly ? '_blank' : undefined;
+const rel = isCalendly ? 'noopener noreferrer' : undefined;
 ---
 
-<button
-  type="button"
-  class={`fixed ${showOnMobile === false ? 'hidden md:flex' : ''} bottom-4 md:bottom-6 ${position === 'left' ? 'left-4 md:left-6' : 'right-4 md:right-6'} z-50 shadow-lg rounded-full px-5 py-3 text-white bg-[#f56b2a] hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]`}
-  data-evt="cta_floating_calendly"
-  data-url={href}
+<a
+  href={href}
+  target={target}
+  rel={rel}
   aria-label={label}
+  data-evt="cta_floating_calendly"
+  class={`fixed ${showOnMobile === false ? 'hidden md:flex' : ''} bottom-4 md:bottom-6 ${position === 'left' ? 'left-4 md:left-6' : 'right-4 md:right-6'} z-50 shadow-lg rounded-full px-5 py-3 text-white bg-[#f56b2a] hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]`}
 >
   {label}
-</button>
-
-<noscript>
-  <a
-    href={href}
-    aria-label={label}
-    class={`fixed ${showOnMobile === false ? 'hidden md:flex' : ''} bottom-4 md:bottom-6 ${position === 'left' ? 'left-4 md:left-6' : 'right-4 md:right-6'} z-50 shadow-lg rounded-full px-5 py-3 text-white bg-[#f56b2a]`}
-  >
-    {label}
-  </a>
-</noscript>
-
-<script is:inline>
-  (() => {
-    const btn = document.currentScript?.previousElementSibling;
-    if (!(btn instanceof HTMLElement)) return;
-
-    let busy = false;
-
-    const openCalendly = (url) => {
-      try {
-        if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
-          window.Calendly.initPopupWidget({ url });
-          return true;
-        }
-      } catch {}
-      return false;
-    };
-
-    const ensureCalendlyLoaded = () =>
-      new Promise((resolve) => {
-        try {
-          if (window.__calendlyLoaded) return resolve(true);
-
-          const existing =
-            document.querySelector('script[src*="assets.calendly.com/assets/external/widget.js"]') ||
-            document.querySelector('script[data-calendly-widget]');
-          if (existing) {
-            window.__calendlyLoaded = true;
-            return resolve(true);
-          }
-
-          const s = document.createElement('script');
-          s.src = 'https://assets.calendly.com/assets/external/widget.js';
-          s.async = true;
-          s.crossOrigin = 'anonymous';
-          s.referrerPolicy = 'no-referrer-when-downgrade';
-          s.setAttribute('data-calendly-widget', 'true');
-          s.onload = () => {
-            window.__calendlyLoaded = true;
-            resolve(true);
-          };
-          s.onerror = () => resolve(false);
-          document.head.appendChild(s);
-        } catch {
-          resolve(false);
-        }
-      });
-
-    btn.addEventListener(
-      'click',
-      async () => {
-        if (busy) return;
-        busy = true;
-        btn.setAttribute('aria-busy', 'true');
-
-        const url = btn.getAttribute('data-url') || '/#contact';
-
-        // Safety: never hang waiting for Calendly
-        const loaded = await Promise.race([
-          ensureCalendlyLoaded(),
-          new Promise((r) => setTimeout(() => r(false), 2500)),
-        ]);
-
-        if (!loaded || !openCalendly(url)) {
-          try {
-            window.location.href = url; // reliable fallback
-          } catch {}
-        }
-
-        setTimeout(() => {
-          busy = false;
-          btn.removeAttribute('aria-busy');
-        }, 300);
-      },
-      { passive: true }
-    );
-  })();
-</script>
+</a>
