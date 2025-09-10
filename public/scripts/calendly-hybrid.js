@@ -1,14 +1,14 @@
-/* Calendly hybrid loader — desktop popup, mobile navigate, bulletproof fallback. */
+/* Calendly hybrid loader — desktop popup for real Calendly links; otherwise do nothing. */
 /* eslint-env browser */
 (() => {
   'use strict';
 
-  // Prevent double-binding across re-renders / multiple imports
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
   if (window.__lgCalendlyHybridInit) return;
   window.__lgCalendlyHybridInit = true;
 
   const SELECTOR = [
-    '[data-cal-hybrid]', // primary (your floating CTA)
+    '[data-cal-hybrid]', // primary (floating CTA, etc.)
     '[data-calendly="open"]',
     '[data-cal-open="true"]',
     '#calendlyBtn',
@@ -19,11 +19,8 @@
   const WIDGET_SRC = 'https://assets.calendly.com/assets/external/widget.js';
 
   const ready = (fn) => {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', fn, { once: true });
-    } else {
-      fn();
-    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn, { once: true });
+    else fn();
   };
 
   const getUrl = (el) => {
@@ -40,28 +37,43 @@
     return Number.isFinite(n) ? n : null;
   };
 
+  const isCalendlyUrl = (u) => {
+    try {
+      const s = String(u || '');
+      return /calendly\.com/i.test(s);
+    } catch {
+      return false;
+    }
+  };
+
   const ensureScript = () =>
     new Promise((resolve, reject) => {
-      const existing = document.querySelector(`script[src="${WIDGET_SRC}"]`);
-      if (existing) {
-        if (typeof window.Calendly !== 'undefined') return resolve();
-        existing.addEventListener('load', () => resolve(), { once: true });
-        existing.addEventListener('error', (e) => reject(e), { once: true });
-        return;
+      try {
+        const existing = document.querySelector(`script[src="${WIDGET_SRC}"]`);
+        if (existing) {
+          if (typeof window.Calendly !== 'undefined') return resolve();
+          existing.addEventListener('load', () => resolve(), { once: true });
+          existing.addEventListener('error', (e) => reject(e), { once: true });
+          return;
+        }
+        const s = document.createElement('script');
+        s.src = WIDGET_SRC;
+        s.async = true;
+        s.onload = () => resolve();
+        s.onerror = (e) => reject(e);
+        document.head.appendChild(s);
+      } catch (e) {
+        reject(e);
       }
-      const s = document.createElement('script');
-      s.src = WIDGET_SRC;
-      s.async = true;
-      s.onload = () => resolve();
-      s.onerror = (e) => reject(e);
-      document.head.appendChild(s);
     });
 
   const tryPopup = (url) => {
-    if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
-      window.Calendly.initPopupWidget({ url });
-      return true;
-    }
+    try {
+      if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+        window.Calendly.initPopupWidget({ url });
+        return true;
+      }
+    } catch {}
     return false;
   };
 
@@ -79,28 +91,32 @@
           const url = getUrl(el);
           if (!url) return;
 
+          const isCal = isCalendlyUrl(url);
           const bp = getBreakpoint(el) ?? 768;
           const w = window.innerWidth || document.documentElement.clientWidth || 0;
 
-          // Mobile (< breakpoint): allow normal navigation (no preventDefault)
+          // Non-Calendly links (anchors like #contact, internal pages): do nothing; let browser handle it.
+          if (!isCal) return;
+
+          // Mobile: let it navigate normally to the Calendly URL (no preventDefault).
           if (w < bp) return;
 
-          // Desktop (>= breakpoint): prefer popup, but NEVER leave the user stuck
+          // Desktop & Calendly URL: prevent default and try popup with hard fallback.
           e.preventDefault();
 
-          // If the widget is already present, open instantly
           if (tryPopup(url)) return;
 
-          // Otherwise, load it and race with a short fallback to hard navigate
           let navigated = false;
           const navigate = () => {
             if (!navigated) {
               navigated = true;
-              window.location.href = url;
+              // Open Calendly URL in a new tab so we never trap the user.
+              window.open(url, '_blank', 'noopener,noreferrer');
             }
           };
 
-          const fallbackTimer = setTimeout(navigate, 1800);
+          const timeoutMs = Number(el.getAttribute('data-cal-timeout') || 2000);
+          const fallbackTimer = setTimeout(navigate, timeoutMs);
 
           ensureScript()
             .then(() => {
@@ -118,6 +134,5 @@
   };
 
   ready(bind);
-  // Re-bind after Astro client-side navigations
   document.addEventListener('astro:page-load', bind);
 })();
