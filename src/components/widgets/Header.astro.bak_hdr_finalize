@@ -77,7 +77,6 @@ const showSecondary = secondary.href !== primary.href;
             decoding="async"
             width="176"
             height="48"
-            fetchpriority="high"
           />
         </a>
 
@@ -216,8 +215,8 @@ const showSecondary = secondary.href !== primary.href;
   /* ——— Theming via CSS variables (no new classes) ——— */
   header.site-header {
     /* Top-of-page (overlay) defaults */
-    --hdr-bg: rgba(31, 45, 61, 0.965); /* navy with alpha */
-    --hdr-border: transparent;
+    --hdr-bg: rgba(31, 45, 61, 0.92); /* navy with alpha */
+    --hdr-border: rgba(255, 255, 255, 0.14);
     --hdr-link: rgba(255, 255, 255, 0.92);
     --hdr-link-hover: #ffffff;
     --hdr-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
