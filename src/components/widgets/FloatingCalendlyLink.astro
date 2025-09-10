@@ -95,7 +95,7 @@ const { href = '/#contact', label = 'Book a Call', position = 'right', showOnMob
           new Promise((r) => setTimeout(() => r(false), 2500)),
         ]);
 
-        if (!openCalendly(url)) {
+        if (!loaded || !openCalendly(url)) {
           try {
             window.location.href = url; // reliable fallback
           } catch {}
