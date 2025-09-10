@@ -1,24 +1,14 @@
 ---
-/**
- * Page wrapper layout — prints Header, your page <slot />, then Footer.
- * Adds:
- *  - JSON-LD support (LocalBusiness always; optional BreadcrumbList + extra schema[])
- *  - Lightweight GA4 click-event tracking (delegated [data-evt])
- *  - Optional floating Calendly button
- */
-
 import Layout from './Layout.astro';
 import Header from '~/components/widgets/Header.astro';
 import Footer from '~/components/widgets/Footer.astro';
 import FloatingCalendlyButton from '~/components/widgets/FloatingCalendlyButton.astro';
-
 import type { MetaData as MetaDataType } from '~/types';
 
 export interface Crumb {
   name: string;
   item: string;
 }
-
 export interface Props {
   title?: string;
   description?: string;
@@ -29,7 +19,7 @@ export interface Props {
   schema?: unknown[];
   noIndex?: boolean;
   showFloatingCalendly?: boolean;
-  calendlyUrl?: string;
+  calendlyUrl?: string; // kept for future use; not used to override FAB target
 }
 
 const props = Astro.props as Props;
@@ -42,13 +32,10 @@ const {
   breadcrumbs = [],
   schema: schemaExtras = [],
   showFloatingCalendly = true,
-  calendlyUrl, // <-- FIX: bring into scope
 } = props;
 
-// Build site URL for absolute breadcrumb items
 const site = Astro.site?.toString() ?? 'https://lilosgrowth.com';
 
-// Minimal LocalBusiness schema (non-PII)
 const localBusiness = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
@@ -57,7 +44,6 @@ const localBusiness = {
   areaServed: { '@type': 'AdministrativeArea', name: 'United States' },
 };
 
-// Optional BreadcrumbList
 const breadcrumbList =
   breadcrumbs.length > 0
     ? {
@@ -72,7 +58,6 @@ const breadcrumbList =
       }
     : null;
 
-// Final schema nodes (OK to render in <body>)
 const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []), ...schemaExtras];
 ---
 
@@ -95,28 +80,19 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
   {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />)}
 
   <script is:inline>
-    document.addEventListener('click', function (e) {
-      const t = e.target;
-      if (!t || !t.closest) return;
-      const el = t.closest('[data-evt]');
+    document.addEventListener('click', (e) => {
+      const el = e.target && e.target.closest ? e.target.closest('[data-evt]') : null;
       if (!el) return;
       const evt = el.getAttribute('data-evt');
-      // @ts-expect-error: gtag is optional
+      // @ts-expect-error gtag optional
       if (!evt || typeof window === 'undefined' || typeof window.gtag !== 'function') return;
       const label = el.href || el.getAttribute('aria-label') || (el.textContent ? el.textContent.trim() : '');
-      // @ts-expect-error: gtag is optional
+      // @ts-expect-error gtag optional
       window.gtag('event', evt, { event_category: 'engagement', event_label: label });
     });
   </script>
 
-  {
-    showFloatingCalendly && (
-      <FloatingCalendlyButton
-        href={(import.meta.env.PUBLIC_CALENDLY_URL as string) || calendlyUrl || '/contact#book'}
-        label="Book a Call"
-      />
-    )
-  }
+  {showFloatingCalendly && <FloatingCalendlyButton href="/contact#book" label="Book a Call" />}
 
   <style is:global>
     :root {

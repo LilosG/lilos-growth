@@ -204,3 +204,5 @@ export const resultsFaqs: FaqItem[] = [
     a: 'Month-to-month is available; most clients opt for 3–6 months to compound organic gains.',
   },
 ];
+
+void _PLACEHOLDER_21_9;

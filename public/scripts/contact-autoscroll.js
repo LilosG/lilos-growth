@@ -1,7 +1,6 @@
 (() => {
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
   if (window.location.hash !== '#book') return;
-
   const tryScroll = () => {
     const el =
       document.getElementById('book') ||
@@ -13,7 +12,6 @@
     }
     return false;
   };
-
   if (!tryScroll()) {
     let n = 0;
     const t = setInterval(() => {

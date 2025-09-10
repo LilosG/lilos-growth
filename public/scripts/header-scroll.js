@@ -1,37 +1,42 @@
-/**
- * Tiny, CSP-safe scroll listener to toggle a shrink class on the header.
- * No unused vars; plays nice with eslint(no-unused-vars) and TS configs.
- */
 (() => {
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
 
-  const header = document.querySelector('header.site-header') || document.querySelector('header.site-header-legacy');
-  if (!header) return;
+  const header = document.querySelector('header.site-header');
+  const spacer = document.getElementById('header-spacer');
+  if (!header || !spacer) return;
 
-  const threshold = 8; // pixels before we consider the header "shrunk"
-
-  const apply = () => {
-    const shouldShrink = (window.scrollY || 0) > threshold;
-    const hasClass = header.classList.contains('is-shrunk');
-    if (shouldShrink !== hasClass) {
-      header.classList.toggle('is-shrunk', shouldShrink);
-    }
+  const setHeaderHeight = () => {
+    const h = Math.max(72, Math.round(header.getBoundingClientRect().height));
+    document.documentElement.style.setProperty('--header-h', `${h}px`);
+    spacer.style.height = `var(--header-h, ${h}px)`;
   };
 
-  // Initial state + throttled scroll via rAF
-  apply();
+  const applyShrink = () => {
+    const shouldShrink = window.scrollY > 8;
+    header.classList.toggle('is-shrunk', shouldShrink);
+  };
+
+  setHeaderHeight();
+  applyShrink();
+
   let ticking = false;
-  window.addEventListener(
-    'scroll',
-    () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(() => {
-          apply();
-          ticking = false;
-        });
-      }
-    },
-    { passive: true }
-  );
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      applyShrink();
+      ticking = false;
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  let resizeRAF;
+  const onResize = () => {
+    if (resizeRAF) cancelAnimationFrame(resizeRAF);
+    resizeRAF = requestAnimationFrame(() => {
+      setHeaderHeight();
+      applyShrink();
+    });
+  };
+  window.addEventListener('resize', onResize);
 })();
