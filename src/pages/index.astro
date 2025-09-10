@@ -54,7 +54,7 @@ export const metadata = {
           </a>
           <a
             href="#packages"
-            class="inline-flex items-center px-6 py-3 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-base shadow transition"
+            class="hidden md:inline-flex items-center px-6 py-3 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-base shadow transition"
             data-evt="cta_hero_see_services"
           >
             See Our Services
@@ -157,6 +157,9 @@ export const metadata = {
             Get My Free Audit
           </button>
         </form>
+
+        <!-- Trust micro-copy -->
+        <p class="mt-3 text-sm text-gray-600">No spam. We’ll reply within 1 business day.</p>
       </div>
     </div>
   </section>
@@ -346,7 +349,7 @@ export const metadata = {
               stroke="currentColor"
               stroke-width="2"
             >
-              <path d="M12 17l-5 3 1.9-5.9L4 9h6l2-6 2 6h6l-4.9 5.1L17 20z"></path>
+              <path d="M12 17l-5 3 1.9-5.9L4 9h6l2-6 2 6h6l-4.9 5.1 L17 20z"></path>
             </svg>
           </div>
           <h3 class="text-xl font-semibold mb-2 text-heading">Review Management</h3>
@@ -678,6 +681,26 @@ export const metadata = {
       <path fill="currentColor" d="M0,32L1440,0V60H0Z"></path>
     </svg>
   </div>
+
+  <!-- PROOF METRICS BAND -->
+  <section aria-label="Key results" class="border-t border-gray-100 py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <ul class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 text-center">
+        <li class="rounded-2xl border border-gray-200 bg-white/60 p-6">
+          <div class="text-4xl font-bold font-heading tracking-tight">+42%</div>
+          <p class="mt-1 text-sm text-gray-600">Avg. GBP calls in 90 days</p>
+        </li>
+        <li class="rounded-2xl border border-gray-200 bg-white/60 p-6">
+          <div class="text-4xl font-bold font-heading tracking-tight">-28%</div>
+          <p class="mt-1 text-sm text-gray-600">Avg. CPC after 60 days</p>
+        </li>
+        <li class="rounded-2xl border border-gray-200 bg-white/60 p-6">
+          <div class="text-4xl font-bold font-heading tracking-tight">+19%</div>
+          <p class="mt-1 text-sm text-gray-600">Lead-to-close (quarterly)</p>
+        </li>
+      </ul>
+    </div>
+  </section>
 
   <!-- FAQ -->
   <section class="py-20 bg-white" id="faq">
