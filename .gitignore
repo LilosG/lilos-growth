@@ -23,3 +23,6 @@ pnpm-lock.yaml
 
 .astro
 .vercel
+
+# Local backups (do not commit)
+.backups/
