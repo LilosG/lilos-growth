@@ -2,12 +2,12 @@
 /**
  * Floating Calendly Button — NO JS. Pure anchor with button role.
  * Props match previous version:
- *  - href?: string (default '/contact#book')
+ *  - href?: string (default '/#contact')
  *  - label?: string (default 'Book a Call')
  *  - position?: 'left' | 'right' (default 'right')
  *  - showOnMobile?: boolean (default true)
  */
-const { href = '/contact#book', label = 'Book a Call', position = 'right', showOnMobile = true } = Astro.props;
+const { href = '/#contact', label = 'Book a Call', position = 'right', showOnMobile = true } = Astro.props;
 
 const isCalendly = typeof href === 'string' && href.includes('calendly.com');
 const target = isCalendly ? '_blank' : undefined;

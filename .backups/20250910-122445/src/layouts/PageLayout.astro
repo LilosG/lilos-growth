@@ -4,8 +4,7 @@
  * Adds:
  *  - JSON-LD support (LocalBusiness always; optional BreadcrumbList + extra schema[])
  *  - Lightweight GA4 click-event tracking (delegated [data-evt])
- *  - Optional floating Calendly button (lazy + fallback)
- * Keeps your existing Layout.astro in charge of <html> and <head>.
+ *  - Optional floating Calendly button
  */
 
 import Layout from './Layout.astro';
@@ -17,7 +16,7 @@ import type { MetaData as MetaDataType } from '~/types';
 
 export interface Crumb {
   name: string;
-  item: string; // absolute or relative URL
+  item: string;
 }
 
 export interface Props {
@@ -90,7 +89,6 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
 
   {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />)}
 
-  <!-- Delegated GA4 click tracking for elements with data-evt -->
   <script is:inline>
     document.addEventListener('click', function (e) {
       const t = e.target;
@@ -99,26 +97,17 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
       if (!el) return;
 
       const evt = el.getAttribute('data-evt');
-      // @ts-expect-error -- safe: element may be null / dataset missing under SSR
+      // @ts-expect-error: gtag exists only if GA loaded
       if (!evt || typeof window === 'undefined' || typeof window.gtag !== 'function') return;
 
       const label = el.href || el.getAttribute('aria-label') || (el.textContent ? el.textContent.trim() : '');
-      // @ts-expect-error -- safe: element may be null / dataset missing under SSR
+      // @ts-expect-error: gtag exists only if GA loaded
       window.gtag('event', evt, { event_category: 'engagement', event_label: label });
     });
   </script>
 
-  <!-- Optional floating Calendly button -->
-  {
-    showFloatingCalendly && (
-      <FloatingCalendlyButton
-        href={(import.meta.env.PUBLIC_CALENDLY_URL as string) || calendlyUrl || '/contact#book'}
-        label="Book a Call"
-      />
-    )
-  }
+  {showFloatingCalendly && <FloatingCalendlyButton href="/contact#book" label="Book a Call" />}
 
-  <!-- C) Anchor offset so in-page links aren't hidden beneath sticky header -->
   <style is:global>
     :root {
       --site-anchor-offset: 88px;
@@ -133,8 +122,8 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
         --site-anchor-offset: 64px;
       }
     }
-    /* Apply to common anchorable elements */
     :where(h1[id], h2[id], h3[id], h4[id], section[id], [data-anchor]) {
+      /* FIX: use var(), not let() */
       scroll-margin-top: var(--site-anchor-offset);
     }
   </style>

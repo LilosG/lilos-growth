@@ -27,19 +27,24 @@ export interface Props {
   bodyClass?: string;
   metadata?: MetaDataType;
 
+  // NEW (optional) props for AEO/schema + CTA
   breadcrumbs?: Crumb[];
-  schema?: unknown[];
-  noIndex?: boolean;
+  schema?: unknown[]; // e.g., FAQPage or Service nodes
+  noIndex?: boolean; // respected in Layout.astro if you wire it there
   showFloatingCalendly?: boolean;
-  calendlyUrl?: string;
+  calendlyUrl?: string; // fallback if env let is missing
 }
 
 const props = Astro.props as Props;
+
+// Pull only what Layout.astro expects so we don't pass extra props to it.
 const { title, description, lang, bodyClass, metadata } = props;
 
+// AEO / Schema props (safe defaults)
 const breadcrumbs = props.breadcrumbs ?? [];
 const schemaExtras = props.schema ?? [];
 const showFloatingCalendly = props.showFloatingCalendly ?? true;
+const calendlyUrl = props.calendlyUrl;
 
 // Build site URL for absolute breadcrumb items
 const site = Astro.site?.toString() ?? 'https://lilosgrowth.com';
@@ -73,6 +78,7 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
 ---
 
 <Layout {title} {description} {lang} {bodyClass} {metadata}>
+  <!-- A) Skip link (kept from your version) -->
   <a
     href="#main"
     class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-2 focus-visible:left-2 focus-visible:z-[1000] focus-visible:bg-white focus-visible:text-[#253242] focus-visible:px-4 focus-visible:py-2 focus-visible:rounded-full focus-visible:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
@@ -88,6 +94,7 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
 
   <Footer />
 
+  <!-- JSON-LD (rendered in body is fine for Google) -->
   {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />)}
 
   <!-- Delegated GA4 click tracking for elements with data-evt -->
@@ -112,7 +119,7 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
   {
     showFloatingCalendly && (
       <FloatingCalendlyButton
-        href={(import.meta.env.PUBLIC_CALENDLY_URL as string) || calendlyUrl || '/contact#book'}
+        href={(import.meta.env.PUBLIC_CALENDLY_URL as string) || calendlyUrl || '/contact'}
         label="Book a Call"
       />
     )
@@ -121,6 +128,7 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
   <!-- C) Anchor offset so in-page links aren't hidden beneath sticky header -->
   <style is:global>
     :root {
+      /* Base offset used by scroll-margin-top targets */
       --site-anchor-offset: 88px;
     }
     @media (max-width: 1023.98px) {
@@ -135,7 +143,7 @@ const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []),
     }
     /* Apply to common anchorable elements */
     :where(h1[id], h2[id], h3[id], h4[id], section[id], [data-anchor]) {
-      scroll-margin-top: var(--site-anchor-offset);
+      scroll-margin-top: let(--site-anchor-offset);
     }
   </style>
 </Layout>

@@ -2,12 +2,12 @@
 /**
  * Floating “Book a Call” — NO JAVASCRIPT (cannot freeze).
  * Props:
- *  - href?: string (default '/#contact')
+ *  - href?: string (default '/contact#book')
  *  - label?: string (default 'Book a Call')
  *  - position?: 'left' | 'right' (default 'right')
  *  - showOnMobile?: boolean (default true)
  */
-const { href = '/#contact', label = 'Book a Call', position = 'right', showOnMobile = true } = Astro.props;
+const { href = '/contact#book', label = 'Book a Call', position = 'right', showOnMobile = true } = Astro.props;
 
 const isCalendly = typeof href === 'string' && href.includes('calendly.com');
 const target = isCalendly ? '_blank' : undefined;
