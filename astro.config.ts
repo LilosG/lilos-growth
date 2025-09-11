@@ -1,6 +1,6 @@
+// FILE: astro.config.ts
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 import { defineConfig } from 'astro/config';
 
 import sitemap from '@astrojs/sitemap';
@@ -11,15 +11,12 @@ import icon from 'astro-icon';
 import compress from 'astro-compress';
 
 import astrowind from './vendor/integration';
-
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  // REQUIRED for correct sitemap URLs — set to your canonical domain
   site: 'https://lilosgrowth.com',
-
   output: 'static',
 
   integrations: [
@@ -44,11 +41,7 @@ export default defineConfig({
     }),
     compress({
       CSS: true,
-      HTML: {
-        'html-minifier-terser': {
-          removeAttributeQuotes: false,
-        },
-      },
+      HTML: { 'html-minifier-terser': { removeAttributeQuotes: false } },
       Image: false,
       JavaScript: true,
       SVG: false,
@@ -60,6 +53,11 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [readingTimeRemarkPlugin],
     rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
+    syntaxHighlight: 'shiki',
+    shikiConfig: {
+      // Map ```astro fences to HTML highlighting to avoid Shiki warnings without adding deps
+      langAlias: { astro: 'html' },
+    },
   },
 
   vite: {

@@ -110,6 +110,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
     <section class="py-24 bg-cream border-t border-gray-100">
       <div class="max-w-6xl mx-auto px-4">
         <h2 class="sr-only font-heading">Key outcomes</h2>
+        <span class="block mx-auto mt-2 h-1 w-12 bg-[#f56b2a] rounded"></span>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {(resultsStats as ResultsStat[]).map((stat) => <StatCard stat={stat} />)}
         </div>
@@ -131,7 +132,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
     <section class="py-24 bg-white border-t border-gray-100">
       <div class="max-w-6xl mx-auto px-4">
         <SectionHeader title="Success Stories from Real Clients" accent="top" />
-        <div class="mt-10 grid md:grid-cols-2 xl:grid-cols-3 gap-8 auto-rows-fr">
+        <div id="results-grid" class="mt-10 grid md:grid-cols-2 xl:grid-cols-3 gap-8 auto-rows-fr items-stretch">
           {(resultsCaseStudies as CaseStudy[]).map((study) => <CaseStudyCard study={study} />)}
         </div>
       </div>

@@ -64,6 +64,7 @@ export const description =
       <h2 class="text-2xl md:text-3xl font-heading font-bold text-heading">
         A Clean, Fast Toolbox Built for Local Wins
       </h2>
+      <span class="block mx-auto mt-2 h-1 w-12 bg-[#f56b2a] rounded"></span>
       <p class="mt-3 text-body max-w-2xl mx-auto">
         Create conversion-ready pages, dial in your Google Business Profile, and ship SEO assets quickly — no logins, no
         fluff.
@@ -81,7 +82,11 @@ export const description =
   <section id="featured-tools" class="bg-white">
     <div class="max-w-6xl mx-auto px-4 py-14">
       <h3 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">Featured Tools</h3>
-      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <div
+        id="tools-grid"
+        class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 tools-grid auto-rows-fr items-stretch"
+      >
         <!-- Card: Review Link & QR -->
         <article class="bg-white rounded-3xl border border-gray-200 shadow-md p-6 md:p-8 flex flex-col">
           <div class="flex items-center gap-3 mb-3">
@@ -200,7 +205,7 @@ export const description =
     <div class="max-w-6xl mx-auto px-4 py-16">
       <h3 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">More Free Utilities</h3>
 
-      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 tools-grid auto-rows-fr items-stretch">
         <!-- FAQ Schema -->
         <article class="bg-white rounded-3xl border border-gray-200 shadow-md p-6 md:p-8">
           <h4 class="text-lg font-heading font-bold text-heading mb-2">FAQ Schema Generator</h4>
