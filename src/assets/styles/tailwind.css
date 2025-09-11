@@ -361,3 +361,8 @@ header.site-header li.group:focus-within .submenu {
   border-radius: 0.5rem;
   z-index: 9999;
 }
+/* a11y: consistent focus ring on primary CTAs */
+.btn-primary:focus-visible,
+a.btn-primary:focus-visible {
+  @apply outline-none ring-2 ring-[#f56b2a] ring-offset-2 ring-offset-white;
+}

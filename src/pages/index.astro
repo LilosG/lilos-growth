@@ -21,7 +21,7 @@ export const metadata = {
     <div class="relative z-10 max-w-6xl mx-auto w-full flex flex-col md:flex-row md:items-center gap-14 px-4">
       <!-- Left Column: Logo, Headline, CTA -->
       <div class="flex-1">
-        <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="mb-10 w-40" />
+        <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="mb-10 w-40" fetchpriority="high" />
         <h1
           class="text-4xl md:text-6xl font-heading text-white font-extrabold mb-2 leading-tight text-left tracking-tight"
         >
@@ -89,6 +89,7 @@ export const metadata = {
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           class="flex flex-col gap-4.5"
+          action="/thank-you"
         >
           <input type="hidden" name="form-name" value="seo-audit" />
           <p class="hidden">

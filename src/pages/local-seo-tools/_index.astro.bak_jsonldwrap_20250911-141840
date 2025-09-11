@@ -1,10 +1,4 @@
 ---
-const base = Astro.site ? new URL("/", Astro.site).toString() : "https://lilosgrowth.com/";
-const parts = Astro.url.pathname.split("/").filter(Boolean);
-const items = [{ "":"ListItem", position:1, name:"Home", item: base }].concat(
-  parts.map((p,i)=>({ "":"ListItem", position:i+2, name:p.replace(/-/g," ").replace(/\b\w/g, c=>c.toUpperCase()), item: new URL("/"+parts.slice(0,i+1).join("/") + "/", base).toString() }))
-);
-const breadcrumbLd = { "":"https://schema.org", "":"BreadcrumbList", itemListElement: items };
 import Layout from '~/layouts/PageLayout.astro';
 
 export const title = 'Free Local SEO Tools for Home Service Businesses | Lilos Growth';
@@ -435,7 +429,17 @@ export const description =
       <path fill="currentColor" d="M0,32L1440,0V60H0Z"></path>
     </svg>
   </div>
-  <script type="application/ld+json" is:inline>{JSON.stringify(breadcrumbLd)}</script>
 </Layout>
 <script type="application/ld+json" is:inline>
+{JSON.stringify((() => {
+  const parts = Astro.url.pathname.split('/').filter(Boolean);
+  const base = Astro.site ? new URL('/', Astro.site).toString() : 'https://lilosgrowth.com/';
+  const items = [{ "@type":"ListItem", position:1, name:"Home", item: base }];
+  let acc = '';
+  parts.forEach((p,i) => {
+    acc += '/' + p;
+    items.push({ "@type":"ListItem", position:i+2, name:p.replace(/-/g,' '), item: Astro.site ? new URL(acc, Astro.site).toString() : acc });
+  });
+  return { "@context":"https://schema.org", "@type":"BreadcrumbList", itemListElement: items };
+})())}
 </script>
