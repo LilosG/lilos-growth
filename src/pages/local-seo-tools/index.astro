@@ -4,7 +4,6 @@ const parts = Astro.url.pathname.split("/").filter(Boolean);
 const items = [{ "":"ListItem", position:1, name:"Home", item: base }].concat(
   parts.map((p,i)=>({ "":"ListItem", position:i+2, name:p.replace(/-/g," ").replace(/\b\w/g, c=>c.toUpperCase()), item: new URL("/"+parts.slice(0,i+1).join("/") + "/", base).toString() }))
 );
-const breadcrumbLd = { "":"https://schema.org", "":"BreadcrumbList", itemListElement: items };
 import Layout from '~/layouts/PageLayout.astro';
 
 export const title = 'Free Local SEO Tools for Home Service Businesses | Lilos Growth';
@@ -13,6 +12,7 @@ export const description =
 ---
 
 <Layout {title} {description}>
+  <script type="application/ld+json" is:inline>{JSON.stringify({ "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://lilosgrowth.com/"},{"@type":"ListItem","position":2,"name":"Local SEO Tools","item":"https://lilosgrowth.com/local-seo-tools/"}] })}</script>
   <script type="application/ld+json" is:inline>{JSON.stringify(breadcrumbLd)}</script>
   <script type="application/ld+json" is:inline>{JSON.stringify(breadcrumbLd)}</script>
   <!-- HERO -->
