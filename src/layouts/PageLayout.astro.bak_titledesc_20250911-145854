@@ -60,10 +60,8 @@ const breadcrumbList =
 
 const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []), ...schemaExtras];
 const pageTitle = Astro.props?.metadata?.title ?? Astro.props?.title ?? 'Lilos Growth';
-const pageDesc =
-  Astro.props?.metadata?.description ??
-  Astro.props?.description ??
-  'Get more calls and booked jobs with Local SEO, GBP, and conversion-ready websites.';
+const pageDesc = Astro.props?.metadata?.description ?? Astro.props?.description ?? 'Get more calls and booked jobs with Local SEO, GBP, and conversion-ready websites.';
+
 ---
 
 <Layout {title} {description} {lang} {bodyClass} {metadata}>

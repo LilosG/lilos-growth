@@ -435,7 +435,7 @@ export const description =
       <path fill="currentColor" d="M0,32L1440,0V60H0Z"></path>
     </svg>
   </div>
-  <script type="application/ld+json" is:inline><script type="application/ld+json" is:inline>{JSON.stringify(breadcrumbLd)}</script></script>
+  <script type="application/ld+json" is:inline>{JSON.stringify(breadcrumbLd)}</script>
 </Layout>
 <script type="application/ld+json" is:inline>
 </script>

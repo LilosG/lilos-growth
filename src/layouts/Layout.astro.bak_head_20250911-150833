@@ -84,55 +84,6 @@ declare global {
     <slot name="head" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <title>
-      {
-        typeof metadata !== 'undefined' && metadata?.title
-          ? metadata.title
-          : typeof title !== 'undefined'
-            ? title
-            : 'Lilos Growth'
-      }
-    </title>
-    <meta
-      name="description"
-      content={typeof metadata !== 'undefined' && metadata?.description
-        ? metadata.description
-        : typeof description !== 'undefined'
-          ? description
-          : 'Get more calls and booked jobs with Local SEO, Google Business Profile, and conversion-ready websites.'}
-    />
-    <meta
-      property="og:title"
-      content={typeof metadata !== 'undefined' && metadata?.title
-        ? metadata.title
-        : typeof title !== 'undefined'
-          ? title
-          : 'Lilos Growth'}
-    />
-    <meta
-      property="og:description"
-      content={typeof metadata !== 'undefined' && metadata?.description
-        ? metadata.description
-        : typeof description !== 'undefined'
-          ? description
-          : 'Get more calls and booked jobs with Local SEO, Google Business Profile, and conversion-ready websites.'}
-    />
-    <meta
-      name="twitter:title"
-      content={typeof metadata !== 'undefined' && metadata?.title
-        ? metadata.title
-        : typeof title !== 'undefined'
-          ? title
-          : 'Lilos Growth'}
-    />
-    <meta
-      name="twitter:description"
-      content={typeof metadata !== 'undefined' && metadata?.description
-        ? metadata.description
-        : typeof description !== 'undefined'
-          ? description
-          : 'Get more calls and booked jobs with Local SEO, Google Business Profile, and conversion-ready websites.'}
-    />
   </head>
 
   <body
