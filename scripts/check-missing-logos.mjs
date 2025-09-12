@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 const file = 'src/data/results.ts';
-const src = fs.readFileSync(file,'utf8');
+const src = fs.readFileSync(file, 'utf8');
 const re = /src:\s*['"]([^'"]+)['"]/g;
 const missing = new Set();
 let m;
