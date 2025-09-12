@@ -187,8 +187,8 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
 
     <!-- INLINE CTA -->
     <div id="results-inline-cta">
-      <ResultsCTABand />
-    </div>
+    <ResultsCTABand />
+  </div>
 
     <!-- CASE STUDIES -->
     <section class="py-20 md:py-24 bg-white border-t border-gray-100">
@@ -268,15 +268,6 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
       secondaryHref="/services"
       secondaryText="See Services"
     />
-    <style>
-      /* results inline CTA heading contrast */
-      #results-inline-cta h1,
-      #results-inline-cta h2,
-      #results-inline-cta h3 {
-        color: #fff !important;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-      }
-    </style>
   </main>
 </PageLayout>
 

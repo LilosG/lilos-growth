@@ -90,9 +90,7 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
                     <li class="relative group">
                       <button
                         class="inline-flex items-center gap-1 py-2 text-[15px] leading-[22px] font-medium tracking-[0.005em]
-                               text-[#1f2d3d] rounded-md transition
-                               hover:underline underline-offset-4 decoration-2 decoration-[#f56b2a]/70
-                               focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a]/60"
+                               text-[#1f2d3d] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a]/60 rounded-md"
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
@@ -114,10 +112,7 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
                             <li>
                               <a
                                 href={lnk.href}
-                                aria-current={isActive(lnk.href) ? 'page' : undefined}
-                                class={`block px-4 py-2.5 text-[14px] leading-5 text-[#1f2d3d] rounded-md transition
-                                        hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a]/60
-                                        ${isActive(lnk.href) ? 'active' : ''}`}
+                                class="block px-4 py-2.5 text-[14px] leading-5 text-[#1f2d3d] hover:bg-gray-50"
                               >
                                 <span class="font-medium">{lnk.text}</span>
                                 {lnk.description && (
@@ -236,20 +231,14 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
             if (isMenu(item)) {
               return (
                 <details class="rounded-xl border border-gray-200">
-                  <summary
-                    class="cursor-pointer select-none px-3 py-3 text-[15px] text-[#253242]
-                                   focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a]/60 rounded-lg"
-                  >
-                    {item.text}
-                  </summary>
+                  <summary class="cursor-pointer select-none px-3 py-3 text-[15px] text-[#253242]">{item.text}</summary>
                   <div class="px-2 pb-2">
                     <ul class="space-y-1">
                       {item.links.map((lnk) => (
                         <li>
                           <a
                             href={lnk.href}
-                            class="block rounded-lg px-3 py-2 text-[14px] text-[#253242] hover:bg-gray-50
-                                   focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a]/60"
+                            class="block rounded-lg px-3 py-2 text-[14px] text-[#253242] hover:bg-gray-50"
                           >
                             {lnk.text}
                           </a>
@@ -261,11 +250,7 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
               );
             }
             return (
-              <a
-                href={item.href}
-                class="block rounded-xl px-3 py-3 text-[15px] text-[#253242] hover:bg-gray-50
-                                        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a]/60"
-              >
+              <a href={item.href} class="block rounded-xl px-3 py-3 text-[15px] text-[#253242] hover:bg-gray-50">
                 {item.text}
               </a>
             );
@@ -274,8 +259,7 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
 
         <a
           href={firstAction.href}
-          class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#f56b2a] px-4 py-3 text-white text-sm font-semibold shadow-md hover:bg-[#e85718] transition
-                 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
+          class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#f56b2a] px-4 py-3 text-white text-sm font-semibold shadow-md hover:bg-[#e85718] transition"
         >
           {firstAction.text}
         </a>
@@ -326,33 +310,5 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
   header.site-header,
   header.site-header * {
     pointer-events: auto;
-  }
-
-  /* Make skip link visible on keyboard focus */
-  .skip-link {
-    position: absolute;
-    left: -9999px;
-    top: 0;
-    z-index: 100000;
-    background: #1f2d3d;
-    color: #fff;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-  }
-  .skip-link:focus {
-    left: 1rem;
-    top: 0.75rem;
-    outline: 2px solid #f56b2a;
-    outline-offset: 2px;
-  }
-
-  /* Consistent active styling without layout shift */
-  .site-header a.active {
-    color: #f56b2a;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 2px;
-    text-decoration-color: rgba(245, 107, 42, 0.7);
   }
 </style>

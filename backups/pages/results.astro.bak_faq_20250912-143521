@@ -55,26 +55,13 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
           .map((it: any) => {
             const q = String(it.q ?? it.question ?? it.title ?? '').trim();
             const a = String(it.a ?? it.answer ?? it.text ?? it.content ?? '').trim();
-            return q && a ? { '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } } : null;
+            return q && a
+              ? { '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }
+              : null;
           })
           .filter(Boolean),
       })}
-    />
-    <script
-      type="application/ld+json"
-      is:inline
-      set:html={JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: (resultsFaqs as any[])
-          .map((it: any) => {
-            const q = String(it.q ?? it.question ?? it.title ?? '').trim();
-            const a = String(it.a ?? it.answer ?? it.text ?? it.content ?? '').trim();
-            return q && a ? { '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } } : null;
-          })
-          .filter(Boolean),
-      })}
-    />
+    ></script>
 
     {
       /*
@@ -178,17 +165,13 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
     <!-- LOGO WALL -->
     <section class="py-20 md:py-24 bg-white border-t border-gray-100">
       <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-heading font-bold text-heading text-center">
-          Trusted by local service brands
-        </h2>
+        <h2 class="sr-only font-heading">Clients</h2>
         <LogoWall items={resultsLogos as LogoItem[]} />
       </div>
     </section>
 
     <!-- INLINE CTA -->
-    <div id="results-inline-cta">
-      <ResultsCTABand />
-    </div>
+    <ResultsCTABand />
 
     <!-- CASE STUDIES -->
     <section class="py-20 md:py-24 bg-white border-t border-gray-100">
@@ -268,15 +251,6 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
       secondaryHref="/services"
       secondaryText="See Services"
     />
-    <style>
-      /* results inline CTA heading contrast */
-      #results-inline-cta h1,
-      #results-inline-cta h2,
-      #results-inline-cta h3 {
-        color: #fff !important;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-      }
-    </style>
   </main>
 </PageLayout>
 
