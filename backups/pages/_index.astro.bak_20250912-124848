@@ -1,18 +1,34 @@
 ---
 const base = Astro.site ? new URL("/", Astro.site).toString() : "https://lilosgrowth.com/";
 const parts = Astro.url.pathname.split("/").filter(Boolean);
-const items = [{ "":"ListItem", position:1, name:"Home", item: base }].concat(
-  parts.map((p,i)=>({ "":"ListItem", position:i+2, name:p.replace(/-/g," ").replace(/\b\w/g, c=>c.toUpperCase()), item: new URL("/"+parts.slice(0,i+1).join("/") + "/", base).toString() }))
-);
-const breadcrumbLd = { "":"https://schema.org", "":"BreadcrumbList", itemListElement: items };
+
+const items = [
+  { '@type': 'ListItem', position: 1, name: 'Home', item: base },
+  ...parts.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 2,
+    name: p.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()),
+    item: new URL("/" + parts.slice(0, i + 1).join("/") + "/", base).toString()
+  }))
+];
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items
+};
+
 import Layout from '~/layouts/PageLayout.astro';
 
 export const title = 'Free Local SEO Tools for Home Service Businesses | Lilos Growth';
 export const description =
   'Practical, fast tools to win the Map Pack, polish your Google Business Profile, and ship on-brand SEO assets—built for plumbers, HVAC, roofers, and other home service pros.';
 ---
-
 <Layout {title} {description}>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbLd)}></script>
+  
+  cript type="application/ld+json" is:inline set:html={J{JSON.stringify(breadcrumbLd)}>
+
   <!-- HERO -->
   <section class="bg-[#253242] relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]" aria-hidden="true"></div>
@@ -435,7 +451,4 @@ export const description =
       <path fill="currentColor" d="M0,32L1440,0V60H0Z"></path>
     </svg>
   </div>
-  <script type="application/ld+json" is:inline>{JSON.stringify(breadcrumbLd)}</script>
 </Layout>
-<script type="application/ld+json" is:inline>
-</script>

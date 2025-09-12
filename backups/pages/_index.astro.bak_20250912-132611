@@ -26,7 +26,7 @@ export const description =
 ---
 
 <Layout {title} {description}>
-  <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbLd)} />
+  <!-- prettier-ignore --> cript type="application/ld+json" is:inline set:html={J{JSON.stringify(breadcrumbLd)}>
 
   <!-- HERO -->
   <section class="bg-[#253242] relative overflow-hidden">
@@ -87,7 +87,7 @@ export const description =
 
   <!-- PROMISE STRIP -->
   <section class="bg-cream border-t border-gray-100">
-    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20 text-center">
+    <div class="max-w-6xl mx-auto px-4 py-12 text-center">
       <h2 class="text-2xl md:text-3xl font-heading font-bold text-heading">
         A Clean, Fast Toolbox Built for Local Wins
       </h2>
@@ -107,10 +107,8 @@ export const description =
 
   <!-- FEATURED TOOLS -->
   <section id="featured-tools" class="bg-white">
-    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20">
-      <h3 class="text-3xl md:text-4xl font-heading font-bold tracking-tight text-heading text-center">
-        Featured Tools
-      </h3>
+    <div class="max-w-6xl mx-auto px-4 py-14">
+      <h3 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">Featured Tools</h3>
 
       <div
         id="tools-grid"
@@ -231,10 +229,8 @@ export const description =
 
   <!-- MORE UTILITIES -->
   <section id="more-utilities" class="bg-[#e9f0f7]">
-    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20">
-      <h3 class="text-3xl md:text-4xl font-heading font-bold tracking-tight text-heading text-center">
-        More Free Utilities
-      </h3>
+    <div class="max-w-6xl mx-auto px-4 py-16">
+      <h3 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">More Free Utilities</h3>
 
       <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 tools-grid auto-rows-fr items-stretch">
         <!-- FAQ Schema -->

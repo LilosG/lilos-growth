@@ -1,34 +1,80 @@
 ---
-import type { LogoItem } from '~/data/results';
-const { items } = Astro.props as { items: LogoItem[] };
+type LogoItem = {
+  src?: string;
+  href?: string;
+  name?: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+};
+
+const { items = [] } = Astro.props as { items: LogoItem[] };
+
+const normalize = (it: any) => {
+  const rawSrc: string =
+    typeof it?.src === 'string'
+      ? it.src
+      : typeof it?.logo === 'string'
+        ? it.logo
+        : typeof it?.image === 'string'
+          ? it.image
+          : '';
+
+  // Ensure absolute web path (so /results doesn't break relative logo URLs)
+  const src = rawSrc ? (rawSrc.startsWith('/') ? rawSrc : '/' + rawSrc.replace(/^\/+/, '')) : '';
+
+  const name = String(it?.name ?? it?.title ?? it?.alt ?? '').trim();
+  // ✅ Parenthesized to avoid mixing ?? with || without precedence
+  const alt = String((it?.alt ?? name) || 'Client logo');
+
+  const href = typeof it?.href === 'string' ? it.href : '';
+  const width = Number(it?.width ?? 200);
+  const height = Number(it?.height ?? 80);
+
+  return { src, name, alt, href, width, height };
+};
+
+const logos: LogoItem[] = (items as any[]).map(normalize);
 ---
 
-<div class="flex flex-wrap justify-center items-center gap-5 md:gap-6">
-  {
-    items?.map((item) => {
-      const box = (
-        <div class="h-16 w-[220px] md:h-16 md:w-[220px] flex items-center justify-center rounded-xl border border-gray-200 bg-white/60">
-          <img
-            src={item.src}
-            alt={item.name ?? 'Client logo'}
-            width="220"
-            height="64"
-            loading="lazy"
-            decoding="async"
-            class="max-h-14 md:max-h-16 w-auto object-contain opacity-80 grayscale hover:grayscale-0 transition"
-          />
-        </div>
-      );
-      return item.href ? (
-        <a
-          href={item.href}
-          class="rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f56b2a]"
-        >
-          {box}
-        </a>
-      ) : (
-        box
-      );
-    })
-  }
-</div>
+<section aria-label="Client logos">
+  <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 md:gap-8 items-center">
+    {
+      logos.map((l) => (
+        <li class="flex">
+          <div class="w-full rounded-2xl border border-gray-200 bg-white px-6 py-4 flex items-center justify-center">
+            {l.src ? (
+              l.href ? (
+                <a href={l.href} class="inline-flex items-center justify-center">
+                  <img
+                    src={l.src}
+                    alt={l.alt}
+                    width={l.width}
+                    height={l.height}
+                    loading="lazy"
+                    decoding="async"
+                    class="h-10 md:h-12 w-auto object-contain grayscale"
+                  />
+                </a>
+              ) : (
+                <img
+                  src={l.src}
+                  alt={l.alt}
+                  width={l.width}
+                  height={l.height}
+                  loading="lazy"
+                  decoding="async"
+                  class="h-10 md:h-12 w-auto object-contain grayscale"
+                />
+              )
+            ) : (
+              <span class="inline-flex items-center justify-center px-3 py-2 rounded-xl bg-white text-sm text-gray-600">
+                {l.name || 'Client'}
+              </span>
+            )}
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>
