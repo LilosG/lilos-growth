@@ -23,50 +23,83 @@ if (!entry) {
 
 const { Content } = await entry.render();
 
-/** Normalize dates to ISO strings for JSON-LD */
-const toISO = (v: unknown) => {
-  if (!v) return undefined;
-  if (typeof v === "string") return new Date(v).toISOString();
-  try { return (v as Date).toISOString?.(); } catch { return undefined; }
+/** Helpers */
+const pageUrl = Astro.url.href;
+const asAbsolute = (src?: string) => {
+  if (!src) return undefined;
+  try {
+    // If it's already absolute, this will work. If not, make it absolute against the page URL.
+    return new URL(src, pageUrl).toString();
+  } catch {
+    return undefined;
+  }
 };
 
-const datePublishedISO = toISO(entry.data.date);
-const dateModifiedISO = toISO(entry.data.updated ?? entry.data.date);
-
-/** Stable absolute URL for mainEntityOfPage (no trailing slash) */
-const siteBase = Astro.site ? Astro.site.toString() : "https://lilosgrowth.com";
-const canonicalUrl = new URL(`/blog/${entry.slug}`, siteBase).toString();
-
-/** Resolve hero image URL if provided */
-let imageUrl: string | undefined;
-const hero = (entry.data as any).hero;
-if (typeof hero === "string") imageUrl = hero;
-else if (hero?.src) imageUrl = hero.src;
-
-/** Compose the BlogPosting graph (exactly one block emitted below) */
+/** JSON-LD: single BlogPosting per post (deduped) */
+const d = entry.data;
 const articleLd = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  headline: entry.data.title,
-  description: entry.data.description || entry.data.excerpt,
-  datePublished: datePublishedISO,
-  dateModified: dateModifiedISO,
-  author: { "@type": "Person", name: entry.data.author },
-  mainEntityOfPage: canonicalUrl,
-  ...(imageUrl ? { image: [imageUrl] } : {}),
-  ...(((entry.data as any).schemaOverrides ?? {}) as Record<string, unknown>),
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": pageUrl,
+  },
+  headline: d.title,
+  description: d.excerpt ?? undefined,
+  datePublished: new Date(d.date).toISOString(),
+  dateModified: new Date(d.updated ?? d.date).toISOString(),
+  author: d.author ? { "@type": "Person", name: d.author } : undefined,
+  image: d.cover ? asAbsolute(d.cover) : undefined,
+  url: pageUrl,
 };
 ---
 
-<PageLayout title={entry.data.title} description={entry.data.description}>
-  <article class="prose mx-auto px-4 md:px-0">
-    <Content />
+<PageLayout
+  title={d.title}
+  description={d.excerpt ?? undefined}
+  breadcrumbs={[
+    { name: "Home", item: "/" },
+    { name: "Blog", item: "/blog" },
+    { name: d.title, item: `/blog/${entry.slug}` },
+  ]}
+>
+  <article class="relative mx-auto w-full max-w-3xl px-4 py-10">
+    <header class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+        {d.title}
+      </h1>
+      <p class="mt-3 text-sm text-gray-600">
+        <time datetime={new Date(d.updated ?? d.date).toISOString()}>
+          {new Date(d.updated ?? d.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "2-digit",
+          })}
+        </time>
+        {d.author && <> • {d.author}</>}
+      </p>
+      {d.cover && (
+        <div class="mt-6 overflow-hidden rounded-2xl">
+          {/* Reserve aspect-ratio to prevent CLS */}
+          <img
+            src={d.cover}
+            alt={d.coverAlt ?? d.title}
+            loading="eager"
+            decoding="async"
+            class="h-auto w-full object-cover"
+            style="aspect-ratio: 16 / 9;"
+          />
+        </div>
+      )}
+    </header>
+
+    <div class="prose prose-neutral max-w-none">
+      <Content />
+    </div>
   </article>
 
-  <!-- One BlogPosting JSON-LD only -->
+  {/* Single BlogPosting JSON-LD */}
   <script type="application/ld+json" is:inline>
-  
-    <script type="application/ld+json">{JSON.stringify(articleLd)}</script>
-  
+    {JSON.stringify(articleLd)}
   </script>
 </PageLayout>
