@@ -32,7 +32,6 @@ const breadcrumbs: { name: string; item: string }[] = [
   { name: 'Blog', item: '/blog' },
 ];
 
-
 function asDate(v: unknown): string | undefined {
   if (typeof v === 'string' && v.trim()) return v;
   if (v instanceof Date) return v.toISOString();
@@ -48,9 +47,8 @@ const baseImage = ((): string | undefined => {
   return typeof img === 'string' ? img : undefined;
 })();
 const published = asDate((post as any)?.date);
-const modified  = asDate((post as any)?.updated ?? (post as any)?.modified);
+const modified = asDate((post as any)?.updated ?? (post as any)?.modified);
 const authorName = asAuthorName((post as any)?.author) ?? 'Lilos Growth';
-
 ---
 
 <PageLayout title={fullTitle} {description} {breadcrumbs}>

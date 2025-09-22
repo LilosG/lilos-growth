@@ -11,11 +11,17 @@ const p = Astro.props as Props;
 const site = Astro.site?.toString() ?? 'https://lilosgrowth.com';
 const abs = (u: string) => (u.startsWith('http') ? u : new URL(u, site).toString());
 const pageUrl = p.url ?? abs(Astro.url.pathname);
-const image = typeof p.image === 'string'
-  ? { '@type': 'ImageObject', url: abs(p.image) }
-  : p.image
-    ? { '@type': 'ImageObject', url: abs(p.image.url), ...(p.image.width ? { width: p.image.width } : {}), ...(p.image.height ? { height: p.image.height } : {}) }
-    : undefined;
+const image =
+  typeof p.image === 'string'
+    ? { '@type': 'ImageObject', url: abs(p.image) }
+    : p.image
+      ? {
+          '@type': 'ImageObject',
+          url: abs(p.image.url),
+          ...(p.image.width ? { width: p.image.width } : {}),
+          ...(p.image.height ? { height: p.image.height } : {}),
+        }
+      : undefined;
 const node: Record<string, any> = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -28,4 +34,5 @@ const node: Record<string, any> = {
   ...(image ? { primaryImageOfPage: image } : {}),
 };
 ---
+
 <script type="application/ld+json" is:inline set:html={JSON.stringify(node)} />

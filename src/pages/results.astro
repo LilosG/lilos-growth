@@ -57,11 +57,14 @@ const breadcrumbs = [
   { name: 'Home', item: '/' },
   { name: 'Results', item: '/results' },
 ];
-
-
 ---
 
-<PageLayout title="Client Results" description="Proof points, success stories, and how we get results." breadcrumbs={breadcrumbs} schema={[itemListSchema, faqSchema]}>
+<PageLayout
+  title="Client Results"
+  description="Proof points, success stories, and how we get results."
+  breadcrumbs={breadcrumbs}
+  schema={[itemListSchema, faqSchema]}
+>
   <main id="main" class="min-h-screen">
     <!-- HERO -->
     <section

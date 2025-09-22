@@ -1,5 +1,9 @@
 ---
-export interface Props { name?: string; url?: string; searchUrl?: string }
+export interface Props {
+  name?: string;
+  url?: string;
+  searchUrl?: string;
+}
 const { name, url, searchUrl } = Astro.props as Props;
 const site = (url ?? Astro.site?.toString() ?? 'https://lilosgrowth.com').replace(/\/+$/, '');
 const graph: Record<string, any> = {
@@ -10,7 +14,12 @@ const graph: Record<string, any> = {
   ...(name ? { name } : {}),
 };
 if (searchUrl && typeof searchUrl === 'string') {
-  graph.potentialAction = { '@type': 'SearchAction', target: `${site}${searchUrl}`, 'query-input': 'required name=search_term_string' };
+  graph.potentialAction = {
+    '@type': 'SearchAction',
+    target: `${site}${searchUrl}`,
+    'query-input': 'required name=search_term_string',
+  };
 }
 ---
+
 <script type="application/ld+json" is:inline set:html={JSON.stringify(graph)} />

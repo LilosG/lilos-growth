@@ -1,5 +1,10 @@
 ---
-export interface Offer { price?: number | string; priceCurrency?: string; availability?: string; url?: string }
+export interface Offer {
+  price?: number | string;
+  priceCurrency?: string;
+  availability?: string;
+  url?: string;
+}
 export interface Props {
   serviceType: string;
   description?: string;
@@ -37,4 +42,5 @@ const node: Record<string, any> = {
     : {}),
 };
 ---
+
 <script type="application/ld+json" is:inline set:html={JSON.stringify(node)} />

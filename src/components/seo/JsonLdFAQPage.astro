@@ -1,6 +1,11 @@
 ---
-export interface QA { q: string; a: string }
-export interface Props { items: QA[] }
+export interface QA {
+  q: string;
+  a: string;
+}
+export interface Props {
+  items: QA[];
+}
 const { items = [] } = Astro.props as Props;
 const node =
   Array.isArray(items) && items.length
@@ -15,4 +20,5 @@ const node =
       }
     : null;
 ---
+
 {node && <script type="application/ld+json" is:inline set:html={JSON.stringify(node)} />}

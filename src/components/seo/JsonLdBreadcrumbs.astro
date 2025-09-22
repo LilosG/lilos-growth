@@ -1,6 +1,12 @@
 ---
-export interface Crumb { name: string; item: string }
-export interface Props { items: Crumb[]; idSuffix?: string }
+export interface Crumb {
+  name: string;
+  item: string;
+}
+export interface Props {
+  items: Crumb[];
+  idSuffix?: string;
+}
 const { items = [], idSuffix = '#bread' } = Astro.props as Props;
 const site = Astro.site?.toString() ?? 'https://lilosgrowth.com';
 const toAbs = (u: string) => (u?.startsWith('http') ? u : new URL(u || '/', site).toString());
@@ -19,4 +25,5 @@ const node =
       }
     : null;
 ---
+
 {node && <script type="application/ld+json" is:inline set:html={JSON.stringify(node)} />}

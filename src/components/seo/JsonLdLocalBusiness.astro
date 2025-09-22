@@ -6,8 +6,15 @@ export interface Address {
   postalCode?: string;
   addressCountry?: string;
 }
-export interface Geo { latitude: number; longitude: number }
-export interface Hours { dayOfWeek: string[]; opens: string; closes: string }
+export interface Geo {
+  latitude: number;
+  longitude: number;
+}
+export interface Hours {
+  dayOfWeek: string[];
+  opens: string;
+  closes: string;
+}
 export interface Props {
   name?: string;
   url?: string;
@@ -57,5 +64,6 @@ const lb: Record<string, any> = {
   parentOrganization: { '@id': `${site}/#org` },
 };
 ---
+
 <script type="application/ld+json" is:inline set:html={JSON.stringify(org)} />
 <script type="application/ld+json" is:inline set:html={JSON.stringify(lb)} />

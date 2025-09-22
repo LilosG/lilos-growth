@@ -9,7 +9,10 @@ import JsonLdBreadcrumbs from '~/components/seo/JsonLdBreadcrumbs.astro';
 import JsonLdLocalBusiness from '~/components/seo/JsonLdLocalBusiness.astro';
 import type { MetaData as MetaDataType } from '~/types';
 
-export interface Crumb { name: string; item: string }
+export interface Crumb {
+  name: string;
+  item: string;
+}
 export interface Props {
   title?: string;
   description?: string;
@@ -46,20 +49,23 @@ const pageDesc =
   description ??
   'Get more calls and booked jobs with Local SEO, GBP, and conversion-ready websites.';
 ---
+
 <Layout {title} {description} {lang} {bodyClass} {metadata}>
   <Fragment slot="head">
     {noIndex && <meta name="robots" content="noindex,follow" />}
     <JsonLdWebSite name="Lilos Growth" url={site} searchUrl={searchUrl} />
-    {!disableLocalBusiness && (
-      <JsonLdLocalBusiness
-        name="Lilos Growth"
-        url={site}
-        email="hello@lilosgrowth.com"
-        priceRange="$"
-        areaServed="United States"
-        subtype="ProfessionalService"
-      />
-    )}
+    {
+      !disableLocalBusiness && (
+        <JsonLdLocalBusiness
+          name="Lilos Growth"
+          url={site}
+          email="hello@lilosgrowth.com"
+          priceRange="$"
+          areaServed="United States"
+          subtype="ProfessionalService"
+        />
+      )
+    }
     <JsonLdBreadcrumbs items={breadcrumbs} />
     <JsonLdWebPage
       name={pageTitle}
@@ -68,13 +74,16 @@ const pageDesc =
       isPartOfId={`${site}/#website`}
       breadcrumbId={`${site}/#bread`}
     />
-    {Array.isArray(schemaExtras) &&
-      schemaExtras.map((node) => (
-        <script type="application/ld+json" is:inline set:html={JSON.stringify(node)} />
-      ))}
+    {
+      Array.isArray(schemaExtras) &&
+        schemaExtras.map((node) => <script type="application/ld+json" is:inline set:html={JSON.stringify(node)} />)
+    }
   </Fragment>
 
-  <a href="#main" class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-2 focus-visible:left-2 focus-visible:z-[1000] focus-visible:bg-white focus-visible:text-[#253242] focus-visible:px-4 focus-visible:py-2 focus-visible:rounded-full focus-visible:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]">
+  <a
+    href="#main"
+    class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-2 focus-visible:left-2 focus-visible:z-[1000] focus-visible:bg-white focus-visible:text-[#253242] focus-visible:px-4 focus-visible:py-2 focus-visible:rounded-full focus-visible:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
+  >
     Skip to content
   </a>
 
