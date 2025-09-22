@@ -16,12 +16,11 @@ type MetaInput = Partial<MetaDataType> & { title?: string; description?: string 
 export interface Props {
   title?: string;
   description?: string;
-  ignoreTitleTemplate?: boolean;
   lang?: string;
   bodyClass?: string;
   metadata?: MetaInput;
 }
-const { title, description, ignoreTitleTemplate, lang = 'en', bodyClass = '', metadata = {} } = Astro.props as Props;
+const { title, description, lang = 'en', bodyClass = '', metadata = {} } = Astro.props as Props;
 const canonical = new URL(Astro.url.pathname, Astro.site?.toString() ?? 'https://lilosgrowth.com').toString();
 const pathname = Astro.url.pathname;
 let fallbackTitle: string | undefined;
@@ -55,26 +54,6 @@ declare global {
           ? effectiveTitle
           : 'Lilos Growth'}
       description={typeof metadata !== 'undefined' && metadata?.description
-        ? metadata.description
-        : typeof description !== 'undefined'
-          ? description
-          : 'Get more calls and booked jobs with Local SEO, Google Business Profile, and conversion-ready websites.'}
-      ogTitle={typeof metadata !== 'undefined' && metadata?.title
-        ? metadata.title
-        : typeof title !== 'undefined'
-          ? title
-          : 'Lilos Growth'}
-      ogDescription={typeof metadata !== 'undefined' && metadata?.description
-        ? metadata.description
-        : typeof description !== 'undefined'
-          ? description
-          : 'Get more calls and booked jobs with Local SEO, Google Business Profile, and conversion-ready websites.'}
-      twitterTitle={typeof metadata !== 'undefined' && metadata?.title
-        ? metadata.title
-        : typeof title !== 'undefined'
-          ? title
-          : 'Lilos Growth'}
-      twitterDescription={typeof metadata !== 'undefined' && metadata?.description
         ? metadata.description
         : typeof description !== 'undefined'
           ? description
