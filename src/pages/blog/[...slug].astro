@@ -1,69 +1,70 @@
 ---
-import PageLayout from '~/layouts/PageLayout.astro';
-import JsonLdArticle from '~/components/seo/JsonLdArticle.astro';
-import SinglePost from '~/components/blog/SinglePost.astro';
-import { getStaticPathsBlogPost } from '~/utils/blog';
+import type { CollectionEntry } from "astro:content";
+import { getEntry, getCollection } from "astro:content";
+import PageLayout from "~/layouts/PageLayout.astro";
 
-export const robots = 'index, follow';
-
-/** Remap old { params: { blog } } → new { params: { slug } } */
+/** Build-time paths for all blog entries */
 export async function getStaticPaths() {
-  const entries = await getStaticPathsBlogPost();
+  const entries = (await getCollection("blog")) as CollectionEntry<"blog">[];
   return entries.map((e) => ({
-    ...e,
-    params: { slug: e.params.blog },
-    props: e.props,
+    // NOTE: This is a REST route ([...slug]), so params.slug MUST be a string, not an array.
+    params: { slug: e.slug },
+    props: { entrySlug: e.slug },
   }));
 }
 
-const props = Astro.props as Record<string, unknown>;
-const post = props['post'] as Record<string, unknown> | undefined;
+const { entrySlug } = Astro.props as { entrySlug: string };
 
-function asString(v: unknown): string | undefined {
-  return typeof v === 'string' ? v : undefined;
+/** Load the entry selected by getStaticPaths */
+const entry = await getEntry("blog", entrySlug);
+if (!entry) {
+  return Astro.redirect("/blog");
 }
 
-const baseTitle = asString(post?.['title']) ?? 'Post';
-const fullTitle = `${baseTitle} | Lilos Growth`;
-const description = asString(post?.['description']) ?? asString(post?.['excerpt']) ?? '';
+const { Content } = await entry.render();
 
-const breadcrumbs: { name: string; item: string }[] = [
-  { name: 'Home', item: '/' },
-  { name: 'Blog', item: '/blog' },
-];
+/** Normalize dates to ISO strings for JSON-LD */
+const toISO = (v: unknown) => {
+  if (!v) return undefined;
+  if (typeof v === "string") return new Date(v).toISOString();
+  try { return (v as Date).toISOString?.(); } catch { return undefined; }
+};
 
-function asDate(v: unknown): string | undefined {
-  if (typeof v === 'string' && v.trim()) return v;
-  if (v instanceof Date) return v.toISOString();
-  return undefined;
-}
-function asAuthorName(v: unknown): string | undefined {
-  if (typeof v === 'string' && v.trim()) return v;
-  if (v && typeof v === 'object' && 'name' in (v as any) && typeof (v as any).name === 'string') return (v as any).name;
-  return undefined;
-}
-const baseImage = ((): string | undefined => {
-  const img = (post && (post as any).image) ?? (post && (post as any).hero);
-  return typeof img === 'string' ? img : undefined;
-})();
-const published = asDate((post as any)?.date);
-const modified = asDate((post as any)?.updated ?? (post as any)?.modified);
-const authorName = asAuthorName((post as any)?.author) ?? 'Lilos Growth';
+const datePublishedISO = toISO(entry.data.date);
+const dateModifiedISO = toISO(entry.data.updated ?? entry.data.date);
+
+/** Stable absolute URL for mainEntityOfPage (no trailing slash) */
+const siteBase = Astro.site ? Astro.site.toString() : "https://lilosgrowth.com";
+const canonicalUrl = new URL(`/blog/${entry.slug}`, siteBase).toString();
+
+/** Resolve hero image URL if provided */
+let imageUrl: string | undefined;
+const hero = (entry.data as any).hero;
+if (typeof hero === "string") imageUrl = hero;
+else if (hero?.src) imageUrl = hero.src;
+
+/** Compose the BlogPosting graph (exactly one block emitted below) */
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: entry.data.title,
+  description: entry.data.description || entry.data.excerpt,
+  datePublished: datePublishedISO,
+  dateModified: dateModifiedISO,
+  author: { "@type": "Person", name: entry.data.author },
+  mainEntityOfPage: canonicalUrl,
+  ...(imageUrl ? { image: [imageUrl] } : {}),
+  ...(((entry.data as any).schemaOverrides ?? {}) as Record<string, unknown>),
+};
 ---
 
-<PageLayout title={fullTitle} {description} {breadcrumbs}>
-  <JsonLdArticle
-    title={baseTitle}
-    description={description}
-    datePublished={published ?? ''}
-    dateModified={modified}
-    authorName={authorName}
-    image={baseImage}
-    publisherName="Lilos Growth"
-    publisherLogo="/Lilos_Growth_Logo_Corrected.svg"
-  />
+<PageLayout title={entry.data.title} description={entry.data.description}>
+  <article class="prose mx-auto px-4 md:px-0">
+    <Content />
+  </article>
 
-  {/* The runtime object from utils/blog matches SinglePost expectations; TS can't see its exact shape here. */}
-  {/* @ts-expect-error - SinglePost expects a stricter Post; runtime shape is provided by utils/blog. */}
-  <SinglePost post={post} url={Astro.url.pathname} />
+  <!-- One BlogPosting JSON-LD only -->
+  <script type="application/ld+json" is:inline>
+    {JSON.stringify(articleLd)}
+  </script>
 </PageLayout>

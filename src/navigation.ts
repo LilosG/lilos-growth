@@ -6,11 +6,6 @@ export const headerData = {
       text: 'Services',
       links: [
         {
-          text: 'Client Results',
-          href: getPermalink('/results'),
-          description: 'Proof from real clients—traffic, GBP visibility, and leads',
-        },
-        {
           text: 'All Services',
           href: getPermalink('/services'),
         },
@@ -28,18 +23,44 @@ export const headerData = {
         },
       ],
     },
+
     {
       text: 'Packages',
       href: getPermalink('/packages'),
     },
+
     {
       text: 'Additional Services',
       href: getPermalink('/additional-services'),
     },
+
+    /* Content & tools hub (compact) */
     {
-      text: 'Local SEO Tools',
-      href: getPermalink('/local-seo-tools'),
+      text: 'Resources',
+      links: [
+        {
+          text: 'Blog',
+          href: getPermalink('/blog'),
+          description: 'Local SEO, GBP, and web design insights',
+        },
+        {
+          text: 'Local SEO Tools',
+          href: getPermalink('/local-seo-tools'),
+          description: 'Free utilities to speed up local SEO work',
+        },
+        {
+          text: 'Client Results',
+          href: getPermalink('/results'),
+          description: 'Case studies and Map Pack wins',
+        },
+        {
+          text: 'RSS',
+          href: '/rss.xml',
+          description: 'Subscribe to new posts',
+        },
+      ],
     },
+
     {
       text: 'About',
       href: getPermalink('/about'),
