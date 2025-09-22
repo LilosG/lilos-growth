@@ -13,13 +13,13 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 type BlogEntry = CollectionEntry<'blog'>;
 
 // 1) Load + sort posts (exclude drafts)
-const allPosts: BlogEntry[] = (
-  await getCollection('blog', (entry: BlogEntry) => !entry.data.draft)
-).sort((a: BlogEntry, b: BlogEntry) => {
-  const da = new Date(a.data.updated ?? a.data.date).getTime();
-  const db = new Date(b.data.updated ?? b.data.date).getTime();
-  return db - da;
-});
+const allPosts: BlogEntry[] = (await getCollection('blog', (entry: BlogEntry) => !entry.data.draft)).sort(
+  (a: BlogEntry, b: BlogEntry) => {
+    const da = new Date(a.data.updated ?? a.data.date).getTime();
+    const db = new Date(b.data.updated ?? b.data.date).getTime();
+    return db - da;
+  }
+);
 
 // 2) Pagination
 const PAGE_SIZE = 12;
@@ -77,12 +77,12 @@ const pageHref = (n: number) => (n === 1 ? '/blog' : `/blog?page=${n}`);
 
 <Layout title={pageTitle} description={pageDescription} breadcrumbs={breadcrumbs}>
   <!-- HERO (brand-matched dark gradient) -->
-  <section class="bg-[#253242] min-h-[440px] flex flex-col items-center justify-center pt-16 pb-20 relative overflow-hidden">
+  <section
+    class="bg-[#253242] min-h-[440px] flex flex-col items-center justify-center pt-16 pb-20 relative overflow-hidden"
+  >
     <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159] pointer-events-none"></div>
     <div class="relative z-10 w-full max-w-3xl flex flex-col items-center gap-7 px-4 mx-auto text-center">
-      <h1 class="text-4xl md:text-5xl leading-snug font-heading text-white font-extrabold tracking-tight">
-        Blog
-      </h1>
+      <h1 class="text-4xl md:text-5xl leading-snug font-heading text-white font-extrabold tracking-tight">Blog</h1>
       <span class="block text-xl md:text-2xl font-semibold mt-1 text-[#f56b2a] tracking-wider uppercase">
         Local SEO • AEO • Astro/AstroWind
       </span>
@@ -98,90 +98,90 @@ const pageHref = (n: number) => (n === 1 ? '/blog' : `/blog?page=${n}`);
       <!-- Reserve space so first row never hides under fixed header; prevents CLS -->
       <div class="pt-[var(--header-h,4.5rem)]">
         <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {cards.map((card) => (
-            <li class="group rounded-2xl border border-black/5 bg-white/60 shadow-sm ring-1 ring-black/5 transition hover:shadow-md focus-within:shadow-md">
-              <a href={card.href} class="block focus:outline-none" aria-label={card.title}>
-                {card.cover && (
-                  <div class="relative overflow-hidden rounded-t-2xl">
-                    <!-- Reserve aspect-ratio to avoid layout shifts -->
-                    <img
-                      src={card.cover}
-                      alt={card.coverAlt}
-                      loading="lazy"
-                      decoding="async"
-                      class="h-auto w-full object-cover"
-                      style="aspect-ratio: 16 / 9;"
-                    />
-                  </div>
-                )}
-
-                <div class="p-5">
-                  <div class="mb-1 text-xs uppercase tracking-wide text-gray-500">
-                    {card.author} • <time datetime={card.dateISO}>{card.dateLabel}</time>
-                  </div>
-                  <h2 class="text-lg font-semibold leading-snug text-gray-900 group-hover:underline">
-                    {card.title}
-                  </h2>
-                  {card.excerpt && (
-                    <p class="mt-2 line-clamp-3 text-sm text-gray-600">{card.excerpt}</p>
-                  )}
-
-                  {card.tags.length > 0 && (
-                    <div class="mt-3 flex flex-wrap gap-2">
-                      {card.tags.map((t) => (
-                        <span class="rounded-full border border-gray-200 px-2 py-1 text-xs text-gray-700">{t}</span>
-                      ))}
+          {
+            cards.map((card) => (
+              <li class="group rounded-2xl border border-black/5 bg-white/60 shadow-sm ring-1 ring-black/5 transition hover:shadow-md focus-within:shadow-md">
+                <a href={card.href} class="block focus:outline-none" aria-label={card.title}>
+                  {card.cover && (
+                    <div class="relative overflow-hidden rounded-t-2xl">
+                      {/* Reserve aspect-ratio to avoid layout shifts */}
+                      <img
+                        src={card.cover}
+                        alt={card.coverAlt}
+                        loading="lazy"
+                        decoding="async"
+                        class="h-auto w-full object-cover"
+                        style="aspect-ratio: 16 / 9;"
+                      />
                     </div>
                   )}
-                </div>
-              </a>
-            </li>
-          ))}
+
+                  <div class="p-5">
+                    <div class="mb-1 text-xs uppercase tracking-wide text-gray-500">
+                      {card.author} • <time datetime={card.dateISO}>{card.dateLabel}</time>
+                    </div>
+                    <h2 class="text-lg font-semibold leading-snug text-gray-900 group-hover:underline">{card.title}</h2>
+                    {card.excerpt && <p class="mt-2 line-clamp-3 text-sm text-gray-600">{card.excerpt}</p>}
+
+                    {card.tags.length > 0 && (
+                      <div class="mt-3 flex flex-wrap gap-2">
+                        {card.tags.map((t) => (
+                          <span class="rounded-full border border-gray-200 px-2 py-1 text-xs text-gray-700">{t}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </a>
+              </li>
+            ))
+          }
         </ul>
 
-        {totalPages > 1 && (
-          <nav
-            class="mx-auto mt-10 flex max-w-7xl items-center justify-between"
-            role="navigation"
-            aria-label="Pagination"
-          >
-            <div>
-              {currentPage > 1 ? (
-                <a
-                  href={pageHref(currentPage - 1)}
-                  class="inline-flex items-center rounded-xl border border-gray-200 px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50"
-                  rel="prev"
-                >
-                  ← Newer
-                </a>
-              ) : (
-                <span class="inline-flex items-center rounded-xl border border-transparent px-3 py-2 text-sm text-gray-400">
-                  ← Newer
-                </span>
-              )}
-            </div>
+        {
+          totalPages > 1 && (
+            <nav
+              class="mx-auto mt-10 flex max-w-7xl items-center justify-between"
+              role="navigation"
+              aria-label="Pagination"
+            >
+              <div>
+                {currentPage > 1 ? (
+                  <a
+                    href={pageHref(currentPage - 1)}
+                    class="inline-flex items-center rounded-xl border border-gray-200 px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50"
+                    rel="prev"
+                  >
+                    ← Newer
+                  </a>
+                ) : (
+                  <span class="inline-flex items-center rounded-xl border border-transparent px-3 py-2 text-sm text-gray-400">
+                    ← Newer
+                  </span>
+                )}
+              </div>
 
-            <div class="text-sm text-gray-600">
-              Page {currentPage} of {totalPages}
-            </div>
+              <div class="text-sm text-gray-600">
+                Page {currentPage} of {totalPages}
+              </div>
 
-            <div>
-              {currentPage < totalPages ? (
-                <a
-                  href={pageHref(currentPage + 1)}
-                  class="inline-flex items-center rounded-xl border border-gray-200 px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50"
-                  rel="next"
-                >
-                  Older →
-                </a>
-              ) : (
-                <span class="inline-flex items-center rounded-xl border border-transparent px-3 py-2 text-sm text-gray-400">
-                  Older →
-                </span>
-              )}
-            </div>
-          </nav>
-        )}
+              <div>
+                {currentPage < totalPages ? (
+                  <a
+                    href={pageHref(currentPage + 1)}
+                    class="inline-flex items-center rounded-xl border border-gray-200 px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50"
+                    rel="next"
+                  >
+                    Older →
+                  </a>
+                ) : (
+                  <span class="inline-flex items-center rounded-xl border border-transparent px-3 py-2 text-sm text-gray-400">
+                    Older →
+                  </span>
+                )}
+              </div>
+            </nav>
+          )
+        }
       </div>
     </div>
   </section>

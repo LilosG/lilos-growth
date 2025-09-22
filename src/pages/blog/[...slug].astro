@@ -65,6 +65,8 @@ const articleLd = {
 
   <!-- One BlogPosting JSON-LD only -->
   <script type="application/ld+json" is:inline>
-    {JSON.stringify(articleLd)}
+  <astro-head>
+    <script type="application/ld+json">{JSON.stringify(articleLd)}</script>
+  </astro-head>
   </script>
 </PageLayout>
