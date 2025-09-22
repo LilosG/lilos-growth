@@ -1,0 +1,134 @@
+---
+import Layout from './Layout.astro';
+import Header from '~/components/widgets/Header.astro';
+import Footer from '~/components/widgets/Footer.astro';
+import FloatingCalendlyButton from '~/components/widgets/FloatingCalendlyButton.astro';
+import type { MetaData as MetaDataType } from '~/types';
+
+export interface Crumb {
+  name: string;
+  item: string;
+}
+export interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+  bodyClass?: string;
+  metadata?: MetaDataType;
+  breadcrumbs?: Crumb[];
+  schema?: unknown[];
+  noIndex?: boolean;
+  showFloatingCalendly?: boolean;
+}
+
+const props = Astro.props as Props;
+const {
+  title,
+  description,
+  lang,
+  bodyClass,
+  metadata,
+  breadcrumbs = [],
+  schema: schemaExtras = [],
+  showFloatingCalendly = true,
+} = props;
+
+const site = Astro.site?.toString() ?? 'https://lilosgrowth.com';
+
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Lilos Growth',
+  url: site,
+  areaServed: { '@type': 'AdministrativeArea', name: 'United States' },
+};
+
+const breadcrumbList =
+  breadcrumbs.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        '@id': `${site}/#bread`,
+        itemListElement: breadcrumbs.map((c, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: c.name,
+          item: c.item?.startsWith('http') ? c.item : new URL(c.item || '/', site).toString(),
+        })),
+      }
+    : null;
+
+const pageTitle = Astro.props?.metadata?.title ?? Astro.props?.title ?? 'Lilos Growth';
+const pageDesc =
+  Astro.props?.metadata?.description ??
+  Astro.props?.description ??
+  'Get more calls and booked jobs with Local SEO, GBP, and conversion-ready websites.';
+
+const pageUrl = new URL(Astro.url.pathname, site).toString();
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site}/#website`,
+  url: site,
+  name: 'Lilos Growth',
+};
+const webPage = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: pageTitle,
+  ...(pageDesc ? { description: pageDesc } : {}),
+  isPartOf: { '@id': `${site}/#website` },
+  ...(breadcrumbList ? { breadcrumb: { '@id': `${site}/#bread` } } : {}),
+};
+
+const schemaNodes = [website, webPage, localBusiness, ...(breadcrumbList ? [breadcrumbList] : []), ...schemaExtras];
+---
+
+<Layout {title} {description} {lang} {bodyClass} {metadata}>
+  <a
+    href="#main"
+    class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-2 focus-visible:left-2 focus-visible:z-[1000] focus-visible:bg-white focus-visible:text-[#253242] focus-visible:px-4 focus-visible:py-2 focus-visible:rounded-full focus-visible:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
+  >
+    Skip to content
+  </a>
+
+  <Header />
+
+  <main id="main" class="flex-1 focus:outline-none" tabindex="-1">
+    <slot />
+  </main>
+
+  <Footer />
+
+  {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />)}
+
+  <script is:inline>
+    document.addEventListener('click', (e) => {
+      const el = e.target && e.target.closest ? e.target.closest('[data-evt]') : null;
+      if (!el) return;
+      const evt = el.getAttribute('data-evt');
+      window.trackEvent?.(evt || 'click', {});
+    });
+  </script>
+
+  <style is:global>
+    :root {
+      --site-anchor-offset: 80px;
+    }
+    @media (min-width: 768px) {
+      :root {
+        --site-anchor-offset: 72px;
+      }
+    }
+    @media (max-width: 767.98px) {
+      :root {
+        --site-anchor-offset: 64px;
+      }
+    }
+    :where(h1[id], h2[id], h3[id], h4[id], section[id], [data-anchor]) {
+      scroll-margin-top: var(--site-anchor-offset);
+    }
+  </style>
+</Layout>

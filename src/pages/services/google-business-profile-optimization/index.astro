@@ -2,11 +2,28 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 export const title = 'Google Business Profile Optimization & Maps SEO for Home Service Businesses | Lilos Growth';
-export const description =
-  'Rank higher in the Google Map Pack and turn searches into booked jobs. Purpose-built Google Business Profile (GBP) optimization, posting, reviews, and reporting for local service pros.';
+export const description = 'Rank higher in the Google Map Pack and turn searches into booked jobs. Purpose-built Google Business Profile (GBP) optimization, posting, reviews, and reporting for local service pros.';
+
+const breadcrumbs = [
+  { name: "Home", item: "/" },
+  { name: "Services", item: "/services" },
+  { name: "Google Business Profile Optimization", item: "/services/google-business-profile-optimization" },
+];
+
+
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Google Business Profile Optimization & Maps SEO",
+  "serviceType": "Google Business Profile Optimization & Maps SEO",
+  "provider": { "@id": "https://lilosgrowth.com/#local" },
+  "areaServed": { "@type": "Country", "name": "United States" }
+};
+  
 ---
 
-<Layout {title} {description}>
+<Layout {title} {description} breadcrumbs={breadcrumbs} schema={[serviceSchema]}>
   <!-- HERO -->
   <section
     class="bg-[#253242] min-h-[440px] flex flex-col items-center justify-center pt-16 pb-20 relative overflow-hidden"
@@ -378,10 +395,3 @@ export const description =
 <script type="application/ld+json" is:inline>
   {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Google Business Profile Management",
-    "serviceType": "Google Business Profile Management",
-    "provider": { "@id": "https://lilosgrowth.com/#local" },
-    "areaServed": { "@type": "Country", "name": "United States" }
-  }
-</script>

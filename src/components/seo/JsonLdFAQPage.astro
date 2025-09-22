@@ -1,0 +1,18 @@
+---
+export interface QA { q: string; a: string }
+export interface Props { items: QA[] }
+const { items = [] } = Astro.props as Props;
+const node =
+  Array.isArray(items) && items.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: items.map((x) => ({
+          '@type': 'Question',
+          name: x.q,
+          acceptedAnswer: { '@type': 'Answer', text: x.a },
+        })),
+      }
+    : null;
+---
+{node && <script type="application/ld+json" is:inline set:html={JSON.stringify(node)} />}

@@ -2,11 +2,26 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 export const title = 'Website Design & Development for Service Businesses | Lilos Growth';
-export const description =
-  'Get a modern, mobile-optimized website that converts visitors into customers. We design, build, and manage high-performance sites for local service companies, with SEO built-in from day one.';
+export const description = 'Get a modern, mobile-optimized website that converts visitors into customers. We design, build, and manage high-performance sites for local service companies, with SEO built-in from day one.';
+
+// Breadcrumbs + Service schema
+const breadcrumbs = [
+  { name: "Home", item: "/" },
+  { name: "Services", item: "/services" },
+  { name: "Website Design & Development", item: "/services/web-design" },
+];
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Website Design & Development",
+  "serviceType": "Website Design & Development",
+  "provider": { "@id": "https://lilosgrowth.com/#local" },
+  "areaServed": { "@type": "Country", "name": "United States" }
+};
 ---
 
-<Layout {title} {description}>
+<Layout {title} {description} breadcrumbs={breadcrumbs} schema={[serviceSchema]}>
   <!-- HERO -->
   <section
     class="bg-[#253242] min-h-[440px] flex flex-col items-center justify-center pt-16 pb-20 relative overflow-hidden"
@@ -476,10 +491,3 @@ export const description =
 <script type="application/ld+json" is:inline>
   {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Website as a Service",
-    "serviceType": "Website as a Service",
-    "provider": { "@id": "https://lilosgrowth.com/#local" },
-    "areaServed": { "@type": "Country", "name": "United States" }
-  }
-</script>

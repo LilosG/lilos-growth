@@ -1,0 +1,38 @@
+---
+export interface Props {
+  title: string;
+  url?: string;
+  description?: string;
+  image?: string;
+  datePublished: string;
+  dateModified?: string;
+  authorName: string;
+  publisherName?: string;
+  publisherLogo?: string;
+}
+const p = Astro.props as Props;
+const site = Astro.site?.toString() ?? 'https://lilosgrowth.com';
+const abs = (u?: string) => (u && u.startsWith('http') ? u : u ? new URL(u, site).toString() : undefined);
+const url = abs(p.url) ?? new URL(Astro.url.pathname, site).toString();
+const node: Record<string, any> = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${url}#webpage` },
+  headline: p.title,
+  datePublished: p.datePublished,
+  ...(p.dateModified ? { dateModified: p.dateModified } : {}),
+  ...(p.description ? { description: p.description } : {}),
+  ...(p.image ? { image: abs(p.image) } : {}),
+  author: { '@type': 'Person', name: p.authorName },
+  ...(p.publisherName
+    ? {
+        publisher: {
+          '@type': 'Organization',
+          name: p.publisherName,
+          ...(p.publisherLogo ? { logo: { '@type': 'ImageObject', url: abs(p.publisherLogo) } } : {}),
+        },
+      }
+    : {}),
+};
+---
+<script type="application/ld+json" is:inline set:html={JSON.stringify(node)} />

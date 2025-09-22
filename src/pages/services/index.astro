@@ -4,9 +4,48 @@ import Layout from '~/layouts/PageLayout.astro';
 export const title = 'SEO & Digital Marketing Services for Home Service Businesses | Lilos Growth';
 export const description =
   'Get more calls and booked jobs with proven Google Business Profile optimization, Local SEO, and conversion-focused web design. Transparent pricing and real results—no contracts.';
+
+// Breadcrumbs + schema
+const breadcrumbs = [
+  { name: 'Home', item: '/' },
+  { name: 'Services', item: '/services' },
+];
+
+// ItemList of core services (truthful URLs/names)
+const servicesList = [
+  {
+    '@type': 'Service',
+    name: 'Google Business Profile Optimization',
+    serviceType: 'Google Business Profile Optimization & Maps SEO',
+    url: 'https://lilosgrowth.com/services/google-business-profile-optimization',
+  },
+  {
+    '@type': 'Service',
+    name: 'Local SEO & Content',
+    serviceType: 'Local SEO for Home Service Businesses',
+    url: 'https://lilosgrowth.com/services/local-seo',
+  },
+  {
+    '@type': 'Service',
+    name: 'Website Design & Conversion',
+    serviceType: 'Website Design & Development for Home Services',
+    url: 'https://lilosgrowth.com/services/web-design',
+  },
+];
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: servicesList.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: s.name,
+    url: s.url,
+  })),
+};
 ---
 
-<Layout {title} {description}>
+<Layout {title} {description} breadcrumbs={breadcrumbs} schema={[itemListSchema]}>
   <!-- HERO -->
   <section
     class="bg-[#253242] min-h-[440px] flex flex-col items-center justify-center pt-16 pb-20 relative overflow-hidden"
@@ -409,14 +448,3 @@ export const description =
     </div>
   </section>
 </Layout>
-
-<script type="application/ld+json" is:inline>
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://lilosgrowth.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://lilosgrowth.com/services" }
-    ]
-  }
-</script>

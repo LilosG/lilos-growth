@@ -3,6 +3,7 @@ import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import { blogCategoryRobots, getStaticPathsBlogCategory } from '~/utils/blog';
 
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLdBreadcrumbs from '~/components/seo/JsonLdBreadcrumbs.astro';
 import BlogList from '~/components/blog/List.astro';
 import Headline from '~/components/blog/Headline.astro';
 import Pagination from '~/components/blog/Pagination.astro';
@@ -19,6 +20,13 @@ const { page, category } = Astro.props as Props;
 
 const currentPage = page.currentPage ?? 1;
 
+const breadcrumbs = [
+  { name: 'Home', item: '/' },
+  { name: 'Blog', item: '/blog' },
+  { name: category.title, item: '/blog' },
+  ...(currentPage > 1 ? [{ name: 'Page ' + String(currentPage), item: '/blog' }] : []),
+];
+
 const metadata = {
   title: `Category '${category.title}' ${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
   robots: {
@@ -29,6 +37,8 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  <JsonLdBreadcrumbs items={breadcrumbs} />
+
   <section class="px-4 md:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
     <Headline>{category.title}</Headline>
     <BlogList posts={page.data} />

@@ -1,0 +1,61 @@
+---
+export interface Address {
+  streetAddress?: string;
+  addressLocality?: string;
+  addressRegion?: string;
+  postalCode?: string;
+  addressCountry?: string;
+}
+export interface Geo { latitude: number; longitude: number }
+export interface Hours { dayOfWeek: string[]; opens: string; closes: string }
+export interface Props {
+  name?: string;
+  url?: string;
+  logo?: string;
+  image?: string;
+  telephone?: string;
+  email?: string;
+  priceRange?: string;
+  sameAs?: string[];
+  address?: Address;
+  geo?: Geo;
+  areaServed?: string | string[];
+  openingHours?: Hours[];
+  subtype?: string;
+}
+const p = Astro.props as Props;
+const site = (p.url ?? Astro.site?.toString() ?? 'https://lilosgrowth.com').replace(/\/+$/, '');
+const org: Record<string, any> = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${site}/#org`,
+  url: site,
+  ...(p.name ? { name: p.name } : {}),
+  ...(p.logo ? { logo: { '@type': 'ImageObject', url: p.logo } } : {}),
+  ...(p.email ? { email: p.email } : {}),
+  ...(Array.isArray(p.sameAs) && p.sameAs.length ? { sameAs: p.sameAs } : {}),
+};
+const lb: Record<string, any> = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', p.subtype || 'ProfessionalService'],
+  '@id': `${site}/#local`,
+  name: p.name ?? 'Lilos Growth',
+  url: site,
+  ...(p.image ? { image: p.image } : {}),
+  ...(p.email ? { email: p.email } : {}),
+  ...(p.telephone ? { telephone: p.telephone } : {}),
+  ...(p.priceRange ? { priceRange: p.priceRange } : {}),
+  ...(p.address ? { address: { '@type': 'PostalAddress', ...p.address } } : {}),
+  ...(p.geo ? { geo: { '@type': 'GeoCoordinates', latitude: p.geo.latitude, longitude: p.geo.longitude } } : {}),
+  ...(p.areaServed
+    ? {
+        areaServed: Array.isArray(p.areaServed)
+          ? p.areaServed.map((n) => ({ '@type': 'AdministrativeArea', name: n }))
+          : { '@type': 'AdministrativeArea', name: p.areaServed },
+      }
+    : {}),
+  parentOrganization: { '@id': `${site}/#org` },
+};
+---
+<script type="application/ld+json" is:inline set:html={JSON.stringify(org)} />
+<script type="application/ld+json" is:inline set:html={JSON.stringify(lb)} />

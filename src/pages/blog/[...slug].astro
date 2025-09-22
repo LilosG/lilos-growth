@@ -1,5 +1,6 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
+import JsonLdArticle from '~/components/seo/JsonLdArticle.astro';
 import SinglePost from '~/components/blog/SinglePost.astro';
 import { getStaticPathsBlogPost } from '~/utils/blog';
 
@@ -30,9 +31,40 @@ const breadcrumbs: { name: string; item: string }[] = [
   { name: 'Home', item: '/' },
   { name: 'Blog', item: '/blog' },
 ];
+
+
+function asDate(v: unknown): string | undefined {
+  if (typeof v === 'string' && v.trim()) return v;
+  if (v instanceof Date) return v.toISOString();
+  return undefined;
+}
+function asAuthorName(v: unknown): string | undefined {
+  if (typeof v === 'string' && v.trim()) return v;
+  if (v && typeof v === 'object' && 'name' in (v as any) && typeof (v as any).name === 'string') return (v as any).name;
+  return undefined;
+}
+const baseImage = ((): string | undefined => {
+  const img = (post && (post as any).image) ?? (post && (post as any).hero);
+  return typeof img === 'string' ? img : undefined;
+})();
+const published = asDate((post as any)?.date);
+const modified  = asDate((post as any)?.updated ?? (post as any)?.modified);
+const authorName = asAuthorName((post as any)?.author) ?? 'Lilos Growth';
+
 ---
 
 <PageLayout title={fullTitle} {description} {breadcrumbs}>
+  <JsonLdArticle
+    title={baseTitle}
+    description={description}
+    datePublished={published ?? ''}
+    dateModified={modified}
+    authorName={authorName}
+    image={baseImage}
+    publisherName="Lilos Growth"
+    publisherLogo="/Lilos_Growth_Logo_Corrected.svg"
+  />
+
   {/* The runtime object from utils/blog matches SinglePost expectations; TS can't see its exact shape here. */}
   {/* @ts-expect-error - SinglePost expects a stricter Post; runtime shape is provided by utils/blog. */}
   <SinglePost post={post} url={Astro.url.pathname} />

@@ -1,0 +1,40 @@
+---
+export interface Offer { price?: number | string; priceCurrency?: string; availability?: string; url?: string }
+export interface Props {
+  serviceType: string;
+  description?: string;
+  providerId?: string;
+  areaServed?: string | string[];
+  offers?: Offer;
+}
+const p = Astro.props as Props;
+const site = Astro.site?.toString() ?? 'https://lilosgrowth.com';
+const toAbs = (u: string) => (u?.startsWith('http') ? u : new URL(u || '/', site).toString());
+const node: Record<string, any> = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${toAbs(Astro.url.pathname)}#service`,
+  serviceType: p.serviceType,
+  ...(p.description ? { description: p.description } : {}),
+  provider: { '@id': p.providerId ?? `${site}/#local` },
+  ...(p.areaServed
+    ? {
+        areaServed: Array.isArray(p.areaServed)
+          ? p.areaServed.map((n) => ({ '@type': 'AdministrativeArea', name: n }))
+          : { '@type': 'AdministrativeArea', name: p.areaServed },
+      }
+    : {}),
+  ...(p.offers
+    ? {
+        offers: {
+          '@type': 'Offer',
+          ...(p.offers.url ? { url: toAbs(p.offers.url) } : {}),
+          ...(p.offers.price ? { price: p.offers.price } : {}),
+          ...(p.offers.priceCurrency ? { priceCurrency: p.offers.priceCurrency } : {}),
+          ...(p.offers.availability ? { availability: p.offers.availability } : {}),
+        },
+      }
+    : {}),
+};
+---
+<script type="application/ld+json" is:inline set:html={JSON.stringify(node)} />

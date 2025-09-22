@@ -4,9 +4,94 @@ import Layout from '~/layouts/PageLayout.astro';
 export const title = 'Additional Marketing Services for Home Service Businesses | Lilos Growth';
 export const description =
   'Order stand-alone services like citation building, Google Business Profile setup, and one-time SEO tune-ups. No contracts — just fast, transparent work built for local home services.';
+
+// Breadcrumbs + schema
+const breadcrumbs = [
+  { name: 'Home', item: '/' },
+  { name: 'Additional Services', item: '/additional-services' },
+];
+
+// OfferCatalog (truthful prices from on-page cards)
+const offerCatalog = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'Additional Services',
+  itemListElement: [
+    {
+      '@type': 'Offer',
+      price: 49,
+      priceCurrency: 'USD',
+      url: 'https://lilosgrowth.com/additional-services#citation',
+      availability: 'https://schema.org/InStock',
+      itemOffered: { '@type': 'Service', name: 'Citation Builder' },
+    },
+    {
+      '@type': 'Offer',
+      price: 399,
+      priceCurrency: 'USD',
+      url: 'https://lilosgrowth.com/additional-services#gbp-setup',
+      availability: 'https://schema.org/InStock',
+      itemOffered: { '@type': 'Service', name: 'Google Business Profile Setup' },
+    },
+    {
+      '@type': 'Offer',
+      price: 499,
+      priceCurrency: 'USD',
+      url: 'https://lilosgrowth.com/additional-services#gbp-30',
+      availability: 'https://schema.org/InStock',
+      itemOffered: { '@type': 'Service', name: 'GBP 30-Day Optimization' },
+    },
+    {
+      '@type': 'Offer',
+      price: 499,
+      priceCurrency: 'USD',
+      url: 'https://lilosgrowth.com/additional-services#seo-tune',
+      availability: 'https://schema.org/InStock',
+      itemOffered: { '@type': 'Service', name: 'SEO Consulting & Website Tune-Up (30 days)' },
+    },
+  ],
+};
+
+// FAQ schema built from visible questions below
+const faqItems = [
+  {
+    q: 'Can I order an additional service without a monthly package?',
+    a: 'Yes. Every service on this page is available individually — no contract or ongoing bundle required.',
+  },
+  {
+    q: 'What if I need help choosing the right service?',
+    a: 'Contact us and we’ll recommend the best fit for your goals and budget.',
+  },
+  {
+    q: 'How fast will I get results?',
+    a: 'Most one-time services are completed in 7–14 days. We’ll keep you updated the whole way.',
+  },
+  {
+    q: 'Can I combine these with a monthly package?',
+    a: 'Absolutely. Many monthly plans include these services for added savings — ask for details.',
+  },
+  {
+    q: 'Is there support after the service is complete?',
+    a: 'Yes — you’ll get a results report, actionable next steps, and 14 days of email support.',
+  },
+  {
+    q: 'Can I talk to someone before ordering?',
+    a: 'Definitely. Reach out for honest, pressure-free advice from a strategist.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 ---
 
-<Layout>
+<Layout title={title} description={description} breadcrumbs={breadcrumbs} schema={[offerCatalog, faqSchema]}>
   <!-- HERO -->
   <section class="relative overflow-hidden bg-[#253242] pt-16 pb-20">
     <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]"></div>
