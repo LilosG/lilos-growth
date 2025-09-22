@@ -2,22 +2,23 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 export const title = 'Website Design & Development for Service Businesses | Lilos Growth';
-export const description = 'Get a modern, mobile-optimized website that converts visitors into customers. We design, build, and manage high-performance sites for local service companies, with SEO built-in from day one.';
+export const description =
+  'Get a modern, mobile-optimized website that converts visitors into customers. We design, build, and manage high-performance sites for local service companies, with SEO built-in from day one.';
 
 // Breadcrumbs + Service schema
 const breadcrumbs = [
-  { name: "Home", item: "/" },
-  { name: "Services", item: "/services" },
-  { name: "Website Design & Development", item: "/services/web-design" },
+  { name: 'Home', item: '/' },
+  { name: 'Services', item: '/services' },
+  { name: 'Website Design & Development', item: '/services/web-design' },
 ];
 
 const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Website Design & Development",
-  "serviceType": "Website Design & Development",
-  "provider": { "@id": "https://lilosgrowth.com/#local" },
-  "areaServed": { "@type": "Country", "name": "United States" }
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Website Design & Development',
+  serviceType: 'Website Design & Development',
+  provider: { '@id': 'https://lilosgrowth.com/#local' },
+  areaServed: { '@type': 'Country', name: 'United States' },
 };
 ---
 
@@ -488,6 +489,3 @@ const serviceSchema = {
     </div>
   </section>
 </Layout>
-<script type="application/ld+json" is:inline>
-  {
-    "@context": "https://schema.org",
