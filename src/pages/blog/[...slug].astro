@@ -7,7 +7,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 export async function getStaticPaths() {
   const entries = (await getCollection("blog")) as CollectionEntry<"blog">[];
   return entries.map((e) => ({
-    // NOTE: This is a REST route ([...slug]), so params.slug MUST be a string, not an array.
+    // For REST-style [...slug] route, slug must be a string (not array)
     params: { slug: e.slug },
     props: { entrySlug: e.slug },
   }));
@@ -28,7 +28,6 @@ const pageUrl = Astro.url.href;
 const asAbsolute = (src?: string) => {
   if (!src) return undefined;
   try {
-    // If it's already absolute, this will work. If not, make it absolute against the page URL.
     return new URL(src, pageUrl).toString();
   } catch {
     return undefined;
@@ -40,10 +39,7 @@ const d = entry.data;
 const articleLd = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  mainEntityOfPage: {
-    "@type": "WebPage",
-    "@id": pageUrl,
-  },
+  mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
   headline: d.title,
   description: d.excerpt ?? undefined,
   datePublished: new Date(d.date).toISOString(),
@@ -78,6 +74,7 @@ const articleLd = {
         </time>
         {d.author && <> • {d.author}</>}
       </p>
+
       {d.cover && (
         <div class="mt-6 overflow-hidden rounded-2xl">
           {/* Reserve aspect-ratio to prevent CLS */}
