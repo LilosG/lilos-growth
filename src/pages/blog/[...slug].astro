@@ -1,0 +1,102 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getEntry, getCollection } from "astro:content";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+/** Build-time paths for all blog entries */
+export async function getStaticPaths() {
+  const entries = (await getCollection("blog")) as CollectionEntry<"blog">[];
+  return entries.map((e) => ({
+    // For REST-style [...slug] route, slug must be a string (not array)
+    params: { slug: e.slug },
+    props: { entrySlug: e.slug },
+  }));
+}
+
+const { entrySlug } = Astro.props as { entrySlug: string };
+
+/** Load the entry selected by getStaticPaths */
+const entry = await getEntry("blog", entrySlug);
+if (!entry) {
+  return Astro.redirect("/blog");
+}
+
+const { Content } = await entry.render();
+
+/** Helpers */
+const pageUrl = Astro.url.href;
+const asAbsolute = (src?: string) => {
+  if (!src) return undefined;
+  try {
+    return new URL(src, pageUrl).toString();
+  } catch {
+    return undefined;
+  }
+};
+
+/** JSON-LD: single BlogPosting per post (deduped) */
+const d = entry.data;
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+  headline: d.title,
+  description: d.excerpt ?? undefined,
+  datePublished: new Date(d.date).toISOString(),
+  dateModified: new Date(d.updated ?? d.date).toISOString(),
+  author: d.author ? { "@type": "Person", name: d.author } : undefined,
+  image: d.cover ? asAbsolute(d.cover) : undefined,
+  url: pageUrl,
+};
+---
+
+<PageLayout
+  title={d.title}
+  description={d.excerpt ?? undefined}
+  breadcrumbs={[
+    { name: "Home", item: "/" },
+    { name: "Blog", item: "/blog" },
+    { name: d.title, item: `/blog/${entry.slug}` },
+  ]}
+>
+  <article class="relative mx-auto w-full max-w-3xl px-4 py-10">
+    <header class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+        {d.title}
+      </h1>
+      <p class="mt-3 text-sm text-gray-600">
+        <time datetime={new Date(d.updated ?? d.date).toISOString()}>
+          {new Date(d.updated ?? d.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "2-digit",
+          })}
+        </time>
+        {d.author && <> • {d.author}</>}
+      </p>
+
+      {d.cover && (
+        <div class="mt-6 overflow-hidden rounded-2xl">
+          {/* Reserve aspect-ratio to prevent CLS */}
+          <img
+            src={d.cover}
+            alt={d.coverAlt ?? d.title}
+            loading="eager"
+            decoding="async"
+            class="h-auto w-full object-cover"
+            style="aspect-ratio: 16 / 9;"
+          />
+        </div>
+      )}
+    </header>
+
+    <div class="prose prose-neutral max-w-none">
+      <Content />
+    </div>
+  </article>
+
+  {/* Single BlogPosting JSON-LD */}
+  <script type="application/ld+json" is:inline>
+    {JSON.stringify(articleLd)}
+  </script>
+</PageLayout>
