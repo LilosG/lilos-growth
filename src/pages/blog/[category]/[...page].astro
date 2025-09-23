@@ -1,47 +1,128 @@
 ---
-import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
-import { blogCategoryRobots, getStaticPathsBlogCategory } from '~/utils/blog';
+import PageLayout from '~/layouts/PageLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
-import Layout from '~/layouts/PageLayout.astro';
-import JsonLdBreadcrumbs from '~/components/seo/JsonLdBreadcrumbs.astro';
-import BlogList from '~/components/blog/List.astro';
-import Headline from '~/components/blog/Headline.astro';
-import Pagination from '~/components/blog/Pagination.astro';
+const PAGE_SIZE = 12 as const;
 
-export const prerender = true;
+export async function getStaticPaths() {
+  // Load non-draft posts from the blog collection
+  const posts = (await getCollection('blog')).filter((p: CollectionEntry<'blog'>) => !p.data?.draft);
 
-export const getStaticPaths = (async ({ paginate }) => {
-  return await getStaticPathsBlogCategory({ paginate });
-}) satisfies GetStaticPaths;
+  // Group posts by category (lowercased)
+  const byCat = new Map<string, CollectionEntry<'blog'>[]>();
+  for (const p of posts) {
+    const cats: string[] = Array.isArray(p.data.categories) ? (p.data.categories as string[]) : [];
+    for (const c of cats) {
+      const k = c.toLowerCase();
+      if (!byCat.has(k)) byCat.set(k, []);
+      byCat.get(k)!.push(p);
+    }
+  }
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths> & { category: Record<string, string> };
+  // Build paths
+  const paths: Array<{
+    params: { category: string; page: string };
+    props: { category: string; page: number; totalPages: number };
+  }> = [];
 
-const { page, category } = Astro.props as Props;
+  for (const [cat, items] of byCat.entries()) {
+    const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+    for (let i = 1; i <= totalPages; i++) {
+      paths.push({
+        params: { category: cat, page: String(i) },
+        props: { category: cat, page: i, totalPages },
+      });
+    }
+  }
 
-const currentPage = page.currentPage ?? 1;
+  return paths;
+}
 
-const breadcrumbs = [
-  { name: 'Home', item: '/' },
-  { name: 'Blog', item: '/blog' },
-  { name: category.title, item: '/blog' },
-  ...(currentPage > 1 ? [{ name: 'Page ' + String(currentPage), item: '/blog' }] : []),
-];
-
-const metadata = {
-  title: `Category '${category.title}' ${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
-  robots: {
-    index: blogCategoryRobots?.index,
-    follow: blogCategoryRobots?.follow,
-  },
+const { category, page, totalPages } = Astro.props as {
+  category: string;
+  page: number;
+  totalPages: number;
 };
+
+// Page slice for this category
+const all = (await getCollection('blog'))
+  .filter((p: CollectionEntry<'blog'>) => !p.data?.draft)
+  .filter((p: CollectionEntry<'blog'>) =>
+    Array.isArray(p.data.categories)
+      ? (p.data.categories as string[]).map((s) => s.toLowerCase()).includes(category)
+      : false
+  )
+  .sort(
+    (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
+      new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+
+const start = (page - 1) * PAGE_SIZE;
+const end = start + PAGE_SIZE;
+const posts = all.slice(start, end);
+
+const title = `Blog — ${category} (Page ${page})`;
+const canonical = `/blog/${encodeURIComponent(category)}/${page}`;
 ---
 
-<Layout metadata={metadata}>
-  <JsonLdBreadcrumbs items={breadcrumbs} />
+<PageLayout
+  title={title}
+  description={`Posts in ${category}`}
+  breadcrumbs={[
+    { name: 'Home', item: '/' },
+    { name: 'Blog', item: '/blog' },
+    { name: category, item: `/blog/${category}` },
+    { name: `Page ${page}`, item: `/blog/${category}/${page}` },
+  ]}
+  schema={[]}
+  noIndex={false}
+>
+  <section class="bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      {
+        posts.length === 0 ? (
+          <p class="text-sm text-gray-600">No posts yet.</p>
+        ) : (
+          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {posts.map((p: CollectionEntry<'blog'>) => (
+              <li>
+                <a class="block rounded-2xl border border-gray-200 p-5 hover:bg-gray-50" href={`/blog/${p.slug}`}>
+                  <h2 class="text-lg font-semibold">{String(p.data.title)}</h2>
+                  {p.data.excerpt && <p class="mt-2 text-sm text-gray-600">{String(p.data.excerpt)}</p>}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
 
-  <section class="px-4 md:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
-    <Headline>{category.title}</Headline>
-    <BlogList posts={page.data} />
-    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+      <nav class="mt-10 flex items-center justify-center gap-2" aria-label="Pagination">
+        {
+          page > 1 && (
+            <a
+              href={`/blog/${category}/${page - 1}`}
+              class="px-3 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 text-sm"
+            >
+              Prev
+            </a>
+          )
+        }
+        <span class="px-3 py-2 rounded-lg bg-gray-900 text-white text-sm">{page}</span>
+        {
+          page < totalPages && (
+            <a
+              href={`/blog/${category}/${page + 1}`}
+              class="px-3 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 text-sm"
+            >
+              Next
+            </a>
+          )
+        }
+      </nav>
+    </div>
   </section>
-</Layout>
+
+  <astro-head>
+    <link rel="canonical" href={canonical} />
+  </astro-head>
+</PageLayout>
