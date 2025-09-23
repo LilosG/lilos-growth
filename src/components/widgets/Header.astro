@@ -1,34 +1,37 @@
 ---
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-// Parser-safe Header with hover dropdowns and parent click-through.
-// No arbitrary Tailwind bracket utilities. No client hydration needed.
+// Clean, parser-safe header with hover dropdowns and parent click-through.
+// No arbitrary Tailwind bracket utilities.
 
 type NavItem = { label: string; href: string };
 type NavGroup = { label: string; href: string; items?: NavItem[] };
 
 const nav: NavGroup[] = [
   {
-    label: "Services",
-    href: "/services",
+    label: 'Services',
+    href: '/services',
     items: [
-      { label: "Local SEO", href: "/services/local-seo" },
-      { label: "Website Design", href: "/services/website-design" },
-      { label: "Analytics & Tracking", href: "/services/analytics" },
+      { label: 'Local SEO', href: '/services/local-seo' },
+      { label: 'Website Design', href: '/services/website-design' },
+      { label: 'Analytics & Tracking', href: '/services/analytics' },
     ],
   },
   {
-    label: "Resources",
-    href: "/resources",
+    label: 'Resources',
+    href: '/resources',
     items: [
-      { label: "Blog", href: "/blog" },
-      { label: "Case Studies", href: "/case-studies" },
-      { label: "Local SEO Tools", href: "/local-seo-tools" },
+      { label: 'Blog', href: '/blog' },
+      { label: 'Case Studies', href: '/case-studies' },
+      { label: 'Local SEO Tools', href: '/local-seo-tools' },
     ],
   },
 ];
 ---
-<header class="sticky top-0 z-40 w-full border-b border-gray-200 bg-white/90 backdrop-blur dark:border-gray-800 dark:bg-gray-950/90">
+
+<header
+  class="sticky top-0 z-40 w-full border-b border-gray-200 bg-white/90 backdrop-blur dark:border-gray-800 dark:bg-gray-950/90"
+>
   <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
     <a href="/" class="flex items-center gap-2 text-gray-900 dark:text-white">
       <span class="text-base font-semibold tracking-tight">Lilos Growth</span>
@@ -36,32 +39,55 @@ const nav: NavGroup[] = [
 
     <nav aria-label="Primary">
       <ul class="flex items-center gap-6 text-sm">
-        {nav.map((group: NavGroup) => (
-          <li class="relative group">
-            <!-- Parent is a LINK (click goes to landing). Hover shows submenu. -->
-            <a href={group.href} class="inline-flex items-center gap-1 py-2 font-medium text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white">
-              <span>{group.label}</span>
-              <svg class="h-4 w-4 opacity-70 group-hover:opacity-100" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.4a.75.75 0 01-1.08 0l-4.25-4.4a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-              </svg>
-            </a>
-            <!-- Submenu -->
-            {group.items && group.items.length > 0 ? (
-              <div class="invisible absolute left-0 top-full mt-2 w-56 translate-y-1 rounded-xl border border-gray-200 bg-white py-2 shadow-lg opacity-0 transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 dark:border-gray-800 dark:bg-gray-900">
-                {group.items.map((item: NavItem) => (
-                  <a href={item.href} class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800">
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-            ) : null}
-          </li>
-        ))}
+        {
+          nav.map((group) => (
+            <li class="relative group">
+              <a
+                href={group.href}
+                class="inline-flex items-center gap-1 py-2 font-medium text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white"
+              >
+                <span>{group.label}</span>
+                <svg
+                  class="h-4 w-4 opacity-70 group-hover:opacity-100"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.4a.75.75 0 01-1.08 0l-4.25-4.4a.75.75 0 01.02-1.06z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+              {group.items && group.items.length > 0 ? (
+                <div class="invisible absolute left-0 top-full mt-2 w-56 translate-y-1 rounded-xl border border-gray-200 bg-white py-2 shadow-lg opacity-0 transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 dark:border-gray-800 dark:bg-gray-900">
+                  {group.items.map((item) => (
+                    <a
+                      href={item.href}
+                      class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800"
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              ) : null}
+            </li>
+          ))
+        }
         <li>
-          <a href="/about" class="inline-flex items-center py-2 font-medium text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white">About</a>
+          <a
+            href="/about"
+            class="inline-flex items-center py-2 font-medium text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white"
+            >About</a
+          >
         </li>
         <li>
-          <a href="/contact" class="inline-flex items-center rounded-lg bg-gray-900 px-3 py-2 font-medium text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200">Contact</a>
+          <a
+            href="/contact"
+            class="inline-flex items-center rounded-lg bg-gray-900 px-3 py-2 font-medium text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+            >Contact</a
+          >
         </li>
       </ul>
     </nav>

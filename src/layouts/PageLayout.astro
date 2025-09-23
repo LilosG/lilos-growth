@@ -1,137 +1,81 @@
 ---
-import Layout from './Layout.astro';
-import SiteHeader from '~/components/widgets/Header.astro';
-import Footer from '~/components/widgets/Footer.astro';
-import FloatingCalendlyButton from '~/components/widgets/FloatingCalendlyButton.astro';
-import JsonLdWebSite from '~/components/seo/JsonLdWebSite.astro';
-import JsonLdWebPage from '~/components/seo/JsonLdWebPage.astro';
-import JsonLdBreadcrumbs from '~/components/seo/JsonLdBreadcrumbs.astro';
-import JsonLdLocalBusiness from '~/components/seo/JsonLdLocalBusiness.astro';
-import type { MetaData as MetaDataType } from '~/types';
+import Header from "~/components/widgets/Header.astro";
+import Footer from "~/components/widgets/Footer.astro";
 
 export interface Crumb {
   name: string;
   item: string;
 }
-export interface Props {
+
+interface Props {
   title?: string;
   description?: string;
-  lang?: string;
-  bodyClass?: string;
-  metadata?: MetaDataType;
   breadcrumbs?: Crumb[];
-  schema?: unknown[];
-  disableLocalBusiness?: boolean;
-  searchUrl?: string;
+  schema?: any[]; // JSON-LD blocks; kept wide to avoid TS2322
   noIndex?: boolean;
-  showFloatingCalendly?: boolean;
 }
-const props = Astro.props as Props;
+
 const {
-  title,
-  description,
-  lang,
-  bodyClass,
-  metadata,
+  title = "Lilos Growth",
+  description = "",
   breadcrumbs = [],
-  schema: schemaExtras = [],
-  disableLocalBusiness = false,
-  searchUrl,
+  schema = [],
   noIndex = false,
-  showFloatingCalendly = true,
-} = props;
-
-const site = Astro.site?.toString() ?? 'https://lilosgrowth.com';
-const abs = (u: string) => (u?.startsWith('http') ? u : new URL(u || '/', site).toString());
-const pageUrl = abs(Astro.url.pathname);
-const pageTitle = metadata?.title ?? title ?? 'Lilos Growth';
-const pageDesc =
-  metadata?.description ??
-  description ??
-  'Get more calls and booked jobs with Local SEO, GBP, and conversion-ready websites.';
+} = Astro.props as Props;
 ---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {title && <title>{title}</title>}
+    {description && <meta name="description" content={description} />}
+    {noIndex && <meta name="robots" content="noindex,nofollow" />}
 
-<Layout {title} {description} {lang} {bodyClass} {metadata}>
-  <Fragment slot="head">
-    {noIndex && <meta name="robots" content="noindex,follow" />}
-    <JsonLdWebSite name="Lilos Growth" url={site} searchUrl={searchUrl} />
-    {
-      !disableLocalBusiness && (
-        <JsonLdLocalBusiness
-          name="Lilos Growth"
-          url={site}
-          email="hello@lilosgrowth.com"
-          priceRange="$"
-          areaServed="United States"
-          subtype="ProfessionalService"
-        />
-      )
-    }
-    <JsonLdBreadcrumbs items={breadcrumbs} />
-    <JsonLdWebPage
-      name={pageTitle}
-      description={pageDesc}
-      url={pageUrl}
-      isPartOfId={`${site}/#website`}
-      breadcrumbId={`${site}/#bread`}
-    />
-    {
-      Array.isArray(schemaExtras) &&
-        schemaExtras.map((node) => <script type="application/ld+json" is:inline set:html={JSON.stringify(node)} />)
-    }
+    {Array.isArray(schema) &&
+      schema.map((block) => (
+        <script type="application/ld+json" is:inline>{block}</script>
+      ))}
+
     <style is:inline>
-      :root {
-        --header-h: 88px;
-      }
-      body {
-        padding-top: var(--header-h);
-      }
-      [id] {
-        scroll-margin-top: var(--header-h);
-      }
+      :root { --header-offset: 0px; }
+      main[data-offset] { padding-top: var(--header-offset); }
     </style>
-  </Fragment>
+    <script is:inline>
+      // Global header offset logic (no per-page spacers)
+      const setOffset = () => {
+        const h = document.querySelector("header");
+        if (h) {
+          const rect = h.getBoundingClientRect();
+          document.documentElement.style.setProperty("--header-offset", rect.height + "px");
+        }
+      };
+      new ResizeObserver(setOffset).observe(document.documentElement);
+      window.addEventListener("load", setOffset, { once: true });
+      window.addEventListener("resize", setOffset);
+    </script>
+  </head>
+  <body class="bg-white text-slate-900 dark:bg-gray-950 dark:text-slate-100">
+    <Header />
 
-  <a
-    href="#main"
-    class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-2 focus-visible:left-2 focus-visible:z-[1000] focus-visible:bg-white focus-visible:text-[#253242] focus-visible:px-4 focus-visible:py-2 focus-visible:rounded-full focus-visible:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
-  >
-    Skip to content
-  </a>
+    <main data-offset>
+      {breadcrumbs.length > 0 && (
+        <nav aria-label="Breadcrumb" class="border-b border-gray-200 bg-gray-50/60 py-2 text-sm dark:border-gray-800 dark:bg-gray-900/40">
+          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <ol class="flex flex-wrap items-center gap-2 text-gray-600 dark:text-gray-300">
+              {breadcrumbs.map((c, i) => (
+                <li class="inline-flex items-center gap-2">
+                  <a href={c.item} class="hover:underline">{c.name}</a>
+                  {i < breadcrumbs.length - 1 && <span aria-hidden="true">/</span>}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </nav>
+      )}
 
-  <!-- Header (no props expected) -->
-  <SiteHeader />
+      <slot />
+    </main>
 
-  <main id="main" class="flex-1 focus:outline-none" tabindex="-1">
-    <slot />
-  </main>
-
-  <Footer />
-
-  {showFloatingCalendly && <FloatingCalendlyButton href="/contact#book" label="Book a Call" />}
-
-  <script is:inline>
-    (function () {
-      const docEl = document.documentElement;
-      const header = document.querySelector('header.site-header') || document.querySelector('header');
-      function setHeaderHeight() {
-        if (!header) return;
-        const h = Math.ceil(header.getBoundingClientRect().height || 0);
-        if (h > 0) docEl.style.setProperty('--header-h', h + 'px');
-      }
-      setHeaderHeight();
-      window.addEventListener('load', setHeaderHeight, { once: true });
-      let to;
-      window.addEventListener('resize', () => {
-        clearTimeout(to);
-        to = setTimeout(setHeaderHeight, 100);
-      });
-      if ('MutationObserver' in window && header) {
-        new MutationObserver(setHeaderHeight).observe(header, {
-          attributes: true,
-          attributeFilter: ['class', 'style'],
-        });
-      }
-    })();
-  </script>
-</Layout>
+    <Footer />
+  </body>
+</html>
