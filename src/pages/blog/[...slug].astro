@@ -7,8 +7,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 export async function getStaticPaths() {
   const entries = (await getCollection("blog")) as CollectionEntry<"blog">[];
   return entries.map((e) => ({
-    // For REST-style [...slug] route, slug must be a string (not array)
-    params: { slug: e.slug },
+    params: { slug: e.slug }, // REST-style [...slug] wants string
     props: { entrySlug: e.slug },
   }));
 }
@@ -17,9 +16,7 @@ const { entrySlug } = Astro.props as { entrySlug: string };
 
 /** Load the entry selected by getStaticPaths */
 const entry = await getEntry("blog", entrySlug);
-if (!entry) {
-  return Astro.redirect("/blog");
-}
+if (!entry) return Astro.redirect("/blog");
 
 const { Content } = await entry.render();
 
@@ -27,21 +24,17 @@ const { Content } = await entry.render();
 const pageUrl = Astro.url.href;
 const asAbsolute = (src?: string) => {
   if (!src) return undefined;
-  try {
-    return new URL(src, pageUrl).toString();
-  } catch {
-    return undefined;
-  }
+  try { return new URL(src, pageUrl).toString(); } catch { return undefined; }
 };
 
-/** JSON-LD: single BlogPosting per post (deduped) */
-const d = entry.data;
+/** Single BlogPosting JSON-LD (deduped) */
+const d = entry.data as Record<string, any>;
 const articleLd = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
   headline: d.title,
-  description: d.excerpt ?? undefined,
+  description: d.description ?? d.excerpt ?? undefined,
   datePublished: new Date(d.date).toISOString(),
   dateModified: new Date(d.updated ?? d.date).toISOString(),
   author: d.author ? { "@type": "Person", name: d.author } : undefined,
@@ -49,10 +42,11 @@ const articleLd = {
   url: pageUrl,
 };
 ---
+---
 
 <PageLayout
   title={d.title}
-  description={d.excerpt ?? undefined}
+  description={d.description ?? d.excerpt ?? undefined}
   breadcrumbs={[
     { name: "Home", item: "/" },
     { name: "Blog", item: "/blog" },
@@ -67,9 +61,7 @@ const articleLd = {
       <p class="mt-3 text-sm text-gray-600">
         <time datetime={new Date(d.updated ?? d.date).toISOString()}>
           {new Date(d.updated ?? d.date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "2-digit",
+            year: "numeric", month: "short", day: "2-digit",
           })}
         </time>
         {d.author && <> • {d.author}</>}
