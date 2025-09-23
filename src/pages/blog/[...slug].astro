@@ -3,31 +3,22 @@ import type { CollectionEntry } from "astro:content";
 import { getEntry, getCollection } from "astro:content";
 import PageLayout from "~/layouts/PageLayout.astro";
 
-/** Build-time paths for all blog entries */
 export async function getStaticPaths() {
   const entries = (await getCollection("blog")) as CollectionEntry<"blog">[];
   return entries.map((e) => ({
-    params: { slug: e.slug }, // REST-style [...slug] wants string
+    params: { slug: e.slug },
     props: { entrySlug: e.slug },
   }));
 }
 
 const { entrySlug } = Astro.props as { entrySlug: string };
-
-/** Load the entry selected by getStaticPaths */
 const entry = await getEntry("blog", entrySlug);
 if (!entry) return Astro.redirect("/blog");
-
 const { Content } = await entry.render();
 
-/** Helpers */
 const pageUrl = Astro.url.href;
-const asAbsolute = (src?: string) => {
-  if (!src) return undefined;
-  try { return new URL(src, pageUrl).toString(); } catch { return undefined; }
-};
+const abs = (src?: string) => (src ? new URL(src, pageUrl).toString() : undefined);
 
-/** Single BlogPosting JSON-LD (deduped) */
 const d = entry.data as Record<string, any>;
 const articleLd = {
   "@context": "https://schema.org",
@@ -38,10 +29,9 @@ const articleLd = {
   datePublished: new Date(d.date).toISOString(),
   dateModified: new Date(d.updated ?? d.date).toISOString(),
   author: d.author ? { "@type": "Person", name: d.author } : undefined,
-  image: d.cover ? asAbsolute(d.cover) : undefined,
+  image: d.cover ? abs(d.cover) : undefined,
   url: pageUrl,
 };
----
 ---
 
 <PageLayout
@@ -66,10 +56,8 @@ const articleLd = {
         </time>
         {d.author && <> • {d.author}</>}
       </p>
-
       {d.cover && (
         <div class="mt-6 overflow-hidden rounded-2xl">
-          {/* Reserve aspect-ratio to prevent CLS */}
           <img
             src={d.cover}
             alt={d.coverAlt ?? d.title}
@@ -87,7 +75,6 @@ const articleLd = {
     </div>
   </article>
 
-  {/* Single BlogPosting JSON-LD */}
   <script type="application/ld+json" is:inline>
     {JSON.stringify(articleLd)}
   </script>
