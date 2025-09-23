@@ -40,6 +40,7 @@ const {
   noIndex = false,
   showFloatingCalendly = true,
 } = props;
+
 const site = Astro.site?.toString() ?? 'https://lilosgrowth.com';
 const abs = (u: string) => (u?.startsWith('http') ? u : new URL(u || '/', site).toString());
 const pageUrl = abs(Astro.url.pathname);
@@ -78,6 +79,20 @@ const pageDesc =
       Array.isArray(schemaExtras) &&
         schemaExtras.map((node) => <script type="application/ld+json" is:inline set:html={JSON.stringify(node)} />)
     }
+    <style is:inline>
+      /* Safe default on first paint; updated by script below */
+      :root {
+        --header-h: 88px;
+      }
+      /* Global fix: push all content below the fixed header */
+      body {
+        padding-top: var(--header-h);
+      }
+      /* Anchor jumps land below header */
+      [id] {
+        scroll-margin-top: var(--header-h);
+      }
+    </style>
   </Fragment>
 
   <a
@@ -96,4 +111,34 @@ const pageDesc =
   <Footer />
 
   {showFloatingCalendly && <FloatingCalendlyButton href="/contact#book" label="Book a Call" />}
+
+  <!-- Measure header and set --header-h on load/resize/mutations -->
+  <script is:inline>
+    (function () {
+      const docEl = document.documentElement;
+      const header = document.querySelector('header.site-header') || document.querySelector('header');
+
+      function setHeaderHeight() {
+        if (!header) return;
+        const h = Math.ceil(header.getBoundingClientRect().height || 0);
+        if (h > 0) docEl.style.setProperty('--header-h', h + 'px');
+      }
+
+      setHeaderHeight();
+      window.addEventListener('load', setHeaderHeight, { once: true });
+
+      let to;
+      window.addEventListener('resize', () => {
+        clearTimeout(to);
+        to = setTimeout(setHeaderHeight, 100);
+      });
+
+      if ('MutationObserver' in window && header) {
+        new MutationObserver(setHeaderHeight).observe(header, {
+          attributes: true,
+          attributeFilter: ['class', 'style'],
+        });
+      }
+    })();
+  </script>
 </Layout>

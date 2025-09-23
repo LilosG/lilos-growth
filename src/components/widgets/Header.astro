@@ -15,7 +15,6 @@ const coerceLink = (x: unknown): Link | null => {
   const href = String((x as any).href).trim();
   const text = String((x as any).text ?? '').trim();
   if (!text) return null;
-  // reject empty or “#” hrefs
   if (!href || href === '#') return null;
   return { text, href, description: (x as any).description };
 };
@@ -24,6 +23,7 @@ const FALLBACK_LINKS: Link[] = [
   { text: 'Services', href: '/services' },
   { text: 'Packages', href: '/packages' },
   { text: 'Additional Services', href: '/additional-services' },
+  { text: 'Resources', href: '/resources' },
   { text: 'Local SEO Tools', href: '/local-seo-tools' },
   { text: 'About', href: '/about' },
   { text: 'Contact', href: '/contact' },
@@ -31,26 +31,27 @@ const FALLBACK_LINKS: Link[] = [
 
 const FALLBACK_ACTION: Link = { text: 'Book a Call', href: '/contact#book' };
 
-// Normalize top-level items (support either Link or Menu shape)
+// Normalize nav config
 const rawItems = ((headerData as UnknownRecord)?.links as unknown[]) ?? [];
 const items: Item[] = rawItems
   .map((it) => {
     if (isMenu(it)) {
-      const text = String((it as any).text ?? '').trim() || 'Services';
+      const text = String((it as any).text ?? '').trim() || 'Menu';
       const links = ((it as any).links as unknown[]).map(coerceLink).filter(Boolean) as Link[];
-      // ensure menu has at least one valid link; otherwise fall back to a simple link
-      if (links.length === 0) return { text, href: '/services' } as Link;
-      return { text, links } as Menu;
+      const lower = text.toLowerCase();
+      const parentHref =
+        lower === 'services' ? '/services'
+        : lower === 'resources' ? '/resources'
+        : (links[0]?.href ?? '/');
+      return { text, links: links.length ? links : [{ text, href: parentHref }] } as Menu;
     }
     const link = coerceLink(it);
     return link ?? null;
   })
   .filter(Boolean) as Item[];
 
-// If nothing valid, fall back to a simple set
 const navItems: Item[] = items.length ? items : FALLBACK_LINKS;
 
-// Primary action (top-right button)
 const rawActions = ((headerData as UnknownRecord)?.actions as unknown[]) ?? [];
 const firstAction = coerceLink(rawActions[0]) ?? FALLBACK_ACTION;
 
@@ -84,25 +85,31 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
           <ul class="flex items-center gap-7 lg:gap-9">
             {
               navItems.map((item) => {
-                if (isMenu(item)) {
-                  // Submenu (e.g., Services)
+                if ('links' in (item as any)) {
+                  const menu = item as Menu;
+                  const lower = menu.text.toLowerCase();
+                  const parentHref =
+                    lower === 'services' ? '/services'
+                    : lower === 'resources' ? '/resources'
+                    : (menu.links[0]?.href ?? '/');
+
                   return (
                     <li class="relative group">
-                      <button
+                      <!-- Parent is a LINK (click goes to parent page). Hover shows submenu. -->
+                      <a
+                        href={parentHref}
                         class="inline-flex items-center gap-1 py-2 text-[15px] leading-[22px] font-medium tracking-[0.005em]
                                text-[#1f2d3d] rounded-md transition
                                hover:underline underline-offset-4 decoration-2 decoration-[#f56b2a]/70
                                focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a]/60"
-                        aria-haspopup="true"
-                        aria-expanded="false"
                       >
-                        {item.text}
+                        {menu.text}
                         <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                           <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" />
                         </svg>
-                      </button>
+                      </a>
 
-                      {/* Dropdown */}
+                      <!-- Submenu: appears on hover/focus of the LI -->
                       <div
                         class="submenu absolute left-0 top-[calc(100%+10px)] min-w-[16rem] rounded-xl border border-gray-200 bg-white shadow-xl
                                opacity-0 pointer-events-none translate-y-1 transition
@@ -110,7 +117,12 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
                                group-focus-within:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 z-[60]"
                       >
                         <ul class="py-2">
-                          {item.links.map((lnk) => (
+                          <li>
+                            <a href={parentHref} class="block px-4 py-2.5 text-[14px] font-medium text-[#1f2d3d] rounded-md hover:bg-gray-50">
+                              All {menu.text}
+                            </a>
+                          </li>
+                          {menu.links.map((lnk) => (
                             <li>
                               <a
                                 href={lnk.href}
@@ -132,18 +144,18 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
                   );
                 }
 
-                // Simple link
+                const link = item as Link;
                 return (
                   <li>
                     <a
-                      href={item.href}
-                      aria-current={isActive(item.href) ? 'page' : undefined}
+                      href={link.href}
+                      aria-current={isActive(link.href) ? 'page' : undefined}
                       class={`py-2 text-[15px] leading-[22px] font-medium tracking-[0.005em] transition
                               hover:underline underline-offset-4 decoration-2 decoration-[#f56b2a]/70
                               focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a]/60 focus-visible:rounded-md
-                              ${isActive(item.href) ? 'active' : ''}`}
+                              ${isActive(link.href) ? 'active' : ''}`}
                     >
-                      {item.text}
+                      {link.text}
                     </a>
                   </li>
                 );
@@ -161,19 +173,12 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
                    focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]/60 focus-visible:ring-offset-white"
           >
             <span>{firstAction.text}</span>
-            <svg
-              viewBox="0 0 24 24"
-              class="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6"></path>
             </svg>
           </a>
 
-          <!-- Mobile menu button (drawer handled by your existing /scripts/mobile-menu.js) -->
+          <!-- Mobile menu button -->
           <button
             id="mobileMenuBtn"
             class="md:hidden inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-3.5 py-2
@@ -184,18 +189,9 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
             aria-label="Open menu"
           >
             <svg viewBox="0 0 20 20" class="h-5 w-5" fill="currentColor" aria-hidden="true">
-              <circle cx="3" cy="3" r="1.5"></circle><circle cx="10" cy="3" r="1.5"></circle><circle
-                cx="17"
-                cy="3"
-                r="1.5"></circle>
-              <circle cx="3" cy="10" r="1.5"></circle><circle cx="10" cy="10" r="1.5"></circle><circle
-                cx="17"
-                cy="10"
-                r="1.5"></circle>
-              <circle cx="3" cy="17" r="1.5"></circle><circle cx="10" cy="17" r="1.5"></circle><circle
-                cx="17"
-                cy="17"
-                r="1.5"></circle>
+              <circle cx="3" cy="3" r="1.5"></circle><circle cx="10" cy="3" r="1.5"></circle><circle cx="17" cy="3" r="1.5"></circle>
+              <circle cx="3" cy="10" r="1.5"></circle><circle cx="10" cy="10" r="1.5"></circle><circle cx="17" cy="10" r="1.5"></circle>
+              <circle cx="3" cy="17" r="1.5"></circle><circle cx="10" cy="17" r="1.5"></circle><circle cx="17" cy="17" r="1.5"></circle>
             </svg>
             <span>Menu</span>
           </button>
@@ -210,13 +206,7 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
     <div class="absolute right-0 top-0 h-full w-[88%] max-w-[22rem] bg-white shadow-xl p-6 overflow-y-auto">
       <div class="flex items-center justify-between">
         <a href="/" class="inline-flex items-center" aria-label="Lilos Growth — Home">
-          <img
-            src="/Lilos_Growth_Logo_Corrected.svg"
-            alt="Lilos Growth"
-            class="h-11 w-auto object-contain"
-            loading="eager"
-            decoding="async"
-          />
+          <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-11 w-auto object-contain" loading="eager" decoding="async" />
         </a>
         <button
           id="mobileMenuClose"
@@ -233,26 +223,24 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
       <div class="mt-6 space-y-2">
         {
           navItems.map((item) => {
-            if (isMenu(item)) {
+            if ('links' in (item as any)) {
+              const menu = item as Menu;
+              const lower = menu.text.toLowerCase();
+              const parentHref =
+                lower === 'services' ? '/services'
+                : lower === 'resources' ? '/resources'
+                : (menu.links[0]?.href ?? '/');
               return (
                 <details class="rounded-xl border border-gray-200">
-                  <summary
-                    class="cursor-pointer select-none px-3 py-3 text-[15px] text-[#253242]
-                                   focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a]/60 rounded-lg"
-                  >
-                    {item.text}
+                  <summary class="cursor-pointer select-none px-3 py-3 text-[15px] text-[#253242] rounded-lg">
+                    {menu.text}
                   </summary>
                   <div class="px-2 pb-2">
                     <ul class="space-y-1">
-                      {item.links.map((lnk) => (
+                      <li><a href={parentHref} class="block rounded-lg px-3 py-2 text-[14px] text-[#253242] hover:bg-gray-50">All {menu.text}</a></li>
+                      {menu.links.map((lnk) => (
                         <li>
-                          <a
-                            href={lnk.href}
-                            class="block rounded-lg px-3 py-2 text-[14px] text-[#253242] hover:bg-gray-50
-                                   focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a]/60"
-                          >
-                            {lnk.text}
-                          </a>
+                          <a href={lnk.href} class="block rounded-lg px-3 py-2 text-[14px] text-[#253242] hover:bg-gray-50">{lnk.text}</a>
                         </li>
                       ))}
                     </ul>
@@ -260,22 +248,14 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
                 </details>
               );
             }
-            return (
-              <a
-                href={item.href}
-                class="block rounded-xl px-3 py-3 text-[15px] text-[#253242] hover:bg-gray-50
-                                        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a]/60"
-              >
-                {item.text}
-              </a>
-            );
+            const link = item as Link;
+            return <a href={link.href} class="block rounded-xl px-3 py-3 text-[15px] text-[#253242] hover:bg-gray-50">{link.text}</a>;
           })
         }
 
         <a
           href={firstAction.href}
-          class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#f56b2a] px-4 py-3 text-white text-sm font-semibold shadow-md hover:bg-[#e85718] transition
-                 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
+          class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#f56b2a] px-4 py-3 text-white text-sm font-semibold shadow-md hover:bg-[#e85718] transition"
         >
           {firstAction.text}
         </a>
@@ -289,70 +269,12 @@ const isActive = (href: string) => !!href && (currentPath === href || (href !== 
   <script type="module" src="/scripts/header-a11y.js" is:inline></script>
 </header>
 
-<!-- Spacer to avoid content jump -->
-<div id="header-spacer" aria-hidden="true" style="height: var(--header-h, 84px)"></div>
-
 <style>
-  /* Light, readable header at all times */
-  header.site-header {
-    --hdr-bg: rgba(255, 255, 255, 0.98);
-    --hdr-border: rgba(2, 6, 23, 0.08);
-    --hdr-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  }
-  header.site-header.is-shrunk {
-    --hdr-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
-  }
-
-  .header-surface {
-    background: transparent !important;
-  }
-  .header-backplate {
-    position: absolute;
-    inset: 0;
-    background: var(--hdr-bg) !important;
-    border-bottom: 1px solid var(--hdr-border) !important;
-    box-shadow: var(--hdr-shadow) !important;
-    z-index: 0;
-    pointer-events: none !important;
-    -webkit-backdrop-filter: saturate(120%) blur(10px);
-    backdrop-filter: saturate(120%) blur(10px);
-    transition:
-      background 0.18s ease,
-      box-shadow 0.18s ease,
-      border-color 0.18s ease;
-  }
-
-  /* Defensive: ensure clicks are never blocked */
-  header.site-header,
-  header.site-header * {
-    pointer-events: auto;
-  }
-
-  /* Make skip link visible on keyboard focus */
-  .skip-link {
-    position: absolute;
-    left: -9999px;
-    top: 0;
-    z-index: 100000;
-    background: #1f2d3d;
-    color: #fff;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-  }
-  .skip-link:focus {
-    left: 1rem;
-    top: 0.75rem;
-    outline: 2px solid #f56b2a;
-    outline-offset: 2px;
-  }
-
-  /* Consistent active styling without layout shift */
-  .site-header a.active {
-    color: #f56b2a;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 2px;
-    text-decoration-color: rgba(245, 107, 42, 0.7);
-  }
+  header.site-header { --hdr-bg: rgba(255,255,255,0.98); --hdr-border: rgba(2,6,23,0.08); --hdr-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+  header.site-header.is-shrunk { --hdr-shadow: 0 10px 28px rgba(0,0,0,0.08); }
+  .header-surface { background: transparent !important; }
+  .header-backplate { position:absolute; inset:0; background:var(--hdr-bg)!important; border-bottom:1px solid var(--hdr-border)!important; box-shadow:var(--hdr-shadow)!important; z-index:0; pointer-events:none!important; -webkit-backdrop-filter:saturate(120%) blur(10px); backdrop-filter:saturate(120%) blur(10px); transition:background .18s ease, box-shadow .18s ease, border-color .18s ease; }
+  .skip-link { position:absolute; left:-9999px; top:0; z-index:100000; background:#1f2d3d; color:#fff; padding:.5rem .75rem; border-radius:.5rem; box-shadow:0 4px 14px rgba(0,0,0,.2); }
+  .skip-link:focus { left:1rem; top:.75rem; outline:2px solid #f56b2a; outline-offset:2px; }
+  .site-header a.active { color:#f56b2a; text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:2px; text-decoration-color:rgba(245,107,42,.7); }
 </style>

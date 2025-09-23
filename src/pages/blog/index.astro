@@ -1,193 +1,177 @@
 ---
-/**
- * Blog Index — Lilos Growth (Cycle 3)
- * - Layout via "~" alias
- * - Inline hero (brand-matched)
- * - trailingSlash: "never"
- * - All data shaping done in frontmatter (typed) to avoid template TS errors
- */
-
-import Layout from '~/layouts/PageLayout.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
+
+export const prerender = true;
 
 type BlogEntry = CollectionEntry<'blog'>;
 
-// 1) Load + sort posts (exclude drafts)
-const allPosts: BlogEntry[] = (await getCollection('blog', (entry: BlogEntry) => !entry.data.draft)).sort(
-  (a: BlogEntry, b: BlogEntry) => {
-    const da = new Date(a.data.updated ?? a.data.date).getTime();
-    const db = new Date(b.data.updated ?? b.data.date).getTime();
-    return db - da;
-  }
-);
-
-// 2) Pagination
-const PAGE_SIZE = 12;
-const url = new URL(Astro.request.url);
-const pageParam = Number(url.searchParams.get('page') ?? '1');
-const currentPage = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
-const totalPages = Math.max(1, Math.ceil(allPosts.length / PAGE_SIZE));
-const start = (currentPage - 1) * PAGE_SIZE;
-const end = start + PAGE_SIZE;
-const pageSlice = allPosts.slice(start, end);
-
-// 3) Shape cards (pre-computed for clean template)
-interface Card {
-  href: string;
-  title: string;
-  author: string;
-  dateISO: string;
-  dateLabel: string;
-  excerpt?: string;
-  cover?: string;
-  coverAlt: string;
-  tags: string[];
-}
-
-const cards: Card[] = pageSlice.map((post: BlogEntry) => {
-  const d = post.data;
-  const when = new Date(d.updated ?? d.date);
-  return {
-    href: `/blog/${post.slug}`,
-    title: d.title,
-    author: d.author ?? 'Lilos Growth',
-    dateISO: when.toISOString(),
-    dateLabel: when.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }),
-    excerpt: d.excerpt,
-    cover: d.cover,
-    coverAlt: d.coverAlt ?? d.title,
-    tags: Array.isArray(d.tags) ? d.tags.slice(0, 3) : [],
-  };
+// Load published posts and sort by updated || date (desc).
+const allPosts = (await getCollection('blog', (entry: BlogEntry) => !entry.data.draft)) as BlogEntry[];
+allPosts.sort((a: BlogEntry, b: BlogEntry) => {
+  const ad = new Date(a.data.updated ?? a.data.date).getTime();
+  const bd = new Date(b.data.updated ?? b.data.date).getTime();
+  return bd - ad;
 });
 
-// 4) Canonical (no trailing slash)
-const canonicalBase = '/blog';
-const canonical = currentPage === 1 ? canonicalBase : `${canonicalBase}?page=${currentPage}`;
+const PAGE_SIZE = 9;
+const pagePosts = allPosts.slice(0, PAGE_SIZE);
 
-// 5) Breadcrumbs + helpers
-const breadcrumbs = [
-  { name: 'Home', item: '/' },
-  { name: 'Blog', item: '/blog' },
-];
-const pageTitle = 'Blog';
-const pageDescription =
-  'Tactical guides and experiments on Local SEO, AEO, and conversion design for home-service businesses.';
-const pageHref = (n: number) => (n === 1 ? '/blog' : `/blog?page=${n}`);
+// Helpers
+const linkForPost = (slug: string) => `/blog/${slug}`;
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 ---
 
-<Layout title={pageTitle} description={pageDescription} breadcrumbs={breadcrumbs}>
-  <!-- HERO (brand-matched dark gradient) -->
-  <section
-    class="bg-[#253242] min-h-[440px] flex flex-col items-center justify-center pt-16 pb-20 relative overflow-hidden"
-  >
-    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159] pointer-events-none"></div>
-    <div class="relative z-10 w-full max-w-3xl flex flex-col items-center gap-7 px-4 mx-auto text-center">
-      <h1 class="text-4xl md:text-5xl leading-snug font-heading text-white font-extrabold tracking-tight">Blog</h1>
-      <span class="block text-xl md:text-2xl font-semibold mt-1 text-[#f56b2a] tracking-wider uppercase">
-        Local SEO • AEO • Astro/AstroWind
-      </span>
-      <p class="text-lg md:text-xl text-white/80 max-w-2xl font-medium">
-        Field-tested playbooks for ranking, speed, and conversion—written for home-service pros.
-      </p>
-    </div>
-  </section>
+<PageLayout
+  title="Blog — Lilos Growth"
+  description="Local SEO and home-service growth playbooks—implementation notes, how-tos, and case studies."
+>
+  <!-- Canonical -->
+  <astro-head>
+    <link rel="canonical" href="/blog" />
+  </astro-head>
 
-  <!-- LIST -->
-  <section class="py-12 bg-white border-t border-gray-100">
-    <div class="mx-auto max-w-7xl px-4">
-      <!-- Reserve space so first row never hides under fixed header; prevents CLS -->
-      <div class="pt-[var(--header-h,4.5rem)]">
-        <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {
-            cards.map((card) => (
-              <li class="group rounded-2xl border border-black/5 bg-white/60 shadow-sm ring-1 ring-black/5 transition hover:shadow-md focus-within:shadow-md">
-                <a href={card.href} class="block focus:outline-none" aria-label={card.title}>
-                  {card.cover && (
-                    <div class="relative overflow-hidden rounded-t-2xl">
-                      {/* Reserve aspect-ratio to avoid layout shifts */}
-                      <img
-                        src={card.cover}
-                        alt={card.coverAlt}
-                        loading="lazy"
-                        decoding="async"
-                        class="h-auto w-full object-cover"
-                        style="aspect-ratio: 16 / 9;"
-                      />
-                    </div>
-                  )}
+  <!-- HERO — match site style (dark band + CTAs) -->
+  <section class="relative overflow-hidden bg-[#1f2d3d]">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#1f2d3d] to-[#2b3e55]" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto flex min-h-[460px] max-w-3xl flex-col items-center justify-center text-center pt-8 md:pt-12">
+        <h1 class="text-4xl font-extrabold tracking-tight text-white md:text-5xl">Insights & Playbooks</h1>
+        <p class="mt-4 max-w-2xl text-base text-white/80 md:text-lg">
+          Practical guides for home-service brands—focused on rankings, speed, and conversions.
+        </p>
 
-                  <div class="p-5">
-                    <div class="mb-1 text-xs uppercase tracking-wide text-gray-500">
-                      {card.author} • <time datetime={card.dateISO}>{card.dateLabel}</time>
-                    </div>
-                    <h2 class="text-lg font-semibold leading-snug text-gray-900 group-hover:underline">{card.title}</h2>
-                    {card.excerpt && <p class="mt-2 line-clamp-3 text-sm text-gray-600">{card.excerpt}</p>}
-
-                    {card.tags.length > 0 && (
-                      <div class="mt-3 flex flex-wrap gap-2">
-                        {card.tags.map((t) => (
-                          <span class="rounded-full border border-gray-200 px-2 py-1 text-xs text-gray-700">{t}</span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-
-        {
-          totalPages > 1 && (
-            <nav
-              class="mx-auto mt-10 flex max-w-7xl items-center justify-between"
-              role="navigation"
-              aria-label="Pagination"
-            >
-              <div>
-                {currentPage > 1 ? (
-                  <a
-                    href={pageHref(currentPage - 1)}
-                    class="inline-flex items-center rounded-xl border border-gray-200 px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50"
-                    rel="prev"
-                  >
-                    ← Newer
-                  </a>
-                ) : (
-                  <span class="inline-flex items-center rounded-xl border border-transparent px-3 py-2 text-sm text-gray-400">
-                    ← Newer
-                  </span>
-                )}
-              </div>
-
-              <div class="text-sm text-gray-600">
-                Page {currentPage} of {totalPages}
-              </div>
-
-              <div>
-                {currentPage < totalPages ? (
-                  <a
-                    href={pageHref(currentPage + 1)}
-                    class="inline-flex items-center rounded-xl border border-gray-200 px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50"
-                    rel="next"
-                  >
-                    Older →
-                  </a>
-                ) : (
-                  <span class="inline-flex items-center rounded-xl border border-transparent px-3 py-2 text-sm text-gray-400">
-                    Older →
-                  </span>
-                )}
-              </div>
-            </nav>
-          )
-        }
+        <!-- CTAs -->
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="/packages"
+            class="inline-flex items-center justify-center rounded-xl bg-[#f56b2a] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-white/40"
+          >
+            See Packages
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/30"
+          >
+            Contact
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <astro-head>
-    <link rel="canonical" href={canonical} />
-    <meta name="robots" content="index,follow" />
-  </astro-head>
-</Layout>
+  <!-- CONTENT -->
+  <main class="relative bg-white">
+    <!-- Extra padding-top for fixed header clearance (prevents clipping) -->
+    <div class="mx-auto max-w-7xl px-4 pb-16 pt-12 sm:px-6 lg:px-8 md:pt-16">
+      {
+        pagePosts.length === 0 ? (
+          <div class="py-20 text-center text-gray-500">No posts yet.</div>
+        ) : (
+          <ul class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {pagePosts.map((post: BlogEntry) => {
+              const d = post.data;
+              const when = new Date(d.updated ?? d.date);
+              const displayDate = formatDate(when.toISOString());
+
+              const coverObj = (d as any).cover;
+              const coverSrc =
+                typeof coverObj === 'object' && coverObj?.src
+                  ? coverObj.src
+                  : typeof coverObj === 'string'
+                    ? coverObj
+                    : undefined;
+              const coverW = typeof coverObj === 'object' && coverObj?.width ? Number(coverObj.width) : undefined;
+              const coverH = typeof coverObj === 'object' && coverObj?.height ? Number(coverObj.height) : undefined;
+              const alt = (d as any).alt ?? (d as any).coverAlt ?? d.title ?? 'Blog cover';
+
+              const href = linkForPost(post.slug);
+
+              return (
+                <li class="group flex flex-col rounded-2xl border border-black/5 bg-white/70 shadow-sm ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:shadow-md">
+                  <a href={href} class="block focus:outline-none" aria-label={d.title}>
+                    {coverSrc ? (
+                      <div class="overflow-hidden rounded-t-2xl bg-gray-100">
+                        <img
+                          src={coverSrc}
+                          width={coverW}
+                          height={coverH}
+                          alt={alt}
+                          loading="lazy"
+                          decoding="async"
+                          class="h-auto w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                          style={!(coverW && coverH) ? 'aspect-ratio: 16/9;' : undefined}
+                        />
+                      </div>
+                    ) : (
+                      /* Branded placeholder (CLS-safe, mirrors hero look) */
+                      <div class="relative overflow-hidden rounded-t-2xl" style="aspect-ratio: 16/9;">
+                        <div
+                          class="absolute inset-0 bg-gradient-to-br from-[#1f2d3d] to-[#2b3e55]"
+                          aria-hidden="true"
+                        />
+                        <div class="relative flex h-full w-full items-center justify-center text-center px-4">
+                          <div class="space-y-1">
+                            <div class="text-sm font-semibold tracking-widest text-[#f56b2a]">Lilos Growth</div>
+                            <div class="text-lg font-bold leading-tight text-white">Blog</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </a>
+
+                  <div class="flex flex-1 flex-col p-5">
+                    <div class="mb-2 text-sm text-gray-500">
+                      {d.author ? <span>By {d.author}</span> : null}
+                      <span class="mx-1" aria-hidden="true">
+                        •
+                      </span>
+                      <time datetime={when.toISOString()}>{displayDate}</time>
+                    </div>
+
+                    <h2 class="text-lg font-semibold text-gray-900">
+                      <a href={href} class="hover:underline focus:outline-none">
+                        {d.title}
+                      </a>
+                    </h2>
+
+                    {(d as any).excerpt || (d as any).description ? (
+                      <p class="mt-2 line-clamp-3 text-sm text-gray-600">
+                        {((d as any).excerpt ?? (d as any).description) as string}
+                      </p>
+                    ) : null}
+
+                    {Array.isArray((d as any).tags) && (d as any).tags.length ? (
+                      <div class="mt-3 flex flex-wrap gap-2">
+                        {(d as any).tags.slice(0, 3).map((t: string) => (
+                          <span class="rounded-full border border-gray-200 px-2 py-1 text-xs text-gray-700">{t}</span>
+                        ))}
+                      </div>
+                    ) : null}
+
+                    <div class="mt-auto pt-5">
+                      <a
+                        href={href}
+                        class="inline-flex items-center text-sm font-medium text-gray-900 underline-offset-4 hover:underline"
+                      >
+                        Read more
+                        <svg class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path
+                            fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l5 5a1 1 0 01.083 1.32l-.083.094-5 5a1 1 0 01-1.497-1.32l.083-.094L13.585 10H4a1 1 0 01-.117-1.993L4 8h9.585l-3.292-3.293a1 1 0 01-.083-1.32l.083-.094z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        )
+      }
+    </div>
+  </main>
+</PageLayout>

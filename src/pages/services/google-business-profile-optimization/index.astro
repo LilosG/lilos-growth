@@ -22,6 +22,13 @@ const serviceSchema = {
 ---
 
 <Layout {title} {description} breadcrumbs={breadcrumbs} schema={[serviceSchema]}>
+  <!-- Keep anchors from hiding under the fixed header -->
+  <style is:inline>
+    [id] {
+      scroll-margin-top: var(--header-h, 88px);
+    }
+  </style>
+
   <!-- HERO -->
   <section
     class="bg-[#253242] min-h-[440px] flex flex-col items-center justify-center pt-16 pb-20 relative overflow-hidden"
@@ -44,18 +51,18 @@ const serviceSchema = {
           class="inline-flex items-center px-8 py-4 rounded-2xl bg-[#f56b2a] hover:bg-[#f34e00] text-white font-heading font-semibold text-lg shadow transition"
         >
           See Packages
-          <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
-            ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-          >
+          <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+            <path d="M5 12h14M13 18l6-6-6-6"></path>
+          </svg>
         </a>
         <a
           href="#faq"
           class="inline-flex items-center px-8 py-4 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-lg shadow transition"
         >
           FAQ
-          <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
-            ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-          >
+          <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+            <path d="M5 12h14M13 18l6-6-6-6"></path>
+          </svg>
         </a>
       </div>
     </div>
@@ -180,7 +187,7 @@ const serviceSchema = {
     </div>
   </section>
 
-  <!-- CROSS-SELL PACKAGES (aligned 4-up grid for consistency) -->
+  <!-- CROSS-SELL PACKAGES (aligned 4-up grid) -->
   <section class="py-24 bg-bluelight border-t border-gray-100 shadow-xl" id="packages">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-4xl md:text-5xl font-heading text-heading font-bold mb-4 text-center">
@@ -190,7 +197,7 @@ const serviceSchema = {
       <p class="text-xl text-body mb-14 text-center font-medium">Choose the package that fits your goals.</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch auto-rows-fr">
-        <!-- GBP (same as above, condensed bullets) -->
+        <!-- GBP (condensed bullets) -->
         <article
           class="h-full rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
         >
