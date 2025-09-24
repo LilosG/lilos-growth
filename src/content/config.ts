@@ -7,7 +7,7 @@ const blog = defineCollection({
       // existing fields
       title: z.string(),
       description: z.string(),
-      date: z.string().datetime(),            // accept ISO string
+      date: z.string().datetime(), // accept ISO string
       updated: z.string().datetime().optional(),
       author: z.string(),
       tags: z.array(z.string()).default([]),
