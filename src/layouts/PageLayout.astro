@@ -1,6 +1,6 @@
 ---
-import Header from "~/components/widgets/Header.astro";
-import Footer from "~/components/widgets/Footer.astro";
+import Header from '~/components/widgets/Header.astro';
+import Footer from '~/components/widgets/Footer.astro';
 
 export interface Crumb {
   name: string;
@@ -11,67 +11,93 @@ interface Props {
   title?: string;
   description?: string;
   breadcrumbs?: Crumb[];
-  schema?: any[]; // JSON-LD blocks; kept wide to avoid TS2322
+  schema?: any[];
   noIndex?: boolean;
+  canonical?: string;
+  metadata?: any;
 }
 
 const {
-  title = "Lilos Growth",
-  description = "",
+  title = 'Lilos Growth',
+  description = '',
   breadcrumbs = [],
   schema = [],
   noIndex = false,
+  canonical,
+  metadata,
 } = Astro.props as Props;
+
+const effectiveTitle = (metadata?.title as string | undefined) ?? title;
+const effectiveDescription = (metadata?.description as string | undefined) ?? description;
+
+const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonicalHref = canonical
+  ? canonical.startsWith('http')
+    ? canonical
+    : `${site}${canonical.startsWith('/') ? canonical : `/${canonical}`}`
+  : undefined;
 ---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {title && <title>{title}</title>}
-    {description && <meta name="description" content={description} />}
+    {effectiveTitle && <title>{effectiveTitle}</title>}
+    {effectiveDescription && <meta name="description" content={effectiveDescription} />}
     {noIndex && <meta name="robots" content="noindex,nofollow" />}
+    {canonicalHref && <link rel="canonical" href={canonicalHref} />}
 
-    {Array.isArray(schema) &&
-      schema.map((block) => (
-        <script type="application/ld+json" is:inline>{block}</script>
-      ))}
+    {
+      Array.isArray(schema) &&
+        schema.map((s) => <script type="application/ld+json" is:inline set:html={JSON.stringify(s)} />)
+    }
 
     <style is:inline>
-      :root { --header-offset: 0px; }
-      main[data-offset] { padding-top: var(--header-offset); }
+      :root {
+        --header-offset: 0px;
+      }
+      main[data-offset] {
+        padding-top: var(--header-offset);
+      }
     </style>
     <script is:inline>
-      // Global header offset logic (no per-page spacers)
       const setOffset = () => {
-        const h = document.querySelector("header");
+        const h = document.querySelector('header');
         if (h) {
           const rect = h.getBoundingClientRect();
-          document.documentElement.style.setProperty("--header-offset", rect.height + "px");
+          document.documentElement.style.setProperty('--header-offset', rect.height + 'px');
         }
       };
       new ResizeObserver(setOffset).observe(document.documentElement);
-      window.addEventListener("load", setOffset, { once: true });
-      window.addEventListener("resize", setOffset);
+      window.addEventListener('load', setOffset, { once: true });
+      window.addEventListener('resize', setOffset);
     </script>
   </head>
   <body class="bg-white text-slate-900 dark:bg-gray-950 dark:text-slate-100">
     <Header />
 
     <main data-offset>
-      {breadcrumbs.length > 0 && (
-        <nav aria-label="Breadcrumb" class="border-b border-gray-200 bg-gray-50/60 py-2 text-sm dark:border-gray-800 dark:bg-gray-900/40">
-          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <ol class="flex flex-wrap items-center gap-2 text-gray-600 dark:text-gray-300">
-              {breadcrumbs.map((c, i) => (
-                <li class="inline-flex items-center gap-2">
-                  <a href={c.item} class="hover:underline">{c.name}</a>
-                  {i < breadcrumbs.length - 1 && <span aria-hidden="true">/</span>}
-                </li>
-              ))}
-            </ol>
-          </div>
-        </nav>
-      )}
+      {
+        breadcrumbs.length > 0 && (
+          <nav
+            aria-label="Breadcrumb"
+            class="border-b border-gray-200 bg-gray-50/60 py-2 text-sm dark:border-gray-800 dark:bg-gray-900/40"
+          >
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <ol class="flex flex-wrap items-center gap-2 text-gray-600 dark:text-gray-300">
+                {breadcrumbs.map((c, i) => (
+                  <li class="inline-flex items-center gap-2">
+                    <a href={c.item} class="hover:underline">
+                      {c.name}
+                    </a>
+                    {i < breadcrumbs.length - 1 && <span aria-hidden="true">/</span>}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </nav>
+        )
+      }
 
       <slot />
     </main>
