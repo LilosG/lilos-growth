@@ -1,9 +1,6 @@
 {
-  "tailwindCSS.emmetCompletions": true,
-  "tailwindCSS.includeLanguages": { "astro": "html", "plaintext": "html" },
-
-  // Silence the built-in CSS/SCSS/LESS validators
-  "css.validate": false,
-  "scss.validate": false,
-  "less.validate": false
+  // Use the project's TypeScript version so Astro's TS plugin loads correctly
+  "typescript.tsdk": "node_modules/typescript/lib",
+  // Nice to have: let the Astro extension format .astro files
+  "[astro]": { "editor.defaultFormatter": "astro-build.astro-vscode" }
 }
