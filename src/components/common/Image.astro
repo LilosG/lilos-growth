@@ -7,8 +7,8 @@
  */
 
 export interface Props {
-  src?: string | ImageMetadata;                 // ← optional now
-  alt?: string;                                 // ← optional, default ''
+  src?: string | ImageMetadata; // ← optional now
+  alt?: string; // ← optional, default ''
   class?: string;
   width?: number | string;
   height?: number | string;
@@ -32,7 +32,7 @@ const {
   layout,
   loading = 'lazy',
   decoding = 'async',
-  aspectRatio
+  aspectRatio,
 } = Astro.props as Props;
 
 // Derive numeric width/height if we can
@@ -50,7 +50,10 @@ if (!w || !h) {
     const meta = src as ImageMetadata;
     if (!w && h) w = Math.round((meta.width / meta.height) * h);
     if (!h && w) h = Math.round((meta.height / meta.width) * w);
-    if (!w && !h) { w = meta.width; h = meta.height; }
+    if (!w && !h) {
+      w = meta.width;
+      h = meta.height;
+    }
   }
 }
 
@@ -59,25 +62,27 @@ if (!w) w = 1;
 if (!h) h = 1;
 ---
 
-{!src ? (
-  /* No src: sized wrapper for slotted content (e.g., SVG icon). */
-  <div
-    class={className}
-    style={`display:inline-block; width:${w}px; height:${h}px; ${aspectRatio ? `aspect-ratio:${aspectRatio};` : ''}`}
-  >
-    <slot />
-  </div>
-) : (
-  <img
-    src={typeof src === 'string' ? src : src.src}
-    alt={alt}
-    class={className}
-    width={w}
-    height={h}
-    loading={loading}
-    decoding={decoding}
-    {...(sizes ? { sizes } : {})}
-    {...(widths ? { widths } : {})}
-    {...(layout ? { layout } : {})}
-  />
-)}
+{
+  !src ? (
+    /* No src: sized wrapper for slotted content (e.g., SVG icon). */
+    <div
+      class={className}
+      style={`display:inline-block; width:${w}px; height:${h}px; ${aspectRatio ? `aspect-ratio:${aspectRatio};` : ''}`}
+    >
+      <slot />
+    </div>
+  ) : (
+    <img
+      src={typeof src === 'string' ? src : src.src}
+      alt={alt}
+      class={className}
+      width={w}
+      height={h}
+      loading={loading}
+      decoding={decoding}
+      {...(sizes ? { sizes } : {})}
+      {...(widths ? { widths } : {})}
+      {...(layout ? { layout } : {})}
+    />
+  )
+}

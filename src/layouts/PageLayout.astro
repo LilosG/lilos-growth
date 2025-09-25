@@ -67,7 +67,7 @@ function uniqueByTypeId(nodes: any[]): any[] {
   const seen = new Set<string>();
   return nodes.filter((n) => {
     if (!n || typeof n !== 'object') return false;
-    const rawType = (Array.isArray(n['@type']) ? n['@type'].join('|') : String(n['@type'] ?? ''));
+    const rawType = Array.isArray(n['@type']) ? n['@type'].join('|') : String(n['@type'] ?? '');
     const id = typeof n['@id'] === 'string' ? n['@id'] : '';
     const key = `${rawType}#${id}`;
     if (seen.has(key)) return false;
@@ -76,12 +76,7 @@ function uniqueByTypeId(nodes: any[]): any[] {
   });
 }
 
-const schemaNodes = uniqueByTypeId([
-  localBusiness,
-  ...(breadcrumbList ? [breadcrumbList] : []),
-  ...schemaExtras,
-]);
-
+const schemaNodes = uniqueByTypeId([localBusiness, ...(breadcrumbList ? [breadcrumbList] : []), ...schemaExtras]);
 ---
 
 <Layout {title} {description} {lang} {bodyClass} {metadata}>
@@ -100,9 +95,7 @@ const schemaNodes = uniqueByTypeId([
 
   <Footer />
 
-  {schemaNodes.map((node) => (
-    <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />
-  ))}
+  {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />)}
 
   <script is:inline>
     document.addEventListener('click', (e) => {

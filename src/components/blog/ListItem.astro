@@ -13,7 +13,9 @@ try {
   // Some Astrowind versions export this helper:
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   ({ getBlogPermalink } = await import('~/utils/permalinks'));
-} catch { /* not available in this project version */ }
+} catch {
+  /* not available in this project version */
+}
 
 export interface Props {
   post: Post;
@@ -56,9 +58,9 @@ const srcString = toSrcString(rawImage);
 const fallbackWidth = 400;
 const fallbackHeight = 225;
 const metaWidth =
-  typeof rawImage === 'object' && rawImage ? (rawImage as ImageMetadata).width ?? fallbackWidth : fallbackWidth;
+  typeof rawImage === 'object' && rawImage ? ((rawImage as ImageMetadata).width ?? fallbackWidth) : fallbackWidth;
 const metaHeight =
-  typeof rawImage === 'object' && rawImage ? (rawImage as ImageMetadata).height ?? fallbackHeight : fallbackHeight;
+  typeof rawImage === 'object' && rawImage ? ((rawImage as ImageMetadata).height ?? fallbackHeight) : fallbackHeight;
 
 // Permalink: prefer explicit post.permalink, then helper, then slug, else '#'
 const slug =
@@ -90,24 +92,26 @@ const altText =
 <article class="mb-6 transition motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
   <div class="relative rounded shadow-lg bg-gray-400 dark:bg-slate-700 mb-6 md:h-64">
     <a href={permalink}>
-      {srcString ? (
-        <Image
-          src={srcString}
-          alt={altText}
-          class="rounded shadow-lg w-full md:h-full"
-          loading="lazy"
-          decoding="async"
-          width={metaWidth}
-          height={metaHeight}
-        />
-      ) : (
-        /* If no image, render an empty ratio box to keep layout stable */
-        <div
-          class="rounded shadow-lg w-full md:h-full bg-gray-300 dark:bg-slate-600"
-          style={`aspect-ratio: ${fallbackWidth} / ${fallbackHeight};`}
-          aria-hidden="true"
-        />
-      )}
+      {
+        srcString ? (
+          <Image
+            src={srcString}
+            alt={altText}
+            class="rounded shadow-lg w-full md:h-full"
+            loading="lazy"
+            decoding="async"
+            width={metaWidth}
+            height={metaHeight}
+          />
+        ) : (
+          /* If no image, render an empty ratio box to keep layout stable */
+          <div
+            class="rounded shadow-lg w-full md:h-full bg-gray-300 dark:bg-slate-600"
+            style={`aspect-ratio: ${fallbackWidth} / ${fallbackHeight};`}
+            aria-hidden="true"
+          />
+        )
+      }
     </a>
   </div>
 
@@ -117,22 +121,22 @@ const altText =
     </a>
   </h3>
 
-  {dateText && (
-    <div class="text-sm text-muted flex items-center gap-2 mb-2">
-      <Icon name="tabler:calendar" class="h-4 w-4" />
-      <time datetime={post.publishDate ? new Date(post.publishDate).toISOString() : undefined}>{dateText}</time>
-    </div>
-  )}
+  {
+    dateText && (
+      <div class="text-sm text-muted flex items-center gap-2 mb-2">
+        <Icon name="tabler:calendar" class="h-4 w-4" />
+        <time datetime={post.publishDate ? new Date(post.publishDate).toISOString() : undefined}>{dateText}</time>
+      </div>
+    )
+  }
 
-  {post.excerpt && (
-    <p class="text-lg text-muted dark:text-slate-400 flex-grow">
-      {post.excerpt}
-    </p>
-  )}
+  {post.excerpt && <p class="text-lg text-muted dark:text-slate-400 flex-grow">{post.excerpt}</p>}
 
-  {post.tags && Array.isArray(post.tags) ? (
-    <footer class="mt-5">
-      <PostTags tags={post.tags} />
-    </footer>
-  ) : null}
+  {
+    post.tags && Array.isArray(post.tags) ? (
+      <footer class="mt-5">
+        <PostTags tags={post.tags} />
+      </footer>
+    ) : null
+  }
 </article>
