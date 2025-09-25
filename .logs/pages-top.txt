@@ -1,0 +1,8 @@
+src/pages/privacy-policy.astro
+src/pages/404.astro
+src/pages/about.astro
+src/pages/index.astro
+src/pages/contact.astro
+src/pages/thank-you.astro
+src/pages/packages.astro
+src/pages/results.astro

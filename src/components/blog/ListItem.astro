@@ -7,114 +7,132 @@ import PostTags from '~/components/blog/Tags.astro';
 import { APP_BLOG } from 'astrowind:config';
 import type { Post } from '~/types';
 
-import { getPermalink } from '~/utils/permalinks';
-import { findImage } from '~/utils/images';
-import { getFormattedDate } from '~/utils/utils';
+// Permalinks: try getBlogPermalink if present, else fallback.
+let getBlogPermalink: ((slug: string) => string) | undefined;
+try {
+  // Some Astrowind versions export this helper:
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  ({ getBlogPermalink } = await import('~/utils/permalinks'));
+} catch { /* not available in this project version */ }
 
 export interface Props {
   post: Post;
 }
 
-const { post } = Astro.props;
-const image = (await findImage(post.image)) as ImageMetadata | undefined;
+const { post } = Astro.props as Props;
 
-const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : '';
+/** Accept several front-matter keys */
+function getPostImageCandidate(p: Post): string | ImageMetadata | null | undefined {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const anyPost = p as any;
+  return anyPost.image ?? anyPost.cover ?? anyPost.heroImage ?? null;
+}
+
+const candidate = getPostImageCandidate(post);
+
+// If your findImage returns Promise<string | ImageMetadata | null | undefined>, keep it.
+// If you don't have it, this still works because we guard below.
+let rawImage: string | ImageMetadata | null | undefined = candidate;
+try {
+  const { findImage } = await import('~/utils/images');
+  rawImage = await findImage(candidate);
+} catch {
+  // no-op: keep candidate
+}
+
+/** Normalize for <Image>: must be string (or {src:string}). */
+function toSrcString(img: string | ImageMetadata | null | undefined): string | undefined {
+  if (!img) return undefined;
+  if (typeof img === 'string') return img;
+  // Astro ImageMetadata usually has .src
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const maybeSrc = (img as any).src as string | undefined;
+  return maybeSrc;
+}
+
+const srcString = toSrcString(rawImage);
+
+// Sizes: if we have ImageMetadata, use it; else fall back.
+const fallbackWidth = 400;
+const fallbackHeight = 225;
+const metaWidth =
+  typeof rawImage === 'object' && rawImage ? (rawImage as ImageMetadata).width ?? fallbackWidth : fallbackWidth;
+const metaHeight =
+  typeof rawImage === 'object' && rawImage ? (rawImage as ImageMetadata).height ?? fallbackHeight : fallbackHeight;
+
+// Permalink: prefer explicit post.permalink, then helper, then slug, else '#'
+const slug =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ((post as any).slug as string | undefined) ??
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ((post as any).id as string | undefined);
+
+const permalink =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ((post as any).permalink as string | undefined) ??
+  (slug && typeof getBlogPermalink === 'function' ? getBlogPermalink(slug) : slug ? `/blog/${slug}/` : '#');
+
+// Date text using toLocaleDateString; avoids helper arity mismatches.
+const dateText = post.publishDate
+  ? new Date(post.publishDate).toLocaleDateString(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (APP_BLOG as any)?.postDate?.locale,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (APP_BLOG as any)?.postDate?.options
+    )
+  : '';
+
+const altText =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ((post as any).imageAlt as string | undefined) ?? post.title ?? 'Blog post image';
 ---
 
-<article
-  class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade ${image ? 'md:grid-cols-2' : ''}`}
->
-  {
-    image &&
-      (link ? (
-        <a class="relative block group" href={link ?? 'javascript:void(0)'}>
-          <div class="relative h-0 pb-[56.25%] md:pb-[75%] md:h-72 lg:pb-[56.25%] overflow-hidden bg-gray-400 dark:bg-slate-700 rounded shadow-lg">
-            {image && (
-              <Image
-                src={image}
-                class="absolute inset-0 object-cover w-full h-full mb-6 rounded shadow-lg bg-gray-400 dark:bg-slate-700"
-                widths={[400, 900]}
-                width={900}
-                sizes="(max-width: 900px) 400px, 900px"
-                alt={post.title}
-                aspectRatio="16:9"
-                loading="lazy"
-                decoding="async"
-              />
-            )}
-          </div>
-        </a>
+<article class="mb-6 transition motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+  <div class="relative rounded shadow-lg bg-gray-400 dark:bg-slate-700 mb-6 md:h-64">
+    <a href={permalink}>
+      {srcString ? (
+        <Image
+          src={srcString}
+          alt={altText}
+          class="rounded shadow-lg w-full md:h-full"
+          loading="lazy"
+          decoding="async"
+          width={metaWidth}
+          height={metaHeight}
+        />
       ) : (
-        <div class="relative h-0 pb-[56.25%] md:pb-[75%] md:h-72 lg:pb-[56.25%] overflow-hidden bg-gray-400 dark:bg-slate-700 rounded shadow-lg">
-          {image && (
-            <Image
-              src={image}
-              class="absolute inset-0 object-cover w-full h-full mb-6 rounded shadow-lg bg-gray-400 dark:bg-slate-700"
-              widths={[400, 900]}
-              width={900}
-              sizes="(max-width: 900px) 400px, 900px"
-              alt={post.title}
-              aspectRatio="16:9"
-              loading="lazy"
-              decoding="async"
-            />
-          )}
-        </div>
-      ))
-  }
-  <div class="mt-2">
-    <header>
-      <div class="mb-1">
-        <span class="text-sm">
-          <Icon name="tabler:clock" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
-          <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
-          {
-            post.author && (
-              <>
-                {' '}
-                · <Icon name="tabler:user" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
-                <span>{post.author.replaceAll('-', ' ')}</span>
-              </>
-            )
-          }
-          {
-            post.category && (
-              <>
-                {' '}
-                ·{' '}
-                <a class="hover:underline" href={getPermalink(post.category.slug, 'category')}>
-                  {post.category.title}
-                </a>
-              </>
-            )
-          }
-        </span>
-      </div>
-      <h2 class="text-xl sm:text-2xl font-bold leading-tight mb-2 font-heading dark:text-slate-300">
-        {
-          link ? (
-            <a
-              class="inline-block hover:text-primary dark:hover:text-blue-700 transition ease-in duration-200"
-              href={link}
-            >
-              {post.title}
-            </a>
-          ) : (
-            post.title
-          )
-        }
-      </h2>
-    </header>
-
-    {post.excerpt && <p class="flex-grow text-muted dark:text-slate-400 text-lg">{post.excerpt}</p>}
-    {
-      post.tags && Array.isArray(post.tags) ? (
-        <footer class="mt-5">
-          <PostTags tags={post.tags} />
-        </footer>
-      ) : (
-        <Fragment />
-      )
-    }
+        /* If no image, render an empty ratio box to keep layout stable */
+        <div
+          class="rounded shadow-lg w-full md:h-full bg-gray-300 dark:bg-slate-600"
+          style={`aspect-ratio: ${fallbackWidth} / ${fallbackHeight};`}
+          aria-hidden="true"
+        />
+      )}
+    </a>
   </div>
+
+  <h3 class="font-heading font-bold text-xl sm:text-2xl leading-tight mb-2 dark:text-slate-300">
+    <a href={permalink} class="transition inline-block hover:text-primary dark:hover:text-blue-700">
+      {post.title}
+    </a>
+  </h3>
+
+  {dateText && (
+    <div class="text-sm text-muted flex items-center gap-2 mb-2">
+      <Icon name="tabler:calendar" class="h-4 w-4" />
+      <time datetime={post.publishDate ? new Date(post.publishDate).toISOString() : undefined}>{dateText}</time>
+    </div>
+  )}
+
+  {post.excerpt && (
+    <p class="text-lg text-muted dark:text-slate-400 flex-grow">
+      {post.excerpt}
+    </p>
+  )}
+
+  {post.tags && Array.isArray(post.tags) ? (
+    <footer class="mt-5">
+      <PostTags tags={post.tags} />
+    </footer>
+  ) : null}
 </article>

@@ -1,0 +1,13 @@
+src/types.d.ts:241:  images?: Array<Image>;
+src/components/blog/ListItem.astro:33:              <Image
+src/components/blog/ListItem.astro:50:            <Image
+src/components/blog/GridItem.astro:28:            <Image
+src/components/blog/GridItem.astro:42:          <Image
+src/components/blog/SinglePost.astro:75:          <Image
+src/components/widgets/Steps.astro:44:            <Image
+src/components/widgets/Hero.astro:89:                <Image
+src/components/widgets/Features3.astro:43:            <Image
+src/components/widgets/Brands.astro:44:                  <Image
+src/components/widgets/Content.astro:78:                <Image
+src/components/widgets/Testimonials.astro:46:                      <Image
+src/components/widgets/Hero2.astro:82:                <Image

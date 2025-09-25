@@ -58,12 +58,30 @@ const breadcrumbList =
       }
     : null;
 
-const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []), ...schemaExtras];
-const pageTitle = Astro.props?.metadata?.title ?? Astro.props?.title ?? 'Lilos Growth';
-const pageDesc =
-  Astro.props?.metadata?.description ??
-  Astro.props?.description ??
-  'Get more calls and booked jobs with Local SEO, GBP, and conversion-ready websites.';
+/**
+ * Ensure we only output one JSON-LD per @type/@id.
+ * If no @id is present, we keep the first occurrence of that @type.
+ * This prevents duplicate BreadcrumbList/LocalBusiness when pages also inject schema.
+ */
+function uniqueByTypeId(nodes: any[]): any[] {
+  const seen = new Set<string>();
+  return nodes.filter((n) => {
+    if (!n || typeof n !== 'object') return false;
+    const rawType = (Array.isArray(n['@type']) ? n['@type'].join('|') : String(n['@type'] ?? ''));
+    const id = typeof n['@id'] === 'string' ? n['@id'] : '';
+    const key = `${rawType}#${id}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+const schemaNodes = uniqueByTypeId([
+  localBusiness,
+  ...(breadcrumbList ? [breadcrumbList] : []),
+  ...schemaExtras,
+]);
+
 ---
 
 <Layout {title} {description} {lang} {bodyClass} {metadata}>
@@ -82,7 +100,9 @@ const pageDesc =
 
   <Footer />
 
-  {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />)}
+  {schemaNodes.map((node) => (
+    <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />
+  ))}
 
   <script is:inline>
     document.addEventListener('click', (e) => {

@@ -1,0 +1,63 @@
+src/layouts/PageLayout.astro.bak_titledesc_20250911-150409:19:  schema?: unknown[];
+src/layouts/PageLayout.astro.bak_titledesc_20250911-150409:33:  schema: schemaExtras = [],
+src/layouts/PageLayout.astro.bak_titledesc_20250911-150409:40:  '@context': 'https://schema.org',
+src/layouts/PageLayout.astro.bak_titledesc_20250911-150409:50:        '@context': 'https://schema.org',
+src/layouts/PageLayout.astro.bak_titledesc_20250911-150409:61:const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []), ...schemaExtras];
+src/layouts/PageLayout.astro.bak_titledesc_20250911-150409:85:  {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />)}
+src/layouts/PageLayout.astro:19:  schema?: unknown[];
+src/layouts/PageLayout.astro:33:  schema: schemaExtras = [],
+src/layouts/PageLayout.astro:40:  '@context': 'https://schema.org',
+src/layouts/PageLayout.astro:50:        '@context': 'https://schema.org',
+src/layouts/PageLayout.astro:61:const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []), ...schemaExtras];
+src/layouts/PageLayout.astro:85:  {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />)}
+src/layouts/PageLayout.astro.bak_titledesc_20250911-145854:19:  schema?: unknown[];
+src/layouts/PageLayout.astro.bak_titledesc_20250911-145854:33:  schema: schemaExtras = [],
+src/layouts/PageLayout.astro.bak_titledesc_20250911-145854:40:  '@context': 'https://schema.org',
+src/layouts/PageLayout.astro.bak_titledesc_20250911-145854:50:        '@context': 'https://schema.org',
+src/layouts/PageLayout.astro.bak_titledesc_20250911-145854:61:const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []), ...schemaExtras];
+src/layouts/PageLayout.astro.bak_titledesc_20250911-145854:83:  {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />)}
+src/layouts/PageLayout.astro.bak_titledesc_20250911-144853:19:  schema?: unknown[];
+src/layouts/PageLayout.astro.bak_titledesc_20250911-144853:33:  schema: schemaExtras = [],
+src/layouts/PageLayout.astro.bak_titledesc_20250911-144853:40:  '@context': 'https://schema.org',
+src/layouts/PageLayout.astro.bak_titledesc_20250911-144853:50:        '@context': 'https://schema.org',
+src/layouts/PageLayout.astro.bak_titledesc_20250911-144853:61:const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []), ...schemaExtras];
+src/layouts/PageLayout.astro.bak_titledesc_20250911-144853:80:  {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />)}
+src/layouts/PageLayout.astro.bak.1758783943:15:  schema?: any[];
+src/layouts/PageLayout.astro.bak.1758783943:25:  schema = [],
+src/layouts/PageLayout.astro.bak.1758783943:52:      Array.isArray(schema) &&
+src/layouts/PageLayout.astro.bak.1758783943:53:        schema.map((s) => <script type="application/ld+json" is:inline set:html={JSON.stringify(s)} />)
+src/layouts/PageLayout.astro.bak_meta_20250911-153317:19:  schema?: unknown[];
+src/layouts/PageLayout.astro.bak_meta_20250911-153317:33:  schema: schemaExtras = [],
+src/layouts/PageLayout.astro.bak_meta_20250911-153317:40:  '@context': 'https://schema.org',
+src/layouts/PageLayout.astro.bak_meta_20250911-153317:50:        '@context': 'https://schema.org',
+src/layouts/PageLayout.astro.bak_meta_20250911-153317:61:const schemaNodes = [localBusiness, ...(breadcrumbList ? [breadcrumbList] : []), ...schemaExtras];
+src/layouts/PageLayout.astro.bak_meta_20250911-153317:85:  {schemaNodes.map((node) => <script type="application/ld+json" set:html={JSON.stringify(node)} is:inline />)}
+src/pages/local-seo-tools/index.astro:16:  '@context': 'https://schema.org',
+src/pages/local-seo-tools/index.astro:240:        <!-- FAQ Schema -->
+src/pages/local-seo-tools/index.astro:242:          <h4 class="text-lg font-heading font-bold text-heading mb-2">FAQ Schema Generator</h4>
+src/pages/local-seo-tools/index.astro:259:              >Generate Schema</button
+src/pages/local-seo-tools/index.astro:333:        <!-- Local Business Schema -->
+src/pages/local-seo-tools/index.astro:335:          <h4 class="text-lg font-heading font-bold text-heading mb-2">Local Business Schema Generator</h4>
+src/pages/local-seo-tools/index.astro:385:              >Generate Schema</button
+src/pages/index.astro:275:            Make pages quotable in AI Overviews and assistants. We structure content and schema so AI can find,
+src/pages/index.astro:280:            <li>Schema: LocalBusiness, Service, FAQ, HowTo</li>
+src/pages/index.astro:782:    "@context": "https://schema.org",
+src/pages/index.astro:823:        "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "USD" }
+src/pages/index.astro:834:<!-- FAQPage schema (safe, add-only) -->
+src/pages/index.astro:837:    "@context": "https://schema.org",
+src/pages/_results.astro.bak_cta-contrast_20250912-151650:42:const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: caseList };
+src/pages/_results.astro.bak_cta-contrast_20250912-151650:52:        '@context': 'https://schema.org',
+src/pages/_results.astro.bak_cta-contrast_20250912-151650:67:        '@context': 'https://schema.org',
+src/pages/_results.astro.bak_cta-contrast_20250912-151650:89:        '@context': 'https://schema.org',
+src/pages/_results.astro.bak_cta-contrast_20250912-151650:276:    "@context": "https://schema.org",
+src/pages/services/web-design/index.astro:338:              <li>On-page SEO setup (titles, meta, schema)</li>
+src/pages/services/web-design/index.astro:478:    "@context": "https://schema.org",
+src/pages/services/index.astro:415:    "@context": "https://schema.org",
+src/pages/services/google-business-profile-optimization/index.astro:380:    "@context": "https://schema.org",
+src/pages/services/local-seo/index.astro:380:              <li>On-page SEO setup (titles, meta, schema)</li>
+src/pages/services/local-seo/index.astro:504:    "@context": "https://schema.org",
+src/pages/results.astro:42:const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: caseList };
+src/pages/results.astro:52:        '@context': 'https://schema.org',
+src/pages/results.astro:67:        '@context': 'https://schema.org',
+src/pages/results.astro:89:        '@context': 'https://schema.org',
+src/pages/results.astro:285:    "@context": "https://schema.org",

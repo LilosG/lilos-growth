@@ -1,0 +1,3 @@
+src/components/Logo.astro
+src/components/Favicons.astro
+src/components/CustomStyles.astro

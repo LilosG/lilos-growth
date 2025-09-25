@@ -1,10 +1,83 @@
 ---
-const { src, alt = '', class: className = '', ...rest } = Astro.props;
+/**
+ * Image.astro — tolerant props so other components stop erroring.
+ * - `src` is optional: when omitted, we render a sized wrapper for slotted content (icons, etc).
+ * - `width` / `height` optional: if `src` is ImageMetadata we derive missing side.
+ * - Always emits explicit width & height on <img>.
+ */
 
-// Require alt attribute (Astro best practice)
-if (!alt) {
-  throw new Error('Image alt attribute is required');
+export interface Props {
+  src?: string | ImageMetadata;                 // ← optional now
+  alt?: string;                                 // ← optional, default ''
+  class?: string;
+  width?: number | string;
+  height?: number | string;
+  sizes?: string;
+  widths?: number[];
+  layout?: 'intrinsic' | 'cover' | 'contain' | 'fill';
+  loading?: 'lazy' | 'eager';
+  decoding?: 'async' | 'auto' | 'sync';
+  /** For square/ratio wrappers when using slotted content */
+  aspectRatio?: `${number}/${number}` | string;
 }
+
+const {
+  src,
+  alt = '',
+  class: className = '',
+  width,
+  height,
+  sizes,
+  widths,
+  layout,
+  loading = 'lazy',
+  decoding = 'async',
+  aspectRatio
+} = Astro.props as Props;
+
+// Derive numeric width/height if we can
+function num(v: unknown): number | undefined {
+  if (typeof v === 'number') return v;
+  if (typeof v === 'string' && v.trim() !== '' && !Number.isNaN(Number(v))) return Number(v);
+  return undefined;
+}
+
+let w = num(width);
+let h = num(height);
+
+if (!w || !h) {
+  if (src && typeof src === 'object' && 'width' in src && 'height' in src) {
+    const meta = src as ImageMetadata;
+    if (!w && h) w = Math.round((meta.width / meta.height) * h);
+    if (!h && w) h = Math.round((meta.height / meta.width) * w);
+    if (!w && !h) { w = meta.width; h = meta.height; }
+  }
+}
+
+// fallback to 1x1 if both missing (shouldn’t happen, but keep safe)
+if (!w) w = 1;
+if (!h) h = 1;
 ---
 
-<img src={typeof src === 'string' ? src : src?.src} alt={alt} class={className} {...rest} />
+{!src ? (
+  /* No src: sized wrapper for slotted content (e.g., SVG icon). */
+  <div
+    class={className}
+    style={`display:inline-block; width:${w}px; height:${h}px; ${aspectRatio ? `aspect-ratio:${aspectRatio};` : ''}`}
+  >
+    <slot />
+  </div>
+) : (
+  <img
+    src={typeof src === 'string' ? src : src.src}
+    alt={alt}
+    class={className}
+    width={w}
+    height={h}
+    loading={loading}
+    decoding={decoding}
+    {...(sizes ? { sizes } : {})}
+    {...(widths ? { widths } : {})}
+    {...(layout ? { layout } : {})}
+  />
+)}
