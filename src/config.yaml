@@ -18,7 +18,7 @@ metadata:
   openGraph:
     site_name: Lilos Growth
     images:
-      - url: '~/assets/images/default.png'
+      - url: 'https://lilosgrowth.com/assets/images/default.png'
         width: 1200
         height: 628
     type: website
