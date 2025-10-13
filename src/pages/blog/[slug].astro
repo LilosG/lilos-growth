@@ -1,0 +1,40 @@
+---
+import Layout from "~/layouts/PageLayout.astro";
+import BlogPost from "../../layouts/BlogPost.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
+import TagPill from "../../components/TagPill.astro";
+import { getCollection } from "astro:content";
+import { getSlug, allowDrafts, type BlogEntry } from "../../lib/blog";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog")) as BlogEntry[];
+  const published = posts.filter((p: BlogEntry) => allowDrafts() || !p.data.draft);
+  return published.map((p: BlogEntry) => ({ params: { slug: getSlug(p) }, props: { entry: p } }));
+}
+
+const { entry } = Astro.props as { entry: BlogEntry };
+const data = entry.data;
+
+const all = (await getCollection("blog")) as BlogEntry[];
+const others = all.filter((p: BlogEntry) => getSlug(p) !== getSlug(entry) && (allowDrafts() || !p.data.draft));
+
+const byTag = new Set<string>((data.tags || []) as string[]);
+const related = others
+  .map((p: BlogEntry) => {
+    const overlap = (p.data.tags || []).filter((t: string) => byTag.has(t)).length;
+    return { slug: getSlug(p), title: p.data.title, datePublished: p.data.datePublished, category: p.data.category, score: overlap };
+  })
+  .sort((a, b) => (b.score - a.score) || (new Date(b.datePublished || "").getTime() - new Date(a.datePublished || "").getTime()))
+  .slice(0, 3);
+---
+<Layout title={data.title} description={data.description}>
+  <BlogPost frontmatter={data}>
+    <slot />
+    {data.tags && data.tags.length > 0 && (
+      <div class="mt-10 flex flex-wrap gap-2">
+        {data.tags.map((t: string) => <TagPill tag={t} />)}
+      </div>
+    )}
+    <RelatedPosts posts={related} />
+  </BlogPost>
+</Layout>

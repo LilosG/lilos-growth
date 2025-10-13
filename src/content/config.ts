@@ -1,70 +1,47 @@
-import { z, defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { defineCollection, z } from "astro:content";
 
-const metadataDefinition = () =>
-  z
-    .object({
-      title: z.string().optional(),
-      ignoreTitleTemplate: z.boolean().optional(),
-
-      canonical: z.string().url().optional(),
-
-      robots: z
-        .object({
-          index: z.boolean().optional(),
-          follow: z.boolean().optional(),
-        })
-        .optional(),
-
-      description: z.string().optional(),
-
-      openGraph: z
-        .object({
-          url: z.string().optional(),
-          siteName: z.string().optional(),
-          images: z
-            .array(
-              z.object({
-                url: z.string(),
-                width: z.number().optional(),
-                height: z.number().optional(),
-              })
-            )
-            .optional(),
-          locale: z.string().optional(),
-          type: z.string().optional(),
-        })
-        .optional(),
-
-      twitter: z
-        .object({
-          handle: z.string().optional(),
-          site: z.string().optional(),
-          cardType: z.string().optional(),
-        })
-        .optional(),
-    })
-    .optional();
-
-const postCollection = defineCollection({
-  loader: glob({ pattern: ['*.md', '*.mdx'], base: 'src/data/post' }),
-  schema: z.object({
-    publishDate: z.date().optional(),
-    updateDate: z.date().optional(),
-    draft: z.boolean().optional(),
-
-    title: z.string(),
-    excerpt: z.string().optional(),
-    image: z.string().optional(),
-
-    category: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-    author: z.string().optional(),
-
-    metadata: metadataDefinition(),
-  }),
+const ImageObj = z.object({
+  src: z.string(),
+  alt: z.string().default(""),
+  width: z.number().optional(),
+  height: z.number().optional()
 });
 
-export const collections = {
-  post: postCollection,
-};
+const FaqItem = z.object({ q: z.string(), a: z.string() });
+
+const blog = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string().max(155),
+    slug: z.string().optional(),
+    // Accept string or date for resilience to YAML parsing
+    datePublished: z.union([z.string(), z.date()]).optional(),
+    dateModified: z.union([z.string(), z.date()]).optional(),
+    author: z.string().optional().default(""),
+    tags: z.array(z.string()).optional().default([]),
+    category: z.string().optional().default("General"),
+    image: z.union([z.string(), ImageObj]).optional(),
+    draft: z.boolean().optional().default(false),
+    canonical: z.string().url().optional(),
+    faq: z.array(FaqItem).optional(),
+    // Back-compat with existing content that may use pubDate
+    pubDate: z.union([z.string(), z.date()]).optional()
+  })
+});
+
+// Optional authors collection to remove auto-generate warning if folder exists
+const authors = defineCollection({
+  type: "content",
+  schema: z.object({
+    name: z.string(),
+    role: z.string().optional(),
+    bio: z.string().optional(),
+    avatar: z.union([z.string(), ImageObj]).optional(),
+    url: z.string().url().optional(),
+    twitter: z.string().optional(),
+    linkedin: z.string().optional()
+  })
+});
+
+export const collections = { blog, authors };

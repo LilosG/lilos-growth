@@ -1,4 +1,5 @@
 ---
+// src/pages/index.astro
 import Layout from '~/layouts/PageLayout.astro';
 
 export const title = 'Local SEO & Websites for Home Service Pros | Lilos Growth';
@@ -497,6 +498,7 @@ export const metadata = {
         Choose the package that fits your goals. No contracts. Real results.
       </p>
 
+      <!-- Equal-height cards with anchored CTAs and a nested "Upgrade" panel (Option A) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 items-stretch auto-rows-fr">
         <!-- GBP -->
         <article class="h-full bg-white rounded-3xl shadow-md border border-gray-200 p-8 flex flex-col relative">
@@ -512,22 +514,25 @@ export const metadata = {
           </header>
 
           <ul class="text-body text-[15px] space-y-2 list-disc pl-5 mt-4.5">
-            <li>GBP setup or audit</li>
-            <li>Monthly listing updates & photos</li>
-            <li>Category & keyword targeting</li>
-            <li>Basic performance tracking</li>
-            <li>Q&A and Services setup for key offerings</li>
+            <li>Complete setup or audit with category &amp; keyword targeting</li>
+            <li>Ongoing profile optimization &amp; listing updates</li>
+            <li>Review generation + reply support</li>
+            <li>EXIF-optimized photos (proper sizing, filenames &amp; alt text)</li>
+            <li>Monthly performance snapshot</li>
           </ul>
 
+          <!-- Upgrade panel (nested, same-family) -->
           <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-4 md:min-h-48 lg:min-h-[220px]">
             <div class="font-semibold text-[#f56b2a] mb-1">
-              Boost Add-on + <span class="font-bold">$300/mo</span> (Total $499)
+              Upgrade: <span class="font-bold">Growth — $399/mo</span>
             </div>
             <ul class="text-body text-[15px] space-y-2 list-disc pl-5">
-              <li>Weekly posts & updates</li>
-              <li>Review request & response strategy</li>
-              <li>Competitor monitoring & insights</li>
-              <li>Citation build & cleanup: 500+ listings + manual BBB, Bing, YP, Yelp</li>
+              <li>Everything in Starter, plus done-for-you review replies</li>
+              <li>Geo-grid heatmap tracking &amp; competitor insights</li>
+              <li>Citation build/cleanup on <span class="font-semibold">200+ directories</span> (core + industry)</li>
+              <li>Call tracking number &amp; conversion dashboard</li>
+              <li>Ongoing photo/video updates with EXIF optimization</li>
+              <li>Quarterly strategy tune-up</li>
             </ul>
           </div>
 
@@ -562,21 +567,24 @@ export const metadata = {
           </header>
 
           <ul class="text-body text-[15px] space-y-2 list-disc pl-5 mt-4.5">
-            <li>SEO audit, keyword research & on-page fixes</li>
-            <li>Technical SEO improvements</li>
-            <li><span class="font-semibold">5</span> new service/location pages / mo</li>
-            <li><span class="font-semibold">5</span> blog posts / mo</li>
+            <li>
+              Baseline technical/site optimization (speed, CWV, meta titles/descriptions, headers &amp; internal links)
+            </li>
+            <li>Content cleanup &amp; on-page fixes across priority pages</li>
+            <li>Keyword research &amp; tracking setup</li>
+            <li>Regular service/location pages &amp; helpful blog content (no rigid caps)</li>
+            <li>Citation sync with GBP &amp; site; unified reporting with lead tracking</li>
           </ul>
 
           <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-4 md:min-h-48 lg:min-h-[220px]">
             <div class="font-semibold text-[#f56b2a] mb-1">
-              Boost Add-on + <span class="font-bold">$300/mo</span> (Total $799)
+              Upgrade: <span class="font-bold">Growth — $899/mo</span>
             </div>
             <ul class="text-body text-[15px] space-y-2 list-disc pl-5">
-              <li><span class="font-semibold">10–15</span> new service/location pages / mo</li>
-              <li><span class="font-semibold">10</span> blog posts / mo</li>
-              <li>Citation build & cleanup (software + manual core listings)</li>
-              <li>Competitor tracking & monthly strategy call</li>
+              <li>Expanded on-page SEO across the site &amp; new content velocity</li>
+              <li>Schema enhancements &amp; internal linking strategy</li>
+              <li>Local link-building + competitor tracking &amp; monthly strategy call</li>
+              <li>Heatmaps &amp; conversion tracking on landing pages</li>
             </ul>
           </div>
 
@@ -591,7 +599,7 @@ export const metadata = {
           </div>
         </article>
 
-        <!-- WaaS -->
+        <!-- Website as a Service -->
         <article class="h-full bg-white rounded-3xl shadow-md border border-gray-200 p-8 flex flex-col relative">
           <header class="text-center">
             <h3 class="text-lg font-heading font-bold text-heading">Website as a Service</h3>
@@ -600,26 +608,26 @@ export const metadata = {
               Best for: Modern, Conversion-Ready Sites
             </span>
             <div class="text-2xl font-bold text-[#f56b2a] mt-4">
-              $250<span class="text-sm font-normal text-gray-500">/mo</span>
+              $199<span class="text-sm font-normal text-gray-500">/mo</span>
             </div>
           </header>
 
           <ul class="text-body text-[15px] space-y-2 list-disc pl-5 mt-4.5">
-            <li>Mobile-friendly, SEO-ready design</li>
-            <li>Secure hosting & monitoring</li>
-            <li>Updates for up to 5 pages / mo</li>
-            <li>Lead form integration & monthly health check</li>
+            <li>Modern, mobile-first design with SEO-ready structure</li>
+            <li>Secure hosting, SSL &amp; monitoring</li>
+            <li>Unlimited edits via ticket system</li>
+            <li>Lead forms/integrations &amp; monthly site health check</li>
+            <li>Analytics setup &amp; basic schema</li>
           </ul>
 
           <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-4 md:min-h-48 lg:min-h-[220px]">
             <div class="font-semibold text-[#f56b2a] mb-1">
-              Boost Add-on + <span class="font-bold">$500/mo</span> (Total $750)
+              Upgrade: <span class="font-bold">Plus — $349/mo</span>
             </div>
             <ul class="text-body text-[15px] space-y-2 list-disc pl-5">
-              <li>Updates for up to 15 pages / mo</li>
-              <li>New landing pages & CRO improvements</li>
-              <li>Quarterly design refresh & content review</li>
-              <li>Priority support (48-hour turnaround)</li>
+              <li>Quarterly design refresh &amp; content review</li>
+              <li>New landing pages &amp; CRO improvements as needed</li>
+              <li>Priority support (faster turnaround)</li>
             </ul>
           </div>
 
@@ -634,7 +642,7 @@ export const metadata = {
           </div>
         </article>
 
-        <!-- Combo -->
+        <!-- Bundle -->
         <article class="h-full bg-white rounded-3xl shadow-md border border-gray-200 p-8 flex flex-col relative">
           <header class="text-center">
             <h3 class="text-lg font-heading font-bold text-heading">Local SEO + GBP Mgmt</h3>
@@ -648,21 +656,18 @@ export const metadata = {
           </header>
 
           <ul class="text-body text-[15px] space-y-2 list-disc pl-5 mt-4.5">
-            <li>Includes Local SEO Base + GBP Base</li>
+            <li>Includes Local SEO Essentials + GBP Growth</li>
             <li>Unified reporting dashboard</li>
             <li>Monthly rank/map visibility review</li>
             <li>Quarterly competitor snapshot</li>
           </ul>
 
           <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4 mt-4 md:min-h-48 lg:min-h-[220px]">
-            <div class="font-semibold text-[#f56b2a] mb-1">
-              Boost Add-on + <span class="font-bold">$500/mo</span> (Total $1,299)
-            </div>
+            <div class="font-semibold text-[#f56b2a] mb-1">Upgrade: <span class="font-bold">Pro — $1,299/mo</span></div>
             <ul class="text-body text-[15px] space-y-2 list-disc pl-5">
-              <li>Includes Local SEO Boost + GBP Boost</li>
-              <li>Citation build & cleanup (software + manual core listings)</li>
+              <li>Advanced link-building &amp; content velocity</li>
+              <li>GBP geo-grid tracking across service area</li>
               <li>Custom quarterly local growth plan</li>
-              <li>GBP heatmap tracking across service area</li>
               <li>Priority support</li>
             </ul>
           </div>

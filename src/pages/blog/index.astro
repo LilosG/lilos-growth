@@ -1,27 +1,49 @@
 ---
-import PageLayout from '~/layouts/PageLayout.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Layout from "~/layouts/PageLayout.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import { getCollection } from "astro:content";
 
-export const robots = 'index, follow';
+const page = Math.max(1, Number(Astro.url.searchParams.get("page") || "1"));
+const pageSize = 9;
+const allowDrafts = import.meta.env.LOCAL_DRAFTS === "1";
 
-const title = 'Blog | Lilos Growth';
-const description =
-  'Insights on Local SEO, Google Business Profile, and conversion-focused websites for home-service pros.';
+const posts = (await getCollection("blog"))
+  .filter((e) => allowDrafts || !e.data.draft)
+  .sort((a, b) => new Date(b.data.datePublished || 0).getTime() - new Date(a.data.datePublished || 0).getTime());
 
-const breadcrumbs: { name: string; item: string }[] = [
-  { name: 'Home', item: '/' },
-  { name: 'Blog', item: '/blog' },
-];
+const total = posts.length;
+const start = (page - 1) * pageSize;
+const end = start + pageSize;
+const slice = posts.slice(start, end);
+const totalPages = Math.max(1, Math.ceil(total / pageSize));
 ---
+<Layout title="Blog" description="Publish at volume, win long-tail, and convert more local jobs.">
+  <section class="bg-white">
+    <div class="max-w-6xl mx-auto px-4 py-10 md:py-12">
+      <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">Blog</h1>
+      <p class="mt-2 text-slate-600">Publish at volume, win long-tail, and convert more local jobs.</p>
 
-<PageLayout {title} {description} {breadcrumbs}>
-  <section class="container mx-auto max-w-5xl px-6 md:px-8 py-16 md:py-24">
-    <h1 class="font-heading text-4xl md:text-5xl tracking-tight">Blog</h1>
-    <p class="mt-3 text-base md:text-lg text-gray-600">
-      Articles on Local SEO, Google Business Profile, and high-converting websites—written for home-service businesses.
-    </p>
-    <div class="mt-10">
-      <BlogLatestPosts />
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {slice.map((p) => (
+          <BlogCard
+            href={`/blog/${p.data.slug}`}
+            title={p.data.title}
+            description={p.data.description}
+            image={typeof p.data.image === "string" ? p.data.image : p.data.image?.src}
+            datePublished={p.data.datePublished}
+            category={p.data.category}
+            tags={p.data.tags}
+          />
+        ))}
+      </div>
+
+      {totalPages > 1 && (
+        <nav class="mt-10 flex items-center justify-center gap-3">
+          <a href={`/blog${page > 2 ? `?page=${page - 1}` : page > 1 ? `` : ``}`} class="px-4 py-2 rounded-xl border border-slate-200 text-slate-700 hover:text-slate-900" aria-disabled={page === 1}>Prev</a>
+          <span class="text-sm text-slate-600">Page {page} of {totalPages}</span>
+          <a href={`/blog?page=${Math.min(totalPages, page + 1)}`} class="px-4 py-2 rounded-xl border border-slate-200 text-slate-700 hover:text-slate-900" aria-disabled={page === totalPages}>Next</a>
+        </nav>
+      )}
     </div>
   </section>
-</PageLayout>
+</Layout>

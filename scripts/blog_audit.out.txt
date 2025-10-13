@@ -1,0 +1,694 @@
+CURRENT_DIR
+/Users/michaelprickett/lilos-growth
+NODE_NPM_VERSIONS
+v22.19.0
+10.9.3
+ASTRO_VERSION
+
+   astro  v5.13.3
+PACKAGE_JSON
+{
+  "name": "lilos-growth",
+  "version": "1.0.0-beta.52",
+  "description": "AstroWind: A free template using Astro 5.0 and Tailwind CSS. Astro starter theme.",
+  "type": "module",
+  "engines": {
+    "node": "^18.17.1 || ^20.3.0 || >= 21.0.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "npm run check:astro && npm run check:eslint && npm run check:prettier",
+    "check:astro": "astro check",
+    "check:eslint": "eslint .",
+    "check:prettier": "prettier --check .",
+    "fix": "npm run fix:eslint && npm run fix:prettier",
+    "fix:eslint": "eslint --fix .",
+    "fix:prettier": "prettier -w .",
+    "postbuild": "node scripts/ensure-blog-in-sitemap.mjs"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.12",
+    "@astrojs/sitemap": "^3.4.2",
+    "@astrolib/analytics": "^0.6.1",
+    "@astrolib/seo": "^1.0.0-beta.8",
+    "@fontsource-variable/inter": "^5.2.5",
+    "astro-embed": "^0.9.0",
+    "astro-icon": "^1.1.5",
+    "limax": "4.1.0",
+    "lodash.merge": "^4.6.2",
+    "unpic": "^4.1.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^4.3.3",
+    "@astrojs/partytown": "^2.1.4",
+    "@astrojs/tailwind": "^6.0.2",
+    "@astrojs/vercel": "^8.2.6",
+    "@eslint/js": "^9.24.0",
+    "@iconify-json/flat-color-icons": "^1.2.1",
+    "@iconify-json/tabler": "^1.2.17",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/js-yaml": "^4.0.9",
+    "@types/lodash.merge": "^4.6.9",
+    "@types/mdx": "^2.0.13",
+    "@typescript-eslint/eslint-plugin": "^8.30.1",
+    "@typescript-eslint/parser": "^8.30.1",
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
+    "astro": "^5.13.3",
+    "astro-compress": "2.3.8",
+    "astro-eslint-parser": "^1.2.2",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.24.0",
+    "eslint-plugin-astro": "^1.3.1",
+    "globals": "^16.0.0",
+    "js-yaml": "^4.1.0",
+    "mdast-util-to-string": "^4.0.0",
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "reading-time": "^1.5.0",
+    "sharp": "0.34.1",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.30.1",
+    "unist-util-visit": "^5.0.0"
+  }
+}
+ASTRO_CONFIG
+// FILE: astro.config.ts
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { defineConfig } from 'astro/config';
+
+import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
+import mdx from '@astrojs/mdx';
+// import partytown from '@astrojs/partytown';
+import icon from 'astro-icon';
+import compress from 'astro-compress';
+
+import astrowind from './vendor/integration';
+import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default defineConfig({
+  site: 'https://lilosgrowth.com',
+  output: 'static',
+
+  integrations: [
+    tailwind({ applyBaseStyles: false }),
+    sitemap({ customPages: ['https://lilosgrowth.com/blog'] }),
+    mdx(),
+    icon({
+      include: {
+        tabler: ['*'],
+        'flat-color-icons': [
+          'template',
+          'gallery',
+          'approval',
+          'document',
+          'advertising',
+          'currency-exchange',
+          'voice-presentation',
+          'business-contact',
+          'database',
+        ],
+      },
+    }),
+    compress({
+      CSS: true,
+      HTML: { 'html-minifier-terser': { removeAttributeQuotes: false } },
+      Image: false,
+      JavaScript: true,
+      SVG: false,
+      Logger: 1,
+    }),
+    astrowind({ config: './src/config.yaml' }),
+  ],
+
+  markdown: {
+    remarkPlugins: [readingTimeRemarkPlugin],
+    rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
+    syntaxHighlight: 'shiki',
+    shikiConfig: {
+      // Map ```astro fences to HTML highlighting to avoid Shiki warnings without adding deps
+      langAlias: { astro: 'html' },
+    },
+  },
+
+  vite: {
+    resolve: {
+      alias: {
+        '~': path.resolve(__dirname, './src'),
+      },
+    },
+  },
+});
+TAILWIND_CONFIG
+import plugin from 'tailwindcss/plugin';
+import typographyPlugin from '@tailwindcss/typography';
+
+export default {
+  content: ['./src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: 'class',
+
+  theme: {
+    container: {
+      center: true,
+      padding: { DEFAULT: '1rem', md: '1.5rem' },
+    },
+    extend: {
+      colors: {
+        primary: '#f56b2a',
+        primaryHover: '#e65c1e',
+        secondary: '#1f2d3d',
+        heading: '#1f2d3d',
+        body: '#4a4a4a',
+        cream: '#fff9f6',
+        bluelight: '#f0f4f8',
+        graylight: '#f8fafc',
+        pattern: '#eaeaea',
+      },
+      fontFamily: {
+        heading: ['Poppins', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+      },
+      fontSize: {
+        base: ['16px', { lineHeight: '1.7' }],
+        sm: ['15px', { lineHeight: '1.6' }],
+        lg: ['18px', { lineHeight: '1.6' }],
+        xl: ['20px', { lineHeight: '1.3' }],
+        '2xl': ['24px', { lineHeight: '1.2' }],
+        '3xl': ['28px', { lineHeight: '1.2' }],
+        '4xl': ['32px', { lineHeight: '1.1' }],
+        '5xl': ['36px', { lineHeight: '1.1' }],
+        '6xl': ['44px', { lineHeight: '1.05' }],
+      },
+      maxWidth: {
+        '2xl': '40rem',
+        '3xl': '48rem',
+        '4xl': '56rem',
+        '5xl': '64rem',
+        '6xl': '72rem',
+      },
+      spacing: {
+        4: '1rem',
+        5: '1.25rem',
+        6: '1.5rem',
+        7: '1.75rem',
+        8: '2rem',
+        10: '2.5rem',
+        12: '3rem',
+        16: '4rem',
+        20: '5rem',
+        24: '6rem',
+        28: '7rem',
+        32: '8rem',
+      },
+      borderRadius: { xl: '1rem', '2xl': '1.5rem', '3xl': '2rem', full: '9999px' },
+      animation: { fade: 'fadeInUp 1s both' },
+      keyframes: {
+        fadeInUp: {
+          '0%': { opacity: 0, transform: 'translateY(2rem)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+      },
+      boxShadow: {
+        xl: '0 10px 40px -10px rgba(31,45,61,.12), 0 2px 8px rgba(31,45,61,.06)',
+        'outline-primary': '0 0 0 3px #f56b2a40',
+      },
+      borderWidth: { 3: '3px', 6: '6px' },
+      zIndex: { 60: '60' },
+
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            '--tw-prose-body': theme('colors.body'),
+            '--tw-prose-headings': theme('colors.heading'),
+            '--tw-prose-links': theme('colors.heading'),
+            '--tw-prose-bold': theme('colors.heading'),
+            '--tw-prose-bullets': theme('colors.body'),
+            maxWidth: '100%',
+            a: {
+              textDecoration: 'underline',
+              textDecorationThickness: '1px',
+              textUnderlineOffset: '4px',
+              '&:hover': { color: theme('colors.primary') },
+            },
+            h1: { letterSpacing: '-0.02em', lineHeight: '1.15', marginBottom: '0.5em' },
+            h2: { letterSpacing: '-0.01em', lineHeight: '1.2', marginTop: '1.2em', marginBottom: '0.6em' },
+            h3: { letterSpacing: '-0.005em', lineHeight: '1.25', marginTop: '1em', marginBottom: '0.5em' },
+            p: { lineHeight: '1.75' },
+            ul: { marginTop: '0.75em', marginBottom: '0.75em' },
+            'ul > li': { marginTop: '0.35em', marginBottom: '0.35em' },
+            'code, kbd': {
+              backgroundColor: theme('colors.graylight'),
+              padding: '0.15em 0.35em',
+              borderRadius: '0.375rem',
+            },
+          },
+        },
+        invert: {
+          css: {
+            '--tw-prose-body': 'rgba(255,255,255,0.8)',
+            '--tw-prose-headings': '#fff',
+            '--tw-prose-links': theme('colors.primary'),
+            '--tw-prose-bold': '#fff',
+            '--tw-prose-bullets': 'rgba(255,255,255,0.8)',
+            a: { '&:hover': { color: theme('colors.primaryHover') } },
+            'code, kbd': { backgroundColor: 'rgba(255,255,255,0.08)' },
+          },
+        },
+      }),
+    },
+  },
+
+  plugins: [
+    typographyPlugin,
+    plugin(({ addVariant, addBase, addUtilities, addComponents, theme }) => {
+      addVariant('intersect', '&:not([no-intersect])');
+
+      addBase({
+        'html, body': { height: '100%' },
+        html: { scrollBehavior: 'smooth' },
+        body: {
+          minHeight: '100svh',
+          display: 'flex',
+          flexDirection: 'column',
+          margin: '0',
+          paddingBottom: '0',
+          overflowX: 'hidden',
+          backgroundColor: theme('colors.white'),
+        },
+        main: { flex: '1 1 auto' },
+        '#page > section:last-child': { marginBottom: '0', paddingBottom: '0' },
+        footer: { marginTop: 'auto' },
+      });
+
+      addUtilities(
+        {
+          '.sticky-cta': {
+            position: 'fixed',
+            right: '1rem',
+            bottom: 'max(1rem, env(safe-area-inset-bottom))',
+            zIndex: theme('zIndex.60'),
+          },
+          '.content-scale-95': { transform: 'scale(0.95)', transformOrigin: 'top center' },
+          '.content-scale-90': { transform: 'scale(0.90)', transformOrigin: 'top center' },
+        },
+        ['responsive']
+      );
+
+      // NOTE: each '@apply …' key must be a single, literal string.
+      addComponents({
+        '.focus-ring': {
+          '@apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]': {},
+        },
+        '.link-underline': {
+          '@apply decoration-1 underline-offset-4 hover:underline focus:underline focus-visible:underline': {},
+        },
+
+        '.btn': {
+          '@apply inline-flex items-center justify-center rounded-full font-semibold transition shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]':
+            {},
+        },
+        '.btn-sm': { '@apply px-4 py-2 text-[14px] leading-[22px]': {} },
+        '.btn-md': { '@apply px-5 py-2.5 text-[15px] leading-[22px]': {} },
+        '.btn-lg': { '@apply px-6 py-3 text-base leading-[24px]': {} },
+        '.btn-primary': { '@apply bg-[#f56b2a] text-white border border-[#f56b2a] hover:bg-[#e65c1e]': {} },
+        '.btn-secondary': {
+          '@apply bg-white text-[#253242] border border-gray-300 hover:bg-gray-50 hover:border-gray-400': {},
+        },
+        '.btn-outline-primary': {
+          '@apply bg-white text-[#f56b2a] border border-[#f56b2a] hover:bg-[#f56b2a] hover:text-white': {},
+        },
+      });
+    }),
+  ],
+};
+CONTENT_COLLECTION_CONFIG
+import { z, defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+
+const metadataDefinition = () =>
+  z
+    .object({
+      title: z.string().optional(),
+      ignoreTitleTemplate: z.boolean().optional(),
+
+      canonical: z.string().url().optional(),
+
+      robots: z
+        .object({
+          index: z.boolean().optional(),
+          follow: z.boolean().optional(),
+        })
+        .optional(),
+
+      description: z.string().optional(),
+
+      openGraph: z
+        .object({
+          url: z.string().optional(),
+          siteName: z.string().optional(),
+          images: z
+            .array(
+              z.object({
+                url: z.string(),
+                width: z.number().optional(),
+                height: z.number().optional(),
+              })
+            )
+            .optional(),
+          locale: z.string().optional(),
+          type: z.string().optional(),
+        })
+        .optional(),
+
+      twitter: z
+        .object({
+          handle: z.string().optional(),
+          site: z.string().optional(),
+          cardType: z.string().optional(),
+        })
+        .optional(),
+    })
+    .optional();
+
+const postCollection = defineCollection({
+  loader: glob({ pattern: ['*.md', '*.mdx'], base: 'src/data/post' }),
+  schema: z.object({
+    publishDate: z.date().optional(),
+    updateDate: z.date().optional(),
+    draft: z.boolean().optional(),
+
+    title: z.string(),
+    excerpt: z.string().optional(),
+    image: z.string().optional(),
+
+    category: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    author: z.string().optional(),
+
+    metadata: metadataDefinition(),
+  }),
+});
+
+export const collections = {
+  post: postCollection,
+};
+BLOG_PAGES
+total 24
+drwxr-xr-x@  7 michaelprickett  staff   224 Sep 25 08:29 .
+drwxrwxr-x  19 michaelprickett  staff   608 Oct  9 15:39 ..
+-rw-r--r--@  1 michaelprickett  staff  1656 Sep 25 08:29 [...page].astro
+-rw-r--r--@  1 michaelprickett  staff  1376 Sep 25 08:29 [...slug].astro
+drwxr-xr-x@  3 michaelprickett  staff    96 Sep 25 08:29 [category]
+drwxr-xr-x@  3 michaelprickett  staff    96 Sep 25 08:29 [tag]
+-rw-r--r--@  1 michaelprickett  staff   943 Sep 25 08:29 index.astro
+BLOG_COMPONENTS
+drwxrwxr-x  12 michaelprickett  staff    384 Sep 25 13:29 blog
+PUBLIC_FILES
+-rw-r--r--@  1 michaelprickett  staff       69 Sep  6 13:52 robots.txt
+ROBOTS_TXT
+User-agent: *
+Allow: /
+
+Sitemap: https://lilosgrowth.com/sitemap.xml
+SITEMAP_CONFIG
+./astro.config.ts:6:import sitemap from '@astrojs/sitemap';
+./node_modules/.package-lock.json:317:    "node_modules/@astrojs/sitemap": {
+./node_modules/.package-lock.json:319:      "resolved": "https://registry.npmjs.org/@astrojs/sitemap/-/sitemap-3.4.2.tgz",
+./node_modules/@astrojs/sitemap/dist/index.js:12:const PKG_NAME = "@astrojs/sitemap";
+./node_modules/@astrojs/sitemap/README.md:1:# @astrojs/sitemap 🗺
+./node_modules/@astrojs/sitemap/README.md:7:Read the [`@astrojs/sitemap` docs][docs]
+./node_modules/@astrojs/sitemap/package.json:2:  "name": "@astrojs/sitemap",
+./package-lock.json:12:        "@astrojs/sitemap": "^3.4.2",
+./package-lock.json:374:    "node_modules/@astrojs/sitemap": {
+./package-lock.json:376:      "resolved": "https://registry.npmjs.org/@astrojs/sitemap/-/sitemap-3.4.2.tgz",
+./package.json:26:    "@astrojs/sitemap": "^3.4.2",
+./scripts/blog_audit.sh:29:grep -R "@astrojs/sitemap" -n . || true
+./scripts/blog_audit.out.txt:35:    "@astrojs/sitemap": "^3.4.2",
+./scripts/blog_audit.out.txt:90:import sitemap from '@astrojs/sitemap';
+./.logs/build-step1.txt:82:12:14:45 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+./vendor/integration/index.ts:89:            cfg.integrations?.find((e) => e?.name === '@astrojs/sitemap') !== undefined;
+MDX_CONFIG
+./astro.config.ts:8:import mdx from '@astrojs/mdx';
+./node_modules/@astro-community/astro-embed-integration/index.ts:54:	const mdxIndex = indexOf('@astrojs/mdx');
+./node_modules/.package-lock.json:256:    "node_modules/@astrojs/mdx": {
+./node_modules/.package-lock.json:258:      "resolved": "https://registry.npmjs.org/@astrojs/mdx/-/mdx-4.3.3.tgz",
+./node_modules/@astrojs/mdx/dist/index.js:10:    serverEntrypoint: "@astrojs/mdx/server.js"
+./node_modules/@astrojs/mdx/dist/index.js:16:    name: "@astrojs/mdx",
+./node_modules/@astrojs/mdx/dist/vite-plugin-mdx-postprocess.js:12:    name: "@astrojs/mdx-postprocess",
+./node_modules/@astrojs/mdx/README.md:1:# @astrojs/mdx 📝
+./node_modules/@astrojs/mdx/README.md:7:Read the [`@astrojs/mdx` docs][docs]
+./node_modules/@astrojs/mdx/package.json:2:  "name": "@astrojs/mdx",
+./node_modules/astro/dist/types/public/config.d.ts:344:     * import mdx from '@astrojs/mdx';
+./node_modules/astro/dist/core/errors/errors-data.d.ts:1321: * Unable to find the official `@astrojs/mdx` integration. This error is raised when using MDX files without an MDX integration installed.
+./node_modules/astro/dist/core/errors/errors-data.js:497:  message: (file) => `Unable to render ${file}. Ensure that the \`@astrojs/mdx\` integration is installed.`,
+./node_modules/astro/dist/core/errors/dev/vite.js:42:    if (fileId && !renderers?.find((r) => r.name === "@astrojs/mdx") && safeError.message.includes("Syntax error") && /.mdx$/.test(fileId)) {
+./node_modules/eslint-plugin-astro/package.json:81:    "@astrojs/mdx": "^3.0.0",
+./node_modules/astro-auto-import/dist/index.js:86:                const mdxIndex = config.integrations.findIndex((i) => i.name === '@astrojs/mdx');
+./node_modules/astro-auto-import/dist/index.js:89:                    console.warn('[auto-import] ⚠️ @astrojs/mdx initialized BEFORE astro-auto-import.\n' +
+./node_modules/astro-auto-import/README.md:24:import mdx from '@astrojs/mdx';
+./package-lock.json:24:        "@astrojs/mdx": "^4.3.3",
+./package-lock.json:313:    "node_modules/@astrojs/mdx": {
+./package-lock.json:315:      "resolved": "https://registry.npmjs.org/@astrojs/mdx/-/mdx-4.3.3.tgz",
+./package.json:38:    "@astrojs/mdx": "^4.3.3",
+./scripts/blog_audit.sh:31:grep -R "@astrojs/mdx" -n . || true
+./scripts/blog_audit.out.txt:47:    "@astrojs/mdx": "^4.3.3",
+./scripts/blog_audit.out.txt:92:import mdx from '@astrojs/mdx';
+RSS_CONFIG
+./node_modules/.package-lock.json:307:    "node_modules/@astrojs/rss": {
+./node_modules/.package-lock.json:309:      "resolved": "https://registry.npmjs.org/@astrojs/rss/-/rss-4.0.12.tgz",
+./node_modules/@astrojs/rss/README.md:1:# @astrojs/rss 📖
+./node_modules/@astrojs/rss/README.md:7:See the [`@astrojs/rss` guide in the Astro docs][docs] for installation and usage examples.
+./node_modules/@astrojs/rss/README.md:32:import rss from '@astrojs/rss';
+./node_modules/@astrojs/rss/README.md:166:import rss from '@astrojs/rss';
+./node_modules/@astrojs/rss/README.md:209:import rss from '@astrojs/rss';
+./node_modules/@astrojs/rss/README.md:223:import { rssSchema } from '@astrojs/rss';
+./node_modules/@astrojs/rss/README.md:236:import { rssSchema } from '@astrojs/rss';
+./node_modules/@astrojs/rss/README.md:251:import rss, { pagesGlobToRssItems } from '@astrojs/rss';
+./node_modules/@astrojs/rss/README.md:269:import { getRssString } from '@astrojs/rss';
+./node_modules/@astrojs/rss/package.json:2:  "name": "@astrojs/rss",
+./package-lock.json:11:        "@astrojs/rss": "^4.0.12",
+./package-lock.json:364:    "node_modules/@astrojs/rss": {
+./package-lock.json:366:      "resolved": "https://registry.npmjs.org/@astrojs/rss/-/rss-4.0.12.tgz",
+./package.json:25:    "@astrojs/rss": "^4.0.12",
+./scripts/blog_audit.sh:33:grep -R "@astrojs/rss" -n . || true
+./scripts/blog_audit.out.txt:34:    "@astrojs/rss": "^4.0.12",
+./.backups/cycle3-blog-20250922-105921/src/pages/rss.xml.ts:1:import { getRssString } from '@astrojs/rss';
+./src/pages/rss.xml.ts:1:import { getRssString } from '@astrojs/rss';
+TAILWIND_TYPOGRAPHY
+./tailwind.config.js:2:import typographyPlugin from '@tailwindcss/typography';
+./node_modules/@tailwindcss/typography/README.md:26:npm install -D @tailwindcss/typography
+./node_modules/@tailwindcss/typography/README.md:38:    require('@tailwindcss/typography'),
+./node_modules/@tailwindcss/typography/README.md:285:    require('@tailwindcss/typography'),
+./node_modules/@tailwindcss/typography/README.md:304:    require('@tailwindcss/typography')({
+./node_modules/@tailwindcss/typography/README.md:353:    require('@tailwindcss/typography'),
+./node_modules/@tailwindcss/typography/README.md:378:    require('@tailwindcss/typography'),
+./node_modules/@tailwindcss/typography/package.json:2:  "name": "@tailwindcss/typography",
+./node_modules/.package-lock.json:1533:    "node_modules/@tailwindcss/typography": {
+./node_modules/.package-lock.json:1535:      "resolved": "https://registry.npmjs.org/@tailwindcss/typography/-/typography-0.5.16.tgz",
+./package-lock.json:31:        "@tailwindcss/typography": "^0.5.16",
+./package-lock.json:2594:    "node_modules/@tailwindcss/typography": {
+./package-lock.json:2596:      "resolved": "https://registry.npmjs.org/@tailwindcss/typography/-/typography-0.5.16.tgz",
+./package.json:45:    "@tailwindcss/typography": "^0.5.16",
+./scripts/blog_audit.sh:35:grep -R "@tailwindcss/typography" -n . || true
+./scripts/blog_audit.out.txt:54:    "@tailwindcss/typography": "^0.5.16",
+./scripts/blog_audit.out.txt:157:import typographyPlugin from '@tailwindcss/typography';
+./.logs/grep-tailwind.txt:3:./tailwind.config.js:2:import typographyPlugin from '@tailwindcss/typography';
+TRAILING_SLASH_SETTING
+CANONICAL_DOMAIN
+src/types/astrowind-config.d.ts:8:    site?: string; // e.g. "https://lilosgrowth.com"
+src/config.yaml:3:  site: 'https://lilosgrowth.com'
+src/config.yaml:21:      - url: 'https://lilosgrowth.com/assets/images/default.png'
+src/components/widgets/Footer.astro:18:          <a data-evt="contact_email_click" href="mailto:hello@lilosgrowth.com" class="text-primary underline"
+src/components/widgets/Footer.astro:19:            >hello@lilosgrowth.com</a
+src/layouts/PageLayout.astro:37:const site = Astro.site?.toString() ?? 'https://lilosgrowth.com';
+src/layouts/Layout.astro:136:    <meta name="twitter:image" content="https://lilosgrowth.com/assets/images/default.png" />
+src/pages/privacy-policy.astro:33:          <a href="/">lilosgrowth.com</a> (the “Site”) and in connection with our services.
+src/pages/local-seo-tools/index.astro:2:const base = Astro.site ? new URL('/', Astro.site).toString() : 'https://lilosgrowth.com/';
+src/pages/index.astro:792:        "@id": "https://lilosgrowth.com/#org",
+src/pages/index.astro:794:        "url": "https://lilosgrowth.com",
+src/pages/index.astro:795:        "logo": { "@type": "ImageObject", "url": "https://lilosgrowth.com/assets/images/default.png" },
+src/pages/index.astro:796:        "email": "hello@lilosgrowth.com"
+src/pages/index.astro:800:        "@id": "https://lilosgrowth.com/#local",
+src/pages/index.astro:802:        "url": "https://lilosgrowth.com",
+src/pages/index.astro:803:        "image": "https://lilosgrowth.com/assets/images/default.png",
+src/pages/index.astro:804:        "email": "hello@lilosgrowth.com",
+src/pages/index.astro:808:        "parentOrganization": { "@id": "https://lilosgrowth.com/#org" },
+src/pages/index.astro:819:        "@id": "https://lilosgrowth.com/#website",
+src/pages/index.astro:820:        "url": "https://lilosgrowth.com",
+src/pages/index.astro:825:        "@id": "https://lilosgrowth.com/#service",
+src/pages/index.astro:827:        "provider": { "@id": "https://lilosgrowth.com/#local" },
+src/pages/index.astro:833:        "@id": "https://lilosgrowth.com/#bread",
+src/pages/index.astro:834:        "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://lilosgrowth.com/" }]
+src/pages/contact.astro:40:          href="mailto:hello@lilosgrowth.com"
+src/pages/contact.astro:41:          class="text-primary underline">hello@lilosgrowth.com</a
+src/pages/contact.astro:46:        <input type="hidden" name="_redirect" value="https://lilosgrowth.com/thank-you" />
+src/pages/contact.astro:100:          <a data-evt="contact_email_click" href="mailto:hello@lilosgrowth.com" class="text-primary underline ml-1"
+src/pages/contact.astro:101:            >hello@lilosgrowth.com</a
+src/pages/thank-you.astro:15:        <a href="mailto:hello@lilosgrowth.com" class="text-[#f56b2a] font-semibold underline">hello@lilosgrowth.com</a>.
+src/pages/services/web-design/index.astro:310:    "provider": { "@id": "https://lilosgrowth.com/#local" },
+src/pages/services/index.astro:433:      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://lilosgrowth.com/" },
+src/pages/services/index.astro:434:      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://lilosgrowth.com/services" }
+src/pages/services/google-business-profile-optimization/index.astro:360:    "provider": { "@id": "https://lilosgrowth.com/#local" },
+src/pages/results.astro:288:      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://lilosgrowth.com/" },
+src/pages/results.astro:289:      { "@type": "ListItem", "position": 2, "name": "Results", "item": "https://lilosgrowth.com/results" }
+public/robots.txt:4:Sitemap: https://lilosgrowth.com/sitemap.xml
+ASTRO_INFO
+Astro                    v5.13.3
+Node                     v22.19.0
+System                   macOS (x64)
+Package Manager          npm
+Output                   static
+Adapter                  none
+Integrations             @astrojs/tailwind
+                         @astrojs/sitemap
+                         @astrojs/mdx
+                         astro-icon
+                         astro-compress
+                         astrowind-integration
+[?25l[2K[1G[36m?[39m [1mCopy to clipboard?[22m [90m›[39m [90m(Y/n)[39m[2K[1G[2K[1G[32m✔[39m [1mCopy to clipboard?[22m [90m…[39m no
+[?25hASTRO_CHECK
+
+> lilos-growth@1.0.0-beta.52 check
+> npm run check:astro && npm run check:eslint && npm run check:prettier
+
+
+> lilos-growth@1.0.0-beta.52 check:astro
+> astro check
+
+16:40:28 [astrowind] Astrowind `./src/config.yaml` has been loaded.
+16:40:28 [content] Syncing content
+16:40:28 [content] Synced content
+16:40:28 [types] Generated 411ms
+16:40:28 [check] Getting diagnostics for Astro files in /Users/michaelprickett/lilos-growth...
+Result (121 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
+
+> lilos-growth@1.0.0-beta.52 check:eslint
+> eslint .
+
+
+> lilos-growth@1.0.0-beta.52 check:prettier
+> prettier --check .
+
+Checking formatting...
+16:40:46 [astrowind] Astrowind `./src/config.yaml` has been loaded.
+16:40:47 [content] Syncing content
+16:40:47 [content] Synced content
+16:40:47 [types] Generated 474ms
+16:40:47 [check] Getting diagnostics for Astro files in /Users/michaelprickett/lilos-growth...
+Result (121 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
+BUILD_START
+
+> lilos-growth@1.0.0-beta.52 build
+> astro build
+
+16:40:58 [astrowind] Astrowind `./src/config.yaml` has been loaded.
+16:40:58 [content] Syncing content
+16:40:58 [content] Synced content
+16:40:58 [types] Generated 377ms
+16:40:58 [build] output: "static"
+16:40:58 [build] mode: "static"
+16:40:58 [build] directory: /Users/michaelprickett/lilos-growth/dist/
+16:40:58 [build] Collecting build info...
+16:40:58 [build] ✓ Completed in 450ms.
+16:40:58 [build] Building static entrypoints...
+16:41:03 [vite] ✓ built in 4.72s
+16:41:03 [build] ✓ Completed in 4.76s.
+
+ building client (vite) 
+16:41:03 [vite] transforming...
+16:41:03 [vite] ✓ 7 modules transformed.
+16:41:03 [vite] rendering chunks...
+16:41:03 [vite] ✓ built in 60ms
+
+ generating static routes 
+16:41:03 ▶ src/pages/404.astro
+16:41:03   └─ /404.html (+15ms) 
+16:41:03 ▶ src/pages/about.astro
+16:41:03   └─ /about/index.html (+6ms) 
+16:41:03 ▶ src/pages/additional-services/index.astro
+16:41:03   └─ /additional-services/index.html (+3ms) 
+16:41:03 ▶ src/pages/blog/[category]/[...page].astro
+16:41:04   ├─ /blog/tutorials/index.html (+12ms) 
+16:41:04   └─ /blog/documentation/index.html (+4ms) 
+16:41:04 ▶ src/pages/blog/[tag]/[...page].astro
+16:41:04   ├─ /blog/astro/index.html (+7ms) 
+16:41:04   ├─ /blog/tailwind-css/index.html (+7ms) 
+16:41:04   ├─ /blog/front-end/index.html (+6ms) 
+16:41:04   ├─ /blog/tools/index.html (+5ms) 
+16:41:04   ├─ /blog/resources/index.html (+6ms) 
+16:41:04   ├─ /blog/theme/index.html (+4ms) 
+16:41:04   └─ /blog/landing-pages/index.html (+4ms) 
+16:41:04 ▶ src/pages/blog/index.astro
+16:41:04   └─ /blog/index.html (+13ms) 
+16:41:04 ▶ src/pages/blog/[...page].astro
+16:41:04 ▶ src/pages/blog/[...slug].astro
+16:41:04   ├─ /blog/get-started-website-with-astro-tailwind-css/index.html (+6ms) 
+16:41:04   ├─ /blog/useful-resources-to-create-websites/index.html (+5ms) 
+16:41:04   ├─ /blog/how-to-customize-astrowind-to-your-brand/index.html (+4ms) 
+16:41:04   ├─ /blog/astrowind-template-in-depth/index.html (+4ms) 
+16:41:04   └─ /blog/landing/index.html (+9ms) 
+16:41:04 ▶ src/pages/contact.astro
+16:41:04   └─ /contact/index.html (+6ms) 
+16:41:04 ▶ src/pages/local-seo-tools/index.astro
+16:41:04   └─ /local-seo-tools/index.html (+4ms) 
+16:41:04 ▶ src/pages/packages.astro
+16:41:04   └─ /packages/index.html (+4ms) 
+16:41:04 ▶ src/pages/privacy.md
+16:41:04   └─ /privacy/index.html (+4ms) 
+16:41:04 ▶ src/pages/privacy-policy.astro
+16:41:04   └─ /privacy-policy/index.html (+3ms) 
+16:41:04 ▶ src/pages/results.astro
+16:41:04   └─ /results/index.html (+6ms) 
+16:41:04 λ src/pages/rss.xml.ts
+16:41:04   └─ /rss.xml (+8ms) 
+16:41:04 ▶ src/pages/services/google-business-profile-optimization/index.astro
+16:41:04   └─ /services/google-business-profile-optimization/index.html (+5ms) 
+16:41:04 ▶ src/pages/services/local-seo/index.astro
+16:41:04   └─ /services/local-seo/index.html (+4ms) 
+16:41:04 ▶ src/pages/services/web-design/index.astro
+16:41:04   └─ /services/web-design/index.html (+6ms) 
+16:41:04 ▶ src/pages/services/index.astro
+16:41:04   └─ /services/index.html (+5ms) 
+16:41:04 ▶ src/pages/terms.md
+16:41:04   └─ /terms/index.html (+2ms) 
+16:41:04 ▶ src/pages/thank-you.astro
+16:41:04   └─ /thank-you/index.html (+4ms) 
+16:41:04 ▶ src/pages/index.astro
+16:41:04   └─ /index.html (+5ms) 
+16:41:04 ✓ Completed in 613ms.
+
+16:41:04 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+✓ Successfully compressed a total of 1 CSS file for 1019 Bytes.
+16:41:07 [build] Waiting for integration "astro-compress", hook "astro:build:done"...
+✓ Successfully compressed a total of 31 HTML files for 113.23 KB.
+✓ Successfully compressed a total of 7 JavaScript files for 9.04 KB.
+16:41:08 [astrowind] Updating `robots.txt` with `sitemap-index.xml` ...
+16:41:08 [build] 31 page(s) built in 10.09s
+16:41:08 [build] Complete!
+
+> lilos-growth@1.0.0-beta.52 postbuild
+> node scripts/ensure-blog-in-sitemap.mjs
+
+✅ Wrote 15 blog URLs to sitemap-blog.xml and linked from sitemap-index.xml
+BUILD_DONE

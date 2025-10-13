@@ -1,0 +1,64 @@
+---
+import Layout from "~/layouts/PageLayout.astro";
+import BlogCard from "../../../components/BlogCard.astro";
+import { getCollection } from "astro:content";
+import { canonicalUrl, metaTags } from "../../../lib/seo";
+import { getSlug, byNewest, allowDrafts, type BlogEntry } from "../../../lib/blog";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog")) as BlogEntry[];
+  const published = posts.filter((p: BlogEntry) => allowDrafts() || !p.data.draft);
+  const tags = new Set<string>();
+  for (const p of published) (p.data.tags || []).forEach((t: string) => tags.add(t));
+  return Array.from(tags).map((t) => ({ params: { tag: t } }));
+}
+
+const page = Math.max(1, Number(Astro.url.searchParams.get("page") || "1"));
+const pageSize = 9;
+const tagParam = Astro.params.tag || "";
+
+const all = (await getCollection("blog")) as BlogEntry[];
+const filtered = all
+  .filter((e: BlogEntry) => (allowDrafts() || !e.data.draft) && (e.data.tags || []).includes(tagParam))
+  .sort(byNewest);
+
+const total = filtered.length;
+const start = (page - 1) * pageSize;
+const end = start + pageSize;
+const slice = filtered.slice(start, end);
+const totalPages = Math.max(1, Math.ceil(total / pageSize));
+
+const url = canonicalUrl(`/blog/tag/${encodeURIComponent(tagParam)}`);
+const title = `Tag: ${tagParam}`;
+const description = `Articles tagged ${tagParam} from Lilos Growth.`;
+---
+<Layout title={title} description={description}>
+  <Fragment set:html={metaTags({ title: `${title}${page > 1 ? ` — Page ${page}` : ``}`, description, url })} />
+  <section class="max-w-6xl mx-auto px-4 py-10">
+    <h1 class="text-3xl md:text-4xl font-semibold">Tag: {tagParam}</h1>
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {slice.map((p: BlogEntry) => {
+        const slug = getSlug(p);
+        const image = typeof p.data.image === "string" ? p.data.image : p.data.image?.src;
+        return (
+          <BlogCard
+            href={`/blog/${slug}`}
+            title={p.data.title}
+            description={p.data.description}
+            image={image}
+            datePublished={p.data.datePublished}
+            category={p.data.category}
+            tags={p.data.tags}
+          />
+        );
+      })}
+    </div>
+    {totalPages > 1 && (
+      <nav class="mt-10 flex items-center justify-center gap-3">
+        <a href={`/blog/tag/${encodeURIComponent(tagParam)}${page > 2 ? `?page=${page - 1}` : page > 1 ? `` : ``}`} class="px-4 py-2 rounded-full border disabled:opacity-40" aria-disabled={page === 1}>Prev</a>
+        <span class="text-sm">Page {page} of {totalPages}</span>
+        <a href={`/blog/tag/${encodeURIComponent(tagParam)}?page=${Math.min(totalPages, page + 1)}`} class="px-4 py-2 rounded-full border disabled:opacity-40" aria-disabled={page === totalPages}>Next</a>
+      </nav>
+    )}
+  </section>
+</Layout>
