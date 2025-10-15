@@ -1,14 +1,14 @@
 ---
-import Layout from "~/layouts/PageLayout.astro";
-import { getCollection } from "astro:content";
-import BlogCard from "../../components/BlogCard.astro";
-import { toListing, getSlug, type BlogEntry } from "../../lib/blog";
+import Layout from '~/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+import BlogCard from '../../components/BlogCard.astro';
+import { toListing, getSlug, type BlogEntry } from '../../lib/blog';
 
 // Pagination
-const page = Math.max(1, Number(Astro.url.searchParams.get("page") || "1"));
+const page = Math.max(1, Number(Astro.url.searchParams.get('page') || '1'));
 const pageSize = 12;
 
-const entries: BlogEntry[] = await getCollection("blog");
+const entries: BlogEntry[] = await getCollection('blog');
 const ordered = toListing(entries); // newest first, drafts hidden unless LOCAL_DRAFTS=1
 
 const total = ordered.length;
@@ -17,9 +17,8 @@ const end = start + pageSize;
 const slice = ordered.slice(start, end);
 const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
-const pageTitle = "Blog | Lilos Growth";
-const pageDescription =
-  "Latest articles on Local SEO, Google Business Profile, websites, and growth.";
+const pageTitle = 'Blog | Lilos Growth';
+const pageDescription = 'Latest articles on Local SEO, Google Business Profile, websites, and growth.';
 ---
 
 <Layout title={pageTitle} description={pageDescription} metadata={{ title: pageTitle, description: pageDescription }}>
@@ -51,7 +50,14 @@ const pageDescription =
             aria-label="Get Started — open contact form"
           >
             Get More Calls Today
-            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true">
+            <svg
+              class="ml-2 w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
               <path d="M5 12h14M13 18l6-6-6-6"></path>
             </svg>
           </a>
@@ -61,7 +67,14 @@ const pageDescription =
             data-evt="cta_hero_see_services"
           >
             See Our Services
-            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true">
+            <svg
+              class="ml-2 w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
               <path d="M5 12h14M13 18l6-6-6-6"></path>
             </svg>
           </a>
@@ -69,7 +82,10 @@ const pageDescription =
       </div>
 
       <!-- Right Column: Lead Form (same Netlify-ready form) -->
-      <div id="contact" class="flex-1 max-w-md mx-auto md:mx-0 bg-white p-10 rounded-3xl shadow-xl border border-gray-100">
+      <div
+        id="contact"
+        class="flex-1 max-w-md mx-auto md:mx-0 bg-white p-10 rounded-3xl shadow-xl border border-gray-100"
+      >
         <h2 class="text-xl font-heading text-heading font-bold mb-4 text-left">
           Free SEO Website Audit for Home Service Pros!
         </h2>
@@ -160,38 +176,48 @@ const pageDescription =
   <!-- BLOG LIST -->
   <section class="py-12">
     <div class="max-w-6xl mx-auto px-4">
-      {slice.length === 0 ? (
-        <p class="text-gray-600">No posts published yet.</p>
-      ) : (
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {slice.map((p) => (
-            <BlogCard
-              href={`/blog/${getSlug(p)}`}
-              title={p.data.title}
-              description={p.data.description}
-              datePublished={p.data.datePublished ?? p.data.pubDate}
-              category={p.data.category}
-              tags={p.data.tags}
-            />
-          ))}
-        </div>
-      )}
+      {
+        slice.length === 0 ? (
+          <p class="text-gray-600">No posts published yet.</p>
+        ) : (
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {slice.map((p) => (
+              <BlogCard
+                href={`/blog/${getSlug(p)}`}
+                title={p.data.title}
+                description={p.data.description}
+                datePublished={p.data.datePublished ?? p.data.pubDate}
+                category={p.data.category}
+                tags={p.data.tags}
+              />
+            ))}
+          </div>
+        )
+      }
 
-      {totalPages > 1 && (
-        <nav class="mt-10 flex items-center justify-center gap-3">
-          <a
-            href={`/blog${page > 2 ? `?page=${page - 1}` : page > 1 ? `` : ``}`}
-            class="btn btn-outline-primary btn-sm disabled:opacity-40"
-            aria-disabled={page === 1}
-          >Prev</a>
-          <span class="text-sm">Page {page} of {totalPages}</span>
-          <a
-            href={`/blog?page=${Math.min(totalPages, page + 1)}`}
-            class="btn btn-outline-primary btn-sm disabled:opacity-40"
-            aria-disabled={page === totalPages}
-          >Next</a>
-        </nav>
-      )}
+      {
+        totalPages > 1 && (
+          <nav class="mt-10 flex items-center justify-center gap-3">
+            <a
+              href={`/blog${page > 2 ? `?page=${page - 1}` : page > 1 ? `` : ``}`}
+              class="btn btn-outline-primary btn-sm disabled:opacity-40"
+              aria-disabled={page === 1}
+            >
+              Prev
+            </a>
+            <span class="text-sm">
+              Page {page} of {totalPages}
+            </span>
+            <a
+              href={`/blog?page=${Math.min(totalPages, page + 1)}`}
+              class="btn btn-outline-primary btn-sm disabled:opacity-40"
+              aria-disabled={page === totalPages}
+            >
+              Next
+            </a>
+          </nav>
+        )
+      }
     </div>
   </section>
 </Layout>
