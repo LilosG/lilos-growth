@@ -18,4 +18,4 @@ export const headerData = {
     { text: 'Contact', href: '/contact' },
   ],
   actions: [{ text: 'Book a Call', href: '/contact#book' }],
-};
+} as const;

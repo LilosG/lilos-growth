@@ -1,162 +1,154 @@
 ---
-import { headerData } from "~/navigation";
+import { headerData } from '~/navigation';
 
-// active route (no trailing slash)
-const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
-function isActive(href?: string) {
-  if (!href) return false;
-  const clean = href.replace(/\/+$/, "") || "/";
-  if (clean === "/") return pathname === "/";
-  return pathname === clean || pathname.startsWith(clean + "/");
+const { url } = Astro;
+const pathname = url.pathname;
+
+const navItems = headerData.links as ReadonlyArray<{
+  text: string;
+  href: string;
+  links?: ReadonlyArray<{ text: string; href: string }>;
+}>;
+
+function isActive(href: string) {
+  const norm = (s: string) => (s.endsWith('/') && s.length > 1 ? s.slice(0, -1) : s);
+  return norm(pathname) === norm(href);
 }
 ---
 
-<header class="sticky top-0 z-50 bg-white">
-  <!-- Desktop -->
-  <nav class="hidden md:block">
-    <div class="container mx-auto px-6">
-      <div class="flex h-16 items-center">
-        <!-- Logo -->
-        <a href="/" class="flex items-center gap-3">
-          <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-8 w-auto" />
-        </a>
+<header class="sticky top-0 z-50 bg-white border-b border-gray-200 pb-px">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 md:h-20 items-center justify-between">
+      <a href="/" class="flex items-center gap-2 shrink-0" aria-label="Lilos Growth">
+        <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-12 md:h-14 lg:h-16 w-auto" />
+      </a>
 
-        <!-- Primary nav (center) -->
-        <ul class="mx-auto flex items-center gap-8">
-          {headerData.links?.map((item) => (
-            <li class="relative group">
+      <nav class="hidden lg:flex items-center gap-2 ml-6">
+        {
+          navItems.map((item) => (
+            <div class="relative group">
               {item.links ? (
-                <>
-                  {/* parent is a REAL LINK; clicking navigates */}
+                <div>
                   <a
-                    href={item.href ?? "/services"}
-                    class={`inline-flex items-center gap-1.5 py-2 text-[15px] leading-[22px] font-medium tracking-[0.005em] transition
-                            ${isActive(item.href) ? "text-[#f56b2a]" : "text-[#1f2d3d] hover:text-[#f56b2a]"}`}
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                    href={item.href}
+                    class={`px-3 py-2 rounded-md text-[15px] leading-6 font-semibold tracking-tight no-underline transition
+                           ${isActive(item.href) ? 'text-[#1f2d3d]' : 'text-gray-700 hover:text-[#1f2d3d] hover:bg-gray-50'}`}
                   >
                     {item.text}
-                    <svg class="h-4 w-4 opacity-70 group-hover:opacity-100 transition" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd" />
-                    </svg>
                   </a>
 
                   <div
-                    class="absolute left-0 top-full z-20 mt-2 min-w-[16rem] rounded-xl border border-gray-200 bg-white p-2 shadow-xl
-                           invisible opacity-0 translate-y-1 transition
-                           group-hover:visible group-hover:opacity-100 group-hover:translate-y-0
-                           group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0"
+                    class="absolute left-0 mt-2 w-72 rounded-2xl border border-gray-200 shadow-xl ring-1 ring-black/5
+                         bg-white/95 backdrop-blur supports-backdrop:bg-white/90 p-2 z-50
+                         hidden group-hover:block before:absolute before:inset-x-0 before:top-0 before:h-1 before:rounded-t-2xl before:bg-[#f56b2a]"
                   >
-                    <ul class="flex flex-col">
-                      {item.links.map((sub) => (
-                        <li>
+                    <ul class="py-1">
+                      {(item.links ?? []).map((sub: { text: string; href: string }) => (
+                        <li class="first:pt-0">
                           <a
-                            href={sub.href ?? "#"}
-                            class={`block rounded-lg px-3 py-2 text-[15px] leading-6 transition
-                                    ${isActive(sub.href) ? "bg-gray-100 text-[#1f2d3d]" : "text-[#1f2d3d] hover:bg-gray-50"}`}
+                            href={sub.href ?? '#'}
+                            class={`group/sub flex items-center gap-3 rounded-xl px-3 py-2 text-[14px] no-underline transition
+                                  ${
+                                    isActive(sub.href)
+                                      ? 'bg-gray-50 text-[#1f2d3d] shadow-sm'
+                                      : 'text-[#1f2d3d] hover:bg-gray-50 hover:shadow-sm hover:translate-x-[2px]'
+                                  }`}
                           >
-                            {sub.text}
+                            <span class="h-1.5 w-1.5 rounded-full bg-gray-300 group-hover/sub:bg-[#f56b2a] transition" />
+                            <span class="font-medium">{sub.text}</span>
                           </a>
                         </li>
                       ))}
                     </ul>
                   </div>
-                </>
+                </div>
               ) : (
                 <a
-                  href={item.href ?? "#"}
-                  class={`inline-flex items-center py-2 text-[15px] leading-[22px] font-medium tracking-[0.005em] transition
-                          ${isActive(item.href) ? "text-[#f56b2a]" : "text-[#1f2d3d] hover:text-[#f56b2a]"}`}
+                  href={item.href}
+                  class={`px-3 py-2 rounded-md text-[15px] leading-6 font-semibold tracking-tight no-underline transition
+                         ${isActive(item.href) ? 'text-[#1f2d3d]' : 'text-gray-700 hover:text-[#1f2d3d] hover:bg-gray-50'}`}
                 >
                   {item.text}
                 </a>
               )}
-            </li>
-          ))}
+            </div>
+          ))
+        }
 
-        </ul>
+        {
+          headerData.actions?.[0] && (
+            <a
+              href={headerData.actions[0].href}
+              class="ml-3 inline-flex items-center rounded-lg bg-[#f56b2a] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 transition"
+            >
+              {headerData.actions[0].text}
+            </a>
+          )
+        }
+      </nav>
 
-        <!-- CTA -->
-        {headerData.actions?.[0] && (
-          <a
-            href={headerData.actions[0].href}
-            class="inline-flex items-center rounded-full bg-[#f56b2a] px-4 py-2 text-white font-semibold shadow hover:bg-[#f34e00] transition"
-          >
-            {headerData.actions[0].text}
-            <svg class="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
-              <path d="M5 12h14M13 18l6-6-6-6" />
-            </svg>
-          </a>
-        )}
-      </div>
-    </div>
-  </nav>
+      <details class="lg:hidden ml-auto">
+        <summary
+          class="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+          aria-label="Open Menu"
+        >
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </summary>
 
-  <!-- Mobile -->
-  <nav class="md:hidden">
-    <div class="container mx-auto px-6">
-      <div class="flex h-16 items-center justify-between">
-        <a href="/" class="flex items-center gap-3">
-          <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth" class="h-8 w-auto" />
-        </a>
+        <nav class="mt-2 rounded-2xl border border-gray-200 bg-white p-2 shadow-xl ring-1 ring-black/5">
+          <ul class="flex flex-col">
+            {
+              navItems.map((item) => (
+                <li class="w-full">
+                  <a
+                    href={item.href}
+                    class={`block w-full rounded-xl px-3 py-2 text-sm no-underline
+                           ${isActive(item.href) ? 'bg-gray-100 text-[#1f2d3d]' : 'text-gray-800 hover:bg-gray-50'}`}
+                  >
+                    {item.text}
+                  </a>
 
-        <details class="relative">
-          <summary class="list-none inline-flex items-center rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-[#1f2d3d]">
-            Menu
-            <svg class="ml-2 h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd" />
-            </svg>
-          </summary>
-
-          <div class="absolute right-0 mt-2 w-[92vw] max-w-sm rounded-2xl border border-gray-200 bg-white p-2 shadow-xl">
-            <ul class="flex flex-col divide-y divide-gray-100">
-              {headerData.links?.map((item) => (
-                <li class="py-1">
-                  {item.links ? (
-                    <details>
-                      <summary class="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-[15px] font-medium text-[#1f2d3d] hover:bg-gray-50">
-                        <span>{item.text}</span>
-                        <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd" />
-                        </svg>
-                      </summary>
-                      <ul class="mt-1 mb-2 pl-2">
-                        {item.links.map((sub) => (
-                          <li>
-                            <a href={sub.href ?? "#"} class="block rounded-lg px-3 py-2 text-[15px] text-[#1f2d3d] hover:bg-gray-50">
-                              {sub.text}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                      {item.href && (
-                        <a href={item.href} class="mx-2 mb-2 block rounded-lg bg-gray-50 px-3 py-2 text-[15px] text-[#1f2d3d] hover:bg-gray-100">
-                          View {item.text}
-                        </a>
-                      )}
-                    </details>
-                  ) : (
-                    <a href={item.href ?? "#"} class="block rounded-lg px-3 py-2 text-[15px] text-[#1f2d3d] hover:bg-gray-50">
-                      {item.text}
-                    </a>
+                  {(item.links ?? []).length > 0 && (
+                    <ul class="mt-1 ml-2 space-y-1 border-l border-gray-200 pl-3">
+                      {(item.links ?? []).map((sub: { text: string; href: string }) => (
+                        <li>
+                          <a
+                            href={sub.href ?? '#'}
+                            class={`group/sub block rounded-xl px-3 py-1.5 text-sm no-underline transition
+                                   ${
+                                     isActive(sub.href)
+                                       ? 'bg-gray-100 text-[#1f2d3d]'
+                                       : 'text-[#1f2d3d] hover:bg-gray-50 hover:translate-x-[2px]'
+                                   }`}
+                          >
+                            <span class="mr-2 inline-block h-1.5 w-1.5 rounded-full align-middle bg-gray-300 group-hover/sub:bg-[#f56b2a] transition" />
+                            {sub.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
                   )}
                 </li>
-              ))}
+              ))
+            }
 
-              {headerData.actions?.[0] && (
-                <li class="pt-2">
+            {
+              headerData.actions?.[0] && (
+                <li class="mt-2">
                   <a
                     href={headerData.actions[0].href}
-                    class="mt-1 inline-flex w-full items-center justify-center rounded-full bg-[#f56b2a] px-4 py-2 text-white font-semibold shadow hover:bg-[#f34e00] transition"
+                    class="block w-full rounded-lg bg-[#f56b2a] px-4 py-2 text-center text-sm font-semibold text-white"
                   >
                     {headerData.actions[0].text}
                   </a>
                 </li>
-              )}
-            </ul>
-          </div>
-        </details>
-      </div>
+              )
+            }
+          </ul>
+        </nav>
+      </details>
     </div>
-  </nav>
+  </div>
 </header>
