@@ -5,13 +5,12 @@
  *  - prop: <GoogleAnalytics id="G-XXXXXXX" />
  *  - env:  PUBLIC_GA_ID or PUBLIC_GOOGLE_MEASUREMENT_ID
  */
-export interface Props { id?: string }
+export interface Props {
+  id?: string;
+}
 
 const propId = (Astro.props as Props).id;
-const envId =
-  import.meta.env.PUBLIC_GA_ID ||
-  import.meta.env.PUBLIC_GOOGLE_MEASUREMENT_ID ||
-  '';
+const envId = import.meta.env.PUBLIC_GA_ID || import.meta.env.PUBLIC_GOOGLE_MEASUREMENT_ID || '';
 
 const id = (propId && String(propId)) || String(envId);
 const enabled = id.length > 0;
@@ -27,9 +26,11 @@ const inlineGA = enabled
   : '';
 ---
 
-{enabled && (
-  <>
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${id}`} is:inline></script>
-    <script is:inline set:html={inlineGA}></script>
-  </>
-)}
+{
+  enabled && (
+    <>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${id}`} is:inline />
+      <script is:inline set:html={inlineGA} />
+    </>
+  )
+}
