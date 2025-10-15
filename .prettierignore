@@ -6,3 +6,7 @@ src/data/post/markdown-elements-demo.post.mdx
 # CI: skip files with parser quirks
 src/components/common/GoogleAnalytics.astro
 src/data/post/markdown-elements-demo-post.mdx
+dist/
+.vercel/
+.backups/
+node_modules/

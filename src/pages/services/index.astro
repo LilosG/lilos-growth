@@ -94,23 +94,27 @@ export const description =
               'Google Business Profile Optimization',
               '/services/google-business-profile-optimization',
               [
-                'Claim, optimize, and manage your GBP listing',
-                'Ongoing reviews & photos',
-                'Monthly reporting & tracking',
+                'Claim, optimize & actively manage your GBP listing',
+                'Ongoing reviews & optimized photos (EXIF/geo, alt naming)',
+                'Keyword/category strategy & monthly reporting',
               ],
             ],
             [
               'Local SEO & Content',
               '/services/local-seo',
-              ['Service/location pages for your city', 'Weekly content & blog posting', 'Citation building & cleanup'],
+              [
+                'On-page & technical fixes (titles, metas, headers, CWV, schema)',
+                'Service & location content + internal linking',
+                'Citations & local authority building with clear reporting',
+              ],
             ],
             [
               'Website Design & Conversion',
               '/services/web-design',
               [
-                'Lightning-fast, secure hosting',
-                'Conversion-focused landing pages',
-                'Lead capture, reviews, and calls built in',
+                'Mobile-first, conversion-ready design with SEO baked in',
+                'Fast hosting, security & analytics',
+                'Lead capture, reviews & calls built in',
               ],
             ],
           ].map(([title, href, bullets]) => (
@@ -231,80 +235,91 @@ export const description =
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
         {
           [
+            /* GBP — value-driven cards per your direction (counts reserved for /packages) */
             [
               'Google Business Profile',
-              'Base: Profile Management',
+              'Starter: Ongoing Management',
               '$199/mo',
               [
-                'GBP setup or audit',
-                'Monthly listing updates & photos',
-                'Category & keyword targeting',
-                'Basic performance tracking',
+                'Complete setup or audit & cleanup',
+                'Keyword & category strategy maintained monthly',
+                'Listing updates, services/products, Q&A monitoring',
+                'Optimized photos (EXIF/geo, alt naming) uploaded routinely',
+                'Review replies handled (up to reasonable volume)',
+                'Monthly performance report',
               ],
-              'Boost Add-on + $300/mo (Total $499)',
+              'Growth Add-on +$200/mo (Total $399)',
               [
-                'Weekly posts & updates',
-                'Review request & response strategy',
-                'Competitor monitoring & insights',
-                'Citation build & cleanup (core listings)',
+                'Includes everything in Starter',
+                'Proactive, high-frequency posting & fresh media',
+                'Review responses without cap',
+                'Monthly services/products refresh & ongoing citations',
+                'Submission to 200+ quality directories (software + manual)',
+                'Quarterly heatmap & competitor snapshot, 30-min strategy call',
               ],
               '/services/google-business-profile-optimization',
             ],
+            /* Local SEO — inclusion-first copy (no hard counts on this page) */
             [
               'Local SEO',
-              'Base: Growth Essentials',
+              'Essentials: Single-Location Growth',
               '$499/mo',
               [
-                'SEO audit, keyword research & on-page fixes',
-                'Technical SEO improvements',
-                '5 new service/location pages / mo',
-                '5 blog posts / mo',
+                'Site & on-page optimization (titles, metas, headers, CWV, schema)',
+                'Keyword research & tracking with clear priorities',
+                'Service/location content & internal linking plan',
+                'Citation cleanup & foundational listings',
+                'Monthly report & strategy check-in',
               ],
-              'Boost Add-on $799/mo',
+              'Growth Add-on +$300/mo (Total $799)',
               [
-                '10–15 service/location pages / mo',
-                '10 blog posts / mo',
-                'Citations build & cleanup',
-                'Competitor tracking & strategy call',
+                'Includes everything in Essentials',
+                'Expanded content & local link acquisition',
+                'Ongoing citation building & crawl/UX priority fixes',
+                'Quarterly heatmap & competitor review',
+                'Monthly report with 45-min strategy call',
               ],
               '/services/local-seo',
               'Most Popular',
             ],
+            /* Website as a Service — base at $199, remove page caps in card copy */
             [
               'Website as a Service',
               'Base: Website Essentials',
-              '$250/mo',
+              '$199/mo',
               [
-                'Mobile-friendly, SEO-ready design',
-                'Secure hosting & monitoring',
-                'Updates for up to 5 pages / mo',
-                'Lead form integration & monthly health check',
+                'Modern, mobile-first website with SEO baked in',
+                'Fast, secure hosting & monitoring',
+                'Unlimited minor edits via support tickets',
+                'Analytics & lead tracking set up',
+                'Month-to-month support',
               ],
-              'Boost Add-on + $500/mo (Total $750)',
+              'Plus Add-on +$500/mo (Total $699)',
               [
-                'Updates for up to 15 pages / mo',
-                'New landing pages & CRO',
-                'Quarterly design refresh',
-                'Priority support',
+                'Priority support & quarterly design refresh',
+                'Conversion improvements & new landing pages',
+                'CRO guidance & growth roadmap',
+                'Tighter reporting & admin support',
               ],
               '/services/web-design',
             ],
+            /* Bundle — align to reference bundles */
             [
-              'Local SEO + GBP Mgmt',
-              'Base: Complete Local Presence',
-              '$799/mo',
+              'Local SEO + GBP',
+              'Bundle: Essentials Combo',
+              '$699/mo',
               [
-                'Includes Local SEO Base + GBP Base',
+                'Includes GBP Starter + Local SEO Essentials',
                 'Unified reporting dashboard',
-                'Monthly rank/map visibility review',
-                'Quarterly competitor snapshot',
+                'Monthly rank & Map visibility review',
+                'Clear roadmap with measurable outcomes',
               ],
-              'Boost Package + $500/mo (Total $1,299)',
+              'All-In-One $1,299/mo',
               [
-                'Includes Local SEO Boost + GBP Boost',
+                'Includes GBP Growth + Local SEO Growth',
+                'Custom quarterly growth plan',
                 'Citation cleanup (software + manual core)',
-                'Custom quarterly local growth plan',
-                'GBP heatmap tracking + priority support',
+                'GBP heatmap tracking & priority support',
               ],
               '/services/local-seo',
             ],
@@ -321,12 +336,12 @@ export const description =
                 <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold">
                   Best for:{' '}
                   {name === 'Google Business Profile'
-                    ? 'Maintain Your Google Presence'
+                    ? 'Maps visibility & reviews'
                     : name === 'Website as a Service'
-                      ? 'Modern, Conversion-Ready Sites'
-                      : name === 'Local SEO + GBP Mgmt'
-                        ? 'Map Pack + Organic Results'
-                        : 'Steady Organic Growth'}
+                      ? 'Modern, conversion-ready sites'
+                      : name === 'Local SEO + GBP'
+                        ? 'Unified organic + Maps growth'
+                        : 'Steady organic growth'}
                 </span>
                 <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-3">
                   {(price as string).replace('/mo', '')}

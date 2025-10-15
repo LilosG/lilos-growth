@@ -15,14 +15,15 @@ export async function GET() {
     );
 
   return rss({
-    title: 'Lilos Growth',
-    description: 'Latest from Lilos Growth.',
+    title: 'Lilos Growth Blog',
+    description: 'Local SEO, GBP, and conversion-focused websites for home service pros.',
     site: new URL('https://lilosgrowth.com'),
     items: filtered.map((p: BlogEntry) => ({
       title: p.data.title,
       description: p.data.description,
       link: `/blog/${p.data.slug || p.slug}`,
       pubDate: new Date(p.data.datePublished || (p as any).data?.pubDate || Date.now()),
+      categories: [p.data.category, ...(p.data.tags || [])],
     })),
   });
 }

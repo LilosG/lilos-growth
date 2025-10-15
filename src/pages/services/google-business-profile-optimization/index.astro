@@ -106,62 +106,98 @@ export const description =
     </div>
   </section>
 
-  <!-- GBP PACKAGE (single card, CTA aligned) -->
+  <!-- GBP PACKAGES -->
   <section id="gbp-package" class="py-24 bg-cream border-t border-gray-100">
-    <div class="max-w-3xl mx-auto px-4">
+    <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-4xl md:text-5xl font-heading text-heading font-bold mb-4 text-center">
         Google Business Profile Packages
         <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
       </h2>
-      <p class="text-xl text-body mb-12 text-center font-medium">
-        One simple monthly plan. No contracts. Real results.
-      </p>
+      <p class="text-xl text-body mb-12 text-center font-medium">Clear value. Month-to-month. No rollovers.</p>
 
-      <article
-        class="mx-auto max-w-xl rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
-      >
-        <header class="text-center">
-          <h3 class="text-lg md:text-xl font-heading font-semibold text-heading">Google Business Profile</h3>
-          <div class="text-sm font-semibold mt-1">Base: Profile Management</div>
-          <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold"
-            >Best for: Maintain Your Google Presence</span
-          >
-          <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-3">
-            $199<span class="text-base font-normal text-gray-500">/mo</span>
-          </div>
-        </header>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        <!-- Starter — $199/mo -->
+        <article
+          class="rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
+          aria-labelledby="gbp-starter-title"
+        >
+          <header class="text-center">
+            <h3 id="gbp-starter-title" class="text-lg md:text-xl font-heading font-semibold text-heading">
+              GBP — Starter
+            </h3>
+            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-2">
+              $199<span class="text-base font-normal text-gray-500">/mo</span>
+            </div>
+            <p class="mt-2 text-body text-[15px]">Essential GBP management for steady local visibility.</p>
+          </header>
 
-        <div class="mt-5 space-y-4">
-          <ul class="text-body text-[15px] space-y-1 list-disc pl-5">
-            <li>GBP setup or audit</li>
-            <li>Monthly listing updates &amp; photos</li>
-            <li>Category &amp; keyword targeting</li>
-            <li>Basic performance tracking</li>
+          <ul class="mt-5 text-body text-[15px] space-y-2 list-disc pl-5">
+            <li>Setup or audit with <span class="font-semibold">keyword research &amp; category mapping</span></li>
+            <li>Business info, services &amp; products maintained (quarterly refresh)</li>
+            <li><span class="font-semibold">6 posts/mo</span> (offers, updates) — no rollovers</li>
+            <li>
+              <span class="font-semibold">6 photos/mo</span>, <span class="font-semibold">EXIF/alt optimized</span> for local
+              relevance — no rollovers
+            </li>
+            <li>Review replies <span class="font-semibold">up to 30/mo</span> + templates</li>
+            <li>Q&amp;A monitored weekly; profile improvements &amp; testing</li>
+            <li>Citation cleanup (quarterly core listings)</li>
+            <li>Monthly performance report</li>
           </ul>
 
-          <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4">
-            <div class="font-semibold text-[#f56b2a] mb-1">
-              Boost Add-on <span class="font-bold">+ $300/mo</span> (Total $499)
-            </div>
-            <ul class="text-body text-[15px] space-y-1 list-disc pl-5">
-              <li>Weekly posts &amp; updates</li>
-              <li>Review request &amp; response strategy</li>
-              <li>Competitor monitoring &amp; insights</li>
-              <li>Citation build &amp; cleanup (core listings)</li>
-            </ul>
+          <div class="pt-6 border-t border-gray-100">
+            <a
+              href="#contact"
+              class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
+              aria-label="Get Started — open contact form">Get Started</a
+            >
           </div>
-        </div>
+        </article>
 
-        <div class="pt-4 border-t border-gray-100">
-          <a
-            href="#contact"
-            class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
-            aria-label="Get Started — open contact form"
+        <!-- Growth — $399/mo (as +$200 add-on from Starter) -->
+        <article
+          class="relative rounded-2xl bg-white shadow-md border-2 border-[#f56b2a] p-8 grid grid-rows-[auto_1fr_auto]"
+          aria-labelledby="gbp-growth-title"
+        >
+          <div
+            class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#f56b2a] text-white text-xs font-bold px-4 py-1 rounded-full shadow"
           >
-            Get Started
-          </a>
-        </div>
-      </article>
+            Most Popular
+          </div>
+          <header class="text-center mt-2">
+            <h3 id="gbp-growth-title" class="text-lg md:text-xl font-heading font-semibold text-heading">
+              GBP — Growth
+            </h3>
+            <div class="text-sm font-semibold mt-1">Includes everything in Starter</div>
+            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-2">
+              $399<span class="text-base font-normal text-gray-500">/mo</span>
+            </div>
+            <p class="mt-2 text-body text-[15px]">Win more service-area searches and outpace competitors.</p>
+          </header>
+
+          <ul class="mt-5 text-body text-[15px] space-y-2 list-disc pl-5">
+            <li><span class="font-semibold">3 posts/week</span> (offers, FAQs, highlights) — no rollovers</li>
+            <li>Fresh photos ongoing, <span class="font-semibold">EXIF/alt optimized</span> for geo &amp; keywords</li>
+            <li>Review replies <span class="font-semibold">no cap</span> + proactive request prompts</li>
+            <li>Services &amp; products <span class="font-semibold">refreshed monthly</span></li>
+            <li>
+              <span class="font-semibold">Ongoing citations</span> incl. <span class="font-semibold"
+                >200+ directories</span
+              > (core + industry/niche)
+            </li>
+            <li>Quarterly heatmap &amp; competitor snapshot</li>
+            <li>Monthly report + <span class="font-semibold">30-min strategy call</span></li>
+          </ul>
+
+          <div class="pt-6 border-t border-gray-100">
+            <a
+              href="#contact"
+              class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
+              aria-label="Upgrade — open contact form">Upgrade to Growth</a
+            >
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -175,159 +211,98 @@ export const description =
       <p class="text-xl text-body mb-14 text-center font-medium">Choose the package that fits your goals.</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch auto-rows-fr">
-        <!-- GBP (same as above, condensed bullets) -->
+        <!-- GBP (condensed; mirrors above) -->
         <article
           class="h-full rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
         >
           <header class="text-center">
             <h3 class="text-lg md:text-xl font-heading font-semibold text-heading">Google Business Profile</h3>
-            <div class="text-sm font-semibold mt-1">Base: Profile Management</div>
-            <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold"
-              >Best for: Maintain Your Google Presence</span
-            >
-            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-3">
-              $199<span class="text-base font-normal text-gray-500">/mo</span>
+            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-1">
+              From $199<span class="text-base font-normal text-gray-500">/mo</span>
             </div>
           </header>
-          <div class="mt-5 space-y-4">
-            <ul class="text-body text-[15px] space-y-1 list-disc pl-5">
-              <li>Setup/audit, photos, updates</li>
-              <li>Categories, services, keywords</li>
-              <li>Basic tracking</li>
-            </ul>
-            <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4">
-              <div class="font-semibold text-[#f56b2a] mb-1">Boost Add-on + $300/mo</div>
-              <ul class="text-body text-[15px] space-y-1 list-disc pl-5">
-                <li>Posts, reviews plan</li><li>Competitor insights</li><li>Citation cleanup</li>
-              </ul>
-            </div>
-          </div>
+          <ul class="mt-5 text-body text-[15px] space-y-1 list-disc pl-5">
+            <li>Audit, categories &amp; keywords</li>
+            <li>Posts &amp; EXIF-optimized photos</li>
+            <li>Reviews, Q&amp;A, citations</li>
+          </ul>
           <div class="pt-4 border-t border-gray-100">
             <a
-              href="#contact"
+              href="#gbp-package"
               class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
-              aria-label="Get Started — open contact form">Get Started</a
+              >View Details</a
             >
           </div>
         </article>
 
-        <!-- Local SEO (Most Popular) -->
+        <!-- Local SEO (Essentials preview) -->
         <article
-          class="h-full relative rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
+          class="h-full rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
         >
-          <div
-            class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#f56b2a] text-white text-xs font-bold px-6 py-1 rounded-full shadow z-10"
-          >
-            Most Popular
-          </div>
-          <header class="text-center mt-3">
+          <header class="text-center">
             <h3 class="text-lg md:text-xl font-heading font-semibold text-heading">Local SEO</h3>
-            <div class="text-sm font-semibold mt-1">Base: Growth Essentials</div>
-            <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold"
-              >Best for: Steady Organic Growth</span
-            >
-            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-3">
-              $499<span class="text-base font-normal text-gray-500">/mo</span>
+            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-1">
+              From $499<span class="text-base font-normal text-gray-500">/mo</span>
             </div>
           </header>
-          <div class="mt-5 space-y-4">
-            <ul class="text-body text-[15px] space-y-1 list-disc pl-5">
-              <li>Audit, keywords, on-page</li>
-              <li>Technical SEO</li>
-              <li><span class="font-semibold">5</span> location/service pages / mo</li>
-              <li><span class="font-semibold">5</span> blog posts / mo</li>
-            </ul>
-            <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4">
-              <div class="font-semibold text-[#f56b2a] mb-1">Boost Add-on $799/mo</div>
-              <ul class="text-body text-[15px] space-y-1 list-disc pl-5">
-                <li>10–15 pages / mo</li><li>10 posts / mo</li><li>Citations cleanup</li><li>
-                  Competitor tracking + call
-                </li>
-              </ul>
-            </div>
-          </div>
+          <ul class="mt-5 text-body text-[15px] space-y-1 list-disc pl-5">
+            <li>Audit, keywords, on-page + technical</li>
+            <li>Content &amp; internal linking</li>
+            <li>Citations + reporting</li>
+          </ul>
           <div class="pt-4 border-t border-gray-100">
             <a
               href="/services/local-seo"
               class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
-              >Get Started</a
+              >View Details</a
             >
           </div>
         </article>
 
-        <!-- Website as a Service -->
+        <!-- Website as a Service (Base $199/mo per latest guardrails) -->
         <article
           class="h-full rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
         >
           <header class="text-center">
             <h3 class="text-lg md:text-xl font-heading font-semibold text-heading">Website as a Service</h3>
-            <div class="text-sm font-semibold mt-1">Base: Website Essentials</div>
-            <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold"
-              >Best for: Conversion-Ready Sites</span
-            >
-            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-3">
-              $250<span class="text-base font-normal text-gray-500">/mo</span>
+            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-1">
+              $199<span class="text-base font-normal text-gray-500">/mo</span>
             </div>
           </header>
-          <div class="mt-5 space-y-4">
-            <ul class="text-body text-[15px] space-y-1 list-disc pl-5">
-              <li>Mobile-friendly, SEO-ready</li><li>Hosting &amp; monitoring</li><li>5 page updates / mo</li><li>
-                Lead forms + health check
-              </li>
-            </ul>
-            <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4">
-              <div class="font-semibold text-[#f56b2a] mb-1">Boost Add-on + $500/mo</div>
-              <ul class="text-body text-[15px] space-y-1 list-disc pl-5">
-                <li>15 page updates / mo</li><li>New landing pages + CRO</li><li>Quarterly refresh</li><li>
-                  Priority support
-                </li>
-              </ul>
-            </div>
-          </div>
+          <ul class="mt-5 text-body text-[15px] space-y-1 list-disc pl-5">
+            <li>Modern, mobile-ready site</li>
+            <li>Hosting, edits &amp; monitoring</li>
+            <li>Lead forms + basic SEO</li>
+          </ul>
           <div class="pt-4 border-t border-gray-100">
             <a
               href="/services/web-design"
               class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
-              >Get Started</a
+              >View Details</a
             >
           </div>
         </article>
 
-        <!-- Local SEO + GBP Mgmt -->
+        <!-- Local SEO + GBP Bundle -->
         <article
           class="h-full rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
         >
           <header class="text-center">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-heading">Local SEO + GBP Mgmt</h3>
-            <div class="text-sm font-semibold mt-1">Base: Complete Local Presence</div>
-            <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold"
-              >Best for: Map Pack + Organic</span
-            >
-            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-3">
+            <h3 class="text-lg md:text-xl font-heading font-semibold text-heading">Local SEO + GBP</h3>
+            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-1">
               $799<span class="text-base font-normal text-gray-500">/mo</span>
             </div>
           </header>
-          <div class="mt-5 space-y-4">
-            <ul class="text-body text-[15px] space-y-1 list-disc pl-5">
-              <li>Includes Local SEO Base + GBP Base</li>
-              <li>Unified reporting</li>
-              <li>Monthly visibility review</li>
-              <li>Quarterly competitor snapshot</li>
-            </ul>
-            <div class="bg-[#fff7f0] border border-[#f56b2a] rounded-xl px-5 py-4">
-              <div class="font-semibold text-[#f56b2a] mb-1">Boost Package + $500/mo (Total $1,299)</div>
-              <ul class="text-body text-[15px] space-y-1 list-disc pl-5">
-                <li>Local SEO Boost + GBP Boost</li><li>Citation cleanup</li><li>Quarterly growth plan</li><li>
-                  GBP heatmap tracking
-                </li>
-              </ul>
-            </div>
-          </div>
+          <ul class="mt-5 text-body text-[15px] space-y-1 list-disc pl-5">
+            <li>Unified plan &amp; reporting</li>
+            <li>Monthly visibility review</li>
+            <li>Quarterly competitor snapshot</li>
+          </ul>
           <div class="pt-4 border-t border-gray-100">
             <a
-              href="/services/local-seo"
+              href="/packages"
               class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
-              >Get Started</a
+              >Compare Plans</a
             >
           </div>
         </article>
@@ -351,7 +326,7 @@ export const description =
               'Most see measurable gains in 30–60 days with consistent posting, reviews, and ongoing profile updates.',
             ],
             [
-              'Can you optimize my profile if I already have GBP listing?',
+              'Can you optimize my profile if I already have a GBP listing?',
               'Absolutely—audits, rebuilds, and ongoing optimization are our bread and butter.',
             ],
             [
@@ -360,7 +335,7 @@ export const description =
             ],
             [
               'Will you manage my reviews and add Q&A?',
-              'Yes—review strategy, reply templates, requests, and Q&A setup/monitoring are included with Boost.',
+              'Yes—review strategy, reply templates, requests, and Q&A setup/monitoring are included (Growth handles replies with no cap).',
             ],
             ['Is there a setup fee or long contract?', 'No setup fees and no contracts—cancel anytime.'],
             ['Will I have a dedicated strategist?', 'Yes—direct access to a home service marketing strategist.'],
@@ -375,6 +350,7 @@ export const description =
     </div>
   </section>
 </Layout>
+
 <script type="application/ld+json" is:inline>
   {
     "@context": "https://schema.org",
@@ -382,6 +358,22 @@ export const description =
     "name": "Google Business Profile Management",
     "serviceType": "Google Business Profile Management",
     "provider": { "@id": "https://lilosgrowth.com/#local" },
-    "areaServed": { "@type": "Country", "name": "United States" }
+    "areaServed": { "@type": "Country", "name": "United States" },
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "GBP — Starter",
+        "priceCurrency": "USD",
+        "price": "199",
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "name": "GBP — Growth",
+        "priceCurrency": "USD",
+        "price": "399",
+        "availability": "https://schema.org/InStock"
+      }
+    ]
   }
 </script>

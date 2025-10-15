@@ -84,17 +84,7 @@ declare global {
     <slot name="head" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <title>
-      {
-        typeof metadata !== 'undefined' && metadata?.title
-          ? metadata.title
-          : typeof title !== 'undefined'
-            ? title
-            : 'Lilos Growth'
-      }
-    </title>
     <meta
-      name="description"
       content={typeof metadata !== 'undefined' && metadata?.description
         ? metadata.description
         : typeof description !== 'undefined'
