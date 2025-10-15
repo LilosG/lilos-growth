@@ -1,40 +1,79 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
-import BlogPost from "../../layouts/BlogPost.astro";
-import RelatedPosts from "../../components/RelatedPosts.astro";
-import TagPill from "../../components/TagPill.astro";
 import { getCollection } from "astro:content";
-import { getSlug, allowDrafts, type BlogEntry } from "../../lib/blog";
+import { getSlug, getDate, formatDate, type BlogEntry } from "../../lib/blog";
 
+// Build static paths using your canonical slug logic
 export async function getStaticPaths() {
-  const posts = (await getCollection("blog")) as BlogEntry[];
-  const published = posts.filter((p: BlogEntry) => allowDrafts() || !p.data.draft);
-  return published.map((p: BlogEntry) => ({ params: { slug: getSlug(p) }, props: { entry: p } }));
+  const posts: BlogEntry[] = await getCollection("blog");
+  return posts.map((p) => ({ params: { slug: getSlug(p) } }));
 }
 
-const { entry } = Astro.props as { entry: BlogEntry };
-const data = entry.data;
+const slug = String(Astro.params.slug ?? "");
 
-const all = (await getCollection("blog")) as BlogEntry[];
-const others = all.filter((p: BlogEntry) => getSlug(p) !== getSlug(entry) && (allowDrafts() || !p.data.draft));
+// Find the post by the same slug logic used above
+const posts: BlogEntry[] = await getCollection("blog");
+const entry = posts.find((p) => getSlug(p) === slug);
+if (!entry) throw new Error(`Post not found for slug: ${slug}`);
 
-const byTag = new Set<string>((data.tags || []) as string[]);
-const related = others
-  .map((p: BlogEntry) => {
-    const overlap = (p.data.tags || []).filter((t: string) => byTag.has(t)).length;
-    return { slug: getSlug(p), title: p.data.title, datePublished: p.data.datePublished, category: p.data.category, score: overlap };
-  })
-  .sort((a, b) => (b.score - a.score) || (new Date(b.datePublished || "").getTime() - new Date(a.datePublished || "").getTime()))
-  .slice(0, 3);
+const { Content } = await entry.render();
+
+// Meta
+const title = entry.data.title ?? "Untitled";
+const description = entry.data.description ?? "";
+const date = getDate(entry);
+const category = entry.data.category;
+const image =
+  typeof entry.data.image === "string" ? entry.data.image : entry.data.image?.src;
 ---
-<Layout title={data.title} description={data.description}>
-  <BlogPost frontmatter={data}>
-    <slot />
-    {data.tags && data.tags.length > 0 && (
-      <div class="mt-10 flex flex-wrap gap-2">
-        {data.tags.map((t: string) => <TagPill tag={t} />)}
+
+<Layout title={title} description={description} metadata={{ title, description }}>
+  <!-- HERO: hard, reliable contrast; no overlays; immune to inherited opacity -->
+  <section class="relative bg-[#253242] text-white pt-10 pb-14 isolate">
+    <div class="container">
+      <a href="/blog" class="inline-block text-sm opacity-90 hover:opacity-100">← Back to Blog</a>
+
+      <div class="mt-4">
+        <h1 class="!text-white !opacity-100 text-4xl md:text-5xl font-extrabold leading-tight tracking-tight drop-shadow-sm">
+          {title}
+        </h1>
+        <div class="mt-4 flex items-center gap-3 text-sm">
+          {category && (
+            <span class="px-2 py-1 rounded-full bg-white/10 border border-white/25 !text-white">
+              {category}
+            </span>
+          )}
+          {date && <time class="!text-white/90">{formatDate(date)}</time>}
+        </div>
       </div>
-    )}
-    <RelatedPosts posts={related} />
-  </BlogPost>
+    </div>
+  </section>
+
+  <!-- READING AREA: light page bg + white card for maximum legibility -->
+  <section class="py-12 bg-slate-50">
+    <div class="container">
+      <div class="mx-auto max-w-3xl bg-white rounded-3xl shadow-xl border border-gray-100 p-6 md:p-10">
+        {image && (
+          <img
+            src={image}
+            alt={title}
+            class="rounded-2xl shadow mb-8"
+            loading="lazy"
+            decoding="async"
+          />
+        )}
+
+        <!-- Tailwind Typography, branded colors, comfortable sizes -->
+        <div class="prose prose-slate lg:prose-lg max-w-none
+                    prose-headings:text-[#1f2d3d]
+                    prose-p:text-[#4a4a4a]
+                    prose-a:text-[#f56b2a] prose-a:no-underline hover:prose-a:underline
+                    prose-strong:text-[#1f2d3d]
+                    prose-blockquote:border-[#ffd8c5] prose-blockquote:bg-[#fff4ee] prose-blockquote:text-[#55301f] prose-blockquote:rounded-xl prose-blockquote:px-5 prose-blockquote:py-3
+                    prose-hr:border-gray-200">
+          <Content />
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>

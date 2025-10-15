@@ -1,18 +1,17 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
-import { canonicalUrl, metaTags, breadcrumbJsonLd, blogPostingJsonLd, websiteSearchActionJsonLd } from "../lib/seo";
+import { breadcrumbJsonLd, blogPostingJsonLd, websiteSearchActionJsonLd } from "../lib/seo";
 type Faq = { q: string; a: string };
 const { frontmatter } = Astro.props as { frontmatter: any };
-const url = canonicalUrl(Astro.url.pathname);
+const url = new URL(Astro.url.pathname, origin).toString();
 const imageUrl = typeof frontmatter.image === "string" ? frontmatter.image : frontmatter.image?.src;
 const crumbs = [
-  { name: "Home", url: canonicalUrl("/") },
-  { name: "Blog", url: canonicalUrl("/blog") },
+  { name: "Home", url: "/" },
+  { name: "Blog", url: "/blog" },
   { name: frontmatter.title, url }
 ];
 ---
 <Layout title={frontmatter.title} description={frontmatter.description}>
-  <Fragment set:html={metaTags({ title: frontmatter.title, description: frontmatter.description, url, image: imageUrl })} />
   <script is:inline type="application/ld+json" set:html={breadcrumbJsonLd(crumbs)}></script>
   <script is:inline type="application/ld+json" set:html={blogPostingJsonLd({
     title: frontmatter.title,

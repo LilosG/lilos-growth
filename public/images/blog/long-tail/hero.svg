@@ -1,0 +1,19 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#253242"/>
+      <stop offset="1" stop-color="#2e4159"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#g)"/>
+  <text x="160" y="360" fill="#fff" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="800" font-size="76">
+    Local SEO Long-Tail Strategy
+  </text>
+  <text x="160" y="440" fill="#fff" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="800" font-size="76">
+    That Compounds
+  </text>
+  <rect x="160" y="470" width="420" height="14" rx="7" fill="#f56b2a"/>
+  <text x="160" y="530" fill="#e8edf3" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="30">
+    Service + City + Qualifier pages that rank and convert.
+  </text>
+</svg>
