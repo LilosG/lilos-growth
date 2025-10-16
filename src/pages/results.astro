@@ -127,7 +127,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
             href="/contact"
             data-astro-prefetch
             aria-label="Book a call to discuss a growth plan"
-            class="inline-flex items-center px-8 py-4 rounded-2xl bg-[#f56b2a] hover:bg-[#e85718] text-white font-heading font-semibold text-lg shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
+            class="inline-flex items-center px-8 py-4 rounded-3xl bg-[#f56b2a] hover:bg-[#e85718] text-white font-heading font-semibold text-lg shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
             data-evt="cta_results_book_call"
           >
             Book a Call
@@ -146,7 +146,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
             href="/services"
             data-astro-prefetch
             aria-label="See services we offer"
-            class="inline-flex items-center px-8 py-4 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-lg shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/70"
+            class="inline-flex items-center px-8 py-4 rounded-3xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-lg shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/70"
           >
             See Services
             <svg
@@ -169,7 +169,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
       <div class="max-w-6xl mx-auto px-4">
         <h2 class="sr-only font-heading">Key outcomes</h2>
         <span class="block mx-auto mt-2 h-1 w-12 bg-[#f56b2a] rounded"></span>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-10">
           {(resultsStats as ResultsStat[]).map((stat) => <StatCard stat={stat} />)}
         </div>
       </div>
@@ -194,7 +194,10 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
     <section class="py-20 md:py-24 bg-white border-t border-gray-100">
       <div class="max-w-6xl mx-auto px-4">
         <SectionHeader title="Success Stories from Real Clients" accent="top" />
-        <div id="results-grid" class="mt-10 grid md:grid-cols-2 xl:grid-cols-3 gap-8 auto-rows-fr items-stretch">
+        <div
+          id="results-grid"
+          class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-10 auto-rows-fr items-stretch"
+        >
           {(resultsCaseStudies as CaseStudy[]).map((study) => <CaseStudyCard study={study} />)}
         </div>
       </div>
@@ -244,7 +247,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
             href="/contact"
             data-astro-prefetch
             aria-label="Book a call"
-            class="inline-flex items-center px-7 py-3 rounded-2xl bg-[#f56b2a] hover:bg-[#e85718] text-white font-heading font-semibold shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
+            class="inline-flex items-center px-7 py-3 rounded-3xl bg-[#f56b2a] hover:bg-[#e85718] text-white font-heading font-semibold shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]"
             data-evt="cta_results_book_call"
           >
             Book a Call
@@ -253,7 +256,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemList
             href="/services"
             data-astro-prefetch
             aria-label="See services"
-            class="inline-flex items-center px-7 py-3 rounded-2xl border border-gray-300 text-heading bg-white hover:bg-gray-50 font-heading font-semibold shadow-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-400"
+            class="inline-flex items-center px-7 py-3 rounded-3xl border border-gray-300 text-heading bg-white hover:bg-gray-50 font-heading font-semibold shadow-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-400"
           >
             See Services
           </a>
