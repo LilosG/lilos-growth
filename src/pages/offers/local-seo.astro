@@ -1,0 +1,545 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+/* ====== LINKS (ready-to-run) ====== */
+const baseCalendly = 'https://calendly.com/lilosgrowth/15min';
+const utmParams = new URLSearchParams({
+  utm_source: Astro.url.searchParams.get('utm_source') ?? 'website',
+  utm_medium: Astro.url.searchParams.get('utm_medium') ?? 'landing',
+  utm_campaign: Astro.url.searchParams.get('utm_campaign') ?? 'offers',
+});
+const CALENDLY = `${baseCalendly}?${utmParams.toString()}`;
+
+/* Works now without a backend: sends the hero form to /thank-you with GET. */
+const FORM_ACTION = '/thank-you';
+
+/* UTMs for the form (safe if missing) */
+const utm = {
+  source: Astro.url.searchParams.get('utm_source') ?? '',
+  medium: Astro.url.searchParams.get('utm_medium') ?? '',
+  campaign: Astro.url.searchParams.get('utm_campaign') ?? '',
+  content: Astro.url.searchParams.get('utm_content') ?? '',
+};
+
+export const title =
+  'Google Maps Growth Offers: $149 GBP Fixes & 30-Day Sprint | Lilos Growth';
+export const description =
+  'Two fast paths to rank higher in Google Maps. $149 Top-5 GBP Fixes or a $499 30-Day Local SEO Sprint. Built for home-service businesses.';
+---
+
+<Layout {title} {description}>
+  <!-- HERO -->
+  <section class="bg-[#253242] relative overflow-hidden pt-16 pb-20">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]"></div>
+
+    <div class="relative mx-auto max-w-6xl px-4">
+      <div class="grid gap-8 md:grid-cols-2 md:items-center">
+        <!-- Left -->
+        <div class="text-center md:text-left">
+          <h1 class="text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-white">
+            Fix Your Google Map Ranking—This Week
+          </h1>
+          <p class="mt-4 text-lg md:text-xl text-white/80 max-w-xl md:max-w-none md:pr-6">
+            Pick a fast path to more calls from your Google Business Profile. No fluff—just the work that moves the needle in days, not months.
+          </p>
+          <div class="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-3">
+            <!-- This button submits the hero form (no Stripe needed yet) -->
+            <button
+              form="offerLeadForm"
+              type="submit"
+              name="path"
+              value="149-fixes"
+              class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-7 py-3 text-white font-heading font-semibold text-base shadow hover:bg-[#f34e00] transition"
+              data-analytics="begin_checkout"
+              data-offer="gbp_top5_149"
+            >
+              Start the $149 Fixes
+              <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"/></svg>
+            </button>
+
+            <a
+              href={CALENDLY}
+              class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 text-white font-heading font-semibold text-base shadow hover:bg-[#27394b] transition"
+              data-analytics="generate_lead"
+              data-offer="sprint_499"
+            >
+              Book 15-min Maps Call
+              <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Hero form -->
+        <div class="rounded-2xl bg-white/95 backdrop-blur shadow-lg border border-white/40 p-6">
+          <h2 class="text-xl font-heading font-semibold text-[#253242]">Get the $149 Fixes or a Free 3-min Audit</h2>
+          <p class="mt-1 text-sm text-slate-600">Tell us where to look—we’ll reply with next steps today.</p>
+
+          <!-- Using GET so it works out-of-the-box; swap to POST later if you want -->
+          <form
+            id="offerLeadForm"
+            action={FORM_ACTION}
+            method="GET"
+            class="mt-4 grid grid-cols-1 gap-3"
+            data-analytics="lead_form_submit"
+          >
+            <!-- pass UTMs -->
+            <input type="hidden" name="utm_source" value={utm.source} />
+            <input type="hidden" name="utm_medium" value={utm.medium} />
+            <input type="hidden" name="utm_campaign" value={utm.campaign} />
+            <input type="hidden" name="utm_content" value={utm.content} />
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <input required name="name" type="text" placeholder="Your name"
+                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#f56b2a]" />
+              <input name="business" type="text" placeholder="Business name"
+                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#f56b2a]" />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <input required name="email" type="email" placeholder="Email"
+                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#f56b2a]" />
+              <input name="phone" type="tel" inputmode="tel" placeholder="Phone"
+                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#f56b2a]" />
+            </div>
+
+            <input name="url" type="url" placeholder="Website or Google Business Profile URL"
+              class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#f56b2a]" />
+
+            <div class="flex flex-wrap gap-3 pt-1">
+              <button
+                type="submit"
+                name="path"
+                value="149-fixes"
+                class="inline-flex items-center rounded-xl bg-[#f56b2a] px-5 py-2.5 text-white font-heading font-semibold text-sm shadow hover:bg-[#c9400a] transition"
+              >
+                Start $149 Fixes
+              </button>
+              <button
+                type="submit"
+                name="path"
+                value="free-audit"
+                class="inline-flex items-center rounded-xl border border-slate-300 px-5 py-2.5 text-[#253242] font-heading font-semibold text-sm hover:bg-slate-50 transition"
+              >
+                Send 3-min Audit
+              </button>
+            </div>
+
+            <p class="text-[12px] text-slate-500 pt-2">By submitting, you agree to be contacted about this request. No spam—ever.</p>
+          </form>
+        </div>
+      </div>
+
+      <!-- trust bar -->
+      <div class="relative mt-8">
+        <div class="mx-auto max-w-6xl px-4">
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <div class="rounded-xl bg-white/10 text-white/90 px-4 py-3 text-sm text-center">Home-service specialists</div>
+            <div class="rounded-xl bg-white/10 text-white/90 px-4 py-3 text-sm text-center">Month-to-month • No long contracts</div>
+            <div class="rounded-xl bg-white/10 text-white/90 px-4 py-3 text-sm text-center">Results you can see in 30 days</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFERS -->
+  <section class="bg-cream border-t border-gray-100 py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2">
+        <article class="grid grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md">
+          <header>
+            <h2 class="text-xl md:text-2xl font-heading font-semibold text-heading">Top-5 Google Business Profile Fixes</h2>
+            <p class="mt-2 text-[15px] text-body">Quick wins implemented in 2–3 days to lift Maps visibility.</p>
+          </header>
+          <ul class="mt-5 list-disc pl-5 text-[15px] text-body space-y-2">
+            <li>Category tune-up (primary + secondary categories)</li>
+            <li>Services list completed with city-modified terms</li>
+            <li>Homepage &lt;title&gt; and H1 aligned to local service keywords</li>
+            <li>10 photos uploaded (EXIF geo-tagged) to GBP</li>
+            <li>1 GBP post with a clear CTA</li>
+            <li>Mini before/after PDF with next steps</li>
+          </ul>
+          <div class="mt-6 flex items-end justify-between border-t border-gray-100 pt-6">
+            <div>
+              <div class="text-3xl font-bold text-[#f56b2a]">$149</div>
+              <div class="text-xs text-gray-500">90-minute cap • 2–3 day turnaround</div>
+            </div>
+            <!-- Secondary CTA still submits form for $149 -->
+            <button
+              form="offerLeadForm"
+              type="submit"
+              name="path"
+              value="149-fixes"
+              class="rounded-xl bg-[#f56b2a] px-6 py-3 text-base font-heading font-semibold text-white shadow hover:bg-[#c9400a] transition"
+              data-analytics="begin_checkout"
+              data-offer="gbp_top5_149"
+            >Start Now</button>
+          </div>
+        </article>
+
+        <article class="relative grid grid-rows-[auto_1fr_auto] rounded-2xl border-2 border-[#f56b2a] bg-white p-8 shadow-md">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#f56b2a] px-4 py-1 text-xs font-bold text-white shadow">Most Popular</div>
+          <header class="mt-2">
+            <h2 class="text-xl md:text-2xl font-heading font-semibold text-heading">30-Day Local SEO Sprint</h2>
+            <p class="mt-2 text-[15px] text-body">Measurable local growth in 30 days—sets you up for ongoing wins.</p>
+          </header>
+          <ul class="mt-5 list-disc pl-5 text-[15px] text-body space-y-2">
+            <li>Everything in Top-5 Fixes</li>
+            <li>GBP description, FAQs, Products + 4 posts over 30 days</li>
+            <li>Top-20 citations (submit/clean NAP)</li>
+            <li>Tune 3–5 core pages (title/H1/meta/internal links/schema)</li>
+            <li>1 new service-area page</li>
+            <li>Tracking baseline + 90-day roadmap</li>
+          </ul>
+          <div class="mt-6 flex items-end justify-between border-t border-gray-100 pt-6">
+            <div>
+              <div class="text-3xl font-bold text-[#f56b2a]">$499</div>
+              <div class="text-xs text-gray-500">3–4 weeks • ~5–6 hrs effort</div>
+            </div>
+            <a
+              href={CALENDLY}
+              class="rounded-xl bg-secondary px-6 py-3 text-base font-heading font-semibold text-white shadow hover:bg-[#27394b] transition"
+              data-analytics="generate_lead"
+              data-offer="sprint_499"
+            >Book 15-min Call</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- proof row -->
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
+          <h3 class="mb-1 text-lg font-heading font-semibold text-heading">Outcome</h3>
+          <p class="text-base text-body">More calls from Maps within 2–4 weeks (category & on-page alignment).</p>
+        </div>
+        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
+          <h3 class="mb-1 text-lg font-heading font-semibold text-heading">NAP Safe</h3>
+          <p class="text-base text-body">Optional tracking number only on GBP (primary) with the real number listed as additional.</p>
+        </div>
+        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
+          <h3 class="mb-1 text-lg font-heading font-semibold text-heading">Guarantee</h3>
+          <p class="text-base text-body">If no measurable lift in 30 days, we’ll keep working free until you do.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS (numbered badges) -->
+  <section class="bg-white border-t border-gray-100 py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">
+        How Our Process Works
+        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+      </h2>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-4">
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-white text-sm font-bold">1</span>
+            <h3 class="text-lg font-heading font-semibold text-heading">Quick Intake</h3>
+          </div>
+          <p class="mt-3 text-[15px] text-body">Share your website/GBP URL + service areas.</p>
+        </div>
+
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-white text-sm font-bold">2</span>
+            <h3 class="text-lg font-heading font-semibold text-heading">Implement</h3>
+          </div>
+          <p class="mt-3 text-[15px] text-body">We apply the fixes that move Maps visibility now.</p>
+        </div>
+
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-white text-sm font-bold">3</span>
+            <h3 class="text-lg font-heading font-semibold text-heading">Verify</h3>
+          </div>
+          <p class="mt-3 text-[15px] text-body">Screenshots + tracking to confirm changes & impact.</p>
+        </div>
+
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-white text-sm font-bold">4</span>
+            <h3 class="text-lg font-heading font-semibold text-heading">Next Wins</h3>
+          </div>
+          <p class="mt-3 text-[15px] text-body">30-day roadmap or month-to-month. Cancel anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED (icon bullets) -->
+  <section class="bg-cream border-t border-gray-100 py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">
+        What You Get (Both Offers)
+        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+      </h2>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h3 class="text-lg font-heading font-semibold text-heading">GBP Essentials</h3>
+          <ul class="mt-4 space-y-2 text-[15px] text-body">
+            <li class="flex items-start gap-2"><svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Correct primary + secondary categories</li>
+            <li class="flex items-start gap-2"><svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Services with location modifiers</li>
+            <li class="flex items-start gap-2"><svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Conversion-ready GBP post</li>
+            <li class="flex items-start gap-2"><svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Fresh photo upload (geo-tag batch)</li>
+          </ul>
+        </div>
+
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h3 class="text-lg font-heading font-semibold text-heading">Website Alignment</h3>
+          <ul class="mt-4 space-y-2 text-[15px] text-body">
+            <li class="flex items-start gap-2"><svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Local keyword-aligned title & H1</li>
+            <li class="flex items-start gap-2"><svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Internal links to high-intent pages</li>
+            <li class="flex items-start gap-2"><svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Basic schema + meta cleanup</li>
+          </ul>
+        </div>
+
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h3 class="text-lg font-heading font-semibold text-heading">Proof & Tracking</h3>
+          <ul class="mt-4 space-y-2 text-[15px] text-body">
+            <li class="flex items-start gap-2"><svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Before/after screenshots</li>
+            <li class="flex items-start gap-2"><svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>GBP Insights baseline</li>
+            <li class="flex items-start gap-2"><svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Simple leads sheet (calls/forms)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MINI CASE RESULTS (pills) -->
+  <section class="bg-white border-t border-gray-100 py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">
+        Recent Results (Snapshots)
+        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+      </h2>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+          <span class="inline-block rounded-full bg-[#f56b2a]/10 text-[#f56b2a] px-3 py-1 text-xs font-semibold">Water Damage • SoCal</span>
+          <p class="mt-3 text-[15px] text-body">+38% calls from Maps in 30 days after category and homepage alignment.</p>
+        </div>
+
+        <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+          <span class="inline-block rounded-full bg-[#f56b2a]/10 text-[#f56b2a] px-3 py-1 text-xs font-semibold">Pest Control • FL</span>
+          <p class="mt-3 text-[15px] text-body">Top-3 for “service + city” terms within 3 weeks; four GBP posts during the sprint.</p>
+        </div>
+
+        <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+          <span class="inline-block rounded-full bg-[#f56b2a]/10 text-[#f56b2a] px-3 py-1 text-xs font-semibold">Plumbing • Inland Empire</span>
+          <p class="mt-3 text-[15px] text-body">First-page for “emergency plumber – city” after adding one service-area page.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON (brand-accented) -->
+<section class="bg-cream border-t border-gray-100 py-16">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">
+      At-a-Glance Comparison
+      <span class="block mx-auto mt-2 h-1 w-20 rounded bg-gradient-to-r from-[#253242] via-[#f56b2a] to-[#253242]"></span>
+    </h2>
+
+    <div
+      class="mt-8 overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-xl ring-1 ring-black/5">
+      
+      <!-- subtle brand top bar -->
+      <div class="h-1 w-full bg-gradient-to-r from-[#253242] via-[#f56b2a] to-[#253242]"></div>
+
+      <table class="w-full text-left text-[15px] text-body">
+        <thead>
+          <tr class="bg-slate-50/80">
+            <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase text-[#253242]">
+              Features
+            </th>
+            <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase">
+              <span
+                class="inline-flex items-center gap-2 rounded-full bg-[#253242]/90 px-3 py-1 text-white"
+                >GBP</span
+              >
+            </th>
+            <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase">
+              <span
+                class="inline-flex items-center gap-2 rounded-full bg-[#f56b2a]/90 px-3 py-1 text-white"
+                >Local SEO</span
+              >
+            </th>
+            <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase">Websites</th>
+            <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase">WaS</th>
+            <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase">Bundles</th>
+          </tr>
+        </thead>
+
+        <tbody class="[&_tr]:border-t [&_tr]:border-gray-100">
+          <!-- Row -->
+          <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
+            <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent">
+              Map Pack management
+            </td>
+            <td class="py-4 px-5">
+              <span class="inline-flex items-center gap-2 text-[#253242]">
+                <svg class="h-4 w-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+            </td>
+            <td class="py-4 px-5">
+              <svg class="h-4 w-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            </td>
+            <td class="py-4 px-5 text-slate-400">&mdash;</td>
+            <td class="py-4 px-5 text-slate-400">&mdash;</td>
+            <td class="py-4 px-5">
+              <svg class="h-4 w-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            </td>
+          </tr>
+
+          <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
+            <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent">
+              On-page &amp; technical SEO
+            </td>
+            <td class="py-4 px-5 text-slate-400">&mdash;</td>
+            <td class="py-4 px-5">
+              <svg class="h-4 w-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            </td>
+            <td class="py-4 px-5">Basic</td>
+            <td class="py-4 px-5">Basic</td>
+            <td class="py-4 px-5">
+              <svg class="h-4 w-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            </td>
+          </tr>
+
+          <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
+            <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent">
+              Content &amp; pages
+            </td>
+            <td class="py-4 px-5">Posts/photos</td>
+            <td class="py-4 px-5">Pages + blogs</td>
+            <td class="py-4 px-5">Site build</td>
+            <td class="py-4 px-5">Updates</td>
+            <td class="py-4 px-5">All</td>
+          </tr>
+
+          <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
+            <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent">
+              Citations
+            </td>
+            <td class="py-4 px-5">Cleanup/ongoing</td>
+            <td class="py-4 px-5">Build + ongoing</td>
+            <td class="py-4 px-5 text-slate-400">&mdash;</td>
+            <td class="py-4 px-5 text-slate-400">&mdash;</td>
+            <td class="py-4 px-5">
+              <svg class="h-4 w-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            </td>
+          </tr>
+
+          <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
+            <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent">
+              Calls &amp; reporting
+            </td>
+            <td class="py-4 px-5">Monthly</td>
+            <td class="py-4 px-5">Monthly/45-min+</td>
+            <td class="py-4 px-5 text-slate-400">&mdash;</td>
+            <td class="py-4 px-5 text-slate-400">&mdash;</td>
+            <td class="py-4 px-5">Monthly</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- subtle bottom accent -->
+      <div class="h-1 w-full bg-gradient-to-r from-[#253242] via-[#f56b2a] to-[#253242]"></div>
+    </div>
+  </div>
+</section>
+
+  <!-- TRUST + GUARANTEE -->
+  <section class="bg-white border-t border-gray-100 py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h3 class="text-lg font-heading font-semibold text-heading">Built for Home-Service Pros</h3>
+          <p class="mt-2 text-[15px] text-body">Plumbing, water damage, pest, HVAC, cleaning, landscaping.</p>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h3 class="text-lg font-heading font-semibold text-heading">Month-to-Month</h3>
+          <p class="mt-2 text-[15px] text-body">No long contracts. Start, pause, or switch plans anytime.</p>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h3 class="text-lg font-heading font-semibold text-heading">Simple Guarantee</h3>
+          <p class="mt-2 text-[15px] text-body">If you don’t see measurable lift in 30 days, we’ll keep working free until you do.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="bg-[#253242] py-16">
+    <div class="mx-auto max-w-6xl px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-white">Ready to Grow from Google Maps?</h2>
+      <p class="mt-3 text-white/80">Start the $149 Fixes now or book a 15-min call to plan your Sprint.</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <button
+          form="offerLeadForm"
+          type="submit"
+          name="path"
+          value="149-fixes"
+          class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-7 py-3 text-white font-heading font-semibold text-base shadow hover:bg-[#f34e00] transition"
+          data-analytics="begin_checkout"
+          data-offer="gbp_top5_149"
+        >
+          Start the $149 Fixes
+        </button>
+        <a
+          href={CALENDLY}
+          class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 text-white font-heading font-semibold text-base shadow hover:bg-[#27394b] transition"
+          data-analytics="generate_lead"
+          data-offer="sprint_499"
+        >
+          Book 15-min Call
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="border-t border-gray-100 bg-white py-20">
+    <div class="mx-auto max-w-4xl px-4">
+      <h2 class="text-center text-3xl md:text-4xl font-heading font-bold text-heading">
+        FAQs
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
+      </h2>
+
+      <div class="mt-8 space-y-6">
+        {[
+          ['Do I need a call for the $149 Fixes?', 'No. Submit the hero form and we start immediately. You’ll get a short intake and a mini report.'],
+          ['What’s included in the $149 Top-5 Fixes?', 'Category tune-up, services list, homepage title/H1 alignment, 10 geo-tagged photos uploaded, 1 GBP post, and a mini before/after PDF.'],
+          ['What’s included in the $499 Sprint?', 'Everything in Top-5 Fixes plus a full GBP pass (description, FAQs, Products, 4 posts), top-20 citations, tune 3–5 core pages, one service-area page, tracking baseline, and a 90-day plan.'],
+          ['Will this hurt SEO or my NAP?', 'No. We follow GBP best practices. If we add a tracking number, your real number remains as an additional line on GBP and stays consistent across citations.'],
+          ['How fast will I see results?', 'Most see movement within 2–4 weeks for Maps terms when categories, on-page, and photos are aligned. Sprint compounds those gains.'],
+          ['How do you measure success?', 'GBP calls/messages/website visits, form leads, and ranking snapshots for core “service + city” terms.'],
+          ['Can I cancel or switch plans?', 'Yes—month-to-month. You can move from the $149 Fixes to the $499 Sprint or into a monthly plan anytime.'],
+          ['What happens after the Sprint?', 'We recommend a monthly program for posts, citations, and new pages. If you prefer DIY, we’ll hand you the 90-day plan and tracking sheet.'],
+        ].map(([q, a]) => (
+          <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
+            <h3 class="text-lg font-heading font-semibold text-heading">{q}</h3>
+            <p class="mt-2 text-base text-body">{a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<!-- JSON-LD Offers -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Lilos Growth",
+  "url": "https://lilosgrowth.com/offers/local-seo",
+  "offers": [
+    {"@type":"Offer","name":"Top-5 Google Business Profile Fixes","priceCurrency":"USD","price":"149.00","availability":"https://schema.org/InStock"},
+    {"@type":"Offer","name":"30-Day Local SEO Sprint","priceCurrency":"USD","price":"499.00","availability":"https://schema.org/InStock"}
+  ]
+}
+</script>
