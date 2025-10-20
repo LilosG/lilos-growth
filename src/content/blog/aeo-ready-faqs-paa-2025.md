@@ -11,8 +11,6 @@ image: '/images/blog/aeo-ready-faqs-paa-2025/hero.svg'
 imageAlt: 'FAQ cards branching across multiple cities'
 ---
 
-<!-- PASTE THE FULL BLOG BODY BELOW THIS LINE -->
-
 > **TL;DR:** FAQs shouldn’t be a dumping ground. Build **AEO-ready “Answer Cards”**—2–4 sentence answers with entities, steps, and proof—then scale them across priority **cities/neighborhoods**. Mine **PAA + call logs**, use a **repeatable template**, add **tables/checklists**, and interlink to **Service + City** pages. Track impressions, justifications, and calls.
 
 ## Quick Answer
