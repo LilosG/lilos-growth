@@ -21,9 +21,9 @@ const utm = {
   content: Astro.url.searchParams.get('utm_content') ?? '',
 };
 
-export const title = 'Google Maps Growth Offers: $149 GBP Fixes & 30-Day Sprint | Lilos Growth';
+export const title = 'Rank Higher on Google Maps in 7 Days | $149 GBP Fixes & 30-Day Sprint';
 export const description =
-  'Two fast paths to rank higher in Google Maps. $149 Top-5 GBP Fixes or a $499 30-Day Local SEO Sprint. Built for home-service businesses.';
+  'Two fast paths to more calls from Google Maps. $149 Top-5 GBP Fixes or a $499 30-Day Local SEO Sprint. Built for home-service businesses.';
 ---
 
 <Layout {title} {description}>
@@ -36,14 +36,14 @@ export const description =
         <!-- Left -->
         <div class="text-center md:text-left">
           <h1 class="text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-white">
-            Fix Your Google Map Ranking—This Week
+            Rank Higher on Google Maps in 7 Days
           </h1>
           <p class="mt-4 text-lg md:text-xl text-white/80 max-w-xl md:max-w-none md:pr-6">
-            Pick a fast path to more calls from your Google Business Profile. No fluff—just the work that moves the
-            needle in days, not months.
+            We fix the 5 issues holding your GBP back—then track lifts in calls, views, and rankings. Month-to-month.
+            Simple guarantee.
           </p>
           <div class="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-3">
-            <!-- This button submits the hero form (no Stripe needed yet) -->
+            <!-- This button submits the hero form -->
             <button
               form="offerLeadForm"
               type="submit"
@@ -53,19 +53,21 @@ export const description =
               data-analytics="begin_checkout"
               data-offer="gbp_top5_149"
             >
-              Start the $149 Fixes
+              Start the $149 Fix
               <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
                 ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
               >
             </button>
 
+            <!-- Calendly popup trigger -->
             <a
-              href={CALENDLY}
+              href="#"
+              onClick={`Calendly.initPopupWidget({ url: '${CALENDLY}' }); return false;`}
               class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 text-white font-heading font-semibold text-base shadow hover:bg-[#27394b] transition"
               data-analytics="generate_lead"
               data-offer="sprint_499"
             >
-              Book 15-min Maps Call
+              Book 15-min Call
               <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
                 ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
               >
@@ -75,10 +77,9 @@ export const description =
 
         <!-- Right: Hero form -->
         <div class="rounded-2xl bg-white/95 backdrop-blur shadow-lg border border-white/40 p-6">
-          <h2 class="text-xl font-heading font-semibold text-[#253242]">Get the $149 Fixes or a Free 3-min Audit</h2>
+          <h2 class="text-xl font-heading font-semibold text-[#253242]">Get the $149 Fix or a Free 3-min Audit</h2>
           <p class="mt-1 text-sm text-slate-600">Tell us where to look—we’ll reply with next steps today.</p>
 
-          <!-- Using GET so it works out-of-the-box; swap to POST later if you want -->
           <form
             id="offerLeadForm"
             action={FORM_ACTION}
@@ -120,7 +121,7 @@ export const description =
                 name="phone"
                 type="tel"
                 inputmode="tel"
-                placeholder="Phone"
+                placeholder="Phone (optional)"
                 class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#f56b2a]"
               />
             </div>
@@ -139,7 +140,7 @@ export const description =
                 value="149-fixes"
                 class="inline-flex items-center rounded-xl bg-[#f56b2a] px-5 py-2.5 text-white font-heading font-semibold text-sm shadow hover:bg-[#c9400a] transition"
               >
-                Start $149 Fixes
+                Start $149 Fix
               </button>
               <button
                 type="submit"
@@ -169,7 +170,7 @@ export const description =
               Month-to-month • No long contracts
             </div>
             <div class="rounded-xl bg-white/10 text-white/90 px-4 py-3 text-sm text-center">
-              Results you can see in 30 days
+              If no lift in 30 days, we keep working free
             </div>
           </div>
         </div>
@@ -189,11 +190,11 @@ export const description =
             <p class="mt-2 text-[15px] text-body">Quick wins implemented in 2–3 days to lift Maps visibility.</p>
           </header>
           <ul class="mt-5 list-disc pl-5 text-[15px] text-body space-y-2">
-            <li>Category tune-up (primary + secondary categories)</li>
+            <li>Primary + secondary categories aligned</li>
             <li>Services list completed with city-modified terms</li>
-            <li>Homepage &lt;title&gt; and H1 aligned to local service keywords</li>
-            <li>10 photos uploaded (EXIF geo-tagged) to GBP</li>
-            <li>1 GBP post with a clear CTA</li>
+            <li>Homepage title &amp; H1 mapped to core local term</li>
+            <li>10 on-brand, geo-tagged photos uploaded to GBP</li>
+            <li>1 GBP post published with a clear CTA</li>
             <li>Mini before/after PDF with next steps</li>
           </ul>
           <div class="mt-6 flex items-end justify-between border-t border-gray-100 pt-6">
@@ -201,7 +202,6 @@ export const description =
               <div class="text-3xl font-bold text-[#f56b2a]">$149</div>
               <div class="text-xs text-gray-500">90-minute cap • 2–3 day turnaround</div>
             </div>
-            <!-- Secondary CTA still submits form for $149 -->
             <button
               form="offerLeadForm"
               type="submit"
@@ -227,10 +227,10 @@ export const description =
             <p class="mt-2 text-[15px] text-body">Measurable local growth in 30 days—sets you up for ongoing wins.</p>
           </header>
           <ul class="mt-5 list-disc pl-5 text-[15px] text-body space-y-2">
-            <li>Everything in Top-5 Fixes</li>
+            <li>Everything in the Top-5 Fixes</li>
             <li>GBP description, FAQs, Products + 4 posts over 30 days</li>
             <li>Top-20 citations (submit/clean NAP)</li>
-            <li>Tune 3–5 core pages (title/H1/meta/internal links/schema)</li>
+            <li>Tune 3–5 core pages (titles/H1s/internal links/schema)</li>
             <li>1 new service-area page</li>
             <li>Tracking baseline + 90-day roadmap</li>
           </ul>
@@ -239,8 +239,10 @@ export const description =
               <div class="text-3xl font-bold text-[#f56b2a]">$499</div>
               <div class="text-xs text-gray-500">3–4 weeks • ~5–6 hrs effort</div>
             </div>
+            <!-- Calendly popup trigger -->
             <a
-              href={CALENDLY}
+              href="#"
+              onClick={`Calendly.initPopupWidget({ url: '${CALENDLY}' }); return false;`}
               class="rounded-xl bg-secondary px-6 py-3 text-base font-heading font-semibold text-white shadow hover:bg-[#27394b] transition"
               data-analytics="generate_lead"
               data-offer="sprint_499">Book 15-min Call</a
@@ -253,7 +255,7 @@ export const description =
       <div class="mt-12 grid gap-6 md:grid-cols-3">
         <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
           <h3 class="mb-1 text-lg font-heading font-semibold text-heading">Outcome</h3>
-          <p class="text-base text-body">More calls from Maps within 2–4 weeks (category & on-page alignment).</p>
+          <p class="text-base text-body">More calls from Maps within 2–4 weeks (category &amp; on-page alignment).</p>
         </div>
         <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
           <h3 class="mb-1 text-lg font-heading font-semibold text-heading">NAP Safe</h3>
@@ -269,7 +271,7 @@ export const description =
     </div>
   </section>
 
-  <!-- HOW IT WORKS (numbered badges) -->
+  <!-- HOW IT WORKS -->
   <section class="bg-white border-t border-gray-100 py-16">
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">
@@ -297,7 +299,7 @@ export const description =
             >
             <h3 class="text-lg font-heading font-semibold text-heading">Implement</h3>
           </div>
-          <p class="mt-3 text-[15px] text-body">We apply the fixes that move Maps visibility now.</p>
+          <p class="mt-3 text:[15px] text-body">We apply the fixes that move Maps visibility now.</p>
         </div>
 
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -308,7 +310,7 @@ export const description =
             >
             <h3 class="text-lg font-heading font-semibold text-heading">Verify</h3>
           </div>
-          <p class="mt-3 text-[15px] text-body">Screenshots + tracking to confirm changes & impact.</p>
+          <p class="mt-3 text-[15px] text-body">Screenshots + tracking to confirm changes &amp; impact.</p>
         </div>
 
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -325,7 +327,7 @@ export const description =
     </div>
   </section>
 
-  <!-- WHAT'S INCLUDED (icon bullets) -->
+  <!-- WHAT'S INCLUDED -->
   <section class="bg-cream border-t border-gray-100 py-16">
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">
@@ -366,7 +368,7 @@ export const description =
             <li class="flex items-start gap-2">
               <svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
                 ><path d="M20 6 9 17l-5-5"></path></svg
-              >Local keyword-aligned title & H1
+              >Local keyword-aligned title &amp; H1
             </li>
             <li class="flex items-start gap-2">
               <svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
@@ -382,7 +384,7 @@ export const description =
         </div>
 
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h3 class="text-lg font-heading font-semibold text-heading">Proof & Tracking</h3>
+          <h3 class="text-lg font-heading font-semibold text-heading">Proof &amp; Tracking</h3>
           <ul class="mt-4 space-y-2 text-[15px] text-body">
             <li class="flex items-start gap-2">
               <svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
@@ -405,7 +407,7 @@ export const description =
     </div>
   </section>
 
-  <!-- MINI CASE RESULTS (pills) -->
+  <!-- MINI CASE RESULTS -->
   <section class="bg-white border-t border-gray-100 py-16">
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">
@@ -444,7 +446,7 @@ export const description =
     </div>
   </section>
 
-  <!-- COMPARISON (brand-accented) -->
+  <!-- COMPARISON -->
   <section class="bg-cream border-t border-gray-100 py-16">
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">
@@ -454,92 +456,88 @@ export const description =
       </h2>
 
       <div class="mt-8 overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-xl ring-1 ring-black/5">
-        <!-- subtle brand top bar -->
         <div class="h-1 w-full bg-gradient-to-r from-[#253242] via-[#f56b2a] to-[#253242]"></div>
 
         <table class="w-full text-left text-[15px] text-body">
           <thead>
             <tr class="bg-slate-50/80">
               <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase text-[#253242]"> Features </th>
-              <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase">
-                <span class="inline-flex items-center gap-2 rounded-full bg-[#253242]/90 px-3 py-1 text-white">GBP</span
-                >
-              </th>
-              <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase">
-                <span class="inline-flex items-center gap-2 rounded-full bg-[#f56b2a]/90 px-3 py-1 text-white"
+              <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase"
+                ><span class="inline-flex items-center gap-2 rounded-full bg-[#253242]/90 px-3 py-1 text-white"
+                  >GBP</span
+                ></th
+              >
+              <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase"
+                ><span class="inline-flex items-center gap-2 rounded-full bg-[#f56b2a]/90 px-3 py-1 text-white"
                   >Local SEO</span
-                >
-              </th>
+                ></th
+              >
               <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase">Websites</th>
               <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase">WaS</th>
               <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase">Bundles</th>
             </tr>
           </thead>
-
           <tbody class="[&_tr]:border-t [&_tr]:border-gray-100">
-            <!-- Row -->
             <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
               <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent"> Map Pack management </td>
-              <td class="py-4 px-5">
-                <span class="inline-flex items-center gap-2 text-[#253242]">
-                  <svg
+              <td class="py-4 px-5"
+                ><span class="inline-flex items-center gap-2 text-[#253242]"
+                  ><svg
                     class="h-4 w-4 text-emerald-600"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
                     stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
-                  >
-                </span>
-              </td>
-              <td class="py-4 px-5">
-                <svg
+                  ></span
+                ></td
+              >
+              <td class="py-4 px-5"
+                ><svg
                   class="h-4 w-4 text-emerald-600"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
-                >
-              </td>
+                ></td
+              >
               <td class="py-4 px-5 text-slate-400">&mdash;</td>
               <td class="py-4 px-5 text-slate-400">&mdash;</td>
-              <td class="py-4 px-5">
-                <svg
+              <td class="py-4 px-5"
+                ><svg
                   class="h-4 w-4 text-emerald-600"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
-                >
-              </td>
+                ></td
+              >
             </tr>
-
             <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
               <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent">
                 On-page &amp; technical SEO
               </td>
               <td class="py-4 px-5 text-slate-400">&mdash;</td>
-              <td class="py-4 px-5">
-                <svg
+              <td class="py-4 px-5"
+                ><svg
                   class="h-4 w-4 text-emerald-600"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
-                >
-              </td>
+                ></td
+              >
               <td class="py-4 px-5">Basic</td>
               <td class="py-4 px-5">Basic</td>
-              <td class="py-4 px-5">
-                <svg
+              <td class="py-4 px-5"
+                ><svg
                   class="h-4 w-4 text-emerald-600"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
-                >
-              </td>
+                ></td
+              >
             </tr>
-
             <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
               <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent"> Content &amp; pages </td>
               <td class="py-4 px-5">Posts/photos</td>
@@ -548,24 +546,22 @@ export const description =
               <td class="py-4 px-5">Updates</td>
               <td class="py-4 px-5">All</td>
             </tr>
-
             <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
               <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent"> Citations </td>
               <td class="py-4 px-5">Cleanup/ongoing</td>
               <td class="py-4 px-5">Build + ongoing</td>
               <td class="py-4 px-5 text-slate-400">&mdash;</td>
               <td class="py-4 px-5 text-slate-400">&mdash;</td>
-              <td class="py-4 px-5">
-                <svg
+              <td class="py-4 px-5"
+                ><svg
                   class="h-4 w-4 text-emerald-600"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
-                >
-              </td>
+                ></td
+              >
             </tr>
-
             <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
               <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent"> Calls &amp; reporting </td>
               <td class="py-4 px-5">Monthly</td>
@@ -576,8 +572,6 @@ export const description =
             </tr>
           </tbody>
         </table>
-
-        <!-- subtle bottom accent -->
         <div class="h-1 w-full bg-gradient-to-r from-[#253242] via-[#f56b2a] to-[#253242]"></div>
       </div>
     </div>
@@ -609,7 +603,7 @@ export const description =
   <section class="bg-[#253242] py-16">
     <div class="mx-auto max-w-6xl px-4 text-center">
       <h2 class="text-3xl md:text-4xl font-heading font-bold text-white">Ready to Grow from Google Maps?</h2>
-      <p class="mt-3 text-white/80">Start the $149 Fixes now or book a 15-min call to plan your Sprint.</p>
+      <p class="mt-3 text-white/80">Start the $149 Fix now or book a 15-min call to plan your Sprint.</p>
       <div class="mt-6 flex flex-wrap justify-center gap-3">
         <button
           form="offerLeadForm"
@@ -620,10 +614,12 @@ export const description =
           data-analytics="begin_checkout"
           data-offer="gbp_top5_149"
         >
-          Start the $149 Fixes
+          Start the $149 Fix
         </button>
+        <!-- Calendly popup trigger -->
         <a
-          href={CALENDLY}
+          href="#"
+          onClick={`Calendly.initPopupWidget({ url: '${CALENDLY}' }); return false;`}
           class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 text-white font-heading font-semibold text-base shadow hover:bg-[#27394b] transition"
           data-analytics="generate_lead"
           data-offer="sprint_499"
@@ -633,61 +629,11 @@ export const description =
       </div>
     </div>
   </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="border-t border-gray-100 bg-white py-20">
-    <div class="mx-auto max-w-4xl px-4">
-      <h2 class="text-center text-3xl md:text-4xl font-heading font-bold text-heading">
-        FAQs
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
-      </h2>
-
-      <div class="mt-8 space-y-6">
-        {
-          [
-            [
-              'Do I need a call for the $149 Fixes?',
-              'No. Submit the hero form and we start immediately. You’ll get a short intake and a mini report.',
-            ],
-            [
-              'What’s included in the $149 Top-5 Fixes?',
-              'Category tune-up, services list, homepage title/H1 alignment, 10 geo-tagged photos uploaded, 1 GBP post, and a mini before/after PDF.',
-            ],
-            [
-              'What’s included in the $499 Sprint?',
-              'Everything in Top-5 Fixes plus a full GBP pass (description, FAQs, Products, 4 posts), top-20 citations, tune 3–5 core pages, one service-area page, tracking baseline, and a 90-day plan.',
-            ],
-            [
-              'Will this hurt SEO or my NAP?',
-              'No. We follow GBP best practices. If we add a tracking number, your real number remains as an additional line on GBP and stays consistent across citations.',
-            ],
-            [
-              'How fast will I see results?',
-              'Most see movement within 2–4 weeks for Maps terms when categories, on-page, and photos are aligned. Sprint compounds those gains.',
-            ],
-            [
-              'How do you measure success?',
-              'GBP calls/messages/website visits, form leads, and ranking snapshots for core “service + city” terms.',
-            ],
-            [
-              'Can I cancel or switch plans?',
-              'Yes—month-to-month. You can move from the $149 Fixes to the $499 Sprint or into a monthly plan anytime.',
-            ],
-            [
-              'What happens after the Sprint?',
-              'We recommend a monthly program for posts, citations, and new pages. If you prefer DIY, we’ll hand you the 90-day plan and tracking sheet.',
-            ],
-          ].map(([q, a]) => (
-            <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
-              <h3 class="text-lg font-heading font-semibold text-heading">{q}</h3>
-              <p class="mt-2 text-base text-body">{a}</p>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
 </Layout>
+
+<!-- Calendly widget assets (for popup) -->
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+<script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 
 <!-- JSON-LD Offers -->
 <script type="application/ld+json" is:inline>
