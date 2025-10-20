@@ -1,4 +1,5 @@
 ---
+date: 2025-10-19T17:07:59-07:00
 title: 'Entity-First Keyword Research 2025: From Services → Cities → Questions → Conversions'
 description: 'A step-by-step system to build entity maps, clusters, and page plans that win in both Google and AI assistants—tailored for local service companies.'
 slug: entity-first-keyword-research-local-2025

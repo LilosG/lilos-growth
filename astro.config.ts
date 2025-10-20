@@ -16,6 +16,7 @@ import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehype
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+  trailingSlash: 'never',
   site: 'https://lilosgrowth.com',
   output: 'static',
 

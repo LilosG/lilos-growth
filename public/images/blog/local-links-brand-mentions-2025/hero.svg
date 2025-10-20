@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Local Links &amp; Brand Mentions 2025</title>
+  <desc id="desc">Network of local links and mentions feeding a home-service brand</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1e293b"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#000" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <rect x="80" y="80" width="1440" height="740" rx="32" fill="url(#bg)" filter="url(#shadow)"/>
+  <g transform="translate(140,210)">
+    <text x="0" y="0" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto" font-size="64" font-weight="800" fill="#ffffff">
+      Local Links &amp; Brand Mentions 2025
+    </text>
+    <rect x="0" y="40" width="620" height="10" rx="5" fill="#8b5cf6"/>
+    <text x="0" y="120" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto" font-size="34" font-weight="600" fill="#dbeafe">
+      Proof-backed PR • Vendor co-marketing • Community assets
+    </text>
+  </g>
+  <!-- network nodes -->
+  <g transform="translate(180,520)" font-family="Inter, system-ui, Segoe UI, Roboto" font-size="20" fill="#e2e8f0" stroke="#8b5cf6" stroke-width="2">
+    <circle cx="200" cy="80" r="40" fill="none"/><text x="172" y="87">City</text>
+    <circle cx="460" cy="40" r="40" fill="none"/><text x="424" y="47">HOA</text>
+    <circle cx="720" cy="80" r="40" fill="none"/><text x="680" y="87">Vendor</text>
+    <circle cx="980" cy="40" r="40" fill="none"/><text x="952" y="47">News</text>
+    <circle cx="1240" cy="80" r="40" fill="none"/><text x="1198" y="87">Chamber</text>
+    <line x1="200" y1="80" x2="720" y2="80" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="6 6"/>
+    <line x1="460" y1="40" x2="980" y2="40" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="6 6"/>
+    <line x1="980" y1="40" x2="1240" y2="80" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="6 6"/>
+  </g>
+</svg>

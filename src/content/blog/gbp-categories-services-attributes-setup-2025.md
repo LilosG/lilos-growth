@@ -1,4 +1,5 @@
 ---
+date: 2025-10-19T17:07:59-07:00
 title: 'GBP Categories, Services & Attributes: The No-Mistakes Setup for 2025'
 description: 'Choose the right primary category, map services, set attributes, and avoid suspensions—field-tested guidance for storefronts and service-area businesses.'
 slug: gbp-categories-services-attributes-setup-2025

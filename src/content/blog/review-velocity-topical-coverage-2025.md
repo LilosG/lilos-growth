@@ -1,4 +1,5 @@
 ---
+date: 2025-10-19T17:07:59-07:00
 title: 'Review Velocity & Topical Coverage 2025: A No-Gating Playbook for Local Services'
 description: 'Win Map Pack tiebreakers with steady review velocity and topic-rich feedback—without gating. Includes prompts, cadences, KPIs, and field checklists.'
 slug: review-velocity-topical-coverage-2025

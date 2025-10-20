@@ -1,4 +1,5 @@
 ---
+date: 2025-10-19T17:07:59-07:00
 title: 'Local Landing Page Blueprints 2025: Copy, Sections, and Internal Links That Rank'
 description: 'Build city and service pages that win: proven sections, copy blocks, internal links, and checklists for local pros in home services.'
 slug: local-landing-page-blueprints-2025

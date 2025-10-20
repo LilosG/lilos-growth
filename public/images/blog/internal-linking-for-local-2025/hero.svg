@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Internal Linking for Local 2025</title>
+  <desc id="desc">Hero card showing a hub-and-spoke motif</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1C2430"/>
+      <stop offset="1" stop-color="#223042"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="20" flood-color="#000" flood-opacity=".3"/>
+    </filter>
+  </defs>
+  <rect x="80" y="80" width="1440" height="740" rx="32" fill="url(#bg)" filter="url(#shadow)"/>
+  <g transform="translate(140,210)">
+    <text x="0" y="0" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto" font-size="64" font-weight="800" fill="#ffffff">
+      Internal Linking for Local 2025
+    </text>
+    <rect x="0" y="40" width="360" height="10" rx="5" fill="#4FD1C5"/>
+    <text x="0" y="120" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto" font-size="34" font-weight="600" fill="#cfe0ea">
+      Hubs → Spokes → Proof, with literal anchors
+    </text>
+  </g>
+  <!-- simple hub-and-spoke marks -->
+  <g transform="translate(1120,460)" fill="none" stroke="#86E1D8" stroke-width="3">
+    <circle cx="0" cy="0" r="70"/>
+    <circle cx="-200" cy="-100" r="22"/><line x1="-200" y1="-100" x2="-70" y2="-35"/>
+    <circle cx="-220" cy="80" r="22"/><line x1="-220" y1="80" x2="-75" y2="15"/>
+    <circle cx="160" cy="-60" r="22"/><line x1="160" y1="-60" x2="70" y2="-20"/>
+    <circle cx="180" cy="90" r="22"/><line x1="180" y1="90" x2="75" y2="30"/>
+  </g>
+</svg>

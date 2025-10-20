@@ -4,30 +4,33 @@ import { getCollection } from 'astro:content';
 import BlogCard from '../../components/BlogCard.astro';
 import { toListing, getSlug, type BlogEntry } from '../../lib/blog';
 
-// Pagination
-const page = Math.max(1, Number(Astro.url.searchParams.get('page') || '1'));
-const pageSize = 12;
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const pageSize = 12; // match index.astro
+  const entries: BlogEntry[] = await getCollection('blog');
+  const ordered = toListing(entries); // newest first, drafts hidden unless LOCAL_DRAFTS=1
+  const uniq = Array.from(new Map(ordered.map((p) => [p.slug, p])).values());
+  return paginate(uniq, { pageSize });
+}
 
-const entries: BlogEntry[] = await getCollection('blog');
-const ordered = toListing(entries); // newest first, drafts hidden unless LOCAL_DRAFTS=1
-
-const total = ordered.length;
-const start = (page - 1) * pageSize;
-const end = start + pageSize;
-const slice = ordered.slice(start, end);
-const totalPages = Math.max(1, Math.ceil(total / pageSize));
+type PageProps = {
+  page: {
+    data: BlogEntry[];
+    current: number;
+    last: number;
+  };
+};
+const { page } = Astro.props as PageProps;
 
 const pageTitle = 'Blog | Lilos Growth';
 const pageDescription = 'Latest articles on Local SEO, Google Business Profile, websites, and growth.';
 ---
 
 <Layout title={pageTitle} description={pageDescription} metadata={{ title: pageTitle, description: pageDescription }}>
-  <!-- HERO SECTION (copied from homepage for pixel parity) -->
+  <!-- HERO SECTION (identical to index.astro) -->
   <section class="bg-[#253242] min-h-[680px] flex items-center pt-10 pb-20 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159] pointer-events-none"></div>
 
     <div class="relative z-10 max-w-6xl mx-auto w-full flex flex-col md:flex-row md:items-center gap-14 px-4">
-      <!-- Left Column: Logo, Headline, CTA -->
       <div class="flex-1">
         <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="mb-10 w-40" fetchpriority="high" />
         <h1
@@ -81,7 +84,6 @@ const pageDescription = 'Latest articles on Local SEO, Google Business Profile, 
         </div>
       </div>
 
-      <!-- Right Column: Lead Form (same Netlify-ready form) -->
       <div
         id="contact"
         class="flex-1 max-w-md mx-auto md:mx-0 bg-white p-10 rounded-3xl shadow-xl border border-gray-100"
@@ -90,7 +92,6 @@ const pageDescription = 'Latest articles on Local SEO, Google Business Profile, 
           Free SEO Website Audit for Home Service Pros!
         </h2>
 
-        <!-- Netlify-friendly form: name, POST, hidden form-name, honeypot -->
         <form
           name="seo-audit"
           method="POST"
@@ -101,10 +102,7 @@ const pageDescription = 'Latest articles on Local SEO, Google Business Profile, 
         >
           <input type="hidden" name="form-name" value="seo-audit" />
           <p class="hidden">
-            <label>
-              Don’t fill this out if you’re human:
-              <input name="bot-field" />
-            </label>
+            <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
           </p>
 
           <div>
@@ -173,15 +171,15 @@ const pageDescription = 'Latest articles on Local SEO, Google Business Profile, 
     </div>
   </section>
 
-  <!-- BLOG LIST -->
+  <!-- BLOG LIST (identical to index.astro, but fed by page.data) -->
   <section class="py-12">
     <div class="max-w-6xl mx-auto px-4">
       {
-        slice.length === 0 ? (
+        page.data.length === 0 ? (
           <p class="text-gray-600">No posts published yet.</p>
         ) : (
           <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {slice.map((p) => (
+            {page.data.map((p) => (
               <BlogCard
                 href={`/blog/${getSlug(p)}`}
                 title={p.data.title}
@@ -195,29 +193,24 @@ const pageDescription = 'Latest articles on Local SEO, Google Business Profile, 
         )
       }
 
-      {
-        totalPages > 1 && (
-          <nav class="mt-10 flex items-center justify-center gap-3">
-            <a
-              href={`/blog${page > 2 ? `/${page - 1}` : page > 1 ? `` : ``}`}
-              class="btn btn-outline-primary btn-sm disabled:opacity-40"
-              aria-disabled={page === 1}
-            >
-              Prev
-            </a>
-            <span class="text-sm">
-              Page {page} of {totalPages}
-            </span>
-            <a
-              href={`/blog/${Math.min(totalPages, page + 1)}`}
-              class="btn btn-outline-primary btn-sm disabled:opacity-40"
-              aria-disabled={page === totalPages}
-            >
-              Next
-            </a>
-          </nav>
-        )
-      }
+      <!-- Pager: identical look, links without trailing slash -->
+      <nav class="mt-10 flex items-center justify-center gap-3">
+        <a
+          href={page.current > 2 ? `/blog/${page.current - 1}` : page.current > 1 ? `/blog` : '#'}
+          class="btn btn-outline-primary btn-sm disabled:opacity-40"
+          aria-disabled={page.current === 1}
+        >
+          Prev
+        </a>
+        <span class="text-sm">Page {page.current} of {page.last}</span>
+        <a
+          href={page.current < page.last ? `/blog/${page.current + 1}` : '#'}
+          class="btn btn-outline-primary btn-sm disabled:opacity-40"
+          aria-disabled={page.current === page.last}
+        >
+          Next
+        </a>
+      </nav>
     </div>
   </section>
 </Layout>

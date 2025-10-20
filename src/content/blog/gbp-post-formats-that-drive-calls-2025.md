@@ -1,7 +1,8 @@
 ---
+date: 2025-10-19T17:07:59-07:00
 title: 'GBP Posts That Drive Calls in 2025: 7 Repeatable Formats + a 30–Day Calendar'
 description: 'Turn Google Business Profile posts into measurable calls and messages using seven proven formats, UTM tracking, and a 30-day publishing cadence.'
-slug: 'gbp-post-formats-that-drive-calls-2025'
+slug: gbp-post-formats-that-drive-calls-2025
 category: 'Google Business Profile'
 tags: ['gbp', 'posts', 'local-seo']
 pubDate: '2025-10-19'

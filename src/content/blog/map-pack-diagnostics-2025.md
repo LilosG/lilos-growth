@@ -1,4 +1,5 @@
 ---
+date: 2025-10-19T17:07:59-07:00
 title: 'Map Pack Diagnostics 2025: Proximity, Prominence, Relevance—What to Fix First'
 description: 'A practical diagnostic to decide whether to improve proximity, prominence, or relevance first—plus trade-ready checklists and examples.'
 slug: map-pack-diagnostics-2025

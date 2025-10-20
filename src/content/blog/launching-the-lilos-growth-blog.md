@@ -1,4 +1,5 @@
 ---
+date: 2025-10-13T09:36:29-07:00
 title: 'Launching the Lilos Growth Blog'
 description: 'How we publish at volume to win long-tail keywords for home-service SEO and AEO—without burning out.'
 slug: launching-the-lilos-growth-blog

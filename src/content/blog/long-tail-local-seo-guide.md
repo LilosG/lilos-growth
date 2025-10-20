@@ -1,7 +1,8 @@
 ---
+date: 2025-10-15T02:22:52-07:00
 title: 'Local SEO Long-Tail Strategy That Compounds'
 description: 'A practical framework for home-service companies to win ‘service + city + qualifier’ searches, publish consistently, and turn clicks into booked jobs.'
-slug: local-seo-long-tail-strategy-that-compounds
+slug: long-tail-local-seo-guide
 category: 'SEO'
 tags: ['local-seo', 'long-tail', 'content', 'strategy', 'gbp']
 pubDate: 2025-10-15

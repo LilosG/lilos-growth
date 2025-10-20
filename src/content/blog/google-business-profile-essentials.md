@@ -1,4 +1,5 @@
 ---
+date: 2025-10-13T09:36:29-07:00
 title: 'Google Business Profile Essentials for Home Services'
 description: 'The foundation for local visibility and booked jobs across Maps and AI answers. Set up, optimize, and maintain your Google Business Profile the right way.'
 slug: google-business-profile-essentials
@@ -21,7 +22,6 @@ imageAlt: 'Google Business Profile optimization banner'
 
 title: "AEO for Local Services: Make Your Content the Direct Answer in ChatGPT & Gemini"
 description: "Turn your service FAQs into AI-ready answers that rank, get cited, and convert—using entities, answer pages, schema, and review evidence."
-slug: "aeo-for-local-services-direct-answer-2025"
 category: "SEO"
 tags: ["local-seo", "aeo", "geo", "local-services", "answer-engine", "strategy"]
 pubDate: "2025-10-19"

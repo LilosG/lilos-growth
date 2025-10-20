@@ -1,4 +1,5 @@
 ---
+date: 2025-10-13T09:36:29-07:00
 title: 'Local SEO Long-Tail Strategy That Compounds'
 description: 'A simple framework to publish specific, conversion-ready pages that rank and turn visits into booked jobs.'
 slug: local-seo-long-tail-strategy

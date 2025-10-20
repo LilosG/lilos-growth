@@ -1,36 +1,55 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { getPermalink } from '~/utils/permalinks';
-import Button from '~/components/ui/Button.astro';
-
-export interface Props {
-  prevUrl?: string;
-  nextUrl?: string;
-  prevText?: string;
-  nextText?: string;
+interface Urls {
+  current: string;
+  prev?: string;
+  next?: string;
 }
-
-const { prevUrl, nextUrl, prevText = 'Newer posts', nextText = 'Older posts' } = Astro.props;
+export interface Props {
+  current: number;
+  last: number;
+  url: Urls;
+  base?: string; // default "/blog"
+}
+const { current, last, url, base = '/blog' } = Astro.props;
+const hrefFor = (n: number) => (n === 1 ? `${base}/` : `${base}/${n}/`);
 ---
 
-{
-  (prevUrl || nextUrl) && (
-    <div class="container flex">
-      <div class="flex flex-row mx-auto container justify-between">
-        <Button
-          variant="tertiary"
-          class={`md:px-3 px-3 mr-2 ${!prevUrl ? 'invisible' : ''}`}
-          href={getPermalink(prevUrl)}
-        >
-          <Icon name="tabler:chevron-left" class="w-6 h-6" />
-          <p class="ml-2">{prevText}</p>
-        </Button>
+<nav class="mt-10 flex items-center justify-between">
+  <div>
+    {
+      url.prev && (
+        <a href={url.prev} class="inline-block rounded-lg border px-4 py-2 hover:underline">
+          ← Newer
+        </a>
+      )
+    }
+  </div>
+  <div class="text-sm">Page {current} of {last}</div>
+  <div>
+    {
+      url.next && (
+        <a href={url.next} class="inline-block rounded-lg border px-4 py-2 hover:underline">
+          Older →
+        </a>
+      )
+    }
+  </div>
+</nav>
 
-        <Button variant="tertiary" class={`md:px-3 px-3 ${!nextUrl ? 'invisible' : ''}`} href={getPermalink(nextUrl)}>
-          <span class="mr-2">{nextText}</span>
-          <Icon name="tabler:chevron-right" class="w-6 h-6" />
-        </Button>
-      </div>
-    </div>
+{
+  last > 1 && (
+    <ul class="mt-4 flex flex-wrap gap-2">
+      {Array.from({ length: last }, (_, i) => i + 1).map((n) => (
+        <li>
+          <a
+            href={hrefFor(n)}
+            class={`inline-block rounded-md border px-3 py-1 ${n === current ? 'font-semibold underline' : 'hover:underline'}`}
+            aria-current={n === current ? 'page' : undefined}
+          >
+            {n}
+          </a>
+        </li>
+      ))}
+    </ul>
   )
 }

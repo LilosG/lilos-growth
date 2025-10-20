@@ -1,4 +1,5 @@
 ---
+date: 2025-10-19T17:07:59-07:00
 title: 'AEO-Ready FAQs 2025: Turn PAA into Converting Answer Cards Across Cities'
 description: 'Mine People Also Ask and call logs, draft short answer cards, and scale city-specific FAQs that assistants can quote and locals can act on.'
 slug: aeo-ready-faqs-paa-2025

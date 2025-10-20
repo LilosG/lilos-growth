@@ -1,4 +1,5 @@
 ---
+date: 2025-10-13T09:36:29-07:00
 title: 'When to Mark a Post as Draft'
 description: 'A simple workflow for hiding work-in-progress posts—so you can stage content, keep URLs stable, and publish clean.'
 slug: when-to-mark-a-post-as-draft

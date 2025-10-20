@@ -169,7 +169,7 @@ const description = `Articles filed under ${cat}.`;
         totalPages > 1 && (
           <nav class="mt-10 flex items-center justify-center gap-3">
             <a
-              href={`/blog/category/${encodeURIComponent(cat)}${page > 2 ? `?page=${page - 1}` : page > 1 ? `` : ``}`}
+              href={`/blog/category/${encodeURIComponent(cat)}${page > 2 ? `/${page - 1}` : page > 1 ? `` : ``}`}
               class="btn btn-outline-primary btn-sm disabled:opacity-40"
               aria-disabled={page === 1}
             >
@@ -179,7 +179,7 @@ const description = `Articles filed under ${cat}.`;
               Page {page} of {totalPages}
             </span>
             <a
-              href={`/blog/category/${encodeURIComponent(cat)}?page=${Math.min(totalPages, page + 1)}`}
+              href={`/blog/category/${encodeURIComponent(cat)}/${Math.min(totalPages, page + 1)}`}
               class="btn btn-outline-primary btn-sm disabled:opacity-40"
               aria-disabled={page === totalPages}
             >
