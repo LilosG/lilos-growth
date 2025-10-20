@@ -152,7 +152,7 @@ _See deep-dive definitions and why it matters in 2025._ (Sources: CXL; Digital E
 - [ ] Ask customers about **the specific service** (“mosquito reduction”)
 - [ ] Mention **city/area** in review prompt (not scripted, just context)
 - [ ] Rotate **topics**: speed, cleanliness, safety, result  
-      _(Avoid gating; ask all customers fairly.)_
+       _(Avoid gating; ask all customers fairly.)_
 
 ## FAQs
 

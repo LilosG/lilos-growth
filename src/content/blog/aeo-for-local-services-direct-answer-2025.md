@@ -127,7 +127,7 @@ pnpm dev
 - [ ] Ask customers about **the specific service** (“mosquito reduction”)
 - [ ] Mention **city/area** in review prompt (context, not scripted)
 - [ ] Rotate **topics**: speed, cleanliness, safety, result  
-      _(Avoid gating; ask all customers fairly.)_
+       _(Avoid gating; ask all customers fairly.)_
 
 ## FAQs
 
