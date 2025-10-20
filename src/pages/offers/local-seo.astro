@@ -54,23 +54,23 @@ export const description =
               data-offer="gbp_top5_149"
             >
               Start the $149 Fix
-              <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
-                ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-              >
+              <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                <path d="M5 12h14M13 18l6-6-6-6"></path>
+              </svg>
             </button>
 
-            <!-- Calendly popup trigger -->
+            <!-- Calendly popup trigger (data-attr + binder script at bottom) -->
             <a
               href="#"
-              onClick={`Calendly.initPopupWidget({ url: '${CALENDLY}' }); return false;`}
+              data-calendly={CALENDLY}
               class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 text-white font-heading font-semibold text-base shadow hover:bg-[#27394b] transition"
               data-analytics="generate_lead"
               data-offer="sprint_499"
             >
               Book 15-min Call
-              <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
-                ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-              >
+              <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                <path d="M5 12h14M13 18l6-6-6-6"></path>
+              </svg>
             </a>
           </div>
         </div>
@@ -209,8 +209,10 @@ export const description =
               value="149-fixes"
               class="rounded-xl bg-[#f56b2a] px-6 py-3 text-base font-heading font-semibold text-white shadow hover:bg-[#c9400a] transition"
               data-analytics="begin_checkout"
-              data-offer="gbp_top5_149">Start Now</button
+              data-offer="gbp_top5_149"
             >
+              Start Now
+            </button>
           </div>
         </article>
 
@@ -242,11 +244,13 @@ export const description =
             <!-- Calendly popup trigger -->
             <a
               href="#"
-              onClick={`Calendly.initPopupWidget({ url: '${CALENDLY}' }); return false;`}
+              data-calendly={CALENDLY}
               class="rounded-xl bg-secondary px-6 py-3 text-base font-heading font-semibold text-white shadow hover:bg-[#27394b] transition"
               data-analytics="generate_lead"
-              data-offer="sprint_499">Book 15-min Call</a
+              data-offer="sprint_499"
             >
+              Book 15-min Call
+            </a>
           </div>
         </article>
       </div>
@@ -619,7 +623,7 @@ export const description =
         <!-- Calendly popup trigger -->
         <a
           href="#"
-          onClick={`Calendly.initPopupWidget({ url: '${CALENDLY}' }); return false;`}
+          data-calendly={CALENDLY}
           class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 text-white font-heading font-semibold text-base shadow hover:bg-[#27394b] transition"
           data-analytics="generate_lead"
           data-offer="sprint_499"
@@ -631,9 +635,22 @@ export const description =
   </section>
 </Layout>
 
-<!-- Calendly widget assets (for popup) -->
+<!-- Calendly widget assets (power the popup) -->
 <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
-<script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
+<script src="https://assets.calendly.com/assets/external/widget.js" defer is:inline></script>
+
+<!-- Bind any link with data-calendly="URL" to open the Calendly popup -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-calendly]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = el.getAttribute('data-calendly');
+        if (window.Calendly && url) Calendly.initPopupWidget({ url });
+      });
+    });
+  });
+</script>
 
 <!-- JSON-LD Offers -->
 <script type="application/ld+json" is:inline>
