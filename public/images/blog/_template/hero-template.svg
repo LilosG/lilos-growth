@@ -1,0 +1,28 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a3a4a"/>
+      <stop offset="100%" stop-color="#2a3a4a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Card -->
+  <rect x="40" y="40" rx="48" ry="48" width="1520" height="820" fill="url(#bg)"/>
+
+  <!-- Title (inserted as tspans; font-size set by script) -->
+  <g id="title" transform="translate(120, 330)">
+    <text id="title-text" x="0" y="0" font-family="Poppins, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+          font-size="{{FONTSIZE}}" font-weight="800" fill="#ffffff">
+      {{TSPAN_TITLE}}
+    </text>
+  </g>
+
+  <!-- Orange underline -->
+  <rect x="120" y="500" width="520" height="18" rx="9" fill="#f56b2a"/>
+
+  <!-- Subtitle -->
+  <g transform="translate(120, 580)">
+    <text x="0" y="0" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+          font-size="36" font-weight="500" fill="#cfd8e3">{{SUBTITLE}}</text>
+  </g>
+</svg>
