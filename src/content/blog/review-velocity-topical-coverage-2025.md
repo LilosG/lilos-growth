@@ -1,15 +1,15 @@
 ---
 date: 2025-10-19T17:07:59-07:00
-title: 'Review Velocity & Topical Coverage 2025: A No-Gating Playbook for Local Services'
-description: 'Win Map Pack tiebreakers with steady review velocity and topic-rich feedback—without gating. Includes prompts, cadences, KPIs, and field checklists.'
+title: "Review Velocity & Topical Coverage 2025: A No-Gating Playbook for Local Services"
+description: "Win Map Pack tiebreakers with steady review velocity and topic-rich feedback—without gating. Includes prompts, cadences, KPIs, and field checklists."
 slug: review-velocity-topical-coverage-2025
-category: 'SEO'
-tags: ['local-seo', 'reviews', 'reputation']
+category: "SEO"
+tags: ["local-seo", "reviews", "reputation"]
 pubDate: 2025-10-19
-datePublished: '2025-10-19'
+datePublished: "2025-10-19"
 draft: false
-image: '/images/blog/review-velocity-topical-coverage-2025/hero.svg'
-imageAlt: 'Ladder showing review velocity steps and topical prompts'
+image: "/images/blog/review-velocity-topical-coverage-2025/hero.svg"
+imageAlt: "Ladder showing review velocity steps and topical prompts"
 ---
 
 <!-- Paste the full blog body here and save -->

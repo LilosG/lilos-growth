@@ -1,8 +1,8 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
 const ImageObj = z.object({
   src: z.string(),
-  alt: z.string().default(''),
+  alt: z.string().default(""),
   width: z.number().optional(),
   height: z.number().optional(),
 });
@@ -10,7 +10,7 @@ const ImageObj = z.object({
 const FaqItem = z.object({ q: z.string(), a: z.string() });
 
 const blog = defineCollection({
-  type: 'content',
+  type: "content",
   schema: z.object({
     title: z.string(),
     description: z.string().max(155),
@@ -18,9 +18,9 @@ const blog = defineCollection({
     // Accept string or date for resilience to YAML parsing
     datePublished: z.union([z.string(), z.date()]).optional(),
     dateModified: z.union([z.string(), z.date()]).optional(),
-    author: z.string().optional().default(''),
+    author: z.string().optional().default(""),
     tags: z.array(z.string()).optional().default([]),
-    category: z.string().optional().default('General'),
+    category: z.string().optional().default("General"),
     image: z.union([z.string(), ImageObj]).optional(),
     draft: z.boolean().optional().default(false),
     canonical: z.string().url().optional(),
@@ -32,7 +32,7 @@ const blog = defineCollection({
 
 // Optional authors collection to remove auto-generate warning if folder exists
 const authors = defineCollection({
-  type: 'content',
+  type: "content",
   schema: z.object({
     name: z.string(),
     role: z.string().optional(),

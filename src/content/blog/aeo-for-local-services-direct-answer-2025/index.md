@@ -1,15 +1,15 @@
 ---
 date: 2025-10-19T17:07:59-07:00
-title: 'AEO for Local Services: Make Your Content the Direct Answer in ChatGPT & Gemini'
-description: 'Turn service FAQs into assistant-ready answers that rank and convert—using entities, answer pages, review evidence, and clean internal linking.'
+title: "AEO for Local Services: Make Your Content the Direct Answer in ChatGPT & Gemini"
+description: "Turn service FAQs into assistant-ready answers that rank and convert—using entities, answer pages, review evidence, and clean internal linking."
 slug: aeo-for-local-services-direct-answer-2025
-category: 'SEO'
-tags: ['local-seo', 'aeo', 'strategy']
+category: "SEO"
+tags: ["local-seo", "aeo", "strategy"]
 pubDate: 2025-10-19
-datePublished: '2025-10-19'
+datePublished: "2025-10-19"
 draft: false
-image: '/images/blog/aeo-for-local-services-direct-answer-2025/hero.svg'
-imageAlt: 'AEO pyramid from entities to answer to evidence'
+image: "/images/blog/aeo-for-local-services-direct-answer-2025/hero.svg"
+imageAlt: "AEO pyramid from entities to answer to evidence"
 ---
 
 > **TL;DR:** Answer Engine Optimization (AEO) means structuring short, **quotable answers** supported by **local proof** and **machine-readable structure**. For home-service companies, build “**Answer Pages**” for each **Service + City** question, mirror GBP wording, add schema at the template level, and refresh review topics. Be the **best two–four sentences** plus the evidence.

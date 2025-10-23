@@ -3,17 +3,17 @@
    Clean results page: white cards, big radius, soft shadow, baseline-aligned CTAs.
    Uses only provided components & data. No JSX in frontmatter.
 */
-import PageLayout from '~/layouts/PageLayout.astro';
+import PageLayout from "~/layouts/PageLayout.astro";
 
-import LogoWall from '~/components/results/LogoWall.astro';
-import StatCard from '~/components/results/StatCard.astro';
-import CaseStudyCard from '~/components/results/CaseStudyCard.astro';
-import FAQResults from '~/components/results/FAQResults.astro';
-import StickyResultsCTA from '~/components/results/StickyResultsCTA.astro';
-import ResultsCTABand from '~/components/results/ResultsCTABand.astro';
+import LogoWall from "~/components/results/LogoWall.astro";
+import StatCard from "~/components/results/StatCard.astro";
+import CaseStudyCard from "~/components/results/CaseStudyCard.astro";
+import FAQResults from "~/components/results/FAQResults.astro";
+import StickyResultsCTA from "~/components/results/StickyResultsCTA.astro";
+import ResultsCTABand from "~/components/results/ResultsCTABand.astro";
 
-import type { ResultsStat, LogoItem, CaseStudy, FaqItem } from '~/data/results';
-import { resultsStats, resultsLogos, resultsCaseStudies, resultsFaqs } from '~/data/results';
+import type { ResultsStat, LogoItem, CaseStudy, FaqItem } from "~/data/results";
+import { resultsStats, resultsLogos, resultsCaseStudies, resultsFaqs } from "~/data/results";
 ---
 
 <PageLayout
@@ -22,22 +22,26 @@ import { resultsStats, resultsLogos, resultsCaseStudies, resultsFaqs } from '~/d
 >
   <!-- HERO -->
   <section class="bg-[#fff5ef]">
-    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20">
+    <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
       <div class="flex items-start gap-4">
         <!-- Round outline badge (matches home page card icon style) -->
         <div
-          class="hidden sm:flex items-center justify-center w-11 h-11 rounded-full ring-2 ring-[#f56b2a] text-[#f56b2a] bg-white shadow-[0_1px_0_rgba(0,0,0,0.03)]"
+          class="hidden h-11 w-11 items-center justify-center rounded-full bg-white text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.03)] ring-2 ring-[#f56b2a] sm:flex"
         >
           <span class="text-[18px] leading-none">⭐</span>
         </div>
         <div>
-          <p class="text-[#f56b2a] tracking-widest font-semibold uppercase text-xs">Proven Outcomes</p>
-          <h1 class="mt-1 text-3xl md:text-4xl font-heading font-extrabold text-heading tracking-tight">
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#f56b2a]">
+            Proven Outcomes
+          </p>
+          <h1
+            class="mt-1 font-heading text-3xl font-extrabold tracking-tight text-heading md:text-4xl"
+          >
             Results that show up in calls, reviews, and booked jobs
           </h1>
-          <p class="mt-3 text-body max-w-2xl">
-            We optimize what moves the needle first—Google Business Profile, speed, pages that match intent—and we keep
-            it simple so you can ship faster and win local.
+          <p class="mt-3 max-w-2xl text-body">
+            We optimize what moves the needle first—Google Business Profile, speed, pages that match
+            intent—and we keep it simple so you can ship faster and win local.
           </p>
         </div>
       </div>
@@ -57,9 +61,11 @@ import { resultsStats, resultsLogos, resultsCaseStudies, resultsFaqs } from '~/d
   {
     Array.isArray(resultsStats) && resultsStats.length > 0 && (
       <section class="bg-white">
-        <div class="max-w-6xl mx-auto px-4 py-14 md:py-16">
-          <h2 class="text-2xl md:text-3xl font-heading font-bold text-heading text-center">High-impact wins</h2>
-          <div class="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div class="mx-auto max-w-6xl px-4 py-14 md:py-16">
+          <h2 class="text-center font-heading text-2xl font-bold text-heading md:text-3xl">
+            High-impact wins
+          </h2>
+          <div class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
             {resultsStats.map((s: ResultsStat) => (
               <StatCard stat={s} />
             ))}
@@ -73,20 +79,22 @@ import { resultsStats, resultsLogos, resultsCaseStudies, resultsFaqs } from '~/d
   {
     Array.isArray(resultsCaseStudies) && resultsCaseStudies.length > 0 && (
       <section class="bg-[#e9f0f7]">
-        <div class="max-w-6xl mx-auto px-4 py-16 md:py-20">
+        <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
           <div class="flex items-start gap-4">
-            <div class="hidden sm:flex items-center justify-center w-11 h-11 rounded-full ring-2 ring-[#f56b2a] text-[#f56b2a] bg-white shadow-[0_1px_0_rgba(0,0,0,0.03)]">
+            <div class="hidden h-11 w-11 items-center justify-center rounded-full bg-white text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.03)] ring-2 ring-[#f56b2a] sm:flex">
               <span class="text-[18px] leading-none">📈</span>
             </div>
             <div>
-              <h2 class="text-2xl md:text-3xl font-heading font-bold text-heading">Recent client success</h2>
-              <p class="mt-2 text-body max-w-2xl">
+              <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
+                Recent client success
+              </h2>
+              <p class="mt-2 max-w-2xl text-body">
                 Clear work, clear outcomes. Brief snapshots of what shipped and what changed.
               </p>
             </div>
           </div>
 
-          <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
             {resultsCaseStudies.map((cs: CaseStudy) => (
               <CaseStudyCard study={cs} />
             ))}
@@ -105,14 +113,18 @@ import { resultsStats, resultsLogos, resultsCaseStudies, resultsFaqs } from '~/d
   {
     Array.isArray(resultsFaqs) && resultsFaqs.length > 0 && (
       <section class="bg-white">
-        <div class="max-w-6xl mx-auto px-4 py-16 md:py-20">
+        <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
           <div class="flex items-start gap-4">
-            <div class="hidden sm:flex items-center justify-center w-11 h-11 rounded-full ring-2 ring-[#f56b2a] text-[#f56b2a] bg-white shadow-[0_1px_0_rgba(0,0,0,0.03)]">
+            <div class="hidden h-11 w-11 items-center justify-center rounded-full bg-white text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.03)] ring-2 ring-[#f56b2a] sm:flex">
               <span class="text-[18px] leading-none">❓</span>
             </div>
             <div>
-              <h2 class="text-2xl md:text-3xl font-heading font-bold text-heading">Common questions</h2>
-              <p class="mt-2 text-body">Simple answers about scope, timeline, and what to expect.</p>
+              <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
+                Common questions
+              </h2>
+              <p class="mt-2 text-body">
+                Simple answers about scope, timeline, and what to expect.
+              </p>
             </div>
           </div>
 
@@ -126,7 +138,7 @@ import { resultsStats, resultsLogos, resultsCaseStudies, resultsFaqs } from '~/d
 
   <!-- CTA BAND -->
   <section class="bg-[#253242]">
-    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20">
+    <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
       <ResultsCTABand />
     </div>
   </section>
@@ -138,7 +150,12 @@ import { resultsStats, resultsLogos, resultsCaseStudies, resultsFaqs } from '~/d
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://lilosgrowth.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Results", "item": "https://lilosgrowth.com/results" }
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Results",
+          "item": "https://lilosgrowth.com/results"
+        }
       ]
     }
   </script>

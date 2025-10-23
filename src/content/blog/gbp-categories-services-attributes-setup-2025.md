@@ -1,15 +1,15 @@
 ---
 date: 2025-10-19T17:07:59-07:00
-title: 'GBP Categories, Services & Attributes: The No-Mistakes Setup for 2025'
-description: 'Choose the right primary category, map services, set attributes, and avoid suspensions—field-tested guidance for storefronts and service-area businesses.'
+title: "GBP Categories, Services & Attributes: The No-Mistakes Setup for 2025"
+description: "Choose the right primary category, map services, set attributes, and avoid suspensions—field-tested guidance for storefronts and service-area businesses."
 slug: gbp-categories-services-attributes-setup-2025
-category: 'Google Business Profile'
-tags: ['gbp', 'setup', 'categories', 'services']
+category: "Google Business Profile"
+tags: ["gbp", "setup", "categories", "services"]
 pubDate: 2025-10-19
-datePublished: '2025-10-19'
+datePublished: "2025-10-19"
 draft: false
-image: '/images/blog/gbp-categories-services-attributes-setup-2025/hero.svg'
-imageAlt: 'Flow from category to services to attributes to proof'
+image: "/images/blog/gbp-categories-services-attributes-setup-2025/hero.svg"
+imageAlt: "Flow from category to services to attributes to proof"
 ---
 
 <!-- Paste the full blog body here and save -->

@@ -2,7 +2,7 @@
 // This makes imports like `import { SITE, APP_BLOG } from 'astrowind:config'`
 // type-check across the project (no `any`).
 
-declare module 'astrowind:config' {
+declare module "astrowind:config" {
   // ----- SITE -----
   export interface SiteConfig {
     site?: string; // e.g. "https://lilosgrowth.com"
@@ -54,7 +54,7 @@ declare module 'astrowind:config' {
   // ----- I18N -----
   export interface I18NConfig {
     language?: Intl.LocalesArgument; // used by utils.ts
-    textDirection?: 'ltr' | 'rtl'; // used by ToBlogLink.astro
+    textDirection?: "ltr" | "rtl"; // used by ToBlogLink.astro
   }
 
   // ----- ANALYTICS -----

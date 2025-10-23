@@ -1,18 +1,18 @@
 ---
-import type { ImageMetadata } from 'astro';
-import { Icon } from 'astro-icon/components';
-import Image from '~/components/common/Image.astro';
-import PostTags from '~/components/blog/Tags.astro';
+import type { ImageMetadata } from "astro";
+import { Icon } from "astro-icon/components";
+import Image from "~/components/common/Image.astro";
+import PostTags from "~/components/blog/Tags.astro";
 
-import { APP_BLOG } from 'astrowind:config';
-import type { Post } from '~/types';
+import { APP_BLOG } from "astrowind:config";
+import type { Post } from "~/types";
 
 // Permalinks: try getBlogPermalink if present, else fallback.
 let getBlogPermalink: ((slug: string) => string) | undefined;
 try {
   // Some Astrowind versions export this helper:
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  ({ getBlogPermalink } = await import('~/utils/permalinks'));
+  ({ getBlogPermalink } = await import("~/utils/permalinks"));
 } catch {
   /* not available in this project version */
 }
@@ -36,7 +36,7 @@ const candidate = getPostImageCandidate(post);
 // If you don't have it, this still works because we guard below.
 let rawImage: string | ImageMetadata | null | undefined = candidate;
 try {
-  const { findImage } = await import('~/utils/images');
+  const { findImage } = await import("~/utils/images");
   rawImage = await findImage(candidate);
 } catch {
   // no-op: keep candidate
@@ -45,7 +45,7 @@ try {
 /** Normalize for <Image>: must be string (or {src:string}). */
 function toSrcString(img: string | ImageMetadata | null | undefined): string | undefined {
   if (!img) return undefined;
-  if (typeof img === 'string') return img;
+  if (typeof img === "string") return img;
   // Astro ImageMetadata usually has .src
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const maybeSrc = (img as any).src as string | undefined;
@@ -58,9 +58,13 @@ const srcString = toSrcString(rawImage);
 const fallbackWidth = 400;
 const fallbackHeight = 225;
 const metaWidth =
-  typeof rawImage === 'object' && rawImage ? ((rawImage as ImageMetadata).width ?? fallbackWidth) : fallbackWidth;
+  typeof rawImage === "object" && rawImage
+    ? ((rawImage as ImageMetadata).width ?? fallbackWidth)
+    : fallbackWidth;
 const metaHeight =
-  typeof rawImage === 'object' && rawImage ? ((rawImage as ImageMetadata).height ?? fallbackHeight) : fallbackHeight;
+  typeof rawImage === "object" && rawImage
+    ? ((rawImage as ImageMetadata).height ?? fallbackHeight)
+    : fallbackHeight;
 
 // Permalink: prefer explicit post.permalink, then helper, then slug, else '#'
 const slug =
@@ -72,7 +76,11 @@ const slug =
 const permalink =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ((post as any).permalink as string | undefined) ??
-  (slug && typeof getBlogPermalink === 'function' ? getBlogPermalink(slug) : slug ? `/blog/${slug}/` : '#');
+  (slug && typeof getBlogPermalink === "function"
+    ? getBlogPermalink(slug)
+    : slug
+      ? `/blog/${slug}/`
+      : "#");
 
 // Date text using toLocaleDateString; avoids helper arity mismatches.
 const dateText = post.publishDate
@@ -82,22 +90,22 @@ const dateText = post.publishDate
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (APP_BLOG as any)?.postDate?.options
     )
-  : '';
+  : "";
 
 const altText =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ((post as any).imageAlt as string | undefined) ?? post.title ?? 'Blog post image';
+  ((post as any).imageAlt as string | undefined) ?? post.title ?? "Blog post image";
 ---
 
 <article class="mb-6 transition motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-  <div class="relative rounded shadow-lg bg-gray-400 dark:bg-slate-700 mb-6 md:h-64">
+  <div class="relative mb-6 rounded bg-gray-400 shadow-lg dark:bg-slate-700 md:h-64">
     <a href={permalink}>
       {
         srcString ? (
           <Image
             src={srcString}
             alt={altText}
-            class="rounded shadow-lg w-full md:h-full"
+            class="w-full rounded shadow-lg md:h-full"
             loading="lazy"
             decoding="async"
             width={metaWidth}
@@ -106,7 +114,7 @@ const altText =
         ) : (
           /* If no image, render an empty ratio box to keep layout stable */
           <div
-            class="rounded shadow-lg w-full md:h-full bg-gray-300 dark:bg-slate-600"
+            class="w-full rounded bg-gray-300 shadow-lg dark:bg-slate-600 md:h-full"
             style={`aspect-ratio: ${fallbackWidth} / ${fallbackHeight};`}
             aria-hidden="true"
           />
@@ -115,22 +123,24 @@ const altText =
     </a>
   </div>
 
-  <h3 class="font-heading font-bold text-xl sm:text-2xl leading-tight mb-2 dark:text-slate-300">
-    <a href={permalink} class="transition inline-block hover:text-primary dark:hover:text-blue-700">
+  <h3 class="mb-2 font-heading text-xl font-bold leading-tight dark:text-slate-300 sm:text-2xl">
+    <a href={permalink} class="inline-block transition hover:text-primary dark:hover:text-blue-700">
       {post.title}
     </a>
   </h3>
 
   {
     dateText && (
-      <div class="text-sm text-muted flex items-center gap-2 mb-2">
+      <div class="text-muted mb-2 flex items-center gap-2 text-sm">
         <Icon name="tabler:calendar" class="h-4 w-4" />
-        <time datetime={post.publishDate ? new Date(post.publishDate).toISOString() : undefined}>{dateText}</time>
+        <time datetime={post.publishDate ? new Date(post.publishDate).toISOString() : undefined}>
+          {dateText}
+        </time>
       </div>
     )
   }
 
-  {post.excerpt && <p class="text-lg text-muted dark:text-slate-400 flex-grow">{post.excerpt}</p>}
+  {post.excerpt && <p class="text-muted flex-grow text-lg dark:text-slate-400">{post.excerpt}</p>}
 
   {
     post.tags && Array.isArray(post.tags) ? (

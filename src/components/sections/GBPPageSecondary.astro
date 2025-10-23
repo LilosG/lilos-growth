@@ -1,0 +1,68 @@
+---
+import PackageCardMini from "../PackageCardMini.astro";
+---
+
+<section class="border-t border-gray-100 bg-bluelight py-12">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="text-center">
+      <h3 class="text-xl font-extrabold text-[#253242] md:text-2xl">
+        Service Packages for Home Service Companies
+      </h3>
+      <p class="mt-2 text-slate-600">Choose the package that fits your goals.</p>
+      <span class="mx-auto mt-3 block h-1 w-12 rounded bg-[#f56b2a]"></span>
+    </div>
+
+    <div
+      class="mt-8 grid auto-rows-fr grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-4"
+    >
+      <PackageCardMini
+        title="GBP + SEO Growth"
+        subtitle="Faster traction via volume"
+        price="$1,199"
+        period="/mo"
+        bullets={[
+          "Everything in GBP + SEO",
+          "2+ services optimized monthly",
+          "Citations & local links",
+        ]}
+        ctaText="Compare Plans"
+        ctaHref="/contact"
+      />
+      <PackageCardMini
+        title="Website-as-a-Service"
+        subtitle="Modern site + support"
+        price="$199"
+        period="/mo"
+        bullets={[
+          "Mobile-first, SEO-ready",
+          "Hosting, edits & monitoring",
+          "Lead forms & analytics",
+        ]}
+        ctaText="View Details"
+        ctaHref="/contact"
+      />
+      <PackageCardMini
+        title="Local SEO — Monthly"
+        subtitle="Single-location growth"
+        price="$599"
+        period="/mo"
+        bullets={[
+          "On-page & technical fixes",
+          "Content & internal linking",
+          "Citations & reporting",
+        ]}
+        ctaText="View Details"
+        ctaHref="/contact"
+      />
+      <PackageCardMini
+        title="One-Time Website Build"
+        subtitle="Own your site outright"
+        price="$499"
+        period=""
+        bullets={["Clean structure & schema", "Lead capture ready", "GA4/GTM setup (provided)"]}
+        ctaText="Get Started"
+        ctaHref="/contact"
+      />
+    </div>
+  </div>
+</section>

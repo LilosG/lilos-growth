@@ -1,0 +1,54 @@
+---
+import PackageCard from "../PackageCard.astro";
+---
+
+<section class="bg-white py-16">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="text-center">
+      <h2 class="text-2xl font-extrabold text-[#253242] md:text-3xl">
+        Google Business Profile Packages
+      </h2>
+      <p class="mt-2 text-slate-600">
+        Clear value. Month-to-month. <span class="font-semibold">No rollovers.</span>
+      </p>
+      <span class="mx-auto mt-3 block h-1 w-12 rounded bg-[#f56b2a]"></span>
+    </div>
+
+    <div class="mt-10 grid auto-rows-fr grid-cols-1 items-stretch gap-8 md:grid-cols-2">
+      <PackageCard
+        title="GBP"
+        subtitle="Consistent Google Business Profile presence"
+        price="$299"
+        period="/mo"
+        bullets={[
+          "<strong>Profile optimization & upkeep</strong> (categories, services, products, hours)",
+          "<strong>Weekly posts</strong> (offers, FAQs, highlights) — no rollovers",
+          "<strong>Photos added</strong> with EXIF/alt optimized for geo & keywords",
+          "<strong>Review replies</strong> + simple request prompts",
+          "<strong>Monthly performance report</strong> with next steps",
+        ]}
+        ctaText="Get Started"
+        ctaHref="/contact"
+      />
+
+      <PackageCard
+        title="GBP + Local SEO"
+        subtitle="Steady Map Pack & organic gains"
+        price="$699"
+        period="/mo"
+        badgeText="Most Popular"
+        highlight={true}
+        bullets={[
+          "<strong>Everything in GBP</strong>, plus:",
+          "<strong>On-site fixes</strong> (titles, metas, H1–H2, internal linking, basic schema)",
+          "<strong>3–5 optimized pages</strong> per month (service or location)",
+          "<strong>Citation creation & cleanup</strong> for core listings",
+          "<strong>Local rank tracking</strong> + quarterly competitor snapshot",
+          "<strong>Monthly report</strong> + 30-min strategy call",
+        ]}
+        ctaText="Upgrade to GBP + SEO"
+        ctaHref="/contact"
+      />
+    </div>
+  </div>
+</section>

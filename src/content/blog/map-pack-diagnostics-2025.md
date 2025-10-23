@@ -1,15 +1,15 @@
 ---
 date: 2025-10-19T17:07:59-07:00
-title: 'Map Pack Diagnostics 2025: Proximity, Prominence, Relevance—What to Fix First'
-description: 'A practical diagnostic to decide whether to improve proximity, prominence, or relevance first—plus trade-ready checklists and examples.'
+title: "Map Pack Diagnostics 2025: Proximity, Prominence, Relevance—What to Fix First"
+description: "A practical diagnostic to decide whether to improve proximity, prominence, or relevance first—plus trade-ready checklists and examples."
 slug: map-pack-diagnostics-2025
-category: 'SEO'
-tags: ['local-seo', 'diagnostics', 'map-pack']
+category: "SEO"
+tags: ["local-seo", "diagnostics", "map-pack"]
 pubDate: 2025-10-19
-datePublished: '2025-10-19'
+datePublished: "2025-10-19"
 draft: false
-image: '/images/blog/map-pack-diagnostics-2025/hero.svg'
-imageAlt: 'Decision flow from proximity to prominence to relevance'
+image: "/images/blog/map-pack-diagnostics-2025/hero.svg"
+imageAlt: "Decision flow from proximity to prominence to relevance"
 ---
 
 <!-- Paste the full blog body here and save -->

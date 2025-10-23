@@ -1,15 +1,15 @@
 ---
 date: 2025-10-13T09:36:29-07:00
-title: 'When to Mark a Post as Draft'
-description: 'A simple workflow for hiding work-in-progress posts—so you can stage content, keep URLs stable, and publish clean.'
+title: "When to Mark a Post as Draft"
+description: "A simple workflow for hiding work-in-progress posts—so you can stage content, keep URLs stable, and publish clean."
 slug: when-to-mark-a-post-as-draft
-category: 'Workflows'
-tags: ['drafts', 'workflow', 'content', 'seo']
+category: "Workflows"
+tags: ["drafts", "workflow", "content", "seo"]
 pubDate: 2025-10-11
-datePublished: '2025-10-11'
+datePublished: "2025-10-11"
 draft: false
-image: '/images/blog/long-tail/hero.svg'
-imageAlt: 'Content workflow draft banner'
+image: "/images/blog/long-tail/hero.svg"
+imageAlt: "Content workflow draft banner"
 ---
 
 > **TL;DR:** Use `draft: true` while writing. Keep the **final slug** from day one, preview locally, then flip to `false` on publish. Avoid indexing half-done pages.

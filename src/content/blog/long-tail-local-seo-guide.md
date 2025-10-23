@@ -1,15 +1,15 @@
 ---
 date: 2025-10-15T02:22:52-07:00
-title: 'Local SEO Long-Tail Strategy That Compounds'
-description: 'A practical framework for home-service companies to win ‘service + city + qualifier’ searches, publish consistently, and turn clicks into booked jobs.'
+title: "Local SEO Long-Tail Strategy That Compounds"
+description: "A practical framework for home-service companies to win ‘service + city + qualifier’ searches, publish consistently, and turn clicks into booked jobs."
 slug: long-tail-local-seo-guide
-category: 'SEO'
-tags: ['local-seo', 'long-tail', 'content', 'strategy', 'gbp']
+category: "SEO"
+tags: ["local-seo", "long-tail", "content", "strategy", "gbp"]
 pubDate: 2025-10-15
-datePublished: '2025-10-15'
+datePublished: "2025-10-15"
 draft: false
-image: '/images/blog/long-tail/hero.svg'
-imageAlt: 'Local SEO long-tail strategy banner'
+image: "/images/blog/long-tail/hero.svg"
+imageAlt: "Local SEO long-tail strategy banner"
 ---
 
 > **TL;DR:** Create focused pages that target **service + city + qualifier** (e.g., “water heater repair in Mesa — same-day”). They rank faster than broad terms and convert better. Publish one page per week using the checklist and template below; link them from your service hubs and Google Business Profile (GBP). Calls compound within 8–12 weeks.

@@ -1,0 +1,329 @@
+---
+import Layout from "~/layouts/PageLayout.astro";
+import PromoPackageCard from "~/components/PromoPackageCard.astro";
+
+const baseCalendly = "https://calendly.com/lilosgrowth/15min";
+const url = new URL(Astro.request.url);
+const search = url.searchParams;
+const utm = new URLSearchParams({
+  utm_source: search.get("utm_source") ?? "website",
+  utm_medium: search.get("utm_medium") ?? "landing",
+  utm_campaign: search.get("utm_campaign") ?? "offers_locked",
+});
+const CALENDLY = `${baseCalendly}?${utm.toString()}`;
+
+const title = "Google Business Profile Optimization — Locked Promo Plans";
+const description =
+  "Promo pricing: $199/mo for GBP or $399/mo for GBP + Local SEO. Month-to-month. Results in 30 days or next month is $0.";
+
+const guarantee =
+  "If GBP searches, GBP→site visitors, or calls don’t lift by Day-30 vs. baseline, your next month is $0 while we keep working (cap 60 days). Baseline captured Day-0.";
+---
+
+<Layout {title} {description}>
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-[#253242] pb-20 pt-16">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]" aria-hidden="true">
+    </div>
+    <div class="relative z-10 mx-auto max-w-[44rem] px-4 text-center">
+      <h1
+        class="font-heading text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl"
+      >
+        Full Google Business Profile Optimization
+      </h1>
+      <p class="mx-auto mt-3 max-w-[38rem] text-sm text-white/85 md:text-base">
+        Month-to-month. Two promo plans. <span class="font-semibold"
+          >Results in 30 days or next month is $0.</span
+        >
+      </p>
+      <div class="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
+        <a
+          href="#plans"
+          class="inline-flex h-11 items-center justify-center rounded-2xl bg-[#f56b2a] px-6 font-heading text-sm font-semibold text-white shadow transition hover:bg-[#e65c1e] md:text-base"
+          >See Plans</a
+        >
+        <a
+          href="#faq"
+          class="inline-flex h-11 items-center justify-center rounded-2xl bg-secondary px-6 font-heading text-sm font-semibold text-white shadow transition hover:bg-[#27394b] md:text-base"
+          >FAQ</a
+        >
+        <a
+          href={CALENDLY}
+          class="inline-flex h-11 items-center justify-center rounded-2xl bg-white/10 px-6 font-heading text-sm font-semibold text-white ring-1 ring-white/25 transition hover:bg-white/15 md:text-base"
+          >Book 15-min Call</a
+        >
+      </div>
+      <p class="mt-4 text-xs text-white/80 md:text-sm">{guarantee}</p>
+    </div>
+  </section>
+
+  <!-- PROMO PILL ROW -->
+  <section class="border-t border-gray-100 bg-cream py-8">
+    <div class="mx-auto max-w-5xl px-4">
+      <div class="flex flex-wrap justify-center gap-2">
+        <span
+          class="rounded-xl bg-bluelight px-4 py-2 font-heading text-xs font-semibold text-heading md:text-sm"
+          >Home-service specialists</span
+        >
+        <span
+          class="rounded-xl bg-bluelight px-4 py-2 font-heading text-xs font-semibold text-heading md:text-sm"
+          >Month-to-month • No contracts</span
+        >
+        <span
+          class="rounded-xl bg-bluelight px-4 py-2 font-heading text-xs font-semibold text-heading md:text-sm"
+          >30-day lift or next month is $0</span
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section id="plans" class="border-t border-gray-100 bg-white py-16 md:py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <h2 class="text-center font-heading text-3xl font-bold text-[#253242] md:text-4xl">
+        GBP &amp; Local SEO — Plans &amp; Pricing
+      </h2>
+      <p class="mt-2 text-center text-sm text-slate-600 md:text-base">
+        Month-to-month. No setup fees. <span class="font-semibold">Locked promo pricing.</span>
+      </p>
+
+      <div class="mt-10 grid auto-rows-fr grid-cols-1 items-stretch gap-8 md:grid-cols-2">
+        <!-- Card 1: GBP (home-page style) with crossed-out $299 -> $199 -->
+        <PromoPackageCard
+          title="GBP"
+          subtitle="Consistent Google Business Profile presence"
+          originalPrice="$299"
+          price="$199"
+          period="/mo"
+          bullets={[
+            "<strong>Profile optimization &amp; upkeep</strong> (N/A fields, services, products, hours)",
+            "<strong>Categories tuned</strong> for intent &amp; relevance",
+            "<strong>Weekly posts</strong> (offers, FAQs, highlights) — no rollovers",
+            "<strong>Fresh photos</strong> with EXIF/alt optimized for geo &amp; keywords",
+            "<strong>Review replies</strong> + simple request prompts",
+            "<strong>Monthly performance report</strong> with next steps",
+          ]}
+          note="No rollovers. Cancel anytime."
+          ctaText="Get Started"
+          ctaHref="/contact"
+        />
+
+        <!-- Card 2: GBP + Local SEO (home-page style) with crossed-out $699 -> $399 -->
+        <PromoPackageCard
+          title="GBP + Local SEO"
+          subtitle="Steady Map Pack & organic gains"
+          originalPrice="$699"
+          price="$399"
+          period="/mo"
+          badgeText="RECOMMENDED"
+          highlight={true}
+          bullets={[
+            "<strong>Everything in GBP</strong>, plus:",
+            "<strong>On-site fixes</strong> (titles, metas, H1–H2, internal links, basic schema)",
+            "<strong>3–5 optimized pages</strong> per month (service or location)",
+            "<strong>Citation creation/cleanup</strong> &amp; core listings",
+            "<strong>Local rank tracking</strong> + quarterly competitor snapshot",
+            "<strong>Monthly report</strong> + 30-min strategy call",
+          ]}
+          note="Workload scales with site size & baseline quality; unused work does not roll over."
+          ctaText="Choose Plan"
+          ctaHref="/contact"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILS (reformatted to match main card bullet style) -->
+  <section id="details" class="border-t border-gray-100 bg-cream py-16 md:py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="grid auto-rows-fr items-stretch gap-8 md:grid-cols-2">
+        <!-- GBP details -->
+        <article
+          class="flex flex-col rounded-3xl border-2 border-[#f56b2a]/10 bg-white p-7 shadow-xl shadow-[#f56b2a]/10 md:p-8"
+        >
+          <header>
+            <h3 class="font-heading text-2xl font-extrabold text-[#253242]">
+              GBP — What’s Included
+            </h3>
+            <p class="mt-1 text-sm text-slate-600">Built the way you’d do it for your own brand.</p>
+          </header>
+
+          <div class="mt-6 grid gap-6 md:grid-cols-2">
+            <div>
+              <h4 class="mb-2 font-heading font-semibold text-[#253242]">Month-1 Full Build</h4>
+              <ul class="space-y-2.5 text-[15px] leading-relaxed text-slate-700">
+                <li class="flex gap-2">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-[#f56b2a]"></span><span
+                    >Primary &amp; secondary categories aligned</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-[#f56b2a]"></span><span
+                    >Services / Products • attributes • description polish</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-[#f56b2a]"></span><span
+                    >Logo/cover refreshed • Q&amp;A seeded &amp; answered</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-[#f56b2a]"></span><span
+                    >Website &amp; Appointment links UTM-tagged • review engine live</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-[#f56b2a]"></span><span
+                    >Spam/duplicate check • Insights baseline captured</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="mb-2 font-heading font-semibold text-[#253242]">Ongoing Care</h4>
+              <ul class="space-y-2.5 text-[15px] leading-relaxed text-slate-700">
+                <li class="flex gap-2">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-[#f56b2a]"></span><span
+                    >Review responses (48h SLA) + Q&amp;A upkeep</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-[#f56b2a]"></span><span
+                    >Category/service micro-tests (1/mo)</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-[#f56b2a]"></span><span
+                    >Hours/holiday updates • spam-defense monitoring</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-[#f56b2a]"></span><span
+                    >Monthly KPI report + next-step recommendations</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="mt-6 text-[12px] text-slate-600"><strong>Promise:</strong> {guarantee}</p>
+          <div class="mt-4">
+            <a
+              href="/contact"
+              class="inline-flex h-11 items-center justify-center rounded-xl bg-[#f56b2a] px-6 font-heading font-semibold text-white shadow hover:bg-[#c9400a]"
+            >
+              Start for $199/mo
+            </a>
+          </div>
+        </article>
+
+        <!-- GBP + Local SEO details -->
+        <article
+          class="flex flex-col rounded-3xl border-2 border-[#f56b2a]/10 bg-white p-7 shadow-xl shadow-[#f56b2a]/10 md:p-8"
+        >
+          <header>
+            <h3 class="font-heading text-2xl font-extrabold text-[#253242]">
+              GBP + Local SEO — What’s Included
+            </h3>
+            <p class="mt-1 text-sm text-slate-600">
+              Everything in GBP, plus site growth &amp; on-page SEO.
+            </p>
+          </header>
+
+          <div class="mt-6 grid gap-6 md:grid-cols-2">
+            <div>
+              <h4 class="mb-2 font-heading font-semibold text-[#253242]">Monthly Content</h4>
+              <ul class="space-y-2.5 text-[15px] leading-relaxed text-slate-700">
+                <li class="flex gap-2">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-[#f56b2a]"></span><span
+                    >1 Money Page (service or service-in-city), posted with schema &amp; interlinks</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-[#f56b2a]"></span><span
+                    >2 Blogs (≈800–1,100 words), Article schema + clear CTA</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="mb-2 font-heading font-semibold text-[#253242]">On-Page &amp; Momentum</h4>
+              <ul class="space-y-2.5 text-[15px] leading-relaxed text-slate-700">
+                <li class="flex gap-2">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-[#f56b2a]"></span><span
+                    >Tune-ups for 2 pages/mo (titles/metas/H1–H3, internal links, image alts, NAP
+                    checks)</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-[#f56b2a]"></span><span
+                    >Citations/mentions (5–10), micro-CRO tweak, GBP→money-page UTMs</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="mt-6 text-[12px] text-slate-600"><strong>Promise:</strong> {guarantee}</p>
+          <div class="mt-4">
+            <a
+              href="/contact"
+              class="inline-flex h-11 items-center justify-center rounded-xl bg-[#f56b2a] px-6 font-heading font-semibold text-white shadow hover:bg-[#c9400a]"
+            >
+              Get the $399 Plan
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="border-t border-gray-100 bg-white py-16 md:py-20">
+    <div class="mx-auto max-w-5xl px-4">
+      <h2 class="text-center font-heading text-3xl font-bold text-[#253242] md:text-4xl">
+        GBP Plans — FAQs
+      </h2>
+      <div class="mt-8 grid gap-3">
+        <details class="rounded-xl border border-gray-200 bg-cream p-4 shadow-sm md:p-5">
+          <summary
+            class="cursor-pointer list-none font-heading text-base font-semibold text-[#253242] md:text-lg"
+            >Is this month-to-month?</summary
+          >
+          <p class="mt-2 text-sm text-slate-700">Yes. Cancel anytime. No setup fees.</p>
+        </details>
+        <details class="rounded-xl border border-gray-200 bg-cream p-4 shadow-sm md:p-5">
+          <summary
+            class="cursor-pointer list-none font-heading text-base font-semibold text-[#253242] md:text-lg"
+            >What counts as a “lift” for the promise?</summary
+          >
+          <p class="mt-2 text-sm text-slate-700">
+            Any one KPI up vs. Day-0 baseline: GBP searches, GBP→site visitors, or calls.
+          </p>
+        </details>
+        <details class="rounded-xl border border-gray-200 bg-cream p-4 shadow-sm md:p-5">
+          <summary
+            class="cursor-pointer list-none font-heading text-base font-semibold text-[#253242] md:text-lg"
+            >How fast do you start?</summary
+          >
+          <p class="mt-2 text-sm text-slate-700">
+            Within 48 hours of payment &amp; intake. Month-1 optimization typically completes within
+            10 business days.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="border-t border-gray-100 bg-cream py-14 md:py-16">
+    <div class="mx-auto max-w-6xl px-4 text-center">
+      <h2 class="font-heading text-2xl font-bold text-[#253242] md:text-3xl">
+        Ready to grow from Google Maps?
+      </h2>
+      <p class="mt-2 text-sm text-slate-700 md:text-base">
+        Start the $199 plan now or book a 15-min call to confirm goals.
+      </p>
+      <div class="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
+        <a
+          href="/contact"
+          class="inline-flex h-11 items-center justify-center rounded-2xl bg-[#f56b2a] px-6 font-heading font-semibold text-white shadow transition hover:bg-[#c9400a]"
+          >Start $199 Plan</a
+        >
+        <a
+          href={CALENDLY}
+          class="inline-flex h-11 items-center justify-center rounded-2xl bg-secondary px-6 font-heading font-semibold text-white shadow transition hover:bg-[#27394b]"
+          >Book 15-min Call</a
+        >
+      </div>
+      <p class="mt-3 text-[11px] text-slate-600">{guarantee}</p>
+    </div>
+  </section>
+</Layout>

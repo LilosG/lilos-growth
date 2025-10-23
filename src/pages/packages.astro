@@ -1,31 +1,36 @@
 ---
 // FILE: src/pages/packages.astro
-import Layout from '~/layouts/PageLayout.astro';
+import Layout from "~/layouts/PageLayout.astro";
 
-export const title = 'Plans & Pricing | Websites, Local SEO & GBP | Lilos Growth';
+export const title = "Plans & Pricing | Websites, Local SEO & GBP | Lilos Growth";
 export const description =
-  'Transparent, no-contract pricing for Google Business Profile management, Local SEO, websites, and Website-as-a-Service. Built for home-service pros, month-to-month, no surprises.';
+  "Transparent, no-contract pricing for Google Business Profile management, Local SEO, websites, and Website-as-a-Service. Built for home-service pros, month-to-month, no surprises.";
 ---
 
 <Layout title={title} description={description}>
   <!-- HERO (unchanged style) -->
-  <section class="bg-[#253242] min-h-[340px] flex items-center justify-center pt-14 pb-14 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159] pointer-events-none"></div>
-    <div class="relative z-10 max-w-3xl mx-auto w-full px-4 text-center">
-      <h1 class="font-heading text-white text-5xl md:text-6xl font-extrabold mb-4 drop-shadow">Plans & Pricing</h1>
-      <p class="font-body text-xl text-white/90 mb-3 font-medium">
+  <section
+    class="relative flex min-h-[340px] items-center justify-center overflow-hidden bg-[#253242] pb-14 pt-14"
+  >
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]">
+    </div>
+    <div class="relative z-10 mx-auto w-full max-w-3xl px-4 text-center">
+      <h1 class="mb-4 font-heading text-5xl font-extrabold text-white drop-shadow md:text-6xl">
+        Plans & Pricing
+      </h1>
+      <p class="mb-3 font-body text-xl font-medium text-white/90">
         Month-to-month. No setup fees. Built for home-service pros.
       </p>
       <div class="mt-6 flex flex-wrap justify-center gap-4">
         <a
           href="#packages"
-          class="inline-flex items-center px-8 py-3 rounded-2xl bg-[#f56b2a] hover:bg-[#f34e00] text-white font-heading font-semibold text-lg shadow transition"
+          class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-8 py-3 font-heading text-lg font-semibold text-white shadow transition hover:bg-[#f34e00]"
           data-track
           data-track-event="view_packages">View Packages</a
         >
         <a
           href="#faq"
-          class="inline-flex items-center px-8 py-3 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-lg shadow transition"
+          class="inline-flex items-center rounded-2xl bg-secondary px-8 py-3 font-heading text-lg font-semibold text-white shadow transition hover:bg-[#27394b]"
           data-track
           data-track-event="view_faq">Frequently Asked Questions</a
         >
@@ -34,60 +39,74 @@ export const description =
   </section>
 
   <!-- TRUST STRIP (unchanged sections) -->
-  <section class="bg-[#f7fafd] py-16 border-t border-gray-100">
-    <div class="max-w-5xl mx-auto px-4 text-center">
-      <h2 class="font-heading text-heading text-3xl md:text-4xl font-extrabold mb-5">How Our Process Works</h2>
-      <p class="font-body text-lg text-body mb-12 max-w-2xl mx-auto">
+  <section class="border-t border-gray-100 bg-[#f7fafd] py-16">
+    <div class="mx-auto max-w-5xl px-4 text-center">
+      <h2 class="mb-5 font-heading text-3xl font-extrabold text-heading md:text-4xl">
+        How Our Process Works
+      </h2>
+      <p class="mx-auto mb-12 max-w-2xl font-body text-lg text-body">
         Straightforward onboarding, clear deliverables, and transparent reporting.
       </p>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="bg-white rounded-2xl shadow p-6">
-          <h3 class="font-heading text-heading font-bold text-lg mb-2">Free Consultation</h3>
-          <p class="font-body text-body text-base">Tailored audit + growth plan—no obligation.</p>
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+        <div class="rounded-2xl bg-white p-6 shadow">
+          <h3 class="mb-2 font-heading text-lg font-bold text-heading">Free Consultation</h3>
+          <p class="font-body text-base text-body">Tailored audit + growth plan—no obligation.</p>
         </div>
-        <div class="bg-white rounded-2xl shadow p-6">
-          <h3 class="font-heading text-heading font-bold text-lg mb-2">Custom Plan</h3>
-          <p class="font-body text-body text-base">Pick a package or we’ll tailor one for goals & budget.</p>
+        <div class="rounded-2xl bg-white p-6 shadow">
+          <h3 class="mb-2 font-heading text-lg font-bold text-heading">Custom Plan</h3>
+          <p class="font-body text-base text-body">
+            Pick a package or we’ll tailor one for goals & budget.
+          </p>
         </div>
-        <div class="bg-white rounded-2xl shadow p-6">
-          <h3 class="font-heading text-heading font-bold text-lg mb-2">Launch & Optimize</h3>
-          <p class="font-body text-body text-base">We implement, improve, and report—end to end.</p>
+        <div class="rounded-2xl bg-white p-6 shadow">
+          <h3 class="mb-2 font-heading text-lg font-bold text-heading">Launch & Optimize</h3>
+          <p class="font-body text-base text-body">We implement, improve, and report—end to end.</p>
         </div>
-        <div class="bg-white rounded-2xl shadow p-6">
-          <h3 class="font-heading text-heading font-bold text-lg mb-2">Grow & Report</h3>
-          <p class="font-body text-body text-base">Monthly reports + check-ins to keep momentum.</p>
+        <div class="rounded-2xl bg-white p-6 shadow">
+          <h3 class="mb-2 font-heading text-lg font-bold text-heading">Grow & Report</h3>
+          <p class="font-body text-base text-body">Monthly reports + check-ins to keep momentum.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- WHO WE HELP -->
-  <section class="bg-white py-10 border-t border-gray-100">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="font-heading text-heading text-2xl md:text-3xl font-extrabold mb-6">Who We Help</h2>
+  <section class="border-t border-gray-100 bg-white py-10">
+    <div class="mx-auto max-w-4xl px-4 text-center">
+      <h2 class="mb-6 font-heading text-2xl font-extrabold text-heading md:text-3xl">
+        Who We Help
+      </h2>
       <div class="flex flex-wrap justify-center gap-3">
-        <span class="bg-bluelight px-5 py-2 rounded-full text-heading font-heading font-medium text-base shadow"
+        <span
+          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
           >Plumbers</span
         >
-        <span class="bg-bluelight px-5 py-2 rounded-full text-heading font-heading font-medium text-base shadow"
+        <span
+          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
           >HVAC</span
         >
-        <span class="bg-bluelight px-5 py-2 rounded-full text-heading font-heading font-medium text-base shadow"
+        <span
+          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
           >Electricians</span
         >
-        <span class="bg-bluelight px-5 py-2 rounded-full text-heading font-heading font-medium text-base shadow"
+        <span
+          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
           >Roofers</span
         >
-        <span class="bg-bluelight px-5 py-2 rounded-full text-heading font-heading font-medium text-base shadow"
+        <span
+          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
           >Pest Control</span
         >
-        <span class="bg-bluelight px-5 py-2 rounded-full text-heading font-heading font-medium text-base shadow"
+        <span
+          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
           >Landscaping</span
         >
-        <span class="bg-bluelight px-5 py-2 rounded-full text-heading font-heading font-medium text-base shadow"
+        <span
+          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
           >Cleaning</span
         >
-        <span class="bg-bluelight px-5 py-2 rounded-full text-heading font-heading font-medium text-base shadow"
+        <span
+          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
           >Other Pros</span
         >
       </div>
@@ -95,54 +114,61 @@ export const description =
   </section>
 
   <!-- WHY CHOOSE US -->
-  <section class="bg-[#f7fafd] py-16 border-t border-gray-100">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <h2 class="font-heading text-heading text-3xl md:text-4xl font-extrabold mb-10">Why Choose Lilos Growth?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
-        <div class="bg-white rounded-2xl p-10 shadow border border-gray-100">
-          <h3 class="font-heading text-heading font-bold text-xl mb-3">Home-Service Specialists</h3>
-          <p class="font-body text-body text-base">Niche focus = faster wins and clearer playbooks.</p>
+  <section class="border-t border-gray-100 bg-[#f7fafd] py-16">
+    <div class="mx-auto max-w-6xl px-4 text-center">
+      <h2 class="mb-10 font-heading text-3xl font-extrabold text-heading md:text-4xl">
+        Why Choose Lilos Growth?
+      </h2>
+      <div class="mt-4 grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div class="rounded-2xl border border-gray-100 bg-white p-10 shadow">
+          <h3 class="mb-3 font-heading text-xl font-bold text-heading">Home-Service Specialists</h3>
+          <p class="font-body text-base text-body">
+            Niche focus = faster wins and clearer playbooks.
+          </p>
         </div>
-        <div class="bg-white rounded-2xl p-10 shadow border border-gray-100">
-          <h3 class="font-heading text-heading font-bold text-xl mb-3">Month-to-Month</h3>
-          <p class="font-body text-body text-base">No contracts. Stay only if we’re delivering.</p>
+        <div class="rounded-2xl border border-gray-100 bg-white p-10 shadow">
+          <h3 class="mb-3 font-heading text-xl font-bold text-heading">Month-to-Month</h3>
+          <p class="font-body text-base text-body">No contracts. Stay only if we’re delivering.</p>
         </div>
-        <div class="bg-white rounded-2xl p-10 shadow border border-gray-100">
-          <h3 class="font-heading text-heading font-bold text-xl mb-3">Done-for-You</h3>
-          <p class="font-body text-body text-base">We handle updates, optimizations, reviews & reporting.</p>
+        <div class="rounded-2xl border border-gray-100 bg-white p-10 shadow">
+          <h3 class="mb-3 font-heading text-xl font-bold text-heading">Done-for-You</h3>
+          <p class="font-body text-base text-body">
+            We handle updates, optimizations, reviews & reporting.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- PACKAGES -->
-  <section id="packages" class="py-20 bg-white border-t border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 space-y-16">
+  <section id="packages" class="border-t border-gray-100 bg-white py-20">
+    <div class="mx-auto max-w-7xl space-y-16 px-4">
       <!-- GBP (Google Business Profile) -->
       <div>
-        <h2 class="font-heading text-heading text-3xl md:text-4xl font-extrabold mb-3 text-center">
+        <h2 class="mb-3 text-center font-heading text-3xl font-extrabold text-heading md:text-4xl">
           Google Business Profile (GBP)
         </h2>
-        <p class="font-body text-lg text-body mb-8 text-center max-w-3xl mx-auto">
+        <p class="mx-auto mb-8 max-w-3xl text-center font-body text-lg text-body">
           Comprehensive management to win the Map Pack and convert more calls.
         </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
           <!-- Starter -->
           <div
-            class="bg-bluelight rounded-2xl shadow-xl border border-gray-100 flex flex-col p-8 hover:shadow-2xl transition"
+            class="flex flex-col rounded-2xl border border-gray-100 bg-bluelight p-8 shadow-xl transition hover:shadow-2xl"
           >
             <span
-              class="block text-xs bg-[#f56b2a]/10 text-[#f56b2a] px-3 py-1 rounded-full mb-3 font-heading font-semibold uppercase tracking-wide"
+              class="mb-3 block rounded-full bg-[#f56b2a]/10 px-3 py-1 font-heading text-xs font-semibold uppercase tracking-wide text-[#f56b2a]"
               >Best for getting established</span
             >
-            <h3 class="font-heading text-heading text-2xl font-bold mb-2">Starter</h3>
-            <div class="text-4xl font-heading text-primary font-bold mb-4">
+            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Starter</h3>
+            <div class="mb-4 font-heading text-4xl font-bold text-primary">
               $199<span class="text-lg font-normal text-gray-500">/mo</span>
             </div>
-            <ul class="font-body text-body text-base space-y-2 list-disc list-inside mb-8">
+            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
               <li>Full GBP setup/optimization + category & services alignment</li>
               <li>
-                Posts: <strong>6/mo</strong> &nbsp;•&nbsp; Photos: <strong>6/mo</strong> (EXIF-optimized names, alt text)
+                Posts: <strong>6/mo</strong> &nbsp;•&nbsp; Photos: <strong>6/mo</strong> (EXIF-optimized
+                names, alt text)
               </li>
               <li>Review replies <strong>up to 30/mo</strong>; Q&amp;A weekly</li>
               <li>Services/Products refresh <strong>quarterly</strong></li>
@@ -151,29 +177,31 @@ export const description =
             </ul>
             <a
               href="#contact"
-              class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition text-center"
+              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
               >Get Started</a
             >
           </div>
           <!-- Growth -->
           <div
-            class="bg-white rounded-2xl shadow-xl border-2 border-primary flex flex-col p-8 relative hover:shadow-2xl transition"
+            class="relative flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-xl transition hover:shadow-2xl"
           >
             <div
-              class="absolute -top-5 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-heading font-bold px-4 py-1 rounded-2xl shadow"
+              class="absolute -top-5 left-1/2 -translate-x-1/2 rounded-2xl bg-primary px-4 py-1 font-heading text-xs font-bold text-white shadow"
             >
               Most Popular
             </div>
             <span
-              class="block text-xs bg-[#f56b2a]/10 text-[#f56b2a] px-3 py-1 rounded-full mb-3 font-heading font-semibold uppercase tracking-wide"
+              class="mb-3 block rounded-full bg-[#f56b2a]/10 px-3 py-1 font-heading text-xs font-semibold uppercase tracking-wide text-[#f56b2a]"
               >Includes everything in Starter</span
             >
-            <h3 class="font-heading text-heading text-2xl font-bold mb-2">Growth</h3>
-            <div class="text-4xl font-heading text-primary font-bold mb-4">
+            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Growth</h3>
+            <div class="mb-4 font-heading text-4xl font-bold text-primary">
               $399<span class="text-lg font-normal text-gray-500">/mo</span>
             </div>
-            <ul class="font-body text-body text-base space-y-2 list-disc list-inside mb-8">
-              <li>Posts: <strong>~3/week</strong> &nbsp;•&nbsp; Fresh photos ongoing (EXIF-optimized)</li>
+            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
+              <li>
+                Posts: <strong>~3/week</strong> &nbsp;•&nbsp; Fresh photos ongoing (EXIF-optimized)
+              </li>
               <li>Review replies: <strong>no cap</strong> + proactive requests</li>
               <li>Services/Products refresh <strong>monthly</strong></li>
               <li>Ongoing citation management (top platforms + corrections)</li>
@@ -182,7 +210,7 @@ export const description =
             </ul>
             <a
               href="#contact"
-              class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition text-center"
+              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
               >Get Started</a
             >
           </div>
@@ -191,50 +219,56 @@ export const description =
 
       <!-- Local SEO -->
       <div>
-        <h2 class="font-heading text-heading text-3xl md:text-4xl font-extrabold mb-3 text-center">
+        <h2 class="mb-3 text-center font-heading text-3xl font-extrabold text-heading md:text-4xl">
           Local SEO (Single Location)
         </h2>
-        <p class="font-body text-lg text-body mb-8 text-center max-w-3xl mx-auto">
+        <p class="mx-auto mb-8 max-w-3xl text-center font-body text-lg text-body">
           On-page, technical, citations, and local authority building—built for service areas.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
           <!-- Essentials -->
           <div
-            class="bg-bluelight rounded-2xl shadow-xl border border-gray-100 flex flex-col p-8 hover:shadow-2xl transition"
+            class="flex flex-col rounded-2xl border border-gray-100 bg-bluelight p-8 shadow-xl transition hover:shadow-2xl"
           >
-            <h3 class="font-heading text-heading text-2xl font-bold mb-2">Essentials</h3>
-            <div class="text-4xl font-heading text-primary font-bold mb-4">
+            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Essentials</h3>
+            <div class="mb-4 font-heading text-4xl font-bold text-primary">
               $499<span class="text-lg font-normal text-gray-500">/mo</span>
             </div>
-            <ul class="font-body text-body text-base space-y-2 list-disc list-inside mb-8">
-              <li><strong>Up to 5 pages</strong> + <strong>5 blog posts</strong> per month (≈750–1,000 words)</li>
-              <li>On-page & technical fixes batched monthly (titles, metas, H1/H2, internal links, schema basics)</li>
+            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
+              <li>
+                <strong>Up to 5 pages</strong> + <strong>5 blog posts</strong> per month (≈750–1,000
+                words)
+              </li>
+              <li>
+                On-page & technical fixes batched monthly (titles, metas, H1/H2, internal links,
+                schema basics)
+              </li>
               <li>Citations: 10–20 initial, then 5–10/mo</li>
               <li>Monthly report + 30-min call</li>
               <li><em>No rollovers.</em></li>
             </ul>
             <a
               href="#contact"
-              class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition text-center"
+              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
               >Get Started</a
             >
           </div>
 
           <!-- Growth -->
           <div
-            class="bg-white rounded-2xl shadow-xl border-2 border-primary flex flex-col p-8 relative hover:shadow-2xl transition"
+            class="relative flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-xl transition hover:shadow-2xl"
           >
             <div
-              class="absolute -top-5 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-heading font-bold px-4 py-1 rounded-2xl shadow"
+              class="absolute -top-5 left-1/2 -translate-x-1/2 rounded-2xl bg-primary px-4 py-1 font-heading text-xs font-bold text-white shadow"
             >
               Best Value
             </div>
-            <h3 class="font-heading text-heading text-2xl font-bold mb-2">Growth</h3>
-            <div class="text-4xl font-heading text-primary font-bold mb-4">
+            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Growth</h3>
+            <div class="mb-4 font-heading text-4xl font-bold text-primary">
               $799<span class="text-lg font-normal text-gray-500">/mo</span>
             </div>
-            <ul class="font-body text-body text-base space-y-2 list-disc list-inside mb-8">
+            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
               <li><strong>Up to 10 pages</strong> + <strong>10 blog posts</strong> per month</li>
               <li>2–4 local backlinks/mo (assoc/partner/sponsor/guest)</li>
               <li>Core Web Vitals, schema & crawl prioritization</li>
@@ -244,20 +278,20 @@ export const description =
             </ul>
             <a
               href="#contact"
-              class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition text-center"
+              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
               >Get Started</a
             >
           </div>
 
           <!-- Pro -->
           <div
-            class="bg-white rounded-2xl shadow-xl border border-gray-100 flex flex-col p-8 hover:shadow-2xl transition"
+            class="flex flex-col rounded-2xl border border-gray-100 bg-white p-8 shadow-xl transition hover:shadow-2xl"
           >
-            <h3 class="font-heading text-heading text-2xl font-bold mb-2">Pro</h3>
-            <div class="text-4xl font-heading text-primary font-bold mb-4">
+            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Pro</h3>
+            <div class="mb-4 font-heading text-4xl font-bold text-primary">
               $1,199<span class="text-lg font-normal text-gray-500">/mo</span>
             </div>
-            <ul class="font-body text-body text-base space-y-2 list-disc list-inside mb-8">
+            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
               <li><strong>Up to 20 pages</strong> + <strong>10 blog posts</strong> per month</li>
               <li>4–6 local backlinks/mo; conversion testing on top pages</li>
               <li>Bi-weekly check-ins</li>
@@ -265,7 +299,7 @@ export const description =
             </ul>
             <a
               href="#contact"
-              class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition text-center"
+              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
               >Request Pro</a
             >
           </div>
@@ -274,68 +308,71 @@ export const description =
 
       <!-- Websites (One-time builds) -->
       <div>
-        <h2 class="font-heading text-heading text-3xl md:text-4xl font-extrabold mb-3 text-center">
+        <h2 class="mb-3 text-center font-heading text-3xl font-extrabold text-heading md:text-4xl">
           Websites (One-Time Builds)
         </h2>
-        <p class="font-body text-lg text-body mb-8 text-center max-w-3xl mx-auto">
+        <p class="mx-auto mb-8 max-w-3xl text-center font-body text-lg text-body">
           Own your site outright. Launch quickly with conversion-ready pages.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
           <!-- Launch Lite -->
           <div
-            class="bg-bluelight rounded-2xl shadow-xl border border-gray-100 flex flex-col p-8 hover:shadow-2xl transition"
+            class="flex flex-col rounded-2xl border border-gray-100 bg-bluelight p-8 shadow-xl transition hover:shadow-2xl"
           >
-            <h3 class="font-heading text-heading text-2xl font-bold mb-2">Launch Lite</h3>
-            <div class="text-4xl font-heading text-primary font-bold mb-4">
+            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Launch Lite</h3>
+            <div class="mb-4 font-heading text-4xl font-bold text-primary">
               $499<span class="text-lg font-normal text-gray-500"> one-time</span>
             </div>
-            <ul class="font-body text-body text-base space-y-2 list-disc list-inside mb-8">
-              <li>≈ <strong>10 pages</strong>: Home, 3 services, About/Contact, + core supporting pages</li>
+            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
+              <li>
+                ≈ <strong>10 pages</strong>: Home, 3 services, About/Contact, + core supporting
+                pages
+              </li>
               <li>Form + click-to-call; basic schema</li>
               <li><strong>3–5 business-day launch</strong></li>
             </ul>
             <a
               href="#contact"
-              class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition text-center"
+              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
               >Start Website</a
             >
           </div>
 
           <!-- Starter -->
           <div
-            class="bg-white rounded-2xl shadow-xl border-2 border-primary flex flex-col p-8 relative hover:shadow-2xl transition"
+            class="relative flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-xl transition hover:shadow-2xl"
           >
             <div
-              class="absolute -top-5 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-heading font-bold px-4 py-1 rounded-2xl shadow"
+              class="absolute -top-5 left-1/2 -translate-x-1/2 rounded-2xl bg-primary px-4 py-1 font-heading text-xs font-bold text-white shadow"
             >
               Popular
             </div>
-            <h3 class="font-heading text-heading text-2xl font-bold mb-2">Starter</h3>
-            <div class="text-4xl font-heading text-primary font-bold mb-4">
+            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Starter</h3>
+            <div class="mb-4 font-heading text-4xl font-bold text-primary">
               $750<span class="text-lg font-normal text-gray-500"> one-time</span>
             </div>
-            <ul class="font-body text-body text-base space-y-2 list-disc list-inside mb-8">
+            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
               <li><strong>15 pages</strong>: Home + 9 service/city pages + supporting pages</li>
               <li>Titles/metas/H1–H2; internal link scaffold; stock library</li>
               <li><strong>5–7 business-day launch</strong></li>
             </ul>
             <a
               href="#contact"
-              class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition text-center"
+              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
               >Start Website</a
             >
           </div>
 
           <!-- Standard -->
           <div
-            class="bg-white rounded-2xl shadow-xl border border-gray-100 flex flex-col p-8 hover:shadow-2xl transition"
+            class="flex flex-col rounded-2xl border border-gray-100 bg-white p-8 shadow-xl transition hover:shadow-2xl"
           >
-            <h3 class="font-heading text-heading text-2xl font-bold mb-2">Standard</h3>
-            <div class="text-4xl font-heading text-primary font-bold mb-4">
+            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Standard</h3>
+            <div class="mb-4 font-heading text-4xl font-bold text-primary">
               $1,500<span class="text-lg font-normal text-gray-500"> one-time</span>
             </div>
-            <ul class="font-body text-body text-base space-y-2 list-disc list-inside mb-8">
+            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
               <li>≈ <strong>25 pages</strong></li>
               <li>Enhanced schema (LocalBusiness + Services)</li>
               <li>Conversion blocks (badges, FAQs, reviews)</li>
@@ -343,65 +380,65 @@ export const description =
             </ul>
             <a
               href="#contact"
-              class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition text-center"
+              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
               >Start Website</a
             >
           </div>
         </div>
 
-        <p class="text-sm text-body/80 mt-4 max-w-3xl mx-auto text-center">
-          Global website notes: client supplies branding/services/service areas/5–10 reviews; premium stock billed at
-          cost; hosting not included (WaS covers hosting/updates).
+        <p class="mx-auto mt-4 max-w-3xl text-center text-sm text-body/80">
+          Global website notes: client supplies branding/services/service areas/5–10 reviews;
+          premium stock billed at cost; hosting not included (WaS covers hosting/updates).
         </p>
       </div>
 
       <!-- Website-as-a-Service (WaS) -->
       <div>
-        <h2 class="font-heading text-heading text-3xl md:text-4xl font-extrabold mb-3 text-center">
+        <h2 class="mb-3 text-center font-heading text-3xl font-extrabold text-heading md:text-4xl">
           Website-as-a-Service (WaS)
         </h2>
-        <p class="font-body text-lg text-body mb-8 text-center max-w-3xl mx-auto">
+        <p class="mx-auto mb-8 max-w-3xl text-center font-body text-lg text-body">
           Subscription website with hosting, updates, and ongoing support.
         </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
           <!-- WaS Base -->
           <div
-            class="bg-bluelight rounded-2xl shadow-xl border border-gray-100 flex flex-col p-8 hover:shadow-2xl transition"
+            class="flex flex-col rounded-2xl border border-gray-100 bg-bluelight p-8 shadow-xl transition hover:shadow-2xl"
           >
-            <h3 class="font-heading text-heading text-2xl font-bold mb-2">Base</h3>
-            <div class="text-4xl font-heading text-primary font-bold mb-4">
+            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Base</h3>
+            <div class="mb-4 font-heading text-4xl font-bold text-primary">
               $250<span class="text-lg font-normal text-gray-500">/mo</span>
             </div>
-            <ul class="font-body text-body text-base space-y-2 list-disc list-inside mb-8">
+            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
               <li><strong>Up to 5 minor updates/mo</strong></li>
               <li>≤ 1 new page/mo</li>
             </ul>
             <a
               href="#contact"
-              class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition text-center"
+              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
               >Get WaS</a
             >
           </div>
           <!-- WaS Plus -->
           <div
-            class="bg-white rounded-2xl shadow-xl border-2 border-primary flex flex-col p-8 relative hover:shadow-2xl transition"
+            class="relative flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-xl transition hover:shadow-2xl"
           >
             <div
-              class="absolute -top-5 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-heading font-bold px-4 py-1 rounded-2xl shadow"
+              class="absolute -top-5 left-1/2 -translate-x-1/2 rounded-2xl bg-primary px-4 py-1 font-heading text-xs font-bold text-white shadow"
             >
               Growing Teams
             </div>
-            <h3 class="font-heading text-heading text-2xl font-bold mb-2">Plus</h3>
-            <div class="text-4xl font-heading text-primary font-bold mb-4">
+            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Plus</h3>
+            <div class="mb-4 font-heading text-4xl font-bold text-primary">
               $750<span class="text-lg font-normal text-gray-500">/mo</span>
             </div>
-            <ul class="font-body text-body text-base space-y-2 list-disc list-inside mb-8">
+            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
               <li><strong>Up to 15 updates/mo</strong></li>
               <li>≤ 3 new pages/mo; quarterly CRO refresh</li>
             </ul>
             <a
               href="#contact"
-              class="mt-auto px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition text-center"
+              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
               >Get WaS</a
             >
           </div>
@@ -410,40 +447,42 @@ export const description =
 
       <!-- Bundles -->
       <div>
-        <h2 class="font-heading text-heading text-3xl md:text-4xl font-extrabold mb-3 text-center">Bundles</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <h2 class="mb-3 text-center font-heading text-3xl font-extrabold text-heading md:text-4xl">
+          Bundles
+        </h2>
+        <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
           <div
-            class="bg-white rounded-2xl shadow-2xl border-2 border-primary flex flex-col p-8 hover:shadow-3xl transition"
+            class="hover:shadow-3xl flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-2xl transition"
           >
-            <h3 class="font-heading text-heading text-2xl font-bold mb-2">GBP + SEO Essentials</h3>
-            <div class="text-4xl font-heading text-primary font-bold mb-4">
+            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">GBP + SEO Essentials</h3>
+            <div class="mb-4 font-heading text-4xl font-bold text-primary">
               $699<span class="text-lg font-normal text-gray-500">/mo</span>
             </div>
-            <ul class="font-body text-body text-base space-y-2 list-disc list-inside mb-6">
+            <ul class="mb-6 list-inside list-disc space-y-2 font-body text-base text-body">
               <li>Everything in GBP Starter + Local SEO Essentials</li>
               <li>Unified reporting + strategy</li>
             </ul>
             <a
               href="#contact"
-              class="px-6 py-3 rounded-xl bg-primary text-white font-heading font-semibold text-lg shadow hover:bg-secondary transition text-center"
+              class="rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
               >Choose Bundle</a
             >
           </div>
 
           <div
-            class="bg-primary text-white rounded-2xl shadow-2xl border-2 border-primary flex flex-col p-8 hover:shadow-3xl transition"
+            class="hover:shadow-3xl flex flex-col rounded-2xl border-2 border-primary bg-primary p-8 text-white shadow-2xl transition"
           >
-            <h3 class="font-heading text-white text-2xl font-bold mb-2">All-In-One</h3>
-            <div class="text-4xl font-heading text-white font-bold mb-4">
+            <h3 class="mb-2 font-heading text-2xl font-bold text-white">All-In-One</h3>
+            <div class="mb-4 font-heading text-4xl font-bold text-white">
               $1,299<span class="text-lg font-normal text-white/80">/mo</span>
             </div>
-            <ul class="font-body text-white/90 text-base space-y-2 list-disc list-inside mb-6">
+            <ul class="mb-6 list-inside list-disc space-y-2 font-body text-base text-white/90">
               <li>Website + Local SEO + GBP management</li>
               <li>Optional launch promo: <strong>$999</strong> first 90 days → then $1,299</li>
             </ul>
             <a
               href="#contact"
-              class="px-6 py-3 rounded-xl bg-white text-primary font-heading font-semibold text-lg shadow hover:bg-bluelight transition text-center"
+              class="rounded-xl bg-white px-6 py-3 text-center font-heading text-lg font-semibold text-primary shadow transition hover:bg-bluelight"
               >Choose All-In-One</a
             >
           </div>
@@ -452,18 +491,22 @@ export const description =
 
       <!-- Add-ons & Surcharges -->
       <div>
-        <h2 class="font-heading text-heading text-2xl md:text-3xl font-extrabold mb-4 text-center">
+        <h2 class="mb-4 text-center font-heading text-2xl font-extrabold text-heading md:text-3xl">
           Add-ons & Surcharges
         </h2>
-        <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow border border-gray-100 p-6">
-          <ul class="font-body text-body text-base space-y-2 list-disc list-inside">
-            <li><strong>LSA Management:</strong> $300/mo + 10% of ad spend over $3k (setup $299)</li>
+        <div class="mx-auto max-w-4xl rounded-2xl border border-gray-100 bg-white p-6 shadow">
+          <ul class="list-inside list-disc space-y-2 font-body text-base text-body">
+            <li>
+              <strong>LSA Management:</strong> $300/mo + 10% of ad spend over $3k (setup $299)
+            </li>
             <li><strong>GA4 + GTM Setup:</strong> $149 one-time (included in SEO Growth/Pro)</li>
-            <li><strong>Multi-location:</strong> +$150/mo per extra GBP; +$200/mo per extra SEO location</li>
+            <li>
+              <strong>Multi-location:</strong> +$150/mo per extra GBP; +$200/mo per extra SEO location
+            </li>
             <li><strong>Rush Ticket (48 hrs):</strong> +$100 per ticket</li>
             <li>
-              <strong>Optional:</strong> Call tracking & lead attribution (pass-through + setup); Citation burst/cleanup
-              from $199/location; Review funnels from $149/mo; Photo/Video pack from $499/quarter
+              <strong>Optional:</strong> Call tracking & lead attribution (pass-through + setup); Citation
+              burst/cleanup from $199/location; Review funnels from $149/mo; Photo/Video pack from $499/quarter
             </li>
           </ul>
         </div>
@@ -472,26 +515,26 @@ export const description =
   </section>
 
   <!-- COMPARE TABLE (kept for scannability) -->
-  <section class="bg-[#f7fafd] py-16 border-t border-gray-100">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-heading text-heading text-2xl md:text-3xl font-extrabold mb-8 text-center">
+  <section class="border-t border-gray-100 bg-[#f7fafd] py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-8 text-center font-heading text-2xl font-extrabold text-heading md:text-3xl">
         At-a-Glance Comparison
       </h2>
-      <div class="overflow-x-auto rounded-2xl bg-white shadow border border-gray-100">
+      <div class="overflow-x-auto rounded-2xl border border-gray-100 bg-white shadow">
         <table class="min-w-full text-left">
           <thead>
-            <tr class="bg-bluelight text-heading text-base">
-              <th class="py-4 px-6 font-heading font-bold">Features</th>
-              <th class="py-4 px-6 font-heading font-bold text-center">GBP</th>
-              <th class="py-4 px-6 font-heading font-bold text-center">Local SEO</th>
-              <th class="py-4 px-6 font-heading font-bold text-center">Websites</th>
-              <th class="py-4 px-6 font-heading font-bold text-center">WaS</th>
-              <th class="py-4 px-6 font-heading font-bold text-center">Bundles</th>
+            <tr class="bg-bluelight text-base text-heading">
+              <th class="px-6 py-4 font-heading font-bold">Features</th>
+              <th class="px-6 py-4 text-center font-heading font-bold">GBP</th>
+              <th class="px-6 py-4 text-center font-heading font-bold">Local SEO</th>
+              <th class="px-6 py-4 text-center font-heading font-bold">Websites</th>
+              <th class="px-6 py-4 text-center font-heading font-bold">WaS</th>
+              <th class="px-6 py-4 text-center font-heading font-bold">Bundles</th>
             </tr>
           </thead>
-          <tbody class="text-body text-base font-body">
+          <tbody class="font-body text-base text-body">
             <tr class="border-t">
-              <td class="py-3 px-6">Map Pack management</td>
+              <td class="px-6 py-3">Map Pack management</td>
               <td class="text-center">✓</td>
               <td class="text-center">✓</td>
               <td class="text-center">–</td>
@@ -499,7 +542,7 @@ export const description =
               <td class="text-center">✓</td>
             </tr>
             <tr class="border-t">
-              <td class="py-3 px-6">On-page & technical SEO</td>
+              <td class="px-6 py-3">On-page & technical SEO</td>
               <td class="text-center">–</td>
               <td class="text-center">✓</td>
               <td class="text-center">Basic</td>
@@ -507,7 +550,7 @@ export const description =
               <td class="text-center">✓</td>
             </tr>
             <tr class="border-t">
-              <td class="py-3 px-6">Content & pages</td>
+              <td class="px-6 py-3">Content & pages</td>
               <td class="text-center">Posts/photos</td>
               <td class="text-center">Pages + blogs</td>
               <td class="text-center">Site build</td>
@@ -515,7 +558,7 @@ export const description =
               <td class="text-center">All</td>
             </tr>
             <tr class="border-t">
-              <td class="py-3 px-6">Citations</td>
+              <td class="px-6 py-3">Citations</td>
               <td class="text-center">Cleanup/ongoing</td>
               <td class="text-center">Build + ongoing</td>
               <td class="text-center">–</td>
@@ -523,7 +566,7 @@ export const description =
               <td class="text-center">✓</td>
             </tr>
             <tr class="border-t">
-              <td class="py-3 px-6">Calls & reporting</td>
+              <td class="px-6 py-3">Calls & reporting</td>
               <td class="text-center">Monthly</td>
               <td class="text-center">Monthly/45-min+</td>
               <td class="text-center">–</td>
@@ -537,60 +580,76 @@ export const description =
   </section>
 
   <!-- TESTIMONIALS -->
-  <section class="py-16 bg-white border-t border-gray-100">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="font-heading text-heading text-2xl md:text-3xl font-extrabold mb-8">What Our Clients Say</h2>
-      <div class="flex flex-col md:flex-row gap-8 justify-center items-stretch">
-        <div class="bg-bluelight rounded-2xl shadow p-8 flex-1">
-          <div class="text-3xl text-primary mb-3 font-heading">★★★★★</div>
-          <p class="text-lg text-heading mb-3 font-heading font-semibold">
+  <section class="border-t border-gray-100 bg-white py-16">
+    <div class="mx-auto max-w-4xl px-4 text-center">
+      <h2 class="mb-8 font-heading text-2xl font-extrabold text-heading md:text-3xl">
+        What Our Clients Say
+      </h2>
+      <div class="flex flex-col items-stretch justify-center gap-8 md:flex-row">
+        <div class="flex-1 rounded-2xl bg-bluelight p-8 shadow">
+          <div class="mb-3 font-heading text-3xl text-primary">★★★★★</div>
+          <p class="mb-3 font-heading text-lg font-semibold text-heading">
             “We booked more calls in 2 months than all last year.”
           </p>
-          <span class="text-body text-base font-body">– Mike S., HVAC Company</span>
+          <span class="font-body text-base text-body">– Mike S., HVAC Company</span>
         </div>
-        <div class="bg-bluelight rounded-2xl shadow p-8 flex-1">
-          <div class="text-3xl text-primary mb-3 font-heading">★★★★★</div>
-          <p class="text-lg text-heading mb-3 font-heading font-semibold">
+        <div class="flex-1 rounded-2xl bg-bluelight p-8 shadow">
+          <div class="mb-3 font-heading text-3xl text-primary">★★★★★</div>
+          <p class="mb-3 font-heading text-lg font-semibold text-heading">
             “The site and Maps ranking paid for itself fast. Seamless process.”
           </p>
-          <span class="text-body text-base font-body">– Sarah K., Plumbing Contractor</span>
+          <span class="font-body text-base text-body">– Sarah K., Plumbing Contractor</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="py-20 bg-[#f7fafd] border-t border-gray-100" id="faq">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="font-heading text-heading text-3xl md:text-4xl font-extrabold mb-8 text-center relative">
+  <section class="border-t border-gray-100 bg-[#f7fafd] py-20" id="faq">
+    <div class="mx-auto max-w-4xl px-4">
+      <h2
+        class="relative mb-8 text-center font-heading text-3xl font-extrabold text-heading md:text-4xl"
+      >
         Frequently Asked Questions
-        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
       </h2>
       <div class="space-y-8">
-        <div class="bg-white rounded-2xl shadow border border-gray-100 p-8">
-          <h3 class="font-heading text-heading text-xl font-bold mb-2">Do I have to sign a long-term contract?</h3>
-          <p class="font-body text-body text-lg">Never. All plans are month-to-month.</p>
+        <div class="rounded-2xl border border-gray-100 bg-white p-8 shadow">
+          <h3 class="mb-2 font-heading text-xl font-bold text-heading">
+            Do I have to sign a long-term contract?
+          </h3>
+          <p class="font-body text-lg text-body">Never. All plans are month-to-month.</p>
         </div>
-        <div class="bg-white rounded-2xl shadow border border-gray-100 p-8">
-          <h3 class="font-heading text-heading text-xl font-bold mb-2">Can I upgrade, downgrade, or cancel?</h3>
-          <p class="font-body text-body text-lg">Yes—switch anytime, cancel with no penalty.</p>
+        <div class="rounded-2xl border border-gray-100 bg-white p-8 shadow">
+          <h3 class="mb-2 font-heading text-xl font-bold text-heading">
+            Can I upgrade, downgrade, or cancel?
+          </h3>
+          <p class="font-body text-lg text-body">Yes—switch anytime, cancel with no penalty.</p>
         </div>
-        <div class="bg-white rounded-2xl shadow border border-gray-100 p-8">
-          <h3 class="font-heading text-heading text-xl font-bold mb-2">Do you offer custom packages?</h3>
-          <p class="font-body text-body text-lg">Absolutely—tell us your goals and we’ll tailor a plan.</p>
+        <div class="rounded-2xl border border-gray-100 bg-white p-8 shadow">
+          <h3 class="mb-2 font-heading text-xl font-bold text-heading">
+            Do you offer custom packages?
+          </h3>
+          <p class="font-body text-lg text-body">
+            Absolutely—tell us your goals and we’ll tailor a plan.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FINAL CTA -->
-  <section class="py-12 bg-primary">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="font-heading text-white text-3xl font-extrabold mb-4">Ready to Grow? Get a Free Consultation.</h2>
-      <p class="font-body text-white/80 text-lg mb-7">Book a free website & SEO audit—no hard sell, just insights.</p>
+  <section class="bg-primary py-12">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+      <h2 class="mb-4 font-heading text-3xl font-extrabold text-white">
+        Ready to Grow? Get a Free Consultation.
+      </h2>
+      <p class="mb-7 font-body text-lg text-white/80">
+        Book a free website & SEO audit—no hard sell, just insights.
+      </p>
       <a
         href="#contact"
-        class="inline-flex items-center px-8 py-4 rounded-2xl bg-white hover:bg-bluelight text-primary font-heading font-semibold text-lg shadow transition"
+        class="inline-flex items-center rounded-2xl bg-white px-8 py-4 font-heading text-lg font-semibold text-primary shadow transition hover:bg-bluelight"
         data-track
         data-track-event="final_cta_click">Book My Free Audit</a
       >

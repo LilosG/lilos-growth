@@ -1,15 +1,15 @@
 ---
 date: 2025-10-20
-title: 'GBP Suspensions & Reinstatements in 2025: Prevention, Evidence, and Fast Recovery'
-description: 'Avoid suspensions, build an audit-ready evidence kit, and follow a precise reinstatement workflow—field-tested for service-area and storefront local pros.'
+title: "GBP Suspensions & Reinstatements in 2025: Prevention, Evidence, and Fast Recovery"
+description: "Avoid suspensions, build an audit-ready evidence kit, and follow a precise reinstatement workflow—field-tested for service-area and storefront local pros."
 slug: gbp-suspension-reinstatement-playbook-2025
-category: 'Google Business Profile'
-tags: ['gbp', 'suspension', 'compliance']
+category: "Google Business Profile"
+tags: ["gbp", "suspension", "compliance"]
 pubDate: 2025-10-19
-datePublished: '2025-10-19'
+datePublished: "2025-10-19"
 draft: false
-image: '/images/blog/gbp-suspension-reinstatement-playbook-2025/hero.svg'
-imageAlt: 'Reinstatement workflow: detect → diagnose → fix → submit → monitor'
+image: "/images/blog/gbp-suspension-reinstatement-playbook-2025/hero.svg"
+imageAlt: "Reinstatement workflow: detect → diagnose → fix → submit → monitor"
 ---
 
 > **TL;DR:** Most suspensions trace to misclassified **SAB vs storefront**, **virtual/coworking addresses**, **category stuffing**, or **aggressive edits** with thin proof. Prevent issues with a quarterly change log and an **evidence kit**. If suspended: **diagnose → correct → assemble proof → submit once, cleanly**—then **stand down** on edits until resolution.

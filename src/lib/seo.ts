@@ -1,10 +1,15 @@
 export function canonicalUrl(path: string) {
-  const base = 'https://lilosgrowth.com';
-  if (!path || path === '/') return base;
-  return `${base}${path.startsWith('/') ? path : `/${path}`}`;
+  const base = "https://lilosgrowth.com";
+  if (!path || path === "/") return base;
+  return `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-export function metaTags(opts: { title: string; description: string; url: string; image?: string }) {
+export function metaTags(opts: {
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+}) {
   const { title, description, url, image } = opts;
   return `
 <title>${title}</title>
@@ -24,10 +29,10 @@ ${image ? `<meta name="twitter:image" content="${image}">` : ``}
 
 export function breadcrumbJsonLd(items: Array<{ name: string; url: string }>) {
   const obj = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: items.map((it, i) => ({
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: i + 1,
       name: it.name,
       item: it.url,
@@ -46,12 +51,12 @@ export function blogPostingJsonLd(opts: {
   dateModified?: string;
 }) {
   const o: any = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
     headline: opts.title,
     description: opts.description,
     url: opts.url,
-    author: { '@type': 'Person', name: opts.author },
+    author: { "@type": "Person", name: opts.author },
   };
   if (opts.datePublished) o.datePublished = opts.datePublished;
   if (opts.dateModified) o.dateModified = opts.dateModified;
@@ -61,13 +66,13 @@ export function blogPostingJsonLd(opts: {
 
 export function websiteSearchActionJsonLd() {
   const obj = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    url: 'https://lilosgrowth.com',
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    url: "https://lilosgrowth.com",
     potentialAction: {
-      '@type': 'SearchAction',
-      target: 'https://lilosgrowth.com/blog?query={search_term_string}',
-      'query-input': 'required name=search_term_string',
+      "@type": "SearchAction",
+      target: "https://lilosgrowth.com/blog?query={search_term_string}",
+      "query-input": "required name=search_term_string",
     },
   };
   return JSON.stringify(obj);

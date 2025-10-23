@@ -1,17 +1,17 @@
 // src/lib/blog.ts
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 
 /** Strong type alias for blog entries */
-export type BlogEntry = CollectionEntry<'blog'>;
+export type BlogEntry = CollectionEntry<"blog">;
 
 /** Frontmatter keys we’ll check (in order) to find a publish date */
 const DATE_KEYS = [
-  'pubDate', // z.date() is ideal in your schema
-  'datePublished', // ISO string or Date
-  'publishedAt', // ISO string or Date
-  'date', // ISO string or Date
-  'updated', // fallback if above are missing
-  'lastmod', // occasional key in migrated content
+  "pubDate", // z.date() is ideal in your schema
+  "datePublished", // ISO string or Date
+  "publishedAt", // ISO string or Date
+  "date", // ISO string or Date
+  "updated", // fallback if above are missing
+  "lastmod", // occasional key in migrated content
 ] as const;
 
 type DateLike = Date | string | number | undefined | null;
@@ -21,13 +21,13 @@ type DateLike = Date | string | number | undefined | null;
 /** True when local dev preview of drafts is enabled */
 export function allowDrafts(): boolean {
   // Set LOCAL_DRAFTS=1 in your .env.local to include drafts in lists.
-  return import.meta.env.LOCAL_DRAFTS === '1';
+  return import.meta.env.LOCAL_DRAFTS === "1";
 }
 
 /** Best-effort coercion of a value to a valid Date (or null). */
 function toDate(v: DateLike): Date | null {
   if (v instanceof Date) return isNaN(v.getTime()) ? null : v;
-  if (typeof v === 'string' || typeof v === 'number') {
+  if (typeof v === "string" || typeof v === "number") {
     const d = new Date(v);
     return isNaN(d.getTime()) ? null : d;
   }
@@ -57,7 +57,7 @@ export function getDateTs(entry: BlogEntry): number {
 /** Slug helper: prefer frontmatter `slug`, else content collection slug. */
 export function getSlug(entry: BlogEntry): string {
   const fmSlug = (entry.data as Record<string, unknown>).slug;
-  return typeof fmSlug === 'string' && fmSlug.trim() ? fmSlug : entry.slug;
+  return typeof fmSlug === "string" && fmSlug.trim() ? fmSlug : entry.slug;
 }
 
 /** Draft flag resolver (frontmatter: draft: true). */
@@ -72,13 +72,13 @@ export function visibleOnly(entries: BlogEntry[]): BlogEntry[] {
 }
 
 /** Locale-aware date formatter. Safe on missing/invalid dates. */
-export function formatDate(input?: Date | string, locale = 'en-US'): string {
-  const d = typeof input === 'string' ? toDate(input) : (input ?? null);
-  if (!d) return '';
+export function formatDate(input?: Date | string, locale = "en-US"): string {
+  const d = typeof input === "string" ? toDate(input) : (input ?? null);
+  if (!d) return "";
   return d.toLocaleDateString(locale, {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
+    year: "numeric",
+    month: "short",
+    day: "numeric",
   });
 }
 
@@ -107,7 +107,7 @@ export const byTag =
 export const byCategory =
   (cat: string) =>
   (p: BlogEntry): boolean =>
-    typeof (p.data as Record<string, unknown>).category === 'string' &&
+    typeof (p.data as Record<string, unknown>).category === "string" &&
     ((p.data as Record<string, unknown>).category as string) === cat;
 
 /** Simple text search across title/description (case-insensitive). */
@@ -117,7 +117,7 @@ export const bySearch = (q: string) => {
     if (!needle) return true;
     const { title, description } = p.data as Record<string, unknown>;
     const hay =
-      `${typeof title === 'string' ? title : ''} ${typeof description === 'string' ? description : ''}`.toLowerCase();
+      `${typeof title === "string" ? title : ""} ${typeof description === "string" ? description : ""}`.toLowerCase();
     return hay.includes(needle);
   };
 };
@@ -130,7 +130,10 @@ export const bySearch = (q: string) => {
  *   2) optional additional filter(s)
  *   3) sort newest-first
  */
-export function toListing(entries: BlogEntry[], ...filters: Array<(e: BlogEntry) => boolean>): BlogEntry[] {
+export function toListing(
+  entries: BlogEntry[],
+  ...filters: Array<(e: BlogEntry) => boolean>
+): BlogEntry[] {
   const base = visibleOnly(entries);
   const filtered = filters.length ? base.filter((e) => filters.every((f) => f(e))) : base;
   return filtered.sort(byNewest);

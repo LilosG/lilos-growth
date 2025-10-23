@@ -10,7 +10,7 @@ export interface Props {
   url: Urls;
   base?: string; // default "/blog"
 }
-const { current, last, url, base = '/blog' } = Astro.props;
+const { current, last, url, base = "/blog" } = Astro.props;
 const hrefFor = (n: number) => (n === 1 ? `${base}/` : `${base}/${n}/`);
 ---
 
@@ -43,8 +43,8 @@ const hrefFor = (n: number) => (n === 1 ? `${base}/` : `${base}/${n}/`);
         <li>
           <a
             href={hrefFor(n)}
-            class={`inline-block rounded-md border px-3 py-1 ${n === current ? 'font-semibold underline' : 'hover:underline'}`}
-            aria-current={n === current ? 'page' : undefined}
+            class={`inline-block rounded-md border px-3 py-1 ${n === current ? "font-semibold underline" : "hover:underline"}`}
+            aria-current={n === current ? "page" : undefined}
           >
             {n}
           </a>

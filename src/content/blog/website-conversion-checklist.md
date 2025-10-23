@@ -1,15 +1,15 @@
 ---
 date: 2025-10-13T09:36:29-07:00
-title: 'Website Conversion Checklist for Service Pros'
-description: 'Quick wins to turn visitors into booked jobs—without a redesign. Copy-ready checks you can apply in an hour.'
+title: "Website Conversion Checklist for Service Pros"
+description: "Quick wins to turn visitors into booked jobs—without a redesign. Copy-ready checks you can apply in an hour."
 slug: website-conversion-checklist
-category: 'Websites'
-tags: ['conversion', 'web', 'ux', 'local-seo']
+category: "Websites"
+tags: ["conversion", "web", "ux", "local-seo"]
 pubDate: 2025-10-11
-datePublished: '2025-10-11'
+datePublished: "2025-10-11"
 draft: false
-image: '/images/blog/long-tail/hero.svg'
-imageAlt: 'Website conversion checklist banner'
+image: "/images/blog/long-tail/hero.svg"
+imageAlt: "Website conversion checklist banner"
 ---
 
 > **TL;DR:** Fix the **five blockers** that stop visitors from calling: unclear headlines, weak CTAs, slow pages, missing proof, and bad forms.

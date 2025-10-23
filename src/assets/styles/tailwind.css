@@ -1,5 +1,5 @@
 /* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;700&display=swap");
 
 /* Tailwind layers */
 @tailwind base;
@@ -8,7 +8,7 @@
 
 /* ---------- Base (site-wide defaults) ---------- */
 body {
-  @apply font-body text-body bg-white;
+  @apply bg-white font-body text-body;
 }
 h1,
 h2,
@@ -42,24 +42,16 @@ h6 {
 @layer components {
   /* Consistent focus styling */
   .focus-ring {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a];
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center rounded-full border border-gray-400 bg-transparent
-           text-base font-medium leading-snug text-page text-center transition
-           py-3.5 px-6 md:px-8
-           ease-in duration-200
-           hover:bg-gray-100 hover:border-gray-600
-           dark:text-slate-300 dark:border-slate-500 dark:hover:bg-slate-800 dark:hover:border-slate-800
-           cursor-pointer;
+    @apply text-page inline-flex cursor-pointer items-center justify-center rounded-full border border-gray-400 bg-transparent px-6 py-3.5 text-center text-base font-medium leading-snug transition duration-200 ease-in hover:border-gray-600 hover:bg-gray-100 dark:border-slate-500 dark:text-slate-300 dark:hover:border-slate-800 dark:hover:bg-slate-800 md:px-8;
     @apply focus-ring;
   }
 
   .btn-primary {
-    @apply btn font-semibold bg-primary text-white border-primary
-           hover:bg-secondary hover:border-secondary hover:text-white
-           dark:text-white dark:bg-primary dark:border-primary dark:hover:border-secondary dark:hover:bg-secondary;
+    @apply btn border-primary bg-primary font-semibold text-white hover:border-secondary hover:bg-secondary hover:text-white dark:border-primary dark:bg-primary dark:text-white dark:hover:border-secondary dark:hover:bg-secondary;
   }
 
   .btn-secondary {
@@ -67,13 +59,12 @@ h6 {
   }
 
   .btn-tertiary {
-    @apply btn border-none shadow-none text-muted hover:text-gray-900
-           dark:text-gray-400 dark:hover:text-white;
+    @apply text-muted btn border-none shadow-none hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
   }
 
   /* Optional: outline variant */
   .btn-outline-primary {
-    @apply btn bg-white text-primary border border-primary hover:bg-primary hover:text-white;
+    @apply btn border border-primary bg-white text-primary hover:bg-primary hover:text-white;
   }
 }
 
@@ -91,7 +82,7 @@ header.site-header-legacy.is-shrunk > div:first-child {
 header.site-header.is-shrunk.dark > div:first-child,
 header.site-header.is-shrunk.dark > div:first-child,
 header.site-header-legacy.is-shrunk.dark > div:first-child {
-  @apply bg-page md:bg-[#030621e6] border-b border-gray-500/20;
+  @apply bg-page border-b border-gray-500/20 md:bg-[#030621e6];
   box-shadow: none;
 }
 /* If you later want the bar to compress vertically, uncomment:
@@ -127,10 +118,10 @@ header.site-header.is-shrunk .header-bar { @apply py-2; }
   @apply transition;
 }
 [data-aw-toggle-menu].expanded g > path:first-child {
-  @apply -rotate-45 translate-y-[15px] translate-x-[-3px];
+  @apply translate-x-[-3px] translate-y-[15px] -rotate-45;
 }
 [data-aw-toggle-menu].expanded g > path:last-child {
-  @apply rotate-45 translate-y-[-8px] translate-x-[14px];
+  @apply translate-x-[14px] translate-y-[-8px] rotate-45;
 }
 
 /* Spacing fix for legacy dropdown blocks */
@@ -141,11 +132,11 @@ header.site-header.is-shrunk .header-bar { @apply py-2; }
 /* ---------- CTA mapping (by data-evt) ---------- */
 @layer components {
   /* Any instrumented CTA becomes a branded primary button */
-  [data-evt^='cta_'] {
+  [data-evt^="cta_"] {
     @apply btn btn-primary;
   }
   /* Opt-in secondary (outline) when data-cta="secondary" */
-  [data-evt^='cta_'][data-cta='secondary'] {
+  [data-evt^="cta_"][data-cta="secondary"] {
     @apply btn btn-outline-primary;
   }
 }
@@ -191,16 +182,16 @@ header.site-header:not(.is-shrunk) .logo--color {
   opacity: 0.98;
 }
 /* --- Logo chip: improves contrast only at top-of-page (overlay) --- */
-header.site-header a[aria-label='Lilos Growth — Home'] {
+header.site-header a[aria-label="Lilos Growth — Home"] {
   position: relative;
   display: inline-flex;
 }
-header.site-header a[aria-label='Lilos Growth — Home'] .logo {
+header.site-header a[aria-label="Lilos Growth — Home"] .logo {
   position: relative;
   z-index: 1;
 }
-header.site-header:not(.is-shrunk) a[aria-label='Lilos Growth — Home']::before {
-  content: '';
+header.site-header:not(.is-shrunk) a[aria-label="Lilos Growth — Home"]::before {
+  content: "";
   position: absolute;
   inset: -6px -10px;
   border-radius: 16px;
@@ -237,7 +228,7 @@ header.site-header:not(.is-shrunk) a[aria-label='Lilos Growth — Home']::before
   header.site-header.is-shrunk > div:first-child,
   header.site-header.is-shrunk > div:first-child,
   header.site-header-legacy.is-shrunk > div:first-child {
-    @apply bg-white/95 md:bg-white/90 supports-[backdrop-filter]:backdrop-blur-md shadow-sm text-[#1f2d3d];
+    @apply bg-white/95 text-[#1f2d3d] shadow-sm supports-[backdrop-filter]:backdrop-blur-md md:bg-white/90;
   }
 
   /* Ensure nav links/buttons remain readable, with brand hover */
@@ -279,11 +270,11 @@ header.site-header li.group:focus-within .submenu {
 /* ----- Results & Tools grids card polish (scoped, safe) ----- */
 #results-grid > *,
 #tools-grid > * {
-  @apply bg-white rounded-3xl border border-gray-200 shadow p-8 flex flex-col h-full;
+  @apply flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow;
 }
 #results-grid h3,
 #tools-grid h3 {
-  @apply text-xl font-semibold mb-2 text-heading;
+  @apply mb-2 text-xl font-semibold text-heading;
 }
 #results-grid p,
 #tools-grid p {
@@ -291,44 +282,44 @@ header.site-header li.group:focus-within .submenu {
 }
 #results-grid .card-footer,
 #tools-grid .card-footer {
-  @apply mt-auto pt-4 border-t border-gray-100;
+  @apply mt-auto border-t border-gray-100 pt-4;
 }
 
 /* Consistent icon/badge spacing inside cards */
-#results-grid [aria-hidden='true'],
-#tools-grid [aria-hidden='true'] {
+#results-grid [aria-hidden="true"],
+#tools-grid [aria-hidden="true"] {
   @apply mb-4;
 }
 /* Tools page uses a class so we can tag multiple grids */
 .tools-grid > * {
-  @apply bg-white rounded-3xl border border-gray-200 shadow p-8 flex flex-col h-full;
+  @apply flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow;
 }
 .tools-grid h3 {
-  @apply text-xl font-semibold mb-2 text-heading;
+  @apply mb-2 text-xl font-semibold text-heading;
 }
 .tools-grid p {
   @apply text-[15px] text-body;
 }
 .tools-grid .card-footer {
-  @apply mt-auto pt-4 border-t border-gray-100;
+  @apply mt-auto border-t border-gray-100 pt-4;
 }
-.tools-grid [aria-hidden='true'] {
+.tools-grid [aria-hidden="true"] {
   @apply mb-4;
 }
 /* Tools page uses a class so multiple grids share the same polish */
 .tools-grid > * {
-  @apply bg-white rounded-3xl border border-gray-200 shadow p-8 flex flex-col h-full;
+  @apply flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow;
 }
 .tools-grid h3 {
-  @apply text-xl font-semibold mb-2 text-heading;
+  @apply mb-2 text-xl font-semibold text-heading;
 }
 .tools-grid p {
   @apply text-[15px] text-body;
 }
 .tools-grid .card-footer {
-  @apply mt-auto pt-4 border-t border-gray-100;
+  @apply mt-auto border-t border-gray-100 pt-4;
 }
-.tools-grid [aria-hidden='true'] {
+.tools-grid [aria-hidden="true"] {
   @apply mb-4;
 }
 /* Align CTA buttons in results/tools grids */

@@ -1,15 +1,15 @@
 ---
 date: 2025-10-13T09:36:29-07:00
-title: 'Launching the Lilos Growth Blog'
-description: 'How we publish at volume to win long-tail keywords for home-service SEO and AEO—without burning out.'
+title: "Launching the Lilos Growth Blog"
+description: "How we publish at volume to win long-tail keywords for home-service SEO and AEO—without burning out."
 slug: launching-the-lilos-growth-blog
-category: 'Announcements'
-tags: ['strategy', 'aeo', 'long-tail', 'content']
+category: "Announcements"
+tags: ["strategy", "aeo", "long-tail", "content"]
 pubDate: 2025-10-11
-datePublished: '2025-10-11'
+datePublished: "2025-10-11"
 draft: false
-image: '/images/blog/long-tail/hero.svg'
-imageAlt: 'Launching the Lilos Growth blog banner'
+image: "/images/blog/long-tail/hero.svg"
+imageAlt: "Launching the Lilos Growth blog banner"
 ---
 
 > **TL;DR:** We’re sharing simple, repeatable playbooks for **service + city + qualifier** pages, GBP wins, and on-page checklists. Expect practical guides you can ship **weekly**.

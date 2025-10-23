@@ -1,10 +1,10 @@
 /* GBP Category Finder — capture-phase delegation (CSP-safe, no globals) */
 (() => {
-  if (typeof window !== 'undefined') {
-    console.log('[GBP] module loaded on', location.pathname);
+  if (typeof window !== "undefined") {
+    console.log("[GBP] module loaded on", location.pathname);
   }
 
-  const ATTR = 'data-gbp-cat';
+  const ATTR = "data-gbp-cat";
 
   function getResultEl(form) {
     const sel = form.dataset.result;
@@ -16,16 +16,16 @@
       const el = document.getElementById(`${form.id}-result`);
       if (el) return el;
     }
-    const div = document.createElement('div');
-    div.setAttribute('role', 'status');
-    div.setAttribute('aria-live', 'polite');
-    div.className = 'mt-4 text-sm';
-    form.insertAdjacentElement('afterend', div);
+    const div = document.createElement("div");
+    div.setAttribute("role", "status");
+    div.setAttribute("aria-live", "polite");
+    div.className = "mt-4 text-sm";
+    form.insertAdjacentElement("afterend", div);
     return div;
   }
 
   function fallbackCategories(term) {
-    const t = String(term || '').trim();
+    const t = String(term || "").trim();
     if (!t) return [];
     const lower = t.toLowerCase();
     return [
@@ -50,23 +50,23 @@
     const out = getResultEl(form);
     const fd = new FormData(form);
     const term = (
-      fd.get('query') ||
-      fd.get('category') ||
-      fd.get('q') ||
-      (form.querySelector('input,textarea')?.value ?? '')
+      fd.get("query") ||
+      fd.get("category") ||
+      fd.get("q") ||
+      (form.querySelector("input,textarea")?.value ?? "")
     )
       .toString()
       .trim();
 
     if (!term) {
-      out.textContent = 'Please enter a category term.';
+      out.textContent = "Please enter a category term.";
       return;
     }
 
     const btn = form.querySelector('[type="submit"]');
     if (btn) {
       btn.disabled = true;
-      btn.setAttribute('data-loading', 'true');
+      btn.setAttribute("data-loading", "true");
     }
 
     try {
@@ -75,7 +75,7 @@
       try {
         // Same-origin API (works with `vercel dev`)
         const res = await fetch(`/api/places?mode=gbp-categories&q=${encodeURIComponent(term)}`, {
-          headers: { Accept: 'application/json' },
+          headers: { Accept: "application/json" },
         });
         if (res.ok) {
           const data = await res.json();
@@ -90,23 +90,23 @@
       }
 
       if (!items.length) {
-        out.textContent = 'No matching categories found.';
+        out.textContent = "No matching categories found.";
         return;
       }
 
-      const ul = document.createElement('ul');
-      ul.className = 'mt-2 space-y-2';
+      const ul = document.createElement("ul");
+      ul.className = "mt-2 space-y-2";
       for (const cat of items.slice(0, 12)) {
-        const li = document.createElement('li');
-        li.className = 'rounded-xl border border-gray-200 px-3 py-2 shadow-sm bg-white';
-        li.textContent = typeof cat === 'string' ? cat : (cat?.name ?? '');
+        const li = document.createElement("li");
+        li.className = "rounded-xl border border-gray-200 px-3 py-2 shadow-sm bg-white";
+        li.textContent = typeof cat === "string" ? cat : (cat?.name ?? "");
         ul.appendChild(li);
       }
       out.replaceChildren(ul);
     } finally {
       if (btn) {
         btn.disabled = false;
-        btn.removeAttribute('data-loading');
+        btn.removeAttribute("data-loading");
       }
     }
   }
@@ -114,9 +114,9 @@
   // Capture-phase submit listener:
   // NEW: match EITHER form[data-gbp-cat] OR #gbp-cat-form so we always intercept
   document.addEventListener(
-    'submit',
+    "submit",
     (e) => {
-      const form = e.target && e.target.closest ? e.target.closest('form') : null;
+      const form = e.target && e.target.closest ? e.target.closest("form") : null;
       if (!form || !form.matches(`form[${ATTR}], #gbp-cat-form`)) return;
       handleSubmit(form, e);
     },

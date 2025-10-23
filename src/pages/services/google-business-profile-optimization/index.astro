@@ -1,45 +1,65 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
+import Layout from "~/layouts/PageLayout.astro";
 
-export const title = 'Google Business Profile Optimization & Maps SEO for Home Service Businesses | Lilos Growth';
+export const title =
+  "Google Business Profile Optimization & Maps SEO for Home Service Businesses | Lilos Growth";
 export const description =
-  'Rank higher in the Google Map Pack and turn searches into booked jobs. Purpose-built Google Business Profile (GBP) optimization, posting, reviews, and reporting for local service pros.';
+  "Rank higher in the Google Map Pack and turn searches into booked jobs. Purpose-built Google Business Profile (GBP) optimization, posting, reviews, and reporting for local service pros.";
+import GBPPagePrimary from "../../../components/sections/GBPPagePrimary.astro";
+import GBPPageSecondary from "../../../components/sections/GBPPageSecondary.astro";
 ---
 
 <Layout {title} {description}>
   <!-- HERO -->
   <section
-    class="bg-[#253242] min-h-[440px] flex flex-col items-center justify-center pt-16 pb-20 relative overflow-hidden"
+    class="relative flex min-h-[440px] flex-col items-center justify-center overflow-hidden bg-[#253242] pb-20 pt-16"
   >
-    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159] pointer-events-none"></div>
-    <div class="relative z-10 w-full max-w-3xl flex flex-col items-center gap-6 px-4 mx-auto text-center">
-      <h1 class="text-4xl md:text-5xl font-heading text-white font-extrabold leading-tight tracking-tight">
-        Google Business Profile Optimization <span class="block text-3xl md:text-4xl mt-1">&amp; Maps SEO</span>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]">
+    </div>
+    <div
+      class="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center"
+    >
+      <h1
+        class="font-heading text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl"
+      >
+        Google Business Profile Optimization <span class="mt-1 block text-3xl md:text-4xl"
+          >&amp; Maps SEO</span
+        >
       </h1>
-      <span class="block text-xl md:text-2xl font-semibold -mt-1 text-[#f56b2a] tracking-wider uppercase">
+      <span
+        class="-mt-1 block text-xl font-semibold uppercase tracking-wider text-[#f56b2a] md:text-2xl"
+      >
         For Home Service Businesses
       </span>
-      <p class="text-lg md:text-xl text-white/80 max-w-2xl font-medium">
-        Get found where it matters most—the Map Pack. More calls, more reviews, and measurable local growth for
-        plumbers, HVAC, pest control, cleaning, landscaping &amp; more.
+      <p class="max-w-2xl text-lg font-medium text-white/80 md:text-xl">
+        Get found where it matters most—the Map Pack. More calls, more reviews, and measurable local
+        growth for plumbers, HVAC, pest control, cleaning, landscaping &amp; more.
       </p>
-      <div class="flex flex-wrap gap-4 justify-center">
+      <div class="flex flex-wrap justify-center gap-4">
         <a
           href="#gbp-package"
-          class="inline-flex items-center px-8 py-4 rounded-2xl bg-[#f56b2a] hover:bg-[#f34e00] text-white font-heading font-semibold text-lg shadow transition"
+          class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-[#f34e00]"
         >
           See Packages
-          <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
-            ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
+          <svg
+            class="ml-2 h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
           >
         </a>
         <a
           href="#faq"
-          class="inline-flex items-center px-8 py-4 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-lg shadow transition"
+          class="inline-flex items-center rounded-2xl bg-secondary px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-[#27394b]"
         >
           FAQ
-          <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
-            ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
+          <svg
+            class="ml-2 h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
           >
         </a>
       </div>
@@ -47,48 +67,68 @@ export const description =
   </section>
 
   <!-- WHAT IS GBP -->
-  <section class="py-16 bg-cream border-t border-gray-100">
-    <div class="max-w-5xl mx-auto px-4 text-center">
-      <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4 text-heading">
+  <section class="border-t border-gray-100 bg-cream py-16">
+    <div class="mx-auto max-w-5xl px-4 text-center">
+      <h2 class="mb-4 font-heading text-3xl font-bold text-heading md:text-4xl">
         What Is Google Business Profile Optimization?
       </h2>
       <p class="text-lg text-body">
-        Your GBP is the #1 driver of local calls. We optimize your profile end-to-end—categories, services, photos,
-        posts, reviews, Q&amp;A, tracking—so you rank in the Map Pack and stay there.
+        Your GBP is the #1 driver of local calls. We optimize your profile end-to-end—categories,
+        services, photos, posts, reviews, Q&amp;A, tracking—so you rank in the Map Pack and stay
+        there.
       </p>
 
-      <div class="flex flex-wrap gap-3 justify-center mt-6">
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">Map Pack Visibility</span>
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">Profile Build &amp; Cleanup</span>
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">Posts &amp; Photos</span>
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">Reviews &amp; Q&amp;A</span>
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">Tracking &amp; Reporting</span>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
+          >Map Pack Visibility</span
+        >
+        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
+          >Profile Build &amp; Cleanup</span
+        >
+        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
+          >Posts &amp; Photos</span
+        >
+        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
+          >Reviews &amp; Q&amp;A</span
+        >
+        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
+          >Tracking &amp; Reporting</span
+        >
       </div>
     </div>
   </section>
 
   <!-- WHY TRUST -->
-  <section class="py-24 bg-white border-t border-gray-100">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-4xl md:text-5xl font-heading text-heading font-bold mb-8 text-center">
+  <section class="border-t border-gray-100 bg-white py-24">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-8 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
         Why Home Service Pros Trust Lilos Growth
-        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
       </h2>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
         {
           [
-            ['Built by Home Service Owners', 'We’ve lived it—so we build what actually generates booked jobs.'],
-            ['Specialists in Home Services', 'No generic agency fluff, just trades-focused growth.'],
-            ['No Long-Term Contract', 'Month-to-month. We earn your business with results.'],
-            ['Results You Can See', 'Local rankings, calls, and jobs—measurable improvements.'],
-            ['No Big Agency Fluff', 'Direct access to your strategist. No runarounds.'],
-            ['Easy, Honest, & Human', 'Clear reporting, plain English, and a process that makes sense.'],
+            [
+              "Built by Home Service Owners",
+              "We’ve lived it—so we build what actually generates booked jobs.",
+            ],
+            [
+              "Specialists in Home Services",
+              "No generic agency fluff, just trades-focused growth.",
+            ],
+            ["No Long-Term Contract", "Month-to-month. We earn your business with results."],
+            ["Results You Can See", "Local rankings, calls, and jobs—measurable improvements."],
+            ["No Big Agency Fluff", "Direct access to your strategist. No runarounds."],
+            [
+              "Easy, Honest, & Human",
+              "Clear reporting, plain English, and a process that makes sense.",
+            ],
           ].map(([title, body]) => (
-            <div class="flex flex-col items-center bg-white rounded-2xl p-8 shadow-lg border border-[#f56b2a]/10">
-              <span class="mb-4 flex items-center justify-center w-14 h-14 rounded-xl bg-[#f56b2a]/10">
+            <div class="flex flex-col items-center rounded-2xl border border-[#f56b2a]/10 bg-white p-8 shadow-lg">
+              <span class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-[#f56b2a]/10">
                 <svg
-                  class="w-7 h-7 text-[#f56b2a]"
+                  class="h-7 w-7 text-[#f56b2a]"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -97,8 +137,10 @@ export const description =
                   <path d="M3 12l6 6l12-12" />
                 </svg>
               </span>
-              <h3 class="text-lg font-heading font-semibold text-heading mb-1 text-center">{title}</h3>
-              <p class="text-body text-center text-[15px]">{body}</p>
+              <h3 class="mb-1 text-center font-heading text-lg font-semibold text-heading">
+                {title}
+              </h3>
+              <p class="text-center text-[15px] text-body">{body}</p>
             </div>
           ))
         }
@@ -107,37 +149,48 @@ export const description =
   </section>
 
   <!-- GBP PACKAGES -->
-  <section id="gbp-package" class="py-24 bg-cream border-t border-gray-100">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-4xl md:text-5xl font-heading text-heading font-bold mb-4 text-center">
+  <section id="gbp-package" class="border-t border-gray-100 bg-cream py-24">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-4 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
         Google Business Profile Packages
-        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
       </h2>
-      <p class="text-xl text-body mb-12 text-center font-medium">Clear value. Month-to-month. No rollovers.</p>
+      <p class="mb-12 text-center text-xl font-medium text-body">
+        Clear value. Month-to-month. No rollovers.
+      </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-        <!-- Starter — $199/mo -->
+      <div class="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2">
+        <!-- Google Business Profile— $299/mo -->
         <article
-          class="rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
+          class="grid grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
           aria-labelledby="gbp-starter-title"
         >
           <header class="text-center">
-            <h3 id="gbp-starter-title" class="text-lg md:text-xl font-heading font-semibold text-heading">
-              GBP — Starter
+            <h3
+              id="gbp-starter-title"
+              class="font-heading text-lg font-semibold text-heading md:text-xl"
+            >
+              Google Business Profile
             </h3>
-            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-2">
-              $199<span class="text-base font-normal text-gray-500">/mo</span>
+            <div class="mt-2 text-2xl font-bold text-[#f56b2a] md:text-3xl">
+              $299<span class="text-base font-normal text-gray-500">/mo</span>
             </div>
-            <p class="mt-2 text-body text-[15px]">Essential GBP management for steady local visibility.</p>
+            <p class="mt-2 text-[15px] text-body">
+              Essential GBP management for steady local visibility.
+            </p>
           </header>
 
-          <ul class="mt-5 text-body text-[15px] space-y-2 list-disc pl-5">
-            <li>Setup or audit with <span class="font-semibold">keyword research &amp; category mapping</span></li>
+          <ul class="mt-5 list-disc space-y-2 pl-5 text-[15px] text-body">
+            <li>
+              Setup or audit with <span class="font-semibold"
+                >keyword research &amp; category mapping</span>
+            </li>
             <li>Business info, services &amp; products maintained (quarterly refresh)</li>
             <li><span class="font-semibold">6 posts/mo</span> (offers, updates) — no rollovers</li>
             <li>
-              <span class="font-semibold">6 photos/mo</span>, <span class="font-semibold">EXIF/alt optimized</span> for local
-              relevance — no rollovers
+              <span class="font-semibold">6 photos/mo</span>, <span class="font-semibold"
+                >EXIF/alt optimized</span
+              > for local relevance — no rollovers
             </li>
             <li>Review replies <span class="font-semibold">up to 30/mo</span> + templates</li>
             <li>Q&amp;A monitored weekly; profile improvements &amp; testing</li>
@@ -145,40 +198,52 @@ export const description =
             <li>Monthly performance report</li>
           </ul>
 
-          <div class="pt-6 border-t border-gray-100">
+          <div class="border-t border-gray-100 pt-6">
             <a
               href="#contact"
-              class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
+              class="block w-full rounded-xl bg-[#f56b2a] px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
               aria-label="Get Started — open contact form">Get Started</a
             >
           </div>
         </article>
 
-        <!-- Growth — $399/mo (as +$200 add-on from Starter) -->
+        <!-- GBP + Local Seo -  -->
         <article
-          class="relative rounded-2xl bg-white shadow-md border-2 border-[#f56b2a] p-8 grid grid-rows-[auto_1fr_auto]"
+          class="relative grid grid-rows-[auto_1fr_auto] rounded-2xl border-2 border-[#f56b2a] bg-white p-8 shadow-md"
           aria-labelledby="gbp-growth-title"
         >
           <div
-            class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#f56b2a] text-white text-xs font-bold px-4 py-1 rounded-full shadow"
+            class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#f56b2a] px-4 py-1 text-xs font-bold text-white shadow"
           >
             Most Popular
           </div>
-          <header class="text-center mt-2">
-            <h3 id="gbp-growth-title" class="text-lg md:text-xl font-heading font-semibold text-heading">
-              GBP — Growth
+          <header class="mt-2 text-center">
+            <h3
+              id="gbp-growth-title"
+              class="font-heading text-lg font-semibold text-heading md:text-xl"
+            >
+              GBP + Local SEO
             </h3>
-            <div class="text-sm font-semibold mt-1">Includes everything in Starter</div>
-            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-2">
-              $399<span class="text-base font-normal text-gray-500">/mo</span>
+            <div class="mt-1 text-sm font-semibold">Includes everything in Starter</div>
+            <div class="mt-2 text-2xl font-bold text-[#f56b2a] md:text-3xl">
+              $699<span class="text-base font-normal text-gray-500">/mo</span>
             </div>
-            <p class="mt-2 text-body text-[15px]">Win more service-area searches and outpace competitors.</p>
+            <p class="mt-2 text-[15px] text-body">
+              Win more service-area searches and outpace competitors.
+            </p>
           </header>
 
-          <ul class="mt-5 text-body text-[15px] space-y-2 list-disc pl-5">
-            <li><span class="font-semibold">3 posts/week</span> (offers, FAQs, highlights) — no rollovers</li>
-            <li>Fresh photos ongoing, <span class="font-semibold">EXIF/alt optimized</span> for geo &amp; keywords</li>
-            <li>Review replies <span class="font-semibold">no cap</span> + proactive request prompts</li>
+          <ul class="mt-5 list-disc space-y-2 pl-5 text-[15px] text-body">
+            <li>
+              <span class="font-semibold">3 posts/week</span> (offers, FAQs, highlights) — no rollovers
+            </li>
+            <li>
+              Fresh photos ongoing, <span class="font-semibold">EXIF/alt optimized</span> for geo &amp;
+              keywords
+            </li>
+            <li>
+              Review replies <span class="font-semibold">no cap</span> + proactive request prompts
+            </li>
             <li>Services &amp; products <span class="font-semibold">refreshed monthly</span></li>
             <li>
               <span class="font-semibold">Ongoing citations</span> incl. <span class="font-semibold"
@@ -189,10 +254,10 @@ export const description =
             <li>Monthly report + <span class="font-semibold">30-min strategy call</span></li>
           </ul>
 
-          <div class="pt-6 border-t border-gray-100">
+          <div class="border-t border-gray-100 pt-6">
             <a
               href="#contact"
-              class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
+              class="block w-full rounded-xl bg-[#f56b2a] px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
               aria-label="Upgrade — open contact form">Upgrade to Growth</a
             >
           </div>
@@ -202,34 +267,38 @@ export const description =
   </section>
 
   <!-- CROSS-SELL PACKAGES (aligned 4-up grid for consistency) -->
-  <section class="py-24 bg-bluelight border-t border-gray-100 shadow-xl" id="packages">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-4xl md:text-5xl font-heading text-heading font-bold mb-4 text-center">
+  <section class="border-t border-gray-100 bg-bluelight py-24 shadow-xl" id="packages">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-4 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
         Service Packages for Home Service Companies
-        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
       </h2>
-      <p class="text-xl text-body mb-14 text-center font-medium">Choose the package that fits your goals.</p>
+      <p class="mb-14 text-center text-xl font-medium text-body">
+        Choose the package that fits your goals.
+      </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch auto-rows-fr">
+      <div class="grid auto-rows-fr grid-cols-1 items-stretch gap-8 md:grid-cols-2 lg:grid-cols-4">
         <!-- GBP (condensed; mirrors above) -->
         <article
-          class="h-full rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
+          class="grid h-full grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
         >
           <header class="text-center">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-heading">Google Business Profile</h3>
-            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-1">
-              From $199<span class="text-base font-normal text-gray-500">/mo</span>
+            <h3 class="font-heading text-lg font-semibold text-heading md:text-xl">
+              Local SEO - Growth
+            </h3>
+            <div class="mt-1 text-2xl font-bold text-[#f56b2a] md:text-3xl">
+              From $999<span class="text-base font-normal text-gray-500">/mo</span>
             </div>
           </header>
-          <ul class="mt-5 text-body text-[15px] space-y-1 list-disc pl-5">
+          <ul class="mt-5 list-disc space-y-1 pl-5 text-[15px] text-body">
             <li>Audit, categories &amp; keywords</li>
             <li>Posts &amp; EXIF-optimized photos</li>
             <li>Reviews, Q&amp;A, citations</li>
           </ul>
-          <div class="pt-4 border-t border-gray-100">
+          <div class="border-t border-gray-100 pt-4">
             <a
               href="#gbp-package"
-              class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
+              class="block w-full rounded-xl bg-[#f56b2a] px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
               >View Details</a
             >
           </div>
@@ -237,23 +306,23 @@ export const description =
 
         <!-- Local SEO (Essentials preview) -->
         <article
-          class="h-full rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
+          class="grid h-full grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
         >
           <header class="text-center">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-heading">Local SEO</h3>
-            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-1">
-              From $499<span class="text-base font-normal text-gray-500">/mo</span>
+            <h3 class="font-heading text-lg font-semibold text-heading md:text-xl">Local SEO</h3>
+            <div class="mt-1 text-2xl font-bold text-[#f56b2a] md:text-3xl">
+              From $599<span class="text-base font-normal text-gray-500">/mo</span>
             </div>
           </header>
-          <ul class="mt-5 text-body text-[15px] space-y-1 list-disc pl-5">
+          <ul class="mt-5 list-disc space-y-1 pl-5 text-[15px] text-body">
             <li>Audit, keywords, on-page + technical</li>
             <li>Content &amp; internal linking</li>
             <li>Citations + reporting</li>
           </ul>
-          <div class="pt-4 border-t border-gray-100">
+          <div class="border-t border-gray-100 pt-4">
             <a
               href="/services/local-seo"
-              class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
+              class="block w-full rounded-xl bg-[#f56b2a] px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
               >View Details</a
             >
           </div>
@@ -261,23 +330,25 @@ export const description =
 
         <!-- Website as a Service (Base $199/mo per latest guardrails) -->
         <article
-          class="h-full rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
+          class="grid h-full grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
         >
           <header class="text-center">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-heading">Website as a Service</h3>
-            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-1">
+            <h3 class="font-heading text-lg font-semibold text-heading md:text-xl">
+              Website as a Service
+            </h3>
+            <div class="mt-1 text-2xl font-bold text-[#f56b2a] md:text-3xl">
               $199<span class="text-base font-normal text-gray-500">/mo</span>
             </div>
           </header>
-          <ul class="mt-5 text-body text-[15px] space-y-1 list-disc pl-5">
+          <ul class="mt-5 list-disc space-y-1 pl-5 text-[15px] text-body">
             <li>Modern, mobile-ready site</li>
             <li>Hosting, edits &amp; monitoring</li>
             <li>Lead forms + basic SEO</li>
           </ul>
-          <div class="pt-4 border-t border-gray-100">
+          <div class="border-t border-gray-100 pt-4">
             <a
               href="/services/web-design"
-              class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
+              class="block w-full rounded-xl bg-[#f56b2a] px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
               >View Details</a
             >
           </div>
@@ -285,23 +356,25 @@ export const description =
 
         <!-- Local SEO + GBP Bundle -->
         <article
-          class="h-full rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
+          class="grid h-full grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
         >
           <header class="text-center">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-heading">Local SEO + GBP</h3>
-            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-1">
-              $799<span class="text-base font-normal text-gray-500">/mo</span>
+            <h3 class="font-heading text-lg font-semibold text-heading md:text-xl">
+              One-Time Website Build
+            </h3>
+            <div class="mt-1 text-2xl font-bold text-[#f56b2a] md:text-3xl">
+              $499<span class="text-base font-normal text-gray-500">/mo</span>
             </div>
           </header>
-          <ul class="mt-5 text-body text-[15px] space-y-1 list-disc pl-5">
+          <ul class="mt-5 list-disc space-y-1 pl-5 text-[15px] text-body">
             <li>Unified plan &amp; reporting</li>
             <li>Monthly visibility review</li>
             <li>Quarterly competitor snapshot</li>
           </ul>
-          <div class="pt-4 border-t border-gray-100">
+          <div class="border-t border-gray-100 pt-4">
             <a
               href="/packages"
-              class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
+              class="block w-full rounded-xl bg-[#f56b2a] px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
               >Compare Plans</a
             >
           </div>
@@ -311,38 +384,44 @@ export const description =
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="py-20 bg-white border-t border-gray-100">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-heading text-heading font-bold mb-8 text-center">
+  <section id="faq" class="border-t border-gray-100 bg-white py-20">
+    <div class="mx-auto max-w-4xl px-4">
+      <h2 class="mb-8 text-center font-heading text-3xl font-bold text-heading md:text-4xl">
         Google Business Profile &amp; Maps SEO: FAQs
-        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
       </h2>
 
       <div class="space-y-6">
         {
           [
             [
-              'How fast can you improve my Google Maps ranking?',
-              'Most see measurable gains in 30–60 days with consistent posting, reviews, and ongoing profile updates.',
+              "How fast can you improve my Google Maps ranking?",
+              "Most see measurable gains in 30–60 days with consistent posting, reviews, and ongoing profile updates.",
             ],
             [
-              'Can you optimize my profile if I already have a GBP listing?',
-              'Absolutely—audits, rebuilds, and ongoing optimization are our bread and butter.',
+              "Can you optimize my profile if I already have a GBP listing?",
+              "Absolutely—audits, rebuilds, and ongoing optimization are our bread and butter.",
             ],
             [
-              'Do you guarantee Map Pack rankings?',
-              'No one can guarantee specific positions, but we provide consistent, data-driven work and transparent reporting.',
+              "Do you guarantee Map Pack rankings?",
+              "No one can guarantee specific positions, but we provide consistent, data-driven work and transparent reporting.",
             ],
             [
-              'Will you manage my reviews and add Q&A?',
-              'Yes—review strategy, reply templates, requests, and Q&A setup/monitoring are included (Growth handles replies with no cap).',
+              "Will you manage my reviews and add Q&A?",
+              "Yes—review strategy, reply templates, requests, and Q&A setup/monitoring are included (Growth handles replies with no cap).",
             ],
-            ['Is there a setup fee or long contract?', 'No setup fees and no contracts—cancel anytime.'],
-            ['Will I have a dedicated strategist?', 'Yes—direct access to a home service marketing strategist.'],
+            [
+              "Is there a setup fee or long contract?",
+              "No setup fees and no contracts—cancel anytime.",
+            ],
+            [
+              "Will I have a dedicated strategist?",
+              "Yes—direct access to a home service marketing strategist.",
+            ],
           ].map(([q, a]) => (
-            <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
-              <h3 class="font-heading text-lg font-semibold mb-2 text-heading">{q}</h3>
-              <p class="text-body text-base">{a}</p>
+            <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
+              <h3 class="mb-2 font-heading text-lg font-semibold text-heading">{q}</h3>
+              <p class="text-base text-body">{a}</p>
             </div>
           ))
         }

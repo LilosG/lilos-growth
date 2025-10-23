@@ -1,15 +1,15 @@
 ---
 date: 2025-10-13T09:36:29-07:00
-title: 'Local SEO Long-Tail Strategy That Compounds'
-description: 'A simple framework to publish specific, conversion-ready pages that rank and turn visits into booked jobs.'
+title: "Local SEO Long-Tail Strategy That Compounds"
+description: "A simple framework to publish specific, conversion-ready pages that rank and turn visits into booked jobs."
 slug: local-seo-long-tail-strategy
-category: 'SEO'
-tags: ['local-seo', 'content', 'strategy', 'long-tail']
+category: "SEO"
+tags: ["local-seo", "content", "strategy", "long-tail"]
 pubDate: 2025-10-11
-datePublished: '2025-10-11'
+datePublished: "2025-10-11"
 draft: false
-image: '/images/blog/long-tail/hero.svg'
-imageAlt: 'Local SEO long-tail strategy banner'
+image: "/images/blog/long-tail/hero.svg"
+imageAlt: "Local SEO long-tail strategy banner"
 ---
 
 > **TL;DR:** Build pages for **service + city + qualifier** (e.g., “gutter repair south austin — two-story”). Ship one per week, interlink from your service hub, and watch calls climb.

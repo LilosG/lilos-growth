@@ -1,15 +1,15 @@
 ---
 date: 2025-10-20
-title: 'SAB Rules in 2025: Service Areas Without Suspensions (Field Guide for Local Pros)'
-description: 'SAB setup for GBP: hide the address, list real cities, avoid coworking, keep an evidence kit, and maintain a quarterly change log.'
+title: "SAB Rules in 2025: Service Areas Without Suspensions (Field Guide for Local Pros)"
+description: "SAB setup for GBP: hide the address, list real cities, avoid coworking, keep an evidence kit, and maintain a quarterly change log."
 slug: sab-rules-service-areas-2025
-category: 'Google Business Profile'
-tags: ['gbp', 'sab', 'compliance']
+category: "Google Business Profile"
+tags: ["gbp", "sab", "compliance"]
 pubDate: 2025-10-19
-datePublished: '2025-10-19'
+datePublished: "2025-10-19"
 draft: false
-image: '/images/blog/sab-rules-service-areas-2025/hero.svg'
-imageAlt: 'Diagram showing SAB address hidden with service areas selected'
+image: "/images/blog/sab-rules-service-areas-2025/hero.svg"
+imageAlt: "Diagram showing SAB address hidden with service areas selected"
 ---
 
 <!-- PASTE THE FULL BLOG BODY BELOW THIS LINE -->

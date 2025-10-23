@@ -1,15 +1,15 @@
 ---
 date: 2025-10-19T17:07:59-07:00
-title: 'AEO-Ready FAQs 2025: Turn PAA into Converting Answer Cards Across Cities'
-description: 'Mine People Also Ask and call logs, draft short answer cards, and scale city-specific FAQs that assistants can quote and locals can act on.'
+title: "AEO-Ready FAQs 2025: Turn PAA into Converting Answer Cards Across Cities"
+description: "Mine People Also Ask and call logs, draft short answer cards, and scale city-specific FAQs that assistants can quote and locals can act on."
 slug: aeo-ready-faqs-paa-2025
-category: 'SEO'
-tags: ['local-seo', 'aeo', 'faqs']
+category: "SEO"
+tags: ["local-seo", "aeo", "faqs"]
 pubDate: 2025-10-19
-datePublished: '2025-10-19'
+datePublished: "2025-10-19"
 draft: false
-image: '/images/blog/aeo-ready-faqs-paa-2025/hero.svg'
-imageAlt: 'FAQ cards branching across multiple cities'
+image: "/images/blog/aeo-ready-faqs-paa-2025/hero.svg"
+imageAlt: "FAQ cards branching across multiple cities"
 ---
 
 > **TL;DR:** FAQs shouldn’t be a dumping ground. Build **AEO-ready “Answer Cards”**—2–4 sentence answers with entities, steps, and proof—then scale them across priority **cities/neighborhoods**. Mine **PAA + call logs**, use a **repeatable template**, add **tables/checklists**, and interlink to **Service + City** pages. Track impressions, justifications, and calls.

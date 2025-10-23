@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  faqs: import('~/data/results').FaqItem[];
+  faqs: import("~/data/results").FaqItem[];
 }
 const { faqs = [] } = Astro.props;
 ---
@@ -9,7 +9,7 @@ const { faqs = [] } = Astro.props;
   {
     faqs.map((f) => (
       <details class="group p-5 [&[open]>summary_svg]:rotate-45">
-        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none focus-ring">
+        <summary class="focus-ring flex cursor-pointer list-none items-center justify-between gap-4">
           <h3 class="text-[15px] font-semibold text-heading">{f.q}</h3>
           <svg
             class="h-5 w-5 text-gray-500 transition-transform"
@@ -22,7 +22,7 @@ const { faqs = [] } = Astro.props;
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14" />
           </svg>
         </summary>
-        <div class="mt-2 text-[15px] text-body leading-relaxed">{f.a}</div>
+        <div class="mt-2 text-[15px] leading-relaxed text-body">{f.a}</div>
       </details>
     ))
   }

@@ -1,13 +1,18 @@
 ---
 /** Floating “Book a Call” link — same-tab only */
-const { href = '/contact#book', label = 'Book a Call', position = 'right', showOnMobile = true } = Astro.props;
+const {
+  href = "/contact#book",
+  label = "Book a Call",
+  position = "right",
+  showOnMobile = true,
+} = Astro.props;
 ---
 
 <a
   href={href}
   aria-label={label}
   data-evt="cta_floating_calendly"
-  class={`fixed ${showOnMobile === false ? 'hidden md:flex' : ''} bottom-4 md:bottom-6 ${position === 'left' ? 'left-4 md:left-6' : 'right-4 md:right-6'} z-50 shadow-lg rounded-full px-5 py-3 text-white bg-[#f56b2a] hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]`}
+  class={`fixed ${showOnMobile === false ? "hidden md:flex" : ""} bottom-4 md:bottom-6 ${position === "left" ? "left-4 md:left-6" : "right-4 md:right-6"} z-50 shadow-lg rounded-full px-5 py-3 text-white bg-[#f56b2a] hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f56b2a]`}
 >
   {label}
 </a>

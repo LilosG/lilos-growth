@@ -1,60 +1,66 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
+import Layout from "~/layouts/PageLayout.astro";
 
 /* ====== LINKS (ready-to-run) ====== */
-const baseCalendly = 'https://calendly.com/lilosgrowth/15min';
+const baseCalendly = "https://calendly.com/lilosgrowth/15min";
 const utmParams = new URLSearchParams({
-  utm_source: Astro.url.searchParams.get('utm_source') ?? 'website',
-  utm_medium: Astro.url.searchParams.get('utm_medium') ?? 'landing',
-  utm_campaign: Astro.url.searchParams.get('utm_campaign') ?? 'offers',
+  utm_source: Astro.url.searchParams.get("utm_source") ?? "website",
+  utm_medium: Astro.url.searchParams.get("utm_medium") ?? "landing",
+  utm_campaign: Astro.url.searchParams.get("utm_campaign") ?? "offers",
 });
 const CALENDLY = `${baseCalendly}?${utmParams.toString()}`;
 
 /* Works now without a backend: sends the hero form to /thank-you with GET. */
-const FORM_ACTION = '/thank-you';
+const FORM_ACTION = "/thank-you";
 
 /* UTMs for the form (safe if missing) */
 const utm = {
-  source: Astro.url.searchParams.get('utm_source') ?? '',
-  medium: Astro.url.searchParams.get('utm_medium') ?? '',
-  campaign: Astro.url.searchParams.get('utm_campaign') ?? '',
-  content: Astro.url.searchParams.get('utm_content') ?? '',
+  source: Astro.url.searchParams.get("utm_source") ?? "",
+  medium: Astro.url.searchParams.get("utm_medium") ?? "",
+  campaign: Astro.url.searchParams.get("utm_campaign") ?? "",
+  content: Astro.url.searchParams.get("utm_content") ?? "",
 };
 
-export const title = 'Rank Higher on Google Maps in 7 Days | $149 GBP Fixes & 30-Day Sprint';
+export const title = "Rank Higher on Google Maps in 7 Days | $149 GBP Fixes & 30-Day Sprint";
 export const description =
-  'Two fast paths to more calls from Google Maps. $149 Top-5 GBP Fixes or a $499 30-Day Local SEO Sprint. Built for home-service businesses.';
+  "Two fast paths to more calls from Google Maps. $149 Top-5 GBP Fixes or a $499 30-Day Local SEO Sprint. Built for home-service businesses.";
 ---
 
 <Layout {title} {description}>
   <!-- HERO -->
-  <section class="bg-[#253242] relative overflow-hidden pt-16 pb-20">
+  <section class="relative overflow-hidden bg-[#253242] pb-20 pt-16">
     <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]"></div>
 
     <div class="relative mx-auto max-w-6xl px-4">
       <div class="grid gap-8 md:grid-cols-2 md:items-center">
         <!-- Left -->
         <div class="text-center md:text-left">
-          <h1 class="text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-white">
+          <h1 class="font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">
             Rank Higher on Google Maps in 7 Days
           </h1>
-          <p class="mt-4 text-lg md:text-xl text-white/80 max-w-xl md:max-w-none md:pr-6">
-            We fix the 5 issues holding your GBP back—then track lifts in calls, views, and rankings. Month-to-month.
-            Simple guarantee.
+          <p class="mt-4 max-w-xl text-lg text-white/80 md:max-w-none md:pr-6 md:text-xl">
+            We fix the 5 issues holding your GBP back—then track lifts in calls, views, and
+            rankings. Month-to-month. Simple guarantee.
           </p>
-          <div class="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-3">
+          <div class="mt-6 flex flex-wrap items-center justify-center gap-3 md:justify-start">
             <!-- This button submits the hero form -->
             <button
               form="offerLeadForm"
               type="submit"
               name="path"
               value="149-fixes"
-              class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-7 py-3 text-white font-heading font-semibold text-base shadow hover:bg-[#f34e00] transition"
+              class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-7 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#f34e00]"
               data-analytics="begin_checkout"
               data-offer="gbp_top5_149"
             >
               Start the $149 Fix
-              <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+              <svg
+                class="ml-2 h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                viewBox="0 0 24 24"
+              >
                 <path d="M5 12h14M13 18l6-6-6-6"></path>
               </svg>
             </button>
@@ -63,12 +69,18 @@ export const description =
             <a
               href="#"
               data-calendly={CALENDLY}
-              class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 text-white font-heading font-semibold text-base shadow hover:bg-[#27394b] transition"
+              class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#27394b]"
               data-analytics="generate_lead"
               data-offer="sprint_499"
             >
               Book 15-min Call
-              <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+              <svg
+                class="ml-2 h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                viewBox="0 0 24 24"
+              >
                 <path d="M5 12h14M13 18l6-6-6-6"></path>
               </svg>
             </a>
@@ -76,9 +88,13 @@ export const description =
         </div>
 
         <!-- Right: Hero form -->
-        <div class="rounded-2xl bg-white/95 backdrop-blur shadow-lg border border-white/40 p-6">
-          <h2 class="text-xl font-heading font-semibold text-[#253242]">Get the $149 Fix or a Free 3-min Audit</h2>
-          <p class="mt-1 text-sm text-slate-600">Tell us where to look—we’ll reply with next steps today.</p>
+        <div class="rounded-2xl border border-white/40 bg-white/95 p-6 shadow-lg backdrop-blur">
+          <h2 class="font-heading text-xl font-semibold text-[#253242]">
+            Get the $149 Fix or a Free 3-min Audit
+          </h2>
+          <p class="mt-1 text-sm text-slate-600">
+            Tell us where to look—we’ll reply with next steps today.
+          </p>
 
           <form
             id="offerLeadForm"
@@ -93,7 +109,7 @@ export const description =
             <input type="hidden" name="utm_campaign" value={utm.campaign} />
             <input type="hidden" name="utm_content" value={utm.content} />
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <input
                 required
                 name="name"
@@ -109,7 +125,7 @@ export const description =
               />
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <input
                 required
                 name="email"
@@ -138,7 +154,7 @@ export const description =
                 type="submit"
                 name="path"
                 value="149-fixes"
-                class="inline-flex items-center rounded-xl bg-[#f56b2a] px-5 py-2.5 text-white font-heading font-semibold text-sm shadow hover:bg-[#c9400a] transition"
+                class="inline-flex items-center rounded-xl bg-[#f56b2a] px-5 py-2.5 font-heading text-sm font-semibold text-white shadow transition hover:bg-[#c9400a]"
               >
                 Start $149 Fix
               </button>
@@ -146,13 +162,13 @@ export const description =
                 type="submit"
                 name="path"
                 value="free-audit"
-                class="inline-flex items-center rounded-xl border border-slate-300 px-5 py-2.5 text-[#253242] font-heading font-semibold text-sm hover:bg-slate-50 transition"
+                class="inline-flex items-center rounded-xl border border-slate-300 px-5 py-2.5 font-heading text-sm font-semibold text-[#253242] transition hover:bg-slate-50"
               >
                 Send 3-min Audit
               </button>
             </div>
 
-            <p class="text-[12px] text-slate-500 pt-2">
+            <p class="pt-2 text-[12px] text-slate-500">
               By submitting, you agree to be contacted about this request. No spam—ever.
             </p>
           </form>
@@ -163,13 +179,13 @@ export const description =
       <div class="relative mt-8">
         <div class="mx-auto max-w-6xl px-4">
           <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div class="rounded-xl bg-white/10 text-white/90 px-4 py-3 text-sm text-center">
+            <div class="rounded-xl bg-white/10 px-4 py-3 text-center text-sm text-white/90">
               Home-service specialists
             </div>
-            <div class="rounded-xl bg-white/10 text-white/90 px-4 py-3 text-sm text-center">
+            <div class="rounded-xl bg-white/10 px-4 py-3 text-center text-sm text-white/90">
               Month-to-month • No long contracts
             </div>
-            <div class="rounded-xl bg-white/10 text-white/90 px-4 py-3 text-sm text-center">
+            <div class="rounded-xl bg-white/10 px-4 py-3 text-center text-sm text-white/90">
               If no lift in 30 days, we keep working free
             </div>
           </div>
@@ -179,17 +195,21 @@ export const description =
   </section>
 
   <!-- OFFERS -->
-  <section class="bg-cream border-t border-gray-100 py-16">
+  <section class="border-t border-gray-100 bg-cream py-16">
     <div class="mx-auto max-w-6xl px-4">
       <div class="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2">
-        <article class="grid grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md">
+        <article
+          class="grid grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
+        >
           <header>
-            <h2 class="text-xl md:text-2xl font-heading font-semibold text-heading">
+            <h2 class="font-heading text-xl font-semibold text-heading md:text-2xl">
               Top-5 Google Business Profile Fixes
             </h2>
-            <p class="mt-2 text-[15px] text-body">Quick wins implemented in 2–3 days to lift Maps visibility.</p>
+            <p class="mt-2 text-[15px] text-body">
+              Quick wins implemented in 2–3 days to lift Maps visibility.
+            </p>
           </header>
-          <ul class="mt-5 list-disc pl-5 text-[15px] text-body space-y-2">
+          <ul class="mt-5 list-disc space-y-2 pl-5 text-[15px] text-body">
             <li>Primary + secondary categories aligned</li>
             <li>Services list completed with city-modified terms</li>
             <li>Homepage title &amp; H1 mapped to core local term</li>
@@ -207,7 +227,7 @@ export const description =
               type="submit"
               name="path"
               value="149-fixes"
-              class="rounded-xl bg-[#f56b2a] px-6 py-3 text-base font-heading font-semibold text-white shadow hover:bg-[#c9400a] transition"
+              class="rounded-xl bg-[#f56b2a] px-6 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
               data-analytics="begin_checkout"
               data-offer="gbp_top5_149"
             >
@@ -225,10 +245,14 @@ export const description =
             Most Popular
           </div>
           <header class="mt-2">
-            <h2 class="text-xl md:text-2xl font-heading font-semibold text-heading">30-Day Local SEO Sprint</h2>
-            <p class="mt-2 text-[15px] text-body">Measurable local growth in 30 days—sets you up for ongoing wins.</p>
+            <h2 class="font-heading text-xl font-semibold text-heading md:text-2xl">
+              30-Day Local SEO Sprint
+            </h2>
+            <p class="mt-2 text-[15px] text-body">
+              Measurable local growth in 30 days—sets you up for ongoing wins.
+            </p>
           </header>
-          <ul class="mt-5 list-disc pl-5 text-[15px] text-body space-y-2">
+          <ul class="mt-5 list-disc space-y-2 pl-5 text-[15px] text-body">
             <li>Everything in the Top-5 Fixes</li>
             <li>GBP description, FAQs, Products + 4 posts over 30 days</li>
             <li>Top-20 citations (submit/clean NAP)</li>
@@ -245,7 +269,7 @@ export const description =
             <a
               href="#"
               data-calendly={CALENDLY}
-              class="rounded-xl bg-secondary px-6 py-3 text-base font-heading font-semibold text-white shadow hover:bg-[#27394b] transition"
+              class="rounded-xl bg-secondary px-6 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#27394b]"
               data-analytics="generate_lead"
               data-offer="sprint_499"
             >
@@ -258,39 +282,44 @@ export const description =
       <!-- proof row -->
       <div class="mt-12 grid gap-6 md:grid-cols-3">
         <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
-          <h3 class="mb-1 text-lg font-heading font-semibold text-heading">Outcome</h3>
-          <p class="text-base text-body">More calls from Maps within 2–4 weeks (category &amp; on-page alignment).</p>
-        </div>
-        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
-          <h3 class="mb-1 text-lg font-heading font-semibold text-heading">NAP Safe</h3>
+          <h3 class="mb-1 font-heading text-lg font-semibold text-heading">Outcome</h3>
           <p class="text-base text-body">
-            Optional tracking number only on GBP (primary) with the real number listed as additional.
+            More calls from Maps within 2–4 weeks (category &amp; on-page alignment).
           </p>
         </div>
         <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
-          <h3 class="mb-1 text-lg font-heading font-semibold text-heading">Guarantee</h3>
-          <p class="text-base text-body">If no measurable lift in 30 days, we’ll keep working free until you do.</p>
+          <h3 class="mb-1 font-heading text-lg font-semibold text-heading">NAP Safe</h3>
+          <p class="text-base text-body">
+            Optional tracking number only on GBP (primary) with the real number listed as
+            additional.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
+          <h3 class="mb-1 font-heading text-lg font-semibold text-heading">Guarantee</h3>
+          <p class="text-base text-body">
+            If no measurable lift in 30 days, we’ll keep working free until you do.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="bg-white border-t border-gray-100 py-16">
+  <section class="border-t border-gray-100 bg-white py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">
+      <h2 class="text-center font-heading text-3xl font-bold text-heading md:text-4xl">
         How Our Process Works
-        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
       </h2>
 
       <div class="mt-10 grid gap-6 md:grid-cols-4">
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <div class="flex items-center gap-3">
             <span
-              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-white text-sm font-bold"
+              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-sm font-bold text-white"
               >1</span
             >
-            <h3 class="text-lg font-heading font-semibold text-heading">Quick Intake</h3>
+            <h3 class="font-heading text-lg font-semibold text-heading">Quick Intake</h3>
           </div>
           <p class="mt-3 text-[15px] text-body">Share your website/GBP URL + service areas.</p>
         </div>
@@ -298,111 +327,157 @@ export const description =
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <div class="flex items-center gap-3">
             <span
-              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-white text-sm font-bold"
+              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-sm font-bold text-white"
               >2</span
             >
-            <h3 class="text-lg font-heading font-semibold text-heading">Implement</h3>
+            <h3 class="font-heading text-lg font-semibold text-heading">Implement</h3>
           </div>
-          <p class="mt-3 text:[15px] text-body">We apply the fixes that move Maps visibility now.</p>
+          <p class="text:[15px] mt-3 text-body">
+            We apply the fixes that move Maps visibility now.
+          </p>
         </div>
 
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <div class="flex items-center gap-3">
             <span
-              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-white text-sm font-bold"
+              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-sm font-bold text-white"
               >3</span
             >
-            <h3 class="text-lg font-heading font-semibold text-heading">Verify</h3>
+            <h3 class="font-heading text-lg font-semibold text-heading">Verify</h3>
           </div>
-          <p class="mt-3 text-[15px] text-body">Screenshots + tracking to confirm changes &amp; impact.</p>
+          <p class="mt-3 text-[15px] text-body">
+            Screenshots + tracking to confirm changes &amp; impact.
+          </p>
         </div>
 
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <div class="flex items-center gap-3">
             <span
-              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-white text-sm font-bold"
+              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-sm font-bold text-white"
               >4</span
             >
-            <h3 class="text-lg font-heading font-semibold text-heading">Next Wins</h3>
+            <h3 class="font-heading text-lg font-semibold text-heading">Next Wins</h3>
           </div>
-          <p class="mt-3 text-[15px] text-body">30-day roadmap or month-to-month. Cancel anytime.</p>
+          <p class="mt-3 text-[15px] text-body">
+            30-day roadmap or month-to-month. Cancel anytime.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- WHAT'S INCLUDED -->
-  <section class="bg-cream border-t border-gray-100 py-16">
+  <section class="border-t border-gray-100 bg-cream py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">
+      <h2 class="text-center font-heading text-3xl font-bold text-heading md:text-4xl">
         What You Get (Both Offers)
-        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
       </h2>
 
       <div class="mt-10 grid gap-6 md:grid-cols-3">
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h3 class="text-lg font-heading font-semibold text-heading">GBP Essentials</h3>
+          <h3 class="font-heading text-lg font-semibold text-heading">GBP Essentials</h3>
           <ul class="mt-4 space-y-2 text-[15px] text-body">
             <li class="flex items-start gap-2">
-              <svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                ><path d="M20 6 9 17l-5-5"></path></svg
+              <svg
+                class="mt-1 h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
               >Correct primary + secondary categories
             </li>
             <li class="flex items-start gap-2">
-              <svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                ><path d="M20 6 9 17l-5-5"></path></svg
+              <svg
+                class="mt-1 h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
               >Services with location modifiers
             </li>
             <li class="flex items-start gap-2">
-              <svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                ><path d="M20 6 9 17l-5-5"></path></svg
+              <svg
+                class="mt-1 h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
               >Conversion-ready GBP post
             </li>
             <li class="flex items-start gap-2">
-              <svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                ><path d="M20 6 9 17l-5-5"></path></svg
+              <svg
+                class="mt-1 h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
               >Fresh photo upload (geo-tag batch)
             </li>
           </ul>
         </div>
 
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h3 class="text-lg font-heading font-semibold text-heading">Website Alignment</h3>
+          <h3 class="font-heading text-lg font-semibold text-heading">Website Alignment</h3>
           <ul class="mt-4 space-y-2 text-[15px] text-body">
             <li class="flex items-start gap-2">
-              <svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                ><path d="M20 6 9 17l-5-5"></path></svg
+              <svg
+                class="mt-1 h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
               >Local keyword-aligned title &amp; H1
             </li>
             <li class="flex items-start gap-2">
-              <svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                ><path d="M20 6 9 17l-5-5"></path></svg
+              <svg
+                class="mt-1 h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
               >Internal links to high-intent pages
             </li>
             <li class="flex items-start gap-2">
-              <svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                ><path d="M20 6 9 17l-5-5"></path></svg
+              <svg
+                class="mt-1 h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
               >Basic schema + meta cleanup
             </li>
           </ul>
         </div>
 
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h3 class="text-lg font-heading font-semibold text-heading">Proof &amp; Tracking</h3>
+          <h3 class="font-heading text-lg font-semibold text-heading">Proof &amp; Tracking</h3>
           <ul class="mt-4 space-y-2 text-[15px] text-body">
             <li class="flex items-start gap-2">
-              <svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                ><path d="M20 6 9 17l-5-5"></path></svg
+              <svg
+                class="mt-1 h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
               >Before/after screenshots
             </li>
             <li class="flex items-start gap-2">
-              <svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                ><path d="M20 6 9 17l-5-5"></path></svg
+              <svg
+                class="mt-1 h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
               >GBP Insights baseline
             </li>
             <li class="flex items-start gap-2">
-              <svg class="mt-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                ><path d="M20 6 9 17l-5-5"></path></svg
+              <svg
+                class="mt-1 h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
               >Simple leads sheet (calls/forms)
             </li>
           </ul>
@@ -412,16 +487,17 @@ export const description =
   </section>
 
   <!-- MINI CASE RESULTS -->
-  <section class="bg-white border-t border-gray-100 py-16">
+  <section class="border-t border-gray-100 bg-white py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">
+      <h2 class="text-center font-heading text-3xl font-bold text-heading md:text-4xl">
         Recent Results (Snapshots)
-        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
       </h2>
 
       <div class="mt-10 grid gap-6 md:grid-cols-3">
         <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-          <span class="inline-block rounded-full bg-[#f56b2a]/10 text-[#f56b2a] px-3 py-1 text-xs font-semibold"
+          <span
+            class="inline-block rounded-full bg-[#f56b2a]/10 px-3 py-1 text-xs font-semibold text-[#f56b2a]"
             >Water Damage • SoCal</span
           >
           <p class="mt-3 text-[15px] text-body">
@@ -430,7 +506,8 @@ export const description =
         </div>
 
         <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-          <span class="inline-block rounded-full bg-[#f56b2a]/10 text-[#f56b2a] px-3 py-1 text-xs font-semibold"
+          <span
+            class="inline-block rounded-full bg-[#f56b2a]/10 px-3 py-1 text-xs font-semibold text-[#f56b2a]"
             >Pest Control • FL</span
           >
           <p class="mt-3 text-[15px] text-body">
@@ -439,7 +516,8 @@ export const description =
         </div>
 
         <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-          <span class="inline-block rounded-full bg-[#f56b2a]/10 text-[#f56b2a] px-3 py-1 text-xs font-semibold"
+          <span
+            class="inline-block rounded-full bg-[#f56b2a]/10 px-3 py-1 text-xs font-semibold text-[#f56b2a]"
             >Plumbing • Inland Empire</span
           >
           <p class="mt-3 text-[15px] text-body">
@@ -451,40 +529,49 @@ export const description =
   </section>
 
   <!-- COMPARISON -->
-  <section class="bg-cream border-t border-gray-100 py-16">
+  <section class="border-t border-gray-100 bg-cream py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading text-center">
+      <h2 class="text-center font-heading text-3xl font-bold text-heading md:text-4xl">
         At-a-Glance Comparison
-        <span class="block mx-auto mt-2 h-1 w-20 rounded bg-gradient-to-r from-[#253242] via-[#f56b2a] to-[#253242]"
+        <span
+          class="mx-auto mt-2 block h-1 w-20 rounded bg-gradient-to-r from-[#253242] via-[#f56b2a] to-[#253242]"
         ></span>
       </h2>
 
-      <div class="mt-8 overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-xl ring-1 ring-black/5">
+      <div
+        class="mt-8 overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-xl ring-1 ring-black/5"
+      >
         <div class="h-1 w-full bg-gradient-to-r from-[#253242] via-[#f56b2a] to-[#253242]"></div>
 
         <table class="w-full text-left text-[15px] text-body">
           <thead>
             <tr class="bg-slate-50/80">
-              <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase text-[#253242]"> Features </th>
-              <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase"
-                ><span class="inline-flex items-center gap-2 rounded-full bg-[#253242]/90 px-3 py-1 text-white"
+              <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-[#253242]">
+                Features
+              </th>
+              <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider"
+                ><span
+                  class="inline-flex items-center gap-2 rounded-full bg-[#253242]/90 px-3 py-1 text-white"
                   >GBP</span
                 ></th
               >
-              <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase"
-                ><span class="inline-flex items-center gap-2 rounded-full bg-[#f56b2a]/90 px-3 py-1 text-white"
+              <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider"
+                ><span
+                  class="inline-flex items-center gap-2 rounded-full bg-[#f56b2a]/90 px-3 py-1 text-white"
                   >Local SEO</span
                 ></th
               >
-              <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase">Websites</th>
-              <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase">WaS</th>
-              <th class="py-4 px-5 text-xs font-semibold tracking-wider uppercase">Bundles</th>
+              <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider">Websites</th>
+              <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider">WaS</th>
+              <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider">Bundles</th>
             </tr>
           </thead>
           <tbody class="[&_tr]:border-t [&_tr]:border-gray-100">
-            <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
-              <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent"> Map Pack management </td>
-              <td class="py-4 px-5"
+            <tr class="transition even:bg-slate-50/40 hover:bg-[#f56b2a]/5">
+              <td class="border-l-4 border-transparent px-5 py-4 font-medium text-heading">
+                Map Pack management
+              </td>
+              <td class="px-5 py-4"
                 ><span class="inline-flex items-center gap-2 text-[#253242]"
                   ><svg
                     class="h-4 w-4 text-emerald-600"
@@ -495,7 +582,7 @@ export const description =
                   ></span
                 ></td
               >
-              <td class="py-4 px-5"
+              <td class="px-5 py-4"
                 ><svg
                   class="h-4 w-4 text-emerald-600"
                   viewBox="0 0 24 24"
@@ -504,9 +591,9 @@ export const description =
                   stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
                 ></td
               >
-              <td class="py-4 px-5 text-slate-400">&mdash;</td>
-              <td class="py-4 px-5 text-slate-400">&mdash;</td>
-              <td class="py-4 px-5"
+              <td class="px-5 py-4 text-slate-400">&mdash;</td>
+              <td class="px-5 py-4 text-slate-400">&mdash;</td>
+              <td class="px-5 py-4"
                 ><svg
                   class="h-4 w-4 text-emerald-600"
                   viewBox="0 0 24 24"
@@ -516,12 +603,12 @@ export const description =
                 ></td
               >
             </tr>
-            <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
-              <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent">
+            <tr class="transition even:bg-slate-50/40 hover:bg-[#f56b2a]/5">
+              <td class="border-l-4 border-transparent px-5 py-4 font-medium text-heading">
                 On-page &amp; technical SEO
               </td>
-              <td class="py-4 px-5 text-slate-400">&mdash;</td>
-              <td class="py-4 px-5"
+              <td class="px-5 py-4 text-slate-400">&mdash;</td>
+              <td class="px-5 py-4"
                 ><svg
                   class="h-4 w-4 text-emerald-600"
                   viewBox="0 0 24 24"
@@ -530,33 +617,9 @@ export const description =
                   stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
                 ></td
               >
-              <td class="py-4 px-5">Basic</td>
-              <td class="py-4 px-5">Basic</td>
-              <td class="py-4 px-5"
-                ><svg
-                  class="h-4 w-4 text-emerald-600"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
-                ></td
-              >
-            </tr>
-            <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
-              <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent"> Content &amp; pages </td>
-              <td class="py-4 px-5">Posts/photos</td>
-              <td class="py-4 px-5">Pages + blogs</td>
-              <td class="py-4 px-5">Site build</td>
-              <td class="py-4 px-5">Updates</td>
-              <td class="py-4 px-5">All</td>
-            </tr>
-            <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
-              <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent"> Citations </td>
-              <td class="py-4 px-5">Cleanup/ongoing</td>
-              <td class="py-4 px-5">Build + ongoing</td>
-              <td class="py-4 px-5 text-slate-400">&mdash;</td>
-              <td class="py-4 px-5 text-slate-400">&mdash;</td>
-              <td class="py-4 px-5"
+              <td class="px-5 py-4">Basic</td>
+              <td class="px-5 py-4">Basic</td>
+              <td class="px-5 py-4"
                 ><svg
                   class="h-4 w-4 text-emerald-600"
                   viewBox="0 0 24 24"
@@ -566,13 +629,43 @@ export const description =
                 ></td
               >
             </tr>
-            <tr class="even:bg-slate-50/40 hover:bg-[#f56b2a]/5 transition">
-              <td class="py-4 px-5 font-medium text-heading border-l-4 border-transparent"> Calls &amp; reporting </td>
-              <td class="py-4 px-5">Monthly</td>
-              <td class="py-4 px-5">Monthly/45-min+</td>
-              <td class="py-4 px-5 text-slate-400">&mdash;</td>
-              <td class="py-4 px-5 text-slate-400">&mdash;</td>
-              <td class="py-4 px-5">Monthly</td>
+            <tr class="transition even:bg-slate-50/40 hover:bg-[#f56b2a]/5">
+              <td class="border-l-4 border-transparent px-5 py-4 font-medium text-heading">
+                Content &amp; pages
+              </td>
+              <td class="px-5 py-4">Posts/photos</td>
+              <td class="px-5 py-4">Pages + blogs</td>
+              <td class="px-5 py-4">Site build</td>
+              <td class="px-5 py-4">Updates</td>
+              <td class="px-5 py-4">All</td>
+            </tr>
+            <tr class="transition even:bg-slate-50/40 hover:bg-[#f56b2a]/5">
+              <td class="border-l-4 border-transparent px-5 py-4 font-medium text-heading">
+                Citations
+              </td>
+              <td class="px-5 py-4">Cleanup/ongoing</td>
+              <td class="px-5 py-4">Build + ongoing</td>
+              <td class="px-5 py-4 text-slate-400">&mdash;</td>
+              <td class="px-5 py-4 text-slate-400">&mdash;</td>
+              <td class="px-5 py-4"
+                ><svg
+                  class="h-4 w-4 text-emerald-600"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg
+                ></td
+              >
+            </tr>
+            <tr class="transition even:bg-slate-50/40 hover:bg-[#f56b2a]/5">
+              <td class="border-l-4 border-transparent px-5 py-4 font-medium text-heading">
+                Calls &amp; reporting
+              </td>
+              <td class="px-5 py-4">Monthly</td>
+              <td class="px-5 py-4">Monthly/45-min+</td>
+              <td class="px-5 py-4 text-slate-400">&mdash;</td>
+              <td class="px-5 py-4 text-slate-400">&mdash;</td>
+              <td class="px-5 py-4">Monthly</td>
             </tr>
           </tbody>
         </table>
@@ -582,19 +675,25 @@ export const description =
   </section>
 
   <!-- TRUST + GUARANTEE -->
-  <section class="bg-white border-t border-gray-100 py-16">
+  <section class="border-t border-gray-100 bg-white py-16">
     <div class="mx-auto max-w-6xl px-4">
       <div class="grid gap-6 md:grid-cols-3">
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h3 class="text-lg font-heading font-semibold text-heading">Built for Home-Service Pros</h3>
-          <p class="mt-2 text-[15px] text-body">Plumbing, water damage, pest, HVAC, cleaning, landscaping.</p>
+          <h3 class="font-heading text-lg font-semibold text-heading">
+            Built for Home-Service Pros
+          </h3>
+          <p class="mt-2 text-[15px] text-body">
+            Plumbing, water damage, pest, HVAC, cleaning, landscaping.
+          </p>
         </div>
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h3 class="text-lg font-heading font-semibold text-heading">Month-to-Month</h3>
-          <p class="mt-2 text-[15px] text-body">No long contracts. Start, pause, or switch plans anytime.</p>
+          <h3 class="font-heading text-lg font-semibold text-heading">Month-to-Month</h3>
+          <p class="mt-2 text-[15px] text-body">
+            No long contracts. Start, pause, or switch plans anytime.
+          </p>
         </div>
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h3 class="text-lg font-heading font-semibold text-heading">Simple Guarantee</h3>
+          <h3 class="font-heading text-lg font-semibold text-heading">Simple Guarantee</h3>
           <p class="mt-2 text-[15px] text-body">
             If you don’t see measurable lift in 30 days, we’ll keep working free until you do.
           </p>
@@ -606,15 +705,19 @@ export const description =
   <!-- FINAL CTA -->
   <section class="bg-[#253242] py-16">
     <div class="mx-auto max-w-6xl px-4 text-center">
-      <h2 class="text-3xl md:text-4xl font-heading font-bold text-white">Ready to Grow from Google Maps?</h2>
-      <p class="mt-3 text-white/80">Start the $149 Fix now or book a 15-min call to plan your Sprint.</p>
+      <h2 class="font-heading text-3xl font-bold text-white md:text-4xl">
+        Ready to Grow from Google Maps?
+      </h2>
+      <p class="mt-3 text-white/80">
+        Start the $149 Fix now or book a 15-min call to plan your Sprint.
+      </p>
       <div class="mt-6 flex flex-wrap justify-center gap-3">
         <button
           form="offerLeadForm"
           type="submit"
           name="path"
           value="149-fixes"
-          class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-7 py-3 text-white font-heading font-semibold text-base shadow hover:bg-[#f34e00] transition"
+          class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-7 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#f34e00]"
           data-analytics="begin_checkout"
           data-offer="gbp_top5_149"
         >
@@ -624,7 +727,7 @@ export const description =
         <a
           href="#"
           data-calendly={CALENDLY}
-          class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 text-white font-heading font-semibold text-base shadow hover:bg-[#27394b] transition"
+          class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#27394b]"
           data-analytics="generate_lead"
           data-offer="sprint_499"
         >
@@ -641,11 +744,11 @@ export const description =
 
 <!-- Bind any link with data-calendly="URL" to open the Calendly popup -->
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[data-calendly]').forEach((el) => {
-      el.addEventListener('click', (e) => {
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("[data-calendly]").forEach((el) => {
+      el.addEventListener("click", (e) => {
         e.preventDefault();
-        const url = el.getAttribute('data-calendly');
+        const url = el.getAttribute("data-calendly");
         if (window.Calendly && url) Calendly.initPopupWidget({ url });
       });
     });

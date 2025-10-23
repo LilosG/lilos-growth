@@ -1,15 +1,15 @@
 ---
 date: 2025-10-20
-title: 'UTM, Call Tracking & Conversion QA for GBP/LSA (2025 Field Playbook)'
-description: 'Make every GBP click and LSA lead measurable. Set UTMs, dynamic numbers, routing, and QA so you can prove which pages, posts, and ads drive calls.'
+title: "UTM, Call Tracking & Conversion QA for GBP/LSA (2025 Field Playbook)"
+description: "Make every GBP click and LSA lead measurable. Set UTMs, dynamic numbers, routing, and QA so you can prove which pages, posts, and ads drive calls."
 slug: gbp-utm-call-tracking-2025
-category: 'Google Business Profile'
-tags: ['gbp', 'utm', 'call-tracking']
+category: "Google Business Profile"
+tags: ["gbp", "utm", "call-tracking"]
 pubDate: 2025-10-19
-datePublished: '2025-10-19'
+datePublished: "2025-10-19"
 draft: false
-image: '/images/blog/gbp-utm-call-tracking-2025/hero.svg'
-imageAlt: 'Diagram of GBP and LSA flowing into tracked calls and analytics'
+image: "/images/blog/gbp-utm-call-tracking-2025/hero.svg"
+imageAlt: "Diagram of GBP and LSA flowing into tracked calls and analytics"
 ---
 
 > **TL;DR:** Add **consistent UTMs** to every GBP link, deploy **dynamic call tracking** with a clearly defined **call flow**, and run a **weekly QA ritual**. For LSA, capture Google’s proxy calls + form leads, mirror them into your CRM, and reconcile against booked jobs. If you can’t trace **lead → booking → revenue**, you’re guessing.

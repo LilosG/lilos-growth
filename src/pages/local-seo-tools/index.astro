@@ -1,124 +1,127 @@
 ---
 /* FILE: src/pages/local-seo-tools/index.astro */
-import Layout from '~/layouts/PageLayout.astro';
-import Button from '~/components/ui/Button.astro';
+import Layout from "~/layouts/PageLayout.astro";
+import Button from "~/components/ui/Button.astro";
 
-export const title = 'Free Local SEO Tools for Home Service Businesses | Lilos Growth';
+export const title = "Free Local SEO Tools for Home Service Businesses | Lilos Growth";
 export const description =
-  'Practical, on-brand tools to win the Map Pack, polish your Google Business Profile, and convert more local leads—no logins, no fluff.';
+  "Practical, on-brand tools to win the Map Pack, polish your Google Business Profile, and convert more local leads—no logins, no fluff.";
 
 const featuredTools = [
   {
-    name: 'Google Review Link & QR',
-    summary: 'Find your business and generate a one-click review link + QR.',
-    href: '#todo',
+    name: "Google Review Link & QR",
+    summary: "Find your business and generate a one-click review link + QR.",
+    href: "#todo",
     fields: [
-      { ph: 'Business name', type: 'text' },
-      { ph: 'City', type: 'text' },
-      { ph: 'State', type: 'text' },
-      { ph: 'ZIP', type: 'text' },
+      { ph: "Business name", type: "text" },
+      { ph: "City", type: "text" },
+      { ph: "State", type: "text" },
+      { ph: "ZIP", type: "text" },
     ],
   },
   {
-    name: 'Google Business Profile Category Finder',
-    summary: 'Type what you do—we suggest matching GBP categories.',
-    href: '#todo',
-    fields: [{ ph: 'Service keyword (e.g., plumber)', type: 'text' }],
+    name: "Google Business Profile Category Finder",
+    summary: "Type what you do—we suggest matching GBP categories.",
+    href: "#todo",
+    fields: [{ ph: "Service keyword (e.g., plumber)", type: "text" }],
   },
   {
-    name: 'Landing Page Outline Generator',
-    summary: 'Proven outline for a service + city page that converts.',
-    href: '#todo',
+    name: "Landing Page Outline Generator",
+    summary: "Proven outline for a service + city page that converts.",
+    href: "#todo",
     fields: [
-      { ph: 'Service', type: 'text' },
-      { ph: 'City/Area', type: 'text' },
+      { ph: "Service", type: "text" },
+      { ph: "City/Area", type: "text" },
     ],
   },
 ];
 
 const moreTools = [
   {
-    name: 'FAQ Schema Generator',
-    summary: 'Turn Q&A into valid JSON-LD (FAQPage).',
-    href: '#todo',
+    name: "FAQ Schema Generator",
+    summary: "Turn Q&A into valid JSON-LD (FAQPage).",
+    href: "#todo",
     fields: [
-      { ph: 'Question', type: 'text' },
-      { ph: 'Answer', type: 'textarea' },
+      { ph: "Question", type: "text" },
+      { ph: "Answer", type: "textarea" },
     ],
   },
   {
-    name: 'Google SERP Preview',
-    summary: 'Preview how your title & description may render.',
-    href: '#todo',
+    name: "Google SERP Preview",
+    summary: "Preview how your title & description may render.",
+    href: "#todo",
     fields: [
-      { ph: 'Title (~70 chars)', type: 'text' },
-      { ph: 'URL (optional)', type: 'url' },
-      { ph: 'Meta description (~155 chars)', type: 'textarea' },
+      { ph: "Title (~70 chars)", type: "text" },
+      { ph: "URL (optional)", type: "url" },
+      { ph: "Meta description (~155 chars)", type: "textarea" },
     ],
   },
   {
-    name: 'UTM Link Builder',
-    summary: 'Create trackable URLs for Google Analytics.',
-    href: '#todo',
+    name: "UTM Link Builder",
+    summary: "Create trackable URLs for Google Analytics.",
+    href: "#todo",
     fields: [
-      { ph: 'Destination URL', type: 'url' },
-      { ph: 'Source', type: 'text' },
-      { ph: 'Medium', type: 'text' },
-      { ph: 'Campaign', type: 'text' },
+      { ph: "Destination URL", type: "url" },
+      { ph: "Source", type: "text" },
+      { ph: "Medium", type: "text" },
+      { ph: "Campaign", type: "text" },
     ],
   },
   {
-    name: 'Local Business Schema',
-    summary: 'Generate JSON-LD for your business details.',
-    href: '#todo',
+    name: "Local Business Schema",
+    summary: "Generate JSON-LD for your business details.",
+    href: "#todo",
     fields: [
-      { ph: 'Business Name', type: 'text' },
-      { ph: 'Phone Number', type: 'tel' },
-      { ph: 'Street Address', type: 'text' },
-      { ph: 'City', type: 'text' },
-      { ph: 'State', type: 'text' },
-      { ph: 'ZIP', type: 'text' },
-      { ph: 'Website URL (optional)', type: 'url' },
+      { ph: "Business Name", type: "text" },
+      { ph: "Phone Number", type: "tel" },
+      { ph: "Street Address", type: "text" },
+      { ph: "City", type: "text" },
+      { ph: "State", type: "text" },
+      { ph: "ZIP", type: "text" },
+      { ph: "Website URL (optional)", type: "url" },
     ],
   },
   {
-    name: 'Google Maps Embed',
-    summary: 'Generate an embed code for your location.',
-    href: '#todo',
-    fields: [{ ph: 'Address or Place', type: 'text' }],
+    name: "Google Maps Embed",
+    summary: "Generate an embed code for your location.",
+    href: "#todo",
+    fields: [{ ph: "Address or Place", type: "text" }],
   },
   {
-    name: 'Local Keyword Ideas',
-    summary: 'Quick ideas for service + location targeting.',
-    href: '#todo',
-    fields: [{ ph: 'e.g., pest control', type: 'text' }],
+    name: "Local Keyword Ideas",
+    summary: "Quick ideas for service + location targeting.",
+    href: "#todo",
+    fields: [{ ph: "e.g., pest control", type: "text" }],
   },
 ];
 ---
 
 <Layout {title} {description}>
   <!-- HERO -->
-  <section class="bg-[#253242] relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]" aria-hidden="true"></div>
-    <div class="relative z-10 max-w-6xl mx-auto px-4 py-20 text-center">
+  <section class="relative overflow-hidden bg-[#253242]">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]" aria-hidden="true">
+    </div>
+    <div class="relative z-10 mx-auto max-w-6xl px-4 py-20 text-center">
       <img
         src="/Lilos_Growth_Logo_Corrected.svg"
         alt="Lilos Growth"
-        class="mx-auto w-24 opacity-70 mb-6"
+        class="mx-auto mb-6 w-24 opacity-70"
         loading="lazy"
       />
-      <h1 class="text-4xl md:text-5xl font-heading font-extrabold text-white tracking-tight">Free Local SEO Tools</h1>
-      <p class="mt-2 text-[#f56b2a] tracking-widest font-semibold uppercase text-sm md:text-base">
+      <h1 class="font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">
+        Free Local SEO Tools
+      </h1>
+      <p class="mt-2 text-sm font-semibold uppercase tracking-widest text-[#f56b2a] md:text-base">
         For Home Service Businesses
       </p>
-      <p class="mt-6 text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-        Practical, on-brand tools to help you win the Map Pack, polish your profile, and convert more local leads — no
-        logins, no fluff.
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-white/80 md:text-xl">
+        Practical, on-brand tools to help you win the Map Pack, polish your profile, and convert
+        more local leads — no logins, no fluff.
       </p>
       <div class="mt-8 flex items-center justify-center gap-3.5">
         <a
           href="#featured-tools"
-          class="inline-flex items-center rounded-3xl bg-[#f56b2a] px-6 py-3 text-white font-heading font-semibold"
+          class="inline-flex items-center rounded-3xl bg-[#f56b2a] px-6 py-3 font-heading font-semibold text-white"
         >
           Start Using Tools
           <svg
@@ -132,7 +135,7 @@ const moreTools = [
         </a>
         <a
           href="#more-utilities"
-          class="inline-flex items-center rounded-3xl bg-[#2b3b50] px-5 py-3 text-white font-heading font-semibold"
+          class="inline-flex items-center rounded-3xl bg-[#2b3b50] px-5 py-3 font-heading font-semibold text-white"
         >
           More Utilities
           <svg
@@ -149,43 +152,45 @@ const moreTools = [
   </section>
 
   <!-- PROMISE STRIP (brand-tinted like homepage) -->
-  <section class="bg-[#fff5ef] border-t border-gray-100">
-    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20 text-center">
-      <h2 class="text-2xl md:text-3xl font-heading font-bold text-heading">
+  <section class="border-t border-gray-100 bg-[#fff5ef]">
+    <div class="mx-auto max-w-6xl px-4 py-16 text-center md:py-20">
+      <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
         A Clean, Fast Toolbox Built for Local Wins
       </h2>
-      <span class="block mx-auto mt-2 h-1 w-12 bg-[#f56b2a] rounded"></span>
-      <p class="mt-3 text-body max-w-2xl mx-auto">
-        Create conversion-ready pages, dial in your Google Business Profile, and ship SEO assets quickly — no logins, no
-        fluff.
+      <span class="mx-auto mt-2 block h-1 w-12 rounded bg-[#f56b2a]"></span>
+      <p class="mx-auto mt-3 max-w-2xl text-body">
+        Create conversion-ready pages, dial in your Google Business Profile, and ship SEO assets
+        quickly — no logins, no fluff.
       </p>
     </div>
   </section>
 
   <!-- FEATURED TOOLS – white cards on white section -->
   <section id="featured-tools" class="bg-white">
-    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20">
-      <h3 class="text-3xl md:text-4xl font-heading font-bold tracking-tight text-heading text-center">
+    <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+      <h3
+        class="text-center font-heading text-3xl font-bold tracking-tight text-heading md:text-4xl"
+      >
         Featured Tools
       </h3>
 
-      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch auto-rows-fr">
+      <div
+        class="mt-10 grid auto-rows-fr grid-cols-1 items-stretch gap-8 md:grid-cols-2 lg:grid-cols-3"
+      >
         {
           featuredTools.map((t, i) => (
             <article
-              class="relative grid h-full rounded-[28px] p-8 bg-white
-                   shadow-[0_10px_30px_rgba(31,46,62,0.06)] border border-gray-200
-                   transition-transform duration-200 motion-safe:hover:-translate-y-0.5"
+              class="relative grid h-full rounded-[28px] border border-gray-200 bg-white p-8 shadow-[0_10px_30px_rgba(31,46,62,0.06)] transition-transform duration-200 motion-safe:hover:-translate-y-0.5"
               style="grid-template-rows:auto 1fr auto;"
             >
               {i === 1 && (
-                <span class="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center rounded-full bg-[#f56b2a] text-white py-1 px-3 text-[11px] font-semibold shadow-md">
+                <span class="absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center rounded-full bg-[#f56b2a] px-3 py-1 text-[11px] font-semibold text-white shadow-md">
                   Popular
                 </span>
               )}
 
               <header class="mb-4">
-                <h4 class="text-xl md:text-2xl font-heading font-bold text-heading">{t.name}</h4>
+                <h4 class="font-heading text-xl font-bold text-heading md:text-2xl">{t.name}</h4>
               </header>
 
               <div class="text-[15px] text-body">
@@ -193,32 +198,32 @@ const moreTools = [
                 {t.fields && (
                   <div class="mt-5 grid gap-3">
                     {t.fields.map((f) =>
-                      f.type === 'textarea' ? (
+                      f.type === "textarea" ? (
                         <textarea
                           rows="3"
                           placeholder={f.ph}
-                          class="rounded-xl border border-gray-300 px-4 py-3 text-[15px] w-full bg-white"
+                          class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-[15px]"
                           aria-label={f.ph}
                         />
-                      ) : f.type === 'url' ? (
+                      ) : f.type === "url" ? (
                         <input
                           type="url"
                           placeholder={f.ph}
-                          class="rounded-xl border border-gray-300 px-4 h-11 text-[15px] w-full bg-white"
+                          class="h-11 w-full rounded-xl border border-gray-300 bg-white px-4 text-[15px]"
                           aria-label={f.ph}
                         />
-                      ) : f.type === 'tel' ? (
+                      ) : f.type === "tel" ? (
                         <input
                           type="tel"
                           placeholder={f.ph}
-                          class="rounded-xl border border-gray-300 px-4 h-11 text-[15px] w-full bg-white"
+                          class="h-11 w-full rounded-xl border border-gray-300 bg-white px-4 text-[15px]"
                           aria-label={f.ph}
                         />
                       ) : (
                         <input
                           type="text"
                           placeholder={f.ph}
-                          class="rounded-xl border border-gray-300 px-4 h-11 text-[15px] w-full bg-white"
+                          class="h-11 w-full rounded-xl border border-gray-300 bg-white px-4 text-[15px]"
                           aria-label={f.ph}
                         />
                       )
@@ -227,17 +232,17 @@ const moreTools = [
                 )}
               </div>
 
-              <footer class="mt-6 pt-5 border-t border-gray-200">
+              <footer class="mt-6 border-t border-gray-200 pt-5">
                 <Button
                   variant="primary"
                   class="w-full sm:w-auto"
                   href={t.href}
                   text={
-                    t.name.includes('Outline')
-                      ? 'Generate Outline'
-                      : t.name.includes('Category')
-                        ? 'Find Categories'
-                        : 'Find Place'
+                    t.name.includes("Outline")
+                      ? "Generate Outline"
+                      : t.name.includes("Category")
+                        ? "Find Categories"
+                        : "Find Place"
                   }
                 />
               </footer>
@@ -250,22 +255,24 @@ const moreTools = [
 
   <!-- MORE UTILITIES – white cards on pale blue section -->
   <section id="more-utilities" class="bg-[#e9f0f7]">
-    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20">
-      <h3 class="text-3xl md:text-4xl font-heading font-bold tracking-tight text-heading text-center">
+    <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+      <h3
+        class="text-center font-heading text-3xl font-bold tracking-tight text-heading md:text-4xl"
+      >
         More Free Utilities
       </h3>
 
-      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch auto-rows-fr">
+      <div
+        class="mt-10 grid auto-rows-fr grid-cols-1 items-stretch gap-8 md:grid-cols-2 lg:grid-cols-3"
+      >
         {
           moreTools.map((t) => (
             <article
-              class="relative grid h-full rounded-[28px] p-8 bg-white
-                   shadow-[0_10px_30px_rgba(31,46,62,0.06)] border border-gray-200
-                   transition-transform duration-200 motion-safe:hover:-translate-y-0.5"
+              class="relative grid h-full rounded-[28px] border border-gray-200 bg-white p-8 shadow-[0_10px_30px_rgba(31,46,62,0.06)] transition-transform duration-200 motion-safe:hover:-translate-y-0.5"
               style="grid-template-rows:auto 1fr auto;"
             >
               <header class="mb-3">
-                <h4 class="text-xl md:text-2xl font-heading font-bold text-heading">{t.name}</h4>
+                <h4 class="font-heading text-xl font-bold text-heading md:text-2xl">{t.name}</h4>
               </header>
 
               <div class="text-[15px] text-body">
@@ -273,32 +280,32 @@ const moreTools = [
                 {t.fields && (
                   <div class="mt-5 grid gap-3">
                     {t.fields.map((f) =>
-                      f.type === 'textarea' ? (
+                      f.type === "textarea" ? (
                         <textarea
                           rows="3"
                           placeholder={f.ph}
-                          class="rounded-xl border border-gray-300 px-4 py-3 text-[15px] w-full bg-white"
+                          class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-[15px]"
                           aria-label={f.ph}
                         />
-                      ) : f.type === 'url' ? (
+                      ) : f.type === "url" ? (
                         <input
                           type="url"
                           placeholder={f.ph}
-                          class="rounded-xl border border-gray-300 px-4 h-11 text-[15px] w-full bg-white"
+                          class="h-11 w-full rounded-xl border border-gray-300 bg-white px-4 text-[15px]"
                           aria-label={f.ph}
                         />
-                      ) : f.type === 'tel' ? (
+                      ) : f.type === "tel" ? (
                         <input
                           type="tel"
                           placeholder={f.ph}
-                          class="rounded-xl border border-gray-300 px-4 h-11 text-[15px] w-full bg-white"
+                          class="h-11 w-full rounded-xl border border-gray-300 bg-white px-4 text-[15px]"
                           aria-label={f.ph}
                         />
                       ) : (
                         <input
                           type="text"
                           placeholder={f.ph}
-                          class="rounded-xl border border-gray-300 px-4 h-11 text-[15px] w-full bg-white"
+                          class="h-11 w-full rounded-xl border border-gray-300 bg-white px-4 text-[15px]"
                           aria-label={f.ph}
                         />
                       )
@@ -307,7 +314,7 @@ const moreTools = [
                 )}
               </div>
 
-              <footer class="mt-6 pt-5 border-t border-gray-200">
+              <footer class="mt-6 border-t border-gray-200 pt-5">
                 <Button variant="primary" class="w-full sm:w-auto" href={t.href} text="Open Tool" />
               </footer>
             </article>
@@ -318,7 +325,7 @@ const moreTools = [
       <div class="mt-12 text-center">
         <a
           href="/contact#book"
-          class="inline-flex items-center rounded-3xl bg-[#f56b2a] px-6 py-3 text-white font-heading font-semibold"
+          class="inline-flex items-center rounded-3xl bg-[#f56b2a] px-6 py-3 font-heading font-semibold text-white"
         >
           Book a Free Intro Call
           <svg
@@ -335,8 +342,8 @@ const moreTools = [
   </section>
 
   <!-- WAVE -->
-  <div class="w-full overflow-hidden leading-none -mb-1">
-    <svg viewBox="0 0 1440 60" class="block w-full h-10 text-white" aria-hidden="true">
+  <div class="-mb-1 w-full overflow-hidden leading-none">
+    <svg viewBox="0 0 1440 60" class="block h-10 w-full text-white" aria-hidden="true">
       <path fill="currentColor" d="M0,32L1440,0V60H0Z"></path>
     </svg>
   </div>

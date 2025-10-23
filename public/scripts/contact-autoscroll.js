@@ -1,13 +1,13 @@
 (() => {
-  if (typeof window === 'undefined' || typeof document === 'undefined') return;
-  if (window.location.hash !== '#book') return;
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+  if (window.location.hash !== "#book") return;
   const tryScroll = () => {
     const el =
-      document.getElementById('book') ||
-      document.querySelector('.calendly-inline-widget') ||
-      document.querySelector('[data-calendly]');
+      document.getElementById("book") ||
+      document.querySelector(".calendly-inline-widget") ||
+      document.querySelector("[data-calendly]");
     if (el && el.scrollIntoView) {
-      el.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      el.scrollIntoView({ block: "start", behavior: "smooth" });
       return true;
     }
     return false;

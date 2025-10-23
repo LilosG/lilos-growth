@@ -1,15 +1,15 @@
 ---
 date: 2025-10-19T17:07:59-07:00
-title: 'Entity-First Keyword Research 2025: From Services → Cities → Questions → Conversions'
-description: 'A step-by-step system to build entity maps, clusters, and page plans that win in both Google and AI assistants—tailored for local service companies.'
+title: "Entity-First Keyword Research 2025: From Services → Cities → Questions → Conversions"
+description: "A step-by-step system to build entity maps, clusters, and page plans that win in both Google and AI assistants—tailored for local service companies."
 slug: entity-first-keyword-research-local-2025
-category: 'SEO'
-tags: ['local-seo', 'keyword-research', 'entities']
+category: "SEO"
+tags: ["local-seo", "keyword-research", "entities"]
 pubDate: 2025-10-19
-datePublished: '2025-10-19'
+datePublished: "2025-10-19"
 draft: false
-image: '/images/blog/entity-first-keyword-research-local-2025/hero.svg'
-imageAlt: 'Diagram showing entities flowing into clusters and city pages'
+image: "/images/blog/entity-first-keyword-research-local-2025/hero.svg"
+imageAlt: "Diagram showing entities flowing into clusters and city pages"
 ---
 
 <!-- Replace this line with your full blog content, then save. -->

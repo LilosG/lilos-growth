@@ -10,7 +10,7 @@ export interface Props {
 }
 
 const propId = (Astro.props as Props).id;
-const envId = import.meta.env.PUBLIC_GA_ID || import.meta.env.PUBLIC_GOOGLE_MEASUREMENT_ID || '';
+const envId = import.meta.env.PUBLIC_GA_ID || import.meta.env.PUBLIC_GOOGLE_MEASUREMENT_ID || "";
 
 const id = (propId && String(propId)) || String(envId);
 const enabled = id.length > 0;
@@ -23,7 +23,7 @@ const inlineGA = enabled
     gtag('js', new Date());
     gtag('config', '${id}', { 'anonymize_ip': true });
   `
-  : '';
+  : "";
 ---
 
 {

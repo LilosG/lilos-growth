@@ -12,22 +12,22 @@ const { items = [] } = Astro.props as { items: LogoItem[] };
 
 const normalize = (it: any) => {
   const rawSrc: string =
-    typeof it?.src === 'string'
+    typeof it?.src === "string"
       ? it.src
-      : typeof it?.logo === 'string'
+      : typeof it?.logo === "string"
         ? it.logo
-        : typeof it?.image === 'string'
+        : typeof it?.image === "string"
           ? it.image
-          : '';
+          : "";
 
   // Ensure absolute web path (so /results doesn't break relative logo URLs)
-  const src = rawSrc ? (rawSrc.startsWith('/') ? rawSrc : '/' + rawSrc.replace(/^\/+/, '')) : '';
+  const src = rawSrc ? (rawSrc.startsWith("/") ? rawSrc : "/" + rawSrc.replace(/^\/+/, "")) : "";
 
-  const name = String(it?.name ?? it?.title ?? it?.alt ?? '').trim();
+  const name = String(it?.name ?? it?.title ?? it?.alt ?? "").trim();
   // ✅ Parenthesized to avoid mixing ?? with || without precedence
-  const alt = String((it?.alt ?? name) || 'Client logo');
+  const alt = String((it?.alt ?? name) || "Client logo");
 
-  const href = typeof it?.href === 'string' ? it.href : '';
+  const href = typeof it?.href === "string" ? it.href : "";
   const width = Number(it?.width ?? 200);
   const height = Number(it?.height ?? 80);
 
@@ -38,11 +38,11 @@ const logos: LogoItem[] = (items as any[]).map(normalize);
 ---
 
 <section aria-label="Client logos">
-  <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 md:gap-8 items-center">
+  <ul class="grid grid-cols-2 items-center gap-6 sm:grid-cols-3 md:grid-cols-4 md:gap-8">
     {
       logos.map((l) => (
         <li class="flex">
-          <div class="w-full rounded-2xl border border-gray-200 bg-white px-6 py-4 flex items-center justify-center">
+          <div class="flex w-full items-center justify-center rounded-2xl border border-gray-200 bg-white px-6 py-4">
             {l.src ? (
               l.href ? (
                 <a href={l.href} class="inline-flex items-center justify-center">
@@ -53,7 +53,7 @@ const logos: LogoItem[] = (items as any[]).map(normalize);
                     height={l.height}
                     loading="lazy"
                     decoding="async"
-                    class="h-10 md:h-12 w-auto object-contain grayscale"
+                    class="h-10 w-auto object-contain grayscale md:h-12"
                   />
                 </a>
               ) : (
@@ -64,12 +64,12 @@ const logos: LogoItem[] = (items as any[]).map(normalize);
                   height={l.height}
                   loading="lazy"
                   decoding="async"
-                  class="h-10 md:h-12 w-auto object-contain grayscale"
+                  class="h-10 w-auto object-contain grayscale md:h-12"
                 />
               )
             ) : (
-              <span class="inline-flex items-center justify-center px-3 py-2 rounded-xl bg-white text-sm text-gray-600">
-                {l.name || 'Client'}
+              <span class="inline-flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm text-gray-600">
+                {l.name || "Client"}
               </span>
             )}
           </div>

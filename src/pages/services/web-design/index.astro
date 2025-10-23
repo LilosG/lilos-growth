@@ -1,45 +1,65 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
+import Layout from "~/layouts/PageLayout.astro";
 
-export const title = 'Website Design & Development for Service Businesses | Lilos Growth';
+export const title = "Website Design & Development for Service Businesses | Lilos Growth";
 export const description =
-  'Modern, mobile-optimized websites that convert. One-time website builds for home-service companies — fast launches, SEO-ready structure, and conversion-first design.';
+  "Modern, mobile-optimized websites that convert. One-time website builds for home-service companies — fast launches, SEO-ready structure, and conversion-first design.";
 ---
 
 <Layout {title} {description}>
   <!-- HERO -->
   <section
-    class="bg-[#253242] min-h-[440px] flex flex-col items-center justify-center pt-16 pb-20 relative overflow-hidden"
+    class="relative flex min-h-[440px] flex-col items-center justify-center overflow-hidden bg-[#253242] pb-20 pt-16"
   >
-    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159] pointer-events-none"></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]">
+    </div>
 
-    <div class="relative z-10 w-full max-w-3xl flex flex-col items-center gap-7 px-4 mx-auto text-center">
-      <h1 class="text-4xl md:text-5xl leading-snug font-heading text-white font-extrabold tracking-tight">
+    <div
+      class="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-7 px-4 text-center"
+    >
+      <h1
+        class="font-heading text-4xl font-extrabold leading-snug tracking-tight text-white md:text-5xl"
+      >
         Website Design &amp; Development
       </h1>
-      <span class="block text-xl md:text-2xl font-semibold mt-1 text-[#f56b2a] tracking-wider uppercase">
+      <span
+        class="mt-1 block text-xl font-semibold uppercase tracking-wider text-[#f56b2a] md:text-2xl"
+      >
         Built for Home-Service Pros
       </span>
-      <p class="text-lg md:text-xl text-white/80 max-w-2xl font-medium">
-        One-time website builds that launch fast and win more calls. Conversion-first, SEO-ready, and easy to update.
+      <p class="max-w-2xl text-lg font-medium text-white/80 md:text-xl">
+        One-time website builds that launch fast and win more calls. Conversion-first, SEO-ready,
+        and easy to update.
       </p>
 
-      <div class="flex flex-wrap gap-4 justify-center">
+      <div class="flex flex-wrap justify-center gap-4">
         <a
           href="#packages"
-          class="inline-flex items-center px-8 py-4 rounded-2xl bg-[#f56b2a] hover:bg-[#f34e00] text-white font-heading font-semibold text-lg shadow transition"
+          class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-[#f34e00]"
         >
           See Packages
-          <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+          <svg
+            class="ml-2 h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            viewBox="0 0 24 24"
+          >
             <path d="M5 12h14M13 18l6-6-6-6"></path>
           </svg>
         </a>
         <a
           href="#faq"
-          class="inline-flex items-center px-8 py-4 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-lg shadow transition"
+          class="inline-flex items-center rounded-2xl bg-secondary px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-[#27394b]"
         >
           FAQ
-          <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+          <svg
+            class="ml-2 h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            viewBox="0 0 24 24"
+          >
             <path d="M5 12h14M13 18l6-6-6-6"></path>
           </svg>
         </a>
@@ -48,24 +68,39 @@ export const description =
   </section>
 
   <!-- WHAT’S INCLUDED (high-value, non-restrictive) -->
-  <section class="py-16 bg-cream border-t border-gray-100">
-    <div class="max-w-5xl mx-auto px-4 text-center">
-      <h2 class="text-3xl md:text-4xl font-heading font-bold mb-5 text-heading">What You Get</h2>
-      <p class="text-lg text-body mb-6">
-        A conversion-ready site with clean structure, local SEO fundamentals, and everything needed for a strong launch.
+  <section class="border-t border-gray-100 bg-cream py-16">
+    <div class="mx-auto max-w-5xl px-4 text-center">
+      <h2 class="mb-5 font-heading text-3xl font-bold text-heading md:text-4xl">What You Get</h2>
+      <p class="mb-6 text-lg text-body">
+        A conversion-ready site with clean structure, local SEO fundamentals, and everything needed
+        for a strong launch.
       </p>
 
-      <div class="flex flex-wrap gap-3 justify-center">
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">Mobile-Responsive Design</span>
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">On-Brand Copy &amp; CTAs</span>
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">SEO-Friendly Architecture</span>
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">Titles, Metas &amp; Headings</span>
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">Schema Markup</span>
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">Lead Forms / Click-to-Call</span>
-        <span class="px-4 py-2 rounded-xl bg-bluelight font-heading font-semibold">Analytics &amp; Tracking Setup</span>
+      <div class="flex flex-wrap justify-center gap-3">
+        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
+          >Mobile-Responsive Design</span
+        >
+        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
+          >On-Brand Copy &amp; CTAs</span
+        >
+        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
+          >SEO-Friendly Architecture</span
+        >
+        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
+          >Titles, Metas &amp; Headings</span
+        >
+        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
+          >Schema Markup</span
+        >
+        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
+          >Lead Forms / Click-to-Call</span
+        >
+        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
+          >Analytics &amp; Tracking Setup</span
+        >
       </div>
 
-      <p class="text-sm text-body/70 mt-3">
+      <p class="mt-3 text-sm text-body/70">
         Need ongoing hosting/updates? See <a
           href="/packages#packages"
           class="text-primary underline hover:text-[#f56b2a]">Website-as-a-Service</a
@@ -75,31 +110,33 @@ export const description =
   </section>
 
   <!-- ONE-TIME WEBSITE BUILDS -->
-  <section class="py-24 bg-bluelight border-t border-gray-100 shadow-xl" id="packages">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-4xl md:text-5xl font-heading text-heading font-bold mb-4 text-center">
+  <section class="border-t border-gray-100 bg-bluelight py-24 shadow-xl" id="packages">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-4 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
         One-Time Website Packages
-        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
       </h2>
-      <p class="text-xl text-body mb-14 text-center font-medium">
-        Own your site outright. Transparent scope, fast timelines, and SEO best practices from day one.
+      <p class="mb-14 text-center text-xl font-medium text-body">
+        Own your site outright. Transparent scope, fast timelines, and SEO best practices from day
+        one.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch auto-rows-fr">
+      <div class="grid auto-rows-fr grid-cols-1 items-stretch gap-8 md:grid-cols-3">
         <!-- Launch Lite -->
         <article
-          class="h-full rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
+          class="grid h-full grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
         >
           <header class="text-center">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-heading">Launch Lite</h3>
-            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-1">$499</div>
-            <div class="text-sm text-body mt-1">Approx. 10 pages</div>
-            <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold"
+            <h3 class="font-heading text-lg font-semibold text-heading md:text-xl">Launch Lite</h3>
+            <div class="mt-1 text-2xl font-bold text-[#f56b2a] md:text-3xl">$499</div>
+            <div class="mt-1 text-sm text-body">Approx. 10 pages</div>
+            <span
+              class="mt-3 inline-block rounded-full bg-[#f56b2a] px-3 py-1.5 text-xs font-semibold text-white"
               >3–5 business-day launch</span
             >
           </header>
 
-          <ul class="mt-5 text-body text-[15px] space-y-1 list-disc pl-5">
+          <ul class="mt-5 list-disc space-y-1 pl-5 text-[15px] text-body">
             <li>Home, 3 service pages, About, Contact, + essentials</li>
             <li>Clean site structure with internal linking scaffold</li>
             <li>Titles, metas, H1–H2 setup &amp; basic schema</li>
@@ -107,10 +144,10 @@ export const description =
             <li>Analytics setup (GA4/GTM if provided)</li>
           </ul>
 
-          <div class="pt-5 border-t border-gray-100">
+          <div class="border-t border-gray-100 pt-5">
             <a
               href="#contact"
-              class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
+              class="block w-full rounded-xl bg-[#f56b2a] px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
               aria-label="Get Started — open contact form"
             >
               Get Started
@@ -120,23 +157,24 @@ export const description =
 
         <!-- Starter -->
         <article
-          class="h-full relative rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
+          class="relative grid h-full grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
         >
           <div
-            class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#f56b2a] text-white text-xs font-bold px-6 py-1 rounded-full shadow z-10"
+            class="absolute -top-7 left-1/2 z-10 -translate-x-1/2 rounded-full bg-[#f56b2a] px-6 py-1 text-xs font-bold text-white shadow"
           >
             Most Popular
           </div>
-          <header class="text-center mt-3">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-heading">Starter</h3>
-            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-1">$750</div>
-            <div class="text-sm text-body mt-1">Up to 15 pages</div>
-            <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold"
+          <header class="mt-3 text-center">
+            <h3 class="font-heading text-lg font-semibold text-heading md:text-xl">Starter</h3>
+            <div class="mt-1 text-2xl font-bold text-[#f56b2a] md:text-3xl">$750</div>
+            <div class="mt-1 text-sm text-body">Up to 15 pages</div>
+            <span
+              class="mt-3 inline-block rounded-full bg-[#f56b2a] px-3 py-1.5 text-xs font-semibold text-white"
               >5–7 business-day launch</span
             >
           </header>
 
-          <ul class="mt-5 text-body text-[15px] space-y-1 list-disc pl-5">
+          <ul class="mt-5 list-disc space-y-1 pl-5 text-[15px] text-body">
             <li>Everything in Launch Lite, plus capacity for more services/areas</li>
             <li>Expanded internal linking &amp; conversion blocks (badges, FAQs, reviews)</li>
             <li>SEO foundations: titles/metas/H1–H2 at scale</li>
@@ -144,10 +182,10 @@ export const description =
             <li>Stock image library (curated, royalty-free)</li>
           </ul>
 
-          <div class="pt-5 border-t border-gray-100">
+          <div class="border-t border-gray-100 pt-5">
             <a
               href="#contact"
-              class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
+              class="block w-full rounded-xl bg-[#f56b2a] px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
               aria-label="Get Started — open contact form"
             >
               Get Started
@@ -157,18 +195,19 @@ export const description =
 
         <!-- Standard -->
         <article
-          class="h-full rounded-2xl bg-white shadow-md border border-gray-200 p-8 grid grid-rows-[auto_1fr_auto]"
+          class="grid h-full grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
         >
           <header class="text-center">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-heading">Standard</h3>
-            <div class="text-2xl md:text-3xl font-bold text-[#f56b2a] mt-1">$1,500</div>
-            <div class="text-sm text-body mt-1">Approx. 25 pages</div>
-            <span class="inline-block text-xs bg-[#f56b2a] text-white px-3 py-1.5 rounded-full mt-3 font-semibold"
+            <h3 class="font-heading text-lg font-semibold text-heading md:text-xl">Standard</h3>
+            <div class="mt-1 text-2xl font-bold text-[#f56b2a] md:text-3xl">$1,500</div>
+            <div class="mt-1 text-sm text-body">Approx. 25 pages</div>
+            <span
+              class="mt-3 inline-block rounded-full bg-[#f56b2a] px-3 py-1.5 text-xs font-semibold text-white"
               >10–14 business-day launch</span
             >
           </header>
 
-          <ul class="mt-5 text-body text-[15px] space-y-1 list-disc pl-5">
+          <ul class="mt-5 list-disc space-y-1 pl-5 text-[15px] text-body">
             <li>Large buildout for services + multiple areas</li>
             <li>Enhanced schema (LocalBusiness + Services)</li>
             <li>Advanced conversion UX (sticky CTAs, trust elements)</li>
@@ -176,10 +215,10 @@ export const description =
             <li>Pre-launch QA &amp; handoff with update training</li>
           </ul>
 
-          <div class="pt-5 border-t border-gray-100">
+          <div class="border-t border-gray-100 pt-5">
             <a
               href="#contact"
-              class="block w-full text-center px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#c9400a] transition"
+              class="block w-full rounded-xl bg-[#f56b2a] px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
               aria-label="Get Started — open contact form"
             >
               Get Started
@@ -188,7 +227,7 @@ export const description =
         </article>
       </div>
 
-      <p class="text-sm text-body/70 mt-6 text-center">
+      <p class="mt-6 text-center text-sm text-body/70">
         Need ongoing edits, hosting, and growth support? Our <a
           href="/packages#packages"
           class="text-primary underline hover:text-[#f56b2a]">Website-as-a-Service</a
@@ -198,100 +237,142 @@ export const description =
   </section>
 
   <!-- WHY CHOOSE US -->
-  <section class="py-24 bg-cream border-t border-gray-100" id="why">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-4xl md:text-5xl font-heading text-heading font-bold mb-8 text-center">
+  <section class="border-t border-gray-100 bg-cream py-24" id="why">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-8 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
         Why Home-Service Pros Choose Lilos Growth
-        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
       </h2>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        <div class="flex flex-col items-center bg-white rounded-2xl p-8 shadow-lg border border-[#f56b2a]/10">
-          <span class="mb-4 flex items-center justify-center w-14 h-14 rounded-xl bg-[#f56b2a]/10">
-            <svg class="w-7 h-7 text-[#f56b2a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
+        <div
+          class="flex flex-col items-center rounded-2xl border border-[#f56b2a]/10 bg-white p-8 shadow-lg"
+        >
+          <span class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-[#f56b2a]/10">
+            <svg
+              class="h-7 w-7 text-[#f56b2a]"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
               <path d="M3 12l6 6l12-12"></path>
             </svg>
           </span>
-          <h3 class="text-lg font-heading font-semibold text-heading mb-1 text-center">Built for Real-World Leads</h3>
-          <p class="text-body text-center text-[15px]">
+          <h3 class="mb-1 text-center font-heading text-lg font-semibold text-heading">
+            Built for Real-World Leads
+          </h3>
+          <p class="text-center text-[15px] text-body">
             Clear calls-to-action, trust elements, and fast paths to call or book.
           </p>
         </div>
 
-        <div class="flex flex-col items-center bg-white rounded-2xl p-8 shadow-lg border border-[#f56b2a]/10">
-          <span class="mb-4 flex items-center justify-center w-14 h-14 rounded-xl bg-[#f56b2a]/10">
-            <svg class="w-7 h-7 text-[#f56b2a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div
+          class="flex flex-col items-center rounded-2xl border border-[#f56b2a]/10 bg-white p-8 shadow-lg"
+        >
+          <span class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-[#f56b2a]/10">
+            <svg
+              class="h-7 w-7 text-[#f56b2a]"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
               <circle cx="12" cy="12" r="10"></circle>
             </svg>
           </span>
-          <h3 class="text-lg font-heading font-semibold text-heading mb-1 text-center">SEO-Ready Structure</h3>
-          <p class="text-body text-center text-[15px]">
+          <h3 class="mb-1 text-center font-heading text-lg font-semibold text-heading">
+            SEO-Ready Structure
+          </h3>
+          <p class="text-center text-[15px] text-body">
             Titles, headings, internal links, and schema done right from day one.
           </p>
         </div>
 
-        <div class="flex flex-col items-center bg-white rounded-2xl p-8 shadow-lg border border-[#f56b2a]/10">
-          <span class="mb-4 flex items-center justify-center w-14 h-14 rounded-xl bg-[#f56b2a]/10">
-            <svg class="w-7 h-7 text-[#f56b2a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div
+          class="flex flex-col items-center rounded-2xl border border-[#f56b2a]/10 bg-white p-8 shadow-lg"
+        >
+          <span class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-[#f56b2a]/10">
+            <svg
+              class="h-7 w-7 text-[#f56b2a]"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
               <path d="M4 7l8 8l8-8"></path>
             </svg>
           </span>
-          <h3 class="text-lg font-heading font-semibold text-heading mb-1 text-center">Fast Turnarounds</h3>
-          <p class="text-body text-center text-[15px]">Tight timelines without cutting corners.</p>
+          <h3 class="mb-1 text-center font-heading text-lg font-semibold text-heading">
+            Fast Turnarounds
+          </h3>
+          <p class="text-center text-[15px] text-body">Tight timelines without cutting corners.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="py-20 bg-white border-t border-gray-100" id="faq">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-heading text-heading font-bold mb-8 text-center">
+  <section class="border-t border-gray-100 bg-white py-20" id="faq">
+    <div class="mx-auto max-w-4xl px-4">
+      <h2 class="mb-8 text-center font-heading text-3xl font-bold text-heading md:text-4xl">
         Website Design &amp; Development: FAQs
-        <span class="block mx-auto mt-2 h-1 w-14 bg-[#f56b2a] rounded"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
       </h2>
 
       <div class="space-y-6">
-        <div class="bg-bluelight rounded-2xl shadow border border-gray-100 p-6">
-          <h3 class="font-heading text-lg font-semibold mb-2 text-heading">Do I own the website?</h3>
-          <p class="text-body text-base">Yes. These are one-time projects — you fully own the finished site.</p>
+        <div class="rounded-2xl border border-gray-100 bg-bluelight p-6 shadow">
+          <h3 class="mb-2 font-heading text-lg font-semibold text-heading">
+            Do I own the website?
+          </h3>
+          <p class="text-base text-body">
+            Yes. These are one-time projects — you fully own the finished site.
+          </p>
         </div>
 
-        <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
-          <h3 class="font-heading text-lg font-semibold mb-2 text-heading">Is hosting included?</h3>
-          <p class="text-body text-base">
+        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
+          <h3 class="mb-2 font-heading text-lg font-semibold text-heading">Is hosting included?</h3>
+          <p class="text-base text-body">
             Hosting/ongoing updates are available through our Website-as-a-Service starting at <span
               class="font-semibold">$199/mo</span
             >.
           </p>
         </div>
 
-        <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
-          <h3 class="font-heading text-lg font-semibold mb-2 text-heading">How quickly can my site be live?</h3>
-          <p class="text-body text-base">
-            Launch Lite: 3–5 business days; Starter: 5–7 business days; Standard: 10–14 business days (content readiness
-            affects timelines).
+        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
+          <h3 class="mb-2 font-heading text-lg font-semibold text-heading">
+            How quickly can my site be live?
+          </h3>
+          <p class="text-base text-body">
+            Launch Lite: 3–5 business days; Starter: 5–7 business days; Standard: 10–14 business
+            days (content readiness affects timelines).
           </p>
         </div>
 
-        <div class="bg-white rounded-2xl shadow border border-gray-100 p-6">
-          <h3 class="font-heading text-lg font-semibold mb-2 text-heading">Can you help with SEO after launch?</h3>
-          <p class="text-body text-base">Absolutely — pair your site with our Local SEO plans for steady growth.</p>
+        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
+          <h3 class="mb-2 font-heading text-lg font-semibold text-heading">
+            Can you help with SEO after launch?
+          </h3>
+          <p class="text-base text-body">
+            Absolutely — pair your site with our Local SEO plans for steady growth.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FINAL CTA -->
-  <section class="py-12 bg-primary">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="font-heading text-white text-3xl font-extrabold mb-4">Ready to Launch a Site That Converts?</h2>
-      <p class="font-body text-white/80 text-lg mb-7">
+  <section class="bg-primary py-12">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+      <h2 class="mb-4 font-heading text-3xl font-extrabold text-white">
+        Ready to Launch a Site That Converts?
+      </h2>
+      <p class="mb-7 font-body text-lg text-white/80">
         Book a quick call. We’ll map your pages, timeline, and next steps.
       </p>
       <a
         href="#contact"
-        class="inline-flex items-center px-8 py-4 rounded-2xl bg-white hover:bg-bluelight text-primary font-heading font-semibold text-lg shadow transition"
+        class="inline-flex items-center rounded-2xl bg-white px-8 py-4 font-heading text-lg font-semibold text-primary shadow transition hover:bg-bluelight"
         aria-label="Get Started — open contact form"
       >
         Book My Free Website Plan

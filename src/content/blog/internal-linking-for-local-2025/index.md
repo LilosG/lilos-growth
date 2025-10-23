@@ -1,15 +1,15 @@
 ---
 date: 2025-10-20
-title: 'Internal Linking for Local 2025: Hubs, Spokes & GBP Alignment'
-description: 'Design a simple internal link system that makes Service + City pages discoverable, boosts relevance, and turns GBP views into calls.'
+title: "Internal Linking for Local 2025: Hubs, Spokes & GBP Alignment"
+description: "Design a simple internal link system that makes Service + City pages discoverable, boosts relevance, and turns GBP views into calls."
 slug: internal-linking-for-local-2025
-category: 'SEO'
-tags: ['local-seo', 'ia', 'internal-links']
+category: "SEO"
+tags: ["local-seo", "ia", "internal-links"]
 pubDate: 2025-10-19
-datePublished: '2025-10-19'
+datePublished: "2025-10-19"
 draft: false
-image: '/images/blog/internal-linking-for-local-2025/hero.svg'
-imageAlt: 'Hub-and-spoke internal link map for local sites'
+image: "/images/blog/internal-linking-for-local-2025/hero.svg"
+imageAlt: "Hub-and-spoke internal link map for local sites"
 ---
 
 > **TL;DR:** Local sites win with a **hub → spoke → proof** link system: Service Hubs, City Hubs, and **Service + City** pages interlinked with **literal anchors**. Add links from FAQs, blog posts, header/footer “utility rails,” and GBP Posts. Audit quarterly to fix orphans, thin anchors, and dead ends.

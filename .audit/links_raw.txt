@@ -1,0 +1,24 @@
+src/layouts/PageLayout.astro:113:  {showFloatingCalendly && <FloatingCalendlyButton href="/contact#book" label="Book a Call" />}
+src/pages/services/web-design/index.astro:70:          href="/packages#packages"
+src/pages/services/web-design/index.astro:193:          href="/packages#packages"
+src/pages/about.astro:299:          href="/contact"
+src/pages/about.astro:315:          href="/#packages"
+src/pages/local-seo-tools/index.astro:320:          href="/contact#book"
+src/pages/services/google-business-profile-optimization/index.astro:255:              href="/services/local-seo"
+src/pages/services/google-business-profile-optimization/index.astro:279:              href="/services/web-design"
+src/pages/services/google-business-profile-optimization/index.astro:303:              href="/packages"
+src/pages/privacy-policy.astro:33:          <a href="/">lilosgrowth.com</a> (the “Site”) and in connection with our services.
+src/pages/privacy-policy.astro:108:          Questions or requests? Please <a href="/contact">contact us</a> and we’ll respond promptly.
+src/pages/blog/tag/[tag].astro:57:            href="/packages"
+src/pages/blog/tag/[tag].astro:66:            href="/contact"
+src/pages/blog/category/[category].astro:56:            href="/packages"
+src/pages/blog/category/[category].astro:65:            href="/contact"
+src/components/widgets/Header.astro:22:      <a href="/" class="flex items-center gap-2 shrink-0" aria-label="Lilos Growth">
+src/pages/blog/[slug].astro:33:      <a href="/blog" class="inline-block text-sm opacity-90 hover:opacity-100">← Back to Blog</a>
+src/pages/blog/[...page].astro:68:            href="/packages"
+src/pages/blog/index.astro:65:            href="/packages"
+src/pages/thank-you.astro:17:      <a href="/" class="inline-flex mt-8 px-6 py-3 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold"
+src/components/Favicons.astro:5:<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+src/components/Favicons.astro:6:<link rel="alternate icon" href="/favicon.png" sizes="32x32" type="image/png" />
+src/components/Favicons.astro:7:<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+src/components/Favicons.astro:8:<link rel="mask-icon" href="/favicon.svg" color={theme} />

@@ -1,15 +1,15 @@
 ---
 date: 2025-10-19T17:07:59-07:00
-title: 'Local Landing Page Blueprints 2025: Copy, Sections, and Internal Links That Rank'
-description: 'Build city and service pages that win: proven sections, copy blocks, internal links, and checklists for local pros in home services.'
+title: "Local Landing Page Blueprints 2025: Copy, Sections, and Internal Links That Rank"
+description: "Build city and service pages that win: proven sections, copy blocks, internal links, and checklists for local pros in home services."
 slug: local-landing-page-blueprints-2025
-category: 'SEO'
-tags: ['local-seo', 'content', 'landing-pages']
+category: "SEO"
+tags: ["local-seo", "content", "landing-pages"]
 pubDate: 2025-10-19
-datePublished: '2025-10-19'
+datePublished: "2025-10-19"
 draft: false
-image: '/images/blog/local-landing-page-blueprints-2025/hero.svg'
-imageAlt: 'Blueprint of a high-performing local landing page'
+image: "/images/blog/local-landing-page-blueprints-2025/hero.svg"
+imageAlt: "Blueprint of a high-performing local landing page"
 ---
 
 <!-- Paste the full blog body here and save -->

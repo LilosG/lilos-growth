@@ -1,12 +1,12 @@
-import type { MiddlewareHandler } from 'astro';
+import type { MiddlewareHandler } from "astro";
 
 export const onRequest: MiddlewareHandler = async (ctx, next) => {
   const url = new URL(ctx.request.url);
-  const n = Number(url.searchParams.get('page'));
+  const n = Number(url.searchParams.get("page"));
 
   if (Number.isFinite(n) && n > 1) {
     // /blog?page=N  -> /blog/N
-    if (url.pathname === '/blog') {
+    if (url.pathname === "/blog") {
       return ctx.redirect(`/blog/${n}`, 308);
     }
     // /blog/tag/<tag>?page=N -> /blog/tag/<tag>/N

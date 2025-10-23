@@ -14,31 +14,31 @@ export interface Props {
   height?: number | string;
   sizes?: string;
   widths?: number[];
-  layout?: 'intrinsic' | 'cover' | 'contain' | 'fill';
-  loading?: 'lazy' | 'eager';
-  decoding?: 'async' | 'auto' | 'sync';
+  layout?: "intrinsic" | "cover" | "contain" | "fill";
+  loading?: "lazy" | "eager";
+  decoding?: "async" | "auto" | "sync";
   /** For square/ratio wrappers when using slotted content */
   aspectRatio?: `${number}/${number}` | string;
 }
 
 const {
   src,
-  alt = '',
-  class: className = '',
+  alt = "",
+  class: className = "",
   width,
   height,
   sizes,
   widths,
   layout,
-  loading = 'lazy',
-  decoding = 'async',
+  loading = "lazy",
+  decoding = "async",
   aspectRatio,
 } = Astro.props as Props;
 
 // Derive numeric width/height if we can
 function num(v: unknown): number | undefined {
-  if (typeof v === 'number') return v;
-  if (typeof v === 'string' && v.trim() !== '' && !Number.isNaN(Number(v))) return Number(v);
+  if (typeof v === "number") return v;
+  if (typeof v === "string" && v.trim() !== "" && !Number.isNaN(Number(v))) return Number(v);
   return undefined;
 }
 
@@ -46,7 +46,7 @@ let w = num(width);
 let h = num(height);
 
 if (!w || !h) {
-  if (src && typeof src === 'object' && 'width' in src && 'height' in src) {
+  if (src && typeof src === "object" && "width" in src && "height" in src) {
     const meta = src as ImageMetadata;
     if (!w && h) w = Math.round((meta.width / meta.height) * h);
     if (!h && w) h = Math.round((meta.height / meta.width) * w);
@@ -67,13 +67,13 @@ if (!h) h = 1;
     /* No src: sized wrapper for slotted content (e.g., SVG icon). */
     <div
       class={className}
-      style={`display:inline-block; width:${w}px; height:${h}px; ${aspectRatio ? `aspect-ratio:${aspectRatio};` : ''}`}
+      style={`display:inline-block; width:${w}px; height:${h}px; ${aspectRatio ? `aspect-ratio:${aspectRatio};` : ""}`}
     >
       <slot />
     </div>
   ) : (
     <img
-      src={typeof src === 'string' ? src : src.src}
+      src={typeof src === "string" ? src : src.src}
       alt={alt}
       class={className}
       width={w}

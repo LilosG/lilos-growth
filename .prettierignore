@@ -1,12 +1,14 @@
-# Ignore demo MDX that Prettier can't parse in CI
-src/data/post/markdown-elements-demo.post.mdx
-
-# (Optional) ignore the whole demo folder if you prefer
-# src/data/post/
-# CI: skip files with parser quirks
-src/components/common/GoogleAnalytics.astro
-src/data/post/markdown-elements-demo-post.mdx
-dist/
-.vercel/
-.backups/
-node_modules/
+node_modules
+dist
+.build
+.out
+.cache
+.vercel
+.netlify
+.backups
+coverage
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+*.min.js
+*.min.css

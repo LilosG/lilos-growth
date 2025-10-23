@@ -4,22 +4,22 @@
  * Pages pass title/description/metadata; SEO is centralized via <Metadata />.
  */
 
-import '~/assets/styles/tailwind.css';
+import "~/assets/styles/tailwind.css";
 
-import CommonMeta from '~/components/common/CommonMeta.astro';
-import CustomStyles from '~/components/CustomStyles.astro';
-import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
-import Metadata from '~/components/common/Metadata.astro';
-import SiteVerification from '~/components/common/SiteVerification.astro';
-import BasicScripts from '~/components/common/BasicScripts.astro';
+import CommonMeta from "~/components/common/CommonMeta.astro";
+import CustomStyles from "~/components/CustomStyles.astro";
+import ApplyColorMode from "~/components/common/ApplyColorMode.astro";
+import Metadata from "~/components/common/Metadata.astro";
+import SiteVerification from "~/components/common/SiteVerification.astro";
+import BasicScripts from "~/components/common/BasicScripts.astro";
 
-import GoogleAnalytics from '~/components/common/GoogleAnalytics.astro';
+import GoogleAnalytics from "~/components/common/GoogleAnalytics.astro";
 
 // Use the official Vercel Analytics package; alias to avoid any name conflicts.
-import VercelAnalytics from '@vercel/analytics/astro';
-import SpeedInsights from '@vercel/speed-insights/astro';
+import VercelAnalytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
-import type { MetaData as MetaDataType } from '~/types';
+import type { MetaData as MetaDataType } from "~/types";
 
 /** Page meta input */
 type MetaInput = Partial<MetaDataType> & {
@@ -36,16 +36,23 @@ export interface Props {
   metadata?: MetaInput;
 }
 
-const { title, description, ignoreTitleTemplate, lang = 'en', bodyClass = '', metadata = {} } = Astro.props as Props;
+const {
+  title,
+  description,
+  ignoreTitleTemplate,
+  lang = "en",
+  bodyClass = "",
+  metadata = {},
+} = Astro.props as Props;
 
 /** Conservative fallback titles when a page doesn't provide one */
 const pathname = Astro.url.pathname;
 let fallbackTitle: string | undefined;
 if (!title) {
-  if (pathname === '/' || pathname === '/index') {
-    fallbackTitle = 'Local SEO & Websites for Home Service Pros';
-  } else if (pathname.startsWith('/additional-services')) {
-    fallbackTitle = 'Additional Services for Home Service Pros';
+  if (pathname === "/" || pathname === "/index") {
+    fallbackTitle = "Local SEO & Websites for Home Service Pros";
+  } else if (pathname.startsWith("/additional-services")) {
+    fallbackTitle = "Additional Services for Home Service Pros";
   }
 }
 const effectiveTitle = title ?? fallbackTitle;
@@ -84,43 +91,43 @@ declare global {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta
-      content={typeof metadata !== 'undefined' && metadata?.description
+      content={typeof metadata !== "undefined" && metadata?.description
         ? metadata.description
-        : typeof description !== 'undefined'
+        : typeof description !== "undefined"
           ? description
-          : 'Get more calls and booked jobs with Local SEO, Google Business Profile, and conversion-ready websites.'}
+          : "Get more calls and booked jobs with Local SEO, Google Business Profile, and conversion-ready websites."}
     />
     <meta
       property="og:title"
-      content={typeof metadata !== 'undefined' && metadata?.title
+      content={typeof metadata !== "undefined" && metadata?.title
         ? metadata.title
-        : typeof title !== 'undefined'
+        : typeof title !== "undefined"
           ? title
-          : 'Lilos Growth'}
+          : "Lilos Growth"}
     />
     <meta
       property="og:description"
-      content={typeof metadata !== 'undefined' && metadata?.description
+      content={typeof metadata !== "undefined" && metadata?.description
         ? metadata.description
-        : typeof description !== 'undefined'
+        : typeof description !== "undefined"
           ? description
-          : 'Get more calls and booked jobs with Local SEO, Google Business Profile, and conversion-ready websites.'}
+          : "Get more calls and booked jobs with Local SEO, Google Business Profile, and conversion-ready websites."}
     />
     <meta
       name="twitter:title"
-      content={typeof metadata !== 'undefined' && metadata?.title
+      content={typeof metadata !== "undefined" && metadata?.title
         ? metadata.title
-        : typeof title !== 'undefined'
+        : typeof title !== "undefined"
           ? title
-          : 'Lilos Growth'}
+          : "Lilos Growth"}
     />
     <meta
       name="twitter:description"
-      content={typeof metadata !== 'undefined' && metadata?.description
+      content={typeof metadata !== "undefined" && metadata?.description
         ? metadata.description
-        : typeof description !== 'undefined'
+        : typeof description !== "undefined"
           ? description
-          : 'Get more calls and booked jobs with Local SEO, Google Business Profile, and conversion-ready websites.'}
+          : "Get more calls and booked jobs with Local SEO, Google Business Profile, and conversion-ready websites."}
     />
     <meta name="twitter:image" content="https://lilosgrowth.com/assets/images/default.png" />
     <meta property="og:image:width" content="1200" />
@@ -135,7 +142,7 @@ declare global {
   <body
     class={`antialiased text-default bg-page tracking-tight min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip ${bodyClass}`}
   >
-    <div class="flex-1 flex flex-col">
+    <div class="flex flex-1 flex-col">
       <slot />
     </div>
 
@@ -151,12 +158,12 @@ declare global {
       window.trackEvent = (name, data = {}) => {
         try {
           const va = /** @type {any} */ (window).va;
-          if (typeof va === 'function') va('event', { name: String(name), data });
+          if (typeof va === "function") va("event", { name: String(name), data });
         } catch {}
 
         try {
           // @ts-expect-error: gtag exists only if GA loaded
-          window.gtag?.('event', String(name), data);
+          window.gtag?.("event", String(name), data);
         } catch {}
       };
     </script>

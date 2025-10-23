@@ -1,15 +1,15 @@
 ---
 date: 2025-10-13T09:36:29-07:00
-title: 'Google Business Profile Essentials for Home Services'
-description: 'The foundation for local visibility and booked jobs across Maps and AI answers. Set up, optimize, and maintain your Google Business Profile the right way.'
+title: "Google Business Profile Essentials for Home Services"
+description: "The foundation for local visibility and booked jobs across Maps and AI answers. Set up, optimize, and maintain your Google Business Profile the right way."
 slug: google-business-profile-essentials
-category: 'Google Business Profile'
-tags: ['gbp', 'local-seo', 'maps', 'reviews']
+category: "Google Business Profile"
+tags: ["gbp", "local-seo", "maps", "reviews"]
 pubDate: 2025-10-11
-datePublished: '2025-10-11'
+datePublished: "2025-10-11"
 draft: false
-image: '/images/blog/long-tail/hero.svg'
-imageAlt: 'Google Business Profile optimization banner'
+image: "/images/blog/long-tail/hero.svg"
+imageAlt: "Google Business Profile optimization banner"
 ---
 
 > **TL;DR:** Your Google Business Profile (GBP) is the **fastest path to calls**. Nail setup, categories, service areas, photos, and reviews. Keep info accurate, post weekly, and respond to every review.

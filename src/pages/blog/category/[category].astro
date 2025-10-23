@@ -1,28 +1,28 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import { getCollection } from 'astro:content';
-import BlogCard from '../../../components/BlogCard.astro';
-import { getSlug, toListing, byCategory, type BlogEntry } from '../../../lib/blog';
+import Layout from "~/layouts/PageLayout.astro";
+import { getCollection } from "astro:content";
+import BlogCard from "../../../components/BlogCard.astro";
+import { getSlug, toListing, byCategory, type BlogEntry } from "../../../lib/blog";
 
 export async function getStaticPaths() {
-  const posts: BlogEntry[] = await getCollection('blog');
+  const posts: BlogEntry[] = await getCollection("blog");
   const published = toListing(posts);
   const cats = new Set<string>();
   for (const p of published) {
     const c = (p.data as any).category;
-    if (typeof c === 'string' && c) cats.add(c);
+    if (typeof c === "string" && c) cats.add(c);
   }
   return Array.from(cats).map((c) => ({ params: { category: c } }));
 }
 
-const cat = String(Astro.params.category ?? '').trim();
+const cat = String(Astro.params.category ?? "").trim();
 
 // Pagination
-const page = Math.max(1, Number(Astro.url.searchParams.get('page') || '1'));
+const page = Math.max(1, Number(Astro.url.searchParams.get("page") || "1"));
 const pageSize = 12;
 
 // Data
-const all: BlogEntry[] = await getCollection('blog');
+const all: BlogEntry[] = await getCollection("blog");
 const filtered = toListing(all, byCategory(cat));
 
 const total = filtered.length;
@@ -37,37 +37,53 @@ const description = `Articles filed under ${cat}.`;
 
 <Layout title={title} description={description} metadata={{ title, description }}>
   <!-- HERO (same structure as homepage) -->
-  <section class="bg-[#253242] min-h-[680px] flex items-center pt-10 pb-20 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159] pointer-events-none"></div>
+  <section
+    class="relative flex min-h-[680px] items-center overflow-hidden bg-[#253242] pb-20 pt-10"
+  >
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]">
+    </div>
 
-    <div class="relative z-10 max-w-6xl mx-auto w-full flex flex-col md:flex-row md:items-center gap-14 px-4">
+    <div
+      class="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-14 px-4 md:flex-row md:items-center"
+    >
       <!-- Left -->
       <div class="flex-1">
         <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="mb-10 w-40" />
-        <h1 class="text-4xl md:text-5xl font-heading text-white font-extrabold mb-2 leading-tight tracking-tight">
+        <h1
+          class="mb-2 font-heading text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl"
+        >
           Category: <span class="text-[#f56b2a]">{cat}</span>
         </h1>
-        <div class="h-1.5 w-28 bg-[#f56b2a] rounded-full mb-8"></div>
-        <p class="text-lg md:text-xl text-white/80 mb-9 max-w-lg font-medium">
-          Curated posts in the {cat} category—strategy, playbooks, and examples tailored for home-service companies.
+        <div class="mb-8 h-1.5 w-28 rounded-full bg-[#f56b2a]"></div>
+        <p class="mb-9 max-w-lg text-lg font-medium text-white/80 md:text-xl">
+          Curated posts in the {cat} category—strategy, playbooks, and examples tailored for home-service
+          companies.
         </p>
         <div class="flex flex-wrap gap-3.5">
           <a
             href="/packages"
-            class="inline-flex items-center px-8 py-3.5 rounded-2xl bg-[#f56b2a] hover:bg-[#f34e00] text-white font-heading font-semibold text-lg shadow transition"
+            class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-8 py-3.5 font-heading text-lg font-semibold text-white shadow transition hover:bg-[#f34e00]"
           >
             Get More Calls Today
-            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
-              ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
+            <svg
+              class="ml-2 h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
             >
           </a>
           <a
             href="/contact"
-            class="inline-flex items-center px-6 py-3 rounded-2xl bg-secondary hover:bg-[#27394b] text-white font-heading font-semibold text-base shadow transition"
+            class="inline-flex items-center rounded-2xl bg-secondary px-6 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#27394b]"
           >
             Book a Call
-            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"
-              ><path d="M5 12h14M13 18l6-6-6-6"></path></svg
+            <svg
+              class="ml-2 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
             >
           </a>
         </div>
@@ -76,9 +92,9 @@ const description = `Articles filed under ${cat}.`;
       <!-- Right: Netlify form -->
       <div
         id="contact"
-        class="flex-1 max-w-md mx-auto md:mx-0 bg-white p-10 rounded-3xl shadow-xl border border-gray-100"
+        class="mx-auto max-w-md flex-1 rounded-3xl border border-gray-100 bg-white p-10 shadow-xl md:mx-0"
       >
-        <h2 class="text-xl font-heading text-heading font-bold mb-4 text-left">
+        <h2 class="mb-4 text-left font-heading text-xl font-bold text-heading">
           Free SEO Website Audit for Home Service Pros!
         </h2>
         <form
@@ -86,7 +102,7 @@ const description = `Articles filed under ${cat}.`;
           method="POST"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
-          class="flex flex-col gap-4.5"
+          class="gap-4.5 flex flex-col"
           action="/thank-you"
         >
           <input type="hidden" name="form-name" value="seo-audit" />
@@ -100,7 +116,7 @@ const description = `Articles filed under ${cat}.`;
             name="name"
             placeholder="Your Name"
             required
-            class="w-full border border-gray-300 rounded-lg px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#f56b2a]/40"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#f56b2a]/40"
           />
 
           <label class="sr-only" for="email">Email Address</label>
@@ -110,7 +126,7 @@ const description = `Articles filed under ${cat}.`;
             name="email"
             placeholder="Email Address"
             required
-            class="w-full border border-gray-300 rounded-lg px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#f56b2a]/40"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#f56b2a]/40"
           />
 
           <label class="sr-only" for="company">Company Name</label>
@@ -118,7 +134,7 @@ const description = `Articles filed under ${cat}.`;
             id="company"
             name="company"
             placeholder="Company Name"
-            class="w-full border border-gray-300 rounded-lg px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#f56b2a]/40"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#f56b2a]/40"
           />
 
           <label class="sr-only" for="website">Website</label>
@@ -128,12 +144,12 @@ const description = `Articles filed under ${cat}.`;
             name="website"
             placeholder="Website"
             required
-            class="w-full border border-gray-300 rounded-lg px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#f56b2a]/40"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#f56b2a]/40"
           />
 
           <button
             type="submit"
-            class="mt-1.5 px-7 py-3.5 rounded-xl bg-[#f56b2a] text-white font-heading font-semibold text-base shadow hover:bg-[#f34e00] transition"
+            class="mt-1.5 rounded-xl bg-[#f56b2a] px-7 py-3.5 font-heading text-base font-semibold text-white shadow transition hover:bg-[#f34e00]"
           >
             Get My Free Audit
           </button>
@@ -145,7 +161,7 @@ const description = `Articles filed under ${cat}.`;
 
   <!-- LIST -->
   <section class="py-12">
-    <div class="max-w-6xl mx-auto px-4">
+    <div class="mx-auto max-w-6xl px-4">
       {
         slice.length === 0 ? (
           <p class="text-gray-600">No posts found in this category.</p>
@@ -170,7 +186,7 @@ const description = `Articles filed under ${cat}.`;
           <nav class="mt-10 flex items-center justify-center gap-3">
             <a
               href={`/blog/category/${encodeURIComponent(cat)}${page > 2 ? `/${page - 1}` : page > 1 ? `` : ``}`}
-              class="btn btn-outline-primary btn-sm disabled:opacity-40"
+              class="btn btn-sm btn-outline-primary disabled:opacity-40"
               aria-disabled={page === 1}
             >
               Prev
@@ -180,7 +196,7 @@ const description = `Articles filed under ${cat}.`;
             </span>
             <a
               href={`/blog/category/${encodeURIComponent(cat)}/${Math.min(totalPages, page + 1)}`}
-              class="btn btn-outline-primary btn-sm disabled:opacity-40"
+              class="btn btn-sm btn-outline-primary disabled:opacity-40"
               aria-disabled={page === totalPages}
             >
               Next

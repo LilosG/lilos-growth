@@ -1,15 +1,15 @@
 ---
 date: 2025-10-20
-title: 'Local Links & Brand Mentions 2025: A Field Playbook for Trades'
-description: 'Earn links and brand mentions that move Map Pack rankings and revenue—using local PR, vendor co-marketing, community assets, and proof-first outreach.'
+title: "Local Links & Brand Mentions 2025: A Field Playbook for Trades"
+description: "Earn links and brand mentions that move Map Pack rankings and revenue—using local PR, vendor co-marketing, community assets, and proof-first outreach."
 slug: local-links-brand-mentions-2025
-category: 'SEO'
-tags: ['local-seo', 'links', 'pr']
+category: "SEO"
+tags: ["local-seo", "links", "pr"]
 pubDate: 2025-10-19
-datePublished: '2025-10-19'
+datePublished: "2025-10-19"
 draft: false
-image: '/images/blog/local-links-brand-mentions-2025/hero.svg'
-imageAlt: 'Network of local links and mentions feeding a home-service brand'
+image: "/images/blog/local-links-brand-mentions-2025/hero.svg"
+imageAlt: "Network of local links and mentions feeding a home-service brand"
 ---
 
 > **TL;DR:** Skip generic link swaps. For local services, the fastest wins come from **proof-backed local PR** (jobs, safety tips, data), **vendor/association co-marketing**, **community sponsorships with deliverables**, and **Answer Page assets** reporters can cite. Build an **opportunity pipeline**, assign **owners**, and run **weekly outreach with SLAs**. Measure by **coverage, clicks, calls, and ranking lift**—not just DA.

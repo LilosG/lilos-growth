@@ -1,2 +1,2 @@
-declare const Astro: import('astro').AstroGlobal;
+declare const Astro: import("astro").AstroGlobal;
 export {};
