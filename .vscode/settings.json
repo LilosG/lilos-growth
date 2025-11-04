@@ -1,9 +1,7 @@
 {
-  "tailwindCSS.emmetCompletions": true,
-  "tailwindCSS.includeLanguages": { "astro": "html", "plaintext": "html" },
-
-  // Silence the built-in CSS/SCSS/LESS validators
-  "css.validate": false,
-  "scss.validate": false,
-  "less.validate": false
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.profiles.osx": {
+    "zsh": { "path": "/bin/zsh", "args": ["-l"] },
+    "bash": { "path": "/bin/bash", "args": ["-l"] }
+  }
 }
