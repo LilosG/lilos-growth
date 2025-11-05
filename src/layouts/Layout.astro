@@ -18,6 +18,7 @@ import GoogleAnalytics from "~/components/common/GoogleAnalytics.astro";
 // Use the official Vercel Analytics package; alias to avoid any name conflicts.
 import VercelAnalytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import CookieBanner from "~/components/CookieBanner.astro";
 
 import type { MetaData as MetaDataType } from "~/types";
 
@@ -167,5 +168,6 @@ declare global {
         } catch {}
       };
     </script>
+    <CookieBanner />
   </body>
 </html>

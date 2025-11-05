@@ -1,0 +1,52 @@
+---
+/* Simple consent banner: stores choice in localStorage and emits an event. */
+const KEY = "lg_cookie_consent";
+---
+
+<div id="cookie-banner" class="fixed inset-x-0 bottom-0 z-50 hidden bg-gray-900 text-white">
+  <div class="mx-auto flex w-full max-w-5xl items-center gap-3 p-4 text-sm">
+    <span
+      >We use cookies for site functionality and analytics. You can change your preference anytime.</span
+    >
+    <div class="ml-auto flex gap-2">
+      <button id="cookie-accept" class="rounded bg-white px-3 py-2 text-gray-900">Accept</button>
+      <button id="cookie-decline" class="rounded border border-white/40 px-3 py-2">Decline</button>
+      <a href="/privacy-policy#cookies" class="underline">Learn more</a>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const key = "lg_cookie_consent";
+    const banner = document.getElementById("cookie-banner");
+    const existing = localStorage.getItem(key);
+    if (!existing) banner.classList.remove("hidden");
+
+    function setConsent(v) {
+      localStorage.setItem(key, v);
+      banner.classList.add("hidden");
+      if (v === "accepted") window.dispatchEvent(new Event("lg-consent-accepted"));
+    }
+    document
+      .getElementById("cookie-accept")
+      ?.addEventListener("click", () => setConsent("accepted"));
+    document
+      .getElementById("cookie-decline")
+      ?.addEventListener("click", () => setConsent("declined"));
+
+    // Re-open from links in Privacy page
+    document.getElementById("cookie-preferences-link")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.removeItem(key);
+      banner.classList.remove("hidden");
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    });
+    document.getElementById("cookie-preferences-link-2")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.removeItem(key);
+      banner.classList.remove("hidden");
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    });
+  })();
+</script>

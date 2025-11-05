@@ -1,6 +1,6 @@
 # Astro/Tailwind Local SEO & Tech Audit
 
-- Timestamp: `2025-10-20 22:26:59`
+- Timestamp: `2025-10-20 22:19:33`
 - Working dir: `/Users/michaelprickett/lilos-growth`
 
 ## Project & Tooling
@@ -17,7 +17,7 @@
 
 ## Core Files
 
-- ❌ sitemap missing (expected public/sitemap.xml or public/sitemap-index.xml)
+- ❌ public/sitemap.xml missing
 - ✅ public/robots.txt exists
 
 ## Layout & Head (canonical, meta, JSON-LD)
@@ -62,5 +62,7 @@
 - ❌ Pages missing title/frontmatter title: 26
 - ❌ Pages missing H1: 13
 - ❌ Pages missing meta description: 28
+
+## Links & Routing Hygiene
 
 - Found ~ 24 internal link occurrences
