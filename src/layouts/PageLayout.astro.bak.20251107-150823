@@ -46,24 +46,22 @@ const organization = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": `${siteUrl}#org`,
-  name: "Lilos Growth, LLC",
-  url: siteUrl,
-  logo: {
+  "name": "Lilos Growth, LLC",
+  "url": siteUrl,
+  "logo": {
     "@type": "ImageObject",
-    url: `${siteUrl}logo.png`, // TODO: replace if your logo lives elsewhere
-    width: 512, // TODO: set real width/height of the logo
-    height: 512,
+    "url": `${siteUrl}logo.png`, // TODO: replace if your logo lives elsewhere
+    "width": 512,                // TODO: set real width/height of the logo
+    "height": 512
   },
-  contactPoint: [
-    {
-      "@type": "ContactPoint",
-      contactType: "customer support",
-      email: "hello@lilosgrowth.com",
-      telephone: "+1-858-722-2920",
-      areaServed: "US",
-      availableLanguage: ["en"],
-    },
-  ],
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "email": "hello@lilosgrowth.com",
+    "telephone": "+1-858-722-2920",
+    "areaServed": "US",
+    "availableLanguage": ["en"]
+  }]
 };
 
 /**
@@ -74,24 +72,24 @@ const localBusiness = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "@id": `${siteUrl}#localbiz`,
-  name: "Lilos Growth, LLC",
-  url: siteUrl,
-  telephone: "+1-858-722-2920",
-  image: `${siteUrl}og.jpg`, // optional; swap for a better brand image if you have one
-  priceRange: "$$",
-  address: {
+  "name": "Lilos Growth, LLC",
+  "url": siteUrl,
+  "telephone": "+1-858-722-2920",
+  "image": `${siteUrl}og.jpg`, // optional; swap for a better brand image if you have one
+  "priceRange": "$$",
+  "address": {
     "@type": "PostalAddress",
-    streetAddress: "401 West A St, Ste 200",
-    addressLocality: "San Diego",
-    addressRegion: "CA",
-    postalCode: "92101",
-    addressCountry: "US",
+    "streetAddress": "401 West A St, Ste 200",
+    "addressLocality": "San Diego",
+    "addressRegion": "CA",
+    "postalCode": "92101",
+    "addressCountry": "US"
   },
-  areaServed: { "@type": "AdministrativeArea", name: "United States" },
-  sameAs: [
+  "areaServed": { "@type": "AdministrativeArea", "name": "United States" },
+  "sameAs": [
     // Add real profiles when available, e.g.:
     // "https://www.linkedin.com/company/lilos-growth"
-  ],
+  ]
 };
 
 /**
@@ -102,8 +100,8 @@ const webSite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": `${siteUrl}#website`,
-  url: siteUrl,
-  name: "Lilos Growth",
+  "url": siteUrl,
+  "name": "Lilos Growth"
 };
 
 const breadcrumbList =

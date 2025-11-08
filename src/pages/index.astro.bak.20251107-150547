@@ -641,6 +641,68 @@ import PackagesSecondary from "../components/sections/PackagesSecondary.astro";
   </section>
 </Layout>
 <!-- SEO/AEO: Organization + LocalBusiness + WebSite + Service + Breadcrumb -->
+<script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://lilosgrowth.com/#org",
+        "name": "Lilos Growth",
+        "url": "https://lilosgrowth.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lilosgrowth.com/assets/images/default.png"
+        },
+        "email": "hello@lilosgrowth.com"
+      },
+      {
+        "@type": ["LocalBusiness", "ProfessionalService"],
+        "@id": "https://lilosgrowth.com/#local",
+        "name": "Lilos Growth",
+        "url": "https://lilosgrowth.com",
+        "image": "https://lilosgrowth.com/assets/images/default.png",
+        "email": "hello@lilosgrowth.com",
+        "areaServed": { "@type": "Country", "name": "United States" },
+        "address": { "@type": "PostalAddress", "addressCountry": "US" },
+        "priceRange": "$",
+        "parentOrganization": { "@id": "https://lilosgrowth.com/#org" },
+        "knowsAbout": [
+          "Local SEO",
+          "Google Business Profile",
+          "Website Design",
+          "Review Management",
+          "Content & On-Page SEO"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://lilosgrowth.com/#website",
+        "url": "https://lilosgrowth.com",
+        "name": "Lilos Growth"
+      },
+      {
+        "@type": "Service",
+        "@id": "https://lilosgrowth.com/#service",
+        "serviceType": "Local SEO & Digital Marketing for Home Service Businesses",
+        "provider": { "@id": "https://lilosgrowth.com/#local" },
+        "areaServed": { "@type": "Country", "name": "United States" },
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://lilosgrowth.com/#bread",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://lilosgrowth.com/" }
+        ]
+      }
+    ]
+  }
+</script>
 
 <!-- FAQPage schema (safe, add-only) -->
 <script type="application/ld+json" is:inline>

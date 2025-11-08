@@ -34,76 +34,14 @@ const {
   showFloatingCalendly = true,
 } = props;
 
-// Prefer Astro.site when available (respects site config)
 const site = Astro.site?.toString() ?? "https://lilosgrowth.com";
-const siteUrl = site.endsWith("/") ? site : site + "/";
 
-/**
- * === Global Organization (site-wide, single source of truth) ===
- * Uses your real contact info; update logo URL/dimensions to match your asset.
- */
-const organization = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": `${siteUrl}#org`,
-  name: "Lilos Growth, LLC",
-  url: siteUrl,
-  logo: {
-    "@type": "ImageObject",
-    url: `${siteUrl}logo.png`, // TODO: replace if your logo lives elsewhere
-    width: 512, // TODO: set real width/height of the logo
-    height: 512,
-  },
-  contactPoint: [
-    {
-      "@type": "ContactPoint",
-      contactType: "customer support",
-      email: "hello@lilosgrowth.com",
-      telephone: "+1-858-722-2920",
-      areaServed: "US",
-      availableLanguage: ["en"],
-    },
-  ],
-};
-
-/**
- * === LocalBusiness (enhanced with full NAP) ===
- * Stable @id lets Google relate entities across your site.
- */
 const localBusiness = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "@id": `${siteUrl}#localbiz`,
-  name: "Lilos Growth, LLC",
-  url: siteUrl,
-  telephone: "+1-858-722-2920",
-  image: `${siteUrl}og.jpg`, // optional; swap for a better brand image if you have one
-  priceRange: "$$",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "401 West A St, Ste 200",
-    addressLocality: "San Diego",
-    addressRegion: "CA",
-    postalCode: "92101",
-    addressCountry: "US",
-  },
-  areaServed: { "@type": "AdministrativeArea", name: "United States" },
-  sameAs: [
-    // Add real profiles when available, e.g.:
-    // "https://www.linkedin.com/company/lilos-growth"
-  ],
-};
-
-/**
- * === WebSite (lightweight, harmless) ===
- * We omit SearchAction unless you expose an on-site search endpoint.
- */
-const webSite = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": `${siteUrl}#website`,
-  url: siteUrl,
   name: "Lilos Growth",
+  url: site,
+  areaServed: { "@type": "AdministrativeArea", name: "United States" },
 };
 
 const breadcrumbList =
@@ -115,7 +53,7 @@ const breadcrumbList =
           "@type": "ListItem",
           position: i + 1,
           name: c.name,
-          item: c.item?.startsWith("http") ? c.item : new URL(c.item || "/", siteUrl).toString(),
+          item: c.item?.startsWith("http") ? c.item : new URL(c.item || "/", site).toString(),
         })),
       }
     : null;
@@ -123,6 +61,7 @@ const breadcrumbList =
 /**
  * Ensure we only output one JSON-LD per @type/@id.
  * If no @id is present, we keep the first occurrence of that @type.
+ * This prevents duplicate BreadcrumbList/LocalBusiness when pages also inject schema.
  */
 function uniqueByTypeId(nodes: any[]): any[] {
   const seen = new Set<string>();
@@ -138,9 +77,7 @@ function uniqueByTypeId(nodes: any[]): any[] {
 }
 
 const schemaNodes = uniqueByTypeId([
-  organization,
   localBusiness,
-  webSite,
   ...(breadcrumbList ? [breadcrumbList] : []),
   ...schemaExtras,
 ]);
