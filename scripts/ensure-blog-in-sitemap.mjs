@@ -21,10 +21,18 @@ function walk(dir) {
 }
 
 const files = walk(blogDir);
-const urls = files.map((f) => {
-  const rel = "/" + path.posix.relative(dist, path.dirname(f)).replace(/\\/g, "/");
-  return SITE + rel;
-});
+
+// Build blog URLs, then filter out tag/category archive URLs
+const urls = files
+  .map((f) => {
+    const rel = "/" + path.posix.relative(dist, path.dirname(f)).replace(/\\/g, "/");
+    return SITE + rel;
+  })
+  .filter((u) => {
+    if (u.startsWith(`${SITE}/blog/tag/`)) return false;
+    if (u.startsWith(`${SITE}/blog/category/`)) return false;
+    return true;
+  });
 
 const urlset = urls.map((u) => `  <url><loc>${u}</loc></url>`).join("\n");
 const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlset}\n</urlset>\n`;
@@ -33,11 +41,13 @@ fs.writeFileSync(path.join(dist, "sitemap-blog.xml"), xml, "utf8");
 const indexPath = path.join(dist, "sitemap-index.xml");
 let index = fs.readFileSync(indexPath, "utf8");
 const loc = `${SITE}/sitemap-blog.xml`;
+
 if (!index.includes(loc)) {
   const insert = `<sitemap><loc>${loc}</loc></sitemap>`;
   index = index.replace("</sitemapindex>", `${insert}\n</sitemapindex>`);
   fs.writeFileSync(indexPath, index, "utf8");
 }
+
 console.log(
-  `✅ Wrote ${urls.length} blog URLs to sitemap-blog.xml and linked from sitemap-index.xml`
+  `✅ Wrote ${urls.length} blog URLs to sitemap-blog.xml and linked from sitemap-index.xml (excluding tag & category archives)`
 );

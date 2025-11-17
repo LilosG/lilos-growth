@@ -35,7 +35,7 @@ const title = `Posts tagged “${tag}”`;
 const description = `Actionable articles about ${tag} for home-service SEO and growth.`;
 ---
 
-<Layout title={title} description={description} metadata={{ title, description }}>
+<Layout title={title} description={description} metadata={{ title, description }} noIndex={true}>
   <!-- HERO (same structure as homepage; copy with tag-specific copy) -->
   <section
     class="relative flex min-h-[680px] items-center overflow-hidden bg-[#253242] pb-20 pt-10"

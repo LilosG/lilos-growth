@@ -32,7 +32,7 @@ imageAlt: "Answer Engine Optimization (AEO) pyramid and local services optimizat
 
 ---
 
-# AEO for Local Services: Make Your Content the Direct Answer in ChatGPT & Gemini
+## AEO for Local Services: Make Your Content the Direct Answer in ChatGPT & Gemini
 
 _Published Oct 19, 2025_
 

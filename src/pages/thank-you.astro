@@ -1,12 +1,11 @@
 ---
-export const title = "Thank You | Lilos Growth";
+export const title = "Thank You";
 export const description = "We received your message and will reply within 1 business day.";
 export const metadata = { title, description };
 import Layout from "~/layouts/PageLayout.astro";
 ---
 
-<Layout title={title} description={description} metadata={metadata}>
-  <meta slot="head" name="robots" content="noindex,follow" />
+<Layout title={title} description={description} metadata={metadata} noIndex={true}>
   <section class="bg-white py-24">
     <div class="mx-auto max-w-3xl px-4 text-center">
       <h1 class="font-heading text-3xl font-bold text-heading md:text-4xl">

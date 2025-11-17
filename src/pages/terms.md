@@ -1,12 +1,12 @@
 ---
-title: "Terms of Service | Lilos Growth"
+title: "Terms of Service"
 description: "Terms of Service for Lilos Growth — services, billing, IP, confidentiality, and legal terms."
 layout: "~/layouts/MarkdownLayout.astro"
 ---
 
 _Last updated: November 2025_
 
-# Terms of Service
+## Terms of Service
 
 These Terms of Service (“**Terms**”) govern your access to and use of the website at **lilosgrowth.com** (the “**Site**”) and any services provided by **Lilos Growth** (“**Lilos Growth**,” “**we**,” “**us**,” or “**our**”). By using the Site or engaging us for services, you agree to these Terms.
 

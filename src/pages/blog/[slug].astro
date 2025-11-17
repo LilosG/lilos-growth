@@ -24,6 +24,15 @@ const description = entry.data.description ?? "";
 const date = getDate(entry);
 const category = entry.data.category;
 const image = typeof entry.data.image === "string" ? entry.data.image : entry.data.image?.src;
+const imageAlt =
+  typeof entry.data.imageAlt === "string" && entry.data.imageAlt.trim()
+    ? entry.data.imageAlt
+    : typeof entry.data.image === "object" &&
+        entry.data.image &&
+        typeof entry.data.image.alt === "string" &&
+        entry.data.image.alt.trim()
+      ? entry.data.image.alt
+      : title;
 ---
 
 <Layout title={title} description={description} metadata={{ title, description }}>
@@ -62,7 +71,7 @@ const image = typeof entry.data.image === "string" ? entry.data.image : entry.da
           image && (
             <img
               src={image}
-              alt={title}
+              alt={imageAlt}
               class="mb-8 rounded-2xl shadow"
               loading="lazy"
               decoding="async"
@@ -75,6 +84,39 @@ const image = typeof entry.data.image === "string" ? entry.data.image : entry.da
           class="prose prose-slate max-w-none lg:prose-lg prose-headings:text-[#1f2d3d] prose-p:text-[#4a4a4a] prose-a:text-[#f56b2a] prose-a:no-underline hover:prose-a:underline prose-blockquote:rounded-xl prose-blockquote:border-[#ffd8c5] prose-blockquote:bg-[#fff4ee] prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:text-[#55301f] prose-strong:text-[#1f2d3d] prose-hr:border-gray-200"
         >
           <Content />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLOBAL BLOG CTA: consistent next steps on every post -->
+  <section class="bg-[#253242] py-10 text-white">
+    <div class="container">
+      <div
+        class="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-white/5 px-6 py-8 shadow-xl md:px-10"
+      >
+        <h2 class="text-2xl font-extrabold tracking-tight md:text-3xl">
+          Ready to turn this into real leads?
+        </h2>
+        <p class="mt-3 text-sm text-white/80 md:text-base">
+          Put these playbooks into action with a Local SEO plan tailored for your home service
+          business.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <a
+            href="/services/local-seo"
+            class="inline-flex items-center rounded-full bg-[#f56b2a] px-6 py-3 text-sm font-semibold text-white shadow transition hover:bg-[#f34e00]"
+            data-evt="cta_blog_local_seo"
+          >
+            Explore Local SEO Services
+          </a>
+          <a
+            href="/contact#book"
+            class="inline-flex items-center rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white/90 hover:bg-white/10"
+            data-evt="cta_blog_book_call"
+          >
+            Book a Call
+          </a>
         </div>
       </div>
     </div>

@@ -8,8 +8,9 @@ tags: ["local-seo", "content", "landing-pages"]
 pubDate: 2025-10-19
 datePublished: "2025-10-19"
 draft: false
-image: "/images/blog/local-landing-page-blueprints-2025/hero.svg"
-imageAlt: "Blueprint of a high-performing local landing page"
+image:
+  src: "/images/blog/local-landing-page-blueprints-2025/hero.svg"
+  alt: "Blueprint of a high-performing local landing page"
 ---
 
 <!-- Paste the full blog body here and save -->

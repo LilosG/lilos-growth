@@ -34,9 +34,12 @@ const {
   showFloatingCalendly = true,
 } = props;
 
+const noIndex = props.noIndex ?? false;
+
 // Prefer Astro.site when available (respects site config)
 const site = Astro.site?.toString() ?? "https://lilosgrowth.com";
 const siteUrl = site.endsWith("/") ? site : site + "/";
+const pathname = Astro.url.pathname || "/";
 
 /**
  * === Global Organization (site-wide, single source of truth) ===
@@ -137,16 +140,58 @@ function uniqueByTypeId(nodes: any[]): any[] {
   });
 }
 
+const isBlogPost =
+  pathname.startsWith("/blog/") &&
+  !pathname.startsWith("/blog/tag/") &&
+  !pathname.startsWith("/blog/category/") &&
+  pathname !== "/blog" &&
+  !/^\/blog\/\d+\/?$/.test(pathname);
+
+const blogPosting =
+  isBlogPost && title
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": new URL(pathname, siteUrl).toString() + "#article",
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": new URL(pathname, siteUrl).toString(),
+        },
+        headline: title,
+        ...(description ? { description } : {}),
+        author: {
+          "@type": "Organization",
+          name: "Lilos Growth",
+          url: siteUrl,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Lilos Growth",
+          url: siteUrl,
+          logo: {
+            "@type": "ImageObject",
+            url: new URL("/assets/images/default.png", siteUrl).toString(),
+          },
+        },
+      }
+    : null;
+
 const schemaNodes = uniqueByTypeId([
   organization,
   localBusiness,
   webSite,
   ...(breadcrumbList ? [breadcrumbList] : []),
+  ...(blogPosting ? [blogPosting] : []),
   ...schemaExtras,
 ]);
+
+const effectiveMetadata = {
+  ...(metadata ?? {}),
+  ...(noIndex ? { robots: { index: false, follow: true } } : {}),
+};
 ---
 
-<Layout {title} {description} {lang} {bodyClass} {metadata}>
+<Layout {title} {description} {lang} {bodyClass} metadata={effectiveMetadata}>
   <a
     href="#main"
     class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:left-2 focus-visible:top-2 focus-visible:z-[1000] focus-visible:rounded-full focus-visible:bg-white focus-visible:px-4 focus-visible:py-2 focus-visible:text-[#253242] focus-visible:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2"

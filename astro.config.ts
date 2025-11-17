@@ -26,7 +26,19 @@ export default defineConfig({
 
   integrations: [
     tailwind({ applyBaseStyles: false }),
-    sitemap({ customPages: ["https://lilosgrowth.com/blog"] }),
+    sitemap({
+      customPages: ["https://lilosgrowth.com/blog"],
+      filter: (page) => {
+        // Utility / confirmation page: noindex + keep out of sitemaps
+        if (page === "https://lilosgrowth.com/thank-you") return false;
+
+        // Archive pages we explicitly noindex
+        if (page.startsWith("https://lilosgrowth.com/blog/tag/")) return false;
+        if (page.startsWith("https://lilosgrowth.com/blog/category/")) return false;
+
+        return true;
+      },
+    }),
     mdx(),
     icon({
       include: {
