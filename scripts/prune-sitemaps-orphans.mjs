@@ -1,9 +1,9 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import fs from "node:fs";
+import path from "node:path";
 
 function loadXml(filePath) {
   if (!fs.existsSync(filePath)) return null;
-  return fs.readFileSync(filePath, 'utf8');
+  return fs.readFileSync(filePath, "utf8");
 }
 
 function parseUrlBlocks(xml) {
@@ -27,28 +27,28 @@ function removeBlocks(xml, predicate) {
 
   for (const { loc, block } of blocks) {
     if (predicate(loc)) {
-      updated = updated.replace(block, '');
+      updated = updated.replace(block, "");
       removed++;
     }
   }
 
   if (removed > 0) {
     // Clean up excess blank lines
-    updated = updated.replace(/\n{3,}/g, '\n\n');
+    updated = updated.replace(/\n{3,}/g, "\n\n");
   }
 
   return { xml: updated, removed };
 }
 
-const distDir = 'dist';
-const mainPath = path.join(distDir, 'sitemap-0.xml');
-const blogPath = path.join(distDir, 'sitemap-blog.xml');
+const distDir = "dist";
+const mainPath = path.join(distDir, "sitemap-0.xml");
+const blogPath = path.join(distDir, "sitemap-blog.xml");
 
-console.log('Pruning sitemap duplicates / low-priority URLs...');
+console.log("Pruning sitemap duplicates / low-priority URLs...");
 
 const mainXml = loadXml(mainPath);
 if (!mainXml) {
-  console.log('  • No sitemap-0.xml found, nothing to do.');
+  console.log("  • No sitemap-0.xml found, nothing to do.");
   process.exit(0);
 }
 
@@ -61,49 +61,45 @@ if (blogXml) {
   const blogUrls = new Set(
     parseUrlBlocks(blogXml)
       .map((u) => u.loc.trim())
-      .filter((loc) => loc.includes('/blog/'))
+      .filter((loc) => loc.includes("/blog/"))
   );
 
   if (blogUrls.size > 0) {
-    const result = removeBlocks(updatedMain, (loc) =>
-      blogUrls.has(loc.trim())
-    );
+    const result = removeBlocks(updatedMain, (loc) => blogUrls.has(loc.trim()));
     updatedMain = result.xml;
     totalRemoved += result.removed;
     console.log(
       `  • Removed ${result.removed} URL(s) from sitemap-0.xml that also appear in sitemap-blog.xml.`
     );
   } else {
-    console.log('  • No blog URLs found in sitemap-blog.xml, skipping dedupe.');
+    console.log("  • No blog URLs found in sitemap-blog.xml, skipping dedupe.");
   }
 } else {
-  console.log('  • sitemap-blog.xml not found, skipping blog URL dedupe.');
+  console.log("  • sitemap-blog.xml not found, skipping blog URL dedupe.");
 }
 
 // 2) Drop a few low-priority / orphan-y utility URLs from sitemap-0.xml
 const dropList = new Set([
-  'https://lilosgrowth.com/offers/local-seo-locked',
-  'https://lilosgrowth.com/privacy',
-  'https://lilosgrowth.com/cards-preview',
-  'https://lilosgrowth.com/plans-preview',
+  "https://lilosgrowth.com/offers/local-seo-locked",
+  "https://lilosgrowth.com/privacy",
+  "https://lilosgrowth.com/cards-preview",
+  "https://lilosgrowth.com/plans-preview",
 ]);
 
 const dropResult = removeBlocks(updatedMain, (loc) => {
-  const norm = loc.trim().replace(/\/$/, '');
+  const norm = loc.trim().replace(/\/$/, "");
   return dropList.has(norm);
 });
 
 updatedMain = dropResult.xml;
 totalRemoved += dropResult.removed;
 if (dropResult.removed > 0) {
-  console.log(
-    `  • Removed ${dropResult.removed} low-priority URL(s) from sitemap-0.xml.`
-  );
+  console.log(`  • Removed ${dropResult.removed} low-priority URL(s) from sitemap-0.xml.`);
 }
 
 if (totalRemoved > 0) {
-  fs.writeFileSync(mainPath, updatedMain.trim() + '\n');
+  fs.writeFileSync(mainPath, updatedMain.trim() + "\n");
   console.log(`Finished. Total URLs removed from sitemap-0.xml: ${totalRemoved}.`);
 } else {
-  console.log('  • No changes needed to sitemap-0.xml.');
+  console.log("  • No changes needed to sitemap-0.xml.");
 }
