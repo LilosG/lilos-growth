@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lilosgrowth.com/sitemap.xml
+Sitemap: https://lilosgrowth.com/sitemap-index.xml
