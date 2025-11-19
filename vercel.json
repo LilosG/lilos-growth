@@ -2,8 +2,18 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.lilosgrowth.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.lilosgrowth.com"
+        }
+      ],
       "destination": "https://lilosgrowth.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tag/local-seo/2",
+      "destination": "/blog/tag/local-seo",
       "permanent": true
     }
   ]
