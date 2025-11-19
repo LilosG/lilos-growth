@@ -99,17 +99,17 @@ export const resultsStats: ResultsStat[] = [
 export const resultsLogos: LogoItem[] = [
   {
     name: "Blue Door Pest Control",
-    href: "/work/blue-door",
+    href: "/results",
     src: "/clients/blue-door-pest-control.jpg",
   },
   {
     name: "Tamarack Restoration",
-    href: "/work/tamarack",
+    href: "/results",
     src: "/clients/tamarack-restoration.webp",
   },
   {
     name: "Carlsbad Home Services",
-    href: "/work/carlsbad-home-services",
+    href: "/results",
     src: "/clients/carlsbad-home-services.png",
   },
   { name: "Postal Systems" },
@@ -156,7 +156,7 @@ export const resultsCaseStudies: CaseStudy[] = [
     ],
     blurb: "Partial hydration + schema cleanup improved crawl, UX, and calls.",
     ctaText: "View restoration framework",
-    ctaHref: "/services/websites",
+    ctaHref: "/services/web-design",
   },
   {
     id: "postal-north-county",
@@ -186,7 +186,7 @@ export const resultsCaseStudies: CaseStudy[] = [
     ],
     blurb: "Lean Astro build + hubs increased crawl depth and conversions.",
     ctaText: "See page template",
-    ctaHref: "/services/websites",
+    ctaHref: "/services/web-design",
   },
   {
     id: "carlsbad-home-services-carlsbad-ca",

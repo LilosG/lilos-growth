@@ -19,7 +19,7 @@
     "fix": "npm run fix:eslint && npm run fix:prettier",
     "fix:eslint": "eslint --fix .",
     "fix:prettier": "prettier -w .",
-    "postbuild": "node scripts/ensure-blog-in-sitemap.mjs",
+    "postbuild": "node scripts/ensure-blog-in-sitemap.mjs && node scripts/prune-sitemaps-orphans.mjs",
     "format": "prettier --write .",
     "lint:blog": "node scripts/lint-blog-frontmatter.mjs"
   },

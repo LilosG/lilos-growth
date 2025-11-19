@@ -67,7 +67,7 @@ Yes. We regularly service **[Neighborhood 1]**, **[Neighborhood 2]**, **[Neighbo
 ### How much does [Service] cost in [City]?
 
 Most jobs fall between **$X–$Y**. Pricing depends on **[factor 1]**, **[factor 2]**, and **[factor 3]**.  
-Want an exact quote? **[Book a Call](/contact/)** or send a photo with our **[Free SEO Website Audit](/local-seo-tools/seo-audit/)**.
+Want an exact quote? **[Book a Call](/contact/)** or send a photo with our **[Free SEO Website Audit](/local-seo-tools)**.
 
 ### How fast can you come out?
 
