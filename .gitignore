@@ -27,3 +27,5 @@ pnpm-lock.yaml
 # Local backups (do not commit)
 .backups/
 _backup_trash/
+
+_audit/
