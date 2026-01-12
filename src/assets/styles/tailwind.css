@@ -225,3 +225,7 @@ h6 {
 a.btn-primary:focus-visible {
   @apply outline-none ring-2 ring-[#f56b2a] ring-offset-2 ring-offset-white;
 }
+
+.logo--halo {
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.45));
+}
