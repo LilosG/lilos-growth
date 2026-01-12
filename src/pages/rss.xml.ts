@@ -6,12 +6,17 @@ type BlogEntry = CollectionEntry<"blog">;
 export async function GET() {
   const allowDrafts = import.meta.env.LOCAL_DRAFTS === "1";
   const posts = (await getCollection("blog")) as BlogEntry[];
+  const getDateValue = (entry: BlogEntry) =>
+    entry.data.datePublished ??
+    entry.data.pubDate ??
+    entry.data.date ??
+    entry.data.dateModified ??
+    0;
   const filtered = posts
     .filter((p: BlogEntry) => allowDrafts || !p.data.draft)
     .sort(
       (a: BlogEntry, b: BlogEntry) =>
-        new Date(b.data.datePublished || (b as any).data?.pubDate || 0).getTime() -
-        new Date(a.data.datePublished || (a as any).data?.pubDate || 0).getTime()
+        new Date(getDateValue(b)).getTime() - new Date(getDateValue(a)).getTime()
     );
 
   return rss({
@@ -22,7 +27,7 @@ export async function GET() {
       title: p.data.title,
       description: p.data.description,
       link: `/blog/${p.data.slug || p.slug}`,
-      pubDate: new Date(p.data.datePublished || (p as any).data?.pubDate || Date.now()),
+      pubDate: new Date(getDateValue(p) || Date.now()),
     })),
   });
 }

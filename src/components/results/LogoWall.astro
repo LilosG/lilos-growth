@@ -10,7 +10,15 @@ type LogoItem = {
 
 const { items = [] } = Astro.props as { items: LogoItem[] };
 
-const normalize = (it: any) => {
+type LogoInput = LogoItem & {
+  logo?: string;
+  image?: string;
+  title?: string;
+  width?: number | string;
+  height?: number | string;
+};
+
+const normalize = (it: LogoInput) => {
   const rawSrc: string =
     typeof it?.src === "string"
       ? it.src
@@ -34,7 +42,7 @@ const normalize = (it: any) => {
   return { src, name, alt, href, width, height };
 };
 
-const logos: LogoItem[] = (items as any[]).map(normalize);
+const logos: LogoItem[] = items.map((item) => normalize(item));
 ---
 
 <section aria-label="Client logos">

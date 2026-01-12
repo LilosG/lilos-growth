@@ -1,7 +1,7 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
-import { getSlug, getDate, formatDate, type BlogEntry } from "../../lib/blog";
+import { getSlug, getDate, formatDate, allowDrafts, type BlogEntry } from "../../lib/blog";
 
 // Build static paths using your canonical slug logic
 export async function getStaticPaths() {
@@ -15,6 +15,9 @@ const slug = String(Astro.params.slug ?? "");
 const posts: BlogEntry[] = await getCollection("blog");
 const entry = posts.find((p) => getSlug(p) === slug);
 if (!entry) throw new Error(`Post not found for slug: ${slug}`);
+if (entry.data.draft && !allowDrafts()) {
+  throw new Error(`Draft post not available: ${slug}`);
+}
 
 const { Content } = await entry.render();
 

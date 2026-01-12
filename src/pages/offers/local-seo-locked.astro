@@ -3,14 +3,7 @@ import Layout from "~/layouts/PageLayout.astro";
 import PromoPackageCard from "~/components/PromoPackageCard.astro";
 
 const baseCalendly = "https://calendly.com/lilosgrowth/15min";
-const url = new URL(Astro.request.url);
-const search = url.searchParams;
-const utm = new URLSearchParams({
-  utm_source: search.get("utm_source") ?? "website",
-  utm_medium: search.get("utm_medium") ?? "landing",
-  utm_campaign: search.get("utm_campaign") ?? "offers_locked",
-});
-const CALENDLY = `${baseCalendly}?${utm.toString()}`;
+const CALENDLY = baseCalendly;
 
 const title = "Google Business Profile Optimization — Locked Promo Plans";
 const description =
@@ -340,3 +333,25 @@ const guarantee =
     </div>
   </section>
 </Layout>
+
+<script is:inline>
+  (() => {
+    const params = new URLSearchParams(window.location.search);
+    const utms = {
+      utm_source: params.get("utm_source") || "",
+      utm_medium: params.get("utm_medium") || "",
+      utm_campaign: params.get("utm_campaign") || "offers_locked",
+      utm_content: params.get("utm_content") || "",
+    };
+    const calendlyParams = new URLSearchParams();
+    Object.entries(utms).forEach(([key, value]) => {
+      if (value) calendlyParams.set(key, value);
+    });
+    const base = "https://calendly.com/lilosgrowth/15min";
+    const url = calendlyParams.toString() ? `${base}?${calendlyParams.toString()}` : base;
+
+    document.querySelectorAll(`a[href="${base}"]`).forEach((el) => {
+      el.setAttribute("href", url);
+    });
+  })();
+</script>

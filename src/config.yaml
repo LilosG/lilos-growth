@@ -18,7 +18,7 @@ metadata:
   openGraph:
     site_name: Lilos Growth
     images:
-      - url: "https://lilosgrowth.com/assets/images/default.png"
+      - url: "https://lilosgrowth.com/images/default.svg"
         width: 1200
         height: 628
     type: website
@@ -38,7 +38,7 @@ apps:
 
     post:
       isEnabled: true
-      permalink: "/%slug%" # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
+      permalink: "/blog/%slug%" # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
       robots:
         index: true
 

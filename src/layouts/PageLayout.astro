@@ -4,6 +4,7 @@ import Header from "~/components/widgets/Header.astro";
 import Footer from "~/components/widgets/Footer.astro";
 import FloatingCalendlyButton from "~/components/widgets/FloatingCalendlyButton.astro";
 import type { MetaData as MetaDataType } from "~/types";
+import { isRecord } from "~/utils/type-guards";
 
 export interface Crumb {
   name: string;
@@ -80,7 +81,7 @@ const localBusiness = {
   name: "Lilos Growth, LLC",
   url: siteUrl,
   telephone: "+1-858-722-2920",
-  image: `${siteUrl}assets/images/default.png`, // optional; swap for a better brand image if you have one
+  image: `${siteUrl}images/default.svg`, // optional; swap for a better brand image if you have one
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",
@@ -127,11 +128,12 @@ const breadcrumbList =
  * Ensure we only output one JSON-LD per @type/@id.
  * If no @id is present, we keep the first occurrence of that @type.
  */
-function uniqueByTypeId(nodes: any[]): any[] {
+function uniqueByTypeId(nodes: unknown[]): Record<string, unknown>[] {
   const seen = new Set<string>();
-  return nodes.filter((n) => {
-    if (!n || typeof n !== "object") return false;
-    const rawType = Array.isArray(n["@type"]) ? n["@type"].join("|") : String(n["@type"] ?? "");
+  return nodes.filter((n): n is Record<string, unknown> => {
+    if (!isRecord(n)) return false;
+    const typeValue = n["@type"];
+    const rawType = Array.isArray(typeValue) ? typeValue.join("|") : String(typeValue ?? "");
     const id = typeof n["@id"] === "string" ? n["@id"] : "";
     const key = `${rawType}#${id}`;
     if (seen.has(key)) return false;
@@ -170,7 +172,7 @@ const blogPosting =
           url: siteUrl,
           logo: {
             "@type": "ImageObject",
-            url: new URL("/assets/images/default.png", siteUrl).toString(),
+            url: new URL("/images/default.svg", siteUrl).toString(),
           },
         },
       }

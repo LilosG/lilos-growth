@@ -48,25 +48,27 @@ const generatePermalink = async ({
     .join("/");
 };
 
-const getNormalizedPost = async (post: CollectionEntry<"post">): Promise<Post> => {
+const getNormalizedPost = async (post: CollectionEntry<"blog">): Promise<Post> => {
   const { id, data } = post;
   const { Content, remarkPluginFrontmatter } = await render(post);
 
   const {
-    publishDate: rawPublishDate = new Date(),
-    updateDate: rawUpdateDate,
+    datePublished: rawPublishDate,
+    dateModified: rawUpdateDate,
+    date: rawDate,
+    pubDate: rawPubDate,
     title,
-    excerpt,
+    description,
     image,
     tags: rawTags = [],
     category: rawCategory,
     author,
     draft = false,
-    metadata = {},
   } = data;
 
+  const resolvedPublishDate = rawPublishDate || rawPubDate || rawDate || new Date();
   const slug = cleanSlug(id); // cleanSlug(rawSlug.split('/').pop());
-  const publishDate = new Date(rawPublishDate);
+  const publishDate = new Date(resolvedPublishDate);
   const updateDate = rawUpdateDate ? new Date(rawUpdateDate) : undefined;
 
   const category = rawCategory
@@ -90,7 +92,7 @@ const getNormalizedPost = async (post: CollectionEntry<"post">): Promise<Post> =
     updateDate: updateDate,
 
     title: title,
-    excerpt: excerpt,
+    excerpt: description,
     image: image,
 
     category: category,
@@ -98,8 +100,6 @@ const getNormalizedPost = async (post: CollectionEntry<"post">): Promise<Post> =
     author: author,
 
     draft: draft,
-
-    metadata,
 
     Content: Content,
     // or 'content' in case you consume from API
@@ -109,8 +109,8 @@ const getNormalizedPost = async (post: CollectionEntry<"post">): Promise<Post> =
 };
 
 const load = async function (): Promise<Array<Post>> {
-  const posts = await getCollection("post");
-  const normalizedPosts = posts.map(async (post: any) => await getNormalizedPost(post));
+  const posts = (await getCollection("blog")) as CollectionEntry<"blog">[];
+  const normalizedPosts = posts.map(async (post) => await getNormalizedPost(post));
 
   const results = (await Promise.all(normalizedPosts))
     .sort((a, b) => b.publishDate.valueOf() - a.publishDate.valueOf())

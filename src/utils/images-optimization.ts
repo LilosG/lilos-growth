@@ -295,7 +295,7 @@ export const unpicOptimizer: ImagesOptimizer = async (
 export async function getImagesOptimized(
   image: ImageMetadata | string,
   {
-    src: _,
+    src,
     width,
     height,
     sizes,
@@ -309,6 +309,7 @@ export async function getImagesOptimized(
   }: ImageProps,
   transform: ImagesOptimizer = () => Promise.resolve([])
 ): Promise<{ src: string; attributes: HTMLAttributes<"img"> }> {
+  void src;
   if (typeof image !== "string") {
     width ||= Number(image.width) || undefined;
     height ||=

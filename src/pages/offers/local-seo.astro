@@ -3,23 +3,9 @@ import Layout from "~/layouts/PageLayout.astro";
 
 /* ====== LINKS (ready-to-run) ====== */
 const baseCalendly = "https://calendly.com/lilosgrowth/15min";
-const utmParams = new URLSearchParams({
-  utm_source: Astro.url.searchParams.get("utm_source") ?? "website",
-  utm_medium: Astro.url.searchParams.get("utm_medium") ?? "landing",
-  utm_campaign: Astro.url.searchParams.get("utm_campaign") ?? "offers",
-});
-const CALENDLY = `${baseCalendly}?${utmParams.toString()}`;
+const CALENDLY = baseCalendly;
 
-/* Works now without a backend: sends the hero form to /thank-you with GET. */
-const FORM_ACTION = "/thank-you";
-
-/* UTMs for the form (safe if missing) */
-const utm = {
-  source: Astro.url.searchParams.get("utm_source") ?? "",
-  medium: Astro.url.searchParams.get("utm_medium") ?? "",
-  campaign: Astro.url.searchParams.get("utm_campaign") ?? "",
-  content: Astro.url.searchParams.get("utm_content") ?? "",
-};
+const FORM_ACTION = "https://formspree.io/f/movlbqdk";
 
 export const title = "Rank Higher on Google Maps in 7 Days | $149 GBP Fixes & 30-Day Sprint";
 export const description =
@@ -99,15 +85,15 @@ export const description =
           <form
             id="offerLeadForm"
             action={FORM_ACTION}
-            method="GET"
+            method="POST"
             class="mt-4 grid grid-cols-1 gap-3"
             data-analytics="lead_form_submit"
           >
-            <!-- pass UTMs -->
-            <input type="hidden" name="utm_source" value={utm.source} />
-            <input type="hidden" name="utm_medium" value={utm.medium} />
-            <input type="hidden" name="utm_campaign" value={utm.campaign} />
-            <input type="hidden" name="utm_content" value={utm.content} />
+            <input type="hidden" name="_redirect" value="https://lilosgrowth.com/thank-you" />
+            <input type="hidden" name="utm_source" value="" />
+            <input type="hidden" name="utm_medium" value="" />
+            <input type="hidden" name="utm_campaign" value="" />
+            <input type="hidden" name="utm_content" value="" />
 
             <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <input
@@ -128,7 +114,7 @@ export const description =
             <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <input
                 required
-                name="email"
+                name="_replyto"
                 type="email"
                 placeholder="Email"
                 class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#f56b2a]"
@@ -745,7 +731,33 @@ export const description =
 <!-- Bind any link with data-calendly="URL" to open the Calendly popup -->
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const utms = {
+      utm_source: params.get("utm_source") || "",
+      utm_medium: params.get("utm_medium") || "",
+      utm_campaign: params.get("utm_campaign") || "",
+      utm_content: params.get("utm_content") || "",
+    };
+
+    const form = document.getElementById("offerLeadForm");
+    if (form) {
+      Object.entries(utms).forEach(([key, value]) => {
+        const input = form.querySelector(`input[name="${key}"]`);
+        if (input && value) input.value = value;
+      });
+    }
+
+    const calendlyParams = new URLSearchParams();
+    Object.entries(utms).forEach(([key, value]) => {
+      if (value) calendlyParams.set(key, value);
+    });
+    const calendlyBase = "https://calendly.com/lilosgrowth/15min";
+    const calendlyUrl = calendlyParams.toString()
+      ? `${calendlyBase}?${calendlyParams.toString()}`
+      : calendlyBase;
+
     document.querySelectorAll("[data-calendly]").forEach((el) => {
+      el.setAttribute("data-calendly", calendlyUrl);
       el.addEventListener("click", (e) => {
         e.preventDefault();
         const url = el.getAttribute("data-calendly");

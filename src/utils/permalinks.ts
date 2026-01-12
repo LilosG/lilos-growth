@@ -77,10 +77,10 @@ export const getPermalink = (slug = "", type: PermalinkType = "page"): string =>
       permalink = getAsset(slug);
       break;
     case "category":
-      permalink = createPath(CATEGORY_BASE, trimSlash(slug));
+      permalink = createPath(BLOG_BASE, CATEGORY_BASE, trimSlash(slug));
       break;
     case "tag":
-      permalink = createPath(TAG_BASE, trimSlash(slug));
+      permalink = createPath(BLOG_BASE, TAG_BASE, trimSlash(slug));
       break;
     case "post":
       permalink = createPath(trimSlash(slug));

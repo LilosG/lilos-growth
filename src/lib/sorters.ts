@@ -1,4 +1,12 @@
-export function newestFirst(a: any, b: any) {
+type DatedEntry = {
+  data?: {
+    dateModified?: Date | string;
+    datePublished?: Date | string;
+    publishDate?: Date | string;
+  };
+};
+
+export function newestFirst(a: DatedEntry, b: DatedEntry) {
   const ad = new Date(
     a?.data?.dateModified ?? a?.data?.datePublished ?? a?.data?.publishDate ?? 0
   ).getTime();

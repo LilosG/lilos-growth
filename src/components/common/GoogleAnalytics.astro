@@ -1,6 +1,7 @@
 ---
 /**
  * Google Analytics (GA4) loader for Astro.
+ * Loads only after explicit consent (lg_cookie_consent === "accepted").
  * Works with either:
  *  - prop: <GoogleAnalytics id="G-XXXXXXX" />
  *  - env:  PUBLIC_GA_ID or PUBLIC_GOOGLE_MEASUREMENT_ID
@@ -18,19 +19,34 @@ const enabled = id.length > 0;
 // Build inline bootstrap as a string so TS/formatters don't choke
 const inlineGA = enabled
   ? `
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', '${id}', { 'anonymize_ip': true });
+    (function () {
+      const consentKey = "lg_cookie_consent";
+      const gaId = "${id}";
+      if (!gaId) return;
+
+      function loadGa() {
+        if (window.__gaLoaded) return;
+        const s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(gaId);
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag("js", new Date());
+        gtag("config", gaId, { anonymize_ip: true });
+        window.__gaLoaded = true;
+      }
+
+      try {
+        if (localStorage.getItem(consentKey) === "accepted") {
+          loadGa();
+        }
+      } catch {}
+
+      window.addEventListener("lg-consent-accepted", loadGa);
+    })();
   `
   : "";
 ---
 
-{
-  enabled && (
-    <>
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${id}`} is:inline />
-      <script is:inline set:html={inlineGA} />
-    </>
-  )
-}
+{enabled && <script is:inline set:html={inlineGA} />}

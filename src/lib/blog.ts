@@ -37,8 +37,9 @@ function toDate(v: DateLike): Date | null {
 /** Extract the first usable publish date from a BlogEntry’s frontmatter. */
 export function getDate(entry: BlogEntry): Date | null {
   // Prefer explicit pubDate if present/typed by Zod
-  if (entry.data && (entry.data as any).pubDate instanceof Date) {
-    return (entry.data as any).pubDate as Date;
+  const data = entry.data as Record<string, unknown>;
+  if (data.pubDate instanceof Date) {
+    return data.pubDate;
   }
   // Otherwise scan known keys
   for (const key of DATE_KEYS) {
