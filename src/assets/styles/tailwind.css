@@ -19,6 +19,42 @@ h6 {
   @apply font-heading text-heading;
 }
 
+/* ---------- Base tokens (single source for AW vars) ---------- */
+@layer base {
+  :root {
+    --aw-color-primary: #f56b2a;
+    --aw-color-secondary: #1f2d3d;
+    --aw-color-accent: #e65c1e;
+
+    --aw-color-text-heading: #1f2d3d;
+    --aw-color-text-default: #4a4a4a;
+    --aw-color-text-page: #4a4a4a;
+    --aw-color-text-muted: rgba(74, 74, 74, 0.66);
+
+    --aw-color-bg-page: #ffffff;
+    --aw-color-bg-page-dark: #030620;
+
+    ::selection {
+      background-color: lavender;
+    }
+  }
+
+  .dark {
+    --aw-color-text-heading: #f7f8f8;
+    --aw-color-text-default: #e5ecf6;
+    --aw-color-text-page: #e5ecf6;
+    --aw-color-text-muted: rgba(229, 236, 246, 0.66);
+
+    --aw-color-bg-page: #030620;
+    --aw-color-bg-page-dark: #030620;
+
+    ::selection {
+      background-color: black;
+      color: snow;
+    }
+  }
+}
+
 /* ---------- Small utility helpers that rely on AW CSS vars ---------- */
 @layer utilities {
   .bg-page {
@@ -67,27 +103,6 @@ h6 {
     @apply btn border border-primary bg-white text-primary hover:bg-primary hover:text-white;
   }
 }
-
-/* ---------- Header (shrink-on-scroll) ---------- */
-/* Your markup adds .site-header and toggles .is-shrunk; style the wrapper inside header */
-header.site-header.is-shrunk > div:first-child,
-header.site-header.is-shrunk > div:first-child,
-header.site-header-legacy.is-shrunk > div:first-child {
-  @apply bg-page md:bg-white/90 md:backdrop-blur-md;
-  box-shadow: 0 0.375rem 1.5rem 0 rgb(140 152 164 / 13%);
-}
-.dark header.site-header.is-shrunk > div:first-child,
-.dark header.site-header.is-shrunk > div:first-child,
-.dark header.site-header-legacy.is-shrunk > div:first-child,
-header.site-header.is-shrunk.dark > div:first-child,
-header.site-header.is-shrunk.dark > div:first-child,
-header.site-header-legacy.is-shrunk.dark > div:first-child {
-  @apply bg-page border-b border-gray-500/20 md:bg-[#030621e6];
-  box-shadow: none;
-}
-/* If you later want the bar to compress vertically, uncomment:
-header.site-header.is-shrunk .header-bar { @apply py-2; }
-*/
 
 /* ---------- Mobile menu & dropdown helpers (safe to keep) ---------- */
 #header.expanded nav {
@@ -140,132 +155,6 @@ header.site-header.is-shrunk .header-bar { @apply py-2; }
     @apply btn btn-outline-primary;
   }
 }
-/* ==== Header override (force readable scrolled state) ==== */
-header.site-header .header-backplate {
-  background: var(--hdr-bg) !important;
-  border-bottom: 1px solid var(--hdr-border) !important;
-  box-shadow: var(--hdr-shadow) !important;
-}
-header.site-header.is-shrunk .header-backplate {
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
-header.site-header.is-shrunk .nav-link {
-  color: #1f2d3d !important;
-}
-header.site-header:not(.is-shrunk) .nav-link {
-  color: rgba(255, 255, 255, 0.95) !important;
-}
-/* ==== /Header override ==== */
-
-/* enforce nav-link colors */
-header.site-header.is-shrunk .nav-link {
-  color: #1f2d3d !important;
-}
-header.site-header:not(.is-shrunk) .nav-link {
-  color: rgba(255, 255, 255, 0.95) !important;
-}
-/* ==== FINAL OVERRIDE: force readable scrolled header ==== */
-header.site-header.is-shrunk .header-backplate {
-  background: #ffffff !important;
-  border-bottom: 1px solid rgba(2, 6, 23, 0.08) !important;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08) !important;
-}
-header.site-header.is-shrunk .nav-link {
-  color: #1f2d3d !important;
-}
-/* ==== /FINAL OVERRIDE ==== */
-header.site-header:not(.is-shrunk) .logo--color {
-  display: inline-block !important;
-  mix-blend-mode: screen;
-  filter: brightness(1.35) contrast(1.06);
-  opacity: 0.98;
-}
-/* --- Logo chip: improves contrast only at top-of-page (overlay) --- */
-header.site-header a[aria-label="Lilos Growth — Home"] {
-  position: relative;
-  display: inline-flex;
-}
-header.site-header a[aria-label="Lilos Growth — Home"] .logo {
-  position: relative;
-  z-index: 1;
-}
-header.site-header:not(.is-shrunk) a[aria-label="Lilos Growth — Home"]::before {
-  content: "";
-  position: absolute;
-  inset: -6px -10px;
-  border-radius: 16px;
-  background: rgba(10, 18, 27, 0.38);
-  -webkit-backdrop-filter: saturate(120%) blur(2px);
-  backdrop-filter: saturate(120%) blur(2px);
-}
-/* ──────────────────────────────────────────────────────────────
-   Lilos Growth — Header contrast & CLS lock (no deps, CSS-only)
-   Targets either .site-header or .site-header-legacy and relies
-   on your existing .is-shrunk class toggle from the scroll script.
-   ────────────────────────────────────────────────────────────── */
-@layer components {
-  /* Support both legacy and current header class names */
-  header.site-header,
-  header.site-header-legacy {
-    --header-h: 4rem; /* 64px: keeps layout stable, CLS≤0.02 */
-  }
-
-  header.site-header > div:first-child,
-  header.site-header-legacy > div:first-child {
-    min-height: var(--header-h);
-    @apply transition-colors duration-300;
-  }
-
-  /* Base (top of page): always readable text */
-  header.site-header:not(.is-shrunk) > div:first-child,
-  header.site-header-legacy:not(.is-shrunk) > div:first-child {
-    @apply text-[#1f2d3d];
-  }
-
-  /* Shrunk (on scroll): high-contrast background + blur + shadow */
-  header.site-header.is-shrunk > div:first-child,
-  header.site-header.is-shrunk > div:first-child,
-  header.site-header.is-shrunk > div:first-child,
-  header.site-header-legacy.is-shrunk > div:first-child {
-    @apply bg-white/95 text-[#1f2d3d] shadow-sm supports-[backdrop-filter]:backdrop-blur-md md:bg-white/90;
-  }
-
-  /* Ensure nav links/buttons remain readable, with brand hover */
-  header.site-header a,
-  header.site-header button,
-  header.site-header-legacy a,
-  header.site-header-legacy button {
-    @apply text-[#1f2d3d];
-  }
-  header.site-header a:hover,
-  header.site-header button:hover,
-  header.site-header-legacy a:hover,
-  header.site-header-legacy button:hover {
-    @apply text-[#f56b2a];
-  }
-
-  /* Visible focus (a11y) */
-  header.site-header a:focus-visible,
-  header.site-header button:focus-visible,
-  header.site-header-legacy a:focus-visible,
-  header.site-header-legacy button:focus-visible {
-    @apply outline-none ring-2 ring-[#f56b2a] ring-offset-2 ring-offset-white;
-  }
-}
-
-/* ---------- Header a11y polish ---------- */
-header.site-header nav a:focus-visible,
-header.site-header nav button:focus-visible {
-  outline: 2px solid #f56b2a;
-  outline-offset: 3px;
-  border-radius: 0.5rem;
-}
-header.site-header li.group:focus-within .submenu {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
 
 /* ----- Results & Tools grids card polish (scoped, safe) ----- */
 #results-grid > *,
@@ -305,27 +194,6 @@ header.site-header li.group:focus-within .submenu {
 }
 .tools-grid [aria-hidden="true"] {
   @apply mb-4;
-}
-/* Tools page uses a class so multiple grids share the same polish */
-.tools-grid > * {
-  @apply flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow;
-}
-.tools-grid h3 {
-  @apply mb-2 text-xl font-semibold text-heading;
-}
-.tools-grid p {
-  @apply text-[15px] text-body;
-}
-.tools-grid .card-footer {
-  @apply mt-auto border-t border-gray-100 pt-4;
-}
-.tools-grid [aria-hidden="true"] {
-  @apply mb-4;
-}
-/* Align CTA buttons in results/tools grids */
-#results-grid .btn,
-#tools-grid .btn {
-  @apply w-full sm:w-auto;
 }
 /* Align CTA buttons in results/tools grids */
 #results-grid .btn,

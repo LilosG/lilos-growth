@@ -32,13 +32,9 @@ The styling mechanism consists of the following files (all paths are prefixed wi
   defined here. Note also styling on elements selected by 'attribute' selectors at the bottom of the
   files, particularly those selected by 'data' attributes.
 </DListItem>
-<DListItem dt="components/CustomStyles.astro">
-  Defines custom colors and fonts. For these to take effect in the 'base.css' file, they need to be
-  loaded in the html header section. See next.
-</DListItem>
 <DListItem dt="layouts/Layout.astro">
   This layout is used for all of the pages rendered by _AstroWind_. The contents of _tailwind.css_
-  and _CustomStyles.astro_ component, described above, is injected into the html header.
+  are loaded for global styling.
 </DListItem>
 
 ### Dark Mode

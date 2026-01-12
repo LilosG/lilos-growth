@@ -7,7 +7,6 @@
 import "~/assets/styles/tailwind.css";
 
 import CommonMeta from "~/components/common/CommonMeta.astro";
-import CustomStyles from "~/components/CustomStyles.astro";
 import ApplyColorMode from "~/components/common/ApplyColorMode.astro";
 import Metadata from "~/components/common/Metadata.astro";
 import SiteVerification from "~/components/common/SiteVerification.astro";
@@ -71,7 +70,6 @@ declare global {
   <head>
     <CommonMeta />
 
-    <CustomStyles />
     <ApplyColorMode />
 
     <!-- Centralized SEO -->
@@ -91,10 +89,29 @@ declare global {
     <slot name="head" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  
-  <!-- AHREFS_ANALYTICS -->
-  <script src="https://analytics.ahrefs.com/analytics.js" data-key="HMqVx+wg6FRKBgVerbziWw" async></script>
-</head>
+
+    <!-- Ahrefs Analytics (consent-gated) -->
+    <script is:inline>
+      (() => {
+        const consentKey = "lg_cookie_consent";
+        const load = () => {
+          if (window.__ahrefsLoaded) return;
+          const s = document.createElement("script");
+          s.src = "https://analytics.ahrefs.com/analytics.js";
+          s.async = true;
+          s.setAttribute("data-key", "HMqVx+wg6FRKBgVerbziWw");
+          document.head.appendChild(s);
+          window.__ahrefsLoaded = true;
+        };
+
+        try {
+          if (localStorage.getItem(consentKey) === "accepted") load();
+        } catch {}
+
+        window.addEventListener("lg-consent-accepted", load);
+      })();
+    </script>
+  </head>
 
   <body
     class={`antialiased text-default bg-page tracking-tight min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip ${bodyClass}`}
