@@ -6,7 +6,7 @@ author: Lilos Growth
 tags: ["internal links", "conversion", "ux"]
 category: UX
 draft: true
-image: https://lilosgrowth.com/assets/images/default.png
+image: https://lilosgrowth.com/images/default.svg
 ---
 
 Link top services from the homepage, connect sibling services, and add contextual links inside posts to related offers.

@@ -6,7 +6,7 @@ author: Lilos Growth
 tags: ["content strategy", "faq", "ai search"]
 category: Content
 draft: true
-image: https://lilosgrowth.com/assets/images/default.png
+image: https://lilosgrowth.com/images/default.svg
 ---
 
 Add two to five FAQs that directly clarify the topic and link to deeper resources.

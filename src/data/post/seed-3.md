@@ -6,7 +6,7 @@ author: Lilos Growth
 tags: ["taxonomy", "tags", "categories"]
 category: Content
 draft: true
-image: https://lilosgrowth.com/assets/images/default.png
+image: https://lilosgrowth.com/images/default.svg
 ---
 
 Choose one category per post and three to five tags at most.
