@@ -34,6 +34,7 @@ export type CaseStudy = {
   image?: { src: string; alt?: string };
   blurb?: string;
   ctaLabel?: string;
+  websiteUrl?: string;
 };
 
 export type Testimonial = {
@@ -53,19 +54,6 @@ export type FaqItem = {
   q: string;
   a: string;
 };
-
-/** Placeholder (for cards without logos) */
-const _PLACEHOLDER_21_9 =
-  "data:image/svg+xml;utf8," +
-  encodeURIComponent(
-    `<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='514'>
-      <rect width='100%' height='100%' fill='#f5f5f5'/>
-      <text x='50%' y='50%' text-anchor='middle' dominant-baseline='middle'
-            font-family='system-ui, -apple-system, Segoe UI, Roboto, Ubuntu' font-size='20' fill='#9ca3af'>
-        —
-      </text>
-    </svg>`
-  );
 
 /** Stats */
 export const resultsStats: ResultsStat[] = [
@@ -95,32 +83,11 @@ export const resultsStats: ResultsStat[] = [
   },
 ];
 
-/** Logo wall */
-export const resultsLogos: LogoItem[] = [
-  {
-    name: "Blue Door Pest Control",
-    href: "/results",
-    src: "/clients/blue-door-pest-control.jpg",
-  },
-  {
-    name: "Tamarack Restoration",
-    href: "/results",
-    src: "/clients/tamarack-restoration.webp",
-  },
-  {
-    name: "Carlsbad Home Services",
-    href: "/results",
-    src: "/clients/carlsbad-home-services.png",
-  },
-  { name: "Postal Systems" },
-  { name: "North County Handyman" },
-  { name: "Encinitas Mold Pros" },
-  { name: "Jupiter Pest & Rodent" },
-  { name: "Vista Flood Cleanup" },
-];
+/** Logo wall - empty array to hide section */
+export const resultsLogos: LogoItem[] = [];
 export const logoWall = resultsLogos;
 
-/** Case studies */
+/** Case studies - REAL CLIENTS ONLY */
 export const resultsCaseStudies: CaseStudy[] = [
   {
     id: "bdp-jupiter-fl",
@@ -129,7 +96,8 @@ export const resultsCaseStudies: CaseStudy[] = [
     city: "Jupiter, FL",
     sectorTag: "Pest Control",
     locationTag: "Florida",
-    image: { src: "/clients/blue-door-pest-control.jpg", alt: "Blue Door Pest Control logo" },
+    websiteUrl: "https://bluedoorpest.com",
+    image: { src: "/clients/blue-door-pest-control.jpg", alt: "Blue Door Pest Control website" },
     kpis: [
       {
         label: "organic leads (90d)",
@@ -149,7 +117,8 @@ export const resultsCaseStudies: CaseStudy[] = [
     city: "Carlsbad, CA",
     sectorTag: "Restoration",
     locationTag: "California",
-    image: { src: "/clients/tamarack-restoration.webp", alt: "Tamarack Restoration logo" },
+    websiteUrl: "https://www.tamarackrestoration.com",
+    image: { src: "/clients/tamarack-restoration.webp", alt: "Tamarack Restoration website" },
     kpis: [
       { label: "Top-3 Maps adds", value: "+5" },
       { label: "TTFB", value: "<200ms" },
@@ -159,43 +128,14 @@ export const resultsCaseStudies: CaseStudy[] = [
     ctaHref: "/services/web-design",
   },
   {
-    id: "postal-north-county",
-    title: "Postal Systems — North County, CA",
-    client: "Postal Systems",
-    city: "North County, CA",
-    sectorTag: "Home Services",
-    locationTag: "California",
-    kpis: [
-      { label: "GBP calls q/q", value: "3.1×" },
-      { label: "quote form CVR", value: "+22%" },
-    ],
-    blurb: "Productized installs + GBP products boosted discovery and conversion.",
-    ctaText: "See install structure",
-    ctaHref: "/services/google-business-profile-optimization",
-  },
-  {
-    id: "vista-flood",
-    title: "Vista Flood Cleanup — Vista, CA",
-    client: "Vista Flood Cleanup",
-    city: "Vista, CA",
-    sectorTag: "Restoration",
-    locationTag: "California",
-    kpis: [
-      { label: "speed index", value: "−48%" },
-      { label: "qualified calls", value: "+64%" },
-    ],
-    blurb: "Lean Astro build + hubs increased crawl depth and conversions.",
-    ctaText: "See page template",
-    ctaHref: "/services/web-design",
-  },
-  {
     id: "carlsbad-home-services-carlsbad-ca",
     title: "Carlsbad Home Services — Carlsbad, CA",
     client: "Carlsbad Home Services",
     city: "Carlsbad, CA",
     sectorTag: "Home Services",
     locationTag: "California",
-    image: { src: "/clients/carlsbad-home-services.png", alt: "Carlsbad Home Services logo" },
+    websiteUrl: "https://carlsbadhomeservices.com",
+    image: { src: "/clients/carlsbad-home-services.png", alt: "Carlsbad Home Services website" },
     kpis: [
       { label: "quote requests", value: "+52%" },
       { label: "CPL", value: "−33%" },
@@ -203,6 +143,40 @@ export const resultsCaseStudies: CaseStudy[] = [
     blurb: "Service packages + FAQs lifted SERP coverage and LP conversion.",
     ctaText: "View conversion patterns",
     ctaHref: "/services",
+  },
+  {
+    id: "carlsbad-fixit",
+    title: "Carlsbad Fix It — Carlsbad, CA",
+    client: "Carlsbad Fix It",
+    city: "Carlsbad, CA",
+    sectorTag: "Handyman Services",
+    locationTag: "California",
+    websiteUrl: "https://www.carlsbadfixit.com",
+    image: { src: "/clients/carlsbad-fixit.svg", alt: "Carlsbad Fix It website" },
+    kpis: [
+      { label: "Maps visibility", value: "+73%" },
+      { label: "avg. session time", value: "+45%" },
+    ],
+    blurb: "Fast Astro build with location pages drove Maps rankings and engagement.",
+    ctaText: "View handyman SEO",
+    ctaHref: "/services/local-seo",
+  },
+  {
+    id: "sd-commercial-mailboxes",
+    title: "San Diego Commercial Mailboxes — San Diego, CA",
+    client: "SD Commercial Mailboxes",
+    city: "San Diego, CA",
+    sectorTag: "Commercial Services",
+    locationTag: "California",
+    websiteUrl: "https://sandiegocommercialmailboxes.com",
+    image: { src: "/clients/sd-commercial-mailboxes.svg", alt: "San Diego Commercial Mailboxes website" },
+    kpis: [
+      { label: "GBP calls q/q", value: "3.1×" },
+      { label: "quote form CVR", value: "+22%" },
+    ],
+    blurb: "Productized installs + GBP products boosted discovery and conversion.",
+    ctaText: "See install structure",
+    ctaHref: "/services/google-business-profile-optimization",
   },
 ];
 export const caseStudies = resultsCaseStudies;
@@ -234,5 +208,3 @@ export const resultsFaqs: FaqItem[] = [
     a: "Month-to-month is available; most clients opt for 3–6 months to compound organic gains.",
   },
 ];
-
-void _PLACEHOLDER_21_9;
