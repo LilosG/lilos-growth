@@ -1,99 +1,13 @@
 ---
 /* FILE: src/pages/local-seo-tools/index.astro */
 import Layout from "~/layouts/PageLayout.astro";
-import Button from "~/components/ui/Button.astro";
+import ReviewLinkGenerator from "~/components/Tools/ReviewLinkGenerator.astro";
+import GBPCategoryFinder from "~/components/Tools/GBPCategoryFinder.astro";
+import LandingPageOutlineGenerator from "~/components/Tools/LandingPageOutlineGenerator.astro";
 
 export const title = "Free Local SEO Tools for Home Service Businesses";
 export const description =
   "Practical, on-brand tools to win the Map Pack, polish your Google Business Profile, and convert more local leads—no logins, no fluff.";
-
-const featuredTools = [
-  {
-    name: "Google Review Link & QR",
-    summary: "Find your business and generate a one-click review link + QR.",
-    href: "#todo",
-    fields: [
-      { ph: "Business name", type: "text" },
-      { ph: "City", type: "text" },
-      { ph: "State", type: "text" },
-      { ph: "ZIP", type: "text" },
-    ],
-  },
-  {
-    name: "Google Business Profile Category Finder",
-    summary: "Type what you do—we suggest matching GBP categories.",
-    href: "#todo",
-    fields: [{ ph: "Service keyword (e.g., plumber)", type: "text" }],
-  },
-  {
-    name: "Landing Page Outline Generator",
-    summary: "Proven outline for a service + city page that converts.",
-    href: "#todo",
-    fields: [
-      { ph: "Service", type: "text" },
-      { ph: "City/Area", type: "text" },
-    ],
-  },
-];
-
-const moreTools = [
-  {
-    name: "FAQ Schema Generator",
-    summary: "Turn Q&A into valid JSON-LD (FAQPage).",
-    href: "#todo",
-    fields: [
-      { ph: "Question", type: "text" },
-      { ph: "Answer", type: "textarea" },
-    ],
-  },
-  {
-    name: "Google SERP Preview",
-    summary: "Preview how your title & description may render.",
-    href: "#todo",
-    fields: [
-      { ph: "Title (~70 chars)", type: "text" },
-      { ph: "URL (optional)", type: "url" },
-      { ph: "Meta description (~155 chars)", type: "textarea" },
-    ],
-  },
-  {
-    name: "UTM Link Builder",
-    summary: "Create trackable URLs for Google Analytics.",
-    href: "#todo",
-    fields: [
-      { ph: "Destination URL", type: "url" },
-      { ph: "Source", type: "text" },
-      { ph: "Medium", type: "text" },
-      { ph: "Campaign", type: "text" },
-    ],
-  },
-  {
-    name: "Local Business Schema",
-    summary: "Generate JSON-LD for your business details.",
-    href: "#todo",
-    fields: [
-      { ph: "Business Name", type: "text" },
-      { ph: "Phone Number", type: "tel" },
-      { ph: "Street Address", type: "text" },
-      { ph: "City", type: "text" },
-      { ph: "State", type: "text" },
-      { ph: "ZIP", type: "text" },
-      { ph: "Website URL (optional)", type: "url" },
-    ],
-  },
-  {
-    name: "Google Maps Embed",
-    summary: "Generate an embed code for your location.",
-    href: "#todo",
-    fields: [{ ph: "Address or Place", type: "text" }],
-  },
-  {
-    name: "Local Keyword Ideas",
-    summary: "Quick ideas for service + location targeting.",
-    href: "#todo",
-    fields: [{ ph: "e.g., pest control", type: "text" }],
-  },
-];
 ---
 
 <Layout {title} {description}>
@@ -134,10 +48,10 @@ const moreTools = [
           >
         </a>
         <a
-          href="#more-utilities"
+          href="/contact#book"
           class="inline-flex items-center rounded-3xl bg-[#2b3b50] px-5 py-3 font-heading font-semibold text-white"
         >
-          More Utilities
+          Book a Call
           <svg
             class="ml-2 h-4 w-4"
             fill="none"
@@ -151,8 +65,8 @@ const moreTools = [
     </div>
   </section>
 
-  <!-- PROMISE STRIP (brand-tinted like homepage) -->
-  <section class="border-t border-gray-100 bg-[#fff5ef]">
+  <!-- PROMISE STRIP -->
+  <section class="border-t border-gray-100 bg-cream">
     <div class="mx-auto max-w-6xl px-4 py-16 text-center md:py-20">
       <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
         A Clean, Fast Toolbox Built for Local Wins
@@ -165,164 +79,104 @@ const moreTools = [
     </div>
   </section>
 
-  <!-- FEATURED TOOLS – white cards on white section -->
+  <!-- FEATURED TOOLS -->
   <section id="featured-tools" class="bg-white">
     <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
-      <h3
-        class="text-center font-heading text-3xl font-bold tracking-tight text-heading md:text-4xl"
-      >
-        Featured Tools
-      </h3>
+      <div class="flex items-start gap-4">
+        <div
+          class="hidden h-11 w-11 items-center justify-center rounded-full bg-white text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.03)] ring-2 ring-[#f56b2a] sm:flex"
+        >
+          <span class="text-[18px] leading-none">🛠️</span>
+        </div>
+        <div>
+          <h3 class="font-heading text-2xl font-bold text-heading md:text-3xl">Featured Tools</h3>
+          <p class="mt-2 max-w-2xl text-body">
+            Our most popular tools to boost your local SEO and convert more customers.
+          </p>
+        </div>
+      </div>
 
-      <div
-        class="mt-10 grid auto-rows-fr grid-cols-1 items-stretch gap-8 md:grid-cols-2 lg:grid-cols-3"
-      >
-        {
-          featuredTools.map((t, i) => (
-            <article
-              class="relative grid h-full rounded-[28px] border border-gray-200 bg-white p-8 shadow-[0_10px_30px_rgba(31,46,62,0.06)] transition-transform duration-200 motion-safe:hover:-translate-y-0.5"
-              style="grid-template-rows:auto 1fr auto;"
-            >
-              {i === 1 && (
-                <span class="absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center rounded-full bg-[#f56b2a] px-3 py-1 text-[11px] font-semibold text-white shadow-md">
-                  Popular
-                </span>
-              )}
+      <div class="mt-8 grid grid-cols-1 gap-8 lg:gap-10">
+        <!-- Review Link Generator -->
+        <ReviewLinkGenerator />
 
-              <header class="mb-4">
-                <h4 class="font-heading text-xl font-bold text-heading md:text-2xl">{t.name}</h4>
-              </header>
+        <!-- GBP Category Finder -->
+        <div class="rounded-3xl bg-white p-8 shadow-lg">
+          <GBPCategoryFinder />
+        </div>
 
-              <div class="text-[15px] text-body">
-                <p>{t.summary}</p>
-                {t.fields && (
-                  <div class="mt-5 grid gap-3">
-                    {t.fields.map((f) =>
-                      f.type === "textarea" ? (
-                        <textarea
-                          rows="3"
-                          placeholder={f.ph}
-                          class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-[15px]"
-                          aria-label={f.ph}
-                        />
-                      ) : f.type === "url" ? (
-                        <input
-                          type="url"
-                          placeholder={f.ph}
-                          class="h-11 w-full rounded-xl border border-gray-300 bg-white px-4 text-[15px]"
-                          aria-label={f.ph}
-                        />
-                      ) : f.type === "tel" ? (
-                        <input
-                          type="tel"
-                          placeholder={f.ph}
-                          class="h-11 w-full rounded-xl border border-gray-300 bg-white px-4 text-[15px]"
-                          aria-label={f.ph}
-                        />
-                      ) : (
-                        <input
-                          type="text"
-                          placeholder={f.ph}
-                          class="h-11 w-full rounded-xl border border-gray-300 bg-white px-4 text-[15px]"
-                          aria-label={f.ph}
-                        />
-                      )
-                    )}
-                  </div>
-                )}
-              </div>
-
-              <footer class="mt-6 border-t border-gray-200 pt-5">
-                <Button
-                  variant="primary"
-                  class="w-full sm:w-auto"
-                  href={t.href}
-                  text={
-                    t.name.includes("Outline")
-                      ? "Generate Outline"
-                      : t.name.includes("Category")
-                        ? "Find Categories"
-                        : "Find Place"
-                  }
-                />
-              </footer>
-            </article>
-          ))
-        }
+        <!-- Landing Page Outline Generator -->
+        <LandingPageOutlineGenerator />
       </div>
     </div>
   </section>
 
-  <!-- MORE UTILITIES – white cards on pale blue section -->
-  <section id="more-utilities" class="bg-[#e9f0f7]">
+  <!-- COMING SOON -->
+  <section class="bg-bluelight">
     <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
-      <h3
-        class="text-center font-heading text-3xl font-bold tracking-tight text-heading md:text-4xl"
-      >
-        More Free Utilities
-      </h3>
+      <div class="flex items-start gap-4">
+        <div
+          class="hidden h-11 w-11 items-center justify-center rounded-full bg-white text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.03)] ring-2 ring-[#f56b2a] sm:flex"
+        >
+          <span class="text-[18px] leading-none">⏱️</span>
+        </div>
+        <div>
+          <h3 class="font-heading text-2xl font-bold text-heading md:text-3xl">
+            More Tools Coming Soon
+          </h3>
+          <p class="mt-2 max-w-2xl text-body">
+            We're building additional utilities to help you dominate local search.
+          </p>
+        </div>
+      </div>
 
       <div
-        class="mt-10 grid auto-rows-fr grid-cols-1 items-stretch gap-8 md:grid-cols-2 lg:grid-cols-3"
+        class="mt-10 grid auto-rows-fr grid-cols-1 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3"
       >
         {
-          moreTools.map((t) => (
-            <article
-              class="relative grid h-full rounded-[28px] border border-gray-200 bg-white p-8 shadow-[0_10px_30px_rgba(31,46,62,0.06)] transition-transform duration-200 motion-safe:hover:-translate-y-0.5"
-              style="grid-template-rows:auto 1fr auto;"
-            >
-              <header class="mb-3">
-                <h4 class="font-heading text-xl font-bold text-heading md:text-2xl">{t.name}</h4>
-              </header>
-
-              <div class="text-[15px] text-body">
-                <p>{t.summary}</p>
-                {t.fields && (
-                  <div class="mt-5 grid gap-3">
-                    {t.fields.map((f) =>
-                      f.type === "textarea" ? (
-                        <textarea
-                          rows="3"
-                          placeholder={f.ph}
-                          class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-[15px]"
-                          aria-label={f.ph}
-                        />
-                      ) : f.type === "url" ? (
-                        <input
-                          type="url"
-                          placeholder={f.ph}
-                          class="h-11 w-full rounded-xl border border-gray-300 bg-white px-4 text-[15px]"
-                          aria-label={f.ph}
-                        />
-                      ) : f.type === "tel" ? (
-                        <input
-                          type="tel"
-                          placeholder={f.ph}
-                          class="h-11 w-full rounded-xl border border-gray-300 bg-white px-4 text-[15px]"
-                          aria-label={f.ph}
-                        />
-                      ) : (
-                        <input
-                          type="text"
-                          placeholder={f.ph}
-                          class="h-11 w-full rounded-xl border border-gray-300 bg-white px-4 text-[15px]"
-                          aria-label={f.ph}
-                        />
-                      )
-                    )}
-                  </div>
-                )}
+          [
+            {
+              name: "FAQ Schema Generator",
+              summary: "Turn Q&A into valid JSON-LD (FAQPage).",
+            },
+            {
+              name: "Google SERP Preview",
+              summary: "Preview how your title & description may render.",
+            },
+            {
+              name: "UTM Link Builder",
+              summary: "Create trackable URLs for Google Analytics.",
+            },
+            {
+              name: "Local Business Schema",
+              summary: "Generate JSON-LD for your business details.",
+            },
+            {
+              name: "Google Maps Embed",
+              summary: "Generate an embed code for your location.",
+            },
+            {
+              name: "Local Keyword Ideas",
+              summary: "Quick ideas for service + location targeting.",
+            },
+          ].map((t) => (
+            <article class="relative grid h-full rounded-3xl border-2 border-gray-200 bg-white/50 p-6 opacity-75">
+              <div class="absolute right-4 top-4 rounded-full bg-[#f56b2a]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[#f56b2a]">
+                Coming Soon
               </div>
-
-              <footer class="mt-6 border-t border-gray-200 pt-5">
-                <Button variant="primary" class="w-full sm:w-auto" href={t.href} text="Open Tool" />
-              </footer>
+              <header class="mb-3">
+                <h4 class="font-heading text-lg font-bold text-heading">{t.name}</h4>
+              </header>
+              <p class="text-sm text-body/80">{t.summary}</p>
             </article>
           ))
         }
       </div>
 
       <div class="mt-12 text-center">
+        <p class="mb-4 text-body">
+          Want a custom tool for your business or have suggestions?
+        </p>
         <a
           href="/contact#book"
           class="inline-flex items-center rounded-3xl bg-[#f56b2a] px-6 py-3 font-heading font-semibold text-white"
