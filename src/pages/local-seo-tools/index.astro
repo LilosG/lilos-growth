@@ -4,6 +4,12 @@ import Layout from "~/layouts/PageLayout.astro";
 import ReviewLinkGenerator from "~/components/Tools/ReviewLinkGenerator.astro";
 import GBPCategoryFinder from "~/components/Tools/GBPCategoryFinder.astro";
 import LandingPageOutlineGenerator from "~/components/Tools/LandingPageOutlineGenerator.astro";
+import FAQSchemaGenerator from "~/components/Tools/FAQSchemaGenerator.astro";
+import SERPPreview from "~/components/Tools/SERPPreview.astro";
+import UTMLinkBuilder from "~/components/Tools/UTMLinkBuilder.astro";
+import LocalBusinessSchema from "~/components/Tools/LocalBusinessSchema.astro";
+import GoogleMapsEmbed from "~/components/Tools/GoogleMapsEmbed.astro";
+import LocalKeywordIdeas from "~/components/Tools/LocalKeywordIdeas.astro";
 
 export const title = "Free Local SEO Tools for Home Service Businesses";
 export const description =
@@ -86,7 +92,7 @@ export const description =
         <div
           class="hidden h-11 w-11 items-center justify-center rounded-full bg-white text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.03)] ring-2 ring-[#f56b2a] sm:flex"
         >
-          <span class="text-[18px] leading-none">🛠️</span>
+          <span class="text-[18px] leading-none">⭐</span>
         </div>
         <div>
           <h3 class="font-heading text-2xl font-bold text-heading md:text-3xl">Featured Tools</h3>
@@ -111,66 +117,43 @@ export const description =
     </div>
   </section>
 
-  <!-- COMING SOON -->
+  <!-- MORE TOOLS -->
   <section class="bg-bluelight">
     <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
       <div class="flex items-start gap-4">
         <div
           class="hidden h-11 w-11 items-center justify-center rounded-full bg-white text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.03)] ring-2 ring-[#f56b2a] sm:flex"
         >
-          <span class="text-[18px] leading-none">⏱️</span>
+          <span class="text-[18px] leading-none">🛠️</span>
         </div>
         <div>
           <h3 class="font-heading text-2xl font-bold text-heading md:text-3xl">
-            More Tools Coming Soon
+            More Free Utilities
           </h3>
           <p class="mt-2 max-w-2xl text-body">
-            We're building additional utilities to help you dominate local search.
+            Additional tools to optimize your local presence and marketing campaigns.
           </p>
         </div>
       </div>
 
-      <div
-        class="mt-10 grid auto-rows-fr grid-cols-1 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3"
-      >
-        {
-          [
-            {
-              name: "FAQ Schema Generator",
-              summary: "Turn Q&A into valid JSON-LD (FAQPage).",
-            },
-            {
-              name: "Google SERP Preview",
-              summary: "Preview how your title & description may render.",
-            },
-            {
-              name: "UTM Link Builder",
-              summary: "Create trackable URLs for Google Analytics.",
-            },
-            {
-              name: "Local Business Schema",
-              summary: "Generate JSON-LD for your business details.",
-            },
-            {
-              name: "Google Maps Embed",
-              summary: "Generate an embed code for your location.",
-            },
-            {
-              name: "Local Keyword Ideas",
-              summary: "Quick ideas for service + location targeting.",
-            },
-          ].map((t) => (
-            <article class="relative grid h-full rounded-3xl border-2 border-gray-200 bg-white/50 p-6 opacity-75">
-              <div class="absolute right-4 top-4 rounded-full bg-[#f56b2a]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[#f56b2a]">
-                Coming Soon
-              </div>
-              <header class="mb-3">
-                <h4 class="font-heading text-lg font-bold text-heading">{t.name}</h4>
-              </header>
-              <p class="text-sm text-body/80">{t.summary}</p>
-            </article>
-          ))
-        }
+      <div class="mt-10 grid grid-cols-1 gap-8 lg:gap-10">
+        <!-- FAQ Schema Generator -->
+        <FAQSchemaGenerator />
+
+        <!-- Google SERP Preview -->
+        <SERPPreview />
+
+        <!-- UTM Link Builder -->
+        <UTMLinkBuilder />
+
+        <!-- Local Business Schema -->
+        <LocalBusinessSchema />
+
+        <!-- Google Maps Embed -->
+        <GoogleMapsEmbed />
+
+        <!-- Local Keyword Ideas -->
+        <LocalKeywordIdeas />
       </div>
 
       <div class="mt-12 text-center">

@@ -1,0 +1,196 @@
+---
+/**
+ * Local Keyword Ideas Generator
+ * Generates local keyword variations for service businesses
+ */
+---
+
+<div class="flex flex-col rounded-3xl bg-white p-8 shadow-lg">
+  <h2 class="mb-3 font-heading text-xl font-bold text-heading">Local Keyword Ideas</h2>
+  <p class="mb-5 text-sm text-body/80">
+    Generate local keyword variations to target your service area and increase visibility.
+  </p>
+
+  <form id="keywords-form" class="grid gap-4">
+    <div>
+      <label class="mb-1 block text-xs font-semibold text-gray-600">
+        Primary Service <span class="text-red-500">*</span>
+      </label>
+      <input
+        id="keywords-service"
+        type="text"
+        required
+        placeholder="plumbing, HVAC repair, pest control"
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm"
+      />
+    </div>
+
+    <div>
+      <label class="mb-1 block text-xs font-semibold text-gray-600">
+        City/Area <span class="text-red-500">*</span>
+      </label>
+      <input
+        id="keywords-city"
+        type="text"
+        required
+        placeholder="Denver"
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm"
+      />
+    </div>
+
+    <div>
+      <label class="mb-1 block text-xs font-semibold text-gray-600">
+        State <span class="text-gray-400">(optional)</span>
+      </label>
+      <input
+        id="keywords-state"
+        type="text"
+        placeholder="Colorado"
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="w-full rounded-xl bg-[#f56b2a] px-5 py-2 font-semibold text-white shadow-lg transition hover:bg-[#c9400a]"
+    >
+      Generate Keywords
+    </button>
+  </form>
+
+  <div id="keywords-output" class="mt-5 hidden">
+    <div class="mb-3 flex items-center justify-between">
+      <h3 class="font-semibold text-heading">Keyword Ideas</h3>
+      <button
+        id="keywords-copy"
+        type="button"
+        class="rounded-lg border border-gray-300 px-3 py-1 text-sm hover:bg-gray-50"
+      >
+        Copy All
+      </button>
+    </div>
+
+    <div class="space-y-4">
+      <div>
+        <h4 class="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-600">
+          Primary Keywords
+        </h4>
+        <div id="keywords-primary" class="space-y-1"></div>
+      </div>
+
+      <div>
+        <h4 class="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-600">
+          Long-Tail Keywords
+        </h4>
+        <div id="keywords-longtail" class="space-y-1"></div>
+      </div>
+
+      <div>
+        <h4 class="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-600">
+          Question-Based Keywords
+        </h4>
+        <div id="keywords-questions" class="space-y-1"></div>
+      </div>
+
+      <div>
+        <h4 class="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-600">
+          Near Me Variations
+        </h4>
+        <div id="keywords-nearme" class="space-y-1"></div>
+      </div>
+    </div>
+
+    <p class="mt-4 text-xs text-gray-600">
+      Use these keywords in your page titles, headings, content, and GBP posts.
+    </p>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById("keywords-form");
+    const outWrap = document.getElementById("keywords-output");
+    const primaryDiv = document.getElementById("keywords-primary");
+    const longtailDiv = document.getElementById("keywords-longtail");
+    const questionsDiv = document.getElementById("keywords-questions");
+    const nearmeDiv = document.getElementById("keywords-nearme");
+    const copyBtn = document.getElementById("keywords-copy");
+
+    let allKeywords = [];
+
+    function createKeywordTag(text) {
+      return `<div class="inline-block rounded-lg border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm text-gray-700">${text}</div>`;
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const service = document.getElementById("keywords-service").value.trim();
+      const city = document.getElementById("keywords-city").value.trim();
+      const state = document.getElementById("keywords-state").value.trim();
+
+      if (!service || !city) return;
+
+      const serviceLower = service.toLowerCase();
+      const cityLower = city.toLowerCase();
+      const stateLower = state.toLowerCase();
+
+      // Primary Keywords
+      const primary = [
+        `${serviceLower} ${cityLower}`,
+        `${serviceLower} in ${cityLower}`,
+        `${cityLower} ${serviceLower}`,
+        state ? `${serviceLower} ${cityLower} ${stateLower}` : null,
+        `best ${serviceLower} ${cityLower}`,
+        `${serviceLower} services ${cityLower}`,
+      ].filter(Boolean);
+
+      // Long-tail Keywords
+      const longtail = [
+        `affordable ${serviceLower} ${cityLower}`,
+        `emergency ${serviceLower} ${cityLower}`,
+        `24/7 ${serviceLower} ${cityLower}`,
+        `same day ${serviceLower} ${cityLower}`,
+        `licensed ${serviceLower} ${cityLower}`,
+        `professional ${serviceLower} ${cityLower}`,
+        `local ${serviceLower} ${cityLower}`,
+        `residential ${serviceLower} ${cityLower}`,
+        `commercial ${serviceLower} ${cityLower}`,
+      ];
+
+      // Question-Based
+      const questions = [
+        `how much does ${serviceLower} cost in ${cityLower}`,
+        `best ${serviceLower} company in ${cityLower}`,
+        `who does ${serviceLower} in ${cityLower}`,
+        `${serviceLower} near ${cityLower}`,
+        `where to find ${serviceLower} in ${cityLower}`,
+      ];
+
+      // Near Me
+      const nearme = [
+        `${serviceLower} near me`,
+        `${serviceLower} companies near me`,
+        `${serviceLower} services near me`,
+        `emergency ${serviceLower} near me`,
+        `24 hour ${serviceLower} near me`,
+      ];
+
+      primaryDiv.innerHTML = primary.map(createKeywordTag).join(" ");
+      longtailDiv.innerHTML = longtail.map(createKeywordTag).join(" ");
+      questionsDiv.innerHTML = questions.map(createKeywordTag).join(" ");
+      nearmeDiv.innerHTML = nearme.map(createKeywordTag).join(" ");
+
+      allKeywords = [...primary, ...longtail, ...questions, ...nearme];
+      outWrap.classList.remove("hidden");
+    });
+
+    copyBtn.addEventListener("click", async function () {
+      try {
+        await navigator.clipboard.writeText(allKeywords.join("\n"));
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => (copyBtn.textContent = "Copy All"), 900);
+      } catch {}
+    });
+  })();
+</script>

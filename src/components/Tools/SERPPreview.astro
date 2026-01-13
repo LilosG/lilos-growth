@@ -1,0 +1,120 @@
+---
+/**
+ * Google SERP Preview Tool
+ * Shows how title/description will appear in search results
+ */
+---
+
+<div class="flex flex-col rounded-3xl bg-white p-8 shadow-lg">
+  <h2 class="mb-3 font-heading text-xl font-bold text-heading">Google SERP Preview</h2>
+  <p class="mb-5 text-sm text-body/80">
+    Preview how your title and meta description may appear in Google search results.
+  </p>
+
+  <form id="serp-form" class="grid gap-4">
+    <div>
+      <label class="mb-1 block text-xs font-semibold text-gray-600">
+        Page Title <span class="text-gray-400">(~60 chars)</span>
+      </label>
+      <input
+        id="serp-title"
+        type="text"
+        maxlength="70"
+        placeholder="Best Plumber in Denver | 24/7 Service"
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm"
+      />
+      <div class="mt-1 text-xs text-gray-500">
+        <span id="title-count">0</span>/60 characters
+      </div>
+    </div>
+
+    <div>
+      <label class="mb-1 block text-xs font-semibold text-gray-600">
+        URL <span class="text-gray-400">(optional)</span>
+      </label>
+      <input
+        id="serp-url"
+        type="text"
+        placeholder="https://example.com/services/plumbing"
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm"
+      />
+    </div>
+
+    <div>
+      <label class="mb-1 block text-xs font-semibold text-gray-600">
+        Meta Description <span class="text-gray-400">(~155 chars)</span>
+      </label>
+      <textarea
+        id="serp-desc"
+        rows="3"
+        maxlength="320"
+        placeholder="Fast, reliable plumbing services in Denver. Licensed & insured. Same-day service available. Call now for a free quote!"
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm"
+      ></textarea>
+      <div class="mt-1 text-xs text-gray-500">
+        <span id="desc-count">0</span>/155 characters
+      </div>
+    </div>
+  </form>
+
+  <div class="mt-6 rounded-xl border border-gray-200 bg-gray-50 p-6">
+    <div class="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">Preview</div>
+    <div class="rounded-lg bg-white p-4 shadow-sm">
+      <div id="preview-url" class="mb-1 truncate text-xs text-gray-600">
+        https://example.com
+      </div>
+      <div
+        id="preview-title"
+        class="mb-1 overflow-hidden text-xl font-medium leading-tight text-[#1a0dab] hover:underline"
+        style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"
+      >
+        Your page title will appear here
+      </div>
+      <div
+        id="preview-desc"
+        class="overflow-hidden text-sm leading-relaxed text-gray-600"
+        style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"
+      >
+        Your meta description will appear here. Make it compelling and include a call to action.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const titleInput = document.getElementById("serp-title");
+    const urlInput = document.getElementById("serp-url");
+    const descInput = document.getElementById("serp-desc");
+
+    const titleCount = document.getElementById("title-count");
+    const descCount = document.getElementById("desc-count");
+
+    const previewTitle = document.getElementById("preview-title");
+    const previewUrl = document.getElementById("preview-url");
+    const previewDesc = document.getElementById("preview-desc");
+
+    function updatePreview() {
+      const title = titleInput.value.trim() || "Your page title will appear here";
+      const url = urlInput.value.trim() || "https://example.com";
+      const desc =
+        descInput.value.trim() ||
+        "Your meta description will appear here. Make it compelling and include a call to action.";
+
+      previewTitle.textContent = title;
+      previewUrl.textContent = url;
+      previewDesc.textContent = desc;
+
+      titleCount.textContent = titleInput.value.length;
+      descCount.textContent = descInput.value.length;
+
+      // Highlight if over recommended length
+      titleCount.style.color = titleInput.value.length > 60 ? "#dc2626" : "#6b7280";
+      descCount.style.color = descInput.value.length > 155 ? "#dc2626" : "#6b7280";
+    }
+
+    titleInput.addEventListener("input", updatePreview);
+    urlInput.addEventListener("input", updatePreview);
+    descInput.addEventListener("input", updatePreview);
+  })();
+</script>
