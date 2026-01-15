@@ -1,0 +1,112 @@
+---
+/**
+ * CaseStudyCard Component
+ * Displays client case studies with screenshots
+ * Uses site theme: rounded-3xl, proper shadows, hover effects matching homepage cards
+ */
+
+import BrowserMockup from "~/components/ui/BrowserMockup.astro";
+
+export interface Props {
+  study: import("~/data/results").CaseStudy;
+}
+const { study } = Astro.props;
+
+const kpis = Array.isArray(study.kpis) ? study.kpis.slice(0, 3) : [];
+const primaryHref = study.ctaHref ?? "/contact";
+const primaryText = study.ctaText ?? "See details";
+
+const screenshot = study.screenshot?.src;
+const websiteUrl = study.websiteUrl;
+---
+
+<article
+  class="group flex h-full flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-md transition-transform hover:-translate-y-1 hover:shadow-xl"
+>
+  <!-- Logo Header -->
+  <header class="flex items-center gap-4 p-6 pb-4">
+    <div
+      class="flex h-12 w-[160px] flex-shrink-0 items-center justify-center overflow-hidden rounded-xl border border-gray-100 bg-white"
+    >
+      {
+        study.image?.src ? (
+          <img
+            src={study.image.src}
+            alt={study.image.alt ?? study.client}
+            width="160"
+            height="48"
+            loading="lazy"
+            decoding="async"
+            class="max-h-10 w-auto object-contain opacity-90"
+          />
+        ) : (
+          <span class="px-3 text-sm font-semibold text-gray-600">{study.client}</span>
+        )
+      }
+    </div>
+    <div class="min-w-0 flex-1">
+      <h3 class="font-heading text-lg font-bold tracking-tight text-heading md:text-xl">
+        {study.title ?? `${study.client} — ${study.city}`}
+      </h3>
+      <div class="mt-1.5 flex flex-wrap gap-2">
+        {
+          study.sectorTag && (
+            <span class="inline-flex items-center rounded-full bg-bluelight px-3 py-0.5 text-xs font-semibold text-heading">
+              {study.sectorTag}
+            </span>
+          )
+        }
+        {
+          study.locationTag && (
+            <span class="inline-flex items-center rounded-full bg-bluelight px-3 py-0.5 text-xs font-semibold text-heading">
+              {study.locationTag}
+            </span>
+          )
+        }
+      </div>
+    </div>
+  </header>
+
+  <!-- Website Screenshot -->
+  {screenshot && websiteUrl && (
+    <div class="px-6 pb-4">
+      <BrowserMockup
+        screenshot={screenshot}
+        url={websiteUrl}
+        alt={`${study.client} website`}
+        loading="lazy"
+      />
+    </div>
+  )}
+
+  <!-- Content -->
+  <div class="flex flex-1 flex-col px-6 pb-6">
+    {
+      kpis.length > 0 && (
+        <ul class="flex flex-wrap gap-2">
+          {kpis.map((k) => (
+            <li class="inline-flex items-center rounded-full border border-gray-100 bg-gray-50 px-3 py-1.5 text-sm">
+              <span class="font-bold text-heading">{k.value}</span>
+              <span class="ml-1 text-gray-600">{k.label}</span>
+              {k.sr && <span class="sr-only">{k.sr}</span>}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {study.blurb && <p class="mt-4 text-[15px] leading-relaxed text-body">{study.blurb}</p>}
+
+    <footer class="mt-auto flex items-center justify-between border-t border-gray-100 pt-5 mt-6">
+      <span class="text-sm font-medium text-gray-500">Case study</span>
+      <a
+        href={primaryHref}
+        data-astro-prefetch
+        class="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 font-heading text-base font-semibold text-white shadow-md transition hover:bg-primaryHover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        aria-label={`${primaryText} for ${study.client}`}
+      >
+        {primaryText}
+      </a>
+    </footer>
+  </div>
+</article>

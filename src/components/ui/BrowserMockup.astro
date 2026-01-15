@@ -1,0 +1,60 @@
+---
+/**
+ * BrowserMockup Component
+ * Displays a screenshot inside a browser chrome wrapper with hover effect
+ */
+
+interface Props {
+  screenshot: string;
+  url: string;
+  alt: string;
+  loading?: 'lazy' | 'eager';
+  class?: string;
+}
+
+const { screenshot, url, alt, loading = 'lazy', class: className = '' } = Astro.props;
+---
+
+<div class:list={['group relative overflow-hidden rounded-2xl shadow-lg transition-shadow hover:shadow-2xl', className]}>
+  <!-- Browser Chrome -->
+  <div class="flex items-center gap-2 bg-gray-200 px-4 py-3">
+    <div class="flex gap-1.5">
+      <div class="h-3 w-3 rounded-full bg-red-500"></div>
+      <div class="h-3 w-3 rounded-full bg-yellow-500"></div>
+      <div class="h-3 w-3 rounded-full bg-green-500"></div>
+    </div>
+    <div class="mx-4 flex-1 rounded bg-white px-3 py-1.5 text-xs text-gray-500 truncate">
+      {url.replace(/^https?:\/\/(www\.)?/, '')}
+    </div>
+  </div>
+  
+  <!-- Screenshot -->
+  <div class="relative bg-white">
+    <img 
+      src={screenshot} 
+      alt={alt}
+      loading={loading}
+      width="1200"
+      height="800"
+      class="w-full h-auto"
+    />
+    
+    <!-- Hover Overlay - "View Live Site" -->
+    <a 
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="absolute inset-0 flex items-center justify-center bg-primary/95 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      aria-label={`Visit ${alt} website`}
+    >
+      <div class="text-center">
+        <svg class="mx-auto mb-3 h-12 w-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+        <span class="text-xl font-bold text-white">
+          View Live Site
+        </span>
+      </div>
+    </a>
+  </div>
+</div>

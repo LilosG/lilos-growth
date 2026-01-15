@@ -14,8 +14,8 @@ export const description =
 
 <Layout {title} {description}>
   <!-- HERO -->
-  <section class="relative overflow-hidden bg-[#253242] pb-20 pt-16">
-    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]"></div>
+  <section class="relative overflow-hidden bg-secondary pb-20 pt-16">
+    <div class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light"></div>
 
     <div class="relative mx-auto max-w-6xl px-4">
       <div class="grid gap-8 md:grid-cols-2 md:items-center">
@@ -35,7 +35,7 @@ export const description =
               type="submit"
               name="path"
               value="149-fixes"
-              class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-7 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#f34e00]"
+              class="inline-flex items-center rounded-2xl bg-primary px-7 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-dark"
               data-analytics="begin_checkout"
               data-offer="gbp_top5_149"
             >
@@ -55,7 +55,7 @@ export const description =
             <a
               href="#"
               data-calendly={CALENDLY}
-              class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#27394b]"
+              class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-secondary-hover"
               data-analytics="generate_lead"
               data-offer="sprint_499"
             >
@@ -75,7 +75,7 @@ export const description =
 
         <!-- Right: Hero form -->
         <div class="rounded-2xl border border-white/40 bg-white/95 p-6 shadow-lg backdrop-blur">
-          <h2 class="font-heading text-xl font-semibold text-[#253242]">
+          <h2 class="font-heading text-xl font-semibold text-secondary">
             Get the $149 Fix or a Free 3-min Audit
           </h2>
           <p class="mt-1 text-sm text-slate-600">
@@ -101,13 +101,13 @@ export const description =
                 name="name"
                 type="text"
                 placeholder="Your name"
-                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#f56b2a]"
+                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-primary"
               />
               <input
                 name="business"
                 type="text"
                 placeholder="Business name"
-                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#f56b2a]"
+                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
 
@@ -117,14 +117,14 @@ export const description =
                 name="_replyto"
                 type="email"
                 placeholder="Email"
-                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#f56b2a]"
+                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-primary"
               />
               <input
                 name="phone"
                 type="tel"
                 inputmode="tel"
                 placeholder="Phone (optional)"
-                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#f56b2a]"
+                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
 
@@ -132,7 +132,7 @@ export const description =
               name="url"
               type="url"
               placeholder="Website or Google Business Profile URL"
-              class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#f56b2a]"
+              class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-primary"
             />
 
             <div class="flex flex-wrap gap-3 pt-1">
@@ -140,7 +140,7 @@ export const description =
                 type="submit"
                 name="path"
                 value="149-fixes"
-                class="inline-flex items-center rounded-xl bg-[#f56b2a] px-5 py-2.5 font-heading text-sm font-semibold text-white shadow transition hover:bg-[#c9400a]"
+                class="inline-flex items-center rounded-xl bg-primary px-5 py-2.5 font-heading text-sm font-semibold text-white shadow transition hover:bg-[#c9400a]"
               >
                 Start $149 Fix
               </button>
@@ -148,7 +148,7 @@ export const description =
                 type="submit"
                 name="path"
                 value="free-audit"
-                class="inline-flex items-center rounded-xl border border-slate-300 px-5 py-2.5 font-heading text-sm font-semibold text-[#253242] transition hover:bg-slate-50"
+                class="inline-flex items-center rounded-xl border border-slate-300 px-5 py-2.5 font-heading text-sm font-semibold text-secondary transition hover:bg-slate-50"
               >
                 Send 3-min Audit
               </button>
@@ -205,7 +205,7 @@ export const description =
           </ul>
           <div class="mt-6 flex items-end justify-between border-t border-gray-100 pt-6">
             <div>
-              <div class="text-3xl font-bold text-[#f56b2a]">$149</div>
+              <div class="text-3xl font-bold text-primary">$149</div>
               <div class="text-xs text-gray-500">90-minute cap • 2–3 day turnaround</div>
             </div>
             <button
@@ -213,7 +213,7 @@ export const description =
               type="submit"
               name="path"
               value="149-fixes"
-              class="rounded-xl bg-[#f56b2a] px-6 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
+              class="rounded-xl bg-primary px-6 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
               data-analytics="begin_checkout"
               data-offer="gbp_top5_149"
             >
@@ -223,10 +223,10 @@ export const description =
         </article>
 
         <article
-          class="relative grid grid-rows-[auto_1fr_auto] rounded-2xl border-2 border-[#f56b2a] bg-white p-8 shadow-md"
+          class="relative grid grid-rows-[auto_1fr_auto] rounded-2xl border-2 border-primary bg-white p-8 shadow-md"
         >
           <div
-            class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#f56b2a] px-4 py-1 text-xs font-bold text-white shadow"
+            class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1 text-xs font-bold text-white shadow"
           >
             Most Popular
           </div>
@@ -248,14 +248,14 @@ export const description =
           </ul>
           <div class="mt-6 flex items-end justify-between border-t border-gray-100 pt-6">
             <div>
-              <div class="text-3xl font-bold text-[#f56b2a]">$499</div>
+              <div class="text-3xl font-bold text-primary">$499</div>
               <div class="text-xs text-gray-500">3–4 weeks • ~5–6 hrs effort</div>
             </div>
             <!-- Calendly popup trigger -->
             <a
               href="#"
               data-calendly={CALENDLY}
-              class="rounded-xl bg-secondary px-6 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#27394b]"
+              class="rounded-xl bg-secondary px-6 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-secondary-hover"
               data-analytics="generate_lead"
               data-offer="sprint_499"
             >
@@ -295,14 +295,14 @@ export const description =
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="text-center font-heading text-3xl font-bold text-heading md:text-4xl">
         How Our Process Works
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
       </h2>
 
       <div class="mt-10 grid gap-6 md:grid-cols-4">
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <div class="flex items-center gap-3">
             <span
-              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-sm font-bold text-white"
+              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-white"
               >1</span
             >
             <h3 class="font-heading text-lg font-semibold text-heading">Quick Intake</h3>
@@ -313,7 +313,7 @@ export const description =
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <div class="flex items-center gap-3">
             <span
-              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-sm font-bold text-white"
+              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-white"
               >2</span
             >
             <h3 class="font-heading text-lg font-semibold text-heading">Implement</h3>
@@ -326,7 +326,7 @@ export const description =
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <div class="flex items-center gap-3">
             <span
-              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-sm font-bold text-white"
+              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-white"
               >3</span
             >
             <h3 class="font-heading text-lg font-semibold text-heading">Verify</h3>
@@ -339,7 +339,7 @@ export const description =
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <div class="flex items-center gap-3">
             <span
-              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f56b2a] text-sm font-bold text-white"
+              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-white"
               >4</span
             >
             <h3 class="font-heading text-lg font-semibold text-heading">Next Wins</h3>
@@ -357,7 +357,7 @@ export const description =
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="text-center font-heading text-3xl font-bold text-heading md:text-4xl">
         What You Get (Both Offers)
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
       </h2>
 
       <div class="mt-10 grid gap-6 md:grid-cols-3">
@@ -477,13 +477,13 @@ export const description =
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="text-center font-heading text-3xl font-bold text-heading md:text-4xl">
         Recent Results (Snapshots)
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
       </h2>
 
       <div class="mt-10 grid gap-6 md:grid-cols-3">
         <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
           <span
-            class="inline-block rounded-full bg-[#f56b2a]/10 px-3 py-1 text-xs font-semibold text-[#f56b2a]"
+            class="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary"
             >Water Damage • SoCal</span
           >
           <p class="mt-3 text-[15px] text-body">
@@ -493,7 +493,7 @@ export const description =
 
         <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
           <span
-            class="inline-block rounded-full bg-[#f56b2a]/10 px-3 py-1 text-xs font-semibold text-[#f56b2a]"
+            class="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary"
             >Pest Control • FL</span
           >
           <p class="mt-3 text-[15px] text-body">
@@ -503,7 +503,7 @@ export const description =
 
         <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
           <span
-            class="inline-block rounded-full bg-[#f56b2a]/10 px-3 py-1 text-xs font-semibold text-[#f56b2a]"
+            class="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary"
             >Plumbing • Inland Empire</span
           >
           <p class="mt-3 text-[15px] text-body">
@@ -520,30 +520,30 @@ export const description =
       <h2 class="text-center font-heading text-3xl font-bold text-heading md:text-4xl">
         At-a-Glance Comparison
         <span
-          class="mx-auto mt-2 block h-1 w-20 rounded bg-gradient-to-r from-[#253242] via-[#f56b2a] to-[#253242]"
+          class="mx-auto mt-2 block h-1 w-20 rounded bg-gradient-to-r from-secondary via-primary to-secondary"
         ></span>
       </h2>
 
       <div
         class="mt-8 overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-xl ring-1 ring-black/5"
       >
-        <div class="h-1 w-full bg-gradient-to-r from-[#253242] via-[#f56b2a] to-[#253242]"></div>
+        <div class="h-1 w-full bg-gradient-to-r from-secondary via-primary to-secondary"></div>
 
         <table class="w-full text-left text-[15px] text-body">
           <thead>
             <tr class="bg-slate-50/80">
-              <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-[#253242]">
+              <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-secondary">
                 Features
               </th>
               <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider"
                 ><span
-                  class="inline-flex items-center gap-2 rounded-full bg-[#253242]/90 px-3 py-1 text-white"
+                  class="inline-flex items-center gap-2 rounded-full bg-secondary/90 px-3 py-1 text-white"
                   >GBP</span
                 ></th
               >
               <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider"
                 ><span
-                  class="inline-flex items-center gap-2 rounded-full bg-[#f56b2a]/90 px-3 py-1 text-white"
+                  class="inline-flex items-center gap-2 rounded-full bg-primary/90 px-3 py-1 text-white"
                   >Local SEO</span
                 ></th
               >
@@ -553,12 +553,12 @@ export const description =
             </tr>
           </thead>
           <tbody class="[&_tr]:border-t [&_tr]:border-gray-100">
-            <tr class="transition even:bg-slate-50/40 hover:bg-[#f56b2a]/5">
+            <tr class="transition even:bg-slate-50/40 hover:bg-primary/5">
               <td class="border-l-4 border-transparent px-5 py-4 font-medium text-heading">
                 Map Pack management
               </td>
               <td class="px-5 py-4"
-                ><span class="inline-flex items-center gap-2 text-[#253242]"
+                ><span class="inline-flex items-center gap-2 text-secondary"
                   ><svg
                     class="h-4 w-4 text-emerald-600"
                     viewBox="0 0 24 24"
@@ -589,7 +589,7 @@ export const description =
                 ></td
               >
             </tr>
-            <tr class="transition even:bg-slate-50/40 hover:bg-[#f56b2a]/5">
+            <tr class="transition even:bg-slate-50/40 hover:bg-primary/5">
               <td class="border-l-4 border-transparent px-5 py-4 font-medium text-heading">
                 On-page &amp; technical SEO
               </td>
@@ -615,7 +615,7 @@ export const description =
                 ></td
               >
             </tr>
-            <tr class="transition even:bg-slate-50/40 hover:bg-[#f56b2a]/5">
+            <tr class="transition even:bg-slate-50/40 hover:bg-primary/5">
               <td class="border-l-4 border-transparent px-5 py-4 font-medium text-heading">
                 Content &amp; pages
               </td>
@@ -625,7 +625,7 @@ export const description =
               <td class="px-5 py-4">Updates</td>
               <td class="px-5 py-4">All</td>
             </tr>
-            <tr class="transition even:bg-slate-50/40 hover:bg-[#f56b2a]/5">
+            <tr class="transition even:bg-slate-50/40 hover:bg-primary/5">
               <td class="border-l-4 border-transparent px-5 py-4 font-medium text-heading">
                 Citations
               </td>
@@ -643,7 +643,7 @@ export const description =
                 ></td
               >
             </tr>
-            <tr class="transition even:bg-slate-50/40 hover:bg-[#f56b2a]/5">
+            <tr class="transition even:bg-slate-50/40 hover:bg-primary/5">
               <td class="border-l-4 border-transparent px-5 py-4 font-medium text-heading">
                 Calls &amp; reporting
               </td>
@@ -655,7 +655,7 @@ export const description =
             </tr>
           </tbody>
         </table>
-        <div class="h-1 w-full bg-gradient-to-r from-[#253242] via-[#f56b2a] to-[#253242]"></div>
+        <div class="h-1 w-full bg-gradient-to-r from-secondary via-primary to-secondary"></div>
       </div>
     </div>
   </section>
@@ -689,7 +689,7 @@ export const description =
   </section>
 
   <!-- FINAL CTA -->
-  <section class="bg-[#253242] py-16">
+  <section class="bg-secondary py-16">
     <div class="mx-auto max-w-6xl px-4 text-center">
       <h2 class="font-heading text-3xl font-bold text-white md:text-4xl">
         Ready to Grow from Google Maps?
@@ -703,7 +703,7 @@ export const description =
           type="submit"
           name="path"
           value="149-fixes"
-          class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-7 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#f34e00]"
+          class="inline-flex items-center rounded-2xl bg-primary px-7 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-dark"
           data-analytics="begin_checkout"
           data-offer="gbp_top5_149"
         >
@@ -713,7 +713,7 @@ export const description =
         <a
           href="#"
           data-calendly={CALENDLY}
-          class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#27394b]"
+          class="inline-flex items-center rounded-2xl bg-secondary px-7 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-secondary-hover"
           data-analytics="generate_lead"
           data-offer="sprint_499"
         >

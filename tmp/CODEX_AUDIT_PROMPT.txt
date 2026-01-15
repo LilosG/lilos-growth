@@ -1,0 +1,18 @@
+You are operating inside the repo that builds lilosgrowth.com (Astro + Tailwind). Goal: produce a comprehensive BEST-PRACTICES AUDIT of the codebase and build structure (not visual redesign).
+
+Non-negotiables:
+- Do NOT modify any files yet. Diagnosis only.
+- Use deterministic checks with evidence (paths, outputs).
+- Recommend long-term best practices (no patches).
+
+Deliver:
+1) Repo inventory: Astro/Node expectations, package manager, key configs, Vercel/deploy assumptions.
+2) Build/quality: scripts, lint/format/typecheck/test, Astro check, TS strictness.
+3) Astro architecture: layouts/pages/components, routing, SSR/SSG, content strategy, images, islands.
+4) Tailwind: config globs, tokens, reuse/primitives, class sprawl.
+5) SEO: titles/meta, canonical/noindex, OG/Twitter, sitemap/robots, schema, perf basics.
+6) Security/maintenance: deps, env hygiene, footguns.
+
+Then output ONE read-only audit script as a CLOSED heredoc bash block that writes to ./tmp/ and ends by printing:
+- report folder path
+- exact file(s) (or one tarball) to paste back here.

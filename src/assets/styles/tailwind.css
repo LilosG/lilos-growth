@@ -1,4 +1,4 @@
-/* Google Fonts */
+/* Google Fonts - Consider moving to <link> in head for better performance */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;700&display=swap");
 
 /* Tailwind layers */
@@ -6,31 +6,27 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---------- Base (site-wide defaults) ---------- */
+/* ============================================
+   BASE STYLES
+   ============================================ */
 body {
   @apply bg-white font-body text-body;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+
+h1, h2, h3, h4, h5, h6 {
   @apply font-heading text-heading;
 }
 
-/* ---------- Base tokens (single source for AW vars) ---------- */
+/* CSS Custom Properties for AstroWind compatibility */
 @layer base {
   :root {
-    --aw-color-primary: #f56b2a;
-    --aw-color-secondary: #1f2d3d;
-    --aw-color-accent: #e65c1e;
-
-    --aw-color-text-heading: #1f2d3d;
-    --aw-color-text-default: #4a4a4a;
-    --aw-color-text-page: #4a4a4a;
+    --aw-color-primary: theme("colors.primary");
+    --aw-color-secondary: theme("colors.secondary");
+    --aw-color-accent: theme("colors.primary-hover");
+    --aw-color-text-heading: theme("colors.heading");
+    --aw-color-text-default: theme("colors.body");
+    --aw-color-text-page: theme("colors.body");
     --aw-color-text-muted: rgba(74, 74, 74, 0.66);
-
     --aw-color-bg-page: #ffffff;
     --aw-color-bg-page-dark: #030620;
 
@@ -44,7 +40,6 @@ h6 {
     --aw-color-text-default: #e5ecf6;
     --aw-color-text-page: #e5ecf6;
     --aw-color-text-muted: rgba(229, 236, 246, 0.66);
-
     --aw-color-bg-page: #030620;
     --aw-color-bg-page-dark: #030620;
 
@@ -55,7 +50,9 @@ h6 {
   }
 }
 
-/* ---------- Small utility helpers that rely on AW CSS vars ---------- */
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
 @layer utilities {
   .bg-page {
     background-color: var(--aw-color-bg-page);
@@ -74,37 +71,61 @@ h6 {
   }
 }
 
-/* ---------- Reusable components ---------- */
+/* ============================================
+   CTA TRACKING STYLES
+   Automatically style elements with data-evt attribute
+   ============================================ */
 @layer components {
-  /* Consistent focus styling */
-  .focus-ring {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2;
+  [data-evt^="cta_"] {
+    @apply btn btn-primary;
   }
-
-  .btn {
-    @apply text-page inline-flex cursor-pointer items-center justify-center rounded-full border border-gray-400 bg-transparent px-6 py-3.5 text-center text-base font-medium leading-snug transition duration-200 ease-in hover:border-gray-600 hover:bg-gray-100 dark:border-slate-500 dark:text-slate-300 dark:hover:border-slate-800 dark:hover:bg-slate-800 md:px-8;
-    @apply focus-ring;
-  }
-
-  .btn-primary {
-    @apply btn border-primary bg-primary font-semibold text-white hover:border-secondary hover:bg-secondary hover:text-white dark:border-primary dark:bg-primary dark:text-white dark:hover:border-secondary dark:hover:bg-secondary;
-  }
-
-  .btn-secondary {
-    @apply btn;
-  }
-
-  .btn-tertiary {
-    @apply text-muted btn border-none shadow-none hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
-  }
-
-  /* Optional: outline variant */
-  .btn-outline-primary {
-    @apply btn border border-primary bg-white text-primary hover:bg-primary hover:text-white;
+  [data-evt^="cta_"][data-cta="secondary"] {
+    @apply btn btn-outline-primary;
   }
 }
 
-/* ---------- Mobile menu & dropdown helpers (safe to keep) ---------- */
+/* ============================================
+   CARD GRID STYLES
+   Consistent styling for results and tools grids
+   ============================================ */
+#results-grid > *,
+#tools-grid > *,
+.tools-grid > * {
+  @apply flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow;
+}
+
+#results-grid h3,
+#tools-grid h3,
+.tools-grid h3 {
+  @apply mb-2 text-xl font-semibold text-heading;
+}
+
+#results-grid p,
+#tools-grid p,
+.tools-grid p {
+  @apply text-sm text-body;
+}
+
+#results-grid .card-footer,
+#tools-grid .card-footer,
+.tools-grid .card-footer {
+  @apply mt-auto border-t border-gray-100 pt-4;
+}
+
+#results-grid [aria-hidden="true"],
+#tools-grid [aria-hidden="true"],
+.tools-grid [aria-hidden="true"] {
+  @apply mb-4;
+}
+
+#results-grid .btn,
+#tools-grid .btn {
+  @apply w-full sm:w-auto;
+}
+
+/* ============================================
+   NAVIGATION & MENU STYLES
+   ============================================ */
 #header.expanded nav {
   position: fixed;
   top: 70px;
@@ -120,15 +141,7 @@ h6 {
   display: block;
 }
 
-/* Icon stroke helpers */
-[astro-icon].icon-light > * {
-  stroke-width: 1.2;
-}
-[astro-icon].icon-bold > * {
-  stroke-width: 2.4;
-}
-
-/* Burger animation used by older header variant; harmless to keep */
+/* Burger animation for mobile menu */
 [data-aw-toggle-menu] path {
   @apply transition;
 }
@@ -139,68 +152,19 @@ h6 {
   @apply translate-x-[14px] translate-y-[-8px] rotate-45;
 }
 
-/* Spacing fix for legacy dropdown blocks */
-.dd *:first-child {
-  margin-top: 0;
+/* ============================================
+   ICON STYLES
+   ============================================ */
+[astro-icon].icon-light > * {
+  stroke-width: 1.2;
+}
+[astro-icon].icon-bold > * {
+  stroke-width: 2.4;
 }
 
-/* ---------- CTA mapping (by data-evt) ---------- */
-@layer components {
-  /* Any instrumented CTA becomes a branded primary button */
-  [data-evt^="cta_"] {
-    @apply btn btn-primary;
-  }
-  /* Opt-in secondary (outline) when data-cta="secondary" */
-  [data-evt^="cta_"][data-cta="secondary"] {
-    @apply btn btn-outline-primary;
-  }
-}
-
-/* ----- Results & Tools grids card polish (scoped, safe) ----- */
-#results-grid > *,
-#tools-grid > * {
-  @apply flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow;
-}
-#results-grid h3,
-#tools-grid h3 {
-  @apply mb-2 text-xl font-semibold text-heading;
-}
-#results-grid p,
-#tools-grid p {
-  @apply text-[15px] text-body;
-}
-#results-grid .card-footer,
-#tools-grid .card-footer {
-  @apply mt-auto border-t border-gray-100 pt-4;
-}
-
-/* Consistent icon/badge spacing inside cards */
-#results-grid [aria-hidden="true"],
-#tools-grid [aria-hidden="true"] {
-  @apply mb-4;
-}
-/* Tools page uses a class so we can tag multiple grids */
-.tools-grid > * {
-  @apply flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow;
-}
-.tools-grid h3 {
-  @apply mb-2 text-xl font-semibold text-heading;
-}
-.tools-grid p {
-  @apply text-[15px] text-body;
-}
-.tools-grid .card-footer {
-  @apply mt-auto border-t border-gray-100 pt-4;
-}
-.tools-grid [aria-hidden="true"] {
-  @apply mb-4;
-}
-/* Align CTA buttons in results/tools grids */
-#results-grid .btn,
-#tools-grid .btn {
-  @apply w-full sm:w-auto;
-}
-/* a11y: skip link */
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -209,23 +173,25 @@ h6 {
   height: 1px;
   overflow: hidden;
 }
+
 .skip-link:focus {
   left: 1rem;
   top: 1rem;
   width: auto;
   height: auto;
   padding: 0.5rem 0.75rem;
-  background: #253242;
-  color: #fff;
-  border-radius: 0.5rem;
+  @apply bg-secondary text-white rounded-lg;
   z-index: 9999;
 }
-/* a11y: consistent focus ring on primary CTAs */
-.btn-primary:focus-visible,
-a.btn-primary:focus-visible {
-  @apply outline-none ring-2 ring-[#f56b2a] ring-offset-2 ring-offset-white;
-}
 
+/* ============================================
+   MISC UTILITIES
+   ============================================ */
 .logo--halo {
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.45));
+}
+
+/* Legacy dropdown spacing fix */
+.dd *:first-child {
+  margin-top: 0;
 }

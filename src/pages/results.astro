@@ -1,162 +1,334 @@
 ---
-/* FILE: src/pages/results.astro
-   Clean results page: white cards, big radius, soft shadow, baseline-aligned CTAs.
-   Uses only provided components & data. No JSX in frontmatter.
-*/
+/**
+ * Results Page - Enhanced with service filtering and visual hierarchy
+ */
 import PageLayout from "~/layouts/PageLayout.astro";
-
-import LogoWall from "~/components/results/LogoWall.astro";
-import StatCard from "~/components/results/StatCard.astro";
 import CaseStudyCard from "~/components/results/CaseStudyCard.astro";
-import FAQResults from "~/components/results/FAQResults.astro";
-import StickyResultsCTA from "~/components/results/StickyResultsCTA.astro";
 import ResultsCTABand from "~/components/results/ResultsCTABand.astro";
 
-import type { ResultsStat, LogoItem, CaseStudy, FaqItem } from "~/data/results";
-import { resultsStats, resultsLogos, resultsCaseStudies, resultsFaqs } from "~/data/results";
+import { resultsStats, resultsCaseStudies, resultsFaqs, serviceTypeLabels } from "~/data/results";
+import type { ServiceType } from "~/data/results";
+
+const featuredStudy = resultsCaseStudies.find(s => s.featured);
+const otherStudies = resultsCaseStudies.filter(s => !s.featured);
 ---
 
 <PageLayout
-  title="Client Results & Case Studies"
-  description="Proof you can ship fast, rank local, and convert. Real results from home-service businesses: visibility wins, calls, reviews, and revenue."
+  title="Client Results & Case Studies | Lilos Growth"
+  description="Real results for home service businesses: more calls, better rankings, faster websites. See how we help pest control, HVAC, restoration, and other local businesses grow."
 >
   <!-- HERO -->
-  <section class="bg-cream">
-    <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
-      <div class="flex items-start gap-4">
-        <!-- Round outline badge (matches home page card icon style) -->
-        <div
-          class="hidden h-11 w-11 items-center justify-center rounded-full bg-white text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.03)] ring-2 ring-[#f56b2a] sm:flex"
-        >
-          <span class="text-[18px] leading-none">⭐</span>
-        </div>
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-[#f56b2a]">
-            Proven Outcomes
-          </p>
-          <h1
-            class="mt-1 font-heading text-3xl font-extrabold tracking-tight text-heading md:text-4xl"
-          >
-            Results that show up in calls, reviews, and booked jobs
-          </h1>
-          <p class="mt-3 max-w-2xl text-body">
-            We optimize what moves the needle first—Google Business Profile, speed, pages that match
-            intent—and we keep it simple so you can ship faster and win local.
-          </p>
+  <section class="relative overflow-hidden bg-secondary">
+    <div class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light"></div>
+    <div class="relative mx-auto max-w-6xl px-4 py-16 md:py-20">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-widest text-primary">
+          Proven Results
+        </p>
+        <h1 class="mt-3 font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">
+          More calls. Better rankings.<br class="hidden sm:block" />
+          <span class="text-primary">Real growth.</span>
+        </h1>
+        <p class="mt-4 text-lg text-white/80 md:text-xl">
+          We help home service businesses dominate local search with fast websites, 
+          optimized Google Business Profiles, and local SEO that actually drives calls.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white">
+            Website Design
+          </span>
+          <span class="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white">
+            GBP Optimization
+          </span>
+          <span class="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white">
+            Local SEO
+          </span>
         </div>
       </div>
-
-      <!-- Logo wall -->
-      {
-        Array.isArray(resultsLogos) && resultsLogos.length > 0 && (
-          <div class="mt-10">
-            <LogoWall items={resultsLogos as LogoItem[]} />
-          </div>
-        )
-      }
     </div>
   </section>
 
   <!-- STATS -->
-  {
-    Array.isArray(resultsStats) && resultsStats.length > 0 && (
-      <section class="bg-white">
-        <div class="mx-auto max-w-6xl px-4 py-14 md:py-16">
-          <h2 class="text-center font-heading text-2xl font-bold text-heading md:text-3xl">
-            High-impact wins
-          </h2>
-          <div class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-            {resultsStats.map((s: ResultsStat) => (
-              <StatCard stat={s} />
-            ))}
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  <!-- CASE STUDIES -->
-  {
-    Array.isArray(resultsCaseStudies) && resultsCaseStudies.length > 0 && (
-      <section class="bg-bluelight">
-        <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <div class="flex items-start gap-4">
-            <div class="hidden h-11 w-11 items-center justify-center rounded-full bg-white text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.03)] ring-2 ring-[#f56b2a] sm:flex">
-              <span class="text-[18px] leading-none">📈</span>
-            </div>
-            <div>
-              <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
-                Recent client success
-              </h2>
-              <p class="mt-2 max-w-2xl text-body">
-                Clear work, clear outcomes. Brief snapshots of what shipped and what changed.
+  <section class="border-b border-gray-100 bg-white py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+        {resultsStats.map((stat) => (
+          <div class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-gradient-to-br from-white to-gray-50 p-6 shadow-sm transition-shadow hover:shadow-md">
+            <div class="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-primary/5 transition-transform group-hover:scale-110"></div>
+            <div class="relative">
+              <p class="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                {stat.label}
               </p>
-            </div>
-          </div>
-
-          <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
-            {resultsCaseStudies.map((cs: CaseStudy) => (
-              <CaseStudyCard study={cs} />
-            ))}
-          </div>
-
-          {/* sticky CTA for mobile */}
-          <div class="mt-10 md:hidden">
-            <StickyResultsCTA />
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  <!-- FAQ -->
-  {
-    Array.isArray(resultsFaqs) && resultsFaqs.length > 0 && (
-      <section class="bg-white">
-        <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <div class="flex items-start gap-4">
-            <div class="hidden h-11 w-11 items-center justify-center rounded-full bg-white text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.03)] ring-2 ring-[#f56b2a] sm:flex">
-              <span class="text-[18px] leading-none">❓</span>
-            </div>
-            <div>
-              <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
-                Common questions
-              </h2>
-              <p class="mt-2 text-body">
-                Simple answers about scope, timeline, and what to expect.
+              <p class="mt-2 font-heading text-3xl font-bold tracking-tight text-heading md:text-4xl">
+                {stat.value}
               </p>
+              {stat.note && (
+                <p class="mt-1 text-xs text-gray-500">{stat.note}</p>
+              )}
             </div>
           </div>
-
-          <div class="mt-6">
-            <FAQResults faqs={resultsFaqs as FaqItem[]} />
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  <!-- CTA BAND -->
-  <section class="bg-[#253242]">
-    <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
-      <ResultsCTABand />
+        ))}
+      </div>
     </div>
   </section>
 
-  <!-- JSON-LD breadcrumbs -->
-  <script type="application/ld+json" is:inline>
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://lilosgrowth.com/" },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Results",
-          "item": "https://lilosgrowth.com/results"
-        }
-      ]
-    }
-  </script>
+  <!-- FEATURED CASE STUDY -->
+  {featuredStudy && (
+    <section class="border-b border-gray-100 bg-cream py-16 md:py-20">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="mb-8 flex items-center gap-3">
+          <span class="rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
+            Featured
+          </span>
+          <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
+            Client Spotlight
+          </h2>
+        </div>
+
+        <div class="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-xl">
+          <div class="grid gap-0 lg:grid-cols-2">
+            <!-- Screenshot Side -->
+            <div class="relative bg-gray-100">
+              {featuredStudy.screenshot && (
+                <div class="aspect-[4/3] overflow-hidden lg:aspect-auto lg:absolute lg:inset-0">
+                  <img
+                    src={featuredStudy.screenshot.src}
+                    alt={featuredStudy.screenshot.alt || featuredStudy.client}
+                    class="h-full w-full object-cover object-top"
+                    loading="eager"
+                  />
+                </div>
+              )}
+              {featuredStudy.websiteUrl && (
+                <a
+                  href={featuredStudy.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-sm font-semibold text-heading shadow-lg backdrop-blur transition hover:bg-white"
+                >
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  View Live Site
+                </a>
+              )}
+            </div>
+
+            <!-- Content Side -->
+            <div class="flex flex-col justify-center p-8 lg:p-10">
+              <div class="flex items-center gap-3">
+                {featuredStudy.image?.src && (
+                  <img
+                    src={featuredStudy.image.src}
+                    alt={featuredStudy.image.alt || featuredStudy.client}
+                    class="h-10 w-auto object-contain"
+                  />
+                )}
+              </div>
+
+              <h3 class="mt-4 font-heading text-2xl font-bold text-heading md:text-3xl">
+                {featuredStudy.title}
+              </h3>
+              
+              <p class="mt-1 text-sm text-gray-500">
+                {featuredStudy.city} · {featuredStudy.sectorTag}
+              </p>
+
+              <!-- Service Badges -->
+              <div class="mt-4 flex flex-wrap gap-2">
+                {featuredStudy.serviceTypes.map((type: ServiceType) => (
+                  <span class:list={[
+                    "inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold",
+                    type === 'website' && "bg-blue-100 text-blue-700",
+                    type === 'gbp' && "bg-green-100 text-green-700",
+                    type === 'local-seo' && "bg-purple-100 text-purple-700",
+                  ]}>
+                    {type === 'website' && (
+                      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    )}
+                    {type === 'gbp' && (
+                      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    )}
+                    {type === 'local-seo' && (
+                      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                    )}
+                    {serviceTypeLabels[type]}
+                  </span>
+                ))}
+              </div>
+
+              <p class="mt-4 text-body">
+                {featuredStudy.blurb}
+              </p>
+
+              <!-- KPIs -->
+              <div class="mt-6 grid grid-cols-3 gap-4">
+                {featuredStudy.kpis.slice(0, 3).map((kpi) => (
+                  <div class="text-center">
+                    <p class="font-heading text-2xl font-bold text-primary md:text-3xl">
+                      {kpi.value}
+                    </p>
+                    <p class="mt-1 text-xs uppercase tracking-wider text-gray-500">
+                      {kpi.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div class="mt-8">
+                <a
+                  href={featuredStudy.ctaHref || "/contact"}
+                  class="btn btn-primary"
+                >
+                  {featuredStudy.ctaText || "Learn More"}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ALL CASE STUDIES -->
+  <section class="bg-white py-16 md:py-20">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="mb-10 text-center">
+        <h2 class="font-heading text-3xl font-bold text-heading md:text-4xl">
+          More Client Wins
+        </h2>
+        <p class="mx-auto mt-3 max-w-2xl text-lg text-body">
+          From pest control to restoration to handyman services—we help home service 
+          businesses across industries dominate their local markets.
+        </p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="mb-8 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Filter by service type">
+        <button
+          type="button"
+          role="tab"
+          aria-selected="true"
+          data-filter="all"
+          class="filter-tab rounded-full px-5 py-2 text-sm font-semibold transition-colors bg-primary text-white"
+        >
+          All Results
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          data-filter="website"
+          class="filter-tab rounded-full px-5 py-2 text-sm font-semibold transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200"
+        >
+          Websites
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          data-filter="gbp"
+          class="filter-tab rounded-full px-5 py-2 text-sm font-semibold transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200"
+        >
+          GBP Optimization
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          data-filter="local-seo"
+          class="filter-tab rounded-full px-5 py-2 text-sm font-semibold transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200"
+        >
+          Local SEO
+        </button>
+      </div>
+
+      <!-- Case Study Grid -->
+      <div id="results-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2">
+        {otherStudies.map((study) => (
+          <CaseStudyCard study={study} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-gray-100 bg-cream py-16 md:py-20">
+    <div class="mx-auto max-w-3xl px-4">
+      <h2 class="text-center font-heading text-3xl font-bold text-heading md:text-4xl">
+        Common Questions
+      </h2>
+      <p class="mx-auto mt-3 max-w-xl text-center text-body">
+        Answers about working together, timelines, and what to expect.
+      </p>
+
+      <div class="mt-10 space-y-4">
+        {resultsFaqs.map((faq, index) => (
+          <details class="group rounded-2xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 [&::-webkit-details-marker]:hidden">
+              <h3 class="font-heading text-base font-semibold text-heading pr-4">
+                {faq.q}
+              </h3>
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-500 transition-colors group-open:bg-primary group-open:text-white">
+                <svg
+                  class="h-4 w-4 transition-transform group-open:rotate-45"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12" />
+                </svg>
+              </span>
+            </summary>
+            <div class="px-6 pb-4 text-body">
+              {faq.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <ResultsCTABand />
+
 </PageLayout>
+
+<script>
+  // Filter functionality
+  const tabs = document.querySelectorAll('.filter-tab');
+  const cards = document.querySelectorAll('#results-grid > article');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const filter = tab.getAttribute('data-filter');
+      
+      // Update tab states
+      tabs.forEach(t => {
+        t.classList.remove('bg-primary', 'text-white');
+        t.classList.add('bg-gray-100', 'text-gray-700');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.remove('bg-gray-100', 'text-gray-700');
+      tab.classList.add('bg-primary', 'text-white');
+      tab.setAttribute('aria-selected', 'true');
+      
+      // Filter cards
+      cards.forEach(card => {
+        const services = card.getAttribute('data-services') || '';
+        if (filter === 'all' || services.includes(filter)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

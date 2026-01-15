@@ -31,24 +31,24 @@ const accentText = accent.startsWith("#") ? `text-[${accent}]` : accent;
 <article
   class={[
     "relative flex flex-col rounded-3xl bg-white border shadow-xl p-8 h-full",
-    "border-[#f56b2a]/10 shadow-[#f56b2a]/10",
-    highlight ? "ring-2 ring-[#f56b2a] ring-offset-2 ring-offset-white" : "",
+    "border-primary/10 shadow-primary/10",
+    highlight ? "ring-2 ring-primary ring-offset-2 ring-offset-white" : "",
   ].join(" ")}
 >
   {
     badgeText && (
       <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-        <span class="inline-flex items-center gap-1 rounded-full border border-[#f56b2a]/30 bg-[#fff7f0] px-3 py-1 text-[11px] font-semibold text-[#f56b2a] shadow">
+        <span class="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-[#fff7f0] px-3 py-1 text-[11px] font-semibold text-primary shadow">
           {badgeText}
         </span>
       </div>
     )
   }
   <header class="mb-5">
-    <h3 class="text-2xl font-extrabold text-[#253242] md:text-[26px]">{title}</h3>
+    <h3 class="text-2xl font-extrabold text-secondary md:text-[26px]">{title}</h3>
     {subtitle && <p class="mt-1 text-[15px] text-slate-600">{subtitle}</p>}
     <div class="mt-4 flex items-baseline gap-1">
-      <div class="text-3xl font-extrabold text-[#f56b2a] md:text-[32px]">{price}</div>
+      <div class="text-3xl font-extrabold text-primary md:text-[32px]">{price}</div>
       <div class="font-medium text-slate-500">{period}</div>
     </div>
   </header>
@@ -72,7 +72,7 @@ const accentText = accent.startsWith("#") ? `text-[${accent}]` : accent;
   <div class="mt-6">
     <a
       href={ctaHref}
-      class="inline-flex w-full items-center justify-center rounded-xl bg-[#f56b2a] px-6 py-3 font-semibold text-white shadow transition hover:bg-[#c9400a]"
+      class="inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow transition hover:bg-[#c9400a]"
     >
       {ctaText}
     </a>

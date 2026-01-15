@@ -1,169 +1,49 @@
 ---
 /**
- * Landing Page Outline Generator
- * Pure client-side utility — no SSR or external deps.
- * Produces a copyable Markdown outline based on service + city.
+ * Landing Page Outline Generator - Headless
  */
 ---
 
-<div class="flex flex-col rounded-3xl bg-white p-8 shadow-lg">
-  <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading">
-    Landing Page Outline Generator
-  </h2>
-  <p class="mb-5 text-center text-sm leading-relaxed text-body">
-    Generate a proven, conversion-friendly outline for a local service landing page.
-  </p>
-
-  <form id="lpo-form" class="grid w-full gap-3">
-    <input
-      id="lpo-service"
-      type="text"
-      required
-      placeholder="Service (e.g., Water Heater Repair)"
-      class="w-full rounded-xl border border-gray-300 px-4 py-2"
-    />
-    <input
-      id="lpo-city"
-      type="text"
-      required
-      placeholder="City/Area (e.g., Denver, CO)"
-      class="w-full rounded-xl border border-gray-300 px-4 py-2"
-    />
-    <input
-      id="lpo-audience"
-      type="text"
-      placeholder="Audience (optional, e.g., homeowners, property managers)"
-      class="w-full rounded-xl border border-gray-300 px-4 py-2"
-    />
-    <input
-      id="lpo-cta"
-      type="text"
-      placeholder='Primary CTA (optional, e.g., "Schedule a Call")'
-      class="w-full rounded-xl border border-gray-300 px-4 py-2"
-    />
-
-    <button
-      type="submit"
-      class="w-full rounded-xl bg-[#f56b2a] px-5 py-2 font-semibold text-white shadow-lg transition hover:bg-[#c9400a]"
-    >
-      Generate Outline
-    </button>
+<div class="flex flex-1 flex-col">
+  <form id="lpo-form" class="flex flex-1 flex-col space-y-3">
+    <input id="lpo-service" type="text" required placeholder="Service (e.g., Water Heater Repair)" class="h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40" />
+    <input id="lpo-city" type="text" required placeholder="City/Area (e.g., Denver, CO)" class="h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40" />
+    <button type="submit" class="btn btn-primary mt-auto h-11 w-full">Generate Outline</button>
   </form>
-
-  <div id="lpo-output" class="mt-5 hidden">
+  <div id="lpo-result" class="mt-4 hidden">
     <div class="mb-2 flex items-center justify-between">
-      <h3 class="font-semibold text-heading">Result (Markdown)</h3>
-      <button
-        id="lpo-copy"
-        type="button"
-        class="rounded-lg border border-gray-300 px-3 py-1 text-sm hover:bg-gray-50"
-      >
-        Copy
-      </button>
+      <span class="text-xs font-medium text-gray-500">Your Outline</span>
+      <button id="lpo-copy" type="button" class="text-xs font-semibold text-primary hover:underline">Copy</button>
     </div>
-    <textarea
-      id="lpo-text"
-      rows="18"
-      readonly
-      class="w-full select-all resize-y rounded-xl border-2 border-[#f56b2a]/30 bg-gray-50 p-4 font-mono text-sm leading-5 transition"
-      style="min-height:240px"></textarea>
+    <pre id="lpo-output" class="max-h-64 overflow-auto rounded-lg border border-gray-200 bg-gray-50 p-4 text-xs text-gray-700"></pre>
   </div>
 </div>
 
-<script is:inline>
-  // Plain JS only — keep it simple and lint-friendly.
+<script>
   (function () {
-    const form = document.getElementById("lpo-form");
-    const outWrap = document.getElementById("lpo-output");
-    const outText = document.getElementById("lpo-text");
-    const copyBtn = document.getElementById("lpo-copy");
+    var form = document.getElementById('lpo-form');
+    var resultEl = document.getElementById('lpo-result');
+    var outputEl = document.getElementById('lpo-output');
+    var copyBtn = document.getElementById('lpo-copy');
 
-    function mdEscape(s) {
-      return String(s || "").replace(/[<>]/g, (m) => (m === "<" ? "&lt;" : "&gt;"));
+    function generate(service, city) {
+      return '# ' + service + ' in ' + city + '\n\n## Hero Section\n- Headline: Professional ' + service + ' in ' + city + '\n- Subheadline: Fast, reliable service from licensed pros\n- CTA: Get a Free Quote / Call Now\n\n## Problem/Pain Points\n- Common ' + service.toLowerCase() + ' issues in ' + city + '\n- Why homeowners need professional help\n\n## Services Offered\n- List 3-5 specific services\n- Emergency/same-day availability\n\n## Why Choose Us\n- Licensed & insured\n- Upfront pricing\n- Local reputation\n\n## Service Process\n1. Contact us\n2. Free estimate\n3. Professional service\n4. Final walkthrough\n\n## Social Proof\n- Google reviews\n- Testimonials\n\n## FAQ Section\n- Cost questions\n- Timeline questions\n- Service area\n\n## Final CTA\n- Schedule Your Free Estimate\n- Phone number';
     }
 
-    function buildOutline({ service, city, audience, cta }) {
-      const svc = mdEscape(service);
-      const loc = mdEscape(city);
-      const aud = audience ? mdEscape(audience) : "customers";
-      const call = cta || "Get a Free Quote";
-
-      // Construct a safe Markdown string with explicit newlines to avoid unterminated literals.
-      const lines = [
-        `# ${svc} in ${loc}`,
-        "",
-        `**Dominate your local market.** Professional ${svc.toLowerCase()} for ${aud} in ${loc}. Fast response, upfront pricing, and 5-star service.`,
-        "",
-        `**Primary CTA:** ${call}`,
-        "",
-        "---",
-        "",
-        "## 1) Hero Section",
-        `- Headline: "${svc} in ${loc}"`,
-        `- Subheadline: Quick, reliable & transparent for ${aud}.`,
-        `- CTA Button: ${call}`,
-        "- Trust badges (reviews, years in business, licenses)",
-        "",
-        "## 2) Social Proof",
-        "- Star rating + review count",
-        "- 2–3 short testimonials with names/neighborhoods",
-        "",
-        "## 3) Why Choose Us",
-        "- Bullet list (fast response, certified techs, honest pricing, guaranteed work)",
-        "",
-        "## 4) Services We Offer",
-        `- Core ${svc.toLowerCase()} solutions (add bullets)`,
-        "- Related add-on services",
-        "",
-        "## 5) How It Works",
-        "- Step 1: Call or request a quote",
-        "- Step 2: On-site assessment & upfront price",
-        "- Step 3: We complete the job right — guaranteed",
-        "",
-        "## 6) Areas We Serve",
-        `- Neighborhoods near ${loc} (3–8 items)`,
-        "",
-        "## 7) FAQs",
-        "- Q1: Pricing & estimates",
-        "- Q2: Availability/response time",
-        "- Q3: Warranty/guarantees",
-        "- Q4: Licensed & insured",
-        "",
-        "## 8) Final Call-to-Action",
-        `- Button: ${call}`,
-        `- Alt: Call (phone) | Text | Email`,
-        "",
-        "---",
-        "",
-        "### SEO Notes",
-        `- Title: ${svc} in ${loc} | Company Name`,
-        `- Meta: ${svc} for ${aud} in ${loc}. Same-day service, honest pricing, 5-star reviews.`,
-        `- URL: /services/${svc.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${loc.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
-      ];
-
-      return lines.join("\n");
-    }
-
-    form.addEventListener("submit", function (e) {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
-      const service = document.getElementById("lpo-service").value.trim();
-      const city = document.getElementById("lpo-city").value.trim();
-      const audience = document.getElementById("lpo-audience").value.trim();
-      const cta = document.getElementById("lpo-cta").value.trim();
-
+      var service = document.getElementById('lpo-service').value.trim();
+      var city = document.getElementById('lpo-city').value.trim();
       if (!service || !city) return;
-
-      const md = buildOutline({ service, city, audience, cta });
-      outText.value = md;
-      outWrap.classList.remove("hidden");
+      outputEl.textContent = generate(service, city);
+      resultEl.classList.remove('hidden');
     });
 
-    copyBtn.addEventListener("click", async function () {
-      try {
-        await navigator.clipboard.writeText(outText.value);
-        copyBtn.textContent = "Copied!";
-        setTimeout(() => (copyBtn.textContent = "Copy"), 900);
-      } catch {}
+    copyBtn.addEventListener('click', function () {
+      navigator.clipboard.writeText(outputEl.textContent).then(function () {
+        copyBtn.textContent = 'Copied!';
+        setTimeout(function () { copyBtn.textContent = 'Copy'; }, 2000);
+      });
     });
   })();
 </script>

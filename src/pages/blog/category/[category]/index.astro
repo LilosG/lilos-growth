@@ -33,9 +33,9 @@ const description = `Articles filed under ${cat}.`;
 <Layout title={title} description={description} metadata={{ title, description }} noIndex={true}>
   <!-- HERO (same structure as homepage) -->
   <section
-    class="relative flex min-h-[680px] items-center overflow-hidden bg-[#253242] pb-20 pt-10"
+    class="relative flex min-h-[680px] items-center overflow-hidden bg-secondary pb-20 pt-10"
   >
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]">
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light">
     </div>
 
     <div
@@ -47,9 +47,9 @@ const description = `Articles filed under ${cat}.`;
         <h1
           class="mb-2 font-heading text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl"
         >
-          Category: <span class="text-[#f56b2a]">{cat}</span>
+          Category: <span class="text-primary">{cat}</span>
         </h1>
-        <div class="mb-8 h-1.5 w-28 rounded-full bg-[#f56b2a]"></div>
+        <div class="mb-8 h-1.5 w-28 rounded-full bg-primary"></div>
         <p class="mb-9 max-w-lg text-lg font-medium text-white/80 md:text-xl">
           Curated posts in the {cat} category—strategy, playbooks, and examples tailored for home-service
           companies.
@@ -57,7 +57,7 @@ const description = `Articles filed under ${cat}.`;
         <div class="flex flex-wrap gap-3.5">
           <a
             href="/packages"
-            class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-8 py-3.5 font-heading text-lg font-semibold text-white shadow transition hover:bg-[#f34e00]"
+            class="inline-flex items-center rounded-2xl bg-primary px-8 py-3.5 font-heading text-lg font-semibold text-white shadow transition hover:bg-primary-dark"
           >
             Get More Calls Today
             <svg
@@ -73,7 +73,7 @@ const description = `Articles filed under ${cat}.`;
           </a>
           <a
             href="/contact"
-            class="inline-flex items-center rounded-2xl bg-secondary px-6 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#27394b]"
+            class="inline-flex items-center rounded-2xl bg-secondary px-6 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-secondary-hover"
           >
             Book a Call
             <svg
@@ -107,7 +107,7 @@ const description = `Articles filed under ${cat}.`;
             name="name"
             placeholder="Your Name"
             required
-            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#f56b2a]/40"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-primary/40"
           />
 
           <label class="sr-only" for="email">Email Address</label>
@@ -117,7 +117,7 @@ const description = `Articles filed under ${cat}.`;
             name="_replyto"
             placeholder="Email Address"
             required
-            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#f56b2a]/40"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-primary/40"
           />
 
           <label class="sr-only" for="company">Company Name</label>
@@ -125,7 +125,7 @@ const description = `Articles filed under ${cat}.`;
             id="company"
             name="company"
             placeholder="Company Name"
-            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#f56b2a]/40"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-primary/40"
           />
 
           <label class="sr-only" for="website">Website</label>
@@ -135,12 +135,12 @@ const description = `Articles filed under ${cat}.`;
             name="website"
             placeholder="Website"
             required
-            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#f56b2a]/40"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-primary/40"
           />
 
           <button
             type="submit"
-            class="mt-1.5 rounded-xl bg-[#f56b2a] px-7 py-3.5 font-heading text-base font-semibold text-white shadow transition hover:bg-[#f34e00]"
+            class="mt-1.5 rounded-xl bg-primary px-7 py-3.5 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-dark"
           >
             Get My Free Audit
           </button>

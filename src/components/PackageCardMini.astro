@@ -22,22 +22,22 @@ const {
 ---
 
 <article
-  class="relative flex h-full flex-col rounded-2xl border border-[#f56b2a]/10 bg-white p-6 shadow-md shadow-[#f56b2a]/10"
+  class="relative flex h-full flex-col rounded-2xl border border-primary/10 bg-white p-6 shadow-md shadow-primary/10"
 >
   {
     badgeText && (
       <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-        <span class="inline-flex items-center rounded-full border border-[#f56b2a]/30 bg-[#fff7f0] px-2.5 py-1 text-[10px] font-semibold text-[#f56b2a] shadow">
+        <span class="inline-flex items-center rounded-full border border-primary/30 bg-[#fff7f0] px-2.5 py-1 text-[10px] font-semibold text-primary shadow">
           {badgeText}
         </span>
       </div>
     )
   }
   <header class="mb-3">
-    <h3 class="text-lg font-extrabold text-[#253242]">{title}</h3>
+    <h3 class="text-lg font-extrabold text-secondary">{title}</h3>
     {subtitle && <p class="mt-0.5 text-[13px] text-slate-600">{subtitle}</p>}
     <div class="mt-2 flex items-baseline gap-1">
-      <div class="text-2xl font-extrabold text-[#f56b2a]">{price}</div>
+      <div class="text-2xl font-extrabold text-primary">{price}</div>
       {period && <div class="text-sm font-medium text-slate-500">{period}</div>}
     </div>
   </header>
@@ -56,7 +56,7 @@ const {
   <div class="mt-4">
     <a
       href={ctaHref}
-      class="inline-flex w-full items-center justify-center rounded-lg bg-[#f56b2a] px-4 py-2.5 text-sm font-semibold text-white shadow transition hover:bg-[#c9400a]"
+      class="inline-flex w-full items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow transition hover:bg-[#c9400a]"
     >
       {ctaText}
     </a>

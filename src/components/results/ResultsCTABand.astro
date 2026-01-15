@@ -18,7 +18,7 @@ const {
 } = Astro.props;
 ---
 
-<section class="border-t border-gray-100 bg-[#253242] py-20 text-white">
+<section class="border-t border-gray-100 bg-secondary py-20 text-white">
   <div class="mx-auto max-w-6xl px-4 text-center">
     <h2 class="text-balance font-heading text-3xl font-bold tracking-tight md:text-4xl">
       {title}
@@ -31,7 +31,7 @@ const {
         href={primaryHref}
         data-astro-prefetch
         aria-label={primaryText}
-        class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-7 py-3 font-heading font-semibold text-white shadow transition hover:bg-[#f34e00] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2"
+        class="inline-flex items-center rounded-2xl bg-primary px-7 py-3 font-heading font-semibold text-white shadow transition hover:bg-primary-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
       >
         {primaryText}
       </a>

@@ -6,9 +6,9 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
-// import partytown from '@astrojs/partytown';
 import icon from "astro-icon";
 import compress from "astro-compress";
+import vercel from "@astrojs/vercel";
 
 import astrowind from "./vendor/integration";
 import {
@@ -23,6 +23,7 @@ export default defineConfig({
   trailingSlash: "never",
   site: "https://lilosgrowth.com",
   output: "static",
+  adapter: vercel(),
 
   integrations: [
     tailwind({ applyBaseStyles: false }),

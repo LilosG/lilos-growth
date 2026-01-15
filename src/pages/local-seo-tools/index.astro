@@ -1,187 +1,316 @@
 ---
-/* FILE: src/pages/local-seo-tools/index.astro */
+/**
+ * Local SEO Tools Page - Final Polish
+ */
 import Layout from "~/layouts/PageLayout.astro";
 import ReviewLinkGenerator from "~/components/Tools/ReviewLinkGenerator.astro";
 import GBPCategoryFinder from "~/components/Tools/GBPCategoryFinder.astro";
-import LandingPageOutlineGenerator from "~/components/Tools/LandingPageOutlineGenerator.astro";
 import FAQSchemaGenerator from "~/components/Tools/FAQSchemaGenerator.astro";
 import SERPPreview from "~/components/Tools/SERPPreview.astro";
+import LandingPageOutlineGenerator from "~/components/Tools/LandingPageOutlineGenerator.astro";
 import UTMLinkBuilder from "~/components/Tools/UTMLinkBuilder.astro";
 import LocalBusinessSchema from "~/components/Tools/LocalBusinessSchema.astro";
-import GoogleMapsEmbed from "~/components/Tools/GoogleMapsEmbed.astro";
 import LocalKeywordIdeas from "~/components/Tools/LocalKeywordIdeas.astro";
 
-export const title = "Free Local SEO Tools for Home Service Businesses";
-export const description =
-  "Practical, on-brand tools to win the Map Pack, polish your Google Business Profile, and convert more local leads—no logins, no fluff.";
+const title = "Free Local SEO Tools | Lilos Growth";
+const description = "Free tools to optimize your Google Business Profile, generate schema markup, and plan local SEO content. No login required.";
+
+const stats = [
+  { value: "8", label: "Free Tools" },
+  { value: "0", label: "Logins Required" },
+  { value: "100%", label: "Private & Secure" },
+  { value: "∞", label: "Unlimited Use" },
+];
 ---
 
 <Layout {title} {description}>
-  <!-- HERO -->
-  <section class="relative overflow-hidden bg-[#253242]">
-    <div class="absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]" aria-hidden="true">
-    </div>
-    <div class="relative z-10 mx-auto max-w-6xl px-4 py-20 text-center">
-      <img
-        src="/Lilos_Growth_Logo_Corrected.svg"
-        alt="Lilos Growth"
-        class="mx-auto mb-6 w-24 opacity-70 logo--halo"
-        loading="lazy"
-      />
-      <h1 class="font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-        Free Local SEO Tools
-      </h1>
-      <p class="mt-2 text-sm font-semibold uppercase tracking-widest text-[#f56b2a] md:text-base">
-        For Home Service Businesses
-      </p>
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-white/80 md:text-xl">
-        Practical, on-brand tools to help you win the Map Pack, polish your profile, and convert
-        more local leads — no logins, no fluff.
-      </p>
-      <div class="mt-8 flex items-center justify-center gap-3.5">
-        <a
-          href="#featured-tools"
-          class="inline-flex items-center rounded-3xl bg-[#f56b2a] px-6 py-3 font-heading font-semibold text-white"
-        >
-          Start Using Tools
-          <svg
-            class="ml-2 h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            viewBox="0 0 24 24"
-            aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-          >
-        </a>
-        <a
-          href="/contact#book"
-          class="inline-flex items-center rounded-3xl bg-[#2b3b50] px-5 py-3 font-heading font-semibold text-white"
-        >
-          Book a Call
-          <svg
-            class="ml-2 h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            viewBox="0 0 24 24"
-            aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-          >
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROMISE STRIP -->
-  <section class="border-t border-gray-100 bg-cream">
-    <div class="mx-auto max-w-6xl px-4 py-16 text-center md:py-20">
-      <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
-        A Clean, Fast Toolbox Built for Local Wins
-      </h2>
-      <span class="mx-auto mt-2 block h-1 w-12 rounded bg-[#f56b2a]"></span>
-      <p class="mx-auto mt-3 max-w-2xl text-body">
-        Create conversion-ready pages, dial in your Google Business Profile, and ship SEO assets
-        quickly — no logins, no fluff.
-      </p>
-    </div>
-  </section>
-
-  <!-- FEATURED TOOLS -->
-  <section id="featured-tools" class="bg-white">
-    <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
-      <div class="flex items-start gap-4">
-        <div
-          class="hidden h-11 w-11 items-center justify-center rounded-full bg-white text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.03)] ring-2 ring-[#f56b2a] sm:flex"
-        >
-          <span class="text-[18px] leading-none">⭐</span>
-        </div>
-        <div>
-          <h3 class="font-heading text-2xl font-bold text-heading md:text-3xl">Featured Tools</h3>
-          <p class="mt-2 max-w-2xl text-body">
-            Our most popular tools to boost your local SEO and convert more customers.
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-8 grid grid-cols-1 gap-8 lg:gap-10">
-        <!-- Review Link Generator -->
-        <ReviewLinkGenerator />
-
-        <!-- GBP Category Finder -->
-        <div class="rounded-3xl bg-white p-8 shadow-lg">
-          <GBPCategoryFinder />
-        </div>
-
-        <!-- Landing Page Outline Generator -->
-        <LandingPageOutlineGenerator />
-      </div>
-    </div>
-  </section>
-
-  <!-- MORE TOOLS -->
-  <section class="bg-bluelight">
-    <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
-      <div class="flex items-start gap-4">
-        <div
-          class="hidden h-11 w-11 items-center justify-center rounded-full bg-white text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.03)] ring-2 ring-[#f56b2a] sm:flex"
-        >
-          <span class="text-[18px] leading-none">🛠️</span>
-        </div>
-        <div>
-          <h3 class="font-heading text-2xl font-bold text-heading md:text-3xl">
-            More Free Utilities
-          </h3>
-          <p class="mt-2 max-w-2xl text-body">
-            Additional tools to optimize your local presence and marketing campaigns.
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-10 grid grid-cols-1 gap-8 lg:gap-10">
-        <!-- FAQ Schema Generator -->
-        <FAQSchemaGenerator />
-
-        <!-- Google SERP Preview -->
-        <SERPPreview />
-
-        <!-- UTM Link Builder -->
-        <UTMLinkBuilder />
-
-        <!-- Local Business Schema -->
-        <LocalBusinessSchema />
-
-        <!-- Google Maps Embed -->
-        <GoogleMapsEmbed />
-
-        <!-- Local Keyword Ideas -->
-        <LocalKeywordIdeas />
-      </div>
-
-      <div class="mt-12 text-center">
-        <p class="mb-4 text-body">
-          Want a custom tool for your business or have suggestions?
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-secondary">
+    <div class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light"></div>
+    <div class="relative mx-auto max-w-6xl px-4 py-16 md:py-20">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-widest text-primary">Free Tools</p>
+        <h1 class="mt-3 font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">
+          Local SEO Toolkit
+        </h1>
+        <p class="mt-4 text-lg text-white/80 md:text-xl">
+          Practical tools built for home service businesses. Generate review links, find GBP categories, create schema markup, and more.
         </p>
-        <a
-          href="/contact#book"
-          class="inline-flex items-center rounded-3xl bg-[#f56b2a] px-6 py-3 font-heading font-semibold text-white"
-        >
-          Book a Free Intro Call
-          <svg
-            class="ml-2 h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            viewBox="0 0 24 24"
-            aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-          >
-        </a>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white">GBP Tools</span>
+          <span class="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white">Schema Generators</span>
+          <span class="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white">Content Planning</span>
+        </div>
+        <div class="mt-8">
+          <a href="#tools" class="btn btn-primary">
+            Start Using Tools
+            <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- WAVE -->
-  <div class="-mb-1 w-full overflow-hidden leading-none">
-    <svg viewBox="0 0 1440 60" class="block h-10 w-full text-white" aria-hidden="true">
-      <path fill="currentColor" d="M0,32L1440,0V60H0Z"></path>
-    </svg>
-  </div>
+  <!-- Stats -->
+  <section class="border-b border-gray-100 bg-white py-12">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+        {stats.map((stat) => (
+          <div class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-gradient-to-br from-white to-gray-50 p-5 text-center shadow-sm transition hover:shadow-md">
+            <div class="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-primary/5 transition-transform group-hover:scale-110"></div>
+            <p class="relative font-heading text-3xl font-bold text-heading">{stat.value}</p>
+            <p class="relative mt-1 text-xs font-semibold uppercase tracking-wider text-gray-500">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section id="tools" class="bg-cream py-16 md:py-20">
+    <div class="mx-auto max-w-6xl px-4">
+      
+      <!-- Featured Tool -->
+      <div class="mb-16">
+        <div class="mb-6 flex items-center gap-3">
+          <span class="rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">Most Popular</span>
+        </div>
+        <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
+          <div class="grid lg:grid-cols-5">
+            <div class="flex flex-col justify-center bg-gradient-to-br from-secondary to-secondary-light p-8 text-white lg:col-span-2">
+              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+                <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                </svg>
+              </div>
+              <h2 class="font-heading text-2xl font-bold">Review Link Generator</h2>
+              <p class="mt-3 text-white/80">Find any business on Google and generate a direct review link plus QR code. Perfect for review cards and follow-up messages.</p>
+              <ul class="mt-6 space-y-2 text-sm text-white/70">
+                <li class="flex items-center gap-2">
+                  <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                  Works with any GBP listing
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                  Instant QR code
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                  One-click copy
+                </li>
+              </ul>
+            </div>
+            <div class="p-6 lg:col-span-3 lg:p-8">
+              <ReviewLinkGenerator />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Tools -->
+      <div class="mb-16">
+        <h2 class="mb-8 font-heading text-2xl font-bold text-heading">Quick Tools</h2>
+        <div class="grid gap-6 md:grid-cols-3">
+          
+          <article class="tool-card group">
+            <div class="tool-card-header tool-card-header--green">
+              <div class="tool-card-icon tool-card-icon--green">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-heading">GBP Category Finder</h3>
+                <p class="text-sm text-gray-500">Search Google's official categories</p>
+              </div>
+            </div>
+            <div class="tool-card-body">
+              <GBPCategoryFinder />
+            </div>
+          </article>
+
+          <article class="tool-card group">
+            <div class="tool-card-header tool-card-header--blue">
+              <div class="tool-card-icon tool-card-icon--blue">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-heading">Landing Page Outline</h3>
+                <p class="text-sm text-gray-500">Get a conversion-ready structure</p>
+              </div>
+            </div>
+            <div class="tool-card-body">
+              <LandingPageOutlineGenerator />
+            </div>
+          </article>
+
+          <article class="tool-card group">
+            <div class="tool-card-header tool-card-header--blue">
+              <div class="tool-card-icon tool-card-icon--blue">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-heading">Local Keyword Ideas</h3>
+                <p class="text-sm text-gray-500">Generate keyword variations</p>
+              </div>
+            </div>
+            <div class="tool-card-body">
+              <LocalKeywordIdeas />
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Schema Tools -->
+      <div class="mb-16">
+        <h2 class="mb-8 font-heading text-2xl font-bold text-heading">Schema Generators</h2>
+        <div class="grid gap-6 lg:grid-cols-2">
+          
+          <article class="tool-card group">
+            <div class="tool-card-header tool-card-header--purple">
+              <div class="tool-card-icon tool-card-icon--purple">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-heading">FAQ Schema Generator</h3>
+                <p class="text-sm text-gray-500">Create rich FAQ snippets for search</p>
+              </div>
+            </div>
+            <div class="tool-card-body">
+              <FAQSchemaGenerator />
+            </div>
+          </article>
+
+          <article class="tool-card group">
+            <div class="tool-card-header tool-card-header--purple">
+              <div class="tool-card-icon tool-card-icon--purple">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-heading">Local Business Schema</h3>
+                <p class="text-sm text-gray-500">Generate JSON-LD structured data</p>
+              </div>
+            </div>
+            <div class="tool-card-body">
+              <LocalBusinessSchema />
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- SEO & Marketing -->
+      <div>
+        <h2 class="mb-8 font-heading text-2xl font-bold text-heading">SEO & Marketing</h2>
+        <div class="grid gap-6 lg:grid-cols-2">
+          
+          <article class="tool-card group">
+            <div class="tool-card-header tool-card-header--blue">
+              <div class="tool-card-icon tool-card-icon--blue">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-heading">SERP Preview</h3>
+                <p class="text-sm text-gray-500">See how your page appears in Google</p>
+              </div>
+            </div>
+            <div class="tool-card-body">
+              <SERPPreview />
+            </div>
+          </article>
+
+          <article class="tool-card group">
+            <div class="tool-card-header tool-card-header--green">
+              <div class="tool-card-icon tool-card-icon--green">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-heading">UTM Link Builder</h3>
+                <p class="text-sm text-gray-500">Create trackable campaign URLs</p>
+              </div>
+            </div>
+            <div class="tool-card-body">
+              <UTMLinkBuilder />
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-secondary py-16">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+      <h2 class="font-heading text-3xl font-bold text-white">Want Results Without the DIY?</h2>
+      <p class="mx-auto mt-4 max-w-xl text-lg text-white/80">
+        These tools are great for getting started. But if you want expert help dominating local search, we're here.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="btn btn-primary">Get a Free Audit</a>
+        <a href="/results" class="inline-flex items-center rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition hover:bg-white/10">See Client Results</a>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .tool-card {
+    @apply flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-lg;
+  }
+  
+  .tool-card-header {
+    @apply flex items-center gap-3 border-b px-5 py-4;
+  }
+  .tool-card-header--green {
+    @apply border-green-100 bg-gradient-to-r from-green-50 to-green-50/50;
+  }
+  .tool-card-header--blue {
+    @apply border-blue-100 bg-gradient-to-r from-blue-50 to-blue-50/50;
+  }
+  .tool-card-header--purple {
+    @apply border-purple-100 bg-gradient-to-r from-purple-50 to-purple-50/50;
+  }
+  
+  .tool-card-icon {
+    @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-xl;
+  }
+  .tool-card-icon--green {
+    @apply bg-green-100 text-green-600;
+  }
+  .tool-card-icon--blue {
+    @apply bg-blue-100 text-blue-600;
+  }
+  .tool-card-icon--purple {
+    @apply bg-purple-100 text-purple-600;
+  }
+  
+  .tool-card-body {
+    @apply flex flex-1 flex-col p-5;
+  }
+  
+  /* Push buttons to bottom of cards */
+  .tool-card-body :global(form) {
+    @apply flex flex-1 flex-col;
+  }
+  .tool-card-body :global(form > button[type="submit"]),
+  .tool-card-body :global(form > .btn) {
+    @apply mt-auto;
+  }
+</style>

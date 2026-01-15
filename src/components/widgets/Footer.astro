@@ -3,7 +3,7 @@ import Logo from "../Logo.astro";
 import { getPermalink } from "~/utils/permalinks";
 ---
 
-<footer class="border-t-2 border-[#f56b2a] bg-[#253242] text-white">
+<footer class="border-t-2 border-primary bg-secondary text-white">
   <div class="mx-auto w-full max-w-7xl px-4 py-14 md:px-6 md:py-16">
     <!-- 2-column layout at md+: Brand/Contact (wide) + Links grid (Services + Company) -->
     <div class="grid grid-cols-1 gap-10 md:grid-cols-[1.1fr,1.4fr] md:gap-12">
@@ -29,7 +29,7 @@ import { getPermalink } from "~/utils/permalinks";
         <div class="mt-5">
           <a
             href={getPermalink("/contact#book")}
-            class="inline-flex items-center gap-2 rounded-full border border-[#f56b2a] bg-[#fff4ed] px-5 py-2.5 text-[15px] font-semibold text-[#f56b2a] shadow-[0_1px_0_rgba(0,0,0,0.02)] transition hover:bg-[#f56b2a] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#253242]"
+            class="inline-flex items-center gap-2 rounded-full border border-primary bg-[#fff4ed] px-5 py-2.5 text-[15px] font-semibold text-primary shadow-[0_1px_0_rgba(0,0,0,0.02)] transition hover:bg-primary hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
           >
             <span>Book a Call</span>
             <svg
@@ -52,7 +52,7 @@ import { getPermalink } from "~/utils/permalinks";
         <nav aria-labelledby="footer-services">
           <h3
             id="footer-services"
-            class="mb-3 text-[15px] font-semibold tracking-wide text-[#f56b2a]"
+            class="mb-3 text-[15px] font-semibold tracking-wide text-primary"
           >
             Services
           </h3>
@@ -60,28 +60,28 @@ import { getPermalink } from "~/utils/permalinks";
             <li>
               <a
                 href={getPermalink("/services/local-seo")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#253242]"
+                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
                 >Local SEO</a
               >
             </li>
             <li>
               <a
                 href={getPermalink("/services/google-business-profile-optimization")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#253242]"
+                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
                 >Google Business Profile</a
               >
             </li>
             <li>
               <a
                 href={getPermalink("/services/web-design")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#253242]"
+                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
                 >Website Design</a
               >
             </li>
             <li>
               <a
                 href={getPermalink("/additional-services")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#253242]"
+                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
                 >Additional Services</a
               >
             </li>
@@ -93,7 +93,7 @@ import { getPermalink } from "~/utils/permalinks";
               <li>
                 <a
                   href={getPermalink("/local-seo-tools")}
-                  class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#253242]"
+                  class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
                   >Local SEO Tools</a
                 >
               </li>
@@ -105,7 +105,7 @@ import { getPermalink } from "~/utils/permalinks";
         <nav aria-labelledby="footer-company">
           <h3
             id="footer-company"
-            class="mb-3 text-[15px] font-semibold tracking-wide text-[#f56b2a]"
+            class="mb-3 text-[15px] font-semibold tracking-wide text-primary"
           >
             Company
           </h3>
@@ -113,21 +113,21 @@ import { getPermalink } from "~/utils/permalinks";
             <li>
               <a
                 href={getPermalink("/packages")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#253242]"
+                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
                 >Packages</a
               >
             </li>
             <li>
               <a
                 href={getPermalink("/about")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#253242]"
+                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
                 >About</a
               >
             </li>
             <li>
               <a
                 href={getPermalink("/contact")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#253242]"
+                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
                 >Contact</a
               >
             </li>
@@ -135,7 +135,7 @@ import { getPermalink } from "~/utils/permalinks";
             <li>
               <a
                 href={getPermalink("/privacy-policy")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#253242]"
+                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
                 >Privacy Policy</a
               >
             </li>
@@ -152,17 +152,17 @@ import { getPermalink } from "~/utils/permalinks";
       <div class="flex items-center gap-4">
         <a
           href={getPermalink("/privacy-policy")}
-          class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#253242]"
+          class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
           >Privacy Policy</a
         >
         <a
           href={getPermalink("/terms")}
-          class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#253242]"
+          class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
           >Terms of Service</a
         >
         <a
           href={getPermalink("/contact")}
-          class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-[#f56b2a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#253242]"
+          class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
           >Contact</a
         >
       </div>

@@ -40,7 +40,7 @@ const imageAlt =
 
 <Layout title={title} description={description} metadata={{ title, description }}>
   <!-- HERO: hard, reliable contrast; no overlays; immune to inherited opacity -->
-  <section class="relative isolate bg-[#253242] pb-14 pt-10 text-white">
+  <section class="relative isolate bg-secondary pb-14 pt-10 text-white">
     <div class="container">
       <a href="/blog" class="inline-block text-sm opacity-90 hover:opacity-100">← Back to Blog</a>
 
@@ -84,7 +84,7 @@ const imageAlt =
 
         <!-- Tailwind Typography, branded colors, comfortable sizes -->
         <div
-          class="prose prose-slate max-w-none lg:prose-lg prose-headings:text-[#1f2d3d] prose-p:text-[#4a4a4a] prose-a:text-[#f56b2a] prose-a:no-underline hover:prose-a:underline prose-blockquote:rounded-xl prose-blockquote:border-[#ffd8c5] prose-blockquote:bg-[#fff4ee] prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:text-[#55301f] prose-strong:text-[#1f2d3d] prose-hr:border-gray-200"
+          class="prose prose-slate max-w-none lg:prose-lg prose-headings:text-heading prose-p:text-[#4a4a4a] prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-blockquote:rounded-xl prose-blockquote:border-[#ffd8c5] prose-blockquote:bg-[#fff4ee] prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:text-[#55301f] prose-strong:text-heading prose-hr:border-gray-200"
         >
           <Content />
         </div>
@@ -93,7 +93,7 @@ const imageAlt =
   </section>
 
   <!-- GLOBAL BLOG CTA: consistent next steps on every post -->
-  <section class="bg-[#253242] py-10 text-white">
+  <section class="bg-secondary py-10 text-white">
     <div class="container">
       <div
         class="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-white/5 px-6 py-8 shadow-xl md:px-10"
@@ -108,7 +108,7 @@ const imageAlt =
         <div class="mt-5 flex flex-wrap gap-3">
           <a
             href="/services/local-seo"
-            class="inline-flex items-center rounded-full bg-[#f56b2a] px-6 py-3 text-sm font-semibold text-white shadow transition hover:bg-[#f34e00]"
+            class="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow transition hover:bg-primary-dark"
             data-evt="cta_blog_local_seo"
           >
             Explore Local SEO Services

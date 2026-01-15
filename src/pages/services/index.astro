@@ -11,9 +11,9 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
 <Layout {title} {description}>
   <!-- HERO -->
   <section
-    class="relative flex min-h-[440px] flex-col items-center justify-center overflow-hidden bg-[#253242] pb-20 pt-16"
+    class="relative flex min-h-[440px] flex-col items-center justify-center overflow-hidden bg-secondary pb-20 pt-16"
   >
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#253242] to-[#2e4159]">
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light">
     </div>
     <div
       class="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center"
@@ -24,7 +24,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
         Local SEO &amp; Digital Marketing
       </h1>
       <span
-        class="-mt-1 block text-xl font-semibold uppercase tracking-wider text-[#f56b2a] md:text-2xl"
+        class="-mt-1 block text-xl font-semibold uppercase tracking-wider text-primary md:text-2xl"
       >
         Services for Home Service Businesses
       </span>
@@ -35,7 +35,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
       <div class="flex flex-wrap justify-center gap-4">
         <a
           href="#core-services"
-          class="inline-flex items-center rounded-2xl bg-[#f56b2a] px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-[#f34e00]"
+          class="inline-flex items-center rounded-2xl bg-primary px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-primary-dark"
         >
           Explore Services
           <svg
@@ -48,7 +48,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
         </a>
         <a
           href="#packages"
-          class="inline-flex items-center rounded-2xl bg-secondary px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-[#27394b]"
+          class="inline-flex items-center rounded-2xl bg-secondary px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary-hover"
         >
           See Packages
           <svg
@@ -91,7 +91,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
       <p class="mt-4 text-sm text-body/70">
         Not sure if we can help your niche? <a
           href="#contact"
-          class="text-primary underline hover:text-[#f56b2a]"
+          class="text-primary underline hover:text-primary"
           aria-label="Get Started — open contact form">Ask us today</a
         >—chances are, we’ve worked with your industry!
       </p>
@@ -103,7 +103,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="mb-10 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
         Our Core Services
-        <span class="mx-auto mt-2 block h-1 w-20 rounded bg-[#f56b2a]"></span>
+        <span class="mx-auto mt-2 block h-1 w-20 rounded bg-primary"></span>
       </h2>
 
       <div class="grid gap-8 md:grid-cols-3">
@@ -137,8 +137,8 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
               ],
             ],
           ].map(([title, href, bullets]) => (
-            <article class="grid grid-rows-[auto_1fr_auto] rounded-2xl border-2 border-[#f56b2a]/10 bg-bluelight p-8 shadow-xl">
-              <h3 class="mb-3 font-heading text-xl font-bold text-[#f56b2a]">{title}</h3>
+            <article class="grid grid-rows-[auto_1fr_auto] rounded-2xl border-2 border-primary/10 bg-bluelight p-8 shadow-xl">
+              <h3 class="mb-3 font-heading text-xl font-bold text-primary">{title}</h3>
               <ul class="list-inside list-disc space-y-1 text-body">
                 {(bullets as string[]).map((b) => (
                   <li>{b}</li>
@@ -146,7 +146,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
               </ul>
               <a
                 href={href as string}
-                class="mt-6 inline-flex items-center font-semibold text-primary underline hover:text-[#f56b2a]"
+                class="mt-6 inline-flex items-center font-semibold text-primary underline hover:text-primary"
               >
                 Learn more &rarr;
               </a>
@@ -162,7 +162,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="mb-8 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
         Why Home Service Pros Trust Lilos Growth
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
       </h2>
 
       <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
@@ -184,10 +184,10 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
               "Clear reporting, plain English, and a process that makes sense.",
             ],
           ].map(([title, body]) => (
-            <div class="flex flex-col items-center rounded-2xl border border-[#f56b2a]/10 bg-white p-8 shadow-lg">
-              <span class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-[#f56b2a]/10">
+            <div class="flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-8 shadow-lg">
+              <span class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10">
                 <svg
-                  class="h-7 w-7 text-[#f56b2a]"
+                  class="h-7 w-7 text-primary"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -212,7 +212,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="mb-6 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
         Our Proven 4-Step Local SEO System
-        <span class="mx-auto mt-2 block h-1 w-20 rounded bg-[#f56b2a]"></span>
+        <span class="mx-auto mt-2 block h-1 w-20 rounded bg-primary"></span>
       </h2>
       <p class="mb-12 text-center text-lg text-body">
         Exactly how we get you ranking higher and driving more local calls.
@@ -242,8 +242,8 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
               "We track, report, and keep optimizing so results improve.",
             ],
           ].map(([num, title, body]) => (
-            <div class="flex flex-col items-center rounded-2xl border-2 border-[#f56b2a]/10 bg-bluelight p-8 shadow-xl">
-              <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#f56b2a]/10 text-2xl font-extrabold text-[#f56b2a]">
+            <div class="flex flex-col items-center rounded-2xl border-2 border-primary/10 bg-bluelight p-8 shadow-xl">
+              <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-2xl font-extrabold text-primary">
                 {num}
               </div>
               <h3 class="mb-2 text-center font-heading text-lg font-bold text-heading">{title}</h3>
@@ -277,7 +277,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
     <div class="mx-auto max-w-4xl px-4">
       <h2 class="mb-8 text-center font-heading text-3xl font-bold text-heading md:text-4xl">
         Frequently Asked Questions
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-[#f56b2a]"></span>
+        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
       </h2>
 
       <div class="space-y-6">
