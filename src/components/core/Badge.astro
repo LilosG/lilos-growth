@@ -15,7 +15,7 @@ import { Icon } from "astro-icon/components";
 
 export interface Props {
   /** Visual variant */
-  variant?: 'primary' | 'secondary' | 'success' | 'info' | 'accent';
+  variant?: 'primary' | 'secondary' | 'success' | 'info' | 'accent' | 'outline';
   /** Size variant */
   size?: 'sm' | 'md' | 'lg';
   /** Icon name (from astro-icon) */
@@ -32,20 +32,21 @@ const {
 } = Astro.props;
 
 const variantClasses = {
-  primary: 'bg-primary/10 text-primary border-primary/20',
-  secondary: 'bg-secondary/10 text-secondary border-secondary/20',
-  success: 'bg-green-50 text-green-700 border-green-200',
-  info: 'bg-blue-50 text-blue-700 border-blue-200',
-  accent: 'bg-accent/10 text-accent border-accent/20',
+  primary: 'bg-white text-primary border-primary/30 shadow-sm hover:shadow-md hover:border-primary/50',
+  secondary: 'bg-white text-secondary border-secondary/30 shadow-sm hover:shadow-md hover:border-secondary/50',
+  success: 'bg-white text-green-700 border-green-300 shadow-sm hover:shadow-md hover:border-green-400',
+  info: 'bg-white text-blue-700 border-blue-300 shadow-sm hover:shadow-md hover:border-blue-400',
+  accent: 'bg-white text-accent border-accent/30 shadow-sm hover:shadow-md hover:border-accent/50',
+  outline: 'bg-transparent text-primary border-primary hover:bg-primary/5',
 };
 
 const sizeClasses = {
   sm: 'px-2.5 py-1 text-xs',
-  md: 'px-3 py-1.5 text-sm',
-  lg: 'px-4 py-2 text-base',
+  md: 'px-3.5 py-1.5 text-sm',
+  lg: 'px-5 py-2.5 text-base',
 };
 
-const baseClasses = 'inline-flex items-center gap-1.5 rounded-full border font-heading font-semibold transition-all duration-200 hover:shadow-sm';
+const baseClasses = 'inline-flex items-center gap-1.5 rounded-xl border-2 font-heading font-semibold transition-all duration-200';
 
 const classes = [
   baseClasses,
