@@ -89,17 +89,17 @@
   --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   
-  /* Font Sizes - Improved for readability */
-  --text-xs: 0.8125rem;    /* 13px - slightly larger for better readability */
-  --text-sm: 0.9375rem;    /* 15px - improved from 14px */
-  --text-base: 1.0625rem;  /* 17px - better than 16px for body text */
-  --text-lg: 1.1875rem;    /* 19px */
-  --text-xl: 1.375rem;     /* 22px */
-  --text-2xl: 1.625rem;    /* 26px */
-  --text-3xl: 2rem;        /* 32px */
-  --text-4xl: 2.5rem;      /* 40px */
-  --text-5xl: 3.25rem;     /* 52px */
-  --text-6xl: 4rem;        /* 64px */
+  /* Font Sizes - Professional scale */
+  --text-xs: 0.6875rem;    /* 11px */
+  --text-sm: 0.8125rem;    /* 13px */
+  --text-base: 0.9375rem;  /* 15px */
+  --text-lg: 1.0625rem;    /* 17px */
+  --text-xl: 1.1875rem;    /* 19px */
+  --text-2xl: 1.375rem;    /* 22px */
+  --text-3xl: 1.75rem;     /* 28px */
+  --text-4xl: 2.125rem;    /* 34px */
+  --text-5xl: 2.75rem;     /* 44px */
+  --text-6xl: 3.5rem;      /* 56px */
   
   /* Line Heights - Optimized for readability */
   --leading-tight: 1.3;
@@ -176,13 +176,12 @@
      LAYOUT TOKENS
      ============================================ */
   
-  --container-xs: 36rem;   /* 576px */
-  --container-sm: 40rem;   /* 640px */
-  --container-md: 48rem;   /* 768px */
-  --container-lg: 64rem;   /* 1024px */
-  --container-xl: 80rem;   /* 1280px */
-  --container-2xl: 90rem;  /* 1440px */
-  
+  /* Container widths - Reduced for better scale */
+  --container-sm: 36rem;   /* 576px */
+  --container-md: 44rem;   /* 704px */
+  --container-lg: 58rem;   /* 928px */
+  --container-xl: 72rem;   /* 1152px */
+  --container-2xl: 80rem;  /* 1280px */  
   --container-padding: 1rem;
   --container-padding-lg: 1.5rem;
   

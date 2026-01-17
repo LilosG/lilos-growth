@@ -144,13 +144,13 @@ const serviceBadgeMap = {
 
       <!-- Metrics -->
       {metrics.length > 0 && (
-        <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
+        <div class="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-8">
           {metrics.map((metric) => (
             <div>
               <div class="font-heading text-3xl font-bold text-primary md:text-4xl">
                 {metric.value}
               </div>
-              <div class="mt-1 text-xs font-semibold uppercase tracking-wider text-body">
+              <div class="mt-1 text-sm font-bold uppercase tracking-wide text-gray-700">
                 {metric.label}
               </div>
             </div>
