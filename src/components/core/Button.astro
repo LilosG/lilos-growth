@@ -1,0 +1,109 @@
+---
+/**
+ * Button Component
+ * 
+ * A comprehensive button component with multiple variants, sizes, and states.
+ * Follows design system tokens and best practices.
+ * 
+ * @component
+ * @example
+ * <Button variant="primary" size="lg" href="/contact">
+ *   Get Started
+ * </Button>
+ */
+
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  /** Visual variant */
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  /** Size variant */
+  size?: 'sm' | 'md' | 'lg';
+  /** Button type (for form buttons) */
+  type?: 'button' | 'submit' | 'reset';
+  /** Link href (renders as <a> instead of <button>) */
+  href?: string;
+  /** Link target */
+  target?: '_blank' | '_self';
+  /** Icon name (from astro-icon) */
+  icon?: string;
+  /** Icon position */
+  iconPosition?: 'left' | 'right';
+  /** Disabled state */
+  disabled?: boolean;
+  /** Full width */
+  fullWidth?: boolean;
+  /** Additional CSS classes */
+  class?: string;
+  /** ARIA label */
+  ariaLabel?: string;
+  /** Data attributes for tracking */
+  [key: `data-${string}`]: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  type = 'button',
+  href,
+  target,
+  icon,
+  iconPosition = 'right',
+  disabled = false,
+  fullWidth = false,
+  class: className = '',
+  ariaLabel,
+  ...rest
+} = Astro.props;
+
+// Build class string
+const variantClasses = {
+  primary: 'btn-primary',
+  secondary: 'btn-secondary',
+  outline: 'btn-outline',
+  ghost: 'btn-ghost',
+};
+
+const sizeClasses = {
+  sm: 'btn-sm',
+  md: 'btn-md',
+  lg: 'btn-lg',
+};
+
+const classes = [
+  'btn',
+  variantClasses[variant],
+  sizeClasses[size],
+  fullWidth && 'w-full',
+  className,
+].filter(Boolean).join(' ');
+
+// Determine if rendering as link or button
+const isLink = !!href && !disabled;
+---
+
+{isLink ? (
+  <a
+    href={href}
+    class={classes}
+    aria-label={ariaLabel}
+    {...(target === '_blank' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+    {...rest}
+  >
+    {icon && iconPosition === 'left' && <Icon name={icon} class="h-5 w-5" />}
+    <slot />
+    {icon && iconPosition === 'right' && <Icon name={icon} class="h-5 w-5" />}
+  </a>
+) : (
+  <button
+    type={type}
+    class={classes}
+    disabled={disabled}
+    aria-label={ariaLabel}
+    {...rest}
+  >
+    {icon && iconPosition === 'left' && <Icon name={icon} class="h-5 w-5" />}
+    <slot />
+    {icon && iconPosition === 'right' && <Icon name={icon} class="h-5 w-5" />}
+  </button>
+)}

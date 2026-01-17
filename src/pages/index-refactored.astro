@@ -12,7 +12,6 @@ import ServiceCard from "~/components/composed/ServiceCard.astro";
 import ProcessStep from "~/components/composed/ProcessStep.astro";
 import StatCard from "~/components/composed/StatCard.astro";
 import LeadCaptureForm from "~/components/composed/LeadCaptureForm.astro";
-import GuaranteeBadge from "~/components/composed/GuaranteeBadge.astro";
 
 export const title = "Local SEO & Websites for Home Service Pros";
 export const description =
@@ -211,11 +210,13 @@ const faqs = [
           <div class="h-1.5 w-28 rounded-full bg-primary"></div>
         </div>
         
-        <div class="space-y-4">
+        <div class="space-y-3">
           <p class="max-w-lg text-lg font-medium text-white/90 md:text-xl">
             Get more calls, book more jobs, guaranteed!
           </p>
-          <GuaranteeBadge variant="badge" class="border-primary-light bg-white/10 text-white" />
+          <p class="text-base text-white/80">
+            If qualified calls or forms don't grow within 90 days, we refund months 2–3
+          </p>
         </div>
         
         <div class="flex flex-wrap gap-3">

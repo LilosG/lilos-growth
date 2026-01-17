@@ -1,0 +1,50 @@
+---
+/**
+ * Badge Component
+ * 
+ * Small status or category indicator following design system.
+ * Used for service types, tags, and status labels.
+ * 
+ * @component
+ * @example
+ * <Badge variant="primary">Featured</Badge>
+ * <Badge variant="website" icon="tabler:device-desktop">Website</Badge>
+ */
+
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  /** Visual variant */
+  variant?: 'primary' | 'success' | 'info' | 'website' | 'gbp' | 'seo';
+  /** Icon name (from astro-icon) */
+  icon?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  icon,
+  class: className = '',
+} = Astro.props;
+
+const variantClasses = {
+  primary: 'badge-primary',
+  success: 'badge-success',
+  info: 'badge-info',
+  website: 'badge-website',
+  gbp: 'badge-gbp',
+  seo: 'badge-seo',
+};
+
+const classes = [
+  'badge',
+  variantClasses[variant],
+  className,
+].filter(Boolean).join(' ');
+---
+
+<span class={classes}>
+  {icon && <Icon name={icon} class="h-3 w-3" />}
+  <slot />
+</span>

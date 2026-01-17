@@ -1,0 +1,85 @@
+---
+/**
+ * Service Card Component
+ * 
+ * Displays a service offering with icon, title, description, and features list.
+ * Built on top of the Card component for consistency.
+ * 
+ * @component
+ * @example
+ * <ServiceCard
+ *   icon="tabler:map-pin"
+ *   title="Google Business Profile Management"
+ *   description="Get seen in Google Maps and local search results..."
+ *   features={[
+ *     "Complete setup and optimization",
+ *     "Consistent photo management",
+ *     "Monthly profile audits"
+ *   ]}
+ * />
+ */
+
+import Card from '../core/Card.astro';
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  /** Icon name from astro-icon */
+  icon: string;
+  /** Service title */
+  title: string;
+  /** Service description */
+  description: string;
+  /** List of features/benefits */
+  features?: string[];
+  /** Optional link */
+  href?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  icon,
+  title,
+  description,
+  features = [],
+  href,
+  class: className = '',
+} = Astro.props;
+---
+
+<Card 
+  variant="interactive" 
+  as="article"
+  href={href}
+  class={className}
+>
+  <div class="mb-4" aria-hidden="true">
+    <Icon name={icon} class="h-8 w-8 text-primary" />
+  </div>
+  
+  <h3 class="mb-2 font-heading text-xl font-semibold text-heading">
+    {title}
+  </h3>
+  
+  <p class="mb-4 text-sm text-body leading-relaxed">
+    {description}
+  </p>
+  
+  {features.length > 0 && (
+    <ul class="space-y-2 text-sm text-body">
+      {features.map((feature) => (
+        <li class="flex items-start gap-2">
+          <Icon name="tabler:check" class="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+          <span>{feature}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+  
+  {href && (
+    <div class="mt-6 flex items-center gap-2 text-primary font-semibold text-sm">
+      <span>Learn more</span>
+      <Icon name="tabler:arrow-right" class="h-4 w-4" />
+    </div>
+  )}
+</Card>

@@ -1,0 +1,80 @@
+---
+/**
+ * Trust Bar Component
+ * 
+ * Displays trust signals like client logos, certifications, or stats.
+ * Helps build credibility and confidence for potential clients.
+ * 
+ * @component
+ * @example
+ * <TrustBar 
+ *   title="Trusted by Leading Home Service Businesses"
+ *   logos={clientLogos}
+ * />
+ */
+
+export interface Props {
+  /** Optional title above logos */
+  title?: string;
+  /** Array of logo objects */
+  logos?: Array<{
+    src: string;
+    alt: string;
+    width?: number;
+  }>;
+  /** Display variant */
+  variant?: 'logos' | 'stats';
+  /** Stats to display (if variant is 'stats') */
+  stats?: Array<{
+    value: string;
+    label: string;
+  }>;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  title,
+  logos = [],
+  variant = 'logos',
+  stats = [],
+  class: className = '',
+} = Astro.props;
+---
+
+<div class={`py-8 ${className}`}>
+  {title && (
+    <p class="mb-6 text-center text-sm font-semibold uppercase tracking-wider text-muted">
+      {title}
+    </p>
+  )}
+
+  {variant === 'logos' && logos.length > 0 && (
+    <div class="flex flex-wrap items-center justify-center gap-8 opacity-60 grayscale transition hover:opacity-80 hover:grayscale-0">
+      {logos.map((logo) => (
+        <img
+          src={logo.src}
+          alt={logo.alt}
+          class="h-8 w-auto object-contain"
+          style={logo.width ? `width: ${logo.width}px` : undefined}
+          loading="lazy"
+        />
+      ))}
+    </div>
+  )}
+
+  {variant === 'stats' && stats.length > 0 && (
+    <div class="flex flex-wrap justify-center gap-8">
+      {stats.map((stat) => (
+        <div class="text-center">
+          <div class="font-heading text-3xl font-bold text-primary">
+            {stat.value}
+          </div>
+          <div class="mt-1 text-sm text-muted">
+            {stat.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
