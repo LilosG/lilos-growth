@@ -75,7 +75,6 @@ const classes = [
   variantClasses[variant],
   sizeClasses[size],
   fullWidth && 'w-full',
-  'btn-primary-animated btn-ripple', // Add animation classes
   className,
 ].filter(Boolean).join(' ');
 
@@ -88,7 +87,7 @@ const isLink = !!href && !disabled;
     href={href}
     class={classes}
     aria-label={ariaLabel}
-    data-ripple
+
     {...(target === '_blank' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
     {...rest}
   >
@@ -102,7 +101,7 @@ const isLink = !!href && !disabled;
     class={classes}
     disabled={disabled}
     aria-label={ariaLabel}
-    data-ripple
+
     {...rest}
   >
     {icon && iconPosition === 'left' && <Icon name={icon} class="h-5 w-5" />}

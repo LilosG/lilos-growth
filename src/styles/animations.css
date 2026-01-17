@@ -1,282 +1,56 @@
 /* ============================================
-   LILOS GROWTH ANIMATION SYSTEM
-   Professional animations and micro-interactions
+   LILOS GROWTH - MINIMAL ANIMATION SYSTEM
+   Subtle, professional interactions only
    ============================================ */
 
 /* ============================================
-   KEYFRAME ANIMATIONS
+   HOVER MICRO-INTERACTIONS (Subtle)
    ============================================ */
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes pulse-subtle {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(255, 107, 53, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
-  }
-}
-
-/* ============================================
-   SCROLL REVEAL ANIMATIONS
-   ============================================ */
-
-.animate-on-scroll {
-  opacity: 0;
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.animate-on-scroll.is-visible {
-  opacity: 1;
-}
-
-/* Fade In */
-.fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
-}
-
-/* Fade In Up */
-.fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-/* Fade In Down */
-.fade-in-down {
-  animation: fadeInDown 0.6s ease-out forwards;
-}
-
-/* Slide In Left */
-.slide-in-left {
-  animation: slideInLeft 0.6s ease-out forwards;
-}
-
-/* Slide In Right */
-.slide-in-right {
-  animation: slideInRight 0.6s ease-out forwards;
-}
-
-/* Scale In */
-.scale-in {
-  animation: scaleIn 0.6s ease-out forwards;
-}
-
-/* Staggered animations for grids */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-.stagger-5 { animation-delay: 0.5s; }
-.stagger-6 { animation-delay: 0.6s; }
-
-/* ============================================
-   HOVER MICRO-INTERACTIONS
-   ============================================ */
-
-/* Card Lift Effect */
+/* Card Subtle Lift */
 .card-lift {
-  @apply transition-all duration-300 ease-out;
-  @apply hover:-translate-y-2 hover:shadow-xl;
-}
-
-/* Card Glow Effect */
-.card-glow {
-  @apply transition-all duration-300 ease-out;
+  @apply transition-all duration-200 ease-out;
   @apply hover:shadow-lg;
 }
 
+/* Card Glow Effect (Very Subtle) */
+.card-glow {
+  @apply transition-shadow duration-200 ease-out;
+}
+
 .card-glow:hover {
-  box-shadow: 0 10px 15px -3px rgba(255, 107, 53, 0.2), 0 4px 6px -4px rgba(255, 107, 53, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
 }
 
-/* Button Shine Effect */
-.btn-shine {
-  position: relative;
-  overflow: hidden;
+/* Service Card Hover (Minimal) */
+.service-card-hover {
+  @apply transition-shadow duration-200 ease-out;
+  @apply hover:shadow-md;
 }
 
-.btn-shine::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-  transition: left 0.5s ease;
-}
-
-.btn-shine:hover::before {
-  left: 100%;
-}
-
-/* Icon Bounce */
-.icon-bounce {
-  @apply transition-transform duration-300 ease-out;
-  @apply hover:scale-110 hover:-translate-y-1;
-}
-
-/* Icon Spin */
-.icon-spin-hover:hover {
-  animation: spin 0.6s ease-in-out;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Icon Pulse */
-.icon-pulse {
-  animation: pulse-subtle 2s ease-in-out infinite;
+/* Pricing Card Highlight (Subtle) */
+.pricing-card-highlight {
+  @apply transition-shadow duration-200 ease-out;
+  @apply hover:shadow-lg;
 }
 
 /* ============================================
-   HERO SECTION ANIMATIONS
-   ============================================ */
-
-/* Animated Gradient Background */
-.hero-gradient-animated {
-  background: linear-gradient(
-    135deg,
-    var(--color-secondary),
-    var(--color-secondary-dark),
-    var(--color-primary)
-  );
-  background-size: 200% 200%;
-  animation: gradient-shift 15s ease infinite;
-}
-
-@keyframes gradient-shift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-/* Floating Elements */
-.float-animation {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* ============================================
-   BUTTON ANIMATIONS
+   BUTTON ANIMATIONS (Minimal)
    ============================================ */
 
 /* Primary Button Hover */
 .btn-primary-animated {
-  @apply relative overflow-hidden;
-  @apply transition-all duration-300 ease-out;
-  @apply hover:scale-105 hover:shadow-lg;
+  @apply transition-all duration-150 ease-out;
+  @apply hover:shadow-md;
 }
 
 /* Button Ripple Effect */
-.btn-ripple {
+[data-ripple] {
   position: relative;
   overflow: hidden;
 }
 
-.btn-ripple::after {
+[data-ripple]::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -284,44 +58,14 @@
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.4);
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition: width 0.4s, height 0.4s;
 }
 
-.btn-ripple:active::after {
-  width: 300px;
-  height: 300px;
-}
-
-/* ============================================
-   CARD ANIMATIONS
-   ============================================ */
-
-/* Service Card Hover */
-.service-card-hover {
-  @apply transition-all duration-300 ease-out;
-  @apply hover:-translate-y-1 hover:shadow-lg;
-}
-
-.service-card-hover:hover .service-card-icon {
-  @apply scale-110;
-}
-
-/* Pricing Card Highlight */
-.pricing-card-highlight {
-  @apply transition-all duration-300 ease-out;
-  @apply hover:scale-105 hover:shadow-2xl hover:border-primary;
-}
-
-/* Case Study Card */
-.case-study-card-hover {
-  @apply transition-all duration-300 ease-out;
-  @apply hover:shadow-xl;
-}
-
-.case-study-card-hover:hover img {
-  @apply scale-105;
+[data-ripple]:active::after {
+  width: 200px;
+  height: 200px;
 }
 
 /* ============================================
@@ -330,9 +74,9 @@
 
 /* Input Focus Effect */
 .input-focus-glow {
-  @apply transition-all duration-200 ease-out;
-  @apply focus:ring-2 focus:ring-primary focus:ring-opacity-30;
-  @apply focus:border-primary focus:scale-[1.01];
+  @apply transition-all duration-150 ease-out;
+  @apply focus:ring-2 focus:ring-primary focus:ring-opacity-20;
+  @apply focus:border-primary;
 }
 
 /* ============================================
@@ -346,6 +90,15 @@
 }
 
 /* Skeleton Loading */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
 .skeleton {
   @apply bg-gray-200 rounded;
   animation: shimmer 2s infinite;
@@ -356,46 +109,6 @@
     #f0f0f0 75%
   );
   background-size: 200% 100%;
-}
-
-/* ============================================
-   SECTION TRANSITIONS
-   ============================================ */
-
-/* Section Fade In */
-.section-fade-in {
-  @apply opacity-0 translate-y-8;
-  @apply transition-all duration-700 ease-out;
-}
-
-.section-fade-in.is-visible {
-  @apply opacity-100 translate-y-0;
-}
-
-/* ============================================
-   UTILITY CLASSES
-   ============================================ */
-
-/* Smooth Scroll */
-.smooth-scroll {
-  scroll-behavior: smooth;
-}
-
-/* Reduce Motion for Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* Hardware Acceleration */
-.gpu-accelerated {
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 /* ============================================
@@ -410,19 +123,51 @@
 .nav-link-underline::after {
   content: '';
   @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary;
-  @apply transition-all duration-300 ease-out;
+  @apply transition-all duration-200 ease-out;
 }
 
 .nav-link-underline:hover::after {
   @apply w-full;
 }
 
-/* Dropdown Slide Down */
-.dropdown-slide {
-  @apply opacity-0 -translate-y-2;
-  @apply transition-all duration-200 ease-out;
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Smooth Scroll */
+.smooth-scroll {
+  scroll-behavior: smooth;
 }
 
-.dropdown-slide.is-open {
-  @apply opacity-100 translate-y-0;
+/* Hardware Acceleration */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
 }
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Reduce Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   DISABLED ANIMATIONS
+   The following are intentionally removed for
+   a cleaner, more professional feel:
+   - Scroll-based fade-in animations
+   - Staggered grid animations  
+   - Hero gradient animations
+   - Card scale effects
+   - Floating animations
+   - Icon bounce/spin effects
+   ============================================ */
