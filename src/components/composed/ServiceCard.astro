@@ -51,9 +51,9 @@ const {
   variant="interactive" 
   as="article"
   href={href}
-  class={className}
+  class={`service-card-hover card-lift ${className}`}
 >
-  <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 transition-all duration-300 group-hover:scale-110 group-hover:shadow-md" aria-hidden="true">
+  <div class="service-card-icon mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 transition-all duration-300 group-hover:scale-110 group-hover:shadow-md" aria-hidden="true">
     <Icon name={icon} class="h-7 w-7 text-primary" />
   </div>
   

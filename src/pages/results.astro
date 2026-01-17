@@ -168,11 +168,11 @@ const faqs = [
 
 <PageLayout {title} {description}>
   <!-- HERO -->
-  <section class="relative overflow-hidden bg-secondary">
+  <section class="relative overflow-hidden bg-secondary hero-gradient-animated">
     <div class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light" aria-hidden="true"></div>
     
     <div class="relative mx-auto max-w-6xl px-4 py-16 md:py-20">
-      <div class="max-w-3xl">
+      <div class="max-w-3xl" data-animate="fade-in-up">
         <p class="text-sm font-semibold uppercase tracking-widest text-primary">
           Proven Results
         </p>
@@ -199,9 +199,11 @@ const faqs = [
   <!-- STATS -->
   <section class="border-b border-border-subtle bg-surface-base section-padding-sm">
     <div class="mx-auto max-w-6xl px-4">
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6" data-stagger-container data-stagger-delay="0.1">
         {stats.map((stat) => (
-          <StatCard {...stat} />
+          <div data-stagger-item data-animate="scale-in">
+            <StatCard {...stat} />
+          </div>
         ))}
       </div>
     </div>
@@ -213,7 +215,7 @@ const faqs = [
       <div class="mx-auto max-w-6xl px-4">
         <div class="mb-8 flex items-center gap-3">
           <Badge variant="primary">Featured</Badge>
-          <h2 class="font-heading text-xl font-bold text-heading md:text-2xl">
+          <h2 class="font-heading text-xl font-bold text-heading md:text-2xl" data-animate="fade-in-up">
             Client Spotlight
           </h2>
         </div>
@@ -226,7 +228,7 @@ const faqs = [
   <!-- MORE CASE STUDIES -->
   <section class="bg-surface-base section-padding">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-4 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
+      <h2 class="mb-4 text-center font-heading text-2xl font-bold text-heading md:text-3xl" data-animate="fade-in-up">
         More Client Wins
       </h2>
       <p class="mb-12 text-center text-base text-body">

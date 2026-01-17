@@ -283,13 +283,13 @@ const faqs = [
 
 <Layout title={title} description={description} metadata={metadata}>
   <!-- HERO SECTION -->
-  <section class="relative flex min-h-[680px] items-center overflow-hidden bg-secondary">
+  <section class="relative flex min-h-[680px] items-center overflow-hidden bg-secondary hero-gradient-animated">
     <!-- Gradient background -->
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light" aria-hidden="true"></div>
 
     <div class="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 py-16 md:flex-row md:items-center md:gap-16">
       <!-- Left Column: Logo, Headline, CTA -->
-      <div class="flex-1 space-y-6">
+      <div class="flex-1 space-y-6" data-animate="fade-in-up">
         <img
           src="/Lilos_Growth_Logo_Corrected.svg"
           alt="Lilos Growth Logo"
@@ -339,7 +339,7 @@ const faqs = [
       </div>
 
       <!-- Right Column: Lead Form -->
-      <div class="mx-auto max-w-md flex-1 md:mx-0">
+      <div class="mx-auto max-w-md flex-1 md:mx-0" data-animate="fade-in-up" data-delay="0.2">
         <LeadCaptureForm
           title="Free SEO Website Audit for Home Service Pros!"
           submitText="Get My Free Audit"
@@ -372,7 +372,7 @@ const faqs = [
   <!-- FULLY MANAGED LOCAL SEO SECTION -->
   <section class="border-t border-border-subtle bg-background-cream section-padding" id="included-services">
     <div class="mx-auto max-w-6xl px-4">
-      <div class="mb-12 text-center">
+      <div class="mb-12 text-center" data-animate="fade-in-up">
         <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
           Fully Managed Local SEO for Home Service Businesses
         </h2>
@@ -382,9 +382,11 @@ const faqs = [
         </p>
       </div>
 
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3" data-stagger-container data-stagger-delay="0.1">
         {services.map((service) => (
-          <ServiceCard {...service} />
+          <div data-stagger-item data-animate="fade-in-up">
+            <ServiceCard {...service} />
+          </div>
         ))}
       </div>
     </div>
@@ -393,13 +395,13 @@ const faqs = [
   <!-- WHY CHOOSE US -->
   <section class="border-t border-border-subtle bg-surface-base section-padding">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-12 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
+      <h2 class="mb-12 text-center font-heading text-2xl font-bold text-heading md:text-3xl" data-animate="fade-in-up">
         Why Choose Lilos Growth for Your Home Service Business?
       </h2>
 
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3" data-stagger-container data-stagger-delay="0.1">
         {whyChooseUs.map((feature, index) => (
-          <article class={`card ${index % 2 === 0 ? 'bg-surface-base' : 'bg-background-cream'}`}>
+          <article class={`card ${index % 2 === 0 ? 'bg-surface-base' : 'bg-background-cream'}`} data-stagger-item data-animate="fade-in-up">
             <h3 class="mb-2 font-heading text-lg font-semibold text-heading">
               {feature.title}
             </h3>
@@ -415,7 +417,7 @@ const faqs = [
   <!-- OUR PROCESS -->
   <section class="border-t border-border-subtle bg-background-cream section-padding">
     <div class="mx-auto max-w-6xl px-4">
-      <div class="mb-12 text-center">
+      <div class="mb-12 text-center" data-animate="fade-in-up">
         <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
           Our Proven 4-Step Local SEO System
         </h2>
@@ -424,9 +426,11 @@ const faqs = [
         </p>
       </div>
 
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4" data-stagger-container data-stagger-delay="0.15">
         {processSteps.map((step) => (
-          <ProcessStep {...step} />
+          <div data-stagger-item data-animate="fade-in-up">
+            <ProcessStep {...step} />
+          </div>
         ))}
       </div>
     </div>
@@ -435,12 +439,14 @@ const faqs = [
   <!-- STATS SECTION -->
   <section aria-label="Key results" class="border-t border-border-subtle bg-surface-base section-padding">
     <div class="mx-auto max-w-6xl px-4">
-      <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-3" data-stagger-container data-stagger-delay="0.15">
         {stats.map((stat) => (
-          <StatCard 
+          <div data-stagger-item data-animate="scale-in">
+            <StatCard 
             label={stat.label} 
             value={stat.value}
-          />
+            />
+          </div>
         ))}
       </div>
     </div>
@@ -449,7 +455,7 @@ const faqs = [
   <!-- MAIN PRICING SECTION -->
   <section class="bg-white section-padding" id="pricing">
     <div class="mx-auto max-w-7xl px-4">
-      <div class="mb-12 text-center">
+      <div class="mb-12 text-center" data-animate="fade-in-up">
         <h2 class="mb-3 font-heading text-2xl font-bold text-heading md:text-3xl">
           Local SEO Plans & Pricing
         </h2>
@@ -458,9 +464,11 @@ const faqs = [
         </p>
       </div>
       
-      <div class="grid gap-8 md:grid-cols-3">
+      <div class="grid gap-8 md:grid-cols-3" data-stagger-container data-stagger-delay="0.15">
         {mainPricingPlans.map((plan) => (
-          <PricingCard {...plan} />
+          <div data-stagger-item data-animate="fade-in-up">
+            <PricingCard {...plan} />
+          </div>
         ))}
       </div>
     </div>
@@ -469,7 +477,7 @@ const faqs = [
   <!-- ADD-ON PRICING SECTION -->
   <section class="bg-surface-base section-padding">
     <div class="mx-auto max-w-7xl px-4">
-      <div class="mb-12 text-center">
+      <div class="mb-12 text-center" data-animate="fade-in-up">
         <h2 class="mb-3 font-heading text-2xl font-bold text-heading md:text-3xl">
           Add-On & One-Time Options
         </h2>
@@ -478,9 +486,11 @@ const faqs = [
         </p>
       </div>
       
-      <div class="grid gap-8 md:grid-cols-3">
+      <div class="grid gap-8 md:grid-cols-3" data-stagger-container data-stagger-delay="0.15">
         {addOnPlans.map((plan) => (
-          <PricingCard {...plan} />
+          <div data-stagger-item data-animate="fade-in-up">
+            <PricingCard {...plan} />
+          </div>
         ))}
       </div>
     </div>
@@ -489,13 +499,13 @@ const faqs = [
   <!-- FAQ SECTION -->
   <section class="bg-surface-base section-padding" id="faq">
     <div class="mx-auto max-w-4xl px-4">
-      <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
+      <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl" data-animate="fade-in-up">
         Frequently Asked Questions About Home Service Marketing
       </h2>
 
-      <div class="space-y-4">
+      <div class="space-y-4" data-stagger-container data-stagger-delay="0.1">
         {faqs.map((faq) => (
-          <details class="card group">
+          <details class="card group" data-stagger-item data-animate="fade-in-up">
             <summary class="flex cursor-pointer items-center justify-between font-semibold text-heading">
               {faq.question}
               <span class="ml-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background-subtle text-muted transition-colors group-open:bg-primary group-open:text-white">
