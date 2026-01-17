@@ -8,14 +8,16 @@
  * @component
  * @example
  * <Badge variant="primary">Featured</Badge>
- * <Badge variant="website" icon="tabler:device-desktop">Website</Badge>
+ * <Badge variant="primary" size="lg">Website</Badge>
  */
 
 import { Icon } from "astro-icon/components";
 
 export interface Props {
   /** Visual variant */
-  variant?: 'primary' | 'success' | 'info' | 'website' | 'gbp' | 'seo';
+  variant?: 'primary' | 'secondary' | 'success' | 'info' | 'accent';
+  /** Size variant */
+  size?: 'sm' | 'md' | 'lg';
   /** Icon name (from astro-icon) */
   icon?: string;
   /** Additional CSS classes */
@@ -24,27 +26,36 @@ export interface Props {
 
 const {
   variant = 'primary',
+  size = 'md',
   icon,
   class: className = '',
 } = Astro.props;
 
 const variantClasses = {
-  primary: 'badge-primary',
-  success: 'badge-success',
-  info: 'badge-info',
-  website: 'badge-website',
-  gbp: 'badge-gbp',
-  seo: 'badge-seo',
+  primary: 'bg-primary/10 text-primary border-primary/20',
+  secondary: 'bg-secondary/10 text-secondary border-secondary/20',
+  success: 'bg-green-50 text-green-700 border-green-200',
+  info: 'bg-blue-50 text-blue-700 border-blue-200',
+  accent: 'bg-accent/10 text-accent border-accent/20',
 };
 
+const sizeClasses = {
+  sm: 'px-2.5 py-1 text-xs',
+  md: 'px-3 py-1.5 text-sm',
+  lg: 'px-4 py-2 text-base',
+};
+
+const baseClasses = 'inline-flex items-center gap-1.5 rounded-full border font-heading font-semibold transition-all duration-200 hover:shadow-sm';
+
 const classes = [
-  'badge',
+  baseClasses,
   variantClasses[variant],
+  sizeClasses[size],
   className,
 ].filter(Boolean).join(' ');
 ---
 
 <span class={classes}>
-  {icon && <Icon name={icon} class="h-3 w-3" />}
+  {icon && <Icon name={icon} class="h-3.5 w-3.5" />}
   <slot />
 </span>

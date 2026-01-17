@@ -11,6 +11,7 @@
  *   title="GBP + Local SEO"
  *   subtitle="Steady Map Pack & organic gains"
  *   price="699"
+ *   period="mo"
  *   features={[...]}
  *   ctaText="Choose Plan"
  *   ctaHref="/packages"
@@ -20,15 +21,22 @@
 
 import Card from '../core/Card.astro';
 import Button from '../core/Button.astro';
+import Badge from '../core/Badge.astro';
 import { Icon } from 'astro-icon/components';
 
 export interface Props {
   /** Plan title */
   title: string;
-  /** Plan subtitle/description */
-  subtitle: string;
+  /** Plan subtitle/description (optional) */
+  subtitle?: string;
+  /** Short description (alternative to subtitle) */
+  description?: string;
   /** Monthly price (number only, no $ or /mo) */
   price: string;
+  /** Period text (e.g., "mo", "one-time") */
+  period?: string;
+  /** Badge text to show above title */
+  badge?: string;
   /** List of features */
   features: string[];
   /** CTA button text */
@@ -46,7 +54,10 @@ export interface Props {
 const {
   title,
   subtitle,
+  description,
   price,
+  period = "mo",
+  badge,
   features,
   ctaText,
   ctaHref,
@@ -54,57 +65,71 @@ const {
   footerNote,
   class: className = '',
 } = Astro.props;
+
+// Remove $ if it exists in the price string
+const cleanPrice = price.replace(/^\$/, '');
+const displayDescription = subtitle || description;
 ---
 
 <div class={`relative ${className}`}>
   {featured && (
     <div class="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-      <span class="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow-md">
+      <Badge variant="primary" size="sm" class="shadow-md">
         Most Popular
-      </span>
+      </Badge>
     </div>
   )}
   
   <Card 
     variant={featured ? "elevated" : "default"}
-    class={`h-full flex flex-col transition-all duration-300 hover:shadow-2xl ${featured ? 'border-2 border-primary shadow-xl scale-105' : 'border border-gray-200 hover:border-primary/30'}`}
+    class={`h-full flex flex-col transition-all duration-300 hover:shadow-2xl ${featured ? 'border-2 border-primary shadow-xl' : 'border border-gray-200 hover:border-primary/30'}`}
   >
-    <div class="mb-6">
-      <h3 class="font-heading text-2xl font-bold text-heading">
+    {badge && !featured && (
+      <div class="mb-3">
+        <Badge variant="secondary" size="sm">
+          {badge}
+        </Badge>
+      </div>
+    )}
+    
+    <div class="mb-4">
+      <h3 class="font-heading text-xl font-bold text-heading md:text-2xl">
         {title}
       </h3>
-      <p class="mt-1 text-sm text-body">
-        {subtitle}
-      </p>
+      {displayDescription && (
+        <p class="mt-1 text-sm text-body">
+          {displayDescription}
+        </p>
+      )}
     </div>
     
     <div class="mb-6">
       <div class="flex items-baseline gap-1">
-        <span class="font-heading text-5xl font-bold text-primary">${price}</span>
-        <span class="text-lg text-body">/mo</span>
+        <span class="font-heading text-3xl font-bold text-primary md:text-4xl">${cleanPrice}</span>
+        <span class="text-base text-body">/{period}</span>
       </div>
     </div>
     
-    <ul class="mb-8 flex-grow space-y-3">
+    <ul class="mb-6 flex-grow space-y-2.5">
       {features.map((feature) => (
-        <li class="flex items-start gap-2.5 text-sm text-body">
-          <Icon name="tabler:circle-filled" class="h-2 w-2 text-primary flex-shrink-0 mt-1.5" />
+        <li class="flex items-start gap-2 text-sm text-body">
+          <Icon name="tabler:circle-check-filled" class="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
           <span set:html={feature} />
         </li>
       ))}
     </ul>
     
     {footerNote && (
-      <p class="mb-6 text-xs text-body/70 italic">
+      <p class="mb-4 text-xs text-body/70 italic">
         {footerNote}
       </p>
     )}
     
-    <div class="mt-auto">
+    <div class="mt-auto border-t border-gray-100 pt-4">
       <Button 
         href={ctaHref}
         variant={featured ? "primary" : "outline"}
-        size="lg"
+        size="md"
         class="w-full"
       >
         {ctaText}
