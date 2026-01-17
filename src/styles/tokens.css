@@ -1,7 +1,11 @@
 /**
  * Design Tokens - Lilos Growth
  * Single source of truth for all design values
- * These tokens are used throughout the Tailwind configuration
+ * 
+ * Version: 2.0 - Professional Scale Refinement
+ * - Reduced typography scale by ~12% for better visual balance
+ * - Improved color contrast for accessibility
+ * - Optimized spacing and layout tokens
  */
 
 :root {
@@ -22,11 +26,12 @@
   --color-secondary-light: #2e4159;
   --color-secondary-dark: #18232e;
   
-  /* Semantic Colors - Improved contrast */
-  --color-heading: #1f2d3d;
-  --color-body: #374151;      /* Darker for better readability */
-  --color-muted: #6b7280;
-  --color-subtle: #9ca3af;
+  /* Semantic Colors - Professional contrast ratios */
+  --color-heading: #1f2d3d;        /* High contrast for headings */
+  --color-body: #374151;           /* Primary text color - WCAG AA compliant */
+  --color-body-light: #4b5563;     /* Slightly lighter body text */
+  --color-muted: #6b7280;          /* De-emphasized text - use sparingly */
+  --color-subtle: #9ca3af;         /* Very subtle text - decorative only */
   
   /* Surface Colors */
   --color-surface-base: #ffffff;
@@ -74,38 +79,38 @@
   --space-3xl: 4rem;       /* 64px */
   --space-4xl: 6rem;       /* 96px */
   
-  /* Component-specific spacing */
-  --space-card-padding: 2rem;
-  --space-card-padding-sm: 1.5rem;
-  --space-card-gap: 2rem;
-  --space-section-padding: 6rem;
-  --space-section-padding-sm: 4rem;
+  /* Component-specific spacing - Optimized for breathing room */
+  --space-card-padding: 2rem;              /* 32px - Main card padding */
+  --space-card-padding-sm: 1.5rem;         /* 24px - Compact card padding */
+  --space-card-gap: 1.5rem;                /* 24px - Gap between card elements */
+  --space-section-padding: 5rem;           /* 80px - Section vertical padding */
+  --space-section-padding-sm: 3rem;        /* 48px - Compact section padding */
   
   /* ============================================
-     TYPOGRAPHY TOKENS
+     TYPOGRAPHY TOKENS - Professional Scale
      ============================================ */
   
   /* Font Families */
   --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   
-  /* Font Sizes - Professional scale */
-  --text-xs: 0.6875rem;    /* 11px */
-  --text-sm: 0.8125rem;    /* 13px */
-  --text-base: 0.9375rem;  /* 15px */
-  --text-lg: 1.0625rem;    /* 17px */
-  --text-xl: 1.1875rem;    /* 19px */
-  --text-2xl: 1.375rem;    /* 22px */
-  --text-3xl: 1.75rem;     /* 28px */
-  --text-4xl: 2.125rem;    /* 34px */
-  --text-5xl: 2.75rem;     /* 44px */
-  --text-6xl: 3.5rem;      /* 56px */
+  /* Font Sizes - Reduced by ~12% for professional feel */
+  --text-xs: 0.625rem;     /* 10px - Minimal use only */
+  --text-sm: 0.75rem;      /* 12px - Small UI text, labels */
+  --text-base: 0.875rem;   /* 14px - Body text default */
+  --text-lg: 1rem;         /* 16px - Emphasized body text */
+  --text-xl: 1.125rem;     /* 18px - Large body text */
+  --text-2xl: 1.25rem;     /* 20px - Small headings */
+  --text-3xl: 1.5rem;      /* 24px - Section subheadings */
+  --text-4xl: 1.875rem;    /* 30px - Section headings */
+  --text-5xl: 2.25rem;     /* 36px - Page headings */
+  --text-6xl: 3rem;        /* 48px - Hero headings */
   
   /* Line Heights - Optimized for readability */
-  --leading-tight: 1.3;
-  --leading-snug: 1.45;
-  --leading-normal: 1.6;
-  --leading-relaxed: 1.75;
+  --leading-tight: 1.25;
+  --leading-snug: 1.4;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
   
   /* Font Weights */
   --font-normal: 400;
@@ -113,6 +118,12 @@
   --font-semibold: 600;
   --font-bold: 700;
   --font-extrabold: 800;
+  
+  /* Letter Spacing */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
   
   /* ============================================
      BORDER RADIUS TOKENS
@@ -127,7 +138,7 @@
   --radius-full: 9999px;
   
   /* Component-specific radius */
-  --radius-card: 1.5rem;
+  --radius-card: 1rem;          /* 16px - Reduced for more professional feel */
   --radius-button: 9999px;
   --radius-input: 0.5rem;
   --radius-badge: 9999px;
@@ -143,13 +154,13 @@
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   
-  /* Card-specific shadows for better visual hierarchy */
-  --shadow-card: 0 2px 8px rgba(31, 45, 61, 0.08), 0 1px 2px rgba(31, 45, 61, 0.04);
-  --shadow-card-hover: 0 12px 24px rgba(31, 45, 61, 0.12), 0 4px 8px rgba(31, 45, 61, 0.06);
+  /* Card-specific shadows - Subtle but professional */
+  --shadow-card: 0 2px 8px rgba(31, 45, 61, 0.06), 0 1px 2px rgba(31, 45, 61, 0.03);
+  --shadow-card-hover: 0 8px 16px rgba(31, 45, 61, 0.1), 0 3px 6px rgba(31, 45, 61, 0.05);
   
   /* Colored shadows */
-  --shadow-primary: 0 10px 40px -10px rgba(245, 107, 42, 0.2);
-  --shadow-primary-lg: 0 20px 50px -10px rgba(245, 107, 42, 0.3);
+  --shadow-primary: 0 10px 40px -10px rgba(245, 107, 42, 0.15);
+  --shadow-primary-lg: 0 20px 50px -10px rgba(245, 107, 42, 0.25);
   
   /* ============================================
      TRANSITION TOKENS
@@ -173,15 +184,15 @@
   --z-tooltip: 70;
   
   /* ============================================
-     LAYOUT TOKENS
+     LAYOUT TOKENS - Professional Scale
      ============================================ */
   
-  /* Container widths - Reduced for better scale */
+  /* Container widths - Optimized for readability and professional feel */
   --container-sm: 36rem;   /* 576px */
   --container-md: 44rem;   /* 704px */
   --container-lg: 58rem;   /* 928px */
-  --container-xl: 72rem;   /* 1152px */
-  --container-2xl: 80rem;  /* 1280px */  
+  --container-xl: 68rem;   /* 1088px - Reduced from 1152px */
+  --container-2xl: 75rem;  /* 1200px - Reduced from 1280px */
   --container-padding: 1rem;
   --container-padding-lg: 1.5rem;
   
@@ -190,6 +201,23 @@
   --width-form: 28rem;
   --width-sidebar: 20rem;
 }
+
+/* ============================================
+   UTILITY CLASSES FOR CONSISTENT USAGE
+   ============================================ */
+
+/**
+ * Text Color Usage Guidelines:
+ * 
+ * .text-heading    - Page titles, section headings, important labels
+ * .text-body       - All body text, UI labels, card content (DEFAULT)
+ * .text-body-light - Secondary information, less important text
+ * .text-muted      - De-emphasized text, helper text (use sparingly)
+ * .text-subtle     - Decorative text only, borders, dividers
+ * 
+ * IMPORTANT: Never use .text-muted or .text-subtle for critical information
+ * or small text (< 14px). Always ensure WCAG AA contrast compliance.
+ */
 
 /* ============================================
    DARK MODE TOKENS (Future-proofing)
@@ -203,4 +231,23 @@
 
 .dark {
   /* Class-based dark mode overrides */
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  :root {
+    /* Slightly larger text on mobile for better readability */
+    --text-base: 0.9375rem;  /* 15px on mobile */
+    --text-lg: 1.0625rem;    /* 17px on mobile */
+    
+    /* Reduced section padding on mobile */
+    --space-section-padding: 3rem;     /* 48px on mobile */
+    --space-section-padding-sm: 2rem;  /* 32px on mobile */
+    
+    /* Reduced card padding on mobile */
+    --space-card-padding: 1.5rem;      /* 24px on mobile */
+  }
 }

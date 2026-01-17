@@ -36,6 +36,7 @@ export default {
         // Semantic colors
         heading: "var(--color-heading)",
         body: "var(--color-body)",
+        "body-light": "var(--color-body-light)",
         muted: "var(--color-muted)",
         subtle: "var(--color-subtle)",
         
