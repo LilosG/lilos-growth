@@ -1,0 +1,114 @@
+---
+/**
+ * Pricing Card Component
+ * 
+ * Displays pricing tiers with features and CTA buttons.
+ * Supports highlighting the most popular option.
+ * 
+ * @component
+ * @example
+ * <PricingCard
+ *   title="GBP + Local SEO"
+ *   subtitle="Steady Map Pack & organic gains"
+ *   price="699"
+ *   features={[...]}
+ *   ctaText="Choose Plan"
+ *   ctaHref="/packages"
+ *   featured={true}
+ * />
+ */
+
+import Card from '../core/Card.astro';
+import Button from '../core/Button.astro';
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  /** Plan title */
+  title: string;
+  /** Plan subtitle/description */
+  subtitle: string;
+  /** Monthly price (number only, no $ or /mo) */
+  price: string;
+  /** List of features */
+  features: string[];
+  /** CTA button text */
+  ctaText: string;
+  /** CTA button link */
+  ctaHref: string;
+  /** Whether this is the featured/popular plan */
+  featured?: boolean;
+  /** Optional footer note */
+  footerNote?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  title,
+  subtitle,
+  price,
+  features,
+  ctaText,
+  ctaHref,
+  featured = false,
+  footerNote,
+  class: className = '',
+} = Astro.props;
+---
+
+<div class={`relative ${className}`}>
+  {featured && (
+    <div class="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+      <span class="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow-md">
+        Most Popular
+      </span>
+    </div>
+  )}
+  
+  <Card 
+    variant={featured ? "elevated" : "default"}
+    class={`h-full flex flex-col ${featured ? 'border-2 border-primary shadow-xl' : 'border border-gray-200'}`}
+  >
+    <div class="mb-6">
+      <h3 class="font-heading text-2xl font-bold text-heading">
+        {title}
+      </h3>
+      <p class="mt-1 text-sm text-body">
+        {subtitle}
+      </p>
+    </div>
+    
+    <div class="mb-6">
+      <div class="flex items-baseline gap-1">
+        <span class="font-heading text-5xl font-bold text-primary">${price}</span>
+        <span class="text-lg text-body">/mo</span>
+      </div>
+    </div>
+    
+    <ul class="mb-8 flex-grow space-y-3">
+      {features.map((feature) => (
+        <li class="flex items-start gap-2.5 text-sm text-body">
+          <Icon name="tabler:circle-filled" class="h-2 w-2 text-primary flex-shrink-0 mt-1.5" />
+          <span set:html={feature} />
+        </li>
+      ))}
+    </ul>
+    
+    {footerNote && (
+      <p class="mb-6 text-xs text-body/70 italic">
+        {footerNote}
+      </p>
+    )}
+    
+    <div class="mt-auto">
+      <Button 
+        href={ctaHref}
+        variant={featured ? "primary" : "outline"}
+        size="lg"
+        class="w-full"
+      >
+        {ctaText}
+      </Button>
+    </div>
+  </Card>
+</div>

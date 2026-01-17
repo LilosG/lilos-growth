@@ -13,6 +13,7 @@ import ProcessStep from "~/components/composed/ProcessStep.astro";
 import StatCard from "~/components/composed/StatCard.astro";
 import LeadCaptureForm from "~/components/composed/LeadCaptureForm.astro";
 import GuaranteeBadge from "~/components/composed/GuaranteeBadge.astro";
+import PricingCard from "~/components/composed/PricingCard.astro";
 
 export const title = "Local SEO & Websites for Home Service Pros";
 export const description =
@@ -152,6 +153,103 @@ const stats = [
 const industries = [
   "Plumbers", "HVAC", "Electricians", "Roofers", 
   "Cleaning", "Pest Control", "Landscaping", "Other Trades"
+];
+
+// Pricing data
+const mainPricingPlans = [
+  {
+    title: "GBP",
+    subtitle: "Consistent Google Business Profile presence",
+    price: "299",
+    ctaText: "Get Started",
+    ctaHref: "/packages",
+    features: [
+      "<strong>Profile optimization & upkeep</strong> (N/A fields, services, products, hours)",
+      "<strong>Categories tuned</strong> for intent & relevance",
+      "<strong>Weekly posts</strong> (offers, FAQs, highlights) — no rollovers",
+      "<strong>Fresh photos</strong> with EXIF/alt optimized for geo & keywords",
+      "<strong>Review replies</strong> + simple request prompts",
+      "<strong>Monthly performance report</strong> with next steps"
+    ]
+  },
+  {
+    title: "GBP + Local SEO",
+    subtitle: "Steady Map Pack & organic gains",
+    price: "699",
+    ctaText: "Choose Plan",
+    ctaHref: "/packages",
+    featured: true,
+    features: [
+      "<strong>Everything in GBP</strong>, plus:",
+      "<strong>On-site fixes</strong> (titles, metas, H1-H2, internal links, basic schema)",
+      "<strong>3–5 optimized pages</strong> per month (service or location)",
+      "<strong>Citation creation/cleanup</strong> & core listings",
+      "<strong>Local rank tracking</strong> + quarterly competitor snapshot",
+      "<strong>Monthly report</strong> + 30-min strategy call"
+    ],
+    footerNote: "Workload scales with site size & baseline quality; no rollovers."
+  },
+  {
+    title: "GBP + Local SEO Growth",
+    subtitle: "Faster traction via volume",
+    price: "1,199",
+    ctaText: "Schedule a Call",
+    ctaHref: "/contact",
+    features: [
+      "<strong>Everything in GBP + Local SEO</strong>, plus:",
+      "<strong>2+ services optimized</strong> per month (pages & posts)",
+      "<strong>2–4 local backlinks</strong> per month (associations, partners, mentions)",
+      "<strong>Ongoing citations</strong> at scale & crawl priority",
+      "<strong>Expanded content volume</strong> (pages/blogs as needed)",
+      "<strong>Monthly report</strong> + 45-min strategy call"
+    ],
+    footerNote: "Content/link budgets are capped to maintain quality; unused work does not roll over."
+  }
+];
+
+const addOnPlans = [
+  {
+    title: "Website-as-a-Service",
+    subtitle: "Modern, conversion-ready site + support",
+    price: "199",
+    ctaText: "See WaaS Details",
+    ctaHref: "/services/web-design",
+    features: [
+      "<strong>Mobile-first site</strong> with SEO baked in",
+      "<strong>Secure hosting & monitoring</strong>",
+      "<strong>Unlimited minor edits</strong> via support tickets",
+      "<strong>Analytics & lead tracking</strong> set up",
+      "<strong>Month-to-month support</strong> — no long contracts"
+    ]
+  },
+  {
+    title: "Local SEO — Essentials",
+    subtitle: "Single-location growth plan",
+    price: "599",
+    ctaText: "Start Local SEO",
+    ctaHref: "/packages",
+    features: [
+      "<strong>Site & on-page optimization</strong> (titles, metas, H1-H2, CWV, schema)",
+      "<strong>Keyword research & tracking</strong> with quarterly priorities",
+      "<strong>Service/location content</strong> & internal-linking scaffold",
+      "<strong>Citation cleanup</strong> & foundational listings",
+      "<strong>Monthly report</strong> + action checklist"
+    ]
+  },
+  {
+    title: "Local SEO — Growth",
+    subtitle: "Higher-volume monthly execution",
+    price: "999",
+    ctaText: "Choose Growth",
+    ctaHref: "/packages",
+    features: [
+      "<strong>Everything in Essentials</strong>, plus:",
+      "<strong>More pages & optimizations</strong> each month",
+      "<strong>Expanded citations & link acquisition</strong>",
+      "<strong>Quarterly competitor review</strong> & heatmap snapshot",
+      "<strong>Monthly report</strong> + strategy call"
+    ]
+  }
 ];
 
 // FAQ data
@@ -343,6 +441,46 @@ const faqs = [
             label={stat.label} 
             value={stat.value}
           />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN PRICING SECTION -->
+  <section class="bg-white section-padding" id="pricing">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="mb-12 text-center">
+        <h2 class="mb-3 font-heading text-3xl font-bold text-heading md:text-4xl">
+          Local SEO Plans & Pricing
+        </h2>
+        <p class="text-lg text-body">
+          Month-to-month. No setup fees. Transparent deliverables. <strong>No rollovers.</strong>
+        </p>
+      </div>
+      
+      <div class="grid gap-8 md:grid-cols-3">
+        {mainPricingPlans.map((plan) => (
+          <PricingCard {...plan} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ADD-ON PRICING SECTION -->
+  <section class="bg-surface-base section-padding">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="mb-12 text-center">
+        <h2 class="mb-3 font-heading text-3xl font-bold text-heading md:text-4xl">
+          Add-On & One-Time Options
+        </h2>
+        <p class="text-lg text-body">
+          Bundle with any plan or purchase separately.
+        </p>
+      </div>
+      
+      <div class="grid gap-8 md:grid-cols-3">
+        {addOnPlans.map((plan) => (
+          <PricingCard {...plan} />
         ))}
       </div>
     </div>
