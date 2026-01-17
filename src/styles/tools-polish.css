@@ -15,8 +15,28 @@
 }
 
 .tool-card-icon {
-  @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-xl;
+  @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all duration-300;
   background-color: rgba(var(--color-primary-rgb), 0.1);
+}
+
+.tool-card:hover .tool-card-icon {
+  @apply scale-110 shadow-md;
+}
+
+.tool-card-icon--green {
+  @apply bg-gradient-to-br from-green-50 to-green-100 text-green-600;
+}
+
+.tool-card-icon--blue {
+  @apply bg-gradient-to-br from-blue-50 to-blue-100 text-blue-600;
+}
+
+.tool-card-icon--purple {
+  @apply bg-gradient-to-br from-purple-50 to-purple-100 text-purple-600;
+}
+
+.tool-card-icon--orange {
+  @apply bg-gradient-to-br from-orange-50 to-orange-100 text-orange-600;
 }
 
 .tool-card-title {

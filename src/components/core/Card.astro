@@ -52,7 +52,8 @@ const sizeClasses = {
 
 const baseClass = variantClasses[variant];
 const sizeClass = sizeClasses[size];
-const combinedClasses = [baseClass, sizeClass, className].filter(Boolean).join(' ');
+const groupClass = variant === 'interactive' ? 'group' : '';
+const combinedClasses = [baseClass, sizeClass, groupClass, className].filter(Boolean).join(' ');
 
 // If href is provided, wrap in link
 const isLink = !!href;
