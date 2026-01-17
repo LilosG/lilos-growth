@@ -75,6 +75,48 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
+   CARD COMPONENT STYLES
+   Design system card variants with hover effects
+   ============================================ */
+@layer components {
+  .card {
+    @apply rounded-card bg-surface-base p-8;
+  }
+  
+  .card-elevated {
+    @apply rounded-card bg-surface-base p-8 transition-all duration-300;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .card-elevated:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+  
+  .card-interactive {
+    @apply rounded-card bg-surface-base p-8 cursor-pointer transition-all duration-300;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .card-interactive:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-4px);
+  }
+  
+  .card-outlined {
+    @apply rounded-card bg-surface-base p-8 border-2 border-border-base transition-all duration-300;
+  }
+  
+  .card-outlined:hover {
+    @apply border-primary;
+  }
+  
+  .card-sm {
+    @apply p-6;
+  }
+}
+
+/* ============================================
    CTA TRACKING STYLES
    Automatically style elements with data-evt attribute
    ============================================ */
