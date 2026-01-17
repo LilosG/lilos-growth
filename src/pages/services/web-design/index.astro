@@ -1,554 +1,373 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
+import Button from "~/components/core/Button.astro";
+import Badge from "~/components/core/Badge.astro";
+import Card from "~/components/core/Card.astro";
+import PricingCard from "~/components/composed/PricingCard.astro";
+import FeatureCard from "~/components/composed/FeatureCard.astro";
+import { Icon } from "astro-icon/components";
 
 export const title = "Website Design & Development for Service Businesses";
 export const description =
   "Modern, mobile-optimized websites that convert. One-time website builds for home-service companies — fast launches, SEO-ready structure, and conversion-first design.";
+
+const features = [
+  "Mobile-Responsive Design",
+  "On-Brand Copy & CTAs",
+  "SEO-Friendly Architecture",
+  "Titles, Metas & Headings",
+  "Schema Markup",
+  "Lead Forms / Click-to-Call",
+  "Analytics & Tracking Setup",
+];
+
+const trustReasons = [
+  {
+    icon: "tabler:target",
+    title: "Built for Real-World Leads",
+    description: "Clear calls-to-action, trust elements, and fast paths to call or book.",
+  },
+  {
+    icon: "tabler:seo",
+    title: "SEO-Ready Structure",
+    description: "Titles, headings, internal links, and schema done right from day one.",
+  },
+  {
+    icon: "tabler:clock-bolt",
+    title: "Fast Turnarounds",
+    description: "Tight timelines without cutting corners.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Do I own the website?",
+    answer: "Yes. These are one-time projects — you fully own the finished site.",
+  },
+  {
+    question: "Is hosting included?",
+    answer: "Hosting/ongoing updates are available through our Website-as-a-Service starting at <strong>$199/mo</strong>.",
+  },
+  {
+    question: "How quickly can my site be live?",
+    answer: "Launch Lite: 3–5 business days; Starter: 5–7 business days; Standard: 10–14 business days (content readiness affects timelines).",
+  },
+  {
+    question: "Can you help with SEO after launch?",
+    answer: "Absolutely — pair your site with our Local SEO plans for steady growth.",
+  },
+];
 ---
 
 <Layout {title} {description}>
   <!-- HERO -->
   <section
-    class="relative flex min-h-[440px] flex-col items-center justify-center overflow-hidden bg-secondary pb-20 pt-16"
+    class="relative flex min-h-[440px] flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-16 pt-12"
   >
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light">
-    </div>
-
     <div
-      class="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-7 px-4 text-center"
+      class="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-4 px-4 text-center"
     >
       <h1
-        class="font-heading text-4xl font-extrabold leading-snug tracking-tight text-white md:text-5xl"
+        class="font-heading text-3xl font-extrabold leading-tight tracking-tight text-white md:text-4xl lg:text-5xl"
       >
         Website Design &amp; Development
       </h1>
       <span
-        class="mt-1 block text-xl font-semibold uppercase tracking-wider text-primary md:text-2xl"
+        class="block text-lg font-semibold uppercase tracking-wider text-accent md:text-xl"
       >
         Built for Home-Service Pros
       </span>
-      <p class="max-w-2xl text-lg font-medium text-white/80 md:text-xl">
+      <p class="max-w-2xl text-base font-medium leading-relaxed text-white/90 md:text-lg">
         One-time website builds that launch fast and win more calls. Conversion-first, SEO-ready,
         and easy to update.
       </p>
 
-      <div class="flex flex-wrap justify-center gap-4">
-        <a
-          href="#packages"
-          class="inline-flex items-center rounded-2xl bg-primary px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-primary-dark"
-        >
+      <div class="flex flex-wrap justify-center gap-3">
+        <Button href="#packages" variant="primary" size="lg">
           See Packages
-          <svg
-            class="ml-2 h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            viewBox="0 0 24 24"
-          >
-            <path d="M5 12h14M13 18l6-6-6-6"></path>
-          </svg>
-        </a>
-        <a
-          href="#faq"
-          class="inline-flex items-center rounded-2xl bg-secondary px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary-hover"
-        >
+          <Icon name="tabler:arrow-right" class="ml-2 h-4 w-4" slot="icon-right" />
+        </Button>
+        <Button href="#faq" variant="secondary" size="lg">
           FAQ
-          <svg
-            class="ml-2 h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            viewBox="0 0 24 24"
-          >
-            <path d="M5 12h14M13 18l6-6-6-6"></path>
-          </svg>
-        </a>
+          <Icon name="tabler:arrow-right" class="ml-2 h-4 w-4" slot="icon-right" />
+        </Button>
       </div>
     </div>
   </section>
 
-  <!-- WHAT’S INCLUDED (high-value, non-restrictive) -->
-  <section class="border-t border-gray-100 bg-cream py-16">
+  <!-- WHAT'S INCLUDED -->
+  <section class="border-t border-gray-100 bg-cream py-12">
     <div class="mx-auto max-w-5xl px-4 text-center">
-      <h2 class="mb-5 font-heading text-3xl font-bold text-heading md:text-4xl">What You Get</h2>
-      <p class="mb-6 text-lg text-body">
+      <h2 class="mb-3 font-heading text-2xl font-bold text-heading md:text-3xl">What You Get</h2>
+      <p class="mb-6 text-base text-body md:text-lg">
         A conversion-ready site with clean structure, local SEO fundamentals, and everything needed
         for a strong launch.
       </p>
 
       <div class="flex flex-wrap justify-center gap-3">
-        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
-          >Mobile-Responsive Design</span
-        >
-        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
-          >On-Brand Copy &amp; CTAs</span
-        >
-        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
-          >SEO-Friendly Architecture</span
-        >
-        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
-          >Titles, Metas &amp; Headings</span
-        >
-        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
-          >Schema Markup</span
-        >
-        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
-          >Lead Forms / Click-to-Call</span
-        >
-        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
-          >Analytics &amp; Tracking Setup</span
-        >
+        {features.map((feature) => (
+          <Badge variant="primary" size="lg">{feature}</Badge>
+        ))}
       </div>
 
-      <p class="mt-3 text-sm text-body/70">
+      <p class="mt-4 text-sm text-body/70">
         Need ongoing hosting/updates? See <a
           href="/packages#packages"
-          class="text-primary underline hover:text-primary">Website-as-a-Service</a
+          class="text-primary underline hover:text-primary-dark">Website-as-a-Service</a
         >.
       </p>
     </div>
   </section>
 
-  <!-- WAA S PRICING (TOP ROW) — Match homepage pricing card formatting -->
-  <section id="waas" class="border-t border-gray-100 bg-bluelight py-20">
+  <!-- WAAS PRICING -->
+  <section id="waas" class="border-t border-gray-100 bg-white py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-2 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
+      <h2 class="mb-3 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         Website-as-a-Service Plans
       </h2>
-      <p class="mb-12 text-center text-lg font-medium text-body">
+      <p class="mb-10 text-center text-base text-body md:text-lg">
         Modern, conversion-ready website + support. Month-to-month. No long contracts.
       </p>
 
-      <div class="grid auto-rows-fr grid-cols-1 gap-8 md:grid-cols-3">
-        <!-- $199/mo -->
-        <article
-          class="relative flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow-xl"
-        >
-          <header>
-            <h3 class="font-heading text-xl font-bold text-heading">WaaS — Starter</h3>
-            <p class="text-body">Modern, conversion-ready site + support</p>
-            <div class="mt-3 text-4xl font-extrabold text-primary">
-              $199<span class="ml-1 text-base font-semibold text-body">/mo</span>
-            </div>
-          </header>
-          <ul class="mt-5 space-y-3 text-[15px] text-body">
-            <li class="flex items-start">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span><span><strong>Mobile-first site</strong> with SEO baked in</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span><span><strong>Secure hosting &amp; monitoring</strong></span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span><span><strong>Unlimited minor edits</strong> via support tickets</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span><span><strong>Analytics &amp; lead tracking</strong> set up</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span><span><strong>Month-to-month support</strong> — no long contracts</span>
-            </li>
-          </ul>
-          <div class="mt-8">
-            <a
-              href="/packages#packages"
-              class="block w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
-            >
-              Choose $199 Plan
-            </a>
-          </div>
-        </article>
+      <div class="grid auto-rows-fr grid-cols-1 gap-6 md:grid-cols-3">
+        <!-- WaaS Starter -->
+        <PricingCard
+          title="WaaS — Starter"
+          price="$199"
+          period="mo"
+          description="Modern, conversion-ready site + support"
+          features={[
+            "<strong>Mobile-first site</strong> with SEO baked in",
+            "<strong>Secure hosting & monitoring</strong>",
+            "<strong>Unlimited minor edits</strong> via support tickets",
+            "<strong>Analytics & lead tracking</strong> set up",
+            "<strong>Month-to-month support</strong> — no long contracts",
+          ]}
+          ctaText="Choose $199 Plan"
+          ctaHref="/packages#packages"
+        />
 
-        <!-- $299/mo (Most Popular) -->
-        <article
-          class="relative flex h-full flex-col rounded-3xl border-2 border-primary bg-white p-8 shadow-2xl"
-        >
-          <div
-            class="absolute -top-6 left-1/2 -translate-x-1/2 rounded-full bg-primary px-5 py-1 text-xs font-bold text-white shadow"
-          >
-            Most Popular
-          </div>
-          <header class="mt-2">
-            <h3 class="font-heading text-xl font-extrabold text-heading">WaaS — Growth</h3>
-            <p class="text-body">More pages, CRO elements, and priority support</p>
-            <div class="mt-3 text-4xl font-extrabold text-primary">
-              $299<span class="ml-1 text-base font-semibold text-body">/mo</span>
-            </div>
-          </header>
-          <ul class="mt-5 space-y-3 text-[15px] text-body">
-            <li class="flex items-start">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span><span><strong>Everything in Starter</strong>, plus</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span><span><strong>More pages &amp; optimizations</strong> monthly</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span><span
-                ><strong>Expanded citations &amp; link acquisition</strong> guidance</span
-              >
-            </li>
-            <li class="flex items-start">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span><span><strong>Quarterly competitor review</strong> &amp; snapshot</span>
-            </li>
-          </ul>
-          <div class="mt-8">
-            <a
-              href="/packages#packages"
-              class="block w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
-            >
-              Choose $299 Plan
-            </a>
-          </div>
-        </article>
+        <!-- WaaS Growth -->
+        <PricingCard
+          title="WaaS — Growth"
+          price="$299"
+          period="mo"
+          description="More pages, CRO elements, and priority support"
+          featured={true}
+          features={[
+            "<strong>Everything in Starter</strong>, plus",
+            "<strong>More pages & optimizations</strong> monthly",
+            "<strong>Expanded citations & link acquisition</strong> guidance",
+            "<strong>Quarterly competitor review</strong> & snapshot",
+          ]}
+          ctaText="Choose $299 Plan"
+          ctaHref="/packages#packages"
+        />
 
-        <!-- $399/mo -->
-        <article
-          class="relative flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow-xl"
-        >
-          <header>
-            <h3 class="font-heading text-xl font-bold text-heading">WaaS — Scale</h3>
-            <p class="text-body">Higher-volume monthly execution</p>
-            <div class="mt-3 text-4xl font-extrabold text-primary">
-              $399<span class="ml-1 text-base font-semibold text-body">/mo</span>
-            </div>
-          </header>
-          <ul class="mt-5 space-y-3 text-[15px] text-body">
-            <li class="flex items-start">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span><span><strong>Everything in Growth</strong>, plus</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span><span><strong>Ongoing citations</strong> at scale</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span><span><strong>Expanded content volume</strong> as needed</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span><span><strong>Monthly report</strong> + strategy call</span>
-            </li>
-          </ul>
-          <div class="mt-8">
-            <a
-              href="/packages#packages"
-              class="block w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
-            >
-              Choose $399 Plan
-            </a>
-          </div>
-        </article>
+        <!-- WaaS Scale -->
+        <PricingCard
+          title="WaaS — Scale"
+          price="$399"
+          period="mo"
+          description="Higher-volume monthly execution"
+          features={[
+            "<strong>Everything in Growth</strong>, plus",
+            "<strong>Ongoing citations</strong> at scale",
+            "<strong>Expanded content volume</strong> as needed",
+            "<strong>Monthly report</strong> + strategy call",
+          ]}
+          ctaText="Choose $399 Plan"
+          ctaHref="/packages#packages"
+        />
       </div>
     </div>
   </section>
 
-  <!-- ONE-TIME BUILDS (BOTTOM ROW) — Match homepage card style -->
-  <section id="one-time" class="border-t border-gray-100 bg-bluelight py-10">
+  <!-- ONE-TIME BUILDS -->
+  <section id="one-time" class="border-t border-gray-100 bg-cream py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-2 text-center font-heading text-3xl font-bold text-heading md:text-4xl">
+      <h2 class="mb-3 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         One-Time Website Packages
       </h2>
-      <p class="mb-10 text-center text-lg font-medium text-body">
+      <p class="mb-10 text-center text-base text-body md:text-lg">
         Own your site outright. Transparent scope, fast timelines, and SEO best practices from day
         one.
       </p>
 
-      <div class="grid auto-rows-fr grid-cols-1 gap-8 md:grid-cols-3">
+      <div class="grid auto-rows-fr grid-cols-1 gap-6 md:grid-cols-3">
         <!-- Starter $499 -->
-        <article
-          class="flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow-xl"
-        >
-          <header class="text-left">
-            <h3 class="font-heading text-xl font-bold text-heading">Starter</h3>
-            <div class="mt-1 text-3xl font-extrabold text-primary">$499</div>
+        <Card variant="elevated" class="flex h-full flex-col">
+          <div class="text-left">
+            <h3 class="font-heading text-lg font-bold text-heading md:text-xl">Starter</h3>
+            <div class="mt-2 text-2xl font-extrabold text-primary md:text-3xl">$499</div>
             <div class="mt-1 text-sm text-body">Approx. 10 pages</div>
-            <span
-              class="mt-3 inline-block rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-white"
-              >3–5 business-day launch</span
-            >
-          </header>
-          <ul class="mt-5 space-y-3 text-[15px] text-body">
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Home, 3 service pages, About, Contact, + essentials
+            <Badge variant="primary" size="sm" class="mt-3">3–5 business-day launch</Badge>
+          </div>
+          <ul class="mt-5 flex-1 space-y-2 text-sm text-body">
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Home, 3 service pages, About, Contact, + essentials</span>
             </li>
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Clean site structure with internal linking scaffold
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Clean site structure with internal linking scaffold</span>
             </li>
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Titles, metas, H1–H2 setup &amp; basic schema
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Titles, metas, H1–H2 setup & basic schema</span>
             </li>
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Lead capture (form + click-to-call)
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Lead capture (form + click-to-call)</span>
             </li>
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Analytics setup (GA4/GTM if provided)
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Analytics setup (GA4/GTM if provided)</span>
             </li>
           </ul>
-          <div class="mt-8">
-            <a
-              href="#contact"
-              class="block w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
-              >Get Started</a
-            >
+          <div class="mt-6 border-t border-gray-100 pt-4">
+            <Button href="#contact" variant="primary" size="md" class="w-full">
+              Get Started
+            </Button>
           </div>
-        </article>
+        </Card>
 
-        <!-- Starter $750 (Most Popular) -->
-        <article
-          class="relative flex h-full flex-col rounded-3xl border-2 border-primary bg-white p-8 shadow-2xl"
-        >
-          <div
-            class="absolute -top-6 left-1/2 -translate-x-1/2 rounded-full bg-primary px-6 py-1 text-xs font-bold text-white shadow"
-          >
+        <!-- Standard $750 -->
+        <Card variant="elevated" class="relative flex h-full flex-col border-2 border-primary">
+          <Badge variant="primary" size="sm" class="absolute -top-3 left-1/2 -translate-x-1/2 shadow-md">
             Most Popular
-          </div>
-          <header class="mt-2 text-left">
-            <h3 class="font-heading text-xl font-extrabold text-heading">Standard</h3>
-            <div class="mt-1 text-3xl font-extrabold text-primary">$750</div>
+          </Badge>
+          <div class="mt-2 text-left">
+            <h3 class="font-heading text-lg font-extrabold text-heading md:text-xl">Standard</h3>
+            <div class="mt-2 text-2xl font-extrabold text-primary md:text-3xl">$750</div>
             <div class="mt-1 text-sm text-body">Up to 15 pages</div>
-            <span
-              class="mt-3 inline-block rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-white"
-              >5–7 business-day launch</span
-            >
-          </header>
-          <ul class="mt-5 space-y-3 text-[15px] text-body">
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Everything in Launch Lite, plus capacity for more services/areas
+            <Badge variant="primary" size="sm" class="mt-3">5–7 business-day launch</Badge>
+          </div>
+          <ul class="mt-5 flex-1 space-y-2 text-sm text-body">
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Everything in Launch Lite, plus capacity for more services/areas</span>
             </li>
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Expanded internal linking &amp; conversion blocks (badges, FAQs, reviews)
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Expanded internal linking & conversion blocks (badges, FAQs, reviews)</span>
             </li>
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>SEO foundations: titles/metas/H1–H2 at scale
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>SEO foundations: titles/metas/H1–H2 at scale</span>
             </li>
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Blog setup (ready for publishing)
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Blog setup (ready for publishing)</span>
             </li>
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Stock image library (curated, royalty-free)
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Stock image library (curated, royalty-free)</span>
             </li>
           </ul>
-          <div class="mt-8">
-            <a
-              href="#contact"
-              class="block w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
-              >Get Started</a
-            >
+          <div class="mt-6 border-t border-gray-100 pt-4">
+            <Button href="#contact" variant="primary" size="md" class="w-full">
+              Get Started
+            </Button>
           </div>
-        </article>
+        </Card>
 
-        <!-- Standard $1,500 -->
-        <article
-          class="flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow-xl"
-        >
-          <header class="text-left">
-            <h3 class="font-heading text-xl font-bold text-heading">Growth Site</h3>
-            <div class="mt-1 text-3xl font-extrabold text-primary">$1,500</div>
+        <!-- Growth Site $1,500 -->
+        <Card variant="elevated" class="flex h-full flex-col">
+          <div class="text-left">
+            <h3 class="font-heading text-lg font-bold text-heading md:text-xl">Growth Site</h3>
+            <div class="mt-2 text-2xl font-extrabold text-primary md:text-3xl">$1,500</div>
             <div class="mt-1 text-sm text-body">Approx. 25 pages</div>
-            <span
-              class="mt-3 inline-block rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-white"
-              >10–14 business-day launch</span
-            >
-          </header>
-          <ul class="mt-5 space-y-3 text-[15px] text-body">
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Large buildout for services + multiple areas
+            <Badge variant="primary" size="sm" class="mt-3">10–14 business-day launch</Badge>
+          </div>
+          <ul class="mt-5 flex-1 space-y-2 text-sm text-body">
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Large buildout for services + multiple areas</span>
             </li>
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Enhanced schema (LocalBusiness + Services)
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Enhanced schema (LocalBusiness + Services)</span>
             </li>
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Advanced conversion UX (sticky CTAs, trust elements)
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Advanced conversion UX (sticky CTAs, trust elements)</span>
             </li>
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Performance pass (Core Web Vitals-minded)
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Performance pass (Core Web Vitals-minded)</span>
             </li>
-            <li class="flex">
-              <span class="mr-2 mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-primary"
-              ></span>Pre-launch QA &amp; handoff with update training
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span>Pre-launch QA & handoff with update training</span>
             </li>
           </ul>
-          <div class="mt-8">
-            <a
-              href="#contact"
-              class="block w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
-              >Get Started</a
-            >
+          <div class="mt-6 border-t border-gray-100 pt-4">
+            <Button href="#contact" variant="primary" size="md" class="w-full">
+              Get Started
+            </Button>
           </div>
-        </article>
+        </Card>
       </div>
     </div>
   </section>
 
   <!-- WHY CHOOSE US -->
-  <section class="border-t border-gray-100 bg-cream py-24" id="why">
+  <section class="border-t border-gray-100 bg-white py-16" id="why">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-8 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
+      <h2 class="mb-8 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         Why Home-Service Pros Choose Lilos Growth
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
       </h2>
 
-      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
-        <div
-          class="flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-8 shadow-lg"
-        >
-          <span class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10">
-            <svg
-              class="h-7 w-7 text-primary"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M3 12l6 6l12-12"></path>
-            </svg>
-          </span>
-          <h3 class="mb-1 text-center font-heading text-lg font-semibold text-heading">
-            Built for Real-World Leads
-          </h3>
-          <p class="text-center text-[15px] text-body">
-            Clear calls-to-action, trust elements, and fast paths to call or book.
-          </p>
-        </div>
-
-        <div
-          class="flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-8 shadow-lg"
-        >
-          <span class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10">
-            <svg
-              class="h-7 w-7 text-primary"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-            </svg>
-          </span>
-          <h3 class="mb-1 text-center font-heading text-lg font-semibold text-heading">
-            SEO-Ready Structure
-          </h3>
-          <p class="text-center text-[15px] text-body">
-            Titles, headings, internal links, and schema done right from day one.
-          </p>
-        </div>
-
-        <div
-          class="flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-8 shadow-lg"
-        >
-          <span class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10">
-            <svg
-              class="h-7 w-7 text-primary"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M4 7l8 8l8-8"></path>
-            </svg>
-          </span>
-          <h3 class="mb-1 text-center font-heading text-lg font-semibold text-heading">
-            Fast Turnarounds
-          </h3>
-          <p class="text-center text-[15px] text-body">Tight timelines without cutting corners.</p>
-        </div>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+        {trustReasons.map((reason) => (
+          <FeatureCard
+            icon={reason.icon}
+            title={reason.title}
+            description={reason.description}
+          />
+        ))}
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="border-t border-gray-100 bg-white py-20" id="faq">
+  <section class="border-t border-gray-100 bg-cream py-16" id="faq">
     <div class="mx-auto max-w-4xl px-4">
-      <h2 class="mb-8 text-center font-heading text-3xl font-bold text-heading md:text-4xl">
+      <h2 class="mb-8 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         Website Design &amp; Development: FAQs
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
       </h2>
 
-      <div class="space-y-6">
-        <div class="rounded-2xl border border-gray-100 bg-bluelight p-6 shadow">
-          <h3 class="mb-2 font-heading text-lg font-semibold text-heading">
-            Do I own the website?
-          </h3>
-          <p class="text-base text-body">
-            Yes. These are one-time projects — you fully own the finished site.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
-          <h3 class="mb-2 font-heading text-lg font-semibold text-heading">Is hosting included?</h3>
-          <p class="text-base text-body">
-            Hosting/ongoing updates are available through our Website-as-a-Service starting at <span
-              class="font-semibold">$199/mo</span
-            >.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
-          <h3 class="mb-2 font-heading text-lg font-semibold text-heading">
-            How quickly can my site be live?
-          </h3>
-          <p class="text-base text-body">
-            Launch Lite: 3–5 business days; Starter: 5–7 business days; Standard: 10–14 business
-            days (content readiness affects timelines).
-          </p>
-        </div>
-
-        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
-          <h3 class="mb-2 font-heading text-lg font-semibold text-heading">
-            Can you help with SEO after launch?
-          </h3>
-          <p class="text-base text-body">
-            Absolutely — pair your site with our Local SEO plans for steady growth.
-          </p>
-        </div>
+      <div class="space-y-4">
+        {faqs.map((faq, index) => (
+          <Card variant={index % 2 === 0 ? "elevated" : "default"}>
+            <h3 class="mb-2 font-heading text-base font-semibold text-heading md:text-lg">
+              {faq.question}
+            </h3>
+            <p class="text-sm text-body md:text-base" set:html={faq.answer} />
+          </Card>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- FINAL CTA -->
-  <section class="bg-primary py-12">
+  <section class="bg-gradient-to-br from-primary to-primary-dark py-12">
     <div class="mx-auto max-w-3xl px-4 text-center">
-      <h2 class="mb-4 font-heading text-3xl font-extrabold text-white">
+      <h2 class="mb-3 font-heading text-2xl font-extrabold text-white md:text-3xl">
         Ready to Launch a Site That Converts?
       </h2>
-      <p class="mb-7 font-body text-lg text-white/80">
-        Book a quick call. We’ll map your pages, timeline, and next steps.
+      <p class="mb-6 text-base text-white/90 md:text-lg">
+        Book a quick call. We'll map your pages, timeline, and next steps.
       </p>
-      <a
-        href="#contact"
-        class="inline-flex items-center rounded-2xl bg-white px-8 py-4 font-heading text-lg font-semibold text-primary shadow transition hover:bg-bluelight"
-        aria-label="Get Started — open contact form"
-      >
+      <Button href="#contact" variant="white" size="lg">
         Book My Free Website Plan
-      </a>
+      </Button>
     </div>
   </section>
 </Layout>
 
-<!-- JSON-LD (kept; aligned to page topic) -->
+<!-- JSON-LD -->
 <script type="application/ld+json" is:inline>
   {
     "@context": "https://schema.org",

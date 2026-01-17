@@ -1,5 +1,10 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
+import Button from "~/components/core/Button.astro";
+import Card from "~/components/core/Card.astro";
+import ServiceOfferingCard from "~/components/composed/ServiceOfferingCard.astro";
+import ProcessStep from "~/components/composed/ProcessStep.astro";
+import { Icon } from "astro-icon/components";
 
 export const title = "Additional Marketing Services for Home Service Businesses";
 export const description =
@@ -8,501 +13,233 @@ export const breadcrumbs = [
   { name: "Services", item: "/services" },
   { name: "Additional Services", item: "/additional-services" },
 ];
+
+const services = [
+  {
+    icon: "tabler:map-pin",
+    title: "Citation Builder",
+    price: "$49",
+    period: "month",
+    badge: "Best for: New locations & ranking boosts",
+    description: "List your business on 250+ top directories to build consistent citations.",
+    features: [
+      "Clean, accurate NAP across 100+ directories",
+      "Consistent brand & category data",
+      "Improved local rankings over time",
+    ],
+  },
+  {
+    icon: "tabler:briefcase",
+    title: "Google Business Profile Setup",
+    price: "$399",
+    period: "one-time",
+    badge: "Best for: New businesses or GBP resets",
+    description: "Complete profile creation & verification — optimized and ready to attract new customers.",
+    features: [
+      "Full GBP creation & verification",
+      "Business info, logo & photos added",
+      "First Google Post & Q&A",
+      "Login & live profile link delivered",
+    ],
+  },
+  {
+    icon: "tabler:star",
+    title: "GBP 30-Day Optimization",
+    price: "$499",
+    period: "one-time",
+    badge: "Best for: Fast visibility & profile fixes",
+    description: "A focused 30-day sprint to clean up, optimize, and grow visibility in the Map Pack.",
+    features: [
+      "Full audit & expert optimizations",
+      "Keyword-rich services & categories",
+      "Weekly posts & photo updates",
+      "Review responses & reporting",
+    ],
+  },
+  {
+    icon: "tabler:chart-line",
+    title: "SEO Consulting & Website Tune-Up",
+    price: "$499",
+    period: "30 days",
+    badge: "Best for: Quick website wins & SEO clarity",
+    description: "A clear SEO roadmap plus a 30-day execution burst on the highest-impact fixes.",
+    features: [
+      "Website SEO audit & strategy call",
+      "Meta, headings, content & internal links",
+      "Tech & UX tune-ups as needed",
+      "Results report with next steps",
+    ],
+  },
+];
+
+const processSteps = [
+  {
+    number: 1,
+    title: "Pick Your Service",
+    description: "Choose any one-time service above — or ask for a custom solution.",
+  },
+  {
+    number: 2,
+    title: "Share Your Details",
+    description: "We'll collect essentials with a quick form so we can get started.",
+  },
+  {
+    number: 3,
+    title: "We Get to Work",
+    description: "Our experts implement the work quickly and keep you updated.",
+  },
+  {
+    number: 4,
+    title: "You Get Results",
+    description: "Receive a clear report, outcomes, and recommendations — done.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Can I order an additional service without a monthly package?",
+    answer: "<strong>Yes.</strong> Every service on this page is available individually — no contract or ongoing bundle required.",
+  },
+  {
+    question: "What if I need help choosing the right service?",
+    answer: 'Just <a href="#contact" class="text-primary underline hover:text-primary-dark">contact us</a> and we\'ll recommend the best fit for your goals and budget.',
+  },
+  {
+    question: "How fast will I get results?",
+    answer: "Most one-time services are completed in <strong>7–14 days</strong>. We'll keep you updated the whole way.",
+  },
+  {
+    question: "Can I combine these with a monthly package?",
+    answer: "Absolutely. Many monthly plans include these services for added savings — ask for details.",
+  },
+  {
+    question: "Is there support after the service is complete?",
+    answer: "Yes — you'll get a results report, actionable next steps, and 14 days of email support.",
+  },
+  {
+    question: "Can I talk to someone before ordering?",
+    answer: 'Definitely. <a href="#contact" class="text-primary underline hover:text-primary-dark">Reach out</a> for honest, pressure-free advice from a strategist.',
+  },
+];
 ---
 
 <Layout title={title} description={description} breadcrumbs={breadcrumbs}>
   <!-- HERO -->
-  <section class="relative overflow-hidden bg-secondary pb-20 pt-16">
-    <div class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light"></div>
+  <section class="relative overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-16 pt-12">
     <div class="relative z-10 mx-auto max-w-3xl px-4 text-center">
       <img
         src="/Lilos_Growth_Logo_Corrected.svg"
         alt="Lilos Growth Logo"
-        class="mx-auto mb-6 w-36 logo--halo"
+        class="mx-auto mb-6 w-32 logo--halo"
       />
       <h1
-        class="mb-1 font-heading text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl"
+        class="mb-2 font-heading text-3xl font-extrabold leading-tight tracking-tight text-white md:text-4xl lg:text-5xl"
       >
         Additional Services &amp; One-Time Projects
       </h1>
       <span
-        class="mb-2 mt-2 block font-heading text-xl font-semibold uppercase tracking-wider text-primary md:text-2xl"
+        class="mb-3 mt-2 block font-heading text-lg font-semibold uppercase tracking-wider text-accent md:text-xl"
         >No Contract • No Commitment • Just Results</span
       >
-      <p class="mx-auto mb-7 max-w-2xl text-lg text-white/80 md:text-xl">
+      <p class="mx-auto mb-6 max-w-2xl text-base leading-relaxed text-white/90 md:text-lg">
         Stand-alone services and quick projects you can order anytime. Pay only for what you need —
         no long-term commitments or fluff.
       </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a
-          href="#services"
-          class="inline-flex items-center rounded-2xl bg-primary px-8 py-4 text-lg font-semibold text-white shadow transition hover:bg-primary-dark"
-        >
+      <div class="flex flex-wrap justify-center gap-3">
+        <Button href="#services" variant="primary" size="lg">
           Explore Services
-          <svg
-            class="ml-2 h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14M13 18l6-6-6-6"></path>
-          </svg>
-        </a>
-        <a
-          href="#faq"
-          class="inline-flex items-center rounded-2xl bg-secondary px-8 py-4 text-lg font-semibold text-white shadow transition hover:bg-secondary-hover"
-        >
+          <Icon name="tabler:arrow-right" class="ml-2 h-4 w-4" slot="icon-right" />
+        </Button>
+        <Button href="#faq" variant="secondary" size="lg">
           FAQ
-          <svg
-            class="ml-2 h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14M13 18l6-6-6-6"></path>
-          </svg>
-        </a>
+          <Icon name="tabler:arrow-right" class="ml-2 h-4 w-4" slot="icon-right" />
+        </Button>
       </div>
     </div>
   </section>
 
   <!-- SERVICES GRID -->
-  <section id="services" class="border-t border-gray-100 bg-white py-24">
+  <section id="services" class="border-t border-gray-100 bg-white py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-8 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
+      <h2 class="mb-3 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         Order Additional Services Individually
-        <span class="mx-auto mt-2 block h-1 w-16 rounded bg-primary"></span>
       </h2>
-      <p class="mx-auto mb-12 max-w-3xl text-center text-lg text-body">
+      <p class="mx-auto mb-10 max-w-3xl text-center text-base text-body md:text-lg">
         Every option below is available as a one-time purchase — no monthly plan required.
       </p>
 
-      <!-- Equal-height cards w/ aligned CTAs -->
-      <div class="grid gap-8 md:grid-cols-2">
-        <!-- Citation Builder -->
-        <article
-          id="citation"
-          class="flex h-full scroll-mt-32 flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-md transition hover:shadow-lg"
-        >
-          <header class="mb-3 flex items-center gap-3">
-            <span
-              class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10"
-              aria-hidden="true"
-            >
-              <!-- pin -->
-              <svg
-                width="22"
-                height="22"
-                fill="none"
-                stroke="#f56b2a"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
-                ></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-            </span>
-            <h3 class="font-heading text-xl font-bold text-heading">Citation Builder</h3>
-          </header>
-
-          <div class="mb-2">
-            <span class="text-2xl font-extrabold text-heading">$49</span>
-            <span class="text-base font-medium text-body/70">/ month</span>
-          </div>
-          <p class="mb-2">
-            <span
-              class="inline-block rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary"
-            >
-              Best for: New locations &amp; ranking boosts
-            </span>
-          </p>
-
-          <p class="mb-3 text-body">
-            List your business on 250+ top directories to build consistent citations.
-          </p>
-          <ul class="mb-6 list-inside list-disc space-y-1 text-body">
-            <li>Clean, accurate NAP across 100+ directories</li>
-            <li>Consistent brand &amp; category data</li>
-            <li>Improved local rankings over time</li>
-          </ul>
-
-          <a
-            href="#contact"
-            class="mt-auto w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-bold text-white shadow transition hover:bg-[#c94c13]"
-            aria-label="Get Started — open contact form">Order Now</a
-          >
-        </article>
-
-        <!-- GBP Setup -->
-        <article
-          id="gbp-setup"
-          class="flex h-full scroll-mt-32 flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-md transition hover:shadow-lg"
-        >
-          <header class="mb-3 flex items-center gap-3">
-            <span
-              class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10"
-              aria-hidden="true"
-            >
-              <!-- briefcase -->
-              <svg
-                width="22"
-                height="22"
-                fill="none"
-                stroke="#f56b2a"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                viewBox="0 0 24 24"
-              >
-                <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path>
-                <rect width="20" height="14" x="2" y="6" rx="2"></rect>
-                <path d="M22 13a18.15 18.15 0 0 1-20 0"></path>
-              </svg>
-            </span>
-            <h3 class="font-heading text-xl font-bold text-heading">
-              Google Business Profile Setup
-            </h3>
-          </header>
-
-          <div class="mb-2">
-            <span class="text-2xl font-extrabold text-heading">$399</span>
-            <span class="text-base font-medium text-body/70">/ one-time</span>
-          </div>
-          <p class="mb-2">
-            <span
-              class="inline-block rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary"
-            >
-              Best for: New businesses or GBP resets
-            </span>
-          </p>
-
-          <p class="mb-3 text-body">
-            Complete profile creation &amp; verification — optimized and ready to attract new
-            customers.
-          </p>
-          <ul class="mb-6 list-inside list-disc space-y-1 text-body">
-            <li>Full GBP creation &amp; verification</li>
-            <li>Business info, logo &amp; photos added</li>
-            <li>First Google Post &amp; Q&amp;A</li>
-            <li>Login &amp; live profile link delivered</li>
-          </ul>
-
-          <a
-            href="#contact"
-            class="mt-auto w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-bold text-white shadow transition hover:bg-[#c94c13]"
-            aria-label="Get Started — open contact form">Order Now</a
-          >
-        </article>
-
-        <!-- GBP 30-Day Optimization -->
-        <article
-          id="gbp-30"
-          class="flex h-full scroll-mt-32 flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-md transition hover:shadow-lg"
-        >
-          <header class="mb-3 flex items-center gap-3">
-            <span
-              class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10"
-              aria-hidden="true"
-            >
-              <!-- star -->
-              <svg
-                width="22"
-                height="22"
-                fill="none"
-                stroke="#f56b2a"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="m12 3 2.31 4.68a2 2 0 0 0 1.6 1.15l5.17.76-3.74 3.64a2 2 0 0 0-.61 1.88l.88 5.14L12 17.88 6.39 20.25l.88-5.14a2 2 0 0 0-.61-1.88L2.9 9.59l5.17-.76A2 2 0 0 0 9.67 7.7L12 3z"
-                ></path>
-              </svg>
-            </span>
-            <h3 class="font-heading text-xl font-bold text-heading">GBP 30-Day Optimization</h3>
-          </header>
-
-          <div class="mb-2">
-            <span class="text-2xl font-extrabold text-heading">$499</span>
-            <span class="text-base font-medium text-body/70">/ one-time</span>
-          </div>
-          <p class="mb-2">
-            <span
-              class="inline-block rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary"
-            >
-              Best for: Fast visibility &amp; profile fixes
-            </span>
-          </p>
-
-          <p class="mb-3 text-body">
-            A focused 30-day sprint to clean up, optimize, and grow visibility in the Map Pack.
-          </p>
-          <ul class="mb-6 list-inside list-disc space-y-1 text-body">
-            <li>Full audit &amp; expert optimizations</li>
-            <li>Keyword-rich services &amp; categories</li>
-            <li>Weekly posts &amp; photo updates</li>
-            <li>Review responses &amp; reporting</li>
-          </ul>
-
-          <a
-            href="#contact"
-            class="mt-auto w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-bold text-white shadow transition hover:bg-[#c94c13]"
-            aria-label="Get Started — open contact form">Order Now</a
-          >
-        </article>
-
-        <!-- SEO Consulting & Website Tune-Up -->
-        <article
-          id="seo-tune"
-          class="flex h-full scroll-mt-32 flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-md transition hover:shadow-lg"
-        >
-          <header class="mb-3 flex items-center gap-3">
-            <span
-              class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10"
-              aria-hidden="true"
-            >
-              <!-- trending -->
-              <svg
-                width="22"
-                height="22"
-                fill="none"
-                stroke="#f56b2a"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 16v5M16 14v7M20 10v11M2 15l6.65-6.65a.5.5 0 0 1 .7 0l3.29 3.3a.5.5 0 0 0 .71 0L22 3"
-                ></path>
-              </svg>
-            </span>
-            <h3 class="font-heading text-xl font-bold text-heading">
-              SEO Consulting &amp; Website Tune-Up
-            </h3>
-          </header>
-
-          <div class="mb-2">
-            <span class="text-2xl font-extrabold text-heading">$499</span>
-            <span class="text-base font-medium text-body/70">/ 30 days</span>
-          </div>
-          <p class="mb-2">
-            <span
-              class="inline-block rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary"
-            >
-              Best for: Quick website wins &amp; SEO clarity
-            </span>
-          </p>
-
-          <p class="mb-3 text-body">
-            A clear SEO roadmap plus a 30-day execution burst on the highest-impact fixes.
-          </p>
-          <ul class="mb-6 list-inside list-disc space-y-1 text-body">
-            <li>Website SEO audit &amp; strategy call</li>
-            <li>Meta, headings, content &amp; internal links</li>
-            <li>Tech &amp; UX tune-ups as needed</li>
-            <li>Results report with next steps</li>
-          </ul>
-
-          <a
-            href="#contact"
-            class="mt-auto w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-bold text-white shadow transition hover:bg-[#c94c13]"
-            aria-label="Get Started — open contact form">Order Now</a
-          >
-        </article>
+      <div class="grid gap-6 md:grid-cols-2">
+        {services.map((service) => (
+          <ServiceOfferingCard
+            icon={service.icon}
+            title={service.title}
+            price={service.price}
+            period={service.period}
+            badge={service.badge}
+            description={service.description}
+            features={service.features}
+            ctaText="Order Now"
+            ctaHref="#contact"
+          />
+        ))}
       </div>
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="border-t border-gray-100 bg-cream py-24">
+  <section class="border-t border-gray-100 bg-cream py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-8 text-center font-heading text-3xl font-bold text-heading md:text-4xl">
+      <h2 class="mb-3 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         How Our Additional Services Work
       </h2>
-      <p class="mx-auto mb-12 max-w-3xl text-center text-lg text-body">
+      <p class="mx-auto mb-10 max-w-3xl text-center text-base text-body md:text-lg">
         Simple, fast, and transparent — no pushy sales calls, just a straightforward process.
       </p>
 
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
-        <div class="flex flex-col items-center rounded-2xl border bg-white p-8 shadow">
-          <span
-            class="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              fill="none"
-              stroke="#f56b2a"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-          </span>
-          <h3 class="mb-2 text-center font-heading font-bold">Pick Your Service</h3>
-          <p class="text-center text-base text-body">
-            Choose any one-time service above — or ask for a custom solution.
-          </p>
-        </div>
-
-        <div class="flex flex-col items-center rounded-2xl border bg-white p-8 shadow">
-          <span
-            class="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              fill="none"
-              stroke="#f56b2a"
-              stroke-width="2"
-            >
-              <circle cx="14" cy="14" r="10"></circle>
-            </svg>
-          </span>
-          <h3 class="mb-2 text-center font-heading font-bold">Share Your Details</h3>
-          <p class="text-center text-base text-body">
-            We’ll collect essentials with a quick form so we can get started.
-          </p>
-        </div>
-
-        <div class="flex flex-col items-center rounded-2xl border bg-white p-8 shadow">
-          <span
-            class="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              fill="none"
-              stroke="#f56b2a"
-              stroke-width="2"
-            >
-              <circle cx="14" cy="14" r="2"></circle>
-              <path d="M14 2v2M14 24v-2M2 14h2M24 14h-2"></path>
-            </svg>
-          </span>
-          <h3 class="mb-2 text-center font-heading font-bold">We Get to Work</h3>
-          <p class="text-center text-base text-body">
-            Our experts implement the work quickly and keep you updated.
-          </p>
-        </div>
-
-        <div class="flex flex-col items-center rounded-2xl border bg-white p-8 shadow">
-          <span
-            class="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              fill="none"
-              stroke="#f56b2a"
-              stroke-width="2"
-            >
-              <polyline points="6 12 12 18 18 12"></polyline>
-            </svg>
-          </span>
-          <h3 class="mb-2 text-center font-heading font-bold">You Get Results</h3>
-          <p class="text-center text-base text-body">
-            Receive a clear report, outcomes, and recommendations — done.
-          </p>
-        </div>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
+        {processSteps.map((step) => (
+          <ProcessStep
+            number={step.number}
+            title={step.title}
+            description={step.description}
+          />
+        ))}
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="border-t border-gray-100 bg-white py-20">
+  <section id="faq" class="border-t border-gray-100 bg-white py-16">
     <div class="mx-auto max-w-4xl px-4">
-      <h2
-        class="relative mb-8 text-center font-heading text-3xl font-bold text-heading md:text-4xl"
-      >
+      <h2 class="mb-8 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         Additional Services FAQ
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
       </h2>
 
-      <div class="space-y-7">
-        <div class="rounded-2xl border-l-4 border-primary bg-white p-6 shadow-md">
-          <h3 class="mb-2 font-heading text-lg font-bold text-primary">
-            Can I order an additional service without a monthly package?
-          </h3>
-          <p class="text-base text-body">
-            <span class="font-semibold text-primary">Yes.</span> Every service on this page is available
-            individually — no contract or ongoing bundle required.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border-l-4 border-primary bg-white p-6 shadow-md">
-          <h3 class="mb-2 font-heading text-lg font-bold text-primary">
-            What if I need help choosing the right service?
-          </h3>
-          <p class="text-base text-body">
-            Just <a
-              href="#contact"
-              class="text-primary underline hover:text-[#e25c15]"
-              aria-label="Get Started — open contact form">contact us</a
-            >
-            and we’ll recommend the best fit for your goals and budget.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border-l-4 border-primary bg-white p-6 shadow-md">
-          <h3 class="mb-2 font-heading text-lg font-bold text-primary">
-            How fast will I get results?
-          </h3>
-          <p class="text-base text-body">
-            Most one-time services are completed in
-            <span class="font-bold text-primary">7–14 days</span>. We’ll keep you updated the
-            whole way.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border-l-4 border-primary bg-white p-6 shadow-md">
-          <h3 class="mb-2 font-heading text-lg font-bold text-primary">
-            Can I combine these with a monthly package?
-          </h3>
-          <p class="text-base text-body">
-            Absolutely. Many monthly plans include these services for added savings — ask for
-            details.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border-l-4 border-primary bg-white p-6 shadow-md">
-          <h3 class="mb-2 font-heading text-lg font-bold text-primary">
-            Is there support after the service is complete?
-          </h3>
-          <p class="text-base text-body">
-            Yes — you’ll get a results report, actionable next steps, and 14 days of email support.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border-l-4 border-primary bg-white p-6 shadow-md">
-          <h3 class="mb-2 font-heading text-lg font-bold text-primary">
-            Can I talk to someone before ordering?
-          </h3>
-          <p class="text-base text-body">
-            Definitely. <a
-              href="#contact"
-              class="text-primary underline hover:text-[#e25c15]"
-              aria-label="Get Started — open contact form">Reach out</a
-            >
-            for honest, pressure-free advice from a strategist.
-          </p>
-        </div>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <Card variant="elevated" class="border-l-4 border-primary">
+            <h3 class="mb-2 font-heading text-base font-bold text-primary md:text-lg">
+              {faq.question}
+            </h3>
+            <p class="text-sm text-body md:text-base" set:html={faq.answer} />
+          </Card>
+        ))}
       </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-gradient-to-br from-primary to-primary-dark py-12">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+      <h2 class="mb-3 font-heading text-2xl font-extrabold text-white md:text-3xl">
+        Ready to Get Started?
+      </h2>
+      <p class="mb-6 text-base text-white/90 md:text-lg">
+        Order a service or talk to a strategist — no pressure, just honest advice.
+      </p>
+      <Button href="#contact" variant="white" size="lg">
+        Contact Us Today
+      </Button>
     </div>
   </section>
 </Layout>
