@@ -1,71 +1,126 @@
 ---
 // FILE: src/pages/packages.astro
 import Layout from "~/layouts/PageLayout.astro";
+import Button from "~/components/core/Button.astro";
+import Badge from "~/components/core/Badge.astro";
+import Card from "~/components/core/Card.astro";
+import PricingCard from "~/components/composed/PricingCard.astro";
+import ProcessStep from "~/components/composed/ProcessStep.astro";
+import FeatureCard from "~/components/composed/FeatureCard.astro";
+import { Icon } from "astro-icon/components";
 
 export const title = "Plans & Pricing | Websites, Local SEO & GBP";
 export const description =
   "Transparent, no-contract pricing for Google Business Profile management, Local SEO, websites, and Website-as-a-Service. Built for home-service pros, month-to-month, no surprises.";
+
+const processSteps = [
+  {
+    number: 1,
+    title: "Free Consultation",
+    description: "Tailored audit + growth plan—no obligation.",
+  },
+  {
+    number: 2,
+    title: "Custom Plan",
+    description: "Pick a package or we'll tailor one for goals & budget.",
+  },
+  {
+    number: 3,
+    title: "Launch & Optimize",
+    description: "We implement, improve, and report—end to end.",
+  },
+  {
+    number: 4,
+    title: "Grow & Report",
+    description: "Monthly reports + check-ins to keep momentum.",
+  },
+];
+
+const industries = [
+  "Plumbers",
+  "HVAC",
+  "Electricians",
+  "Roofers",
+  "Pest Control",
+  "Landscaping",
+  "Cleaning",
+  "Other Pros",
+];
+
+const whyChooseUs = [
+  {
+    icon: "tabler:tool",
+    title: "Home-Service Specialists",
+    description: "Niche focus = faster wins and clearer playbooks.",
+  },
+  {
+    icon: "tabler:calendar-check",
+    title: "Month-to-Month",
+    description: "No contracts. Stay only if we're delivering.",
+  },
+  {
+    icon: "tabler:checkbox",
+    title: "Done-for-You",
+    description: "We handle updates, optimizations, reviews & reporting.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Do I have to sign a long-term contract?",
+    answer: "Never. All plans are month-to-month.",
+  },
+  {
+    question: "Can I upgrade, downgrade, or cancel?",
+    answer: "Yes—switch anytime, cancel with no penalty.",
+  },
+  {
+    question: "Do you offer custom packages?",
+    answer: "Absolutely—tell us your goals and we'll tailor a plan.",
+  },
+];
 ---
 
 <Layout title={title} description={description}>
-  <!-- HERO (unchanged style) -->
+  <!-- HERO -->
   <section
-    class="relative flex min-h-[340px] items-center justify-center overflow-hidden bg-secondary pb-14 pt-14"
+    class="relative flex min-h-[340px] items-center justify-center overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-12 pt-12"
   >
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light">
-    </div>
     <div class="relative z-10 mx-auto w-full max-w-3xl px-4 text-center">
-      <h1 class="mb-4 font-heading text-5xl font-extrabold text-white drop-shadow md:text-6xl">
+      <h1 class="mb-4 font-heading text-3xl font-extrabold text-white drop-shadow md:text-5xl">
         Plans & Pricing
       </h1>
-      <p class="mb-3 font-body text-xl font-medium text-white/90">
+      <p class="mb-4 text-base font-medium text-white/90">
         Month-to-month. No setup fees. Built for home-service pros.
       </p>
-      <div class="mt-6 flex flex-wrap justify-center gap-4">
-        <a
-          href="#packages"
-          class="inline-flex items-center rounded-2xl bg-primary px-8 py-3 font-heading text-lg font-semibold text-white shadow transition hover:bg-primary-dark"
-          data-track
-          data-track-event="view_packages">View Packages</a
-        >
-        <a
-          href="#faq"
-          class="inline-flex items-center rounded-2xl bg-secondary px-8 py-3 font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary-hover"
-          data-track
-          data-track-event="view_faq">Frequently Asked Questions</a
-        >
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <Button href="#packages" variant="primary" size="lg" data-track data-track-event="view_packages">
+          View Packages
+        </Button>
+        <Button href="#faq" variant="secondary" size="lg" data-track data-track-event="view_faq">
+          Frequently Asked Questions
+        </Button>
       </div>
     </div>
   </section>
 
-  <!-- TRUST STRIP (unchanged sections) -->
-  <section class="border-t border-gray-100 bg-[#f7fafd] py-16">
+  <!-- TRUST STRIP -->
+  <section class="border-t border-gray-100 bg-cream py-12">
     <div class="mx-auto max-w-5xl px-4 text-center">
-      <h2 class="mb-5 font-heading text-3xl font-extrabold text-heading md:text-4xl">
+      <h2 class="mb-3 font-heading text-xl font-bold text-heading md:text-2xl">
         How Our Process Works
       </h2>
-      <p class="mx-auto mb-12 max-w-2xl font-body text-lg text-body">
+      <p class="mx-auto mb-10 max-w-2xl text-base text-body md:text-lg">
         Straightforward onboarding, clear deliverables, and transparent reporting.
       </p>
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
-        <div class="rounded-2xl bg-white p-6 shadow">
-          <h3 class="mb-2 font-heading text-lg font-bold text-heading">Free Consultation</h3>
-          <p class="font-body text-base text-body">Tailored audit + growth plan—no obligation.</p>
-        </div>
-        <div class="rounded-2xl bg-white p-6 shadow">
-          <h3 class="mb-2 font-heading text-lg font-bold text-heading">Custom Plan</h3>
-          <p class="font-body text-base text-body">
-            Pick a package or we’ll tailor one for goals & budget.
-          </p>
-        </div>
-        <div class="rounded-2xl bg-white p-6 shadow">
-          <h3 class="mb-2 font-heading text-lg font-bold text-heading">Launch & Optimize</h3>
-          <p class="font-body text-base text-body">We implement, improve, and report—end to end.</p>
-        </div>
-        <div class="rounded-2xl bg-white p-6 shadow">
-          <h3 class="mb-2 font-heading text-lg font-bold text-heading">Grow & Report</h3>
-          <p class="font-body text-base text-body">Monthly reports + check-ins to keep momentum.</p>
-        </div>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
+        {processSteps.map((step) => (
+          <ProcessStep
+            number={step.number}
+            title={step.title}
+            description={step.description}
+          />
+        ))}
       </div>
     </div>
   </section>
@@ -73,317 +128,244 @@ export const description =
   <!-- WHO WE HELP -->
   <section class="border-t border-gray-100 bg-white py-10">
     <div class="mx-auto max-w-4xl px-4 text-center">
-      <h2 class="mb-6 font-heading text-2xl font-extrabold text-heading md:text-3xl">
+      <h2 class="mb-6 font-heading text-xl font-bold text-heading md:text-2xl">
         Who We Help
       </h2>
       <div class="flex flex-wrap justify-center gap-3">
-        <span
-          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
-          >Plumbers</span
-        >
-        <span
-          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
-          >HVAC</span
-        >
-        <span
-          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
-          >Electricians</span
-        >
-        <span
-          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
-          >Roofers</span
-        >
-        <span
-          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
-          >Pest Control</span
-        >
-        <span
-          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
-          >Landscaping</span
-        >
-        <span
-          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
-          >Cleaning</span
-        >
-        <span
-          class="rounded-full bg-bluelight px-5 py-2 font-heading text-base font-medium text-heading shadow"
-          >Other Pros</span
-        >
+        {industries.map((industry) => (
+          <Badge variant="primary" size="md">{industry}</Badge>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- WHY CHOOSE US -->
-  <section class="border-t border-gray-100 bg-[#f7fafd] py-16">
+  <section class="border-t border-gray-100 bg-cream py-12">
     <div class="mx-auto max-w-6xl px-4 text-center">
-      <h2 class="mb-10 font-heading text-3xl font-extrabold text-heading md:text-4xl">
+      <h2 class="mb-8 font-heading text-xl font-bold text-heading md:text-2xl">
         Why Choose Lilos Growth?
       </h2>
-      <div class="mt-4 grid grid-cols-1 gap-8 md:grid-cols-3">
-        <div class="rounded-2xl border border-gray-100 bg-white p-10 shadow">
-          <h3 class="mb-3 font-heading text-xl font-bold text-heading">Home-Service Specialists</h3>
-          <p class="font-body text-base text-body">
-            Niche focus = faster wins and clearer playbooks.
-          </p>
-        </div>
-        <div class="rounded-2xl border border-gray-100 bg-white p-10 shadow">
-          <h3 class="mb-3 font-heading text-xl font-bold text-heading">Month-to-Month</h3>
-          <p class="font-body text-base text-body">No contracts. Stay only if we’re delivering.</p>
-        </div>
-        <div class="rounded-2xl border border-gray-100 bg-white p-10 shadow">
-          <h3 class="mb-3 font-heading text-xl font-bold text-heading">Done-for-You</h3>
-          <p class="font-body text-base text-body">
-            We handle updates, optimizations, reviews & reporting.
-          </p>
-        </div>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {whyChooseUs.map((reason) => (
+          <FeatureCard
+            icon={reason.icon}
+            title={reason.title}
+            description={reason.description}
+          />
+        ))}
       </div>
     </div>
   </section>
 
   <!-- PACKAGES -->
-  <section id="packages" class="border-t border-gray-100 bg-white py-20">
+  <section id="packages" class="border-t border-gray-100 bg-white py-16">
     <div class="mx-auto max-w-7xl space-y-16 px-4">
       <!-- GBP (Google Business Profile) -->
       <div>
-        <h2 class="mb-3 text-center font-heading text-3xl font-extrabold text-heading md:text-4xl">
+        <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
           Google Business Profile (GBP)
         </h2>
-        <p class="mx-auto mb-8 max-w-3xl text-center font-body text-lg text-body">
+        <p class="mx-auto mb-8 max-w-3xl text-center text-base text-body md:text-lg">
           Comprehensive management to win the Map Pack and convert more calls.
         </p>
-        <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
           <!-- Starter -->
-          <div
-            class="flex flex-col rounded-2xl border border-gray-100 bg-bluelight p-8 shadow-xl transition hover:shadow-2xl"
-          >
-            <span
-              class="mb-3 block rounded-full bg-primary/10 px-3 py-1 font-heading text-xs font-semibold uppercase tracking-wide text-primary"
-              >Best for getting established</span
-            >
-            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Starter</h3>
-            <div class="mb-4 font-heading text-4xl font-bold text-primary">
-              $199<span class="text-lg font-normal text-gray-500">/mo</span>
-            </div>
-            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
-              <li>Full GBP setup/optimization + category & services alignment</li>
-              <li>
-                Posts: <strong>6/mo</strong> &nbsp;•&nbsp; Photos: <strong>6/mo</strong> (EXIF-optimized
-                names, alt text)
-              </li>
-              <li>Review replies <strong>up to 30/mo</strong>; Q&amp;A weekly</li>
-              <li>Services/Products refresh <strong>quarterly</strong></li>
-              <li>Citation cleanup <strong>quarterly</strong>; monthly performance report</li>
-              <li><em>No rollovers.</em></li>
-            </ul>
-            <a
-              href="#contact"
-              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
-              >Get Started</a
-            >
-          </div>
+          <PricingCard
+            title="Starter"
+            price="$199"
+            period="mo"
+            badge="Best for getting established"
+            features={[
+              "Full GBP setup/optimization + category & services alignment",
+              "Posts: <strong>6/mo</strong> &nbsp;•&nbsp; Photos: <strong>6/mo</strong> (EXIF-optimized names, alt text)",
+              "Review replies <strong>up to 30/mo</strong>; Q&A weekly",
+              "Services/Products refresh <strong>quarterly</strong>",
+              "Citation cleanup <strong>quarterly</strong>; monthly performance report",
+              "<em>No rollovers.</em>",
+            ]}
+            ctaText="Get Started"
+            ctaHref="#contact"
+          />
+
           <!-- Growth -->
-          <div
-            class="relative flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-xl transition hover:shadow-2xl"
-          >
-            <div
-              class="absolute -top-5 left-1/2 -translate-x-1/2 rounded-2xl bg-primary px-4 py-1 font-heading text-xs font-bold text-white shadow"
-            >
-              Most Popular
-            </div>
-            <span
-              class="mb-3 block rounded-full bg-primary/10 px-3 py-1 font-heading text-xs font-semibold uppercase tracking-wide text-primary"
-              >Includes everything in Starter</span
-            >
-            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Growth</h3>
-            <div class="mb-4 font-heading text-4xl font-bold text-primary">
-              $399<span class="text-lg font-normal text-gray-500">/mo</span>
-            </div>
-            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
-              <li>
-                Posts: <strong>~3/week</strong> &nbsp;•&nbsp; Fresh photos ongoing (EXIF-optimized)
-              </li>
-              <li>Review replies: <strong>no cap</strong> + proactive requests</li>
-              <li>Services/Products refresh <strong>monthly</strong></li>
-              <li>Ongoing citation management (top platforms + corrections)</li>
-              <li>Quarterly heatmap & competitor snapshot; monthly report + 30-min call</li>
-              <li><em>No rollovers.</em></li>
-            </ul>
-            <a
-              href="#contact"
-              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
-              >Get Started</a
-            >
-          </div>
+          <PricingCard
+            title="Growth"
+            price="$399"
+            period="mo"
+            badge="Includes everything in Starter"
+            featured={true}
+            features={[
+              "Posts: <strong>~3/week</strong> &nbsp;•&nbsp; Fresh photos ongoing (EXIF-optimized)",
+              "Review replies: <strong>no cap</strong> + proactive requests",
+              "Services/Products refresh <strong>monthly</strong>",
+              "Ongoing citation management (top platforms + corrections)",
+              "Quarterly heatmap & competitor snapshot; monthly report + 30-min call",
+              "<em>No rollovers.</em>",
+            ]}
+            ctaText="Get Started"
+            ctaHref="#contact"
+          />
         </div>
       </div>
 
       <!-- Local SEO -->
       <div>
-        <h2 class="mb-3 text-center font-heading text-3xl font-extrabold text-heading md:text-4xl">
+        <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
           Local SEO (Single Location)
         </h2>
-        <p class="mx-auto mb-8 max-w-3xl text-center font-body text-lg text-body">
+        <p class="mx-auto mb-8 max-w-3xl text-center text-base text-body md:text-lg">
           On-page, technical, citations, and local authority building—built for service areas.
         </p>
 
-        <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
           <!-- Essentials -->
-          <div
-            class="flex flex-col rounded-2xl border border-gray-100 bg-bluelight p-8 shadow-xl transition hover:shadow-2xl"
-          >
-            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Essentials</h3>
-            <div class="mb-4 font-heading text-4xl font-bold text-primary">
-              $499<span class="text-lg font-normal text-gray-500">/mo</span>
-            </div>
-            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
-              <li>
-                <strong>Up to 5 pages</strong> + <strong>5 blog posts</strong> per month (≈750–1,000
-                words)
-              </li>
-              <li>
-                On-page & technical fixes batched monthly (titles, metas, H1/H2, internal links,
-                schema basics)
-              </li>
-              <li>Citations: 10–20 initial, then 5–10/mo</li>
-              <li>Monthly report + 30-min call</li>
-              <li><em>No rollovers.</em></li>
-            </ul>
-            <a
-              href="#contact"
-              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
-              >Get Started</a
-            >
-          </div>
+          <PricingCard
+            title="Essentials"
+            price="$499"
+            period="mo"
+            features={[
+              "<strong>Up to 5 pages</strong> + <strong>5 blog posts</strong> per month (≈750–1,000 words)",
+              "On-page & technical fixes batched monthly (titles, metas, H1/H2, internal links, schema basics)",
+              "Citations: 10–20 initial, then 5–10/mo",
+              "Monthly report + 30-min call",
+              "<em>No rollovers.</em>",
+            ]}
+            ctaText="Get Started"
+            ctaHref="#contact"
+          />
 
           <!-- Growth -->
-          <div
-            class="relative flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-xl transition hover:shadow-2xl"
-          >
-            <div
-              class="absolute -top-5 left-1/2 -translate-x-1/2 rounded-2xl bg-primary px-4 py-1 font-heading text-xs font-bold text-white shadow"
-            >
-              Best Value
-            </div>
-            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Growth</h3>
-            <div class="mb-4 font-heading text-4xl font-bold text-primary">
-              $799<span class="text-lg font-normal text-gray-500">/mo</span>
-            </div>
-            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
-              <li><strong>Up to 10 pages</strong> + <strong>10 blog posts</strong> per month</li>
-              <li>2–4 local backlinks/mo (assoc/partner/sponsor/guest)</li>
-              <li>Core Web Vitals, schema & crawl prioritization</li>
-              <li>Ongoing citations; quarterly heatmap & competitor review</li>
-              <li>Monthly report + 45-min call</li>
-              <li><em>No rollovers.</em></li>
-            </ul>
-            <a
-              href="#contact"
-              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
-              >Get Started</a
-            >
-          </div>
+          <PricingCard
+            title="Growth"
+            price="$799"
+            period="mo"
+            featured={true}
+            features={[
+              "<strong>Up to 10 pages</strong> + <strong>10 blog posts</strong> per month",
+              "2–4 local backlinks/mo (assoc/partner/sponsor/guest)",
+              "Core Web Vitals, schema & crawl prioritization",
+              "Ongoing citations; quarterly heatmap & competitor review",
+              "Monthly report + 45-min call",
+              "<em>No rollovers.</em>",
+            ]}
+            ctaText="Get Started"
+            ctaHref="#contact"
+          />
 
           <!-- Pro -->
-          <div
-            class="flex flex-col rounded-2xl border border-gray-100 bg-white p-8 shadow-xl transition hover:shadow-2xl"
-          >
-            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Pro</h3>
-            <div class="mb-4 font-heading text-4xl font-bold text-primary">
-              $1,199<span class="text-lg font-normal text-gray-500">/mo</span>
-            </div>
-            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
-              <li><strong>Up to 20 pages</strong> + <strong>10 blog posts</strong> per month</li>
-              <li>4–6 local backlinks/mo; conversion testing on top pages</li>
-              <li>Bi-weekly check-ins</li>
-              <li><em>No rollovers.</em></li>
-            </ul>
-            <a
-              href="#contact"
-              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
-              >Request Pro</a
-            >
-          </div>
+          <PricingCard
+            title="Pro"
+            price="$1,199"
+            period="mo"
+            features={[
+              "<strong>Up to 20 pages</strong> + <strong>10 blog posts</strong> per month",
+              "4–6 local backlinks/mo; conversion testing on top pages",
+              "Bi-weekly check-ins",
+              "<em>No rollovers.</em>",
+            ]}
+            ctaText="Request Pro"
+            ctaHref="#contact"
+          />
         </div>
       </div>
 
       <!-- Websites (One-time builds) -->
       <div>
-        <h2 class="mb-3 text-center font-heading text-3xl font-extrabold text-heading md:text-4xl">
+        <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
           Websites (One-Time Builds)
         </h2>
-        <p class="mx-auto mb-8 max-w-3xl text-center font-body text-lg text-body">
+        <p class="mx-auto mb-8 max-w-3xl text-center text-base text-body md:text-lg">
           Own your site outright. Launch quickly with conversion-ready pages.
         </p>
 
-        <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
           <!-- Launch Lite -->
-          <div
-            class="flex flex-col rounded-2xl border border-gray-100 bg-bluelight p-8 shadow-xl transition hover:shadow-2xl"
-          >
-            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Launch Lite</h3>
-            <div class="mb-4 font-heading text-4xl font-bold text-primary">
-              $499<span class="text-lg font-normal text-gray-500"> one-time</span>
+          <Card variant="elevated" class="flex h-full flex-col">
+            <h3 class="mb-2 font-heading text-lg font-bold text-heading md:text-xl">Launch Lite</h3>
+            <div class="mb-4 text-2xl font-bold text-primary md:text-3xl">
+              $499<span class="text-base font-normal text-gray-500"> one-time</span>
             </div>
-            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
-              <li>
-                ≈ <strong>10 pages</strong>: Home, 3 services, About/Contact, + core supporting
-                pages
+            <ul class="mb-6 flex-1 space-y-2 text-sm text-body">
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <span>≈ <strong>10 pages</strong>: Home, 3 services, About/Contact, + core supporting pages</span>
               </li>
-              <li>Form + click-to-call; basic schema</li>
-              <li><strong>3–5 business-day launch</strong></li>
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <span>Form + click-to-call; basic schema</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <span><strong>3–5 business-day launch</strong></span>
+              </li>
             </ul>
-            <a
-              href="#contact"
-              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
-              >Start Website</a
-            >
-          </div>
+            <div class="mt-auto border-t border-gray-100 pt-4">
+              <Button href="#contact" variant="primary" size="md" class="w-full">
+                Start Website
+              </Button>
+            </div>
+          </Card>
 
           <!-- Starter -->
-          <div
-            class="relative flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-xl transition hover:shadow-2xl"
-          >
-            <div
-              class="absolute -top-5 left-1/2 -translate-x-1/2 rounded-2xl bg-primary px-4 py-1 font-heading text-xs font-bold text-white shadow"
-            >
+          <Card variant="elevated" class="relative flex h-full flex-col border-2 border-primary">
+            <Badge variant="primary" size="sm" class="absolute -top-3 left-1/2 -translate-x-1/2 shadow-md">
               Popular
+            </Badge>
+            <h3 class="mt-2 mb-2 font-heading text-lg font-bold text-heading md:text-xl">Starter</h3>
+            <div class="mb-4 text-2xl font-bold text-primary md:text-3xl">
+              $750<span class="text-base font-normal text-gray-500"> one-time</span>
             </div>
-            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Starter</h3>
-            <div class="mb-4 font-heading text-4xl font-bold text-primary">
-              $750<span class="text-lg font-normal text-gray-500"> one-time</span>
-            </div>
-            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
-              <li><strong>15 pages</strong>: Home + 9 service/city pages + supporting pages</li>
-              <li>Titles/metas/H1–H2; internal link scaffold; stock library</li>
-              <li><strong>5–7 business-day launch</strong></li>
+            <ul class="mb-6 flex-1 space-y-2 text-sm text-body">
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <span><strong>15 pages</strong>: Home + 9 service/city pages + supporting pages</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <span>Titles/metas/H1–H2; internal link scaffold; stock library</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <span><strong>5–7 business-day launch</strong></span>
+              </li>
             </ul>
-            <a
-              href="#contact"
-              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
-              >Start Website</a
-            >
-          </div>
+            <div class="mt-auto border-t border-gray-100 pt-4">
+              <Button href="#contact" variant="primary" size="md" class="w-full">
+                Start Website
+              </Button>
+            </div>
+          </Card>
 
           <!-- Standard -->
-          <div
-            class="flex flex-col rounded-2xl border border-gray-100 bg-white p-8 shadow-xl transition hover:shadow-2xl"
-          >
-            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Standard</h3>
-            <div class="mb-4 font-heading text-4xl font-bold text-primary">
-              $1,500<span class="text-lg font-normal text-gray-500"> one-time</span>
+          <Card variant="elevated" class="flex h-full flex-col">
+            <h3 class="mb-2 font-heading text-lg font-bold text-heading md:text-xl">Standard</h3>
+            <div class="mb-4 text-2xl font-bold text-primary md:text-3xl">
+              $1,500<span class="text-base font-normal text-gray-500"> one-time</span>
             </div>
-            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
-              <li>≈ <strong>25 pages</strong></li>
-              <li>Enhanced schema (LocalBusiness + Services)</li>
-              <li>Conversion blocks (badges, FAQs, reviews)</li>
-              <li><strong>10–14 business-day launch</strong></li>
+            <ul class="mb-6 flex-1 space-y-2 text-sm text-body">
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <span>≈ <strong>25 pages</strong></span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <span>Enhanced schema (LocalBusiness + Services)</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <span>Conversion blocks (badges, FAQs, reviews)</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <span><strong>10–14 business-day launch</strong></span>
+              </li>
             </ul>
-            <a
-              href="#contact"
-              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
-              >Start Website</a
-            >
-          </div>
+            <div class="mt-auto border-t border-gray-100 pt-4">
+              <Button href="#contact" variant="primary" size="md" class="w-full">
+                Start Website
+              </Button>
+            </div>
+          </Card>
         </div>
 
         <p class="mx-auto mt-4 max-w-3xl text-center text-sm text-body/80">
@@ -394,136 +376,138 @@ export const description =
 
       <!-- Website-as-a-Service (WaS) -->
       <div>
-        <h2 class="mb-3 text-center font-heading text-3xl font-extrabold text-heading md:text-4xl">
+        <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
           Website-as-a-Service (WaS)
         </h2>
-        <p class="mx-auto mb-8 max-w-3xl text-center font-body text-lg text-body">
+        <p class="mx-auto mb-8 max-w-3xl text-center text-base text-body md:text-lg">
           Subscription website with hosting, updates, and ongoing support.
         </p>
-        <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
           <!-- WaS Base -->
-          <div
-            class="flex flex-col rounded-2xl border border-gray-100 bg-bluelight p-8 shadow-xl transition hover:shadow-2xl"
-          >
-            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Base</h3>
-            <div class="mb-4 font-heading text-4xl font-bold text-primary">
-              $250<span class="text-lg font-normal text-gray-500">/mo</span>
-            </div>
-            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
-              <li><strong>Up to 5 minor updates/mo</strong></li>
-              <li>≤ 1 new page/mo</li>
-            </ul>
-            <a
-              href="#contact"
-              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
-              >Get WaS</a
-            >
-          </div>
+          <PricingCard
+            title="Base"
+            price="$250"
+            period="mo"
+            features={[
+              "<strong>Up to 5 minor updates/mo</strong>",
+              "≤ 1 new page/mo",
+            ]}
+            ctaText="Get WaS"
+            ctaHref="#contact"
+          />
+
           <!-- WaS Plus -->
-          <div
-            class="relative flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-xl transition hover:shadow-2xl"
-          >
-            <div
-              class="absolute -top-5 left-1/2 -translate-x-1/2 rounded-2xl bg-primary px-4 py-1 font-heading text-xs font-bold text-white shadow"
-            >
-              Growing Teams
-            </div>
-            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">Plus</h3>
-            <div class="mb-4 font-heading text-4xl font-bold text-primary">
-              $750<span class="text-lg font-normal text-gray-500">/mo</span>
-            </div>
-            <ul class="mb-8 list-inside list-disc space-y-2 font-body text-base text-body">
-              <li><strong>Up to 15 updates/mo</strong></li>
-              <li>≤ 3 new pages/mo; quarterly CRO refresh</li>
-            </ul>
-            <a
-              href="#contact"
-              class="mt-auto rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
-              >Get WaS</a
-            >
-          </div>
+          <PricingCard
+            title="Plus"
+            price="$750"
+            period="mo"
+            badge="Growing Teams"
+            featured={true}
+            features={[
+              "<strong>Up to 15 updates/mo</strong>",
+              "≤ 3 new pages/mo; quarterly CRO refresh",
+            ]}
+            ctaText="Get WaS"
+            ctaHref="#contact"
+          />
         </div>
       </div>
 
       <!-- Bundles -->
       <div>
-        <h2 class="mb-3 text-center font-heading text-3xl font-extrabold text-heading md:text-4xl">
+        <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
           Bundles
         </h2>
-        <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
-          <div
-            class="hover:shadow-3xl flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-2xl transition"
-          >
-            <h3 class="mb-2 font-heading text-2xl font-bold text-heading">GBP + SEO Essentials</h3>
-            <div class="mb-4 font-heading text-4xl font-bold text-primary">
-              $699<span class="text-lg font-normal text-gray-500">/mo</span>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <Card variant="elevated" class="flex flex-col border-2 border-primary">
+            <h3 class="mb-2 font-heading text-lg font-bold text-heading md:text-xl">GBP + SEO Essentials</h3>
+            <div class="mb-4 text-2xl font-bold text-primary md:text-3xl">
+              $699<span class="text-base font-normal text-gray-500">/mo</span>
             </div>
-            <ul class="mb-6 list-inside list-disc space-y-2 font-body text-base text-body">
-              <li>Everything in GBP Starter + Local SEO Essentials</li>
-              <li>Unified reporting + strategy</li>
+            <ul class="mb-6 flex-1 space-y-2 text-sm text-body">
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <span>Everything in GBP Starter + Local SEO Essentials</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <span>Unified reporting + strategy</span>
+              </li>
             </ul>
-            <a
-              href="#contact"
-              class="rounded-xl bg-primary px-6 py-3 text-center font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary"
-              >Choose Bundle</a
-            >
-          </div>
+            <div class="mt-auto border-t border-gray-100 pt-4">
+              <Button href="#contact" variant="primary" size="md" class="w-full">
+                Choose Bundle
+              </Button>
+            </div>
+          </Card>
 
-          <div
-            class="hover:shadow-3xl flex flex-col rounded-2xl border-2 border-primary bg-primary p-8 text-white shadow-2xl transition"
-          >
-            <h3 class="mb-2 font-heading text-2xl font-bold text-white">All-In-One</h3>
-            <div class="mb-4 font-heading text-4xl font-bold text-white">
-              $1,299<span class="text-lg font-normal text-white/80">/mo</span>
+          <Card variant="elevated" class="flex flex-col border-2 border-primary bg-gradient-to-br from-primary to-primary-dark text-white">
+            <h3 class="mb-2 font-heading text-lg font-bold text-white md:text-xl">All-In-One</h3>
+            <div class="mb-4 text-2xl font-bold text-white md:text-3xl">
+              $1,299<span class="text-base font-normal text-white/80">/mo</span>
             </div>
-            <ul class="mb-6 list-inside list-disc space-y-2 font-body text-base text-white/90">
-              <li>Website + Local SEO + GBP management</li>
-              <li>Optional launch promo: <strong>$999</strong> first 90 days → then $1,299</li>
+            <ul class="mb-6 flex-1 space-y-2 text-sm text-white/90">
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-white" />
+                <span>Website + Local SEO + GBP management</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-white" />
+                <span>Optional launch promo: <strong>$999</strong> first 90 days → then $1,299</span>
+              </li>
             </ul>
-            <a
-              href="#contact"
-              class="rounded-xl bg-white px-6 py-3 text-center font-heading text-lg font-semibold text-primary shadow transition hover:bg-bluelight"
-              >Choose All-In-One</a
-            >
-          </div>
+            <div class="mt-auto border-t border-white/20 pt-4">
+              <Button href="#contact" variant="white" size="md" class="w-full">
+                Choose All-In-One
+              </Button>
+            </div>
+          </Card>
         </div>
       </div>
 
       <!-- Add-ons & Surcharges -->
       <div>
-        <h2 class="mb-4 text-center font-heading text-2xl font-extrabold text-heading md:text-3xl">
+        <h2 class="mb-4 text-center font-heading text-xl font-bold text-heading md:text-2xl">
           Add-ons & Surcharges
         </h2>
-        <div class="mx-auto max-w-4xl rounded-2xl border border-gray-100 bg-white p-6 shadow">
-          <ul class="list-inside list-disc space-y-2 font-body text-base text-body">
-            <li>
-              <strong>LSA Management:</strong> $300/mo + 10% of ad spend over $3k (setup $299)
+        <Card variant="elevated" class="mx-auto max-w-4xl">
+          <ul class="space-y-2 text-sm text-body">
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span><strong>LSA Management:</strong> $300/mo + 10% of ad spend over $3k (setup $299)</span>
             </li>
-            <li><strong>GA4 + GTM Setup:</strong> $149 one-time (included in SEO Growth/Pro)</li>
-            <li>
-              <strong>Multi-location:</strong> +$150/mo per extra GBP; +$200/mo per extra SEO location
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span><strong>GA4 + GTM Setup:</strong> $149 one-time (included in SEO Growth/Pro)</span>
             </li>
-            <li><strong>Rush Ticket (48 hrs):</strong> +$100 per ticket</li>
-            <li>
-              <strong>Optional:</strong> Call tracking & lead attribution (pass-through + setup); Citation
-              burst/cleanup from $199/location; Review funnels from $149/mo; Photo/Video pack from $499/quarter
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span><strong>Multi-location:</strong> +$150/mo per extra GBP; +$200/mo per extra SEO location</span>
+            </li>
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span><strong>Rush Ticket (48 hrs):</strong> +$100 per ticket</span>
+            </li>
+            <li class="flex items-start">
+              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <span><strong>Optional:</strong> Call tracking & lead attribution (pass-through + setup); Citation burst/cleanup from $199/location; Review funnels from $149/mo; Photo/Video pack from $499/quarter</span>
             </li>
           </ul>
-        </div>
+        </Card>
       </div>
     </div>
   </section>
 
-  <!-- COMPARE TABLE (kept for scannability) -->
-  <section class="border-t border-gray-100 bg-[#f7fafd] py-16">
+  <!-- COMPARE TABLE -->
+  <section class="border-t border-gray-100 bg-cream py-12">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-8 text-center font-heading text-2xl font-extrabold text-heading md:text-3xl">
+      <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         At-a-Glance Comparison
       </h2>
       <div class="overflow-x-auto rounded-2xl border border-gray-100 bg-white shadow">
         <table class="min-w-full text-left">
           <thead>
-            <tr class="bg-bluelight text-base text-heading">
+            <tr class="bg-secondary/10 text-sm text-heading">
               <th class="px-6 py-4 font-heading font-bold">Features</th>
               <th class="px-6 py-4 text-center font-heading font-bold">GBP</th>
               <th class="px-6 py-4 text-center font-heading font-bold">Local SEO</th>
@@ -532,7 +516,7 @@ export const description =
               <th class="px-6 py-4 text-center font-heading font-bold">Bundles</th>
             </tr>
           </thead>
-          <tbody class="font-body text-base text-body">
+          <tbody class="text-sm text-body">
             <tr class="border-t">
               <td class="px-6 py-3">Map Pack management</td>
               <td class="text-center">✓</td>
@@ -580,79 +564,63 @@ export const description =
   </section>
 
   <!-- TESTIMONIALS -->
-  <section class="border-t border-gray-100 bg-white py-16">
+  <section class="border-t border-gray-100 bg-white py-12">
     <div class="mx-auto max-w-4xl px-4 text-center">
-      <h2 class="mb-8 font-heading text-2xl font-extrabold text-heading md:text-3xl">
+      <h2 class="mb-8 font-heading text-xl font-bold text-heading md:text-2xl">
         What Our Clients Say
       </h2>
-      <div class="flex flex-col items-stretch justify-center gap-8 md:flex-row">
-        <div class="flex-1 rounded-2xl bg-bluelight p-8 shadow">
-          <div class="mb-3 font-heading text-3xl text-primary">★★★★★</div>
-          <p class="mb-3 font-heading text-lg font-semibold text-heading">
-            “We booked more calls in 2 months than all last year.”
+      <div class="flex flex-col items-stretch justify-center gap-6 md:flex-row">
+        <Card variant="elevated" class="flex-1">
+          <div class="mb-3 text-2xl text-accent">★★★★★</div>
+          <p class="mb-3 font-heading text-base font-semibold text-heading md:text-lg">
+            "We booked more calls in 2 months than all last year."
           </p>
-          <span class="font-body text-base text-body">– Mike S., HVAC Company</span>
-        </div>
-        <div class="flex-1 rounded-2xl bg-bluelight p-8 shadow">
-          <div class="mb-3 font-heading text-3xl text-primary">★★★★★</div>
-          <p class="mb-3 font-heading text-lg font-semibold text-heading">
-            “The site and Maps ranking paid for itself fast. Seamless process.”
+          <span class="text-sm text-body">– Mike S., HVAC Company</span>
+        </Card>
+        <Card variant="elevated" class="flex-1">
+          <div class="mb-3 text-2xl text-accent">★★★★★</div>
+          <p class="mb-3 font-heading text-base font-semibold text-heading md:text-lg">
+            "The site and Maps ranking paid for itself fast. Seamless process."
           </p>
-          <span class="font-body text-base text-body">– Sarah K., Plumbing Contractor</span>
-        </div>
+          <span class="text-sm text-body">– Sarah K., Plumbing Contractor</span>
+        </Card>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="border-t border-gray-100 bg-[#f7fafd] py-20" id="faq">
+  <section class="border-t border-gray-100 bg-cream py-16" id="faq">
     <div class="mx-auto max-w-4xl px-4">
-      <h2
-        class="relative mb-8 text-center font-heading text-3xl font-extrabold text-heading md:text-4xl"
-      >
+      <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Frequently Asked Questions
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
       </h2>
-      <div class="space-y-8">
-        <div class="rounded-2xl border border-gray-100 bg-white p-8 shadow">
-          <h3 class="mb-2 font-heading text-xl font-bold text-heading">
-            Do I have to sign a long-term contract?
-          </h3>
-          <p class="font-body text-lg text-body">Never. All plans are month-to-month.</p>
-        </div>
-        <div class="rounded-2xl border border-gray-100 bg-white p-8 shadow">
-          <h3 class="mb-2 font-heading text-xl font-bold text-heading">
-            Can I upgrade, downgrade, or cancel?
-          </h3>
-          <p class="font-body text-lg text-body">Yes—switch anytime, cancel with no penalty.</p>
-        </div>
-        <div class="rounded-2xl border border-gray-100 bg-white p-8 shadow">
-          <h3 class="mb-2 font-heading text-xl font-bold text-heading">
-            Do you offer custom packages?
-          </h3>
-          <p class="font-body text-lg text-body">
-            Absolutely—tell us your goals and we’ll tailor a plan.
-          </p>
-        </div>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <Card variant="elevated">
+            <h3 class="mb-2 font-heading text-base font-bold text-heading md:text-lg">
+              {faq.question}
+            </h3>
+            <p class="text-sm text-body md:text-base">
+              {faq.answer}
+            </p>
+          </Card>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- FINAL CTA -->
-  <section class="bg-primary py-12">
+  <section class="bg-gradient-to-br from-primary to-primary-dark py-12">
     <div class="mx-auto max-w-3xl px-4 text-center">
-      <h2 class="mb-4 font-heading text-3xl font-extrabold text-white">
+      <h2 class="mb-3 font-heading text-xl font-extrabold text-white md:text-2xl">
         Ready to Grow? Get a Free Consultation.
       </h2>
-      <p class="mb-7 font-body text-lg text-white/80">
+      <p class="mb-6 text-base text-white/90 md:text-lg">
         Book a free website & SEO audit—no hard sell, just insights.
       </p>
-      <a
-        href="#contact"
-        class="inline-flex items-center rounded-2xl bg-white px-8 py-4 font-heading text-lg font-semibold text-primary shadow transition hover:bg-bluelight"
-        data-track
-        data-track-event="final_cta_click">Book My Free Audit</a
-      >
+      <Button href="#contact" variant="white" size="lg" data-track data-track-event="final_cta_click">
+        Book My Free Audit
+      </Button>
     </div>
   </section>
 </Layout>

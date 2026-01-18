@@ -12,8 +12,6 @@ import ServiceCard from "~/components/composed/ServiceCard.astro";
 import ProcessStep from "~/components/composed/ProcessStep.astro";
 import StatCard from "~/components/composed/StatCard.astro";
 import LeadCaptureForm from "~/components/composed/LeadCaptureForm.astro";
-import GuaranteeBadge from "~/components/composed/GuaranteeBadge.astro";
-import PricingCard from "~/components/composed/PricingCard.astro";
 
 export const title = "Local SEO & Websites for Home Service Pros";
 export const description =
@@ -155,103 +153,6 @@ const industries = [
   "Cleaning", "Pest Control", "Landscaping", "Other Trades"
 ];
 
-// Pricing data
-const mainPricingPlans = [
-  {
-    title: "GBP",
-    subtitle: "Consistent Google Business Profile presence",
-    price: "299",
-    ctaText: "Get Started",
-    ctaHref: "/packages",
-    features: [
-      "<strong>Profile optimization & upkeep</strong> (N/A fields, services, products, hours)",
-      "<strong>Categories tuned</strong> for intent & relevance",
-      "<strong>Weekly posts</strong> (offers, FAQs, highlights) — no rollovers",
-      "<strong>Fresh photos</strong> with EXIF/alt optimized for geo & keywords",
-      "<strong>Review replies</strong> + simple request prompts",
-      "<strong>Monthly performance report</strong> with next steps"
-    ]
-  },
-  {
-    title: "GBP + Local SEO",
-    subtitle: "Steady Map Pack & organic gains",
-    price: "699",
-    ctaText: "Choose Plan",
-    ctaHref: "/packages",
-    featured: true,
-    features: [
-      "<strong>Everything in GBP</strong>, plus:",
-      "<strong>On-site fixes</strong> (titles, metas, H1-H2, internal links, basic schema)",
-      "<strong>3–5 optimized pages</strong> per month (service or location)",
-      "<strong>Citation creation/cleanup</strong> & core listings",
-      "<strong>Local rank tracking</strong> + quarterly competitor snapshot",
-      "<strong>Monthly report</strong> + 30-min strategy call"
-    ],
-    footerNote: "Workload scales with site size & baseline quality; no rollovers."
-  },
-  {
-    title: "GBP + Local SEO Growth",
-    subtitle: "Faster traction via volume",
-    price: "1,199",
-    ctaText: "Schedule a Call",
-    ctaHref: "/contact",
-    features: [
-      "<strong>Everything in GBP + Local SEO</strong>, plus:",
-      "<strong>2+ services optimized</strong> per month (pages & posts)",
-      "<strong>2–4 local backlinks</strong> per month (associations, partners, mentions)",
-      "<strong>Ongoing citations</strong> at scale & crawl priority",
-      "<strong>Expanded content volume</strong> (pages/blogs as needed)",
-      "<strong>Monthly report</strong> + 45-min strategy call"
-    ],
-    footerNote: "Content/link budgets are capped to maintain quality; unused work does not roll over."
-  }
-];
-
-const addOnPlans = [
-  {
-    title: "Website-as-a-Service",
-    subtitle: "Modern, conversion-ready site + support",
-    price: "199",
-    ctaText: "See WaaS Details",
-    ctaHref: "/services/web-design",
-    features: [
-      "<strong>Mobile-first site</strong> with SEO baked in",
-      "<strong>Secure hosting & monitoring</strong>",
-      "<strong>Unlimited minor edits</strong> via support tickets",
-      "<strong>Analytics & lead tracking</strong> set up",
-      "<strong>Month-to-month support</strong> — no long contracts"
-    ]
-  },
-  {
-    title: "Local SEO — Essentials",
-    subtitle: "Single-location growth plan",
-    price: "599",
-    ctaText: "Start Local SEO",
-    ctaHref: "/packages",
-    features: [
-      "<strong>Site & on-page optimization</strong> (titles, metas, H1-H2, CWV, schema)",
-      "<strong>Keyword research & tracking</strong> with quarterly priorities",
-      "<strong>Service/location content</strong> & internal-linking scaffold",
-      "<strong>Citation cleanup</strong> & foundational listings",
-      "<strong>Monthly report</strong> + action checklist"
-    ]
-  },
-  {
-    title: "Local SEO — Growth",
-    subtitle: "Higher-volume monthly execution",
-    price: "999",
-    ctaText: "Choose Growth",
-    ctaHref: "/packages",
-    features: [
-      "<strong>Everything in Essentials</strong>, plus:",
-      "<strong>More pages & optimizations</strong> each month",
-      "<strong>Expanded citations & link acquisition</strong>",
-      "<strong>Quarterly competitor review</strong> & heatmap snapshot",
-      "<strong>Monthly report</strong> + strategy call"
-    ]
-  }
-];
-
 // FAQ data
 const faqs = [
   {
@@ -298,22 +199,24 @@ const faqs = [
         />
         
         <div class="space-y-4">
-          <h1 class="font-heading text-3xl font-extrabold leading-tight tracking-tight text-white md:text-5xl">
+          <h1 class="font-heading text-4xl font-extrabold leading-tight tracking-tight text-white md:text-6xl">
             Local SEO & Digital Marketing
           </h1>
           
-          <p class="font-heading text-lg font-semibold uppercase tracking-wider text-primary md:text-2xl">
+          <p class="font-heading text-xl font-semibold uppercase tracking-wider text-primary md:text-3xl">
             For Home Service Businesses
           </p>
           
           <div class="h-1.5 w-28 rounded-full bg-primary"></div>
         </div>
         
-        <div class="space-y-4">
-          <p class="max-w-lg text-base font-medium text-white/90 md:text-lg">
+        <div class="space-y-3">
+          <p class="max-w-lg text-lg font-medium text-white/90 md:text-xl">
             Get more calls, book more jobs, guaranteed!
           </p>
-          <GuaranteeBadge variant="badge" class="border-primary-light bg-white/10 text-white" />
+          <p class="text-base text-white/80">
+            If qualified calls or forms don't grow within 90 days, we refund months 2–3
+          </p>
         </div>
         
         <div class="flex flex-wrap gap-3">
@@ -353,7 +256,7 @@ const faqs = [
   <!-- WHO WE HELP -->
   <section class="border-t border-border-subtle bg-surface-base section-padding-sm" id="who-we-help">
     <div class="mx-auto max-w-5xl px-4 text-center">
-      <h2 class="mb-6 font-heading text-xl font-bold md:text-2xl">Who We Help</h2>
+      <h2 class="mb-6 font-heading text-2xl font-bold md:text-3xl">Who We Help</h2>
       
       <h3 class="mb-4 text-base font-semibold text-heading">
         Home Service Businesses We Work With:
@@ -373,10 +276,10 @@ const faqs = [
   <section class="border-t border-border-subtle bg-background-cream section-padding" id="included-services">
     <div class="mx-auto max-w-6xl px-4">
       <div class="mb-12 text-center">
-        <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
+        <h2 class="mb-4 font-heading text-3xl font-bold text-heading md:text-4xl">
           Fully Managed Local SEO for Home Service Businesses
         </h2>
-        <p class="mx-auto max-w-3xl text-base text-body">
+        <p class="mx-auto max-w-3xl text-lg text-body">
           Complete, end-to-end SEO management that puts your business at the top of local search results.
           We handle everything so you can focus on what you do best.
         </p>
@@ -384,9 +287,7 @@ const faqs = [
 
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {services.map((service) => (
-          <div data-stagger-item>
-            <ServiceCard {...service} />
-          </div>
+          <ServiceCard {...service} />
         ))}
       </div>
     </div>
@@ -395,14 +296,14 @@ const faqs = [
   <!-- WHY CHOOSE US -->
   <section class="border-t border-border-subtle bg-surface-base section-padding">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-12 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
+      <h2 class="mb-12 text-center font-heading text-3xl font-bold text-heading md:text-4xl">
         Why Choose Lilos Growth for Your Home Service Business?
       </h2>
 
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {whyChooseUs.map((feature, index) => (
-          <article class={`card ${index % 2 === 0 ? 'bg-surface-base' : 'bg-background-cream'}`} data-stagger-item>
-            <h3 class="mb-2 font-heading text-lg font-semibold text-heading">
+          <article class={`card ${index % 2 === 0 ? 'bg-surface-base' : 'bg-background-cream'}`}>
+            <h3 class="mb-2 font-heading text-xl font-semibold text-heading">
               {feature.title}
             </h3>
             <p class="text-sm text-body leading-relaxed">
@@ -418,19 +319,17 @@ const faqs = [
   <section class="border-t border-border-subtle bg-background-cream section-padding">
     <div class="mx-auto max-w-6xl px-4">
       <div class="mb-12 text-center">
-        <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
+        <h2 class="mb-4 font-heading text-3xl font-bold text-heading md:text-4xl">
           Our Proven 4-Step Local SEO System
         </h2>
-        <p class="mx-auto max-w-3xl text-base text-body">
+        <p class="mx-auto max-w-3xl text-lg text-body">
           Here's exactly how we get your business ranking higher and bringing in more local calls—no guesswork, just results.
         </p>
       </div>
 
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
         {processSteps.map((step) => (
-          <div data-stagger-item>
-            <ProcessStep {...step} />
-          </div>
+          <ProcessStep {...step} />
         ))}
       </div>
     </div>
@@ -441,56 +340,10 @@ const faqs = [
     <div class="mx-auto max-w-6xl px-4">
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
         {stats.map((stat) => (
-          <div data-stagger-item>
-            <StatCard 
+          <StatCard 
             label={stat.label} 
             value={stat.value}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- MAIN PRICING SECTION -->
-  <section class="bg-white section-padding" id="pricing">
-    <div class="mx-auto max-w-7xl px-4">
-      <div class="mb-12 text-center">
-        <h2 class="mb-3 font-heading text-2xl font-bold text-heading md:text-3xl">
-          Local SEO Plans & Pricing
-        </h2>
-        <p class="text-base text-body">
-          Month-to-month. No setup fees. Transparent deliverables. <strong>No rollovers.</strong>
-        </p>
-      </div>
-      
-      <div class="grid gap-8 md:grid-cols-3">
-        {mainPricingPlans.map((plan) => (
-          <div data-stagger-item>
-            <PricingCard {...plan} />
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ADD-ON PRICING SECTION -->
-  <section class="bg-surface-base section-padding">
-    <div class="mx-auto max-w-7xl px-4">
-      <div class="mb-12 text-center">
-        <h2 class="mb-3 font-heading text-2xl font-bold text-heading md:text-3xl">
-          Add-On & One-Time Options
-        </h2>
-        <p class="text-base text-body">
-          Bundle with any plan or purchase separately.
-        </p>
-      </div>
-      
-      <div class="grid gap-8 md:grid-cols-3">
-        {addOnPlans.map((plan) => (
-          <div data-stagger-item>
-            <PricingCard {...plan} />
-          </div>
+          />
         ))}
       </div>
     </div>
@@ -499,13 +352,13 @@ const faqs = [
   <!-- FAQ SECTION -->
   <section class="bg-surface-base section-padding" id="faq">
     <div class="mx-auto max-w-4xl px-4">
-      <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
+      <h2 class="mb-8 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         Frequently Asked Questions About Home Service Marketing
       </h2>
 
       <div class="space-y-4">
         {faqs.map((faq) => (
-          <details class="card group" data-stagger-item>
+          <details class="card group">
             <summary class="flex cursor-pointer items-center justify-between font-semibold text-heading">
               {faq.question}
               <span class="ml-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background-subtle text-muted transition-colors group-open:bg-primary group-open:text-white">
@@ -526,10 +379,10 @@ const faqs = [
   <!-- FINAL CTA -->
   <section class="border-t border-border-subtle bg-background-cream section-padding">
     <div class="mx-auto max-w-3xl px-4 text-center">
-      <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
+      <h2 class="mb-4 font-heading text-3xl font-bold text-heading md:text-4xl">
         Ready to Grow Your Home Service Business?
       </h2>
-      <p class="mb-8 text-base text-body">
+      <p class="mb-8 text-lg text-body">
         Get a free SEO audit and see how we can help you dominate local search.
       </p>
       <Button 

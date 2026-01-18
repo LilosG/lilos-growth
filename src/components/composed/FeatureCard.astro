@@ -1,0 +1,53 @@
+---
+/**
+ * Feature Card Component
+ * 
+ * Displays a feature or benefit with icon, title, and description.
+ * Used on service pages for showcasing key features.
+ * 
+ * @component
+ * @example
+ * <FeatureCard
+ *   icon="tabler:check-circle"
+ *   title="No Long-Term Contracts"
+ *   description="Month-to-month service with no lock-in"
+ * />
+ */
+
+import Card from '../core/Card.astro';
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  /** Icon name from astro-icon */
+  icon: string;
+  /** Feature title */
+  title: string;
+  /** Feature description */
+  description: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  icon,
+  title,
+  description,
+  class: className = '',
+} = Astro.props;
+---
+
+<Card variant="elevated" class={`text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${className}`}>
+  <div class="mb-4 flex justify-center">
+    <div class="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary-dark shadow-md">
+      <Icon name={icon} class="h-7 w-7 text-white" />
+    </div>
+  </div>
+  
+  <h3 class="mb-2 font-heading text-lg font-bold text-heading">
+    {title}
+  </h3>
+  
+  <p class="text-sm text-body">
+    {description}
+  </p>
+</Card>

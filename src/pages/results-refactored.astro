@@ -52,7 +52,7 @@ const caseStudies = [
       { label: "GBP calls", value: "+89%" }
     ],
     screenshot: {
-      src: "/images/case-studies/blue-door-screenshot.webp",
+      src: "/images/case-studies/blue-door-screenshot.jpg",
       alt: "Blue Door Pest Control website"
     },
     logo: {
@@ -73,10 +73,6 @@ const caseStudies = [
       { label: "Maps top-3 keywords", value: "+5" },
       { label: "page load time", value: "<1s" }
     ],
-    screenshot: {
-      src: "/images/case-studies/tamarack-screenshot.webp",
-      alt: "Tamarack Restoration website"
-    },
     caseStudyUrl: "/results/tamarack-restoration"
   },
   {
@@ -89,10 +85,6 @@ const caseStudies = [
       { label: "quote requests", value: "+52%" },
       { label: "cost per lead", value: "−33%" }
     ],
-    screenshot: {
-      src: "/images/case-studies/carlsbad-home-screenshot.webp",
-      alt: "Carlsbad Home Services website"
-    },
     caseStudyUrl: "/results/carlsbad-home-services"
   },
   {
@@ -105,10 +97,6 @@ const caseStudies = [
       { label: "Maps visibility", value: "+73%" },
       { label: "avg. session time", value: "+45%" }
     ],
-    screenshot: {
-      src: "/images/case-studies/carlsbad-fixit-screenshot.webp",
-      alt: "Carlsbad Fix It website"
-    },
     caseStudyUrl: "/results/carlsbad-fix-it"
   },
   {
@@ -121,31 +109,7 @@ const caseStudies = [
       { label: "GBP calls", value: "3.1×" },
       { label: "form conversion", value: "+22%" }
     ],
-    screenshot: {
-      src: "/images/case-studies/postal-systems-screenshot.webp",
-      alt: "Postal Systems website"
-    },
     caseStudyUrl: "/results/postal-systems"
-  }
-];
-
-// GBP Performance Data
-const gbpResults = [
-  {
-    client: "Blue Door Pest Control",
-    metric: "Direction Requests",
-    value: "194",
-    growth: "+19.0%",
-    period: "Sep 2025 – Dec 2025",
-    image: "/images/results/blue-door-gbp.png"
-  },
-  {
-    client: "Carlsbad Fix It",
-    metric: "Business Profile Interactions",
-    value: "38",
-    growth: "Upward Trend",
-    period: "Sep 2025 – Dec 2025",
-    image: "/images/results/carlsbad-fixit-gbp.png"
   }
 ];
 
@@ -197,12 +161,12 @@ const faqs = [
           Proven Results
         </p>
         
-        <h1 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-5xl">
+        <h1 class="mt-3 font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">
           More calls. Better rankings.<br class="hidden sm:block" />
           <span class="text-primary">Real growth.</span>
         </h1>
         
-        <p class="mt-4 text-base text-white/80">
+        <p class="mt-4 text-lg text-white/80 md:text-xl">
           We help home service businesses dominate local search with fast websites, 
           optimized Google Business Profiles, and local SEO that actually drives calls.
         </p>
@@ -221,9 +185,7 @@ const faqs = [
     <div class="mx-auto max-w-6xl px-4">
       <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
         {stats.map((stat) => (
-          <div data-stagger-item>
-            <StatCard {...stat} />
-          </div>
+          <StatCard {...stat} />
         ))}
       </div>
     </div>
@@ -235,7 +197,7 @@ const faqs = [
       <div class="mx-auto max-w-6xl px-4">
         <div class="mb-8 flex items-center gap-3">
           <Badge variant="primary">Featured</Badge>
-          <h2 class="font-heading text-xl font-bold text-heading md:text-2xl">
+          <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
             Client Spotlight
           </h2>
         </div>
@@ -245,55 +207,13 @@ const faqs = [
     </section>
   ))}
 
-  <!-- GBP PERFORMANCE SECTION -->
-  <section class="border-b border-border-subtle bg-surface-base section-padding">
-    <div class="mx-auto max-w-6xl px-4">
-      <div class="mb-12 text-center">
-        <Badge variant="primary" class="mb-4">GBP Management</Badge>
-        <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
-          Google Business Profile Performance
-        </h2>
-        <p class="mx-auto mt-4 max-w-2xl text-base text-body">
-          Real-time performance data from profiles we manage. We focus on the metrics that matter: direction requests, calls, and direct customer interactions.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {gbpResults.map((result) => (
-          <div class="card-elevated overflow-hidden p-0">
-            <div class="border-b border-border-subtle bg-background-subtle p-6">
-              <div class="flex items-start justify-between">
-                <div>
-                  <h3 class="font-heading text-lg font-bold text-heading">{result.client}</h3>
-                  <p class="text-sm text-muted">{result.period}</p>
-                </div>
-                <div class="text-right">
-                  <div class="text-2xl font-bold text-primary">{result.value}</div>
-                  <div class="text-xs font-semibold uppercase tracking-wider text-success">{result.growth}</div>
-                </div>
-              </div>
-              <p class="mt-2 text-sm font-medium text-body">{result.metric}</p>
-            </div>
-            <div class="relative aspect-[16/9] bg-secondary/5">
-              <img 
-                src={result.image} 
-                alt={`${result.client} GBP Performance`}
-                class="h-full w-full object-cover object-top"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <!-- MORE CASE STUDIES -->
-  <section class="bg-background-cream section-padding">
+  <section class="bg-surface-base section-padding">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-4 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
+      <h2 class="mb-4 text-center font-heading text-3xl font-bold text-heading md:text-4xl">
         More Client Wins
       </h2>
-      <p class="mb-12 text-center text-base text-body">
+      <p class="mb-12 text-center text-lg text-body">
         From pest control to restoration to handyman services—we help home service businesses across industries dominate their local markets.
       </p>
 
@@ -315,9 +235,9 @@ const faqs = [
   </section>
 
   <!-- FAQs -->
-  <section class="border-t border-border-subtle bg-surface-base section-padding" id="faq">
+  <section class="border-t border-border-subtle bg-background-cream section-padding" id="faq">
     <div class="mx-auto max-w-4xl px-4">
-      <h2 class="mb-4 text-center font-heading text-xl font-bold text-heading md:text-2xl">
+      <h2 class="mb-4 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         Common Questions
       </h2>
       <p class="mb-8 text-center text-body">
@@ -345,12 +265,12 @@ const faqs = [
   </section>
 
   <!-- FINAL CTA -->
-  <section class="border-t border-border-subtle bg-background-cream section-padding">
+  <section class="border-t border-border-subtle bg-surface-base section-padding">
     <div class="mx-auto max-w-3xl px-4 text-center">
-      <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
+      <h2 class="mb-4 font-heading text-3xl font-bold text-heading md:text-4xl">
         See what this could look like in your city
       </h2>
-      <p class="mb-8 text-base text-body">
+      <p class="mb-8 text-lg text-body">
         We'll audit your GBP and top pages, outline quick wins, and map a 90-day plan to lift calls.
       </p>
       <div class="flex flex-wrap justify-center gap-4">

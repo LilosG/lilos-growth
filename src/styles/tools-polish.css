@@ -1,0 +1,186 @@
+/**
+ * Local SEO Tools - Visual Polish Enhancements
+ * 
+ * Improves spacing, shadows, and visual hierarchy for tool components
+ */
+
+/* Tool Card Enhancements */
+.tool-card {
+  @apply rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300;
+  @apply hover:shadow-lg hover:-translate-y-1;
+}
+
+.tool-card-header {
+  @apply flex items-center gap-3 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white p-6;
+}
+
+.tool-card-icon {
+  @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all duration-300;
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+}
+
+.tool-card:hover .tool-card-icon {
+  @apply scale-110 shadow-md;
+}
+
+.tool-card-icon--green {
+  @apply bg-gradient-to-br from-green-50 to-green-100 text-green-600;
+}
+
+.tool-card-icon--blue {
+  @apply bg-gradient-to-br from-blue-50 to-blue-100 text-blue-600;
+}
+
+.tool-card-icon--purple {
+  @apply bg-gradient-to-br from-purple-50 to-purple-100 text-purple-600;
+}
+
+.tool-card-icon--orange {
+  @apply bg-gradient-to-br from-orange-50 to-orange-100 text-orange-600;
+}
+
+.tool-card-title {
+  @apply font-heading text-xl font-bold text-heading;
+}
+
+.tool-card-description {
+  @apply mt-1 text-sm text-body;
+}
+
+.tool-card-body {
+  @apply p-6 space-y-4;
+}
+
+/* Form Input Enhancements */
+.tool-input {
+  @apply w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-heading;
+  @apply transition-all duration-200;
+  @apply focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-20 focus:outline-none;
+  @apply placeholder:text-gray-400;
+}
+
+.tool-input:hover {
+  @apply border-gray-400;
+}
+
+.tool-textarea {
+  @apply tool-input resize-none;
+  min-height: 120px;
+}
+
+.tool-select {
+  @apply tool-input appearance-none bg-no-repeat pr-10;
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3e%3cpolyline points="6 9 12 15 18 9"%3e%3c/polyline%3e%3c/svg%3e');
+  background-size: 1.25rem;
+  background-position: right 0.75rem center;
+}
+
+/* Label Enhancements */
+.tool-label {
+  @apply block text-sm font-semibold text-heading mb-2;
+}
+
+.tool-label-optional {
+  @apply ml-1 text-xs font-normal text-gray-500;
+}
+
+/* Button Enhancements */
+.tool-button-primary {
+  @apply w-full rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-white;
+  @apply transition-all duration-200;
+  @apply hover:bg-primary-dark hover:shadow-md;
+  @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 focus:ring-offset-2;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.tool-button-secondary {
+  @apply w-full rounded-lg border-2 border-gray-300 bg-white px-6 py-3.5 text-sm font-semibold text-heading;
+  @apply transition-all duration-200;
+  @apply hover:border-gray-400 hover:bg-gray-50;
+  @apply focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2;
+}
+
+/* Output/Result Box Enhancements */
+.tool-output {
+  @apply rounded-lg border border-gray-200 bg-gray-50 p-4;
+}
+
+.tool-output-code {
+  @apply rounded-lg bg-secondary p-4 font-mono text-xs text-white overflow-x-auto;
+}
+
+.tool-output-success {
+  @apply rounded-lg border border-green-200 bg-green-50 p-4 text-sm text-green-800;
+}
+
+.tool-output-error {
+  @apply rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800;
+}
+
+/* Info Box / Help Text */
+.tool-info-box {
+  @apply rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-blue-800;
+}
+
+.tool-info-box svg {
+  @apply h-5 w-5 shrink-0 text-blue-600;
+}
+
+/* Grid Layout for Multiple Tools */
+.tools-grid {
+  @apply grid grid-cols-1 gap-8 lg:grid-cols-2;
+}
+
+/* Section Headings */
+.tools-section-heading {
+  @apply mb-6 font-heading text-2xl font-bold text-heading md:text-3xl;
+}
+
+.tools-section-subheading {
+  @apply mb-8 text-lg text-body;
+}
+
+/* Badge/Tag Styling */
+.tool-badge {
+  @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold;
+}
+
+.tool-badge-primary {
+  @apply tool-badge bg-primary text-white;
+}
+
+.tool-badge-secondary {
+  @apply tool-badge bg-gray-200 text-gray-700;
+}
+
+.tool-badge-success {
+  @apply tool-badge bg-green-100 text-green-800;
+}
+
+/* Copy Button Styling */
+.tool-copy-button {
+  @apply inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-heading;
+  @apply transition-all duration-200;
+  @apply hover:bg-gray-50 hover:border-gray-400;
+  @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50;
+}
+
+.tool-copy-button svg {
+  @apply h-4 w-4;
+}
+
+/* Loading State */
+.tool-loading {
+  @apply inline-block h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent;
+}
+
+/* Responsive Spacing */
+@media (min-width: 768px) {
+  .tool-card-body {
+    @apply p-8;
+  }
+  
+  .tool-card-header {
+    @apply p-8;
+  }
+}

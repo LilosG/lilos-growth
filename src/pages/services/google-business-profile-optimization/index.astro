@@ -1,430 +1,351 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
+import Button from "~/components/core/Button.astro";
+import Badge from "~/components/core/Badge.astro";
+import Card from "~/components/core/Card.astro";
+import PricingCard from "~/components/composed/PricingCard.astro";
+import FeatureCard from "~/components/composed/FeatureCard.astro";
+import { Icon } from "astro-icon/components";
 
 export const title =
   "Google Business Profile Optimization & Maps SEO for Home Service Businesses | Lilos Growth";
 export const description =
   "Rank higher in the Google Map Pack and turn searches into booked jobs. Purpose-built Google Business Profile (GBP) optimization, posting, reviews, and reporting for local service pros.";
+
+const features = [
+  "Map Pack Visibility",
+  "Profile Build & Cleanup",
+  "Posts & Photos",
+  "Reviews & Q&A",
+  "Tracking & Reporting",
+];
+
+const trustReasons = [
+  {
+    icon: "tabler:users",
+    title: "Built by Home Service Owners",
+    description: "We've lived it—so we build what actually generates booked jobs.",
+  },
+  {
+    icon: "tabler:tool",
+    title: "Specialists in Home Services",
+    description: "No generic agency fluff, just trades-focused growth.",
+  },
+  {
+    icon: "tabler:calendar-x",
+    title: "No Long-Term Contract",
+    description: "Month-to-month. We earn your business with results.",
+  },
+  {
+    icon: "tabler:chart-line",
+    title: "Results You Can See",
+    description: "Local rankings, calls, and jobs—measurable improvements.",
+  },
+  {
+    icon: "tabler:shield-check",
+    title: "No Big Agency Fluff",
+    description: "Direct access to your strategist. No runarounds.",
+  },
+  {
+    icon: "tabler:heart-handshake",
+    title: "Easy, Honest, & Human",
+    description: "Clear reporting, plain English, and a process that makes sense.",
+  },
+];
+
+const faqs = [
+  {
+    question: "How fast can you improve my Google Maps ranking?",
+    answer: "Most see measurable gains in 30–60 days with consistent posting, reviews, and ongoing profile updates.",
+  },
+  {
+    question: "Can you optimize my profile if I already have a GBP listing?",
+    answer: "Absolutely—audits, rebuilds, and ongoing optimization are our bread and butter.",
+  },
+  {
+    question: "Do you guarantee Map Pack rankings?",
+    answer: "No one can guarantee specific positions, but we provide consistent, data-driven work and transparent reporting.",
+  },
+  {
+    question: "Will you manage my reviews and add Q&A?",
+    answer: "Yes—review strategy, reply templates, requests, and Q&A setup/monitoring are included (Growth handles replies with no cap).",
+  },
+  {
+    question: "Is there a setup fee or long contract?",
+    answer: "No setup fees and no contracts—cancel anytime.",
+  },
+  {
+    question: "Will I have a dedicated strategist?",
+    answer: "Yes—direct access to a home service marketing strategist.",
+  },
+];
 ---
 
 <Layout {title} {description}>
   <!-- HERO -->
   <section
-    class="relative flex min-h-[440px] flex-col items-center justify-center overflow-hidden bg-secondary pb-20 pt-16"
+    class="relative flex min-h-[440px] flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-16 pt-12"
   >
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light">
-    </div>
     <div
-      class="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center"
+      class="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-4 px-4 text-center"
     >
       <h1
-        class="font-heading text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl"
+        class="font-heading text-3xl font-extrabold leading-tight tracking-tight text-white md:text-5xl"
       >
-        Google Business Profile Optimization <span class="mt-1 block text-3xl md:text-4xl"
+        Google Business Profile Optimization <span class="mt-1 block text-xl md:text-3xl"
           >&amp; Maps SEO</span
         >
       </h1>
       <span
-        class="-mt-1 block text-xl font-semibold uppercase tracking-wider text-primary md:text-2xl"
+        class="block text-base font-semibold uppercase tracking-wider text-accent md:text-lg"
       >
         For Home Service Businesses
       </span>
-      <p class="max-w-2xl text-lg font-medium text-white/80 md:text-xl">
+      <p class="max-w-2xl text-base font-medium leading-relaxed text-white/90">
         Get found where it matters most—the Map Pack. More calls, more reviews, and measurable local
         growth for plumbers, HVAC, pest control, cleaning, landscaping &amp; more.
       </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a
-          href="#gbp-package"
-          class="inline-flex items-center rounded-2xl bg-primary px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-primary-dark"
-        >
+      <div class="flex flex-wrap justify-center gap-3">
+        <Button href="#gbp-package" variant="primary" size="lg">
           See Packages
-          <svg
-            class="ml-2 h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-          >
-        </a>
-        <a
-          href="#faq"
-          class="inline-flex items-center rounded-2xl bg-secondary px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-secondary-hover"
-        >
+          <Icon name="tabler:arrow-right" class="ml-2 h-4 w-4" slot="icon-right" />
+        </Button>
+        <Button href="#faq" variant="secondary" size="lg">
           FAQ
-          <svg
-            class="ml-2 h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-          >
-        </a>
+          <Icon name="tabler:arrow-right" class="ml-2 h-4 w-4" slot="icon-right" />
+        </Button>
       </div>
     </div>
   </section>
 
   <!-- WHAT IS GBP -->
-  <section class="border-t border-gray-100 bg-cream py-16">
+  <section class="border-t border-gray-100 bg-cream py-12">
     <div class="mx-auto max-w-5xl px-4 text-center">
-      <h2 class="mb-4 font-heading text-3xl font-bold text-heading md:text-4xl">
+      <h2 class="mb-3 font-heading text-xl font-bold text-heading md:text-2xl">
         What Is Google Business Profile Optimization?
       </h2>
-      <p class="text-lg text-body">
+      <p class="mb-6 text-base text-body">
         Your GBP is the #1 driver of local calls. We optimize your profile end-to-end—categories,
         services, photos, posts, reviews, Q&amp;A, tracking—so you rank in the Map Pack and stay
         there.
       </p>
 
-      <div class="mt-6 flex flex-wrap justify-center gap-3">
-        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
-          >Map Pack Visibility</span
-        >
-        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
-          >Profile Build &amp; Cleanup</span
-        >
-        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
-          >Posts &amp; Photos</span
-        >
-        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
-          >Reviews &amp; Q&amp;A</span
-        >
-        <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold"
-          >Tracking &amp; Reporting</span
-        >
+      <div class="flex flex-wrap justify-center gap-3">
+        {features.map((feature) => (
+          <Badge variant="primary" size="lg">{feature}</Badge>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- WHY TRUST -->
-  <section class="border-t border-gray-100 bg-white py-24">
+  <section class="border-t border-gray-100 bg-white py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-8 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
+      <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Why Home Service Pros Trust Lilos Growth
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
       </h2>
 
-      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
-        {
-          [
-            [
-              "Built by Home Service Owners",
-              "We’ve lived it—so we build what actually generates booked jobs.",
-            ],
-            [
-              "Specialists in Home Services",
-              "No generic agency fluff, just trades-focused growth.",
-            ],
-            ["No Long-Term Contract", "Month-to-month. We earn your business with results."],
-            ["Results You Can See", "Local rankings, calls, and jobs—measurable improvements."],
-            ["No Big Agency Fluff", "Direct access to your strategist. No runarounds."],
-            [
-              "Easy, Honest, & Human",
-              "Clear reporting, plain English, and a process that makes sense.",
-            ],
-          ].map(([title, body]) => (
-            <div class="flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-8 shadow-lg">
-              <span class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10">
-                <svg
-                  class="h-7 w-7 text-primary"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M3 12l6 6l12-12" />
-                </svg>
-              </span>
-              <h3 class="mb-1 text-center font-heading text-lg font-semibold text-heading">
-                {title}
-              </h3>
-              <p class="text-center text-[15px] text-body">{body}</p>
-            </div>
-          ))
-        }
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+        {trustReasons.map((reason) => (
+          <FeatureCard
+            icon={reason.icon}
+            title={reason.title}
+            description={reason.description}
+          />
+        ))}
       </div>
     </div>
   </section>
 
   <!-- GBP PACKAGES -->
-  <section id="gbp-package" class="border-t border-gray-100 bg-cream py-24">
+  <section id="gbp-package" class="border-t border-gray-100 bg-cream py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-4 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
+      <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Google Business Profile Packages
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
       </h2>
-      <p class="mb-12 text-center text-xl font-medium text-body">
+      <p class="mb-10 text-center text-base text-body">
         Clear value. Month-to-month. No rollovers.
       </p>
 
-      <div class="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2">
+      <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2">
         <!-- Google Business Profile— $299/mo -->
-        <article
-          class="grid grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
-          aria-labelledby="gbp-starter-title"
-        >
-          <header class="text-center">
-            <h3
-              id="gbp-starter-title"
-              class="font-heading text-lg font-semibold text-heading md:text-xl"
-            >
-              Google Business Profile
-            </h3>
-            <div class="mt-2 text-2xl font-bold text-primary md:text-3xl">
-              $299<span class="text-base font-normal text-gray-500">/mo</span>
-            </div>
-            <p class="mt-2 text-[15px] text-body">
-              Essential GBP management for steady local visibility.
-            </p>
-          </header>
+        <PricingCard
+          title="Google Business Profile"
+          price="$299"
+          period="mo"
+          description="Essential GBP management for steady local visibility."
+          features={[
+            "Setup or audit with <strong>keyword research & category mapping</strong>",
+            "Business info, services & products maintained (quarterly refresh)",
+            "<strong>6 posts/mo</strong> (offers, updates) — no rollovers",
+            "<strong>6 photos/mo</strong>, <strong>EXIF/alt optimized</strong> for local relevance — no rollovers",
+            "Review replies <strong>up to 30/mo</strong> + templates",
+            "Q&A monitored weekly; profile improvements & testing",
+            "Citation cleanup (quarterly core listings)",
+            "Monthly performance report",
+          ]}
+          ctaText="Get Started"
+          ctaHref="#contact"
+        />
 
-          <ul class="mt-5 list-disc space-y-2 pl-5 text-[15px] text-body">
-            <li>
-              Setup or audit with <span class="font-semibold"
-                >keyword research &amp; category mapping</span
-              >
-            </li>
-            <li>Business info, services &amp; products maintained (quarterly refresh)</li>
-            <li><span class="font-semibold">6 posts/mo</span> (offers, updates) — no rollovers</li>
-            <li>
-              <span class="font-semibold">6 photos/mo</span>, <span class="font-semibold"
-                >EXIF/alt optimized</span
-              > for local relevance — no rollovers
-            </li>
-            <li>Review replies <span class="font-semibold">up to 30/mo</span> + templates</li>
-            <li>Q&amp;A monitored weekly; profile improvements &amp; testing</li>
-            <li>Citation cleanup (quarterly core listings)</li>
-            <li>Monthly performance report</li>
-          </ul>
-
-          <div class="border-t border-gray-100 pt-6">
-            <a
-              href="#contact"
-              class="block w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
-              aria-label="Get Started — open contact form">Get Started</a
-            >
-          </div>
-        </article>
-
-        <!-- GBP + Local Seo -  -->
-        <article
-          class="relative grid grid-rows-[auto_1fr_auto] rounded-2xl border-2 border-primary bg-white p-8 shadow-md"
-          aria-labelledby="gbp-growth-title"
-        >
-          <div
-            class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1 text-xs font-bold text-white shadow"
-          >
-            Most Popular
-          </div>
-          <header class="mt-2 text-center">
-            <h3
-              id="gbp-growth-title"
-              class="font-heading text-lg font-semibold text-heading md:text-xl"
-            >
-              GBP + Local SEO
-            </h3>
-            <div class="mt-1 text-sm font-semibold">Includes everything in Starter</div>
-            <div class="mt-2 text-2xl font-bold text-primary md:text-3xl">
-              $699<span class="text-base font-normal text-gray-500">/mo</span>
-            </div>
-            <p class="mt-2 text-[15px] text-body">
-              Win more service-area searches and outpace competitors.
-            </p>
-          </header>
-
-          <ul class="mt-5 list-disc space-y-2 pl-5 text-[15px] text-body">
-            <li>
-              <span class="font-semibold">3 posts/week</span> (offers, FAQs, highlights) — no rollovers
-            </li>
-            <li>
-              Fresh photos ongoing, <span class="font-semibold">EXIF/alt optimized</span> for geo &amp;
-              keywords
-            </li>
-            <li>
-              Review replies <span class="font-semibold">no cap</span> + proactive request prompts
-            </li>
-            <li>Services &amp; products <span class="font-semibold">refreshed monthly</span></li>
-            <li>
-              <span class="font-semibold">Ongoing citations</span> incl. <span class="font-semibold"
-                >200+ directories</span
-              > (core + industry/niche)
-            </li>
-            <li>Quarterly heatmap &amp; competitor snapshot</li>
-            <li>Monthly report + <span class="font-semibold">30-min strategy call</span></li>
-          </ul>
-
-          <div class="border-t border-gray-100 pt-6">
-            <a
-              href="#contact"
-              class="block w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
-              aria-label="Upgrade — open contact form">Upgrade to Growth</a
-            >
-          </div>
-        </article>
+        <!-- GBP + Local SEO -->
+        <PricingCard
+          title="GBP + Local SEO"
+          price="$699"
+          period="mo"
+          badge="Includes everything in Starter"
+          description="Win more service-area searches and outpace competitors."
+          featured={true}
+          features={[
+            "<strong>3 posts/week</strong> (offers, FAQs, highlights) — no rollovers",
+            "Fresh photos ongoing, <strong>EXIF/alt optimized</strong> for geo & keywords",
+            "Review replies <strong>no cap</strong> + proactive request prompts",
+            "Services & products <strong>refreshed monthly</strong>",
+            "<strong>Ongoing citations</strong> incl. <strong>200+ directories</strong> (core + industry/niche)",
+            "Quarterly heatmap & competitor snapshot",
+            "Monthly report + <strong>30-min strategy call</strong>",
+          ]}
+          ctaText="Upgrade to Growth"
+          ctaHref="#contact"
+        />
       </div>
     </div>
   </section>
 
-  <!-- CROSS-SELL PACKAGES (aligned 4-up grid for consistency) -->
-  <section class="border-t border-gray-100 bg-bluelight py-24 shadow-xl" id="packages">
+  <!-- CROSS-SELL PACKAGES -->
+  <section class="border-t border-gray-100 bg-white py-16" id="packages">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-4 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
+      <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Service Packages for Home Service Companies
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
       </h2>
-      <p class="mb-14 text-center text-xl font-medium text-body">
+      <p class="mb-10 text-center text-base text-body">
         Choose the package that fits your goals.
       </p>
 
-      <div class="grid auto-rows-fr grid-cols-1 items-stretch gap-8 md:grid-cols-2 lg:grid-cols-4">
-        <!-- GBP (condensed; mirrors above) -->
-        <article
-          class="grid h-full grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
-        >
-          <header class="text-center">
-            <h3 class="font-heading text-lg font-semibold text-heading md:text-xl">
+      <div class="grid auto-rows-fr grid-cols-1 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <!-- Local SEO - Growth -->
+        <Card variant="elevated" class="flex h-full flex-col">
+          <div class="text-center">
+            <h3 class="font-heading text-base font-semibold text-heading md:text-lg">
               Local SEO - Growth
             </h3>
-            <div class="mt-1 text-2xl font-bold text-primary md:text-3xl">
-              From $999<span class="text-base font-normal text-gray-500">/mo</span>
+            <div class="mt-2 text-xl font-bold text-primary md:text-2xl">
+              From $999<span class="text-sm font-normal text-gray-500">/mo</span>
             </div>
-          </header>
-          <ul class="mt-5 list-disc space-y-1 pl-5 text-[15px] text-body">
+          </div>
+          <ul class="mt-4 flex-1 list-disc space-y-1 pl-5 text-sm text-body">
             <li>Audit, categories &amp; keywords</li>
             <li>Posts &amp; EXIF-optimized photos</li>
             <li>Reviews, Q&amp;A, citations</li>
           </ul>
-          <div class="border-t border-gray-100 pt-4">
-            <a
-              href="#gbp-package"
-              class="block w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
-              >View Details</a
-            >
+          <div class="mt-4 border-t border-gray-100 pt-4">
+            <Button href="#gbp-package" variant="primary" size="md" class="w-full">
+              View Details
+            </Button>
           </div>
-        </article>
+        </Card>
 
-        <!-- Local SEO (Essentials preview) -->
-        <article
-          class="grid h-full grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
-        >
-          <header class="text-center">
-            <h3 class="font-heading text-lg font-semibold text-heading md:text-xl">Local SEO</h3>
-            <div class="mt-1 text-2xl font-bold text-primary md:text-3xl">
-              From $599<span class="text-base font-normal text-gray-500">/mo</span>
+        <!-- Local SEO -->
+        <Card variant="elevated" class="flex h-full flex-col">
+          <div class="text-center">
+            <h3 class="font-heading text-base font-semibold text-heading md:text-lg">Local SEO</h3>
+            <div class="mt-2 text-xl font-bold text-primary md:text-2xl">
+              From $599<span class="text-sm font-normal text-gray-500">/mo</span>
             </div>
-          </header>
-          <ul class="mt-5 list-disc space-y-1 pl-5 text-[15px] text-body">
+          </div>
+          <ul class="mt-4 flex-1 list-disc space-y-1 pl-5 text-sm text-body">
             <li>Audit, keywords, on-page + technical</li>
             <li>Content &amp; internal linking</li>
             <li>Citations + reporting</li>
           </ul>
-          <div class="border-t border-gray-100 pt-4">
-            <a
-              href="/services/local-seo"
-              class="block w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
-              >View Details</a
-            >
+          <div class="mt-4 border-t border-gray-100 pt-4">
+            <Button href="/services/local-seo" variant="primary" size="md" class="w-full">
+              View Details
+            </Button>
           </div>
-        </article>
+        </Card>
 
-        <!-- Website as a Service (Base $199/mo per latest guardrails) -->
-        <article
-          class="grid h-full grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
-        >
-          <header class="text-center">
-            <h3 class="font-heading text-lg font-semibold text-heading md:text-xl">
+        <!-- Website as a Service -->
+        <Card variant="elevated" class="flex h-full flex-col">
+          <div class="text-center">
+            <h3 class="font-heading text-base font-semibold text-heading md:text-lg">
               Website as a Service
             </h3>
-            <div class="mt-1 text-2xl font-bold text-primary md:text-3xl">
-              $199<span class="text-base font-normal text-gray-500">/mo</span>
+            <div class="mt-2 text-xl font-bold text-primary md:text-2xl">
+              $199<span class="text-sm font-normal text-gray-500">/mo</span>
             </div>
-          </header>
-          <ul class="mt-5 list-disc space-y-1 pl-5 text-[15px] text-body">
+          </div>
+          <ul class="mt-4 flex-1 list-disc space-y-1 pl-5 text-sm text-body">
             <li>Modern, mobile-ready site</li>
             <li>Hosting, edits &amp; monitoring</li>
             <li>Lead forms + basic SEO</li>
           </ul>
-          <div class="border-t border-gray-100 pt-4">
-            <a
-              href="/services/web-design"
-              class="block w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
-              >View Details</a
-            >
+          <div class="mt-4 border-t border-gray-100 pt-4">
+            <Button href="/services/web-design" variant="primary" size="md" class="w-full">
+              View Details
+            </Button>
           </div>
-        </article>
+        </Card>
 
-        <!-- Local SEO + GBP Bundle -->
-        <article
-          class="grid h-full grid-rows-[auto_1fr_auto] rounded-2xl border border-gray-200 bg-white p-8 shadow-md"
-        >
-          <header class="text-center">
-            <h3 class="font-heading text-lg font-semibold text-heading md:text-xl">
+        <!-- One-Time Website Build -->
+        <Card variant="elevated" class="flex h-full flex-col">
+          <div class="text-center">
+            <h3 class="font-heading text-base font-semibold text-heading md:text-lg">
               One-Time Website Build
             </h3>
-            <div class="mt-1 text-2xl font-bold text-primary md:text-3xl">
-              $499<span class="text-base font-normal text-gray-500">/mo</span>
+            <div class="mt-2 text-xl font-bold text-primary md:text-2xl">
+              $499<span class="text-sm font-normal text-gray-500">/mo</span>
             </div>
-          </header>
-          <ul class="mt-5 list-disc space-y-1 pl-5 text-[15px] text-body">
+          </div>
+          <ul class="mt-4 flex-1 list-disc space-y-1 pl-5 text-sm text-body">
             <li>Unified plan &amp; reporting</li>
             <li>Monthly visibility review</li>
             <li>Quarterly competitor snapshot</li>
           </ul>
-          <div class="border-t border-gray-100 pt-4">
-            <a
-              href="/packages"
-              class="block w-full rounded-xl bg-primary px-6 py-3 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
-              >Compare Plans</a
-            >
+          <div class="mt-4 border-t border-gray-100 pt-4">
+            <Button href="/packages" variant="primary" size="md" class="w-full">
+              Compare Plans
+            </Button>
           </div>
-        </article>
+        </Card>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="border-t border-gray-100 bg-white py-20">
+  <section id="faq" class="border-t border-gray-100 bg-cream py-16">
     <div class="mx-auto max-w-4xl px-4">
-      <h2 class="mb-8 text-center font-heading text-3xl font-bold text-heading md:text-4xl">
+      <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Google Business Profile &amp; Maps SEO: FAQs
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
       </h2>
 
-      <div class="space-y-6">
-        {
-          [
-            [
-              "How fast can you improve my Google Maps ranking?",
-              "Most see measurable gains in 30–60 days with consistent posting, reviews, and ongoing profile updates.",
-            ],
-            [
-              "Can you optimize my profile if I already have a GBP listing?",
-              "Absolutely—audits, rebuilds, and ongoing optimization are our bread and butter.",
-            ],
-            [
-              "Do you guarantee Map Pack rankings?",
-              "No one can guarantee specific positions, but we provide consistent, data-driven work and transparent reporting.",
-            ],
-            [
-              "Will you manage my reviews and add Q&A?",
-              "Yes—review strategy, reply templates, requests, and Q&A setup/monitoring are included (Growth handles replies with no cap).",
-            ],
-            [
-              "Is there a setup fee or long contract?",
-              "No setup fees and no contracts—cancel anytime.",
-            ],
-            [
-              "Will I have a dedicated strategist?",
-              "Yes—direct access to a home service marketing strategist.",
-            ],
-          ].map(([q, a]) => (
-            <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
-              <h3 class="mb-2 font-heading text-lg font-semibold text-heading">{q}</h3>
-              <p class="text-base text-body">{a}</p>
-            </div>
-          ))
-        }
+      <div class="space-y-4">
+        {faqs.map((faq, index) => (
+          <Card variant={index % 2 === 0 ? "elevated" : "default"}>
+            <h3 class="mb-2 font-heading text-base font-semibold text-heading md:text-lg">
+              {faq.question}
+            </h3>
+            <p class="text-sm text-body md:text-base">
+              {faq.answer}
+            </p>
+          </Card>
+        ))}
       </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-gradient-to-br from-primary to-primary-dark py-12">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+      <h2 class="mb-3 font-heading text-xl font-extrabold text-white md:text-2xl">
+        Ready to Dominate the Map Pack?
+      </h2>
+      <p class="mb-6 text-base text-white/90">
+        Get a free GBP audit and action plan—no hard sell, just what to do next.
+      </p>
+      <Button href="#contact" variant="white" size="lg">
+        Book My Free Audit
+      </Button>
     </div>
   </section>
 </Layout>

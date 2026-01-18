@@ -1,0 +1,173 @@
+/* ============================================
+   LILOS GROWTH - MINIMAL ANIMATION SYSTEM
+   Subtle, professional interactions only
+   ============================================ */
+
+/* ============================================
+   HOVER MICRO-INTERACTIONS (Subtle)
+   ============================================ */
+
+/* Card Subtle Lift */
+.card-lift {
+  @apply transition-all duration-200 ease-out;
+  @apply hover:shadow-lg;
+}
+
+/* Card Glow Effect (Very Subtle) */
+.card-glow {
+  @apply transition-shadow duration-200 ease-out;
+}
+
+.card-glow:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Service Card Hover (Minimal) */
+.service-card-hover {
+  @apply transition-shadow duration-200 ease-out;
+  @apply hover:shadow-md;
+}
+
+/* Pricing Card Highlight (Subtle) */
+.pricing-card-highlight {
+  @apply transition-shadow duration-200 ease-out;
+  @apply hover:shadow-lg;
+}
+
+/* ============================================
+   BUTTON ANIMATIONS (Minimal)
+   ============================================ */
+
+/* Primary Button Hover */
+.btn-primary-animated {
+  @apply transition-all duration-150 ease-out;
+  @apply hover:shadow-md;
+}
+
+/* Button Ripple Effect */
+[data-ripple] {
+  position: relative;
+  overflow: hidden;
+}
+
+[data-ripple]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s, height 0.4s;
+}
+
+[data-ripple]:active::after {
+  width: 200px;
+  height: 200px;
+}
+
+/* ============================================
+   FORM ANIMATIONS
+   ============================================ */
+
+/* Input Focus Effect */
+.input-focus-glow {
+  @apply transition-all duration-150 ease-out;
+  @apply focus:ring-2 focus:ring-primary focus:ring-opacity-20;
+  @apply focus:border-primary;
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+
+/* Spinner */
+.spinner {
+  @apply inline-block h-5 w-5 animate-spin rounded-full;
+  @apply border-2 border-current border-t-transparent;
+}
+
+/* Skeleton Loading */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  @apply bg-gray-200 rounded;
+  animation: shimmer 2s infinite;
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+}
+
+/* ============================================
+   NAVIGATION ANIMATIONS
+   ============================================ */
+
+/* Nav Link Underline Effect */
+.nav-link-underline {
+  @apply relative;
+}
+
+.nav-link-underline::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary;
+  @apply transition-all duration-200 ease-out;
+}
+
+.nav-link-underline:hover::after {
+  @apply w-full;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Smooth Scroll */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Hardware Acceleration */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Reduce Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   DISABLED ANIMATIONS
+   The following are intentionally removed for
+   a cleaner, more professional feel:
+   - Scroll-based fade-in animations
+   - Staggered grid animations  
+   - Hero gradient animations
+   - Card scale effects
+   - Floating animations
+   - Icon bounce/spin effects
+   ============================================ */

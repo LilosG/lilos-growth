@@ -1,3 +1,6 @@
+/* Design Tokens - Single source of truth */
+@import "../../styles/tokens.css";
+
 /* Google Fonts - Consider moving to <link> in head for better performance */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;700&display=swap");
 
@@ -72,6 +75,49 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
+   CARD COMPONENT STYLES
+   Design system card variants with hover effects
+   ============================================ */
+@layer components {
+  .card {
+    @apply rounded-card bg-surface-base p-8 border border-gray-200/60 shadow-sm;
+  }
+  
+  .card-elevated {
+    @apply rounded-card bg-surface-base p-8 border border-gray-200/60 transition-all duration-300;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .card-elevated:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+  
+  .card-interactive {
+    @apply rounded-card bg-surface-base p-8 border border-gray-200/60 cursor-pointer transition-all duration-300;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .card-interactive:hover {
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(245, 107, 42, 0.2);
+    transform: translateY(-4px);
+  }
+  
+  .card-outlined {
+    @apply rounded-card bg-surface-base p-8 border-2 border-border-base transition-all duration-300;
+  }
+  
+  .card-outlined:hover {
+    @apply border-primary;
+  }
+  
+  .card-sm {
+    @apply p-6;
+  }
+}
+
+/* ============================================
    CTA TRACKING STYLES
    Automatically style elements with data-evt attribute
    ============================================ */
@@ -80,7 +126,7 @@ h1, h2, h3, h4, h5, h6 {
     @apply btn btn-primary;
   }
   [data-evt^="cta_"][data-cta="secondary"] {
-    @apply btn btn-outline-primary;
+    @apply btn btn-outline;
   }
 }
 
