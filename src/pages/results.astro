@@ -129,6 +129,26 @@ const caseStudies = [
   }
 ];
 
+// GBP Performance Data
+const gbpResults = [
+  {
+    client: "Blue Door Pest Control",
+    metric: "Direction Requests",
+    value: "194",
+    growth: "+19.0%",
+    period: "Sep 2025 – Dec 2025",
+    image: "/images/results/blue-door-gbp.png"
+  },
+  {
+    client: "Carlsbad Fix It",
+    metric: "Business Profile Interactions",
+    value: "38",
+    growth: "Upward Trend",
+    period: "Sep 2025 – Dec 2025",
+    image: "/images/results/carlsbad-fixit-gbp.png"
+  }
+];
+
 // Service type labels for filtering
 const serviceTypeLabels = {
   all: "All Results",
@@ -225,8 +245,50 @@ const faqs = [
     </section>
   ))}
 
+  <!-- GBP PERFORMANCE SECTION -->
+  <section class="border-b border-border-subtle bg-surface-base section-padding">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="mb-12 text-center">
+        <Badge variant="primary" class="mb-4">GBP Management</Badge>
+        <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
+          Google Business Profile Performance
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base text-body">
+          Real-time performance data from profiles we manage. We focus on the metrics that matter: direction requests, calls, and direct customer interactions.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        {gbpResults.map((result) => (
+          <div class="card-elevated overflow-hidden p-0">
+            <div class="border-b border-border-subtle bg-background-subtle p-6">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h3 class="font-heading text-lg font-bold text-heading">{result.client}</h3>
+                  <p class="text-sm text-muted">{result.period}</p>
+                </div>
+                <div class="text-right">
+                  <div class="text-2xl font-bold text-primary">{result.value}</div>
+                  <div class="text-xs font-semibold uppercase tracking-wider text-success">{result.growth}</div>
+                </div>
+              </div>
+              <p class="mt-2 text-sm font-medium text-body">{result.metric}</p>
+            </div>
+            <div class="relative aspect-[16/9] bg-secondary/5">
+              <img 
+                src={result.image} 
+                alt={`${result.client} GBP Performance`}
+                class="h-full w-full object-cover object-top"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- MORE CASE STUDIES -->
-  <section class="bg-surface-base section-padding">
+  <section class="bg-background-cream section-padding">
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="mb-4 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         More Client Wins
@@ -253,7 +315,7 @@ const faqs = [
   </section>
 
   <!-- FAQs -->
-  <section class="border-t border-border-subtle bg-background-cream section-padding" id="faq">
+  <section class="border-t border-border-subtle bg-surface-base section-padding" id="faq">
     <div class="mx-auto max-w-4xl px-4">
       <h2 class="mb-4 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Common Questions
@@ -283,7 +345,7 @@ const faqs = [
   </section>
 
   <!-- FINAL CTA -->
-  <section class="border-t border-border-subtle bg-surface-base section-padding">
+  <section class="border-t border-border-subtle bg-background-cream section-padding">
     <div class="mx-auto max-w-3xl px-4 text-center">
       <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
         See what this could look like in your city
