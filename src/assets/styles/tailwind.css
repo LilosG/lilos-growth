@@ -80,11 +80,11 @@ h1, h2, h3, h4, h5, h6 {
    ============================================ */
 @layer components {
   .card {
-    @apply rounded-card bg-surface-base p-8;
+    @apply rounded-card bg-surface-base p-8 border border-gray-200/60 shadow-sm;
   }
   
   .card-elevated {
-    @apply rounded-card bg-surface-base p-8 transition-all duration-300;
+    @apply rounded-card bg-surface-base p-8 border border-gray-200/60 transition-all duration-300;
     box-shadow: var(--shadow-card);
   }
   
@@ -94,12 +94,13 @@ h1, h2, h3, h4, h5, h6 {
   }
   
   .card-interactive {
-    @apply rounded-card bg-surface-base p-8 cursor-pointer transition-all duration-300;
+    @apply rounded-card bg-surface-base p-8 border border-gray-200/60 cursor-pointer transition-all duration-300;
     box-shadow: var(--shadow-card);
   }
   
   .card-interactive:hover {
     box-shadow: var(--shadow-card-hover);
+    border-color: rgba(245, 107, 42, 0.2);
     transform: translateY(-4px);
   }
   
