@@ -1,0 +1,230 @@
+
+> lilos-growth@1.0.0-beta.52 build
+> astro build
+
+03:04:52 [astrowind] Astrowind `./src/config.yaml` has been loaded.
+03:04:52 [content] Syncing content
+03:04:52 [content] Synced content
+03:04:52 [types] Generated 551ms
+03:04:53 [build] output: "static"
+03:04:53 [build] mode: "server"
+03:04:53 [build] directory: /home/ubuntu/lilos-growth/dist/
+03:04:53 [build] adapter: @astrojs/vercel
+03:04:53 [build] Collecting build info...
+03:04:53 [build] ✓ Completed in 705ms.
+03:04:53 [build] Building server entrypoints...
+Browserslist: browsers data (caniuse-lite) is 7 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+
+warn - The utility `` contains an invalid theme value and was not generated.
+03:04:59 [vite] ✓ built in 6.91s
+03:04:59 [build] ✓ Completed in 6.96s.
+
+ building client (vite) 
+03:05:00 [vite] transforming...
+03:05:00 [vite] ✓ 17 modules transformed.
+03:05:00 [vite] rendering chunks...
+03:05:00 [vite] computing gzip size...
+03:05:00 [vite] dist/client/_astro/GBPCategoryFinder.astro_astro_type_script_index_0_lang.Ba1LjQzI.js  8.88 kB │ gzip: 3.34 kB
+03:05:00 [vite] ✓ built in 118ms
+
+ prerendering static routes 
+03:05:00 ▶ src/pages/404.astro
+03:05:00   └─ /404.html (+15ms) 
+03:05:00 ▶ src/pages/about.astro
+03:05:00   └─ /about/index.html (+8ms) 
+03:05:00 ▶ src/pages/additional-services/index.astro
+03:05:00   └─ /additional-services/index.html (+13ms) 
+03:05:00 ▶ src/pages/blog/category/[category]/[page].astro
+03:05:00   ├─ /blog/category/Local SEO/1/index.html (+7ms) 
+03:05:00   ├─ /blog/category/Content/1/index.html (+6ms) 
+03:05:00   ├─ /blog/category/SEO/1/index.html (+17ms) 
+03:05:00   ├─ /blog/category/Google Business Profile/1/index.html (+6ms) 
+03:05:00   ├─ /blog/category/Announcements/1/index.html (+4ms) 
+03:05:00   ├─ /blog/category/Websites/1/index.html (+5ms) 
+03:05:00   └─ /blog/category/Workflows/1/index.html (+4ms) 
+03:05:00 ▶ src/pages/blog/category/[category]/index.astro
+03:05:00   ├─ /blog/category/Local SEO/index.html (+5ms) 
+03:05:00   ├─ /blog/category/Content/index.html (+5ms) 
+03:05:00   ├─ /blog/category/SEO/index.html (+6ms) 
+03:05:00   ├─ /blog/category/Google Business Profile/index.html (+5ms) 
+03:05:00   ├─ /blog/category/Announcements/index.html (+4ms) 
+03:05:00   ├─ /blog/category/Websites/index.html (+3ms) 
+03:05:00   └─ /blog/category/Workflows/index.html (+3ms) 
+03:05:00 λ src/pages/blog/rss.xml.ts
+03:05:00   └─ /blog/rss.xml (+11ms) 
+03:05:00 ▶ src/pages/blog/tag/[tag]/[page].astro
+03:05:00   ├─ /blog/tag/gbp/1/index.html (+6ms) 
+03:05:00   ├─ /blog/tag/categories/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/local-seo/1/index.html (+6ms) 
+03:05:00   ├─ /blog/tag/local-seo/2/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/checklist/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/service-pages/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/templates/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/conversion/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/location-pages/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/service-area-pages/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/architecture/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/ranking-factors/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/map-pack/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/keyword-research/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/entities/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/setup/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/services/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/posts/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/content/1/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/landing-pages/1/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/diagnostics/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/reviews/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/reputation/1/index.html (+7ms) 
+03:05:00   ├─ /blog/tag/aeo/1/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/strategy/1/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/faqs/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/suspension/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/compliance/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/utm/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/call-tracking/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/ia/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/internal-links/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/links/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/pr/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/sab/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/long-tail/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/maps/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/web/1/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/ux/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/drafts/1/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/workflow/1/index.html (+2ms) 
+03:05:00   └─ /blog/tag/seo/1/index.html (+3ms) 
+03:05:00 ▶ src/pages/blog/tag/[tag]/index.astro
+03:05:00   ├─ /blog/tag/gbp/index.html (+5ms) 
+03:05:00   ├─ /blog/tag/categories/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/local-seo/index.html (+10ms) 
+03:05:00   ├─ /blog/tag/checklist/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/service-pages/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/templates/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/conversion/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/location-pages/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/service-area-pages/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/architecture/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/ranking-factors/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/map-pack/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/keyword-research/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/entities/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/setup/index.html (+2ms) 
+03:05:00   ├─ /blog/tag/services/index.html (+6ms) 
+03:05:00   ├─ /blog/tag/posts/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/content/index.html (+5ms) 
+03:05:00   ├─ /blog/tag/landing-pages/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/diagnostics/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/reviews/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/reputation/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/aeo/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/strategy/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/faqs/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/suspension/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/compliance/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/utm/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/call-tracking/index.html (+6ms) 
+03:05:00   ├─ /blog/tag/ia/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/internal-links/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/links/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/pr/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/sab/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/long-tail/index.html (+4ms) 
+03:05:00   ├─ /blog/tag/maps/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/web/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/ux/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/drafts/index.html (+3ms) 
+03:05:00   ├─ /blog/tag/workflow/index.html (+3ms) 
+03:05:00   └─ /blog/tag/seo/index.html (+3ms) 
+03:05:00 ▶ src/pages/blog/[slug].astro
+03:05:00   ├─ /blog/best-gbp-categories-home-service-businesses/index.html (+13ms) 
+03:05:00   ├─ /blog/diy-google-business-profile-optimization-checklist/index.html (+7ms) 
+03:05:00   ├─ /blog/local-seo-service-page-template-home-services/index.html (+6ms) 
+03:05:00   ├─ /blog/location-pages-vs-service-area-pages-home-services/index.html (+7ms) 
+03:05:00   ├─ /blog/map-pack-ranking-factors-for-home-service-businesses-2025/index.html (+6ms) 
+03:05:00   ├─ /blog/entity-first-keyword-research-local-2025/index.html (+3ms) 
+03:05:00   ├─ /blog/gbp-categories-services-attributes-setup-2025/index.html (+3ms) 
+03:05:00   ├─ /blog/gbp-post-formats-that-drive-calls-2025/index.html (+4ms) 
+03:05:00   ├─ /blog/google-business-profile-essentials/index.html (+4ms) 
+03:05:00   ├─ /blog/launching-the-lilos-growth-blog/index.html (+4ms) 
+03:05:00   ├─ /blog/local-landing-page-blueprints-2025/index.html (+6ms) 
+03:05:00   ├─ /blog/local-seo-long-tail-strategy/index.html (+4ms) 
+03:05:00   ├─ /blog/long-tail-local-seo-guide/index.html (+3ms) 
+03:05:00   ├─ /blog/map-pack-diagnostics-2025/index.html (+3ms) 
+03:05:00   ├─ /blog/review-velocity-topical-coverage-2025/index.html (+3ms) 
+03:05:00   ├─ /blog/website-conversion-checklist/index.html (+3ms) 
+03:05:00   ├─ /blog/aeo-for-local-services-direct-answer-2025/index.html (+3ms) 
+03:05:00   ├─ /blog/when-to-mark-a-post-as-draft/index.html (+3ms) 
+03:05:00   ├─ /blog/aeo-ready-faqs-paa-2025/index.html (+3ms) 
+03:05:00   ├─ /blog/gbp-suspension-reinstatement-playbook-2025/index.html (+3ms) 
+03:05:00   ├─ /blog/gbp-utm-call-tracking-2025/index.html (+3ms) 
+03:05:00   ├─ /blog/internal-linking-for-local-2025/index.html (+3ms) 
+03:05:00   ├─ /blog/local-links-brand-mentions-2025/index.html (+3ms) 
+03:05:00   └─ /blog/sab-rules-service-areas-2025/index.html (+6ms) 
+03:05:00 ▶ src/pages/blog/index.astro
+03:05:00   └─ /blog/index.html (+7ms) 
+03:05:00 ▶ src/pages/blog/[...page].astro
+03:05:00   └─ /blog/2/index.html (+6ms) 
+03:05:00 ▶ src/pages/cards-preview.astro
+03:05:00   └─ /cards-preview/index.html (+3ms) 
+03:05:00 ▶ src/pages/contact.astro
+03:05:00   └─ /contact/index.html (+3ms) 
+03:05:00 ▶ src/pages/index-refactored.astro
+03:05:00   └─ /index-refactored/index.html (+7ms) 
+03:05:00 ▶ src/pages/local-seo-tools/index.astro
+03:05:00   └─ /local-seo-tools/index.html (+4ms) 
+03:05:00 ▶ src/pages/offers/local-seo.astro
+03:05:00   └─ /offers/local-seo/index.html (+3ms) 
+03:05:00 ▶ src/pages/offers/local-seo-locked.astro
+03:05:00   └─ /offers/local-seo-locked/index.html (+3ms) 
+03:05:00 ▶ src/pages/packages.astro
+03:05:00   └─ /packages/index.html (+10ms) 
+03:05:00 ▶ src/pages/plans-preview.astro
+03:05:00   └─ /plans-preview/index.html (+3ms) 
+03:05:00 ▶ src/pages/privacy.md
+03:05:00   └─ /privacy/index.html (+3ms) 
+03:05:00 ▶ src/pages/privacy-policy.astro
+03:05:00   └─ /privacy-policy/index.html (+2ms) 
+03:05:00 ▶ src/pages/results.astro
+03:05:00   └─ /results/index.html (+11ms) 
+03:05:00 ▶ src/pages/results-refactored.astro
+03:05:00   └─ /results-refactored/index.html (+9ms) 
+03:05:00 λ src/pages/rss.xml.ts
+03:05:00   └─ /rss.xml (+5ms) 
+03:05:00 ▶ src/pages/services/google-business-profile-optimization/index.astro
+03:05:00   └─ /services/google-business-profile-optimization/index.html (+8ms) 
+03:05:00 ▶ src/pages/services/local-seo/index.astro
+03:05:00   └─ /services/local-seo/index.html (+7ms) 
+03:05:00 ▶ src/pages/services/web-design/index.astro
+03:05:00   └─ /services/web-design/index.html (+9ms) 
+03:05:00 ▶ src/pages/services/index.astro
+03:05:00   └─ /services/index.html (+5ms) 
+03:05:00 ▶ src/pages/terms.md
+03:05:00   └─ /terms/index.html (+2ms) 
+03:05:00 ▶ src/pages/thank-you.astro
+03:05:00   └─ /thank-you/index.html (+3ms) 
+03:05:00 ▶ src/pages/index.astro
+03:05:00   └─ /index.html (+16ms) 
+03:05:01 ✓ Completed in 872ms.
+
+03:05:01 [build] Rearranging server assets...
+03:05:01 [@astrojs/vercel] Bundling function ../../../../dist/server/entry.mjs
+03:05:02 [@astrojs/sitemap] `sitemap-index.xml` created at `dist/client`
+✓ Successfully compressed a total of 2 CSS files for 1.24 KB.
+03:05:26 [build] Waiting for integration "astro-compress", hook "astro:build:done"...
+✓ Successfully compressed a total of 145 HTML files for 369.18 KB.
+✓ Successfully compressed a total of 5 JavaScript files for 7.26 KB.
+03:05:26 [astrowind] Updating `robots.txt` with `sitemap-index.xml` ...
+03:05:26 [@astrojs/vercel] Copying static files to .vercel/output/static
+03:05:26 [build] Server built in 34.48s
+03:05:26 [build] Complete!
+
+> lilos-growth@1.0.0-beta.52 postbuild
+> node scripts/ensure-blog-in-sitemap.mjs && node scripts/prune-sitemaps-orphans.mjs
+
+No dist/blog found; skipping.
+Pruning sitemap duplicates / low-priority URLs...
+  • No sitemap-0.xml found, nothing to do.

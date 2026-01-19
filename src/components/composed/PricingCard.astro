@@ -82,7 +82,7 @@ const displayDescription = subtitle || description;
   
   <Card 
     variant={featured ? "elevated" : "default"}
-    class={`pricing-card-highlight h-full flex flex-col transition-all duration-300 hover:shadow-2xl ${featured ? 'border-2 border-primary shadow-xl' : 'border border-gray-200 shadow-sm hover:border-primary/30'}`}
+    class={`pricing-card-highlight h-full flex flex-col transition-all duration-300 ${featured ? 'border-2 border-primary shadow-2xl' : 'hover:shadow-xl hover:border-primary/30'}`}
   >
     {badge && !featured && (
       <div class="mb-3">

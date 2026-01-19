@@ -79,27 +79,25 @@ h1, h2, h3, h4, h5, h6 {
    ============================================ */
 @layer components {
   .card {
-    @apply rounded-card bg-surface-base p-8 border border-gray-200/60 shadow-sm;
+    @apply rounded-card bg-white p-8 border border-gray-200/80 shadow-md;
   }
   
   .card-elevated {
-    @apply rounded-card bg-surface-base p-8 border border-gray-200/60 transition-all duration-300;
-    box-shadow: var(--shadow-card);
+    @apply rounded-card bg-white p-8 border border-gray-200/80 transition-all duration-300 shadow-lg;
   }
   
   .card-elevated:hover {
-    box-shadow: var(--shadow-card-hover);
+    @apply shadow-xl border-gray-300/80;
     transform: translateY(-2px);
   }
   
   .card-interactive {
-    @apply rounded-card bg-surface-base p-8 border border-gray-200/60 cursor-pointer transition-all duration-300;
-    box-shadow: var(--shadow-card);
+    @apply rounded-card bg-white p-8 border border-gray-200/80 cursor-pointer transition-all duration-300 shadow-lg;
   }
   
   .card-interactive:hover {
-    box-shadow: var(--shadow-card-hover);
-    border-color: rgba(245, 107, 42, 0.2);
+    @apply shadow-2xl;
+    border-color: rgba(245, 107, 42, 0.3);
     transform: translateY(-4px);
   }
   
