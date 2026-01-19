@@ -1,4 +1,6 @@
-# 🚀 AstroWind
+# 🚀 Lilos Growth - Performance Optimized
+
+<!-- Deployment: v1.0.0-beta.53 - Performance Optimizations Active -->
 
 <img src="https://raw.githubusercontent.com/onwidget/.github/main/resources/astrowind/lighthouse-score.png" align="right"
      alt="AstroWind Lighthouse Score" width="100" height="358">
