@@ -26,15 +26,29 @@ const inlineGA = enabled
 
       function loadGa() {
         if (window.__gaLoaded) return;
-        const s = document.createElement("script");
-        s.async = true;
-        s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(gaId);
-        document.head.appendChild(s);
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){ dataLayer.push(arguments); }
-        gtag("js", new Date());
-        gtag("config", gaId, { anonymize_ip: true });
-        window.__gaLoaded = true;
+
+        // Use requestIdleCallback to defer GA loading until browser is idle
+        const loadScript = function() {
+          const s = document.createElement("script");
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(gaId);
+          document.head.appendChild(s);
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ dataLayer.push(arguments); }
+          gtag("js", new Date());
+          gtag("config", gaId, {
+            anonymize_ip: true,
+            send_page_view: true
+          });
+          window.__gaLoaded = true;
+        };
+
+        // Defer loading until browser is idle (or after 2s fallback)
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadScript, { timeout: 2000 });
+        } else {
+          setTimeout(loadScript, 2000);
+        }
       }
 
       try {

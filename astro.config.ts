@@ -59,10 +59,50 @@ export default defineConfig({
     }),
     compress({
       CSS: true,
-      HTML: { "html-minifier-terser": { removeAttributeQuotes: false } },
-      Image: false,
-      JavaScript: true,
-      SVG: false,
+      HTML: {
+        "html-minifier-terser": {
+          removeAttributeQuotes: false,
+          collapseWhitespace: true,
+          removeComments: true,
+          minifyCSS: true,
+          minifyJS: true
+        }
+      },
+      Image: {
+        webp: {
+          quality: 80,
+        },
+        avif: {
+          quality: 75,
+        },
+        jpg: {
+          quality: 80,
+        },
+        png: {
+          quality: 80,
+        },
+      },
+      JavaScript: {
+        terser: {
+          compress: {
+            drop_console: true,
+            drop_debugger: true,
+          },
+        },
+      },
+      SVG: {
+        multipass: true,
+        plugins: [
+          {
+            name: 'preset-default',
+            params: {
+              overrides: {
+                removeViewBox: false,
+              },
+            },
+          },
+        ],
+      },
       Logger: 1,
     }),
     astrowind({ config: "./src/config.yaml" }),
