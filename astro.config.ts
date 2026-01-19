@@ -1,4 +1,5 @@
 // FILE: astro.config.ts
+// Performance Optimizations v1.0.0-beta.53
 import path from "path";
 import { fileURLToPath } from "url";
 import { defineConfig } from "astro/config";
