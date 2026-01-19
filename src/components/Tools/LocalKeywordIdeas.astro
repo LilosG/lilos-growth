@@ -31,35 +31,46 @@
 
 <script>
   (function () {
-    const form = document.getElementById('keywords-form');
-    const resultEl = document.getElementById('keywords-result');
-    const outputEl = document.getElementById('keywords-output');
-    const copyBtn = document.getElementById('keywords-copy');
+    const form = document.getElementById('keywords-form') as HTMLFormElement | null;
+    const resultEl = document.getElementById('keywords-result') as HTMLElement | null;
+    const outputEl = document.getElementById('keywords-output') as HTMLElement | null;
+    const copyBtn = document.getElementById('keywords-copy') as HTMLButtonElement | null;
+
+    if (!form || !resultEl || !outputEl || !copyBtn) return;
+
     const modifiers = ['near me', 'services', 'company', 'contractor', 'cost', 'prices', 'affordable', 'emergency', '24 hour', 'licensed', 'best', 'top rated'];
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      const service = document.getElementById('keywords-service').value.trim().toLowerCase();
-      const city = document.getElementById('keywords-city').value.trim();
-      const nearby = document.getElementById('keywords-nearby').value.split(',').map(s => s.trim()).filter(Boolean);
+      const serviceEl = document.getElementById('keywords-service') as HTMLInputElement | null;
+      const cityEl = document.getElementById('keywords-city') as HTMLInputElement | null;
+      const nearbyEl = document.getElementById('keywords-nearby') as HTMLInputElement | null;
+
+      if (!serviceEl || !cityEl || !nearbyEl) return;
+
+      const service = serviceEl.value.trim().toLowerCase();
+      const city = cityEl.value.trim();
+      const nearby = nearbyEl.value.split(',').map((s: string) => s.trim()).filter(Boolean);
       if (!service || !city) return;
 
       const areas = [city, ...nearby];
-      const keywords = [];
+      const keywords: string[] = [];
       areas.forEach(area => { keywords.push(service + ' ' + area, service + ' in ' + area, area + ' ' + service); });
       modifiers.forEach(mod => { keywords.push(service + ' ' + mod, service + ' ' + mod + ' ' + city); });
       keywords.push('how much does ' + service + ' cost in ' + city, 'best ' + service + ' in ' + city);
 
       const unique = [...new Set(keywords)].sort();
-      outputEl.innerHTML = unique.map(kw => '<div class="py-1 text-sm text-gray-700">' + kw + '</div>').join('');
-      outputEl.dataset.keywords = unique.join('\n');
-      resultEl.classList.remove('hidden');
+      outputEl!.innerHTML = unique.map(kw => '<div class="py-1 text-sm text-gray-700">' + kw + '</div>').join('');
+      outputEl!.dataset.keywords = unique.join('\n');
+      resultEl!.classList.remove('hidden');
     });
 
     copyBtn.addEventListener('click', function () {
-      navigator.clipboard.writeText(outputEl.dataset.keywords).then(function () {
-        copyBtn.textContent = 'Copied!';
-        setTimeout(function () { copyBtn.textContent = 'Copy All'; }, 2000);
+      const keywords = outputEl!.dataset.keywords;
+      if (!keywords) return;
+      navigator.clipboard.writeText(keywords).then(function () {
+        copyBtn!.textContent = 'Copied!';
+        setTimeout(function () { copyBtn!.textContent = 'Copy All'; }, 2000);
       });
     });
   })();

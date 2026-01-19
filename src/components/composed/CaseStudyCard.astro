@@ -20,7 +20,7 @@ export interface Props {
   /** Industry/sector */
   sector: string;
   /** Service types provided */
-  serviceTypes: Array<'website' | 'gbp' | 'local-seo'>;
+  serviceTypes: ReadonlyArray<'website' | 'gbp' | 'local-seo'> | Array<'website' | 'gbp' | 'local-seo'>;
   /** Brief description */
   description: string;
   /** Array of metrics */
@@ -46,6 +46,8 @@ export interface Props {
   featured?: boolean;
   /** Additional CSS classes */
   class?: string;
+  /** Data attribute for filtering */
+  'data-services'?: string;
 }
 
 const {

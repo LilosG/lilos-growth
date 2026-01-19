@@ -2,15 +2,14 @@
 /**
  * CaseStudyCard - Enhanced with service type badges
  */
-import BrowserMockup from "~/components/ui/BrowserMockup.astro";
 import { serviceTypeLabels } from "~/data/results";
 import type { CaseStudy, ServiceType } from "~/data/results";
 
-export interface Props {
-  study: CaseStudy;
+export interface Props extends CaseStudy {
+  'data-services'?: string;
 }
 
-const { study } = Astro.props;
+const study = Astro.props;
 
 const kpis = Array.isArray(study.kpis) ? study.kpis.slice(0, 3) : [];
 const primaryHref = study.ctaHref ?? "/contact";

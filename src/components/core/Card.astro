@@ -50,8 +50,8 @@ const sizeClasses = {
   sm: 'card-sm',
 };
 
-const baseClass = variantClasses[variant];
-const sizeClass = sizeClasses[size];
+const baseClass = variantClasses[variant as keyof typeof variantClasses];
+const sizeClass = sizeClasses[size as keyof typeof sizeClasses];
 const groupClass = variant === 'interactive' ? 'group' : '';
 const combinedClasses = [baseClass, sizeClass, groupClass, className].filter(Boolean).join(' ');
 

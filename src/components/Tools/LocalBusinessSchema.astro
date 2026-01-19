@@ -68,38 +68,53 @@
 
 <script>
   (function () {
-    var form = document.getElementById('schema-form');
-    var resultEl = document.getElementById('schema-result');
-    var outputEl = document.getElementById('schema-output');
-    var copyBtn = document.getElementById('schema-copy');
+    var form = document.getElementById('schema-form') as HTMLFormElement | null;
+    var resultEl = document.getElementById('schema-result') as HTMLElement | null;
+    var outputEl = document.getElementById('schema-output') as HTMLElement | null;
+    var copyBtn = document.getElementById('schema-copy') as HTMLButtonElement | null;
+
+    if (!form || !resultEl || !outputEl || !copyBtn) return;
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var schema = {
+      var typeEl = document.getElementById('schema-type') as HTMLSelectElement | null;
+      var nameEl = document.getElementById('schema-name') as HTMLInputElement | null;
+      var phoneEl = document.getElementById('schema-phone') as HTMLInputElement | null;
+      var urlEl = document.getElementById('schema-url') as HTMLInputElement | null;
+      var streetEl = document.getElementById('schema-street') as HTMLInputElement | null;
+      var cityEl = document.getElementById('schema-city') as HTMLInputElement | null;
+      var stateEl = document.getElementById('schema-state') as HTMLInputElement | null;
+      var zipEl = document.getElementById('schema-zip') as HTMLInputElement | null;
+      var descEl = document.getElementById('schema-desc') as HTMLTextAreaElement | null;
+
+      if (!typeEl || !nameEl || !phoneEl || !urlEl || !streetEl || !cityEl || !stateEl || !zipEl || !descEl) return;
+
+      var schema: any = {
         '@context': 'https://schema.org',
-        '@type': document.getElementById('schema-type').value,
-        name: document.getElementById('schema-name').value.trim(),
-        telephone: document.getElementById('schema-phone').value.trim(),
-        url: document.getElementById('schema-url').value.trim(),
+        '@type': typeEl.value,
+        name: nameEl.value.trim(),
+        telephone: phoneEl.value.trim(),
+        url: urlEl.value.trim(),
         address: {
           '@type': 'PostalAddress',
-          streetAddress: document.getElementById('schema-street').value.trim(),
-          addressLocality: document.getElementById('schema-city').value.trim(),
-          addressRegion: document.getElementById('schema-state').value.trim(),
-          postalCode: document.getElementById('schema-zip').value.trim(),
+          streetAddress: streetEl.value.trim(),
+          addressLocality: cityEl.value.trim(),
+          addressRegion: stateEl.value.trim(),
+          postalCode: zipEl.value.trim(),
           addressCountry: 'US'
         }
       };
-      var desc = document.getElementById('schema-desc').value.trim();
+      var desc = descEl.value.trim();
       if (desc) schema.description = desc;
-      outputEl.textContent = JSON.stringify(schema, null, 2);
-      resultEl.classList.remove('hidden');
+      outputEl!.textContent = JSON.stringify(schema, null, 2);
+      resultEl!.classList.remove('hidden');
     });
 
     copyBtn.addEventListener('click', function () {
-      navigator.clipboard.writeText(outputEl.textContent).then(function () {
-        copyBtn.textContent = 'Copied!';
-        setTimeout(function () { copyBtn.textContent = 'Copy'; }, 2000);
+      if (!outputEl!.textContent) return;
+      navigator.clipboard.writeText(outputEl!.textContent).then(function () {
+        copyBtn!.textContent = 'Copied!';
+        setTimeout(function () { copyBtn!.textContent = 'Copy'; }, 2000);
       });
     });
   })();

@@ -47,31 +47,43 @@
 
 <script>
   (function () {
-    var form = document.getElementById('utm-form');
-    var resultEl = document.getElementById('utm-result');
-    var outputEl = document.getElementById('utm-output');
-    var copyBtn = document.getElementById('utm-copy');
+    var form = document.getElementById('utm-form') as HTMLFormElement | null;
+    var resultEl = document.getElementById('utm-result') as HTMLElement | null;
+    var outputEl = document.getElementById('utm-output') as HTMLInputElement | null;
+    var copyBtn = document.getElementById('utm-copy') as HTMLButtonElement | null;
+
+    if (!form || !resultEl || !outputEl || !copyBtn) return;
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       try {
-        var url = new URL(document.getElementById('utm-url').value.trim());
-        url.searchParams.set('utm_source', document.getElementById('utm-source').value.trim());
-        url.searchParams.set('utm_medium', document.getElementById('utm-medium').value.trim());
-        url.searchParams.set('utm_campaign', document.getElementById('utm-campaign').value.trim());
-        var term = document.getElementById('utm-term').value.trim();
-        var content = document.getElementById('utm-content').value.trim();
+        var urlInputEl = document.getElementById('utm-url') as HTMLInputElement | null;
+        var sourceEl = document.getElementById('utm-source') as HTMLInputElement | null;
+        var mediumEl = document.getElementById('utm-medium') as HTMLInputElement | null;
+        var campaignEl = document.getElementById('utm-campaign') as HTMLInputElement | null;
+        var termEl = document.getElementById('utm-term') as HTMLInputElement | null;
+        var contentEl = document.getElementById('utm-content') as HTMLInputElement | null;
+
+        if (!urlInputEl || !sourceEl || !mediumEl || !campaignEl || !termEl || !contentEl) return;
+
+        var url = new URL(urlInputEl.value.trim());
+        url.searchParams.set('utm_source', sourceEl.value.trim());
+        url.searchParams.set('utm_medium', mediumEl.value.trim());
+        url.searchParams.set('utm_campaign', campaignEl.value.trim());
+        var term = termEl.value.trim();
+        var content = contentEl.value.trim();
         if (term) url.searchParams.set('utm_term', term);
         if (content) url.searchParams.set('utm_content', content);
-        outputEl.value = url.toString();
-        resultEl.classList.remove('hidden');
-      } catch (e) { outputEl.value = 'Invalid URL'; resultEl.classList.remove('hidden'); }
+        outputEl!.value = url.toString();
+        resultEl!.classList.remove('hidden');
+      } catch (e) { outputEl!.value = 'Invalid URL'; resultEl!.classList.remove('hidden'); }
     });
 
     copyBtn.addEventListener('click', function () {
-      navigator.clipboard.writeText(outputEl.value).then(function () {
-        copyBtn.textContent = 'Copied!';
-        setTimeout(function () { copyBtn.textContent = 'Copy'; }, 2000);
+      if (!outputEl!.value) return;
+      navigator.clipboard.writeText(outputEl!.value).then(function () {
+        copyBtn!.textContent = 'Copied!';
+        setTimeout(function () { copyBtn!.textContent = 'Copy'; }, 2000);
       });
     });
   })();

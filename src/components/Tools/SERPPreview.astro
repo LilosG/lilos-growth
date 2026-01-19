@@ -34,18 +34,21 @@
 
 <script>
   (function () {
-    var titleEl = document.getElementById('serp-title');
-    var urlEl = document.getElementById('serp-url');
-    var descEl = document.getElementById('serp-desc');
-    var titleCount = document.getElementById('title-count');
-    var descCount = document.getElementById('desc-count');
-    var previewTitle = document.getElementById('preview-title');
-    var previewUrl = document.getElementById('preview-url');
-    var previewDesc = document.getElementById('preview-desc');
+    var titleEl = document.getElementById('serp-title') as HTMLInputElement | null;
+    var urlEl = document.getElementById('serp-url') as HTMLInputElement | null;
+    var descEl = document.getElementById('serp-desc') as HTMLTextAreaElement | null;
+    var titleCount = document.getElementById('title-count') as HTMLElement | null;
+    var descCount = document.getElementById('desc-count') as HTMLElement | null;
+    var previewTitle = document.getElementById('preview-title') as HTMLElement | null;
+    var previewUrl = document.getElementById('preview-url') as HTMLElement | null;
+    var previewDesc = document.getElementById('preview-desc') as HTMLElement | null;
+
+    if (!titleEl || !urlEl || !descEl || !titleCount || !descCount || !previewTitle || !previewUrl || !previewDesc) return;
 
     function update() {
-      titleCount.textContent = titleEl.value.length;
-      descCount.textContent = descEl.value.length;
+      if (!titleEl || !urlEl || !descEl || !titleCount || !descCount || !previewTitle || !previewUrl || !previewDesc) return;
+      titleCount.textContent = String(titleEl.value.length);
+      descCount.textContent = String(descEl.value.length);
       titleCount.className = titleEl.value.length > 60 ? 'text-red-500' : '';
       descCount.className = descEl.value.length > 155 ? 'text-red-500' : '';
       previewTitle.textContent = titleEl.value || 'Your Page Title';
@@ -59,6 +62,7 @@
     titleEl.addEventListener('input', update);
     urlEl.addEventListener('input', update);
     descEl.addEventListener('input', update);
-    document.getElementById('serp-preview-btn').addEventListener('click', update);
+    const btnEl = document.getElementById('serp-preview-btn') as HTMLButtonElement | null;
+    if (btnEl) btnEl.addEventListener('click', update);
   })();
 </script>

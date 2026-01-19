@@ -193,20 +193,20 @@ function isActive(href: string) {
   const LEAVE_DELAY = 120;
 
   document.querySelectorAll('[data-dropdown="true"]').forEach((container) => {
-    const trigger = container.querySelector('a[aria-haspopup="true"]');
-    const panel = container.querySelector('.dropdown-panel');
-    const chevron = container.querySelector('.dropdown-chevron');
+    const trigger = container.querySelector('a[aria-haspopup="true"]') as HTMLAnchorElement | null;
+    const panel = container.querySelector('.dropdown-panel') as HTMLElement | null;
+    const chevron = container.querySelector('.dropdown-chevron') as HTMLElement | null;
     if (!trigger || !panel) return;
 
-    let openTimer = null;
-    let closeTimer = null;
+    let openTimer: ReturnType<typeof setTimeout> | null = null;
+    let closeTimer: ReturnType<typeof setTimeout> | null = null;
 
     const open = () => {
       if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
       openTimer = setTimeout(() => {
         panel.classList.remove('hidden');
         trigger.setAttribute('aria-expanded', 'true');
-        if (chevron) chevron.style.transform = 'rotate(180deg)';
+        if (chevron) (chevron as HTMLElement).style.transform = 'rotate(180deg)';
       }, HOVER_DELAY);
     };
 
@@ -215,44 +215,47 @@ function isActive(href: string) {
       closeTimer = setTimeout(() => {
         panel.classList.add('hidden');
         trigger.setAttribute('aria-expanded', 'false');
-        if (chevron) chevron.style.transform = '';
+        if (chevron) (chevron as HTMLElement).style.transform = '';
       }, LEAVE_DELAY);
     };
 
     container.addEventListener('mouseenter', open);
     container.addEventListener('mouseleave', close);
 
-    trigger.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowDown' || e.key === ' ') {
-        e.preventDefault();
+    trigger.addEventListener('keydown', (e: Event) => {
+      const kbdEvent = e as KeyboardEvent;
+      if (kbdEvent.key === 'ArrowDown' || kbdEvent.key === ' ') {
+        kbdEvent.preventDefault();
         panel.classList.remove('hidden');
         trigger.setAttribute('aria-expanded', 'true');
-        const first = panel.querySelector('a[role="menuitem"]');
+        const first = panel.querySelector('a[role="menuitem"]') as HTMLAnchorElement | null;
         if (first) first.focus();
       }
-      if (e.key === 'Escape') {
+      if (kbdEvent.key === 'Escape') {
         panel.classList.add('hidden');
         trigger.setAttribute('aria-expanded', 'false');
       }
     });
 
-    panel.addEventListener('keydown', (e) => {
-      const items = Array.from(panel.querySelectorAll('a[role="menuitem"]'));
-      const idx = items.indexOf(document.activeElement);
-      if (e.key === 'ArrowDown') { 
-        e.preventDefault(); 
+    panel.addEventListener('keydown', (e: Event) => {
+      const kbdEvent = e as KeyboardEvent;
+      const items = Array.from(panel.querySelectorAll('a[role="menuitem"]')) as HTMLAnchorElement[];
+      const activeEl = document.activeElement as Element | null;
+      const idx = activeEl ? items.indexOf(activeEl as HTMLAnchorElement) : -1;
+      if (kbdEvent.key === 'ArrowDown') {
+        kbdEvent.preventDefault();
         const next = items[idx + 1] || items[0];
-        if (next) next.focus(); 
+        if (next) (next as HTMLAnchorElement).focus();
       }
-      if (e.key === 'ArrowUp') { 
-        e.preventDefault(); 
+      if (kbdEvent.key === 'ArrowUp') {
+        kbdEvent.preventDefault();
         const prev = items[idx - 1] || items[items.length - 1];
-        if (prev) prev.focus(); 
+        if (prev) (prev as HTMLAnchorElement).focus();
       }
-      if (e.key === 'Escape') { 
-        panel.classList.add('hidden'); 
-        trigger.setAttribute('aria-expanded', 'false'); 
-        trigger.focus(); 
+      if (kbdEvent.key === 'Escape') {
+        panel.classList.add('hidden');
+        trigger.setAttribute('aria-expanded', 'false');
+        (trigger as HTMLAnchorElement).focus();
       }
     });
   });

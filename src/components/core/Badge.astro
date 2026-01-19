@@ -15,7 +15,7 @@ import { Icon } from "astro-icon/components";
 
 export interface Props {
   /** Visual variant */
-  variant?: 'primary' | 'secondary' | 'success' | 'info' | 'accent' | 'outline';
+  variant?: 'primary' | 'secondary' | 'success' | 'info' | 'accent' | 'outline' | 'website' | 'gbp' | 'seo';
   /** Size variant */
   size?: 'sm' | 'md' | 'lg';
   /** Icon name (from astro-icon) */
@@ -38,6 +38,9 @@ const variantClasses = {
   info: 'bg-white text-blue-700 border-blue-300 shadow-sm hover:shadow-md hover:border-blue-400',
   accent: 'bg-white text-accent border-accent/30 shadow-sm hover:shadow-md hover:border-accent/50',
   outline: 'bg-transparent text-primary border-primary hover:bg-primary/5',
+  website: 'bg-white text-purple-700 border-purple-300 shadow-sm hover:shadow-md hover:border-purple-400',
+  gbp: 'bg-white text-orange-700 border-orange-300 shadow-sm hover:shadow-md hover:border-orange-400',
+  seo: 'bg-white text-teal-700 border-teal-300 shadow-sm hover:shadow-md hover:border-teal-400',
 };
 
 const sizeClasses = {
@@ -50,8 +53,8 @@ const baseClasses = 'inline-flex items-center gap-1.5 rounded-xl border-2 font-h
 
 const classes = [
   baseClasses,
-  variantClasses[variant],
-  sizeClasses[size],
+  variantClasses[variant as keyof typeof variantClasses],
+  sizeClasses[size as keyof typeof sizeClasses],
   className,
 ].filter(Boolean).join(' ');
 ---

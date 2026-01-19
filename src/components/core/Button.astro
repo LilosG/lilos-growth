@@ -16,7 +16,7 @@ import { Icon } from "astro-icon/components";
 
 export interface Props {
   /** Visual variant */
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'white';
   /** Size variant */
   size?: 'sm' | 'md' | 'lg';
   /** Button type (for form buttons) */
@@ -62,6 +62,7 @@ const variantClasses = {
   secondary: 'btn-secondary',
   outline: 'btn-outline',
   ghost: 'btn-ghost',
+  white: 'btn-white',
 };
 
 const sizeClasses = {
@@ -72,8 +73,8 @@ const sizeClasses = {
 
 const classes = [
   'btn',
-  variantClasses[variant],
-  sizeClasses[size],
+  variantClasses[variant as keyof typeof variantClasses],
+  sizeClasses[size as keyof typeof sizeClasses],
   fullWidth && 'w-full',
   className,
 ].filter(Boolean).join(' ');

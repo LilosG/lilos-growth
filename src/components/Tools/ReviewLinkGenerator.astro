@@ -18,18 +18,26 @@
 
 <script>
   (function () {
-    const form = document.getElementById('rev-form');
-    const result = document.getElementById('rev-result');
+    const form = document.getElementById('rev-form') as HTMLFormElement | null;
+    const result = document.getElementById('rev-result') as HTMLElement | null;
 
-    function escapeHtml(s) {
+    if (!form || !result) return;
+
+    function escapeHtml(s: any): string {
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
-      const name = document.getElementById('rev-name').value.trim();
-      const city = document.getElementById('rev-city').value.trim();
-      const region = document.getElementById('rev-region').value.trim();
+      const nameEl = document.getElementById('rev-name') as HTMLInputElement | null;
+      const cityEl = document.getElementById('rev-city') as HTMLInputElement | null;
+      const regionEl = document.getElementById('rev-region') as HTMLInputElement | null;
+
+      if (!nameEl || !cityEl || !regionEl || !result) return;
+
+      const name = nameEl.value.trim();
+      const city = cityEl.value.trim();
+      const region = regionEl.value.trim();
       if (!name) { result.innerHTML = '<div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">Please enter a business name.</div>'; return; }
 
       let q = name;

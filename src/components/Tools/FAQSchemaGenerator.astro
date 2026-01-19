@@ -26,38 +26,44 @@
 
 <script>
   (function () {
-    var form = document.getElementById('faq-form');
-    var pairsContainer = document.getElementById('faq-pairs');
-    var addBtn = document.getElementById('add-faq');
-    var resultEl = document.getElementById('faq-result');
-    var outputEl = document.getElementById('faq-output');
-    var copyBtn = document.getElementById('faq-copy');
+    var form = document.getElementById('faq-form') as HTMLFormElement | null;
+    var pairsContainer = document.getElementById('faq-pairs') as HTMLElement | null;
+    var addBtn = document.getElementById('add-faq') as HTMLButtonElement | null;
+    var resultEl = document.getElementById('faq-result') as HTMLElement | null;
+    var outputEl = document.getElementById('faq-output') as HTMLElement | null;
+    var copyBtn = document.getElementById('faq-copy') as HTMLButtonElement | null;
+
+    if (!form || !pairsContainer || !addBtn || !resultEl || !outputEl || !copyBtn) return;
 
     addBtn.addEventListener('click', function () {
       var div = document.createElement('div');
       div.className = 'faq-pair rounded-lg border border-gray-200 bg-gray-50 p-3 relative';
       div.innerHTML = '<button type="button" class="absolute top-2 right-2 text-gray-400 hover:text-red-500" onclick="this.parentElement.remove()">×</button><input type="text" placeholder="Question" data-question required class="mb-2 h-10 w-full rounded-lg border border-gray-300 px-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40" /><textarea rows="2" placeholder="Answer" data-answer required class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"></textarea>';
-      pairsContainer.appendChild(div);
+      pairsContainer!.appendChild(div);
     });
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var faqs = [];
-      var pairs = pairsContainer.querySelectorAll('.faq-pair');
+      var faqs: Array<{ '@type': string; name: string; acceptedAnswer: { '@type': string; text: string } }> = [];
+      var pairs = pairsContainer!.querySelectorAll('.faq-pair');
       for (var i = 0; i < pairs.length; i++) {
-        var q = pairs[i].querySelector('[data-question]').value.trim();
-        var a = pairs[i].querySelector('[data-answer]').value.trim();
+        var qEl = pairs[i].querySelector('[data-question]') as HTMLInputElement | null;
+        var aEl = pairs[i].querySelector('[data-answer]') as HTMLTextAreaElement | null;
+        if (!qEl || !aEl) continue;
+        var q = qEl.value.trim();
+        var a = aEl.value.trim();
         if (q && a) faqs.push({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } });
       }
       if (faqs.length === 0) return;
-      outputEl.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs }, null, 2);
-      resultEl.classList.remove('hidden');
+      outputEl!.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs }, null, 2);
+      resultEl!.classList.remove('hidden');
     });
 
     copyBtn.addEventListener('click', function () {
-      navigator.clipboard.writeText(outputEl.textContent).then(function () {
-        copyBtn.textContent = 'Copied!';
-        setTimeout(function () { copyBtn.textContent = 'Copy'; }, 2000);
+      if (!outputEl!.textContent) return;
+      navigator.clipboard.writeText(outputEl!.textContent).then(function () {
+        copyBtn!.textContent = 'Copied!';
+        setTimeout(function () { copyBtn!.textContent = 'Copy'; }, 2000);
       });
     });
   })();

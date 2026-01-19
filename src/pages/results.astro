@@ -370,32 +370,32 @@ const faqs = [
   document.addEventListener('DOMContentLoaded', () => {
     const tabs = document.querySelectorAll('.filter-tab');
     const caseStudies = document.querySelectorAll('[data-services]');
-    
+
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        const filter = tab.getAttribute('data-filter');
-        
+        const filter = tab.getAttribute('data-filter') || 'all';
+
         // Update active tab
         tabs.forEach(t => {
           t.classList.remove('bg-primary', 'text-white', 'shadow-md');
           t.classList.add('bg-background-subtle', 'text-body');
           t.setAttribute('aria-selected', 'false');
         });
-        
+
         tab.classList.remove('bg-background-subtle', 'text-body');
         tab.classList.add('bg-primary', 'text-white', 'shadow-md');
         tab.setAttribute('aria-selected', 'true');
-        
+
         // Filter case studies
-        caseStudies.forEach(study => {
-          const services = study.getAttribute('data-services') || '';
-          const shouldShow = filter === 'all' || services.includes(filter);
-          
+        caseStudies.forEach(card => {
+          const services = card.getAttribute('data-services') || '';
+          const shouldShow = filter === 'all' || (filter && services.includes(filter));
+
           if (shouldShow) {
-            study.style.display = '';
-            study.classList.add('animate-fade-in');
+            (card as HTMLElement).style.display = '';
+            card.classList.add('animate-fade-in');
           } else {
-            study.style.display = 'none';
+            (card as HTMLElement).style.display = 'none';
           }
         });
       });

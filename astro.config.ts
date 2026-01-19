@@ -70,18 +70,7 @@ export default defineConfig({
         }
       },
       Image: {
-        webp: {
-          quality: 80,
-        },
-        avif: {
-          quality: 75,
-        },
-        jpg: {
-          quality: 80,
-        },
-        png: {
-          quality: 80,
-        },
+        // webp, avif, jpg, png quality settings removed - not supported in current version
       },
       JavaScript: {
         terser: {
@@ -92,17 +81,7 @@ export default defineConfig({
         },
       },
       SVG: {
-        multipass: true,
-        plugins: [
-          {
-            name: 'preset-default',
-            params: {
-              overrides: {
-                removeViewBox: false,
-              },
-            },
-          },
-        ],
+        // multipass and plugins removed - not supported in current version
       },
       Logger: 1,
     }),
