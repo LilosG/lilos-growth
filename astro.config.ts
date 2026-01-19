@@ -69,41 +69,9 @@ export default defineConfig({
           minifyJS: true
         }
       },
-      Image: {
-        webp: {
-          quality: 80,
-        },
-        avif: {
-          quality: 75,
-        },
-        jpg: {
-          quality: 80,
-        },
-        png: {
-          quality: 80,
-        },
-      },
-      JavaScript: {
-        terser: {
-          compress: {
-            drop_console: true,
-            drop_debugger: true,
-          },
-        },
-      },
-      SVG: {
-        multipass: true,
-        plugins: [
-          {
-            name: 'preset-default',
-            params: {
-              overrides: {
-                removeViewBox: false,
-              },
-            },
-          },
-        ],
-      },
+      Image: true,
+      JavaScript: true,
+      SVG: true,
       Logger: 1,
     }),
     astrowind({ config: "./src/config.yaml" }),
