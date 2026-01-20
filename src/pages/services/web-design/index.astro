@@ -46,11 +46,13 @@ const faqs = [
   },
   {
     question: "Is hosting included?",
-    answer: "Hosting/ongoing updates are available through our Website-as-a-Service starting at <strong>$199/mo</strong>.",
+    answer:
+      "Hosting/ongoing updates are available through our Website-as-a-Service starting at <strong>$199/mo</strong>.",
   },
   {
     question: "How quickly can my site be live?",
-    answer: "Launch Lite: 3–5 business days; Starter: 5–7 business days; Standard: 10–14 business days (content readiness affects timelines).",
+    answer:
+      "Launch Lite: 3–5 business days; Starter: 5–7 business days; Standard: 10–14 business days (content readiness affects timelines).",
   },
   {
     question: "Can you help with SEO after launch?",
@@ -72,9 +74,7 @@ const faqs = [
       >
         Website Design &amp; Development
       </h1>
-      <span
-        class="block text-base font-semibold uppercase tracking-wider text-accent md:text-lg"
-      >
+      <span class="text-accent block text-base font-semibold uppercase tracking-wider md:text-lg">
         Built for Home-Service Pros
       </span>
       <p class="max-w-2xl text-base font-medium leading-relaxed text-white/90">
@@ -96,7 +96,7 @@ const faqs = [
   </section>
 
   <!-- WHAT'S INCLUDED -->
-  <section class="border-t border-gray-100 bg-cream py-12">
+  <section class="bg-cream border-t border-gray-100 py-12">
     <div class="mx-auto max-w-5xl px-4 text-center">
       <h2 class="mb-3 font-heading text-xl font-bold text-heading md:text-2xl">What You Get</h2>
       <p class="mb-6 text-base text-body">
@@ -105,9 +105,13 @@ const faqs = [
       </p>
 
       <div class="flex flex-wrap justify-center gap-3">
-        {features.map((feature) => (
-          <Badge variant="primary" size="lg">{feature}</Badge>
-        ))}
+        {
+          features.map((feature) => (
+            <Badge variant="primary" size="lg">
+              {feature}
+            </Badge>
+          ))
+        }
       </div>
 
       <p class="mt-4 text-sm text-body-light">
@@ -184,7 +188,7 @@ const faqs = [
   </section>
 
   <!-- ONE-TIME BUILDS -->
-  <section id="one-time" class="border-t border-gray-100 bg-cream py-16">
+  <section id="one-time" class="bg-cream border-t border-gray-100 py-16">
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         One-Time Website Packages
@@ -205,23 +209,38 @@ const faqs = [
           </div>
           <ul class="mt-5 flex-1 space-y-2 text-sm text-body">
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Home, 3 service pages, About, Contact, + essentials</span>
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Clean site structure with internal linking scaffold</span>
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Titles, metas, H1–H2 setup & basic schema</span>
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Lead capture (form + click-to-call)</span>
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Analytics setup (GA4/GTM if provided)</span>
             </li>
           </ul>
@@ -234,7 +253,11 @@ const faqs = [
 
         <!-- Standard $750 -->
         <Card variant="elevated" class="relative flex h-full flex-col border-2 border-primary">
-          <Badge variant="primary" size="sm" class="absolute -top-3 left-1/2 -translate-x-1/2 shadow-md">
+          <Badge
+            variant="primary"
+            size="sm"
+            class="absolute -top-3 left-1/2 -translate-x-1/2 shadow-md"
+          >
             Most Popular
           </Badge>
           <div class="mt-2 text-left">
@@ -245,23 +268,38 @@ const faqs = [
           </div>
           <ul class="mt-5 flex-1 space-y-2 text-sm text-body">
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Everything in Launch Lite, plus capacity for more services/areas</span>
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Expanded internal linking & conversion blocks (badges, FAQs, reviews)</span>
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>SEO foundations: titles/metas/H1–H2 at scale</span>
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Blog setup (ready for publishing)</span>
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Stock image library (curated, royalty-free)</span>
             </li>
           </ul>
@@ -282,23 +320,38 @@ const faqs = [
           </div>
           <ul class="mt-5 flex-1 space-y-2 text-sm text-body">
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Large buildout for services + multiple areas</span>
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Enhanced schema (LocalBusiness + Services)</span>
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Advanced conversion UX (sticky CTAs, trust elements)</span>
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Performance pass (Core Web Vitals-minded)</span>
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span>Pre-launch QA & handoff with update training</span>
             </li>
           </ul>
@@ -320,33 +373,33 @@ const faqs = [
       </h2>
 
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-        {trustReasons.map((reason) => (
-          <FeatureCard
-            icon={reason.icon}
-            title={reason.title}
-            description={reason.description}
-          />
-        ))}
+        {
+          trustReasons.map((reason) => (
+            <FeatureCard icon={reason.icon} title={reason.title} description={reason.description} />
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="border-t border-gray-100 bg-cream py-16" id="faq">
+  <section class="bg-cream border-t border-gray-100 py-16" id="faq">
     <div class="mx-auto max-w-4xl px-4">
       <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Website Design &amp; Development: FAQs
       </h2>
 
       <div class="space-y-4">
-        {faqs.map((faq, index) => (
-          <Card variant={index % 2 === 0 ? "elevated" : "default"}>
-            <h3 class="mb-2 font-heading text-base font-semibold text-heading md:text-lg">
-              {faq.question}
-            </h3>
-            <p class="text-sm text-body md:text-base" set:html={faq.answer} />
-          </Card>
-        ))}
+        {
+          faqs.map((faq, index) => (
+            <Card variant={index % 2 === 0 ? "elevated" : "default"}>
+              <h3 class="mb-2 font-heading text-base font-semibold text-heading md:text-lg">
+                {faq.question}
+              </h3>
+              <p class="text-sm text-body md:text-base" set:html={faq.answer} />
+            </Card>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -360,9 +413,7 @@ const faqs = [
       <p class="mb-6 text-base text-white/90">
         Book a quick call. We'll map your pages, timeline, and next steps.
       </p>
-      <Button href="#contact" variant="white" size="lg">
-        Book My Free Website Plan
-      </Button>
+      <Button href="#contact" variant="white" size="lg"> Book My Free Website Plan </Button>
     </div>
   </section>
 </Layout>

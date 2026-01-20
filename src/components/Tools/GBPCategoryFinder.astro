@@ -11,7 +11,7 @@
       type="text"
       required
       placeholder="Type your business type (e.g., plumber, dentist)"
-      class="h-11 w-full rounded-lg border border-gray-300 px-4 text-sm text-heading placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
+      class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm text-heading placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2"
       autocomplete="off"
     />
     <button type="submit" class="btn btn-primary mt-auto h-11">Find Categories</button>
@@ -19,75 +19,456 @@
   <div id="gbp-cat-results" class="mt-4" aria-live="polite"></div>
 </div>
 
-<script>
-  var GBP_CATEGORIES = ["Accountant","Accounting firm","Acupuncturist","Air conditioning contractor","Air conditioning repair service","Air duct cleaning service","Alarm company","Animal hospital","Antique store","Apartment rental agency","Appliance repair service","Appliance store","Arborist","Architect","Asphalt contractor","Attorney","Auto body shop","Auto detailing service","Auto glass shop","Auto parts store","Auto repair shop","Bakery","Bank","Bar","Barber shop","Bathroom remodeler","Beauty salon","Bed and breakfast","Bicycle repair shop","Bicycle store","Bookkeeper","Bookstore","Boutique","Brewery","Building inspector","Building materials supplier","Business consultant","Butcher shop","Cabinet maker","Cabinet store","Cafe","Cake shop","Car dealer","Car detailing service","Car rental agency","Car wash","Carpenter","Carpet cleaning service","Carpet installer","Carpet store","Caterer","Cell phone store","Chimney sweep","Chiropractor","Cleaning service","Clothing store","Coffee shop","Commercial cleaning service","Commercial real estate agency","Computer repair service","Computer store","Concrete contractor","Construction company","Consultant","Contractor","Convenience store","Cosmetic dentist","Counselor","Coworking space","Credit union","Custom home builder","Dance school","Day care center","Day spa","Deck builder","Deli","Demolition contractor","Dental clinic","Dentist","Dermatologist","Digital marketing agency","Diner","Doctor","Dog day care center","Dog trainer","Donut shop","Drain cleaning service","Driving school","Dry cleaner","Drywall contractor","Dumpster rental service","Electrician","Electronics repair shop","Electronics store","Emergency locksmith service","Employment agency","Endodontist","Equipment rental agency","Escape room center","Estate planning attorney","Event planner","Event venue","Excavating contractor","Exterminator","Eye care center","Family law attorney","Family practice physician","Farmers market","Fast food restaurant","Fence contractor","Financial advisor","Financial planner","Fine dining restaurant","Fireplace store","Fitness center","Floor refinishing service","Flooring contractor","Flooring store","Florist","Food truck","Funeral home","Furnace repair service","Furniture repair shop","Furniture store","Garage door supplier","Garden center","Gardener","Gas station","General contractor","General practitioner","Gift shop","Glass repair service","Glazier","Golf course","Graphic designer","Grocery store","Gutter cleaning service","Gym","Gynecologist","Hair salon","Handyman","Hardware store","Health food store","Health insurance agency","Hearing aid store","Heating contractor","Home builder","Home health care service","Home improvement store","Home inspection service","Home insurance agency","Hospital","Hotel","House cleaning service","House painter","HVAC contractor","Ice cream shop","Immigration attorney","Indian restaurant","Insurance agency","Insurance broker","Interior designer","Internet marketing service","Italian restaurant","Janitorial service","Japanese restaurant","Jewelry repair service","Jewelry store","Juice bar","Karate school","Kennel","Kitchen remodeler","Korean restaurant","Landscape designer","Landscaper","Language school","Laser hair removal service","Laundromat","Laundry service","Law firm","Lawn care service","Lawn sprinkler system contractor","Lawyer","Limousine service","Liquor store","Locksmith","Maid service","Makeup artist","Marketing agency","Marketing consultant","Marriage counselor","Martial arts school","Massage spa","Massage therapist","Mattress store","Mechanic","Medical center","Medical clinic","Medical spa","Mediterranean restaurant","Mental health clinic","Mexican restaurant","Mobile phone repair shop","Mold removal service","Mortgage broker","Mortgage lender","Motel","Motorcycle repair shop","Mover","Moving company","Music school","Music store","Nail salon","Naturopathic practitioner","New car dealer","Night club","Non-profit organization","Notary public","Nursing home","Nutritionist","Occupational therapist","Office supply store","Oil change service","Ophthalmologist","Optician","Optometrist","Oral surgeon","Organic food store","Orthodontist","Orthopedic surgeon","Osteopath","Paint store","Painter","Party planner","Party store","Paving contractor","Pawn shop","Pediatric dentist","Pediatrician","Periodontist","Personal injury attorney","Personal trainer","Pest control service","Pet boarding service","Pet groomer","Pet store","Pharmacy","Photographer","Photography studio","Physical therapist","Physical therapy clinic","Physician","Pilates studio","Pizza restaurant","Plumber","Plumbing supply store","Podiatrist","Pool cleaning service","Pool contractor","Pressure washing service","Print shop","Private investigator","Private school","Property management company","Psychiatrist","Psychologist","Psychotherapist","Public relations firm","Real estate agency","Real estate appraiser","Real estate attorney","Real estate developer","Recording studio","Recreation center","Recruiter","Recycling center","Refrigerator repair service","Rehabilitation center","Remodeler","Restaurant","Retirement home","Roofing contractor","Sandwich shop","Seafood restaurant","Security service","Security system installer","Self storage facility","Septic system service","Sewer service","Sheet metal contractor","Shoe repair shop","Shoe store","Sign shop","Skin care clinic","Small engine repair service","Smoothie shop","Snow removal service","Solar energy company","Solar energy contractor","Spa","Sporting goods store","Sports bar","Stationery store","Steak house","Storage facility","Storm damage restoration service","Structural engineer","Stucco contractor","Supermarket","Swimming pool contractor","Swimming pool repair service","Tailor","Tanning salon","Tattoo shop","Tax consultant","Tax preparation service","Taxi service","Television repair service","Temp agency","Termite control service","Thai restaurant","Thrift store","Tile contractor","Tile store","Tire shop","Title company","Tow truck service","Toy store","Transmission shop","Travel agency","Tree service","Trucking company","Tutoring service","Upholstery shop","Urgent care center","Urologist","Used car dealer","Vacuum cleaner repair shop","Veterinarian","Video production service","Vietnamese restaurant","Walk-in clinic","Waste management service","Watch repair service","Water damage restoration service","Water heater installation service","Water heater repair service","Waterproofing company","Web design company","Website designer","Wedding photographer","Wedding planner","Wedding venue","Weight loss service","Welder","Well drilling contractor","Wellness center","Window cleaning service","Window installation service","Window tinting service","Wine store","Winery","Yoga studio"];
+<script is:inline>
+  const GBP_CATEGORIES = [
+    "Accountant",
+    "Accounting firm",
+    "Acupuncturist",
+    "Air conditioning contractor",
+    "Air conditioning repair service",
+    "Air duct cleaning service",
+    "Alarm company",
+    "Animal hospital",
+    "Antique store",
+    "Apartment rental agency",
+    "Appliance repair service",
+    "Appliance store",
+    "Arborist",
+    "Architect",
+    "Asphalt contractor",
+    "Attorney",
+    "Auto body shop",
+    "Auto detailing service",
+    "Auto glass shop",
+    "Auto parts store",
+    "Auto repair shop",
+    "Bakery",
+    "Bank",
+    "Bar",
+    "Barber shop",
+    "Bathroom remodeler",
+    "Beauty salon",
+    "Bed and breakfast",
+    "Bicycle repair shop",
+    "Bicycle store",
+    "Bookkeeper",
+    "Bookstore",
+    "Boutique",
+    "Brewery",
+    "Building inspector",
+    "Building materials supplier",
+    "Business consultant",
+    "Butcher shop",
+    "Cabinet maker",
+    "Cabinet store",
+    "Cafe",
+    "Cake shop",
+    "Car dealer",
+    "Car detailing service",
+    "Car rental agency",
+    "Car wash",
+    "Carpenter",
+    "Carpet cleaning service",
+    "Carpet installer",
+    "Carpet store",
+    "Caterer",
+    "Cell phone store",
+    "Chimney sweep",
+    "Chiropractor",
+    "Cleaning service",
+    "Clothing store",
+    "Coffee shop",
+    "Commercial cleaning service",
+    "Commercial real estate agency",
+    "Computer repair service",
+    "Computer store",
+    "Concrete contractor",
+    "Construction company",
+    "Consultant",
+    "Contractor",
+    "Convenience store",
+    "Cosmetic dentist",
+    "Counselor",
+    "Coworking space",
+    "Credit union",
+    "Custom home builder",
+    "Dance school",
+    "Day care center",
+    "Day spa",
+    "Deck builder",
+    "Deli",
+    "Demolition contractor",
+    "Dental clinic",
+    "Dentist",
+    "Dermatologist",
+    "Digital marketing agency",
+    "Diner",
+    "Doctor",
+    "Dog day care center",
+    "Dog trainer",
+    "Donut shop",
+    "Drain cleaning service",
+    "Driving school",
+    "Dry cleaner",
+    "Drywall contractor",
+    "Dumpster rental service",
+    "Electrician",
+    "Electronics repair shop",
+    "Electronics store",
+    "Emergency locksmith service",
+    "Employment agency",
+    "Endodontist",
+    "Equipment rental agency",
+    "Escape room center",
+    "Estate planning attorney",
+    "Event planner",
+    "Event venue",
+    "Excavating contractor",
+    "Exterminator",
+    "Eye care center",
+    "Family law attorney",
+    "Family practice physician",
+    "Farmers market",
+    "Fast food restaurant",
+    "Fence contractor",
+    "Financial advisor",
+    "Financial planner",
+    "Fine dining restaurant",
+    "Fireplace store",
+    "Fitness center",
+    "Floor refinishing service",
+    "Flooring contractor",
+    "Flooring store",
+    "Florist",
+    "Food truck",
+    "Funeral home",
+    "Furnace repair service",
+    "Furniture repair shop",
+    "Furniture store",
+    "Garage door supplier",
+    "Garden center",
+    "Gardener",
+    "Gas station",
+    "General contractor",
+    "General practitioner",
+    "Gift shop",
+    "Glass repair service",
+    "Glazier",
+    "Golf course",
+    "Graphic designer",
+    "Grocery store",
+    "Gutter cleaning service",
+    "Gym",
+    "Gynecologist",
+    "Hair salon",
+    "Handyman",
+    "Hardware store",
+    "Health food store",
+    "Health insurance agency",
+    "Hearing aid store",
+    "Heating contractor",
+    "Home builder",
+    "Home health care service",
+    "Home improvement store",
+    "Home inspection service",
+    "Home insurance agency",
+    "Hospital",
+    "Hotel",
+    "House cleaning service",
+    "House painter",
+    "HVAC contractor",
+    "Ice cream shop",
+    "Immigration attorney",
+    "Indian restaurant",
+    "Insurance agency",
+    "Insurance broker",
+    "Interior designer",
+    "Internet marketing service",
+    "Italian restaurant",
+    "Janitorial service",
+    "Japanese restaurant",
+    "Jewelry repair service",
+    "Jewelry store",
+    "Juice bar",
+    "Karate school",
+    "Kennel",
+    "Kitchen remodeler",
+    "Korean restaurant",
+    "Landscape designer",
+    "Landscaper",
+    "Language school",
+    "Laser hair removal service",
+    "Laundromat",
+    "Laundry service",
+    "Law firm",
+    "Lawn care service",
+    "Lawn sprinkler system contractor",
+    "Lawyer",
+    "Limousine service",
+    "Liquor store",
+    "Locksmith",
+    "Maid service",
+    "Makeup artist",
+    "Marketing agency",
+    "Marketing consultant",
+    "Marriage counselor",
+    "Martial arts school",
+    "Massage spa",
+    "Massage therapist",
+    "Mattress store",
+    "Mechanic",
+    "Medical center",
+    "Medical clinic",
+    "Medical spa",
+    "Mediterranean restaurant",
+    "Mental health clinic",
+    "Mexican restaurant",
+    "Mobile phone repair shop",
+    "Mold removal service",
+    "Mortgage broker",
+    "Mortgage lender",
+    "Motel",
+    "Motorcycle repair shop",
+    "Mover",
+    "Moving company",
+    "Music school",
+    "Music store",
+    "Nail salon",
+    "Naturopathic practitioner",
+    "New car dealer",
+    "Night club",
+    "Non-profit organization",
+    "Notary public",
+    "Nursing home",
+    "Nutritionist",
+    "Occupational therapist",
+    "Office supply store",
+    "Oil change service",
+    "Ophthalmologist",
+    "Optician",
+    "Optometrist",
+    "Oral surgeon",
+    "Organic food store",
+    "Orthodontist",
+    "Orthopedic surgeon",
+    "Osteopath",
+    "Paint store",
+    "Painter",
+    "Party planner",
+    "Party store",
+    "Paving contractor",
+    "Pawn shop",
+    "Pediatric dentist",
+    "Pediatrician",
+    "Periodontist",
+    "Personal injury attorney",
+    "Personal trainer",
+    "Pest control service",
+    "Pet boarding service",
+    "Pet groomer",
+    "Pet store",
+    "Pharmacy",
+    "Photographer",
+    "Photography studio",
+    "Physical therapist",
+    "Physical therapy clinic",
+    "Physician",
+    "Pilates studio",
+    "Pizza restaurant",
+    "Plumber",
+    "Plumbing supply store",
+    "Podiatrist",
+    "Pool cleaning service",
+    "Pool contractor",
+    "Pressure washing service",
+    "Print shop",
+    "Private investigator",
+    "Private school",
+    "Property management company",
+    "Psychiatrist",
+    "Psychologist",
+    "Psychotherapist",
+    "Public relations firm",
+    "Real estate agency",
+    "Real estate appraiser",
+    "Real estate attorney",
+    "Real estate developer",
+    "Recording studio",
+    "Recreation center",
+    "Recruiter",
+    "Recycling center",
+    "Refrigerator repair service",
+    "Rehabilitation center",
+    "Remodeler",
+    "Restaurant",
+    "Retirement home",
+    "Roofing contractor",
+    "Sandwich shop",
+    "Seafood restaurant",
+    "Security service",
+    "Security system installer",
+    "Self storage facility",
+    "Septic system service",
+    "Sewer service",
+    "Sheet metal contractor",
+    "Shoe repair shop",
+    "Shoe store",
+    "Sign shop",
+    "Skin care clinic",
+    "Small engine repair service",
+    "Smoothie shop",
+    "Snow removal service",
+    "Solar energy company",
+    "Solar energy contractor",
+    "Spa",
+    "Sporting goods store",
+    "Sports bar",
+    "Stationery store",
+    "Steak house",
+    "Storage facility",
+    "Storm damage restoration service",
+    "Structural engineer",
+    "Stucco contractor",
+    "Supermarket",
+    "Swimming pool contractor",
+    "Swimming pool repair service",
+    "Tailor",
+    "Tanning salon",
+    "Tattoo shop",
+    "Tax consultant",
+    "Tax preparation service",
+    "Taxi service",
+    "Television repair service",
+    "Temp agency",
+    "Termite control service",
+    "Thai restaurant",
+    "Thrift store",
+    "Tile contractor",
+    "Tile store",
+    "Tire shop",
+    "Title company",
+    "Tow truck service",
+    "Toy store",
+    "Transmission shop",
+    "Travel agency",
+    "Tree service",
+    "Trucking company",
+    "Tutoring service",
+    "Upholstery shop",
+    "Urgent care center",
+    "Urologist",
+    "Used car dealer",
+    "Vacuum cleaner repair shop",
+    "Veterinarian",
+    "Video production service",
+    "Vietnamese restaurant",
+    "Walk-in clinic",
+    "Waste management service",
+    "Watch repair service",
+    "Water damage restoration service",
+    "Water heater installation service",
+    "Water heater repair service",
+    "Waterproofing company",
+    "Web design company",
+    "Website designer",
+    "Wedding photographer",
+    "Wedding planner",
+    "Wedding venue",
+    "Weight loss service",
+    "Welder",
+    "Well drilling contractor",
+    "Wellness center",
+    "Window cleaning service",
+    "Window installation service",
+    "Window tinting service",
+    "Wine store",
+    "Winery",
+    "Yoga studio",
+  ];
 
   function fuzzySearch(query, categories, limit) {
     limit = limit || 12;
-    var q = query.toLowerCase().trim();
+    const q = query.toLowerCase().trim();
     if (!q) return [];
-    var results = [];
-    for (var i = 0; i < categories.length; i++) {
-      var cat = categories[i];
-      var catLower = cat.toLowerCase();
+    const results = [];
+    for (let i = 0; i < categories.length; i++) {
+      const cat = categories[i];
+      const catLower = cat.toLowerCase();
       if (catLower === q) results.push({ cat: cat, score: 100 });
       else if (catLower.indexOf(q) === 0) results.push({ cat: cat, score: 80 });
       else if (catLower.indexOf(q) > -1) results.push({ cat: cat, score: 40 });
     }
-    results.sort(function(a, b) { return b.score - a.score; });
-    return results.slice(0, limit).map(function(r) { return r.cat; });
+    results.sort(function (a, b) {
+      return b.score - a.score;
+    });
+    return results.slice(0, limit).map(function (r) {
+      return r.cat;
+    });
   }
 
-  var form = document.getElementById('gbp-cat-form');
-  var input = document.getElementById('gbp-cat-input');
-  var resultsEl = document.getElementById('gbp-cat-results');
+  const form = document.getElementById("gbp-cat-form");
+  const input = document.getElementById("gbp-cat-input");
+  const resultsEl = document.getElementById("gbp-cat-results");
 
   function renderResults(categories) {
     if (categories.length === 0) {
-      resultsEl.innerHTML = '<div class="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">No matching categories found.</div>';
+      resultsEl.innerHTML =
+        '<div class="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">No matching categories found.</div>';
       return;
     }
-    var html = '<div class="flex items-center justify-between mb-2"><span class="text-xs font-medium text-gray-500">' + categories.length + ' matches</span><button type="button" id="gbp-copy-all" class="text-xs font-semibold text-primary hover:underline">Copy All</button></div><ul class="space-y-1">';
-    for (var i = 0; i < categories.length; i++) {
-      html += '<li class="group flex items-center justify-between rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm transition hover:border-primary/30 hover:bg-primary/5"><span class="text-heading">' + categories[i] + '</span><button type="button" class="copy-cat text-xs text-primary opacity-0 transition group-hover:opacity-100 hover:underline" data-cat="' + categories[i] + '">Copy</button></li>';
+    let html =
+      '<div class="flex items-center justify-between mb-2"><span class="text-xs font-medium text-gray-500">' +
+      categories.length +
+      ' matches</span><button type="button" id="gbp-copy-all" class="text-xs font-semibold text-primary hover:underline">Copy All</button></div><ul class="space-y-1">';
+    for (let i = 0; i < categories.length; i++) {
+      html +=
+        '<li class="group flex items-center justify-between rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm transition hover:border-primary/30 hover:bg-primary/5"><span class="text-heading">' +
+        categories[i] +
+        '</span><button type="button" class="copy-cat text-xs text-primary opacity-0 transition group-hover:opacity-100 hover:underline" data-cat="' +
+        categories[i] +
+        '">Copy</button></li>';
     }
-    html += '</ul>';
+    html += "</ul>";
     resultsEl.innerHTML = html;
-    
-    var copyBtns = resultsEl.querySelectorAll('.copy-cat');
-    for (var j = 0; j < copyBtns.length; j++) {
-      copyBtns[j].addEventListener('click', function(e) {
-        var btn = e.target;
-        navigator.clipboard.writeText(btn.getAttribute('data-cat')).then(function() {
-          btn.textContent = 'Copied!';
-          setTimeout(function() { btn.textContent = 'Copy'; }, 1500);
+
+    const copyBtns = resultsEl.querySelectorAll(".copy-cat");
+    for (let j = 0; j < copyBtns.length; j++) {
+      copyBtns[j].addEventListener("click", function (e) {
+        const btn = e.target;
+        navigator.clipboard.writeText(btn.getAttribute("data-cat")).then(function () {
+          btn.textContent = "Copied!";
+          setTimeout(function () {
+            btn.textContent = "Copy";
+          }, 1500);
         });
       });
     }
-    
-    var copyAllBtn = document.getElementById('gbp-copy-all');
+
+    const copyAllBtn = document.getElementById("gbp-copy-all");
     if (copyAllBtn) {
-      copyAllBtn.addEventListener('click', function() {
-        navigator.clipboard.writeText(categories.join('\n')).then(function() {
-          copyAllBtn.textContent = 'Copied!';
-          setTimeout(function() { copyAllBtn.textContent = 'Copy All'; }, 1500);
+      copyAllBtn.addEventListener("click", function () {
+        navigator.clipboard.writeText(categories.join("\n")).then(function () {
+          copyAllBtn.textContent = "Copied!";
+          setTimeout(function () {
+            copyAllBtn.textContent = "Copy All";
+          }, 1500);
         });
       });
     }
   }
 
-  form.addEventListener('submit', function(e) {
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
     renderResults(fuzzySearch(input.value.trim(), GBP_CATEGORIES));
   });
-  
-  var debounceTimer;
-  input.addEventListener('input', function() {
+
+  let debounceTimer;
+  input.addEventListener("input", function () {
     clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(function() {
-      var q = input.value.trim();
+    debounceTimer = setTimeout(function () {
+      const q = input.value.trim();
       if (q.length >= 2) renderResults(fuzzySearch(q, GBP_CATEGORIES));
-      else if (q.length === 0) resultsEl.innerHTML = '';
+      else if (q.length === 0) resultsEl.innerHTML = "";
     }, 200);
   });
 </script>

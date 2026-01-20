@@ -66,22 +66,11 @@ export default defineConfig({
           collapseWhitespace: true,
           removeComments: true,
           minifyCSS: true,
-          minifyJS: true
-        }
+          minifyJS: true,
+        },
       },
       Image: {
-        webp: {
-          quality: 80,
-        },
-        avif: {
-          quality: 75,
-        },
-        jpg: {
-          quality: 80,
-        },
-        png: {
-          quality: 80,
-        },
+        sharp: true,
       },
       JavaScript: {
         terser: {
@@ -92,17 +81,19 @@ export default defineConfig({
         },
       },
       SVG: {
-        multipass: true,
-        plugins: [
-          {
-            name: 'preset-default',
-            params: {
-              overrides: {
-                removeViewBox: false,
+        svgo: {
+          multipass: true,
+          plugins: [
+            {
+              name: "preset-default",
+              params: {
+                overrides: {
+                  removeViewBox: false,
+                },
               },
             },
-          },
-        ],
+          ],
+        },
       },
       Logger: 1,
     }),

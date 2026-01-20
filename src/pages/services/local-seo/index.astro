@@ -15,27 +15,32 @@ const processSteps = [
   {
     number: 1,
     title: "Audit & Strategy",
-    description: "Baseline rankings, competitors, and site health. Clear roadmap aligned to services & city coverage.",
+    description:
+      "Baseline rankings, competitors, and site health. Clear roadmap aligned to services & city coverage.",
   },
   {
     number: 2,
     title: "On-Page Fixes",
-    description: "Titles, metas, headers, internal links, indexation/crawl, CWV, and schema foundations.",
+    description:
+      "Titles, metas, headers, internal links, indexation/crawl, CWV, and schema foundations.",
   },
   {
     number: 3,
     title: "Content",
-    description: "High-intent service/location pages and helpful blog content that converts searches into calls.",
+    description:
+      "High-intent service/location pages and helpful blog content that converts searches into calls.",
   },
   {
     number: 4,
     title: "Citations & Links",
-    description: "Clean NAP across directories, add niche/trade sites, and earn trustworthy local backlinks.",
+    description:
+      "Clean NAP across directories, add niche/trade sites, and earn trustworthy local backlinks.",
   },
   {
     number: 5,
     title: "Reports & Calls",
-    description: "Transparent metrics and monthly strategy calls to prioritize what moves the needle.",
+    description:
+      "Transparent metrics and monthly strategy calls to prioritize what moves the needle.",
   },
 ];
 
@@ -50,7 +55,8 @@ const features = [
 const faqs = [
   {
     question: "How soon will I see results?",
-    answer: "Most clients see measurable gains in 30–60 days. We prioritize high-impact fixes and pages first.",
+    answer:
+      "Most clients see measurable gains in 30–60 days. We prioritize high-impact fixes and pages first.",
   },
   {
     question: "Do you require contracts or charge setup fees?",
@@ -58,11 +64,13 @@ const faqs = [
   },
   {
     question: "Can you cover multiple cities or locations?",
-    answer: "Yes. We right-size page creation and tracking for your footprint. Multi-location fees apply.",
+    answer:
+      "Yes. We right-size page creation and tracking for your footprint. Multi-location fees apply.",
   },
   {
     question: "Will I get reports and strategy time?",
-    answer: "Every plan includes transparent reporting plus scheduled calls (Essentials: 30-min, Growth: 45-min, Pro: bi-weekly check-ins).",
+    answer:
+      "Every plan includes transparent reporting plus scheduled calls (Essentials: 30-min, Growth: 45-min, Pro: bi-weekly check-ins).",
   },
 ];
 ---
@@ -83,22 +91,18 @@ const faqs = [
         and local links to improve rankings in both Organic and the Map Pack—without long contracts.
       </p>
       <div class="mt-6 flex flex-wrap justify-center gap-3">
-        <Button href="#plans" variant="primary" size="lg">
-          See Plans
-        </Button>
-        <Button href="#faq" variant="secondary" size="lg">
-          FAQ
-        </Button>
+        <Button href="#plans" variant="primary" size="lg"> See Plans </Button>
+        <Button href="#faq" variant="secondary" size="lg"> FAQ </Button>
       </div>
       <div class="mt-4 flex items-center justify-center gap-2">
-        <Icon name="tabler:star-filled" class="h-5 w-5 text-accent" />
+        <Icon name="tabler:star-filled" class="text-accent h-5 w-5" />
         <span class="text-sm font-semibold text-white/90">5-Star Rated by Local Businesses</span>
       </div>
     </div>
   </section>
 
   <!-- OVERVIEW PILL ROW -->
-  <section class="border-t border-gray-100 bg-cream py-12">
+  <section class="bg-cream border-t border-gray-100 py-12">
     <div class="mx-auto max-w-5xl px-4 text-center">
       <h2 class="mb-3 font-heading text-xl font-bold text-heading md:text-2xl">
         What You Get with Local SEO
@@ -108,9 +112,13 @@ const faqs = [
         booked jobs.
       </p>
       <div class="flex flex-wrap justify-center gap-3">
-        {features.map((feature) => (
-          <Badge variant="primary" size="lg">{feature}</Badge>
-        ))}
+        {
+          features.map((feature) => (
+            <Badge variant="primary" size="lg">
+              {feature}
+            </Badge>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -122,19 +130,17 @@ const faqs = [
         Our Local SEO System (5 Steps)
       </h2>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-5">
-        {processSteps.map((step) => (
-          <ProcessStep
-            number={step.number}
-            title={step.title}
-            description={step.description}
-          />
-        ))}
+        {
+          processSteps.map((step) => (
+            <ProcessStep number={step.number} title={step.title} description={step.description} />
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- PLANS -->
-  <section id="plans" class="border-t border-gray-100 bg-cream py-16">
+  <section id="plans" class="bg-cream border-t border-gray-100 py-16">
     <div class="mx-auto max-w-7xl px-4">
       <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Local SEO Plans &amp; Pricing
@@ -220,16 +226,14 @@ const faqs = [
         Local SEO — FAQs
       </h2>
       <div class="space-y-4">
-        {faqs.map((faq, index) => (
-          <Card variant={index % 2 === 0 ? "elevated" : "default"}>
-            <h3 class="mb-2 font-heading text-base font-semibold text-heading">
-              {faq.question}
-            </h3>
-            <p class="text-sm text-body">
-              {faq.answer}
-            </p>
-          </Card>
-        ))}
+        {
+          faqs.map((faq, index) => (
+            <Card variant={index % 2 === 0 ? "elevated" : "default"}>
+              <h3 class="mb-2 font-heading text-base font-semibold text-heading">{faq.question}</h3>
+              <p class="text-sm text-body">{faq.answer}</p>
+            </Card>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -243,9 +247,7 @@ const faqs = [
       <p class="mb-6 text-base text-white/90">
         Get a free audit and action plan—no hard sell, just what to do next.
       </p>
-      <Button href="#contact" variant="white" size="lg">
-        Book My Free Audit
-      </Button>
+      <Button href="#contact" variant="white" size="lg"> Book My Free Audit </Button>
     </div>
   </section>
 </Layout>

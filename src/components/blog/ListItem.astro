@@ -96,7 +96,7 @@ const altText =
   ((post as any).imageAlt as string | undefined) ?? post.title ?? "Blog post image";
 ---
 
-<article class="mb-6 transition motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+<article class="motion-safe:md:intersect:animate-fade mb-6 transition motion-safe:md:opacity-0">
   <div class="relative mb-6 rounded bg-gray-400 shadow-lg dark:bg-slate-700 md:h-64">
     <a href={permalink}>
       {
@@ -130,7 +130,7 @@ const altText =
 
   {
     dateText && (
-      <div class="text-muted mb-2 flex items-center gap-2 text-sm">
+      <div class="mb-2 flex items-center gap-2 text-sm text-muted">
         <Icon name="tabler:calendar" class="h-4 w-4" />
         <time datetime={post.publishDate ? new Date(post.publishDate).toISOString() : undefined}>
           {dateText}
@@ -139,7 +139,7 @@ const altText =
     )
   }
 
-  {post.excerpt && <p class="text-muted flex-grow text-lg dark:text-slate-400">{post.excerpt}</p>}
+  {post.excerpt && <p class="flex-grow text-lg text-muted dark:text-slate-400">{post.excerpt}</p>}
 
   {
     post.tags && Array.isArray(post.tags) ? (

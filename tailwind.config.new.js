@@ -24,28 +24,28 @@ export default {
           50: "var(--color-primary-50)",
           100: "var(--color-primary-100)",
         },
-        
-        // Secondary brand colors  
+
+        // Secondary brand colors
         secondary: {
           DEFAULT: "var(--color-secondary)",
           hover: "var(--color-secondary-hover)",
           light: "var(--color-secondary-light)",
           dark: "var(--color-secondary-dark)",
         },
-        
+
         // Semantic colors
         heading: "var(--color-heading)",
         body: "var(--color-body)",
         muted: "var(--color-muted)",
         subtle: "var(--color-subtle)",
-        
+
         // Surface colors
         surface: {
           base: "var(--color-surface-base)",
           raised: "var(--color-surface-raised)",
           overlay: "var(--color-surface-overlay)",
         },
-        
+
         // Background colors
         background: {
           base: "var(--color-background-base)",
@@ -53,14 +53,14 @@ export default {
           cream: "var(--color-background-cream)",
           blue: "var(--color-background-blue)",
         },
-        
+
         // Border colors
         border: {
           base: "var(--color-border-base)",
           subtle: "var(--color-border-subtle)",
           strong: "var(--color-border-strong)",
         },
-        
+
         // Status colors
         success: {
           DEFAULT: "var(--color-success)",
@@ -78,7 +78,7 @@ export default {
           DEFAULT: "var(--color-info)",
           light: "var(--color-info-light)",
         },
-        
+
         // Service type colors
         service: {
           website: "var(--color-service-website)",
@@ -89,12 +89,12 @@ export default {
           "seo-light": "var(--color-service-seo-light)",
         },
       },
-      
+
       fontFamily: {
         heading: "var(--font-heading)",
         body: "var(--font-body)",
       },
-      
+
       fontSize: {
         xs: ["var(--text-xs)", { lineHeight: "var(--leading-normal)" }],
         sm: ["var(--text-sm)", { lineHeight: "var(--leading-normal)" }],
@@ -107,7 +107,7 @@ export default {
         "5xl": ["var(--text-5xl)", { lineHeight: "var(--leading-tight)" }],
         "6xl": ["var(--text-6xl)", { lineHeight: "var(--leading-tight)" }],
       },
-      
+
       spacing: {
         xs: "var(--space-xs)",
         sm: "var(--space-sm)",
@@ -118,8 +118,8 @@ export default {
         "3xl": "var(--space-3xl)",
         "4xl": "var(--space-4xl)",
       },
-      
-      borderRadius: { 
+
+      borderRadius: {
         sm: "var(--radius-sm)",
         md: "var(--radius-md)",
         lg: "var(--radius-lg)",
@@ -132,7 +132,7 @@ export default {
         input: "var(--radius-input)",
         badge: "var(--radius-badge)",
       },
-      
+
       boxShadow: {
         xs: "var(--shadow-xs)",
         sm: "var(--shadow-sm)",
@@ -143,13 +143,13 @@ export default {
         primary: "var(--shadow-primary)",
         "primary-lg": "var(--shadow-primary-lg)",
       },
-      
+
       transitionDuration: {
         fast: "var(--transition-fast)",
         base: "var(--transition-base)",
         slow: "var(--transition-slow)",
       },
-      
+
       zIndex: {
         base: "var(--z-base)",
         dropdown: "var(--z-dropdown)",
@@ -171,6 +171,7 @@ export default {
         prose: "var(--width-prose)",
       },
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       typography: (theme) => ({
         DEFAULT: {
           css: {
@@ -186,10 +187,10 @@ export default {
               textUnderlineOffset: "4px",
               "&:hover": { color: "var(--color-primary)" },
             },
-            h1: { 
-              letterSpacing: "-0.02em", 
-              lineHeight: "var(--leading-tight)", 
-              marginBottom: "0.5em" 
+            h1: {
+              letterSpacing: "-0.02em",
+              lineHeight: "var(--leading-tight)",
+              marginBottom: "0.5em",
             },
             h2: {
               letterSpacing: "-0.01em",
@@ -230,6 +231,7 @@ export default {
 
   plugins: [
     typographyPlugin,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     plugin(({ addVariant, addBase, addUtilities, addComponents, theme }) => {
       addVariant("intersect", "&:not([no-intersect])");
 
@@ -266,7 +268,7 @@ export default {
         // ============================================
         // CARD COMPONENTS
         // ============================================
-        
+
         ".card": {
           backgroundColor: "var(--color-surface-base)",
           borderRadius: "var(--radius-card)",
@@ -274,7 +276,7 @@ export default {
           border: "1px solid var(--color-border-subtle)",
           transition: "all var(--transition-base)",
         },
-        
+
         ".card-elevated": {
           backgroundColor: "var(--color-surface-raised)",
           borderRadius: "var(--radius-card)",
@@ -287,7 +289,7 @@ export default {
             transform: "translateY(-2px)",
           },
         },
-        
+
         ".card-interactive": {
           backgroundColor: "var(--color-surface-base)",
           borderRadius: "var(--radius-card)",
@@ -302,7 +304,7 @@ export default {
             transform: "translateY(-4px)",
           },
         },
-        
+
         ".card-outlined": {
           backgroundColor: "transparent",
           borderRadius: "var(--radius-card)",
@@ -310,15 +312,15 @@ export default {
           border: "2px solid var(--color-border-base)",
           transition: "all var(--transition-base)",
         },
-        
+
         ".card-sm": {
           padding: "var(--space-card-padding-sm)",
         },
-        
+
         // ============================================
         // BUTTON COMPONENTS
         // ============================================
-        
+
         ".btn": {
           display: "inline-flex",
           alignItems: "center",
@@ -337,25 +339,25 @@ export default {
             cursor: "not-allowed",
           },
         },
-        
-        ".btn-sm": { 
+
+        ".btn-sm": {
           padding: "0.5rem 1rem",
           fontSize: "var(--text-sm)",
           lineHeight: "1.5",
         },
-        
-        ".btn-md": { 
+
+        ".btn-md": {
           padding: "0.75rem 1.5rem",
           fontSize: "var(--text-base)",
           lineHeight: "1.5",
         },
-        
-        ".btn-lg": { 
+
+        ".btn-lg": {
           padding: "1rem 2rem",
           fontSize: "var(--text-lg)",
           lineHeight: "1.5",
         },
-        
+
         ".btn-primary": {
           backgroundColor: "var(--color-primary)",
           color: "white",
@@ -372,7 +374,7 @@ export default {
             outlineOffset: "2px",
           },
         },
-        
+
         ".btn-secondary": {
           backgroundColor: "var(--color-secondary)",
           color: "white",
@@ -386,7 +388,7 @@ export default {
             outlineOffset: "2px",
           },
         },
-        
+
         ".btn-outline": {
           backgroundColor: "transparent",
           color: "var(--color-primary)",
@@ -400,7 +402,7 @@ export default {
             outlineOffset: "2px",
           },
         },
-        
+
         ".btn-ghost": {
           backgroundColor: "transparent",
           color: "var(--color-body)",
@@ -409,11 +411,11 @@ export default {
             color: "var(--color-heading)",
           },
         },
-        
+
         // ============================================
         // BADGE COMPONENTS
         // ============================================
-        
+
         ".badge": {
           display: "inline-flex",
           alignItems: "center",
@@ -426,41 +428,41 @@ export default {
           letterSpacing: "0.05em",
           whiteSpace: "nowrap",
         },
-        
+
         ".badge-primary": {
           backgroundColor: "var(--color-primary-100)",
           color: "var(--color-primary-dark)",
         },
-        
+
         ".badge-success": {
           backgroundColor: "var(--color-success-light)",
           color: "var(--color-success)",
         },
-        
+
         ".badge-info": {
           backgroundColor: "var(--color-info-light)",
           color: "var(--color-info)",
         },
-        
+
         ".badge-website": {
           backgroundColor: "var(--color-service-website-light)",
           color: "var(--color-service-website)",
         },
-        
+
         ".badge-gbp": {
           backgroundColor: "var(--color-service-gbp-light)",
           color: "var(--color-service-gbp)",
         },
-        
+
         ".badge-seo": {
           backgroundColor: "var(--color-service-seo-light)",
           color: "var(--color-service-seo)",
         },
-        
+
         // ============================================
         // INPUT COMPONENTS
         // ============================================
-        
+
         ".input": {
           width: "100%",
           padding: "0.75rem 1rem",
@@ -488,7 +490,7 @@ export default {
             opacity: "0.6",
           },
         },
-        
+
         ".input-error": {
           borderColor: "var(--color-error)",
           "&:focus": {
@@ -496,11 +498,11 @@ export default {
             boxShadow: "0 0 0 3px var(--color-error-light)",
           },
         },
-        
+
         // ============================================
         // UTILITY COMPONENTS
         // ============================================
-        
+
         ".focus-ring": {
           outline: "none",
           "&:focus-visible": {
@@ -508,7 +510,7 @@ export default {
             outlineOffset: "2px",
           },
         },
-        
+
         ".link-underline": {
           textDecorationThickness: "1px",
           textUnderlineOffset: "4px",
@@ -518,12 +520,12 @@ export default {
             color: "var(--color-primary)",
           },
         },
-        
+
         ".section-padding": {
           paddingTop: "var(--space-section-padding)",
           paddingBottom: "var(--space-section-padding)",
         },
-        
+
         ".section-padding-sm": {
           paddingTop: "var(--space-section-padding-sm)",
           paddingBottom: "var(--space-section-padding-sm)",

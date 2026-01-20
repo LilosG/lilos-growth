@@ -94,7 +94,13 @@ const faqs = [
         Month-to-month. No setup fees. Built for home-service pros.
       </p>
       <div class="mt-6 flex flex-wrap justify-center gap-3">
-        <Button href="#packages" variant="primary" size="lg" data-track data-track-event="view_packages">
+        <Button
+          href="#packages"
+          variant="primary"
+          size="lg"
+          data-track
+          data-track-event="view_packages"
+        >
           View Packages
         </Button>
         <Button href="#faq" variant="secondary" size="lg" data-track data-track-event="view_faq">
@@ -105,7 +111,7 @@ const faqs = [
   </section>
 
   <!-- TRUST STRIP -->
-  <section class="border-t border-gray-100 bg-cream py-12">
+  <section class="bg-cream border-t border-gray-100 py-12">
     <div class="mx-auto max-w-5xl px-4 text-center">
       <h2 class="mb-3 font-heading text-xl font-bold text-heading md:text-2xl">
         How Our Process Works
@@ -114,13 +120,11 @@ const faqs = [
         Straightforward onboarding, clear deliverables, and transparent reporting.
       </p>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
-        {processSteps.map((step) => (
-          <ProcessStep
-            number={step.number}
-            title={step.title}
-            description={step.description}
-          />
-        ))}
+        {
+          processSteps.map((step) => (
+            <ProcessStep number={step.number} title={step.title} description={step.description} />
+          ))
+        }
       </div>
     </div>
   </section>
@@ -128,31 +132,31 @@ const faqs = [
   <!-- WHO WE HELP -->
   <section class="border-t border-gray-100 bg-white py-10">
     <div class="mx-auto max-w-4xl px-4 text-center">
-      <h2 class="mb-6 font-heading text-xl font-bold text-heading md:text-2xl">
-        Who We Help
-      </h2>
+      <h2 class="mb-6 font-heading text-xl font-bold text-heading md:text-2xl">Who We Help</h2>
       <div class="flex flex-wrap justify-center gap-3">
-        {industries.map((industry) => (
-          <Badge variant="primary" size="md">{industry}</Badge>
-        ))}
+        {
+          industries.map((industry) => (
+            <Badge variant="primary" size="md">
+              {industry}
+            </Badge>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- WHY CHOOSE US -->
-  <section class="border-t border-gray-100 bg-cream py-12">
+  <section class="bg-cream border-t border-gray-100 py-12">
     <div class="mx-auto max-w-6xl px-4 text-center">
       <h2 class="mb-8 font-heading text-xl font-bold text-heading md:text-2xl">
         Why Choose Lilos Growth?
       </h2>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {whyChooseUs.map((reason) => (
-          <FeatureCard
-            icon={reason.icon}
-            title={reason.title}
-            description={reason.description}
-          />
-        ))}
+        {
+          whyChooseUs.map((reason) => (
+            <FeatureCard icon={reason.icon} title={reason.title} description={reason.description} />
+          ))
+        }
       </div>
     </div>
   </section>
@@ -287,15 +291,27 @@ const faqs = [
             </div>
             <ul class="mb-6 flex-1 space-y-2 text-sm text-body">
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-                <span>≈ <strong>10 pages</strong>: Home, 3 services, About/Contact, + core supporting pages</span>
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                />
+                <span
+                  >≈ <strong>10 pages</strong>: Home, 3 services, About/Contact, + core supporting
+                  pages</span
+                >
               </li>
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                />
                 <span>Form + click-to-call; basic schema</span>
               </li>
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                />
                 <span><strong>3–5 business-day launch</strong></span>
               </li>
             </ul>
@@ -308,24 +324,41 @@ const faqs = [
 
           <!-- Starter -->
           <Card variant="elevated" class="relative flex h-full flex-col border-2 border-primary">
-            <Badge variant="primary" size="sm" class="absolute -top-3 left-1/2 -translate-x-1/2 shadow-md">
+            <Badge
+              variant="primary"
+              size="sm"
+              class="absolute -top-3 left-1/2 -translate-x-1/2 shadow-md"
+            >
               Popular
             </Badge>
-            <h3 class="mt-2 mb-2 font-heading text-lg font-bold text-heading md:text-xl">Starter</h3>
+            <h3 class="mb-2 mt-2 font-heading text-lg font-bold text-heading md:text-xl">
+              Starter
+            </h3>
             <div class="mb-4 text-2xl font-bold text-primary md:text-3xl">
               $750<span class="text-base font-normal text-gray-500"> one-time</span>
             </div>
             <ul class="mb-6 flex-1 space-y-2 text-sm text-body">
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-                <span><strong>15 pages</strong>: Home + 9 service/city pages + supporting pages</span>
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                />
+                <span
+                  ><strong>15 pages</strong>: Home + 9 service/city pages + supporting pages</span
+                >
               </li>
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                />
                 <span>Titles/metas/H1–H2; internal link scaffold; stock library</span>
               </li>
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                />
                 <span><strong>5–7 business-day launch</strong></span>
               </li>
             </ul>
@@ -344,19 +377,31 @@ const faqs = [
             </div>
             <ul class="mb-6 flex-1 space-y-2 text-sm text-body">
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                />
                 <span>≈ <strong>25 pages</strong></span>
               </li>
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                />
                 <span>Enhanced schema (LocalBusiness + Services)</span>
               </li>
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                />
                 <span>Conversion blocks (badges, FAQs, reviews)</span>
               </li>
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                />
                 <span><strong>10–14 business-day launch</strong></span>
               </li>
             </ul>
@@ -368,7 +413,7 @@ const faqs = [
           </Card>
         </div>
 
-        <p class="mx-auto mt-4 max-w-3xl text-center text-sm text-body/80">
+        <p class="text-body/80 mx-auto mt-4 max-w-3xl text-center text-sm">
           Global website notes: client supplies branding/services/service areas/5–10 reviews;
           premium stock billed at cost; hosting not included (WaS covers hosting/updates).
         </p>
@@ -388,10 +433,7 @@ const faqs = [
             title="Base"
             price="$250"
             period="mo"
-            features={[
-              "<strong>Up to 5 minor updates/mo</strong>",
-              "≤ 1 new page/mo",
-            ]}
+            features={["<strong>Up to 5 minor updates/mo</strong>", "≤ 1 new page/mo"]}
             ctaText="Get WaS"
             ctaHref="#contact"
           />
@@ -420,17 +462,25 @@ const faqs = [
         </h2>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
           <Card variant="elevated" class="flex flex-col border-2 border-primary">
-            <h3 class="mb-2 font-heading text-lg font-bold text-heading md:text-xl">GBP + SEO Essentials</h3>
+            <h3 class="mb-2 font-heading text-lg font-bold text-heading md:text-xl">
+              GBP + SEO Essentials
+            </h3>
             <div class="mb-4 text-2xl font-bold text-primary md:text-3xl">
               $699<span class="text-base font-normal text-gray-500">/mo</span>
             </div>
             <ul class="mb-6 flex-1 space-y-2 text-sm text-body">
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                />
                 <span>Everything in GBP Starter + Local SEO Essentials</span>
               </li>
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                />
                 <span>Unified reporting + strategy</span>
               </li>
             </ul>
@@ -441,19 +491,29 @@ const faqs = [
             </div>
           </Card>
 
-          <Card variant="elevated" class="flex flex-col border-2 border-primary bg-gradient-to-br from-primary to-primary-dark text-white">
+          <Card
+            variant="elevated"
+            class="flex flex-col border-2 border-primary bg-gradient-to-br from-primary to-primary-dark text-white"
+          >
             <h3 class="mb-2 font-heading text-lg font-bold text-white md:text-xl">All-In-One</h3>
             <div class="mb-4 text-2xl font-bold text-white md:text-3xl">
               $1,299<span class="text-base font-normal text-white/80">/mo</span>
             </div>
             <ul class="mb-6 flex-1 space-y-2 text-sm text-white/90">
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-white" />
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-white"
+                />
                 <span>Website + Local SEO + GBP management</span>
               </li>
               <li class="flex items-start">
-                <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-white" />
-                <span>Optional launch promo: <strong>$999</strong> first 90 days → then $1,299</span>
+                <Icon
+                  name="tabler:circle-check-filled"
+                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-white"
+                />
+                <span>Optional launch promo: <strong>$999</strong> first 90 days → then $1,299</span
+                >
               </li>
             </ul>
             <div class="mt-auto border-t border-white/20 pt-4">
@@ -473,24 +533,49 @@ const faqs = [
         <Card variant="elevated" class="mx-auto max-w-4xl">
           <ul class="space-y-2 text-sm text-body">
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-              <span><strong>LSA Management:</strong> $300/mo + 10% of ad spend over $3k (setup $299)</span>
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
+              <span
+                ><strong>LSA Management:</strong> $300/mo + 10% of ad spend over $3k (setup $299)</span
+              >
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-              <span><strong>GA4 + GTM Setup:</strong> $149 one-time (included in SEO Growth/Pro)</span>
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
+              <span
+                ><strong>GA4 + GTM Setup:</strong> $149 one-time (included in SEO Growth/Pro)</span
+              >
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-              <span><strong>Multi-location:</strong> +$150/mo per extra GBP; +$200/mo per extra SEO location</span>
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
+              <span
+                ><strong>Multi-location:</strong> +$150/mo per extra GBP; +$200/mo per extra SEO location</span
+              >
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
               <span><strong>Rush Ticket (48 hrs):</strong> +$100 per ticket</span>
             </li>
             <li class="flex items-start">
-              <Icon name="tabler:circle-check-filled" class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-              <span><strong>Optional:</strong> Call tracking & lead attribution (pass-through + setup); Citation burst/cleanup from $199/location; Review funnels from $149/mo; Photo/Video pack from $499/quarter</span>
+              <Icon
+                name="tabler:circle-check-filled"
+                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+              />
+              <span
+                ><strong>Optional:</strong> Call tracking & lead attribution (pass-through + setup);
+                Citation burst/cleanup from $199/location; Review funnels from $149/mo; Photo/Video pack
+                from $499/quarter</span
+              >
             </li>
           </ul>
         </Card>
@@ -499,7 +584,7 @@ const faqs = [
   </section>
 
   <!-- COMPARE TABLE -->
-  <section class="border-t border-gray-100 bg-cream py-12">
+  <section class="bg-cream border-t border-gray-100 py-12">
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         At-a-Glance Comparison
@@ -571,14 +656,14 @@ const faqs = [
       </h2>
       <div class="flex flex-col items-stretch justify-center gap-6 md:flex-row">
         <Card variant="elevated" class="flex-1">
-          <div class="mb-3 text-2xl text-accent">★★★★★</div>
+          <div class="text-accent mb-3 text-2xl">★★★★★</div>
           <p class="mb-3 font-heading text-base font-semibold text-heading md:text-lg">
             "We booked more calls in 2 months than all last year."
           </p>
           <span class="text-sm text-body">– Mike S., HVAC Company</span>
         </Card>
         <Card variant="elevated" class="flex-1">
-          <div class="mb-3 text-2xl text-accent">★★★★★</div>
+          <div class="text-accent mb-3 text-2xl">★★★★★</div>
           <p class="mb-3 font-heading text-base font-semibold text-heading md:text-lg">
             "The site and Maps ranking paid for itself fast. Seamless process."
           </p>
@@ -589,22 +674,22 @@ const faqs = [
   </section>
 
   <!-- FAQ -->
-  <section class="border-t border-gray-100 bg-cream py-16" id="faq">
+  <section class="bg-cream border-t border-gray-100 py-16" id="faq">
     <div class="mx-auto max-w-4xl px-4">
       <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Frequently Asked Questions
       </h2>
       <div class="space-y-4">
-        {faqs.map((faq) => (
-          <Card variant="elevated">
-            <h3 class="mb-2 font-heading text-base font-bold text-heading md:text-lg">
-              {faq.question}
-            </h3>
-            <p class="text-sm text-body md:text-base">
-              {faq.answer}
-            </p>
-          </Card>
-        ))}
+        {
+          faqs.map((faq) => (
+            <Card variant="elevated">
+              <h3 class="mb-2 font-heading text-base font-bold text-heading md:text-lg">
+                {faq.question}
+              </h3>
+              <p class="text-sm text-body md:text-base">{faq.answer}</p>
+            </Card>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -618,7 +703,13 @@ const faqs = [
       <p class="mb-6 text-base text-white/90 md:text-lg">
         Book a free website & SEO audit—no hard sell, just insights.
       </p>
-      <Button href="#contact" variant="white" size="lg" data-track data-track-event="final_cta_click">
+      <Button
+        href="#contact"
+        variant="white"
+        size="lg"
+        data-track
+        data-track-event="final_cta_click"
+      >
         Book My Free Audit
       </Button>
     </div>

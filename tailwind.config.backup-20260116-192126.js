@@ -16,16 +16,16 @@ export default {
         primary: "#f56b2a",
         "primary-hover": "#e65c1e",
         "primary-dark": "#f34e00",
-        
-        // Secondary brand colors  
+
+        // Secondary brand colors
         secondary: "#1f2d3d",
         "secondary-hover": "#27394b",
         "secondary-light": "#2e4159",
-        
+
         // Semantic colors
         heading: "#1f2d3d",
         body: "#4a4a4a",
-        
+
         // Background colors
         cream: "#fff9f6",
         bluelight: "#f0f4f8",
@@ -68,14 +68,14 @@ export default {
         28: "7rem",
         32: "8rem",
       },
-      borderRadius: { 
-        xl: "1rem", 
-        "2xl": "1.5rem", 
-        "3xl": "2rem", 
-        full: "9999px" 
+      borderRadius: {
+        xl: "1rem",
+        "2xl": "1.5rem",
+        "3xl": "2rem",
+        full: "9999px",
       },
-      animation: { 
-        fade: "fadeInUp 1s both" 
+      animation: {
+        fade: "fadeInUp 1s both",
       },
       keyframes: {
         fadeInUp: {
@@ -188,7 +188,7 @@ export default {
             boxShadow: `0 0 0 2px white, 0 0 0 4px ${theme("colors.primary")}`,
           },
         },
-        
+
         // Link underline utility
         ".link-underline": {
           textDecorationThickness: "1px",
@@ -215,24 +215,24 @@ export default {
             boxShadow: `0 0 0 2px white, 0 0 0 4px ${theme("colors.primary")}`,
           },
         },
-        
+
         // Size variants
-        ".btn-sm": { 
+        ".btn-sm": {
           padding: `${theme("spacing.2")} ${theme("spacing.4")}`,
           fontSize: "14px",
           lineHeight: "22px",
         },
-        ".btn-md": { 
+        ".btn-md": {
           padding: `0.625rem ${theme("spacing.5")}`,
           fontSize: "15px",
           lineHeight: "22px",
         },
-        ".btn-lg": { 
+        ".btn-lg": {
           padding: `${theme("spacing.3")} ${theme("spacing.6")}`,
           fontSize: theme("fontSize.base")[0],
           lineHeight: "24px",
         },
-        
+
         // Primary button
         ".btn-primary": {
           backgroundColor: theme("colors.primary"),
@@ -243,7 +243,7 @@ export default {
             borderColor: theme("colors.primary-hover"),
           },
         },
-        
+
         // Secondary button
         ".btn-secondary": {
           backgroundColor: "white",
@@ -255,7 +255,7 @@ export default {
             borderColor: theme("colors.gray.400"),
           },
         },
-        
+
         // Outline primary button
         ".btn-outline-primary": {
           backgroundColor: "white",
@@ -266,7 +266,7 @@ export default {
             color: "white",
           },
         },
-        
+
         // Tertiary/ghost button
         ".btn-tertiary": {
           backgroundColor: "transparent",

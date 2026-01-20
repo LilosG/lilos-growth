@@ -1,17 +1,17 @@
 ---
 /**
  * Input Component
- * 
+ *
  * Form input with built-in label, error, and helper text support.
  * Follows design system and accessibility best practices.
- * 
+ *
  * @component
  * @example
- * <Input 
- *   id="email" 
- *   label="Email Address" 
- *   type="email" 
- *   required 
+ * <Input
+ *   id="email"
+ *   label="Email Address"
+ *   type="email"
+ *   required
  *   helperText="We'll never share your email"
  * />
  */
@@ -22,7 +22,7 @@ export interface Props {
   /** Input name attribute */
   name?: string;
   /** Input type */
-  type?: 'text' | 'email' | 'tel' | 'url' | 'password' | 'number';
+  type?: "text" | "email" | "tel" | "url" | "password" | "number";
   /** Label text */
   label?: string;
   /** Placeholder text */
@@ -38,7 +38,7 @@ export interface Props {
   /** Autocomplete attribute */
   autocomplete?: string;
   /** Input mode for mobile keyboards */
-  inputmode?: 'text' | 'email' | 'tel' | 'url' | 'numeric';
+  inputmode?: "text" | "email" | "tel" | "url" | "numeric";
   /** Default value */
   value?: string;
   /** Additional CSS classes for input */
@@ -48,7 +48,7 @@ export interface Props {
 const {
   id,
   name = id,
-  type = 'text',
+  type = "text",
   label,
   placeholder,
   helperText,
@@ -58,28 +58,23 @@ const {
   autocomplete,
   inputmode,
   value,
-  class: className = '',
+  class: className = "",
 } = Astro.props;
 
 const hasError = !!error;
-const inputClasses = [
-  'input',
-  hasError && 'input-error',
-  className,
-].filter(Boolean).join(' ');
+const inputClasses = ["input", hasError && "input-error", className].filter(Boolean).join(" ");
 ---
 
 <div class="space-y-1.5">
-  {label && (
-    <label 
-      for={id} 
-      class="block text-sm font-medium text-heading"
-    >
-      {label}
-      {required && <span class="text-error ml-1">*</span>}
-    </label>
-  )}
-  
+  {
+    label && (
+      <label for={id} class="block text-sm font-medium text-heading">
+        {label}
+        {required && <span class="ml-1 text-error">*</span>}
+      </label>
+    )
+  }
+
   <input
     id={id}
     name={name}
@@ -94,16 +89,20 @@ const inputClasses = [
     aria-invalid={hasError}
     aria-describedby={error ? `${id}-error` : helperText ? `${id}-helper` : undefined}
   />
-  
-  {error && (
-    <p id={`${id}-error`} class="text-sm text-error">
-      {error}
-    </p>
-  )}
-  
-  {!error && helperText && (
-    <p id={`${id}-helper`} class="text-sm text-muted">
-      {helperText}
-    </p>
-  )}
+
+  {
+    error && (
+      <p id={`${id}-error`} class="text-sm text-error">
+        {error}
+      </p>
+    )
+  }
+
+  {
+    !error && helperText && (
+      <p id={`${id}-helper`} class="text-sm text-muted">
+        {helperText}
+      </p>
+    )
+  }
 </div>

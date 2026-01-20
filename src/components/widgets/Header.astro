@@ -23,7 +23,7 @@ function isActive(href: string) {
         <img
           src="/Lilos_Growth_Logo_Corrected.svg"
           alt="Lilos Growth"
-          class="h-12 w-auto md:h-14 lg:h-16 logo--halo"
+          class="logo--halo h-12 w-auto md:h-14 lg:h-16"
         />
       </a>
 
@@ -39,7 +39,7 @@ function isActive(href: string) {
                       "nav-link inline-flex items-center gap-1 rounded-lg px-3 py-2 text-[15px] font-semibold leading-6 tracking-tight no-underline transition-colors",
                       isActive(item.href)
                         ? "bg-gray-100 text-heading"
-                        : "text-gray-700 hover:bg-gray-50 hover:text-heading"
+                        : "text-gray-700 hover:bg-gray-50 hover:text-heading",
                     ]}
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -66,7 +66,10 @@ function isActive(href: string) {
                     role="menu"
                   >
                     <div class="relative w-72 rounded-2xl border border-gray-200 bg-white p-2 shadow-xl ring-1 ring-black/5">
-                      <div class="absolute inset-x-2 top-2 h-1 rounded-t-xl bg-primary" aria-hidden="true"></div>
+                      <div
+                        class="absolute inset-x-2 top-2 h-1 rounded-t-xl bg-primary"
+                        aria-hidden="true"
+                      />
                       <ul class="mt-2 space-y-1">
                         {(item.links ?? []).map((sub) => (
                           <li role="none">
@@ -78,10 +81,10 @@ function isActive(href: string) {
                                 "flex items-center gap-3 rounded-xl px-3 py-2 text-sm no-underline transition-colors",
                                 isActive(sub.href)
                                   ? "bg-gray-100 text-heading"
-                                  : "text-gray-700 hover:bg-gray-50 hover:text-heading"
+                                  : "text-gray-700 hover:bg-gray-50 hover:text-heading",
                               ]}
                             >
-                              <span class="h-1 w-1 rounded-full bg-gray-300" aria-hidden="true"></span>
+                              <span class="h-1 w-1 rounded-full bg-gray-300" aria-hidden="true" />
                               <span class="font-medium">{sub.text}</span>
                             </a>
                           </li>
@@ -97,7 +100,7 @@ function isActive(href: string) {
                     "nav-link rounded-lg px-3 py-2 text-[15px] font-semibold leading-6 tracking-tight no-underline transition-colors",
                     isActive(item.href)
                       ? "bg-gray-100 text-heading"
-                      : "text-gray-700 hover:bg-gray-50 hover:text-heading"
+                      : "text-gray-700 hover:bg-gray-50 hover:text-heading",
                   ]}
                 >
                   {item.text}
@@ -126,11 +129,31 @@ function isActive(href: string) {
         aria-controls="mobile-menu"
         aria-label="Toggle menu"
       >
-        <svg class="menu-icon h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        <svg
+          class="menu-icon h-6 w-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
-        <svg class="close-icon hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        <svg
+          class="close-icon hidden h-6 w-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
     </div>
@@ -146,7 +169,9 @@ function isActive(href: string) {
                 href={item.href}
                 class:list={[
                   "block rounded-xl px-4 py-3 text-base font-semibold no-underline",
-                  isActive(item.href) ? "bg-gray-100 text-heading" : "text-gray-700 hover:bg-gray-50"
+                  isActive(item.href)
+                    ? "bg-gray-100 text-heading"
+                    : "text-gray-700 hover:bg-gray-50",
                 ]}
               >
                 {item.text}
@@ -159,7 +184,9 @@ function isActive(href: string) {
                         href={sub.href ?? "#"}
                         class:list={[
                           "block rounded-lg px-3 py-2 text-sm no-underline",
-                          isActive(sub.href) ? "bg-gray-100 text-heading" : "text-gray-600 hover:bg-gray-50"
+                          isActive(sub.href)
+                            ? "bg-gray-100 text-heading"
+                            : "text-gray-600 hover:bg-gray-50",
                         ]}
                       >
                         {sub.text}
@@ -188,87 +215,93 @@ function isActive(href: string) {
   </div>
 </header>
 
-<script>
+<script is:inline>
   const HOVER_DELAY = 80;
   const LEAVE_DELAY = 120;
 
   document.querySelectorAll('[data-dropdown="true"]').forEach((container) => {
     const trigger = container.querySelector('a[aria-haspopup="true"]');
-    const panel = container.querySelector('.dropdown-panel');
-    const chevron = container.querySelector('.dropdown-chevron');
+    const panel = container.querySelector(".dropdown-panel");
+    const chevron = container.querySelector(".dropdown-chevron");
     if (!trigger || !panel) return;
 
     let openTimer = null;
     let closeTimer = null;
 
     const open = () => {
-      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
       openTimer = setTimeout(() => {
-        panel.classList.remove('hidden');
-        trigger.setAttribute('aria-expanded', 'true');
-        if (chevron) chevron.style.transform = 'rotate(180deg)';
+        panel.classList.remove("hidden");
+        trigger.setAttribute("aria-expanded", "true");
+        if (chevron) chevron.style.transform = "rotate(180deg)";
       }, HOVER_DELAY);
     };
 
     const close = () => {
-      if (openTimer) { clearTimeout(openTimer); openTimer = null; }
+      if (openTimer) {
+        clearTimeout(openTimer);
+        openTimer = null;
+      }
       closeTimer = setTimeout(() => {
-        panel.classList.add('hidden');
-        trigger.setAttribute('aria-expanded', 'false');
-        if (chevron) chevron.style.transform = '';
+        panel.classList.add("hidden");
+        trigger.setAttribute("aria-expanded", "false");
+        if (chevron) chevron.style.transform = "";
       }, LEAVE_DELAY);
     };
 
-    container.addEventListener('mouseenter', open);
-    container.addEventListener('mouseleave', close);
+    container.addEventListener("mouseenter", open);
+    container.addEventListener("mouseleave", close);
 
-    trigger.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowDown' || e.key === ' ') {
+    trigger.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown" || e.key === " ") {
         e.preventDefault();
-        panel.classList.remove('hidden');
-        trigger.setAttribute('aria-expanded', 'true');
+        panel.classList.remove("hidden");
+        trigger.setAttribute("aria-expanded", "true");
         const first = panel.querySelector('a[role="menuitem"]');
         if (first) first.focus();
       }
-      if (e.key === 'Escape') {
-        panel.classList.add('hidden');
-        trigger.setAttribute('aria-expanded', 'false');
+      if (e.key === "Escape") {
+        panel.classList.add("hidden");
+        trigger.setAttribute("aria-expanded", "false");
       }
     });
 
-    panel.addEventListener('keydown', (e) => {
+    panel.addEventListener("keydown", (e) => {
       const items = Array.from(panel.querySelectorAll('a[role="menuitem"]'));
       const idx = items.indexOf(document.activeElement);
-      if (e.key === 'ArrowDown') { 
-        e.preventDefault(); 
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
         const next = items[idx + 1] || items[0];
-        if (next) next.focus(); 
+        if (next) next.focus();
       }
-      if (e.key === 'ArrowUp') { 
-        e.preventDefault(); 
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
         const prev = items[idx - 1] || items[items.length - 1];
-        if (prev) prev.focus(); 
+        if (prev) prev.focus();
       }
-      if (e.key === 'Escape') { 
-        panel.classList.add('hidden'); 
-        trigger.setAttribute('aria-expanded', 'false'); 
-        trigger.focus(); 
+      if (e.key === "Escape") {
+        panel.classList.add("hidden");
+        trigger.setAttribute("aria-expanded", "false");
+        trigger.focus();
       }
     });
   });
 
-  const mobileBtn = document.querySelector('.mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuIcon = document.querySelector('.menu-icon');
-  const closeIcon = document.querySelector('.close-icon');
+  const mobileBtn = document.querySelector(".mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const menuIcon = document.querySelector(".menu-icon");
+  const closeIcon = document.querySelector(".close-icon");
 
   if (mobileBtn) {
-    mobileBtn.addEventListener('click', () => {
-      const isOpen = mobileBtn.getAttribute('aria-expanded') === 'true';
-      mobileBtn.setAttribute('aria-expanded', String(!isOpen));
-      if (mobileMenu) mobileMenu.classList.toggle('hidden');
-      if (menuIcon) menuIcon.classList.toggle('hidden');
-      if (closeIcon) closeIcon.classList.toggle('hidden');
+    mobileBtn.addEventListener("click", () => {
+      const isOpen = mobileBtn.getAttribute("aria-expanded") === "true";
+      mobileBtn.setAttribute("aria-expanded", String(!isOpen));
+      if (mobileMenu) mobileMenu.classList.toggle("hidden");
+      if (menuIcon) menuIcon.classList.toggle("hidden");
+      if (closeIcon) closeIcon.classList.toggle("hidden");
     });
   }
 </script>

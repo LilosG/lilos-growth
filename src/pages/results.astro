@@ -1,7 +1,7 @@
 ---
 /**
  * Results Page - Refactored with Design System
- * 
+ *
  * Showcases client case studies and results using the new component system.
  */
 import PageLayout from "~/layouts/PageLayout.astro";
@@ -12,30 +12,31 @@ import CaseStudyCard from "~/components/composed/CaseStudyCard.astro";
 import FilterTab from "~/components/composed/FilterTab.astro";
 
 const title = "Client Results & Case Studies | Lilos Growth";
-const description = "Real results for home service businesses: more calls, better rankings, faster websites. See how we help pest control, HVAC, restoration, and other local businesses grow.";
+const description =
+  "Real results for home service businesses: more calls, better rankings, faster websites. See how we help pest control, HVAC, restoration, and other local businesses grow.";
 
 // Stats data
 const stats = [
   {
     label: "Avg. lead growth",
     value: "+142%",
-    note: "12-month median across active clients"
+    note: "12-month median across active clients",
   },
   {
     label: "GBP calls increase",
     value: "3.2×",
-    note: "After profile optimization & posting"
+    note: "After profile optimization & posting",
   },
   {
     label: "Cost per lead",
     value: "−38%",
-    note: "Landing page + tracking improvements"
+    note: "Landing page + tracking improvements",
   },
   {
     label: "Core Web Vitals",
     value: "96%",
-    note: "Pass rate on Astro-built sites"
-  }
+    note: "Pass rate on Astro-built sites",
+  },
 ];
 
 // Case studies data
@@ -44,89 +45,94 @@ const caseStudies = [
     client: "Blue Door Pest Control",
     location: "Jupiter, FL",
     sector: "Pest Control",
-    serviceTypes: ['website', 'gbp', 'local-seo'] as const,
-    description: "Full-service engagement: Astro website rebuild, GBP optimization with weekly posts, and local SEO strategy targeting Jupiter and surrounding Palm Beach County cities.",
+    serviceTypes: ["website", "gbp", "local-seo"] as const,
+    description:
+      "Full-service engagement: Astro website rebuild, GBP optimization with weekly posts, and local SEO strategy targeting Jupiter and surrounding Palm Beach County cities.",
     metrics: [
       { label: "organic leads", value: "+118%" },
       { label: "cost per lead", value: "−41%" },
-      { label: "GBP calls", value: "+89%" }
+      { label: "GBP calls", value: "+89%" },
     ],
     screenshot: {
       src: "/images/case-studies/blue-door-screenshot.webp",
-      alt: "Blue Door Pest Control website"
+      alt: "Blue Door Pest Control website",
     },
     logo: {
       src: "/images/case-studies/blue-door-logo.png",
-      alt: "Blue Door Pest Control"
+      alt: "Blue Door Pest Control",
     },
     websiteUrl: "https://bluedoorpestcontrol.com",
     caseStudyUrl: "/results/blue-door-pest-control",
-    featured: true
+    featured: true,
   },
   {
     client: "Tamarack Restoration",
     location: "Carlsbad, CA",
     sector: "Restoration",
-    serviceTypes: ['website', 'gbp', 'local-seo'] as const,
-    description: "Fast Astro build with service-area pages, GBP optimization, and local link building for water damage and mold remediation searches.",
+    serviceTypes: ["website", "gbp", "local-seo"] as const,
+    description:
+      "Fast Astro build with service-area pages, GBP optimization, and local link building for water damage and mold remediation searches.",
     metrics: [
       { label: "Maps top-3 keywords", value: "+5" },
-      { label: "page load time", value: "<1s" }
+      { label: "page load time", value: "<1s" },
     ],
     screenshot: {
       src: "/images/case-studies/tamarack-screenshot.webp",
-      alt: "Tamarack Restoration website"
+      alt: "Tamarack Restoration website",
     },
-    caseStudyUrl: "/results/tamarack-restoration"
+    caseStudyUrl: "/results/tamarack-restoration",
   },
   {
     client: "Carlsbad Home Services",
     location: "Carlsbad, CA",
     sector: "Home Services",
-    serviceTypes: ['website', 'local-seo'] as const,
-    description: "Conversion-focused website with service pages and FAQ schema, plus local SEO targeting North County San Diego service areas.",
+    serviceTypes: ["website", "local-seo"] as const,
+    description:
+      "Conversion-focused website with service pages and FAQ schema, plus local SEO targeting North County San Diego service areas.",
     metrics: [
       { label: "quote requests", value: "+52%" },
-      { label: "cost per lead", value: "−33%" }
+      { label: "cost per lead", value: "−33%" },
     ],
     screenshot: {
       src: "/images/case-studies/carlsbad-home-screenshot.webp",
-      alt: "Carlsbad Home Services website"
+      alt: "Carlsbad Home Services website",
     },
-    caseStudyUrl: "/results/carlsbad-home-services"
+    caseStudyUrl: "/results/carlsbad-home-services",
   },
   {
     client: "Carlsbad Fix It",
     location: "Carlsbad, CA",
     sector: "Handyman",
-    serviceTypes: ['website', 'gbp', 'local-seo'] as const,
-    description: "Complete local presence overhaul: fast website, optimized GBP with service menus, and location-specific content for handyman searches.",
+    serviceTypes: ["website", "gbp", "local-seo"] as const,
+    description:
+      "Complete local presence overhaul: fast website, optimized GBP with service menus, and location-specific content for handyman searches.",
     metrics: [
       { label: "Maps visibility", value: "+73%" },
-      { label: "avg. session time", value: "+45%" }
+      { label: "avg. session time", value: "+45%" },
     ],
     screenshot: {
       src: "/images/case-studies/carlsbad-fixit-screenshot.webp",
-      alt: "Carlsbad Fix It website"
+      alt: "Carlsbad Fix It website",
     },
-    caseStudyUrl: "/results/carlsbad-fix-it"
+    caseStudyUrl: "/results/carlsbad-fix-it",
   },
   {
     client: "Postal Systems",
     location: "San Diego, CA",
     sector: "Commercial Services",
-    serviceTypes: ['website', 'gbp', 'local-seo'] as const,
-    description: "Niche B2B focus: productized service pages for mailbox installation, GBP optimization with product listings, and local SEO for commercial property managers.",
+    serviceTypes: ["website", "gbp", "local-seo"] as const,
+    description:
+      "Niche B2B focus: productized service pages for mailbox installation, GBP optimization with product listings, and local SEO for commercial property managers.",
     metrics: [
       { label: "GBP calls", value: "3.1×" },
-      { label: "form conversion", value: "+22%" }
+      { label: "form conversion", value: "+22%" },
     ],
     screenshot: {
       src: "/images/case-studies/postal-systems-screenshot.webp",
-      alt: "Postal Systems website"
+      alt: "Postal Systems website",
     },
-    caseStudyUrl: "/results/postal-systems"
-  }
+    caseStudyUrl: "/results/postal-systems",
+  },
 ];
 
 // GBP Performance Data
@@ -137,7 +143,7 @@ const gbpResults = [
     value: "194",
     growth: "+19.0%",
     period: "Sep 2025 – Dec 2025",
-    image: "/images/results/blue-door-gbp.png"
+    image: "/images/results/blue-door-gbp.png",
   },
   {
     client: "Carlsbad Fix It",
@@ -145,8 +151,8 @@ const gbpResults = [
     value: "38",
     growth: "Upward Trend",
     period: "Sep 2025 – Dec 2025",
-    image: "/images/results/carlsbad-fixit-gbp.png"
-  }
+    image: "/images/results/carlsbad-fixit-gbp.png",
+  },
 ];
 
 // Service type labels for filtering
@@ -154,59 +160,67 @@ const serviceTypeLabels = {
   all: "All Results",
   website: "Websites",
   gbp: "GBP Optimization",
-  'local-seo': "Local SEO"
+  "local-seo": "Local SEO",
 };
 
 // FAQs
 const faqs = [
   {
     question: "How quickly will I see results?",
-    answer: "Technical improvements (speed, structure) are immediate. Local SEO momentum typically builds over 6–12 weeks as Google re-crawls and trusts the changes."
+    answer:
+      "Technical improvements (speed, structure) are immediate. Local SEO momentum typically builds over 6–12 weeks as Google re-crawls and trusts the changes.",
   },
   {
     question: "Do I need to increase my ad spend?",
-    answer: "Usually no. We focus on organic visibility first. Paid ads only make sense once tracking is solid and landing pages convert well."
+    answer:
+      "Usually no. We focus on organic visibility first. Paid ads only make sense once tracking is solid and landing pages convert well.",
   },
   {
     question: "Can you work with my existing website?",
-    answer: "Yes. We can optimize an existing site or rebuild on Astro for better speed and maintainability. We preserve URLs and redirects either way."
+    answer:
+      "Yes. We can optimize an existing site or rebuild on Astro for better speed and maintainability. We preserve URLs and redirects either way.",
   },
   {
     question: "How do you measure success?",
-    answer: "Leads and booked jobs are the primary metrics. We also track GBP actions (calls, directions, clicks), conversion rates, page speed, and keyword rankings."
+    answer:
+      "Leads and booked jobs are the primary metrics. We also track GBP actions (calls, directions, clicks), conversion rates, page speed, and keyword rankings.",
   },
   {
     question: "What do you need from me to get started?",
-    answer: "Access to Google Analytics, Search Console, and your GBP. Quick feedback loops on content approvals help us move faster."
+    answer:
+      "Access to Google Analytics, Search Console, and your GBP. Quick feedback loops on content approvals help us move faster.",
   },
   {
     question: "Are there long-term contracts?",
-    answer: "Month-to-month is available. Most clients choose 3–6 month engagements to let organic SEO compound, but you're never locked in."
-  }
+    answer:
+      "Month-to-month is available. Most clients choose 3–6 month engagements to let organic SEO compound, but you're never locked in.",
+  },
 ];
 ---
 
 <PageLayout {title} {description}>
   <!-- HERO -->
   <section class="relative overflow-hidden bg-secondary">
-    <div class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light" aria-hidden="true"></div>
-    
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light"
+      aria-hidden="true"
+    >
+    </div>
+
     <div class="relative mx-auto max-w-6xl px-4 py-16 md:py-20">
       <div class="max-w-3xl">
-        <p class="text-sm font-semibold uppercase tracking-widest text-primary">
-          Proven Results
-        </p>
-        
+        <p class="text-sm font-semibold uppercase tracking-widest text-primary">Proven Results</p>
+
         <h1 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-5xl">
           More calls. Better rankings.<br class="hidden sm:block" />
           <span class="text-primary">Real growth.</span>
         </h1>
-        
+
         <p class="mt-4 text-base text-white/80">
-          We help home service businesses dominate local search with fast websites, 
-          optimized Google Business Profiles, and local SEO that actually drives calls.
+          We help home service businesses dominate local search with fast websites, optimized Google
+          Business Profiles, and local SEO that actually drives calls.
         </p>
-        
+
         <div class="mt-6 flex flex-wrap gap-2">
           <Badge variant="info">Website Design</Badge>
           <Badge variant="info">GBP Optimization</Badge>
@@ -217,36 +231,42 @@ const faqs = [
   </section>
 
   <!-- STATS -->
-  <section class="border-b border-border-subtle bg-surface-base section-padding-sm">
+  <section class="section-padding-sm border-b border-border-subtle bg-surface-base">
     <div class="mx-auto max-w-6xl px-4">
       <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-        {stats.map((stat) => (
-          <div data-stagger-item>
-            <StatCard {...stat} />
-          </div>
-        ))}
+        {
+          stats.map((stat) => (
+            <div data-stagger-item>
+              <StatCard {...stat} />
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- FEATURED CASE STUDY -->
-  {caseStudies.filter(cs => cs.featured).map((study) => (
-    <section class="border-b border-border-subtle bg-background-cream section-padding-sm">
-      <div class="mx-auto max-w-6xl px-4">
-        <div class="mb-8 flex items-center gap-3">
-          <Badge variant="primary">Featured</Badge>
-          <h2 class="font-heading text-xl font-bold text-heading md:text-2xl">
-            Client Spotlight
-          </h2>
-        </div>
+  {
+    caseStudies
+      .filter((cs) => cs.featured)
+      .map((study) => (
+        <section class="section-padding-sm border-b border-border-subtle bg-background-cream">
+          <div class="mx-auto max-w-6xl px-4">
+            <div class="mb-8 flex items-center gap-3">
+              <Badge variant="primary">Featured</Badge>
+              <h2 class="font-heading text-xl font-bold text-heading md:text-2xl">
+                Client Spotlight
+              </h2>
+            </div>
 
-        <CaseStudyCard {...study} />
-      </div>
-    </section>
-  ))}
+            <CaseStudyCard {...study} />
+          </div>
+        </section>
+      ))
+  }
 
   <!-- GBP PERFORMANCE SECTION -->
-  <section class="border-b border-border-subtle bg-surface-base section-padding">
+  <section class="section-padding border-b border-border-subtle bg-surface-base">
     <div class="mx-auto max-w-6xl px-4">
       <div class="mb-12 text-center">
         <Badge variant="primary" class="mb-4">GBP Management</Badge>
@@ -254,47 +274,53 @@ const faqs = [
           Google Business Profile Performance
         </h2>
         <p class="mx-auto mt-4 max-w-2xl text-base text-body">
-          Real-time performance data from profiles we manage. We focus on the metrics that matter: direction requests, calls, and direct customer interactions.
+          Real-time performance data from profiles we manage. We focus on the metrics that matter:
+          direction requests, calls, and direct customer interactions.
         </p>
       </div>
 
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {gbpResults.map((result) => (
-          <div class="card-elevated overflow-hidden p-0">
-            <div class="border-b border-border-subtle bg-background-subtle p-6">
-              <div class="flex items-start justify-between">
-                <div>
-                  <h3 class="font-heading text-lg font-bold text-heading">{result.client}</h3>
-                  <p class="text-sm text-muted">{result.period}</p>
+        {
+          gbpResults.map((result) => (
+            <div class="card-elevated overflow-hidden p-0">
+              <div class="border-b border-border-subtle bg-background-subtle p-6">
+                <div class="flex items-start justify-between">
+                  <div>
+                    <h3 class="font-heading text-lg font-bold text-heading">{result.client}</h3>
+                    <p class="text-sm text-muted">{result.period}</p>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-2xl font-bold text-primary">{result.value}</div>
+                    <div class="text-xs font-semibold uppercase tracking-wider text-success">
+                      {result.growth}
+                    </div>
+                  </div>
                 </div>
-                <div class="text-right">
-                  <div class="text-2xl font-bold text-primary">{result.value}</div>
-                  <div class="text-xs font-semibold uppercase tracking-wider text-success">{result.growth}</div>
-                </div>
+                <p class="mt-2 text-sm font-medium text-body">{result.metric}</p>
               </div>
-              <p class="mt-2 text-sm font-medium text-body">{result.metric}</p>
+              <div class="bg-secondary/5 relative aspect-[16/9]">
+                <img
+                  src={result.image}
+                  alt={`${result.client} GBP Performance`}
+                  class="h-full w-full object-cover object-top"
+                />
+              </div>
             </div>
-            <div class="relative aspect-[16/9] bg-secondary/5">
-              <img 
-                src={result.image} 
-                alt={`${result.client} GBP Performance`}
-                class="h-full w-full object-cover object-top"
-              />
-            </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- MORE CASE STUDIES -->
-  <section class="bg-background-cream section-padding">
+  <section class="section-padding bg-background-cream">
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="mb-4 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         More Client Wins
       </h2>
       <p class="mb-12 text-center text-base text-body">
-        From pest control to restoration to handyman services—we help home service businesses across industries dominate their local markets.
+        From pest control to restoration to handyman services—we help home service businesses across
+        industries dominate their local markets.
       </p>
 
       <!-- Filter Tabs -->
@@ -302,20 +328,24 @@ const faqs = [
         <FilterTab id="all" label={serviceTypeLabels.all} active={true} />
         <FilterTab id="website" label={serviceTypeLabels.website} />
         <FilterTab id="gbp" label={serviceTypeLabels.gbp} />
-        <FilterTab id="local-seo" label={serviceTypeLabels['local-seo']} />
+        <FilterTab id="local-seo" label={serviceTypeLabels["local-seo"]} />
       </div>
 
       <!-- Case Studies Grid -->
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2" id="case-studies-grid">
-        {caseStudies.filter(cs => !cs.featured).map((study) => (
-          <CaseStudyCard {...study} data-services={study.serviceTypes.join(',')} />
-        ))}
+        {
+          caseStudies
+            .filter((cs) => !cs.featured)
+            .map((study) => (
+              <CaseStudyCard {...study} data-services={study.serviceTypes.join(",")} />
+            ))
+        }
       </div>
     </div>
   </section>
 
   <!-- FAQs -->
-  <section class="border-t border-border-subtle bg-surface-base section-padding" id="faq">
+  <section class="section-padding border-t border-border-subtle bg-surface-base" id="faq">
     <div class="mx-auto max-w-4xl px-4">
       <h2 class="mb-4 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Common Questions
@@ -325,27 +355,32 @@ const faqs = [
       </p>
 
       <div class="space-y-4">
-        {faqs.map((faq) => (
-          <details class="card group">
-            <summary class="flex cursor-pointer items-center justify-between font-semibold text-heading">
-              {faq.question}
-              <span class="ml-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background-subtle text-muted transition-colors group-open:bg-primary group-open:text-white">
-                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
-            </summary>
-            <p class="mt-4 text-sm text-body leading-relaxed">
-              {faq.answer}
-            </p>
-          </details>
-        ))}
+        {
+          faqs.map((faq) => (
+            <details class="group card">
+              <summary class="flex cursor-pointer items-center justify-between font-semibold text-heading">
+                {faq.question}
+                <span class="ml-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background-subtle text-muted transition-colors group-open:bg-primary group-open:text-white">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </span>
+              </summary>
+              <p class="mt-4 text-sm leading-relaxed text-body">{faq.answer}</p>
+            </details>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- FINAL CTA -->
-  <section class="border-t border-border-subtle bg-background-cream section-padding">
+  <section class="section-padding border-t border-border-subtle bg-background-cream">
     <div class="mx-auto max-w-3xl px-4 text-center">
       <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
         See what this could look like in your city
@@ -354,48 +389,44 @@ const faqs = [
         We'll audit your GBP and top pages, outline quick wins, and map a 90-day plan to lift calls.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
-        <Button variant="primary" size="lg" href="/contact">
-          Get a Free Growth Plan
-        </Button>
-        <Button variant="outline" size="lg" href="/services">
-          Explore Services
-        </Button>
+        <Button variant="primary" size="lg" href="/contact"> Get a Free Growth Plan </Button>
+        <Button variant="outline" size="lg" href="/services"> Explore Services </Button>
       </div>
     </div>
   </section>
 </PageLayout>
 
-<script>
+<script is:inline>
   // Filter functionality
-  document.addEventListener('DOMContentLoaded', () => {
-    const tabs = document.querySelectorAll('.filter-tab');
-    const caseStudies = document.querySelectorAll('[data-services]');
-    
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const filter = tab.getAttribute('data-filter');
-        
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll(".filter-tab");
+    const caseStudies = document.querySelectorAll("[data-services]");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const filter = tab.getAttribute("data-filter");
+
         // Update active tab
-        tabs.forEach(t => {
-          t.classList.remove('bg-primary', 'text-white', 'shadow-md');
-          t.classList.add('bg-background-subtle', 'text-body');
-          t.setAttribute('aria-selected', 'false');
+        tabs.forEach((t) => {
+          t.classList.remove("bg-primary", "text-white", "shadow-md");
+          t.classList.add("bg-background-subtle", "text-body");
+          t.setAttribute("aria-selected", "false");
         });
-        
-        tab.classList.remove('bg-background-subtle', 'text-body');
-        tab.classList.add('bg-primary', 'text-white', 'shadow-md');
-        tab.setAttribute('aria-selected', 'true');
-        
+
+        tab.classList.remove("bg-background-subtle", "text-body");
+        tab.classList.add("bg-primary", "text-white", "shadow-md");
+        tab.setAttribute("aria-selected", "true");
+
         // Filter case studies
-        caseStudies.forEach(study => {
-          const services = study.getAttribute('data-services') || '';
-          const shouldShow = filter === 'all' || services.includes(filter);
-          
+        caseStudies.forEach((study) => {
+          const services = study.getAttribute("data-services") || "";
+          const shouldShow = filter === "all" || services.includes(filter);
+
           if (shouldShow) {
-            study.style.display = '';
-            study.classList.add('animate-fade-in');
+            study.style.display = "";
+            study.classList.add("animate-fade-in");
           } else {
-            study.style.display = 'none';
+            study.style.display = "none";
           }
         });
       });
@@ -414,20 +445,20 @@ const faqs = [
       transform: translateY(0);
     }
   }
-  
+
   .animate-fade-in {
     animation: fade-in 0.3s ease-out;
   }
-  
+
   /* Smooth accordion animation */
   details summary::-webkit-details-marker {
     display: none;
   }
-  
+
   details[open] summary svg {
     transform: rotate(180deg);
   }
-  
+
   details summary svg {
     transition: transform 0.2s ease;
   }

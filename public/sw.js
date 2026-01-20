@@ -4,15 +4,11 @@
  * Version: 1.0
  */
 
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = "v1";
 const CACHE_NAME = `lilos-growth-${CACHE_VERSION}`;
 
 // Assets to cache immediately on install
-const PRECACHE_ASSETS = [
-  '/',
-  '/offline.html',
-  '/Lilos_Growth_Logo_Corrected.svg',
-];
+const PRECACHE_ASSETS = ["/", "/offline.html", "/Lilos_Growth_Logo_Corrected.svg"];
 
 // Cache strategies
 const CACHE_STRATEGIES = {
@@ -30,12 +26,12 @@ const CACHE_STRATEGIES = {
 };
 
 // Install event - precache essential assets
-self.addEventListener('install', (event) => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(CACHE_NAME)
       .then((cache) => {
-        console.log('[SW] Precaching assets');
+        console.log("[SW] Precaching assets");
         return cache.addAll(PRECACHE_ASSETS);
       })
       .then(() => self.skipWaiting())
@@ -43,16 +39,16 @@ self.addEventListener('install', (event) => {
 });
 
 // Activate event - clean up old caches
-self.addEventListener('activate', (event) => {
+self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches
       .keys()
       .then((cacheNames) => {
         return Promise.all(
           cacheNames
-            .filter((name) => name.startsWith('lilos-growth-') && name !== CACHE_NAME)
+            .filter((name) => name.startsWith("lilos-growth-") && name !== CACHE_NAME)
             .map((name) => {
-              console.log('[SW] Deleting old cache:', name);
+              console.log("[SW] Deleting old cache:", name);
               return caches.delete(name);
             })
         );
@@ -62,7 +58,7 @@ self.addEventListener('activate', (event) => {
 });
 
 // Fetch event - implement caching strategies
-self.addEventListener('fetch', (event) => {
+self.addEventListener("fetch", (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
@@ -98,7 +94,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   // Network-first for HTML pages
-  if (request.mode === 'navigate' || request.headers.get('accept')?.includes('text/html')) {
+  if (request.mode === "navigate" || request.headers.get("accept")?.includes("text/html")) {
     event.respondWith(networkFirst(request));
     return;
   }
@@ -131,8 +127,8 @@ async function cacheFirst(request) {
 
     return response;
   } catch (error) {
-    console.error('[SW] Cache-first fetch failed:', error);
-    return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
+    console.error("[SW] Cache-first fetch failed:", error);
+    return new Response("Offline", { status: 503, statusText: "Service Unavailable" });
   }
 }
 
@@ -149,13 +145,13 @@ async function networkFirst(request) {
     const response = await fetch(request);
 
     // Cache successful HTML responses for offline fallback
-    if (response.ok && request.mode === 'navigate') {
+    if (response.ok && request.mode === "navigate") {
       cache.put(request, response.clone());
     }
 
     return response;
   } catch (error) {
-    console.warn('[SW] Network failed, trying cache:', error);
+    console.warn("[SW] Network failed, trying cache:", error);
 
     const cached = await cache.match(request);
     if (cached) {
@@ -163,29 +159,27 @@ async function networkFirst(request) {
     }
 
     // Return offline page for navigation requests
-    if (request.mode === 'navigate') {
-      const offlinePage = await cache.match('/offline.html');
+    if (request.mode === "navigate") {
+      const offlinePage = await cache.match("/offline.html");
       if (offlinePage) {
         return offlinePage;
       }
     }
 
-    return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
+    return new Response("Offline", { status: 503, statusText: "Service Unavailable" });
   }
 }
 
 // Message handler for cache clearing
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
     self.skipWaiting();
   }
 
-  if (event.data && event.data.type === 'CLEAR_CACHE') {
+  if (event.data && event.data.type === "CLEAR_CACHE") {
     event.waitUntil(
       caches.keys().then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((name) => caches.delete(name))
-        );
+        return Promise.all(cacheNames.map((name) => caches.delete(name)));
       })
     );
   }

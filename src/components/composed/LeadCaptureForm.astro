@@ -1,10 +1,10 @@
 ---
 /**
  * Lead Capture Form Component
- * 
+ *
  * Reusable lead generation form with consistent styling and validation.
  * Integrates with Formspree for form submissions.
- * 
+ *
  * @component
  * @example
  * <LeadCaptureForm
@@ -14,8 +14,8 @@
  * />
  */
 
-import Input from '../core/Input.astro';
-import Button from '../core/Button.astro';
+import Input from "../core/Input.astro";
+import Button from "../core/Button.astro";
 
 export interface Props {
   /** Form title */
@@ -38,13 +38,13 @@ export interface Props {
 
 const {
   title,
-  submitText = 'Submit',
+  submitText = "Submit",
   formspreeId,
-  redirectUrl = 'https://lilosgrowth.com/thank-you',
+  redirectUrl = "https://lilosgrowth.com/thank-you",
   showCompany = true,
   showWebsite = true,
   trustMessage = "No spam. We'll reply within 1 business day.",
-  class: className = '',
+  class: className = "",
 } = Astro.props;
 
 const formAction = `https://formspree.io/f/${formspreeId}`;
@@ -79,44 +79,38 @@ const formAction = `https://formspree.io/f/${formspreeId}`;
       required
     />
 
-    {showCompany && (
-      <Input
-        id="company"
-        name="company"
-        type="text"
-        label="Company Name"
-        placeholder="Acme Plumbing"
-        autocomplete="organization"
-      />
-    )}
+    {
+      showCompany && (
+        <Input
+          id="company"
+          name="company"
+          type="text"
+          label="Company Name"
+          placeholder="Acme Plumbing"
+          autocomplete="organization"
+        />
+      )
+    }
 
-    {showWebsite && (
-      <Input
-        id="website"
-        name="website"
-        type="url"
-        label="Website"
-        placeholder="https://example.com"
-        autocomplete="url"
-        inputmode="url"
-        required
-      />
-    )}
+    {
+      showWebsite && (
+        <Input
+          id="website"
+          name="website"
+          type="url"
+          label="Website"
+          placeholder="https://example.com"
+          autocomplete="url"
+          inputmode="url"
+          required
+        />
+      )
+    }
 
-    <Button
-      type="submit"
-      variant="primary"
-      size="lg"
-      fullWidth
-      data-evt="cta_lead_form_submit"
-    >
+    <Button type="submit" variant="primary" size="lg" fullWidth data-evt="cta_lead_form_submit">
       {submitText}
     </Button>
   </form>
 
-  {trustMessage && (
-    <p class="mt-4 text-sm text-muted text-center">
-      {trustMessage}
-    </p>
-  )}
+  {trustMessage && <p class="mt-4 text-center text-sm text-muted">{trustMessage}</p>}
 </div>

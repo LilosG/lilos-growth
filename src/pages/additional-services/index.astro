@@ -34,7 +34,8 @@ const services = [
     price: "$399",
     period: "one-time",
     badge: "Best for: New businesses or GBP resets",
-    description: "Complete profile creation & verification — optimized and ready to attract new customers.",
+    description:
+      "Complete profile creation & verification — optimized and ready to attract new customers.",
     features: [
       "Full GBP creation & verification",
       "Business info, logo & photos added",
@@ -48,7 +49,8 @@ const services = [
     price: "$499",
     period: "one-time",
     badge: "Best for: Fast visibility & profile fixes",
-    description: "A focused 30-day sprint to clean up, optimize, and grow visibility in the Map Pack.",
+    description:
+      "A focused 30-day sprint to clean up, optimize, and grow visibility in the Map Pack.",
     features: [
       "Full audit & expert optimizations",
       "Keyword-rich services & categories",
@@ -98,39 +100,47 @@ const processSteps = [
 const faqs = [
   {
     question: "Can I order an additional service without a monthly package?",
-    answer: "<strong>Yes.</strong> Every service on this page is available individually — no contract or ongoing bundle required.",
+    answer:
+      "<strong>Yes.</strong> Every service on this page is available individually — no contract or ongoing bundle required.",
   },
   {
     question: "What if I need help choosing the right service?",
-    answer: 'Just <a href="#contact" class="text-primary underline hover:text-primary-dark">contact us</a> and we\'ll recommend the best fit for your goals and budget.',
+    answer:
+      'Just <a href="#contact" class="text-primary underline hover:text-primary-dark">contact us</a> and we\'ll recommend the best fit for your goals and budget.',
   },
   {
     question: "How fast will I get results?",
-    answer: "Most one-time services are completed in <strong>7–14 days</strong>. We'll keep you updated the whole way.",
+    answer:
+      "Most one-time services are completed in <strong>7–14 days</strong>. We'll keep you updated the whole way.",
   },
   {
     question: "Can I combine these with a monthly package?",
-    answer: "Absolutely. Many monthly plans include these services for added savings — ask for details.",
+    answer:
+      "Absolutely. Many monthly plans include these services for added savings — ask for details.",
   },
   {
     question: "Is there support after the service is complete?",
-    answer: "Yes — you'll get a results report, actionable next steps, and 14 days of email support.",
+    answer:
+      "Yes — you'll get a results report, actionable next steps, and 14 days of email support.",
   },
   {
     question: "Can I talk to someone before ordering?",
-    answer: 'Definitely. <a href="#contact" class="text-primary underline hover:text-primary-dark">Reach out</a> for honest, pressure-free advice from a strategist.',
+    answer:
+      'Definitely. <a href="#contact" class="text-primary underline hover:text-primary-dark">Reach out</a> for honest, pressure-free advice from a strategist.',
   },
 ];
 ---
 
 <Layout title={title} description={description} breadcrumbs={breadcrumbs}>
   <!-- HERO -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-16 pt-12">
+  <section
+    class="relative overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-16 pt-12"
+  >
     <div class="relative z-10 mx-auto max-w-3xl px-4 text-center">
       <img
         src="/Lilos_Growth_Logo_Corrected.svg"
         alt="Lilos Growth Logo"
-        class="mx-auto mb-6 w-32 logo--halo"
+        class="logo--halo mx-auto mb-6 w-32"
       />
       <h1
         class="mb-2 font-heading text-3xl font-extrabold leading-tight tracking-tight text-white md:text-4xl lg:text-5xl"
@@ -138,7 +148,7 @@ const faqs = [
         Additional Services &amp; One-Time Projects
       </h1>
       <span
-        class="mb-3 mt-2 block font-heading text-lg font-semibold uppercase tracking-wider text-accent md:text-xl"
+        class="text-accent mb-3 mt-2 block font-heading text-lg font-semibold uppercase tracking-wider md:text-xl"
         >No Contract • No Commitment • Just Results</span
       >
       <p class="mx-auto mb-6 max-w-2xl text-base leading-relaxed text-white/90 md:text-lg">
@@ -169,25 +179,27 @@ const faqs = [
       </p>
 
       <div class="grid gap-6 md:grid-cols-2">
-        {services.map((service) => (
-          <ServiceOfferingCard
-            icon={service.icon}
-            title={service.title}
-            price={service.price}
-            period={service.period}
-            badge={service.badge}
-            description={service.description}
-            features={service.features}
-            ctaText="Order Now"
-            ctaHref="#contact"
-          />
-        ))}
+        {
+          services.map((service) => (
+            <ServiceOfferingCard
+              icon={service.icon}
+              title={service.title}
+              price={service.price}
+              period={service.period}
+              badge={service.badge}
+              description={service.description}
+              features={service.features}
+              ctaText="Order Now"
+              ctaHref="#contact"
+            />
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="border-t border-gray-100 bg-cream py-16">
+  <section class="bg-cream border-t border-gray-100 py-16">
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="mb-3 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         How Our Additional Services Work
@@ -197,13 +209,11 @@ const faqs = [
       </p>
 
       <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
-        {processSteps.map((step) => (
-          <ProcessStep
-            number={step.number}
-            title={step.title}
-            description={step.description}
-          />
-        ))}
+        {
+          processSteps.map((step) => (
+            <ProcessStep number={step.number} title={step.title} description={step.description} />
+          ))
+        }
       </div>
     </div>
   </section>
@@ -216,14 +226,16 @@ const faqs = [
       </h2>
 
       <div class="space-y-4">
-        {faqs.map((faq) => (
-          <Card variant="elevated" class="border-l-4 border-primary">
-            <h3 class="mb-2 font-heading text-base font-bold text-primary md:text-lg">
-              {faq.question}
-            </h3>
-            <p class="text-sm text-body md:text-base" set:html={faq.answer} />
-          </Card>
-        ))}
+        {
+          faqs.map((faq) => (
+            <Card variant="elevated" class="border-l-4 border-primary">
+              <h3 class="mb-2 font-heading text-base font-bold text-primary md:text-lg">
+                {faq.question}
+              </h3>
+              <p class="text-sm text-body md:text-base" set:html={faq.answer} />
+            </Card>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -237,9 +249,7 @@ const faqs = [
       <p class="mb-6 text-base text-white/90 md:text-lg">
         Order a service or talk to a strategist — no pressure, just honest advice.
       </p>
-      <Button href="#contact" variant="white" size="lg">
-        Contact Us Today
-      </Button>
+      <Button href="#contact" variant="white" size="lg"> Contact Us Today </Button>
     </div>
   </section>
 </Layout>

@@ -12,3 +12,5 @@ yarn.lock
 package-lock.json
 *.min.js
 *.min.css
+DESIGN_SYSTEM.md
+src/data/post/markdown-elements-demo-post.mdx
