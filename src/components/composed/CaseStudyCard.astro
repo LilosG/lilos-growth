@@ -20,11 +20,11 @@ export interface Props {
   /** Industry/sector */
   sector: string;
   /** Service types provided */
-  serviceTypes: Array<'website' | 'gbp' | 'local-seo'>;
+  serviceTypes: ReadonlyArray<'website' | 'gbp' | 'local-seo'>;
   /** Brief description */
   description: string;
   /** Array of metrics */
-  metrics: Array<{
+  metrics: ReadonlyArray<{
     label: string;
     value: string;
   }>;

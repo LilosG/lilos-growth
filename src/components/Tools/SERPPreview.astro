@@ -33,16 +33,16 @@
 </div>
 
 <script is:inline>
-  // @ts-nocheck
+  /* eslint-disable */
   (function () {
-    var titleEl = document.getElementById('serp-title');
-    var urlEl = document.getElementById('serp-url');
-    var descEl = document.getElementById('serp-desc');
-    var titleCount = document.getElementById('title-count');
-    var descCount = document.getElementById('desc-count');
-    var previewTitle = document.getElementById('preview-title');
-    var previewUrl = document.getElementById('preview-url');
-    var previewDesc = document.getElementById('preview-desc');
+    const titleEl = document.getElementById('serp-title');
+    const urlEl = document.getElementById('serp-url');
+    const descEl = document.getElementById('serp-desc');
+    const titleCount = document.getElementById('title-count');
+    const descCount = document.getElementById('desc-count');
+    const previewTitle = document.getElementById('preview-title');
+    const previewUrl = document.getElementById('preview-url');
+    const previewDesc = document.getElementById('preview-desc');
 
     function update() {
       titleCount.textContent = titleEl.value.length;

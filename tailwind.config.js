@@ -172,6 +172,7 @@ export default {
         prose: "var(--width-prose)",
       },
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       typography: (theme) => ({
         DEFAULT: {
           css: {
@@ -231,6 +232,7 @@ export default {
 
   plugins: [
     typographyPlugin,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     plugin(({ addVariant, addBase, addUtilities, addComponents, theme }) => {
       addVariant("intersect", "&:not([no-intersect])");
 

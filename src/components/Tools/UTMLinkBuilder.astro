@@ -46,22 +46,22 @@
 </div>
 
 <script is:inline>
-  // @ts-nocheck
+  /* eslint-disable */
   (function () {
-    var form = document.getElementById('utm-form');
-    var resultEl = document.getElementById('utm-result');
-    var outputEl = document.getElementById('utm-output');
-    var copyBtn = document.getElementById('utm-copy');
+    const form = document.getElementById('utm-form');
+    const resultEl = document.getElementById('utm-result');
+    const outputEl = document.getElementById('utm-output');
+    const copyBtn = document.getElementById('utm-copy');
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       try {
-        var url = new URL(document.getElementById('utm-url').value.trim());
+        const url = new URL(document.getElementById('utm-url').value.trim());
         url.searchParams.set('utm_source', document.getElementById('utm-source').value.trim());
         url.searchParams.set('utm_medium', document.getElementById('utm-medium').value.trim());
         url.searchParams.set('utm_campaign', document.getElementById('utm-campaign').value.trim());
-        var term = document.getElementById('utm-term').value.trim();
-        var content = document.getElementById('utm-content').value.trim();
+        const term = document.getElementById('utm-term').value.trim();
+        const content = document.getElementById('utm-content').value.trim();
         if (term) url.searchParams.set('utm_term', term);
         if (content) url.searchParams.set('utm_content', content);
         outputEl.value = url.toString();

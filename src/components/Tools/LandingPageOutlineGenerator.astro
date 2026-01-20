@@ -20,12 +20,12 @@
 </div>
 
 <script is:inline>
-  // @ts-nocheck
+  /* eslint-disable */
   (function () {
-    var form = document.getElementById('lpo-form');
-    var resultEl = document.getElementById('lpo-result');
-    var outputEl = document.getElementById('lpo-output');
-    var copyBtn = document.getElementById('lpo-copy');
+    const form = document.getElementById('lpo-form');
+    const resultEl = document.getElementById('lpo-result');
+    const outputEl = document.getElementById('lpo-output');
+    const copyBtn = document.getElementById('lpo-copy');
 
     function generate(service, city) {
       return '# ' + service + ' in ' + city + '\n\n## Hero Section\n- Headline: Professional ' + service + ' in ' + city + '\n- Subheadline: Fast, reliable service from licensed pros\n- CTA: Get a Free Quote / Call Now\n\n## Problem/Pain Points\n- Common ' + service.toLowerCase() + ' issues in ' + city + '\n- Why homeowners need professional help\n\n## Services Offered\n- List 3-5 specific services\n- Emergency/same-day availability\n\n## Why Choose Us\n- Licensed & insured\n- Upfront pricing\n- Local reputation\n\n## Service Process\n1. Contact us\n2. Free estimate\n3. Professional service\n4. Final walkthrough\n\n## Social Proof\n- Google reviews\n- Testimonials\n\n## FAQ Section\n- Cost questions\n- Timeline questions\n- Service area\n\n## Final CTA\n- Schedule Your Free Estimate\n- Phone number';
@@ -33,8 +33,8 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var service = document.getElementById('lpo-service').value.trim();
-      var city = document.getElementById('lpo-city').value.trim();
+      const service = document.getElementById('lpo-service').value.trim();
+      const city = document.getElementById('lpo-city').value.trim();
       if (!service || !city) return;
       outputEl.textContent = generate(service, city);
       resultEl.classList.remove('hidden');
