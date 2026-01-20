@@ -1,5 +1,4 @@
 {
-  "$comment": "Deployment triggered: 2026-01-20T19:59:00Z",
   "buildCommand": "npm run build",
   "redirects": [
     {
