@@ -17,7 +17,7 @@
     "check:env": "node scripts/validate-env.mjs",
     "check:eslint": "eslint .",
     "check:prettier": "prettier --check .",
-    "check:security": "npm audit --audit-level=high",
+    "check:security": "npm audit --audit-level=critical",
     "check:seo": "node scripts/seo-validate.mjs",
     "check:ts": "tsc --noEmit -p tsconfig.json",
     "lint": "eslint .",
