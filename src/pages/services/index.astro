@@ -13,7 +13,9 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
   <section
     class="relative flex min-h-[440px] flex-col items-center justify-center overflow-hidden bg-secondary pb-20 pt-16"
   >
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light">
+    <div
+      class="pointer-events-none absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light"
+    >
     </div>
     <div
       class="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center"
@@ -64,7 +66,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
   </section>
 
   <!-- WHO WE HELP -->
-  <section class="border-t border-gray-100 bg-cream py-16">
+  <section class="bg-cream border-t border-gray-100 py-16">
     <div class="mx-auto max-w-5xl px-4 text-center">
       <h2 class="mb-5 font-heading text-3xl font-bold text-heading md:text-4xl">Who We Help</h2>
       <p class="mb-6 text-lg text-body">
@@ -84,11 +86,11 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
             "Painters",
             "Other Trades",
           ].map((x) => (
-            <span class="rounded-xl bg-bluelight px-4 py-2 font-heading font-semibold">{x}</span>
+            <span class="bg-bluelight rounded-xl px-4 py-2 font-heading font-semibold">{x}</span>
           ))
         }
       </div>
-      <p class="mt-4 text-sm text-body/70">
+      <p class="text-body/70 mt-4 text-sm">
         Not sure if we can help your niche? <a
           href="#contact"
           class="text-primary underline hover:text-primary"
@@ -137,7 +139,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
               ],
             ],
           ].map(([title, href, bullets]) => (
-            <article class="grid grid-rows-[auto_1fr_auto] rounded-2xl border-2 border-primary/10 bg-bluelight p-8 shadow-xl">
+            <article class="border-primary/10 bg-bluelight grid grid-rows-[auto_1fr_auto] rounded-2xl border-2 p-8 shadow-xl">
               <h3 class="mb-3 font-heading text-xl font-bold text-primary">{title}</h3>
               <ul class="list-inside list-disc space-y-1 text-body">
                 {(bullets as string[]).map((b) => (
@@ -158,7 +160,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
   </section>
 
   <!-- WHY CHOOSE US -->
-  <section class="border-t border-gray-100 bg-cream py-24">
+  <section class="bg-cream border-t border-gray-100 py-24">
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="mb-8 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
         Why Home Service Pros Trust Lilos Growth
@@ -184,8 +186,8 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
               "Clear reporting, plain English, and a process that makes sense.",
             ],
           ].map(([title, body]) => (
-            <div class="flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-8 shadow-lg">
-              <span class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10">
+            <div class="border-primary/10 flex flex-col items-center rounded-2xl border bg-white p-8 shadow-lg">
+              <span class="bg-primary/10 mb-4 flex h-14 w-14 items-center justify-center rounded-xl">
                 <svg
                   class="h-7 w-7 text-primary"
                   viewBox="0 0 24 24"
@@ -242,8 +244,8 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
               "We track, report, and keep optimizing so results improve.",
             ],
           ].map(([num, title, body]) => (
-            <div class="flex flex-col items-center rounded-2xl border-2 border-primary/10 bg-bluelight p-8 shadow-xl">
-              <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-2xl font-extrabold text-primary">
+            <div class="border-primary/10 bg-bluelight flex flex-col items-center rounded-2xl border-2 p-8 shadow-xl">
+              <div class="bg-primary/10 mb-4 flex h-14 w-14 items-center justify-center rounded-full text-2xl font-extrabold text-primary">
                 {num}
               </div>
               <h3 class="mb-2 text-center font-heading text-lg font-bold text-heading">{title}</h3>
@@ -258,12 +260,12 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
   <!-- MINI TESTIMONIAL -->
   <section class="border-t border-gray-100 bg-white py-12">
     <div class="mx-auto max-w-3xl px-4">
-      <div class="rounded-2xl bg-cream p-8 text-center shadow">
+      <div class="bg-cream rounded-2xl p-8 text-center shadow">
         <p class="mb-2 text-lg font-medium">
           “After just 60 days, we jumped from the bottom of Google Maps to the top 3. The phones
           ring every week now.”
         </p>
-        <div class="text-sm text-body/70">— John T., Plumbing Business Owner</div>
+        <div class="text-body/70 text-sm">— John T., Plumbing Business Owner</div>
       </div>
     </div>
   </section>

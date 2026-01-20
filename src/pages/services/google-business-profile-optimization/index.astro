@@ -56,7 +56,8 @@ const trustReasons = [
 const faqs = [
   {
     question: "How fast can you improve my Google Maps ranking?",
-    answer: "Most see measurable gains in 30–60 days with consistent posting, reviews, and ongoing profile updates.",
+    answer:
+      "Most see measurable gains in 30–60 days with consistent posting, reviews, and ongoing profile updates.",
   },
   {
     question: "Can you optimize my profile if I already have a GBP listing?",
@@ -64,11 +65,13 @@ const faqs = [
   },
   {
     question: "Do you guarantee Map Pack rankings?",
-    answer: "No one can guarantee specific positions, but we provide consistent, data-driven work and transparent reporting.",
+    answer:
+      "No one can guarantee specific positions, but we provide consistent, data-driven work and transparent reporting.",
   },
   {
     question: "Will you manage my reviews and add Q&A?",
-    answer: "Yes—review strategy, reply templates, requests, and Q&A setup/monitoring are included (Growth handles replies with no cap).",
+    answer:
+      "Yes—review strategy, reply templates, requests, and Q&A setup/monitoring are included (Growth handles replies with no cap).",
   },
   {
     question: "Is there a setup fee or long contract?",
@@ -96,9 +99,7 @@ const faqs = [
           >&amp; Maps SEO</span
         >
       </h1>
-      <span
-        class="block text-base font-semibold uppercase tracking-wider text-accent md:text-lg"
-      >
+      <span class="text-accent block text-base font-semibold uppercase tracking-wider md:text-lg">
         For Home Service Businesses
       </span>
       <p class="max-w-2xl text-base font-medium leading-relaxed text-white/90">
@@ -119,7 +120,7 @@ const faqs = [
   </section>
 
   <!-- WHAT IS GBP -->
-  <section class="border-t border-gray-100 bg-cream py-12">
+  <section class="bg-cream border-t border-gray-100 py-12">
     <div class="mx-auto max-w-5xl px-4 text-center">
       <h2 class="mb-3 font-heading text-xl font-bold text-heading md:text-2xl">
         What Is Google Business Profile Optimization?
@@ -131,9 +132,13 @@ const faqs = [
       </p>
 
       <div class="flex flex-wrap justify-center gap-3">
-        {features.map((feature) => (
-          <Badge variant="primary" size="lg">{feature}</Badge>
-        ))}
+        {
+          features.map((feature) => (
+            <Badge variant="primary" size="lg">
+              {feature}
+            </Badge>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -146,19 +151,17 @@ const faqs = [
       </h2>
 
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-        {trustReasons.map((reason) => (
-          <FeatureCard
-            icon={reason.icon}
-            title={reason.title}
-            description={reason.description}
-          />
-        ))}
+        {
+          trustReasons.map((reason) => (
+            <FeatureCard icon={reason.icon} title={reason.title} description={reason.description} />
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- GBP PACKAGES -->
-  <section id="gbp-package" class="border-t border-gray-100 bg-cream py-16">
+  <section id="gbp-package" class="bg-cream border-t border-gray-100 py-16">
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Google Business Profile Packages
@@ -218,9 +221,7 @@ const faqs = [
       <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Service Packages for Home Service Companies
       </h2>
-      <p class="mb-10 text-center text-base text-body">
-        Choose the package that fits your goals.
-      </p>
+      <p class="mb-10 text-center text-base text-body">Choose the package that fits your goals.</p>
 
       <div class="grid auto-rows-fr grid-cols-1 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-4">
         <!-- Local SEO - Growth -->
@@ -313,23 +314,23 @@ const faqs = [
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="border-t border-gray-100 bg-cream py-16">
+  <section id="faq" class="bg-cream border-t border-gray-100 py-16">
     <div class="mx-auto max-w-4xl px-4">
       <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Google Business Profile &amp; Maps SEO: FAQs
       </h2>
 
       <div class="space-y-4">
-        {faqs.map((faq, index) => (
-          <Card variant={index % 2 === 0 ? "elevated" : "default"}>
-            <h3 class="mb-2 font-heading text-base font-semibold text-heading md:text-lg">
-              {faq.question}
-            </h3>
-            <p class="text-sm text-body md:text-base">
-              {faq.answer}
-            </p>
-          </Card>
-        ))}
+        {
+          faqs.map((faq, index) => (
+            <Card variant={index % 2 === 0 ? "elevated" : "default"}>
+              <h3 class="mb-2 font-heading text-base font-semibold text-heading md:text-lg">
+                {faq.question}
+              </h3>
+              <p class="text-sm text-body md:text-base">{faq.answer}</p>
+            </Card>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -343,9 +344,7 @@ const faqs = [
       <p class="mb-6 text-base text-white/90">
         Get a free GBP audit and action plan—no hard sell, just what to do next.
       </p>
-      <Button href="#contact" variant="white" size="lg">
-        Book My Free Audit
-      </Button>
+      <Button href="#contact" variant="white" size="lg"> Book My Free Audit </Button>
     </div>
   </section>
 </Layout>

@@ -1,10 +1,10 @@
 ---
 /**
  * Card Component
- * 
+ *
  * A flexible, reusable card component following atomic design principles.
  * Supports multiple variants and can be composed with other components.
- * 
+ *
  * @component
  * @example
  * <Card variant="elevated">
@@ -15,60 +15,62 @@
 
 export interface Props {
   /** Visual variant of the card */
-  variant?: 'default' | 'elevated' | 'interactive' | 'outlined';
+  variant?: "default" | "elevated" | "interactive" | "outlined";
   /** Size variant */
-  size?: 'default' | 'sm';
+  size?: "default" | "sm";
   /** Additional CSS classes */
   class?: string;
   /** HTML element to render as */
-  as?: 'div' | 'article' | 'section';
+  as?: "div" | "article" | "section";
   /** Optional href to make card a link */
   href?: string;
   /** Link target attribute */
-  target?: '_blank' | '_self';
+  target?: "_blank" | "_self";
 }
 
 const {
-  variant = 'default',
-  size = 'default',
-  class: className = '',
-  as: Tag = 'div',
+  variant = "default",
+  size = "default",
+  class: className = "",
+  as: Tag = "div",
   href,
   target,
 } = Astro.props;
 
 // Build class string based on props
 const variantClasses = {
-  default: 'card',
-  elevated: 'card-elevated',
-  interactive: 'card-interactive',
-  outlined: 'card-outlined',
+  default: "card",
+  elevated: "card-elevated",
+  interactive: "card-interactive",
+  outlined: "card-outlined",
 };
 
 const sizeClasses = {
-  default: '',
-  sm: 'card-sm',
+  default: "",
+  sm: "card-sm",
 };
 
 const baseClass = variantClasses[variant as keyof typeof variantClasses];
 const sizeClass = sizeClasses[size as keyof typeof sizeClasses];
-const groupClass = variant === 'interactive' ? 'group' : '';
-const combinedClasses = [baseClass, sizeClass, groupClass, className].filter(Boolean).join(' ');
+const groupClass = variant === "interactive" ? "group" : "";
+const combinedClasses = [baseClass, sizeClass, groupClass, className].filter(Boolean).join(" ");
 
 // If href is provided, wrap in link
 const isLink = !!href;
 ---
 
-{isLink ? (
-  <a 
-    href={href} 
-    class={combinedClasses}
-    {...(target === '_blank' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-  >
-    <slot />
-  </a>
-) : (
-  <Tag class={combinedClasses}>
-    <slot />
-  </Tag>
-)}
+{
+  isLink ? (
+    <a
+      href={href}
+      class={combinedClasses}
+      {...(target === "_blank" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+    >
+      <slot />
+    </a>
+  ) : (
+    <Tag class={combinedClasses}>
+      <slot />
+    </Tag>
+  )
+}

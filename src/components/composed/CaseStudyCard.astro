@@ -1,16 +1,16 @@
 ---
 /**
  * Case Study Card Component
- * 
+ *
  * Displays a client case study with metrics, services, and optional screenshot.
  * Used on the results page to showcase client success stories.
- * 
+ *
  * @component
  */
 
-import Card from '../core/Card.astro';
-import Badge from '../core/Badge.astro';
-import { Icon } from 'astro-icon/components';
+import Card from "../core/Card.astro";
+import Badge from "../core/Badge.astro";
+import { Icon } from "astro-icon/components";
 
 export interface Props {
   /** Client name */
@@ -20,7 +20,7 @@ export interface Props {
   /** Industry/sector */
   sector: string;
   /** Service types provided */
-  serviceTypes: ReadonlyArray<'website' | 'gbp' | 'local-seo'>;
+  serviceTypes: ReadonlyArray<"website" | "gbp" | "local-seo">;
   /** Brief description */
   description: string;
   /** Array of metrics */
@@ -47,7 +47,7 @@ export interface Props {
   /** Additional CSS classes */
   class?: string;
   /** Data attribute for filtering by services */
-  'data-services'?: string;
+  "data-services"?: string;
 }
 
 const {
@@ -62,116 +62,120 @@ const {
   websiteUrl,
   caseStudyUrl,
   featured = false,
-  class: className = '',
+  class: className = "",
 } = Astro.props;
 
 // Map service types to badge variants
 const serviceBadgeMap = {
-  'website': { variant: 'info' as const, label: 'Website', icon: 'tabler:device-desktop' },
-  'gbp': { variant: 'success' as const, label: 'GBP', icon: 'tabler:map-pin' },
-  'local-seo': { variant: 'primary' as const, label: 'Local SEO', icon: 'tabler:chart-line' },
+  website: { variant: "info" as const, label: "Website", icon: "tabler:device-desktop" },
+  gbp: { variant: "success" as const, label: "GBP", icon: "tabler:map-pin" },
+  "local-seo": { variant: "primary" as const, label: "Local SEO", icon: "tabler:chart-line" },
 };
 ---
 
-<Card 
-  variant="elevated" 
-  as="article"
-  class={`overflow-hidden ${className}`}
->
-  {featured && (
-    <div class="mb-4">
-      <Badge variant="primary">Featured</Badge>
-    </div>
-  )}
+<Card variant="elevated" as="article" class={`overflow-hidden ${className}`}>
+  {
+    featured && (
+      <div class="mb-4">
+        <Badge variant="primary">Featured</Badge>
+      </div>
+    )
+  }
 
   <div class="grid gap-6 lg:grid-cols-2">
     <!-- Screenshot/Image Side -->
-    {screenshot && (
-      <div class="relative -m-8 mb-0 lg:m-0 lg:order-2">
-        <div class="aspect-[4/3] overflow-hidden rounded-t-card lg:rounded-card">
-          <img
-            src={screenshot.src}
-            alt={screenshot.alt}
-            class="h-full w-full object-cover object-top"
-            loading="lazy"
-          />
+    {
+      screenshot && (
+        <div class="relative -m-8 mb-0 lg:order-2 lg:m-0">
+          <div class="aspect-[4/3] overflow-hidden rounded-t-card lg:rounded-card">
+            <img
+              src={screenshot.src}
+              alt={screenshot.alt}
+              class="h-full w-full object-cover object-top"
+              loading="lazy"
+            />
+          </div>
+          {websiteUrl && (
+            <a
+              href={websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-surface-base/95 absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-heading shadow-lg backdrop-blur transition hover:bg-surface-base"
+            >
+              <Icon name="tabler:external-link" class="h-4 w-4" />
+              View Live Site
+            </a>
+          )}
         </div>
-        {websiteUrl && (
-          <a
-            href={websiteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-surface-base/95 px-4 py-2 text-sm font-semibold text-heading shadow-lg backdrop-blur transition hover:bg-surface-base"
-          >
-            <Icon name="tabler:external-link" class="h-4 w-4" />
-            View Live Site
-          </a>
-        )}
-      </div>
-    )}
+      )
+    }
 
     <!-- Content Side -->
     <div class="flex flex-col justify-center lg:order-1">
-      {logo && (
-        <img
-          src={logo.src}
-          alt={logo.alt}
-          class="mb-4 h-10 w-auto object-contain object-left"
-        />
-      )}
+      {
+        logo && (
+          <img src={logo.src} alt={logo.alt} class="mb-4 h-10 w-auto object-contain object-left" />
+        )
+      }
 
       <h3 class="font-heading text-2xl font-bold text-heading">
         {client}
       </h3>
-      
+
       <p class="mt-1 text-sm text-body-light">
         {location} · {sector}
       </p>
 
       <!-- Service Badges -->
       <div class="mt-4 flex flex-wrap gap-2">
-        {serviceTypes.map((type) => {
-          const badge = serviceBadgeMap[type];
-          return (
-            <Badge variant={badge.variant} icon={badge.icon}>
-              {badge.label}
-            </Badge>
-          );
-        })}
+        {
+          serviceTypes.map((type) => {
+            const badge = serviceBadgeMap[type];
+            return (
+              <Badge variant={badge.variant} icon={badge.icon}>
+                {badge.label}
+              </Badge>
+            );
+          })
+        }
       </div>
 
-      <p class="mt-4 text-sm text-body leading-relaxed">
+      <p class="mt-4 text-sm leading-relaxed text-body">
         {description}
       </p>
 
       <!-- Metrics -->
-      {metrics.length > 0 && (
-        <div class="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-8">
-          {metrics.map((metric) => (
-            <div>
-              <div class="font-heading text-2xl font-bold text-primary md:text-3xl">
-                {metric.value}
+      {
+        metrics.length > 0 && (
+          <div class="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-8">
+            {metrics.map((metric) => (
+              <div>
+                <div class="font-heading text-2xl font-bold text-primary md:text-3xl">
+                  {metric.value}
+                </div>
+                <div class="mt-1.5 text-xs font-semibold uppercase tracking-wider text-body">
+                  {metric.label}
+                </div>
               </div>
-              <div class="mt-1.5 text-xs font-semibold uppercase tracking-wider text-body">
-                {metric.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )
+      }
 
       <!-- CTA -->
-      {caseStudyUrl && (
-        <div class="mt-6">
-          <a
-            href={caseStudyUrl}
-            class="inline-flex items-center gap-2 font-semibold text-primary transition hover:text-primary-hover"
-          >
-            <span>View approach</span>
-            <Icon name="tabler:arrow-right" class="h-4 w-4" />
-          </a>
-        </div>
-      )}
+      {
+        caseStudyUrl && (
+          <div class="mt-6">
+            <a
+              href={caseStudyUrl}
+              class="inline-flex items-center gap-2 font-semibold text-primary transition hover:text-primary-hover"
+            >
+              <span>View approach</span>
+              <Icon name="tabler:arrow-right" class="h-4 w-4" />
+            </a>
+          </div>
+        )
+      }
     </div>
   </div>
 </Card>

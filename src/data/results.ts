@@ -19,7 +19,7 @@ export type KPI = {
   sr?: string;
 };
 
-export type ServiceType = 'website' | 'gbp' | 'local-seo';
+export type ServiceType = "website" | "gbp" | "local-seo";
 
 export type CaseStudy = {
   id: string;
@@ -63,9 +63,9 @@ export type FaqItem = {
 
 /** Service type labels for display */
 export const serviceTypeLabels: Record<ServiceType, string> = {
-  'website': 'Website',
-  'gbp': 'GBP',
-  'local-seo': 'Local SEO',
+  website: "Website",
+  gbp: "GBP",
+  "local-seo": "Local SEO",
 };
 
 /** Stats */
@@ -109,17 +109,25 @@ export const resultsCaseStudies: CaseStudy[] = [
     city: "Jupiter, FL",
     sectorTag: "Pest Control",
     locationTag: "Florida",
-    serviceTypes: ['website', 'gbp', 'local-seo'],
+    serviceTypes: ["website", "gbp", "local-seo"],
     featured: true,
     websiteUrl: "https://bluedoorpest.com",
     image: { src: "/clients/blue-door-pest-control.jpg", alt: "Blue Door Pest Control logo" },
-    screenshot: { src: "/clients/screenshots/blue-door-pest-full.png", alt: "Blue Door Pest Control website" },
+    screenshot: {
+      src: "/clients/screenshots/blue-door-pest-full.png",
+      alt: "Blue Door Pest Control website",
+    },
     kpis: [
-      { label: "organic leads", value: "+118%", sr: "plus one hundred eighteen percent organic leads" },
+      {
+        label: "organic leads",
+        value: "+118%",
+        sr: "plus one hundred eighteen percent organic leads",
+      },
       { label: "cost per lead", value: "−41%" },
       { label: "GBP calls", value: "+89%" },
     ],
-    blurb: "Full-service engagement: Astro website rebuild, GBP optimization with weekly posts, and local SEO strategy targeting Jupiter and surrounding Palm Beach County cities.",
+    blurb:
+      "Full-service engagement: Astro website rebuild, GBP optimization with weekly posts, and local SEO strategy targeting Jupiter and surrounding Palm Beach County cities.",
     ctaText: "View SEO approach",
     ctaHref: "/services/local-seo",
   },
@@ -130,15 +138,19 @@ export const resultsCaseStudies: CaseStudy[] = [
     city: "Carlsbad, CA",
     sectorTag: "Restoration",
     locationTag: "California",
-    serviceTypes: ['website', 'gbp', 'local-seo'],
+    serviceTypes: ["website", "gbp", "local-seo"],
     websiteUrl: "https://www.tamarackrestoration.com",
     image: { src: "/clients/tamarack-restoration.webp", alt: "Tamarack Restoration logo" },
-    screenshot: { src: "/clients/screenshots/tamarack-restoration-full.png", alt: "Tamarack Restoration website" },
+    screenshot: {
+      src: "/clients/screenshots/tamarack-restoration-full.png",
+      alt: "Tamarack Restoration website",
+    },
     kpis: [
       { label: "Maps top-3 keywords", value: "+5" },
       { label: "page load time", value: "<1s" },
     ],
-    blurb: "Fast Astro build with service-area pages, GBP optimization, and local link building for water damage and mold remediation searches.",
+    blurb:
+      "Fast Astro build with service-area pages, GBP optimization, and local link building for water damage and mold remediation searches.",
     ctaText: "View approach",
     ctaHref: "/services/web-design",
   },
@@ -149,15 +161,19 @@ export const resultsCaseStudies: CaseStudy[] = [
     city: "Carlsbad, CA",
     sectorTag: "Home Services",
     locationTag: "California",
-    serviceTypes: ['website', 'local-seo'],
+    serviceTypes: ["website", "local-seo"],
     websiteUrl: "https://carlsbadhomeservices.com",
     image: { src: "/clients/carlsbad-home-services.png", alt: "Carlsbad Home Services logo" },
-    screenshot: { src: "/clients/screenshots/carlsbad-home-services-full.png", alt: "Carlsbad Home Services website" },
+    screenshot: {
+      src: "/clients/screenshots/carlsbad-home-services-full.png",
+      alt: "Carlsbad Home Services website",
+    },
     kpis: [
       { label: "quote requests", value: "+52%" },
       { label: "cost per lead", value: "−33%" },
     ],
-    blurb: "Conversion-focused website with service pages and FAQ schema, plus local SEO targeting North County San Diego service areas.",
+    blurb:
+      "Conversion-focused website with service pages and FAQ schema, plus local SEO targeting North County San Diego service areas.",
     ctaText: "View approach",
     ctaHref: "/services",
   },
@@ -168,15 +184,19 @@ export const resultsCaseStudies: CaseStudy[] = [
     city: "Carlsbad, CA",
     sectorTag: "Handyman",
     locationTag: "California",
-    serviceTypes: ['website', 'gbp', 'local-seo'],
+    serviceTypes: ["website", "gbp", "local-seo"],
     websiteUrl: "https://www.carlsbadfixit.com",
     image: { src: "/clients/carlsbad-fixit.svg", alt: "Carlsbad Fix It logo" },
-    screenshot: { src: "/clients/screenshots/carlsbad-fixit-full.png", alt: "Carlsbad Fix It website" },
+    screenshot: {
+      src: "/clients/screenshots/carlsbad-fixit-full.png",
+      alt: "Carlsbad Fix It website",
+    },
     kpis: [
       { label: "Maps visibility", value: "+73%" },
       { label: "avg. session time", value: "+45%" },
     ],
-    blurb: "Complete local presence overhaul: fast website, optimized GBP with service menus, and location-specific content for handyman searches.",
+    blurb:
+      "Complete local presence overhaul: fast website, optimized GBP with service menus, and location-specific content for handyman searches.",
     ctaText: "View approach",
     ctaHref: "/services/local-seo",
   },
@@ -187,15 +207,19 @@ export const resultsCaseStudies: CaseStudy[] = [
     city: "San Diego, CA",
     sectorTag: "Commercial Services",
     locationTag: "California",
-    serviceTypes: ['website', 'gbp', 'local-seo'],
+    serviceTypes: ["website", "gbp", "local-seo"],
     websiteUrl: "https://sandiegocommercialmailboxes.com",
     image: { src: "/clients/sd-commercial-mailboxes.svg", alt: "Postal Systems logo" },
-    screenshot: { src: "/clients/screenshots/san-diego-commercial-mailboxes-full.png", alt: "Postal Systems website" },
+    screenshot: {
+      src: "/clients/screenshots/san-diego-commercial-mailboxes-full.png",
+      alt: "Postal Systems website",
+    },
     kpis: [
       { label: "GBP calls", value: "3.1×" },
       { label: "form conversion", value: "+22%" },
     ],
-    blurb: "Niche B2B focus: productized service pages for mailbox installation, GBP optimization with product listings, and local SEO for commercial property managers.",
+    blurb:
+      "Niche B2B focus: productized service pages for mailbox installation, GBP optimization with product listings, and local SEO for commercial property managers.",
     ctaText: "View approach",
     ctaHref: "/services/google-business-profile-optimization",
   },

@@ -40,7 +40,9 @@ const description = `Actionable articles about ${tag} for home-service SEO and g
   <section
     class="relative flex min-h-[680px] items-center overflow-hidden bg-secondary pb-20 pt-10"
   >
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light">
+    <div
+      class="pointer-events-none absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light"
+    >
     </div>
 
     <div
@@ -48,7 +50,11 @@ const description = `Actionable articles about ${tag} for home-service SEO and g
     >
       <!-- Left -->
       <div class="flex-1">
-        <img src="/Lilos_Growth_Logo_Corrected.svg" alt="Lilos Growth Logo" class="mb-10 w-40 logo--halo" />
+        <img
+          src="/Lilos_Growth_Logo_Corrected.svg"
+          alt="Lilos Growth Logo"
+          class="logo--halo mb-10 w-40"
+        />
         <h1
           class="mb-2 font-heading text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl"
         >
@@ -112,7 +118,7 @@ const description = `Actionable articles about ${tag} for home-service SEO and g
             name="name"
             placeholder="Your Name"
             required
-            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-primary/40"
+            class="focus:ring-primary/40 w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2"
           />
 
           <label class="sr-only" for="email">Email Address</label>
@@ -122,7 +128,7 @@ const description = `Actionable articles about ${tag} for home-service SEO and g
             name="_replyto"
             placeholder="Email Address"
             required
-            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-primary/40"
+            class="focus:ring-primary/40 w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2"
           />
 
           <label class="sr-only" for="company">Company Name</label>
@@ -130,7 +136,7 @@ const description = `Actionable articles about ${tag} for home-service SEO and g
             id="company"
             name="company"
             placeholder="Company Name"
-            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-primary/40"
+            class="focus:ring-primary/40 w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2"
           />
 
           <label class="sr-only" for="website">Website</label>
@@ -140,7 +146,7 @@ const description = `Actionable articles about ${tag} for home-service SEO and g
             name="website"
             placeholder="Website"
             required
-            class="w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-primary/40"
+            class="focus:ring-primary/40 w-full rounded-lg border border-gray-300 px-4 py-3.5 focus:outline-none focus:ring-2"
           />
 
           <button
@@ -186,7 +192,7 @@ const description = `Actionable articles about ${tag} for home-service SEO and g
                   ? `/blog/tag/${encodeURIComponent(tag)}/${page.currentPage - 1}`
                   : `/blog/tag/${encodeURIComponent(tag)}`
               }
-              class="btn btn-sm btn-outline-primary disabled:opacity-40"
+              class="btn-outline-primary btn btn-sm disabled:opacity-40"
               aria-disabled={page.currentPage === 1}
             >
               Prev
@@ -196,7 +202,7 @@ const description = `Actionable articles about ${tag} for home-service SEO and g
             </span>
             <a
               href={`/blog/tag/${encodeURIComponent(tag)}/${Math.min(page.lastPage, page.currentPage + 1)}`}
-              class="btn btn-sm btn-outline-primary disabled:opacity-40"
+              class="btn-outline-primary btn btn-sm disabled:opacity-40"
               aria-disabled={page.currentPage === page.lastPage}
             >
               Next

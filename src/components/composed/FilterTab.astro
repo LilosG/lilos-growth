@@ -1,10 +1,10 @@
 ---
 /**
  * Filter Tab Component
- * 
+ *
  * Tab button for filtering content (used on results page).
  * Handles active/inactive states with proper accessibility.
- * 
+ *
  * @component
  * @example
  * <FilterTab id="all" label="All Results" active={true} />
@@ -21,19 +21,15 @@ export interface Props {
   class?: string;
 }
 
-const {
-  id,
-  label,
-  active = false,
-  class: className = '',
-} = Astro.props;
+const { id, label, active = false, class: className = "" } = Astro.props;
 
-const baseClasses = "filter-tab rounded-full px-5 py-2 text-sm font-semibold transition-all cursor-pointer";
-const activeClasses = active 
-  ? "bg-primary text-white shadow-md" 
+const baseClasses =
+  "filter-tab rounded-full px-5 py-2 text-sm font-semibold transition-all cursor-pointer";
+const activeClasses = active
+  ? "bg-primary text-white shadow-md"
   : "bg-background-subtle text-body hover:bg-border-base";
 
-const classes = [baseClasses, activeClasses, className].filter(Boolean).join(' ');
+const classes = [baseClasses, activeClasses, className].filter(Boolean).join(" ");
 ---
 
 <button

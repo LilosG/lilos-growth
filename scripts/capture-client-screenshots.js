@@ -4,25 +4,24 @@
  * Uses Puppeteer to take screenshots of client sites
  */
 
-const puppeteer = require('puppeteer');
-const fs = require('fs');
-const path = require('path');
+const puppeteer = require("puppeteer");
+const path = require("path");
 
 const clients = [
-  { name: 'blue-door-pest-control', url: 'https://bluedoorpest.com' },
-  { name: 'tamarack-restoration', url: 'https://www.tamarackrestoration.com' },
-  { name: 'carlsbad-home-services', url: 'https://carlsbadhomeservices.com' },
-  { name: 'carlsbad-fixit', url: 'https://www.carlsbadfixit.com' },
-  { name: 'sd-commercial-mailboxes', url: 'https://sandiegocommercialmailboxes.com' },
+  { name: "blue-door-pest-control", url: "https://bluedoorpest.com" },
+  { name: "tamarack-restoration", url: "https://www.tamarackrestoration.com" },
+  { name: "carlsbad-home-services", url: "https://carlsbadhomeservices.com" },
+  { name: "carlsbad-fixit", url: "https://www.carlsbadfixit.com" },
+  { name: "sd-commercial-mailboxes", url: "https://sandiegocommercialmailboxes.com" },
 ];
 
-const outputDir = path.join(__dirname, '..', 'public', 'clients');
+const outputDir = path.join(__dirname, "..", "public", "clients");
 
 async function captureScreenshots() {
-  console.log('Launching browser...');
+  console.log("Launching browser...");
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 
   for (const client of clients) {
@@ -35,7 +34,7 @@ async function captureScreenshots() {
 
       // Navigate to the site
       await page.goto(client.url, {
-        waitUntil: 'networkidle0',
+        waitUntil: "networkidle0",
         timeout: 30000,
       });
 
@@ -63,7 +62,7 @@ async function captureScreenshots() {
   }
 
   await browser.close();
-  console.log('Done!');
+  console.log("Done!");
 }
 
 captureScreenshots().catch(console.error);

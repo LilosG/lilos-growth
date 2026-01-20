@@ -219,7 +219,7 @@ const jsonLd = { "@context": "https://schema.org", "@type": "ItemList", itemList
     </section>
 
     <!-- STATS -->
-    <section class="border-t border-gray-100 bg-cream py-20 md:py-24">
+    <section class="bg-cream border-t border-gray-100 py-20 md:py-24">
       <div class="mx-auto max-w-6xl px-4">
         <h2 class="sr-only font-heading">Key outcomes</h2>
         <span class="mx-auto mt-2 block h-1 w-12 rounded bg-[#f56b2a]"></span>
@@ -258,7 +258,7 @@ const jsonLd = { "@context": "https://schema.org", "@type": "ItemList", itemList
     </section>
 
     <!-- TESTIMONIALS -->
-    <section class="border-t border-gray-100 bg-cream py-20 md:py-24">
+    <section class="bg-cream border-t border-gray-100 py-20 md:py-24">
       <div class="mx-auto max-w-6xl px-4">
         <TestimonialBand items={testimonials} />
       </div>
@@ -289,7 +289,7 @@ const jsonLd = { "@context": "https://schema.org", "@type": "ItemList", itemList
     </section>
 
     <!-- FINAL CTA -->
-    <section class="border-t border-gray-100 bg-cream py-20 md:py-24">
+    <section class="bg-cream border-t border-gray-100 py-20 md:py-24">
       <div class="mx-auto max-w-6xl px-4 text-center">
         <SectionHeader
           title="Ready to turn searches into scheduled jobs?"

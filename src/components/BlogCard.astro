@@ -46,11 +46,11 @@ const iconName = pickIconName(props.icon, props.category);
 ---
 
 <article
-  class="group overflow-hidden rounded-3xl border-2 border-primary/10 bg-white shadow-xl shadow-primary/10 transition-[transform,box-shadow] duration-200 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20"
+  class="border-primary/10 shadow-primary/10 hover:shadow-primary/20 group overflow-hidden rounded-3xl border-2 bg-white shadow-xl transition-[transform,box-shadow] duration-200 hover:-translate-y-2 hover:shadow-2xl"
 >
   <a href={props.href} class="block p-6">
     <div
-      class="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/20 bg-[#fff7f0]"
+      class="border-primary/20 inline-flex h-12 w-12 items-center justify-center rounded-2xl border bg-[#fff7f0]"
     >
       <span set:html={iconSvg(iconName)} />
     </div>
@@ -79,7 +79,7 @@ const iconName = pickIconName(props.icon, props.category);
         {props.tags.slice(0, 3).map((t: string) => (
           <a
             href={`/blog/tag/${encodeURIComponent(t)}`}
-            class="rounded-full border border-primary/20 bg-[#fff7f0] px-2 py-1 text-xs text-primary"
+            class="border-primary/20 rounded-full border bg-[#fff7f0] px-2 py-1 text-xs text-primary"
           >
             {t}
           </a>

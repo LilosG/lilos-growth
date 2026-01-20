@@ -66,8 +66,8 @@ export default defineConfig({
           collapseWhitespace: true,
           removeComments: true,
           minifyCSS: true,
-          minifyJS: true
-        }
+          minifyJS: true,
+        },
       },
       Image: {
         sharp: true,
@@ -84,16 +84,16 @@ export default defineConfig({
         svgo: {
           multipass: true,
           plugins: [
-          {
-            name: 'preset-default',
-            params: {
-              overrides: {
-                removeViewBox: false,
+            {
+              name: "preset-default",
+              params: {
+                overrides: {
+                  removeViewBox: false,
+                },
               },
             },
-          },
-        ],
-        }
+          ],
+        },
       },
       Logger: 1,
     }),

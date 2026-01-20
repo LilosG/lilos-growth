@@ -1,47 +1,49 @@
 ---
 /**
  * Guarantee Badge Component
- * 
+ *
  * Displays the money-back guarantee prominently to build trust.
  * Can be used inline or as a floating element.
- * 
+ *
  * @component
  * @example
  * <GuaranteeBadge />
  */
 
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 
 export interface Props {
   /** Display variant */
-  variant?: 'inline' | 'badge';
+  variant?: "inline" | "badge";
   /** Additional CSS classes */
   class?: string;
 }
 
-const {
-  variant = 'inline',
-  class: className = '',
-} = Astro.props;
+const { variant = "inline", class: className = "" } = Astro.props;
 ---
 
-{variant === 'inline' ? (
-  <div class={`flex items-start gap-3 rounded-xl border-2 border-primary/20 bg-primary-50 p-4 ${className}`}>
-    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-white">
-      <Icon name="tabler:shield-check" class="h-6 w-6" />
+{
+  variant === "inline" ? (
+    <div
+      class={`border-primary/20 flex items-start gap-3 rounded-xl border-2 bg-primary-50 p-4 ${className}`}
+    >
+      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-white">
+        <Icon name="tabler:shield-check" class="h-6 w-6" />
+      </div>
+      <div>
+        <p class="font-heading text-sm font-bold text-heading">90-Day Growth Guarantee</p>
+        <p class="mt-1 text-xs text-body">
+          If qualified calls or forms don't grow within 90 days, we refund months 2–3. No questions
+          asked.
+        </p>
+      </div>
     </div>
-    <div>
-      <p class="font-heading text-sm font-bold text-heading">
-        90-Day Growth Guarantee
-      </p>
-      <p class="mt-1 text-xs text-body">
-        If qualified calls or forms don't grow within 90 days, we refund months 2–3. No questions asked.
-      </p>
+  ) : (
+    <div
+      class={`inline-flex items-center gap-2 rounded-full border-2 border-primary bg-gradient-to-r from-primary-50 to-primary-100 px-5 py-2.5 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg ${className}`}
+    >
+      <Icon name="tabler:shield-check" class="h-5 w-5 animate-pulse text-primary" />
+      <span class="text-sm font-bold text-heading">90-Day Guarantee</span>
     </div>
-  </div>
-) : (
-  <div class={`inline-flex items-center gap-2 rounded-full border-2 border-primary bg-gradient-to-r from-primary-50 to-primary-100 px-5 py-2.5 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg ${className}`}>
-    <Icon name="tabler:shield-check" class="h-5 w-5 text-primary animate-pulse" />
-    <span class="text-sm font-bold text-heading">90-Day Guarantee</span>
-  </div>
-)}
+  )
+}

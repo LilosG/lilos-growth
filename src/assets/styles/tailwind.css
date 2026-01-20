@@ -15,7 +15,12 @@ body {
   @apply bg-white font-body text-body;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   @apply font-heading text-heading;
 }
 
@@ -79,38 +84,38 @@ h1, h2, h3, h4, h5, h6 {
    ============================================ */
 @layer components {
   .card {
-    @apply rounded-card bg-surface-base p-8 border border-gray-200/60 shadow-sm;
+    @apply rounded-card border border-gray-200/60 bg-surface-base p-8 shadow-sm;
   }
-  
+
   .card-elevated {
-    @apply rounded-card bg-surface-base p-8 border border-gray-200/60 transition-all duration-300;
+    @apply rounded-card border border-gray-200/60 bg-surface-base p-8 transition-all duration-300;
     box-shadow: var(--shadow-card);
   }
-  
+
   .card-elevated:hover {
     box-shadow: var(--shadow-card-hover);
     transform: translateY(-2px);
   }
-  
+
   .card-interactive {
-    @apply rounded-card bg-surface-base p-8 border border-gray-200/60 cursor-pointer transition-all duration-300;
+    @apply cursor-pointer rounded-card border border-gray-200/60 bg-surface-base p-8 transition-all duration-300;
     box-shadow: var(--shadow-card);
   }
-  
+
   .card-interactive:hover {
     box-shadow: var(--shadow-card-hover);
     border-color: rgba(245, 107, 42, 0.2);
     transform: translateY(-4px);
   }
-  
+
   .card-outlined {
-    @apply rounded-card bg-surface-base p-8 border-2 border-border-base transition-all duration-300;
+    @apply rounded-card border-2 border-border-base bg-surface-base p-8 transition-all duration-300;
   }
-  
+
   .card-outlined:hover {
     @apply border-primary;
   }
-  
+
   .card-sm {
     @apply p-6;
   }
@@ -225,7 +230,7 @@ h1, h2, h3, h4, h5, h6 {
   width: auto;
   height: auto;
   padding: 0.5rem 0.75rem;
-  @apply bg-secondary text-white rounded-lg;
+  @apply rounded-lg bg-secondary text-white;
   z-index: 9999;
 }
 

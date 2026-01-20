@@ -26,6 +26,7 @@ A comprehensive, professional animation system built with CSS animations, Inters
 Elements animate into view as users scroll down the page.
 
 **Available Animations:**
+
 - `fade-in-up` - Fade in while sliding up from bottom
 - `fade-in-down` - Fade in while sliding down from top
 - `fade-in-left` - Fade in while sliding from left
@@ -35,15 +36,12 @@ Elements animate into view as users scroll down the page.
 - `slide-in-down` - Slide down without fade
 
 **Usage:**
+
 ```html
-<div data-animate="fade-in-up">
-  Content that fades in and slides up
-</div>
+<div data-animate="fade-in-up">Content that fades in and slides up</div>
 
 <!-- With delay -->
-<div data-animate="fade-in-up" data-delay="0.2">
-  Content with 200ms delay
-</div>
+<div data-animate="fade-in-up" data-delay="0.2">Content with 200ms delay</div>
 ```
 
 ### 2. Staggered Grid Animations
@@ -51,6 +49,7 @@ Elements animate into view as users scroll down the page.
 Cards or items in a grid animate sequentially with a delay between each.
 
 **Usage:**
+
 ```html
 <div data-stagger-container data-stagger-delay="0.1">
   <div data-stagger-item data-animate="fade-in-up">Card 1</div>
@@ -60,11 +59,13 @@ Cards or items in a grid animate sequentially with a delay between each.
 ```
 
 **Parameters:**
+
 - `data-stagger-delay` - Delay between items in seconds (default: 0.1)
 
 ### 3. Hero Section Animations
 
 **Animated Gradient Background:**
+
 ```html
 <section class="hero-gradient-animated bg-secondary">
   <!-- Hero content -->
@@ -78,11 +79,13 @@ Creates a subtle 15-second color shift animation on hero backgrounds.
 #### Button Animations
 
 **Ripple Effect:**
+
 ```html
 <button data-ripple>Click me</button>
 ```
 
 **Animated Primary Button:**
+
 ```html
 <button class="btn-primary-animated">Hover me</button>
 ```
@@ -90,20 +93,23 @@ Creates a subtle 15-second color shift animation on hero backgrounds.
 #### Card Animations
 
 **Card Lift:**
+
 ```html
-<div class="card card-lift">
+<div class="card-lift card">
   <!-- Card content -->
 </div>
 ```
 
 **Card Glow:**
+
 ```html
-<div class="card card-glow">
+<div class="card-glow card">
   <!-- Card content -->
 </div>
 ```
 
 **Service Card Hover:**
+
 ```html
 <div class="service-card-hover">
   <!-- Service card content -->
@@ -111,6 +117,7 @@ Creates a subtle 15-second color shift animation on hero backgrounds.
 ```
 
 **Pricing Card Highlight:**
+
 ```html
 <div class="pricing-card-highlight">
   <!-- Pricing card content -->
@@ -120,11 +127,13 @@ Creates a subtle 15-second color shift animation on hero backgrounds.
 ### 5. Loading States
 
 **Skeleton Loader:**
+
 ```html
 <div class="skeleton-loader"></div>
 ```
 
 **Pulse Animation:**
+
 ```html
 <div class="animate-pulse-slow">
   <!-- Content -->
@@ -134,6 +143,7 @@ Creates a subtle 15-second color shift animation on hero backgrounds.
 ### 6. Floating/Breathing Effects
 
 **Floating Animation:**
+
 ```html
 <div class="float-animation">
   <!-- Floating element -->
@@ -145,10 +155,12 @@ Creates a subtle 15-second color shift animation on hero backgrounds.
 ### Hardware Acceleration
 
 All animations use GPU-accelerated properties:
+
 - `transform` (translate, scale, rotate)
 - `opacity`
 
 Avoid animating:
+
 - `width`, `height`
 - `top`, `left`, `right`, `bottom`
 - `margin`, `padding`
@@ -162,6 +174,7 @@ Avoid animating:
 ### Accessibility
 
 **Respects `prefers-reduced-motion`:**
+
 ```css
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -209,11 +222,13 @@ Users who prefer reduced motion will see instant transitions instead of animatio
 
 ```astro
 <div class="grid gap-8 md:grid-cols-3" data-stagger-container data-stagger-delay="0.1">
-  {services.map((service) => (
-    <div data-stagger-item data-animate="fade-in-up">
-      <ServiceCard {...service} />
-    </div>
-  ))}
+  {
+    services.map((service) => (
+      <div data-stagger-item data-animate="fade-in-up">
+        <ServiceCard {...service} />
+      </div>
+    ))
+  }
 </div>
 ```
 
@@ -221,11 +236,13 @@ Users who prefer reduced motion will see instant transitions instead of animatio
 
 ```astro
 <div class="grid grid-cols-4 gap-6" data-stagger-container data-stagger-delay="0.15">
-  {stats.map((stat) => (
-    <div data-stagger-item data-animate="scale-in">
-      <StatCard {...stat} />
-    </div>
-  ))}
+  {
+    stats.map((stat) => (
+      <div data-stagger-item data-animate="scale-in">
+        <StatCard {...stat} />
+      </div>
+    ))
+  }
 </div>
 ```
 
@@ -237,7 +254,7 @@ Users who prefer reduced motion will see instant transitions instead of animatio
     <h1>Main Heading</h1>
     <p>Subheading</p>
   </div>
-  
+
   <div data-animate="fade-in-up" data-delay="0.2">
     <LeadCaptureForm />
   </div>
@@ -256,21 +273,24 @@ Users who prefer reduced motion will see instant transitions instead of animatio
 
 ```javascript
 // In browser console
-console.log('Animations loaded:', typeof initAllAnimations !== 'undefined');
+console.log("Animations loaded:", typeof initAllAnimations !== "undefined");
 ```
 
 ### Verify Intersection Observer:
 
 ```javascript
 // In browser console
-console.log('IntersectionObserver supported:', 'IntersectionObserver' in window);
+console.log("IntersectionObserver supported:", "IntersectionObserver" in window);
 ```
 
 ### Test reduced motion:
 
 ```javascript
 // In browser console
-console.log('Prefers reduced motion:', window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+console.log(
+  "Prefers reduced motion:",
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches
+);
 ```
 
 ## Future Enhancements
@@ -297,12 +317,14 @@ Potential additions for future iterations:
 ### Modifying Timing
 
 Update timing values in:
+
 - `/src/styles/animations.css` - Animation durations
 - `/src/utils/animations.ts` - Stagger delays and Intersection Observer thresholds
 
 ### Performance Monitoring
 
 Use Chrome DevTools Performance tab to:
+
 1. Record page load and scroll
 2. Check for layout thrashing
 3. Verify 60fps during animations
@@ -311,6 +333,7 @@ Use Chrome DevTools Performance tab to:
 ## Credits
 
 Animation system designed and implemented for Lilos Growth by Manus AI, following industry best practices from:
+
 - Material Design Motion Guidelines
 - Apple Human Interface Guidelines
 - Web Animation API specifications
