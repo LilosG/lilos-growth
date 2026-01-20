@@ -1,5 +1,5 @@
 {
-  "buildCommand": "echo 'Forcing Vercel redeploy'",
+  "buildCommand": "npm run build",
   "redirects": [
     {
       "source": "/(.*)",
