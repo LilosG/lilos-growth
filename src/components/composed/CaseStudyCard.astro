@@ -46,6 +46,8 @@ export interface Props {
   featured?: boolean;
   /** Additional CSS classes */
   class?: string;
+  /** Data attribute for filtering by services */
+  'data-services'?: string;
 }
 
 const {
@@ -65,9 +67,9 @@ const {
 
 // Map service types to badge variants
 const serviceBadgeMap = {
-  'website': { variant: 'website' as const, label: 'Website', icon: 'tabler:device-desktop' },
-  'gbp': { variant: 'gbp' as const, label: 'GBP', icon: 'tabler:map-pin' },
-  'local-seo': { variant: 'seo' as const, label: 'Local SEO', icon: 'tabler:chart-line' },
+  'website': { variant: 'info' as const, label: 'Website', icon: 'tabler:device-desktop' },
+  'gbp': { variant: 'success' as const, label: 'GBP', icon: 'tabler:map-pin' },
+  'local-seo': { variant: 'primary' as const, label: 'Local SEO', icon: 'tabler:chart-line' },
 };
 ---
 

@@ -24,7 +24,8 @@
   </div>
 </div>
 
-<script>
+<script is:inline>
+  // @ts-nocheck
   (function () {
     var form = document.getElementById('faq-form');
     var pairsContainer = document.getElementById('faq-pairs');
@@ -32,6 +33,8 @@
     var resultEl = document.getElementById('faq-result');
     var outputEl = document.getElementById('faq-output');
     var copyBtn = document.getElementById('faq-copy');
+
+    if (!form || !pairsContainer || !addBtn || !resultEl || !outputEl || !copyBtn) return;
 
     addBtn.addEventListener('click', function () {
       var div = document.createElement('div');
@@ -45,8 +48,11 @@
       var faqs = [];
       var pairs = pairsContainer.querySelectorAll('.faq-pair');
       for (var i = 0; i < pairs.length; i++) {
-        var q = pairs[i].querySelector('[data-question]').value.trim();
-        var a = pairs[i].querySelector('[data-answer]').value.trim();
+        var qEl = pairs[i].querySelector('[data-question]');
+        var aEl = pairs[i].querySelector('[data-answer]');
+        if (!qEl || !aEl) continue;
+        var q = qEl.value.trim();
+        var a = aEl.value.trim();
         if (q && a) faqs.push({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } });
       }
       if (faqs.length === 0) return;
@@ -55,6 +61,7 @@
     });
 
     copyBtn.addEventListener('click', function () {
+      if (!outputEl.textContent) return;
       navigator.clipboard.writeText(outputEl.textContent).then(function () {
         copyBtn.textContent = 'Copied!';
         setTimeout(function () { copyBtn.textContent = 'Copy'; }, 2000);
