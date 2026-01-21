@@ -2,20 +2,20 @@
   "buildCommand": "npm run build",
   "redirects": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "has": [
         {
           "type": "host",
           "value": "www.lilosgrowth.com"
         }
       ],
-      "destination": "https://lilosgrowth.com/$1",
+      "destination": "https://lilosgrowth.com/:path*",
       "permanent": true
     }
   ],
   "headers": [
     {
-      "source": "/_astro/(.*)",
+      "source": "/_astro/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.(?:jpg|jpeg|png|webp|avif|gif|svg|ico)",
+      "source": "/:path*\\.(jpg|jpeg|png|webp|avif|gif|svg|ico)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.(?:woff|woff2|ttf|otf|eot)",
+      "source": "/:path*\\.(woff|woff2|ttf|otf|eot)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -59,7 +59,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.(?:css|js)",
+      "source": "/:path*\\.(css|js)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "headers": [
         {
           "key": "X-Content-Type-Options",
