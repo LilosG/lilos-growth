@@ -98,11 +98,21 @@ declare global {
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;700&display=swap"
     />
     <link
+      id="gfonts-css"
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;700&display=swap"
       media="print"
-      onload="this.media='all'"
     />
+    <script is:inline>
+      (() => {
+        const l = document.getElementById("gfonts-css");
+        if (!l) return;
+        const apply = () => { l.media = "all"; };
+        // Flip to all once loaded; fallback after 3s for edge cases.
+        l.addEventListener?.("load", apply, { once: true });
+        setTimeout(apply, 3000);
+      })();
+    </script>
     <noscript>
       <link
         rel="stylesheet"
