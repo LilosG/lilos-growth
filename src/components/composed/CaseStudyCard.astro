@@ -70,7 +70,13 @@ const serviceBadgeMap = {
   website: { variant: "info" as const, label: "Website", icon: "tabler:device-desktop" },
   gbp: { variant: "success" as const, label: "GBP", icon: "tabler:map-pin" },
   "local-seo": { variant: "primary" as const, label: "Local SEO", icon: "tabler:chart-line" },
+};const normalizeCaseStudyHref = (href?: string | null): string => {
+  // Until case study detail pages exist, never emit /results/<slug> links.
+  if (typeof href === "string" && href.startsWith("/results/")) return "/results";
+  return href ?? "/results";
 };
+
+
 ---
 
 <Card variant="elevated" as="article" class={`overflow-hidden ${className}`}>
@@ -167,7 +173,7 @@ const serviceBadgeMap = {
         caseStudyUrl && (
           <div class="mt-6">
             <a
-              href={caseStudyUrl}
+              href={normalizeCaseStudyHref(caseStudyUrl)}
               class="inline-flex items-center gap-2 font-semibold text-primary transition hover:text-primary-hover"
             >
               <span>View approach</span>
