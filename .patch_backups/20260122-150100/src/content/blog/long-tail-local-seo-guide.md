@@ -67,7 +67,7 @@ Yes. We regularly service **[Neighborhood 1]**, **[Neighborhood 2]**, **[Neighbo
 ### How much does [Service] cost in [City]?
 
 Most jobs fall between **$X–$Y**. Pricing depends on **[factor 1]**, **[factor 2]**, and **[factor 3]**.  
-Want an exact quote? **[Book a Call](/contact)** or send a photo with our **[Free SEO Website Audit](/local-seo-tools)**.
+Want an exact quote? **[Book a Call](/contact/)** or send a photo with our **[Free SEO Website Audit](/local-seo-tools)**.
 
 ### How fast can you come out?
 
@@ -137,6 +137,6 @@ You’ll get a **written estimate** before work begins. No surprises.
 
 Want this done-for-you? We pair **Local SEO** with **Google Business Profile optimization** so your map rankings and long-tail pages work together.
 
-- Learn more: **[Local SEO](/services/local-seo)**
-- Quick help: **[Book a Call](/contact)**
-- DIY resources: **[Local SEO Tools](/local-seo-tools)**
+- Learn more: **[Local SEO](/services/local-seo/)**
+- Quick help: **[Book a Call](/contact/)**
+- DIY resources: **[Local SEO Tools](/local-seo-tools/)**
