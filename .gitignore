@@ -28,3 +28,6 @@ _backup_trash/
 
 _audit/
 _backups/
+
+# Local patch backups
+.patch_backups/

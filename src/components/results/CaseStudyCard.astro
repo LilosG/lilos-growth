@@ -17,6 +17,16 @@ const primaryText = study.ctaText ?? "View approach";
 const screenshot = study.screenshot?.src;
 const websiteUrl = study.websiteUrl;
 const serviceTypes = study.serviceTypes || [];
+
+const normalizeCaseStudyHref = (href?: string | null): string => {
+  // Until case study detail pages exist, never emit /results/<slug> links.
+  if (typeof href === "string" && href.startsWith("/results/")) return "/results";
+  return href ?? "/results";
+};
+
+
+
+const ctaHref = normalizeCaseStudyHref(primaryHref);
 ---
 
 <article
@@ -158,7 +168,7 @@ const serviceTypes = study.serviceTypes || [];
     <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
       <span class="text-xs font-medium uppercase tracking-wider text-gray-400"> Case Study </span>
       <a
-        href={primaryHref}
+        href={ctaHref}
         class="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary-hover"
       >
         {primaryText}

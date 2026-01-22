@@ -29,7 +29,7 @@ h6 {
   :root {
     --aw-color-primary: theme("colors.primary");
     --aw-color-secondary: theme("colors.secondary");
-    --aw-color-accent: theme("colors.primary-hover");
+    --aw-color-accent: theme("colors.primary");
     --aw-color-text-heading: theme("colors.heading");
     --aw-color-text-default: theme("colors.body");
     --aw-color-text-page: theme("colors.body");
