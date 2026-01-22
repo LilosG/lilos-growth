@@ -11,6 +11,11 @@
       ],
       "destination": "https://lilosgrowth.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/results/:path*",
+      "destination": "/results",
+      "permanent": true
     }
   ],
   "headers": [
@@ -89,6 +94,33 @@
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/offers/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/privacy",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/offline",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
         }
       ]
     }

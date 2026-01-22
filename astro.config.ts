@@ -29,17 +29,12 @@ export default defineConfig({
   integrations: [
     tailwind({ applyBaseStyles: false }),
     sitemap({
-      customPages: ["https://lilosgrowth.com/blog"],
-      filter: (page) => {
-        // Utility / confirmation page: noindex + keep out of sitemaps
-        if (page === "https://lilosgrowth.com/thank-you") return false;
-
-        // Archive pages we explicitly noindex
-        if (page.startsWith("https://lilosgrowth.com/blog/tag/")) return false;
-        if (page.startsWith("https://lilosgrowth.com/blog/category/")) return false;
-
-        return true;
-      },
+    filter: (page) => {
+      if (page.startsWith('/offers/')) return false;
+      return !new Set(['/cards-preview', '/plans-preview', '/index-refactored', '/results-refactored', '/offline', '/privacy']).has(page);
+    },
+    customPages: ["https://lilosgrowth.com/blog"],
+      
     }),
     mdx(),
     icon({
