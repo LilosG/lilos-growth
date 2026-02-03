@@ -31,14 +31,14 @@ const {
 <article
   class={[
     "relative flex flex-col rounded-3xl bg-white border-2 p-8 h-full",
-    "border-primary/10 shadow-xl shadow-primary/10",
+    "border-primary/10 shadow-xl shadow-primary",
     highlight ? "ring-2 ring-primary ring-offset-2 ring-offset-white" : "",
   ].join(" ")}
 >
   {
     badgeText && (
       <div class="absolute -top-6 left-1/2 -translate-x-1/2">
-        <span class="border-primary/30 inline-flex items-center gap-1 rounded-full border bg-[#fff7f0] px-3 py-1 text-[11px] font-semibold text-primary shadow">
+        <span class="border-primary/30 inline-flex items-center gap-1 rounded-full border bg-primary-50 px-3 py-1 text-[11px] font-semibold text-primary shadow">
           {badgeText}
         </span>
       </div>
@@ -81,7 +81,7 @@ const {
   <div class="mt-6">
     <a
       href={ctaHref}
-      class="inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-[#c9400a]"
+      class="inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-hover"
     >
       {ctaText}
     </a>

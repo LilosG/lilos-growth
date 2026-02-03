@@ -25,20 +25,19 @@ const {
   note,
   accent = "#f56b2a",
 } = Astro.props;
-const accentText = accent.startsWith("#") ? `text-[${accent}]` : accent;
 ---
 
 <article
   class={[
     "relative flex flex-col rounded-3xl bg-white border shadow-xl p-8 h-full",
-    "border-primary/10 shadow-primary/10",
+    "border-primary/10 shadow-primary",
     highlight ? "ring-2 ring-primary ring-offset-2 ring-offset-white" : "",
   ].join(" ")}
 >
   {
     badgeText && (
       <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-        <span class="border-primary/30 inline-flex items-center gap-1 rounded-full border bg-[#fff7f0] px-3 py-1 text-[11px] font-semibold text-primary shadow">
+        <span class="border-primary/30 inline-flex items-center gap-1 rounded-full border bg-primary-50 px-3 py-1 text-[11px] font-semibold text-primary shadow">
           {badgeText}
         </span>
       </div>
@@ -58,7 +57,7 @@ const accentText = accent.startsWith("#") ? `text-[${accent}]` : accent;
       bullets.map((b) => (
         <li class="flex gap-2">
           <span
-            class={`mt-1.5 inline-block h-2 w-2 rounded-full ${accentText}`}
+            class="mt-1.5 inline-block h-2 w-2 rounded-full"
             style={accent.startsWith("#") ? `background:${accent}` : ""}
           />
           <span set:html={b} />
@@ -72,7 +71,7 @@ const accentText = accent.startsWith("#") ? `text-[${accent}]` : accent;
   <div class="mt-6">
     <a
       href={ctaHref}
-      class="inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow transition hover:bg-[#c9400a]"
+      class="inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow transition hover:bg-primary-hover"
     >
       {ctaText}
     </a>
