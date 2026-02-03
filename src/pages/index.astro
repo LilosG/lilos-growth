@@ -19,7 +19,7 @@ import TestimonialBand from "~/components/results/TestimonialBand.astro";
 import TrustBand from "~/components/composed/TrustBand.astro";
 import { homeTestimonials, trustLogos } from "~/data/proof";
 
-export const title = "High-End Websites + Local SEO for Home Service Pros";
+export const title = "Local SEO + GBP Management for Home Service Pros";
 export const description =
   "Get more calls and booked jobs with premium web design, Local SEO, and Google Business Profile management—built for plumbers, HVAC, pest control, and other service pros.";
 
@@ -330,13 +330,13 @@ const faqs = [
 
         <div class="space-y-4">
           <h1 class="font-heading text-3xl font-extrabold leading-tight tracking-tight text-white md:text-5xl">
-            High-End Websites + Local SEO
+            Local SEO + GBP Management
           </h1>
 
           <p
             class="font-heading text-lg font-semibold uppercase tracking-wider text-primary md:text-2xl"
           >
-            GBP Optimization Included
+            Premium Websites Included
           </p>
 
           <div class="h-1.5 w-28 rounded-full bg-primary"></div>
@@ -344,8 +344,8 @@ const faqs = [
 
         <div class="space-y-4">
           <p class="max-w-lg text-base font-medium text-white/90 md:text-lg">
-            Lilos Growth is the agency for home service businesses that need premium websites, GBP
-            management, and local SEO that drives calls.
+            Lilos Growth helps home service businesses win more calls with GBP optimization, local
+            SEO, and websites built to convert.
           </p>
           <GuaranteeBadge variant="badge" class="border-primary-light bg-white/10 text-white" />
         </div>
@@ -528,7 +528,7 @@ const faqs = [
       <div class="grid gap-8 md:grid-cols-3">
         {
           mainPricingPlans.map((plan) => (
-            <div data-stagger-item>
+            <div data-stagger-item class="h-full">
               <PricingCard {...plan} />
             </div>
           ))
@@ -548,7 +548,7 @@ const faqs = [
       <div class="grid gap-8 md:grid-cols-3">
         {
           addOnPlans.map((plan) => (
-            <div data-stagger-item>
+            <div data-stagger-item class="h-full">
               <PricingCard {...plan} />
             </div>
           ))
