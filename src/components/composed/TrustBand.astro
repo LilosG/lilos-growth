@@ -1,0 +1,35 @@
+---
+import LogoWall from "~/components/results/LogoWall.astro";
+import type { TrustLogo, TrustStat } from "~/data/proof";
+
+export interface Props {
+  heading: string;
+  subheading?: string;
+  logos: TrustLogo[];
+  stats?: TrustStat[];
+}
+
+const { heading, subheading, logos, stats = [] } = Astro.props;
+---
+
+<div class="space-y-8">
+  <div class="text-center">
+    <p class="text-sm font-semibold uppercase tracking-widest text-muted">{heading}</p>
+    {subheading && <p class="mt-3 text-base text-body">{subheading}</p>}
+  </div>
+
+  <LogoWall items={logos} />
+
+  {
+    stats.length > 0 && (
+      <div class="grid gap-4 text-center md:grid-cols-3">
+        {stats.map((stat) => (
+          <div class="card card-sm bg-background-cream shadow-sm">
+            <p class="text-2xl font-bold text-heading">{stat.value}</p>
+            <p class="text-sm text-body">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    )
+  }
+</div>

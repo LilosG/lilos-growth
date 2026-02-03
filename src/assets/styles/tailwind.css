@@ -79,6 +79,19 @@ h6 {
 }
 
 /* ============================================
+   CTA TRACKING STYLES
+   Automatically style elements with data-evt attribute
+   ============================================ */
+@layer components {
+  [data-evt^="cta_"] {
+    @apply btn btn-primary;
+  }
+  [data-evt^="cta_"][data-cta="secondary"] {
+    @apply btn btn-outline;
+  }
+}
+
+/* ============================================
    CARD COMPONENT STYLES
    Design system card variants with hover effects
    ============================================ */
@@ -117,20 +130,7 @@ h6 {
   }
 
   .card-sm {
-    @apply p-6;
-  }
-}
-
-/* ============================================
-   CTA TRACKING STYLES
-   Automatically style elements with data-evt attribute
-   ============================================ */
-@layer components {
-  [data-evt^="cta_"] {
-    @apply btn btn-primary;
-  }
-  [data-evt^="cta_"][data-cta="secondary"] {
-    @apply btn btn-outline;
+    @apply rounded-card border border-gray-200/60 bg-surface-base p-6 shadow-sm;
   }
 }
 

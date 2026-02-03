@@ -11,11 +11,6 @@
       ],
       "destination": "https://lilosgrowth.com/:path*",
       "permanent": true
-    },
-    {
-      "source": "/results/:path*",
-      "destination": "/results",
-      "permanent": true
     }
   ],
   "headers": [
