@@ -10,6 +10,8 @@ import Button from "~/components/core/Button.astro";
 import StatCard from "~/components/composed/StatCard.astro";
 import CaseStudyCard from "~/components/composed/CaseStudyCard.astro";
 import FilterTab from "~/components/composed/FilterTab.astro";
+import Image from "~/components/common/Image.astro";
+import Section from "~/components/core/Section.astro";
 
 const title = "Client Results & Case Studies | Lilos Growth";
 const description =
@@ -58,7 +60,7 @@ const caseStudies = [
       alt: "Blue Door Pest Control website",
     },
     logo: {
-      src: "/images/case-studies/blue-door-logo.png",
+      src: "/clients/blue-door-pest-control.jpg",
       alt: "Blue Door Pest Control",
     },
     websiteUrl: "https://bluedoorpestcontrol.com",
@@ -231,169 +233,184 @@ const faqs = [
   </section>
 
   <!-- STATS -->
-  <section class="section-padding-sm border-b border-border-subtle bg-surface-base">
-    <div class="mx-auto max-w-6xl px-4">
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-        {
-          stats.map((stat) => (
-            <div data-stagger-item>
-              <StatCard {...stat} />
-            </div>
-          ))
-        }
-      </div>
+  <Section padding="sm" class="border-b border-border-subtle bg-surface-base" containerClass="max-w-6xl">
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+      {
+        stats.map((stat) => (
+          <div data-stagger-item>
+            <StatCard {...stat} />
+          </div>
+        ))
+      }
     </div>
-  </section>
+  </Section>
 
   <!-- FEATURED CASE STUDY -->
   {
     caseStudies
       .filter((cs) => cs.featured)
       .map((study) => (
-        <section class="section-padding-sm border-b border-border-subtle bg-background-cream">
-          <div class="mx-auto max-w-6xl px-4">
-            <div class="mb-8 flex items-center gap-3">
-              <Badge variant="primary">Featured</Badge>
-              <h2 class="font-heading text-xl font-bold text-heading md:text-2xl">
-                Client Spotlight
-              </h2>
-            </div>
-
-            <CaseStudyCard {...study} />
+        <Section
+          padding="sm"
+          class="border-b border-border-subtle bg-background-cream"
+          containerClass="max-w-6xl"
+        >
+          <div class="mb-8 flex items-center gap-3">
+            <Badge variant="primary">Featured</Badge>
+            <h2 class="font-heading text-xl font-bold text-heading md:text-2xl">
+              Client Spotlight
+            </h2>
           </div>
-        </section>
+
+          <CaseStudyCard {...study} />
+        </Section>
       ))
   }
 
   <!-- GBP PERFORMANCE SECTION -->
-  <section class="section-padding border-b border-border-subtle bg-surface-base">
-    <div class="mx-auto max-w-6xl px-4">
-      <div class="mb-12 text-center">
-        <Badge variant="primary" class="mb-4">GBP Management</Badge>
-        <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
-          Google Business Profile Performance
-        </h2>
-        <p class="mx-auto mt-4 max-w-2xl text-base text-body">
-          Real-time performance data from profiles we manage. We focus on the metrics that matter:
-          direction requests, calls, and direct customer interactions.
-        </p>
-      </div>
+  <Section class="border-b border-border-subtle bg-surface-base" containerClass="max-w-6xl">
+    <div class="mb-12 text-center">
+      <Badge variant="primary" class="mb-4">GBP Management</Badge>
+      <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
+        Google Business Profile Performance
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-base text-body">
+        Real-time performance data from profiles we manage. We focus on the metrics that matter:
+        direction requests, calls, and direct customer interactions.
+      </p>
+    </div>
 
-      <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {
-          gbpResults.map((result) => (
-            <div class="card-elevated overflow-hidden p-0">
-              <div class="border-b border-border-subtle bg-background-subtle p-6">
-                <div class="flex items-start justify-between">
-                  <div>
-                    <h3 class="font-heading text-lg font-bold text-heading">{result.client}</h3>
-                    <p class="text-sm text-muted">{result.period}</p>
-                  </div>
-                  <div class="text-right">
-                    <div class="text-2xl font-bold text-primary">{result.value}</div>
-                    <div class="text-xs font-semibold uppercase tracking-wider text-success">
-                      {result.growth}
-                    </div>
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+      {
+        gbpResults.map((result) => (
+          <div class="card-elevated overflow-hidden p-0">
+            <div class="border-b border-border-subtle bg-background-subtle p-6">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h3 class="font-heading text-lg font-bold text-heading">{result.client}</h3>
+                  <p class="text-sm text-muted">{result.period}</p>
+                </div>
+                <div class="text-right">
+                  <div class="text-2xl font-bold text-primary">{result.value}</div>
+                  <div class="text-xs font-semibold uppercase tracking-wider text-success">
+                    {result.growth}
                   </div>
                 </div>
-                <p class="mt-2 text-sm font-medium text-body">{result.metric}</p>
               </div>
-              <div class="bg-secondary/5 relative aspect-[16/9]">
-                <img
-                  src={result.image}
-                  alt={`${result.client} GBP Performance`}
-                  class="h-full w-full object-cover object-top"
-                />
-              </div>
+              <p class="mt-2 text-sm font-medium text-body">{result.metric}</p>
             </div>
-          ))
-        }
-      </div>
+            <div class="bg-secondary/5 relative aspect-[16/9]">
+              <Image
+                src={result.image}
+                alt={`${result.client} GBP Performance`}
+                class="h-full w-full object-cover object-top"
+                width={1280}
+                height={720}
+                sizes="(max-width: 1024px) 100vw, 640px"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+          </div>
+        ))
+      }
     </div>
-  </section>
+  </Section>
 
   <!-- MORE CASE STUDIES -->
-  <section class="section-padding bg-background-cream">
-    <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-4 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
-        More Client Wins
-      </h2>
-      <p class="mb-12 text-center text-base text-body">
-        From pest control to restoration to handyman services—we help home service businesses across
-        industries dominate their local markets.
-      </p>
+  <Section class="bg-background-cream" containerClass="max-w-6xl">
+    <h2 class="mb-4 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
+      More Client Wins
+    </h2>
+    <p class="mb-12 text-center text-base text-body">
+      From pest control to restoration to handyman services—we help home service businesses across
+      industries dominate their local markets.
+    </p>
 
-      <!-- Filter Tabs -->
-      <div class="mb-8 flex flex-wrap justify-center gap-3" role="tablist">
-        <FilterTab id="all" label={serviceTypeLabels.all} active={true} />
-        <FilterTab id="website" label={serviceTypeLabels.website} />
-        <FilterTab id="gbp" label={serviceTypeLabels.gbp} />
-        <FilterTab id="local-seo" label={serviceTypeLabels["local-seo"]} />
-      </div>
-
-      <!-- Case Studies Grid -->
-      <div class="grid grid-cols-1 gap-8 lg:grid-cols-2" id="case-studies-grid">
-        {
-          caseStudies
-            .filter((cs) => !cs.featured)
-            .map((study) => (
-              <CaseStudyCard {...study} data-services={study.serviceTypes.join(",")} />
-            ))
-        }
-      </div>
+    <!-- Filter Tabs -->
+    <div class="mb-8 flex flex-wrap justify-center gap-3" role="tablist">
+      <FilterTab id="all" label={serviceTypeLabels.all} active={true} />
+      <FilterTab id="website" label={serviceTypeLabels.website} />
+      <FilterTab id="gbp" label={serviceTypeLabels.gbp} />
+      <FilterTab id="local-seo" label={serviceTypeLabels["local-seo"]} />
     </div>
-  </section>
+
+    <!-- Case Studies Grid -->
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2" id="case-studies-grid">
+      {
+        caseStudies
+          .filter((cs) => !cs.featured)
+          .map((study) => (
+            <CaseStudyCard {...study} data-services={study.serviceTypes.join(",")} />
+          ))
+      }
+    </div>
+  </Section>
 
   <!-- FAQs -->
-  <section class="section-padding border-t border-border-subtle bg-surface-base" id="faq">
-    <div class="mx-auto max-w-4xl px-4">
-      <h2 class="mb-4 text-center font-heading text-xl font-bold text-heading md:text-2xl">
-        Common Questions
-      </h2>
-      <p class="mb-8 text-center text-body">
-        Answers about working together, timelines, and what to expect.
-      </p>
+  <Section
+    id="faq"
+    class="border-t border-border-subtle bg-surface-base"
+    containerClass="max-w-4xl"
+  >
+    <h2 class="mb-4 text-center font-heading text-xl font-bold text-heading md:text-2xl">
+      Common Questions
+    </h2>
+    <p class="mb-8 text-center text-body">
+      Answers about working together, timelines, and what to expect.
+    </p>
 
-      <div class="space-y-4">
-        {
-          faqs.map((faq) => (
-            <details class="group card">
-              <summary class="flex cursor-pointer items-center justify-between font-semibold text-heading">
-                {faq.question}
-                <span class="ml-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background-subtle text-muted transition-colors group-open:bg-primary group-open:text-white">
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </span>
-              </summary>
-              <p class="mt-4 text-sm leading-relaxed text-body">{faq.answer}</p>
-            </details>
-          ))
-        }
-      </div>
+    <div class="space-y-4">
+      {
+        faqs.map((faq) => (
+          <details class="group card">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-heading">
+              {faq.question}
+              <span class="ml-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background-subtle text-muted transition-colors group-open:bg-primary group-open:text-white">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </span>
+            </summary>
+            <p class="mt-4 text-sm leading-relaxed text-body">{faq.answer}</p>
+          </details>
+        ))
+      }
     </div>
-  </section>
+  </Section>
 
   <!-- FINAL CTA -->
-  <section class="section-padding border-t border-border-subtle bg-background-cream">
-    <div class="mx-auto max-w-3xl px-4 text-center">
-      <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
-        See what this could look like in your city
-      </h2>
-      <p class="mb-8 text-base text-body">
-        We'll audit your GBP and top pages, outline quick wins, and map a 90-day plan to lift calls.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <Button variant="primary" size="lg" href="/contact"> Get a Free Growth Plan </Button>
-        <Button variant="outline" size="lg" href="/services"> Explore Services </Button>
-      </div>
+  <Section class="border-t border-border-subtle bg-background-cream" containerClass="max-w-3xl text-center">
+    <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
+      See what this could look like in your city
+    </h2>
+    <p class="mb-8 text-base text-body">
+      We'll audit your GBP and top pages, outline quick wins, and map a 90-day plan to lift calls.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <Button
+        variant="primary"
+        size="lg"
+        href="/contact#book"
+        data-evt="cta_results_growth_plan"
+      >
+        Get a Free Growth Plan
+      </Button>
+      <Button
+        variant="outline"
+        size="lg"
+        href="/services"
+        data-evt="cta_results_explore_services"
+      >
+        Explore Services
+      </Button>
     </div>
-  </section>
+  </Section>
 </PageLayout>
 
 <script is:inline>

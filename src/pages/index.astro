@@ -8,14 +8,18 @@
 import Layout from "~/layouts/PageLayout.astro";
 import Button from "~/components/core/Button.astro";
 import Badge from "~/components/core/Badge.astro";
+import Section from "~/components/core/Section.astro";
 import ServiceCard from "~/components/composed/ServiceCard.astro";
 import ProcessStep from "~/components/composed/ProcessStep.astro";
 import StatCard from "~/components/composed/StatCard.astro";
 import LeadCaptureForm from "~/components/composed/LeadCaptureForm.astro";
 import GuaranteeBadge from "~/components/composed/GuaranteeBadge.astro";
 import PricingCard from "~/components/composed/PricingCard.astro";
+import TestimonialBand from "~/components/results/TestimonialBand.astro";
+import TrustBand from "~/components/composed/TrustBand.astro";
+import { homeTestimonials, trustLogos } from "~/data/proof";
 
-export const title = "Local SEO & Websites for Home Service Pros";
+export const title = "Local SEO + GBP Management for Home Service Pros";
 export const description =
   "Get more calls and booked jobs with Local SEO, Google Business Profile management, and conversion-ready websites—built for plumbers, HVAC, pest control, and other service pros.";
 
@@ -325,16 +329,14 @@ const faqs = [
         />
 
         <div class="space-y-4">
-          <h1
-            class="font-heading text-3xl font-extrabold leading-tight tracking-tight text-white md:text-5xl"
-          >
-            Local SEO & Digital Marketing
+          <h1 class="font-heading text-3xl font-extrabold leading-tight tracking-tight text-white md:text-5xl">
+            Local SEO + GBP Management
           </h1>
 
           <p
             class="font-heading text-lg font-semibold uppercase tracking-wider text-primary md:text-2xl"
           >
-            For Home Service Businesses
+            Premium Websites Included
           </p>
 
           <div class="h-1.5 w-28 rounded-full bg-primary"></div>
@@ -342,24 +344,30 @@ const faqs = [
 
         <div class="space-y-4">
           <p class="max-w-lg text-base font-medium text-white/90 md:text-lg">
-            Get more calls, book more jobs, guaranteed!
+            Lilos Growth helps home service businesses win more calls with GBP optimization, local
+            SEO, and websites built to convert.
           </p>
           <GuaranteeBadge variant="badge" class="border-primary-light bg-white/10 text-white" />
         </div>
 
         <div class="flex flex-wrap gap-3">
-          <Button variant="primary" size="lg" href="#contact" data-evt="cta_hero_get_calls">
-            Get More Calls Today
+          <Button
+            variant="primary"
+            size="lg"
+            href="/contact#book"
+            data-evt="cta_hero_book_call"
+          >
+            Book a Call
           </Button>
 
           <Button
-            variant="secondary"
+            variant="outline"
             size="lg"
-            href="#packages"
+            href="#pricing"
             class="hidden md:inline-flex"
-            data-evt="cta_hero_see_services"
+            data-evt="cta_hero_view_pricing"
           >
-            See Our Services
+            View Pricing
           </Button>
         </div>
       </div>
@@ -377,11 +385,12 @@ const faqs = [
   </section>
 
   <!-- WHO WE HELP -->
-  <section
-    class="section-padding-sm border-t border-border-subtle bg-surface-base"
+  <Section
     id="who-we-help"
+    padding="sm"
+    class="border-t border-border-subtle bg-surface-base"
+    containerClass="max-w-5xl text-center"
   >
-    <div class="mx-auto max-w-5xl px-4 text-center">
       <h2 class="mb-6 font-heading text-xl font-bold md:text-2xl">Who We Help</h2>
 
       <h3 class="mb-4 text-base font-semibold text-heading">
@@ -397,15 +406,19 @@ const faqs = [
           ))
         }
       </div>
-    </div>
-  </section>
+  </Section>
+
+  <!-- TRUST BAR -->
+  <Section padding="sm" class="border-t border-border-subtle bg-white" containerClass="max-w-6xl">
+    <TrustBand heading="Trusted by home service teams nationwide" logos={trustLogos} />
+  </Section>
 
   <!-- FULLY MANAGED LOCAL SEO SECTION -->
-  <section
-    class="section-padding border-t border-border-subtle bg-background-cream"
+  <Section
     id="included-services"
+    class="border-t border-border-subtle bg-background-cream"
+    containerClass="max-w-6xl"
   >
-    <div class="mx-auto max-w-6xl px-4">
       <div class="mb-12 text-center">
         <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
           Fully Managed Local SEO for Home Service Businesses
@@ -425,12 +438,10 @@ const faqs = [
           ))
         }
       </div>
-    </div>
-  </section>
+  </Section>
 
   <!-- WHY CHOOSE US -->
-  <section class="section-padding border-t border-border-subtle bg-surface-base">
-    <div class="mx-auto max-w-6xl px-4">
+  <Section class="border-t border-border-subtle bg-surface-base" containerClass="max-w-6xl">
       <h2 class="mb-12 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         Why Choose Lilos Growth for Your Home Service Business?
       </h2>
@@ -448,12 +459,10 @@ const faqs = [
           ))
         }
       </div>
-    </div>
-  </section>
+  </Section>
 
   <!-- OUR PROCESS -->
-  <section class="section-padding border-t border-border-subtle bg-background-cream">
-    <div class="mx-auto max-w-6xl px-4">
+  <Section class="border-t border-border-subtle bg-background-cream" containerClass="max-w-6xl">
       <div class="mb-12 text-center">
         <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
           Our Proven 4-Step Local SEO System
@@ -473,15 +482,14 @@ const faqs = [
           ))
         }
       </div>
-    </div>
-  </section>
+  </Section>
 
   <!-- STATS SECTION -->
-  <section
+  <Section
     aria-label="Key results"
-    class="section-padding border-t border-border-subtle bg-surface-base"
+    class="border-t border-border-subtle bg-surface-base"
+    containerClass="max-w-6xl"
   >
-    <div class="mx-auto max-w-6xl px-4">
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
         {
           stats.map((stat) => (
@@ -491,12 +499,23 @@ const faqs = [
           ))
         }
       </div>
+  </Section>
+
+  <!-- TESTIMONIALS -->
+  <Section class="border-t border-border-subtle bg-background-cream" containerClass="max-w-6xl">
+    <div class="mb-10 text-center">
+      <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
+        Results that turn into booked jobs
+      </h2>
+      <p class="mt-3 text-base text-body">
+        Premium websites, GBP management, and local SEO working together—without the agency fluff.
+      </p>
     </div>
-  </section>
+    <TestimonialBand items={homeTestimonials} />
+  </Section>
 
   <!-- MAIN PRICING SECTION -->
-  <section class="section-padding bg-white" id="pricing">
-    <div class="mx-auto max-w-7xl px-4">
+  <Section id="pricing" class="bg-white" containerClass="max-w-7xl">
       <div class="mb-12 text-center">
         <h2 class="mb-3 font-heading text-2xl font-bold text-heading md:text-3xl">
           Local SEO Plans & Pricing
@@ -509,18 +528,16 @@ const faqs = [
       <div class="grid gap-8 md:grid-cols-3">
         {
           mainPricingPlans.map((plan) => (
-            <div data-stagger-item>
+            <div data-stagger-item class="h-full">
               <PricingCard {...plan} />
             </div>
           ))
         }
       </div>
-    </div>
-  </section>
+  </Section>
 
   <!-- ADD-ON PRICING SECTION -->
-  <section class="section-padding bg-surface-base">
-    <div class="mx-auto max-w-7xl px-4">
+  <Section class="bg-surface-base" containerClass="max-w-7xl">
       <div class="mb-12 text-center">
         <h2 class="mb-3 font-heading text-2xl font-bold text-heading md:text-3xl">
           Add-On & One-Time Options
@@ -531,18 +548,16 @@ const faqs = [
       <div class="grid gap-8 md:grid-cols-3">
         {
           addOnPlans.map((plan) => (
-            <div data-stagger-item>
+            <div data-stagger-item class="h-full">
               <PricingCard {...plan} />
             </div>
           ))
         }
       </div>
-    </div>
-  </section>
+  </Section>
 
   <!-- FAQ SECTION -->
-  <section class="section-padding bg-surface-base" id="faq">
-    <div class="mx-auto max-w-4xl px-4">
+  <Section id="faq" class="bg-surface-base" containerClass="max-w-4xl">
       <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
         Frequently Asked Questions About Home Service Marketing
       </h2>
@@ -569,23 +584,23 @@ const faqs = [
           ))
         }
       </div>
-    </div>
-  </section>
+  </Section>
 
   <!-- FINAL CTA -->
-  <section class="section-padding border-t border-border-subtle bg-background-cream">
-    <div class="mx-auto max-w-3xl px-4 text-center">
+  <Section
+    class="border-t border-border-subtle bg-background-cream"
+    containerClass="max-w-3xl text-center"
+  >
       <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
         Ready to Grow Your Home Service Business?
       </h2>
       <p class="mb-8 text-base text-body">
         Get a free SEO audit and see how we can help you dominate local search.
       </p>
-      <Button variant="primary" size="lg" href="#contact" data-evt="cta_footer_get_started">
+      <Button variant="primary" size="lg" href="/contact#book" data-evt="cta_footer_get_started">
         Get Your Free Audit
       </Button>
-    </div>
-  </section>
+  </Section>
 </Layout>
 
 <style>

@@ -1,0 +1,49 @@
+---
+/**
+ * Section Component
+ *
+ * Consistent layout primitive for vertical rhythm and container widths.
+ */
+import type { HTMLTag } from "astro/types";
+
+export interface Props {
+  /** Section element type */
+  as?: HTMLTag;
+  /** Optional anchor ID */
+  id?: string;
+  /** Padding size */
+  padding?: "default" | "sm" | "none";
+  /** Wrapper class names */
+  class?: string;
+  /** Container class names */
+  containerClass?: string;
+  /** Additional HTML attributes */
+  [key: string]: unknown;
+}
+
+const props = Astro.props as Props;
+const {
+  as: Tag = "section",
+  id,
+  padding = "default",
+  class: className = "",
+  containerClass = "",
+  ...rest
+} = props;
+
+const paddingClasses = {
+  default: "section-padding",
+  sm: "section-padding-sm",
+  none: "",
+};
+---
+
+<Tag
+  class:list={[paddingClasses[padding], className].filter(Boolean)}
+  {...(id ? { id } : {})}
+  {...rest}
+>
+  <div class:list={["mx-auto w-full max-w-7xl px-4", containerClass].filter(Boolean)}>
+    <slot />
+  </div>
+</Tag>
