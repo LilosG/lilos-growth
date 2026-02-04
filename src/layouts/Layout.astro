@@ -107,7 +107,9 @@ declare global {
       (() => {
         const l = document.getElementById("gfonts-css");
         if (!l) return;
-        const apply = () => { l.media = "all"; };
+        const apply = () => {
+          l.media = "all";
+        };
         // Flip to all once loaded; fallback after 3s for edge cases.
         l.addEventListener?.("load", apply, { once: true });
         setTimeout(apply, 3000);

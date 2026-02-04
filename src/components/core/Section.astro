@@ -40,7 +40,7 @@ const paddingClasses = {
 
 <Tag
   class:list={[paddingClasses[padding], className].filter(Boolean)}
-  {...(id ? { id } : {})}
+  {...id ? { id } : {}}
   {...rest}
 >
   <div class:list={["mx-auto w-full max-w-7xl px-4", containerClass].filter(Boolean)}>

@@ -233,7 +233,11 @@ const faqs = [
   </section>
 
   <!-- STATS -->
-  <Section padding="sm" class="border-b border-border-subtle bg-surface-base" containerClass="max-w-6xl">
+  <Section
+    padding="sm"
+    class="border-b border-border-subtle bg-surface-base"
+    containerClass="max-w-6xl"
+  >
     <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
       {
         stats.map((stat) => (
@@ -340,9 +344,7 @@ const faqs = [
       {
         caseStudies
           .filter((cs) => !cs.featured)
-          .map((study) => (
-            <CaseStudyCard {...study} data-services={study.serviceTypes.join(",")} />
-          ))
+          .map((study) => <CaseStudyCard {...study} data-services={study.serviceTypes.join(",")} />)
       }
     </div>
   </Section>
@@ -385,7 +387,10 @@ const faqs = [
   </Section>
 
   <!-- FINAL CTA -->
-  <Section class="border-t border-border-subtle bg-background-cream" containerClass="max-w-3xl text-center">
+  <Section
+    class="border-t border-border-subtle bg-background-cream"
+    containerClass="max-w-3xl text-center"
+  >
     <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
       See what this could look like in your city
     </h2>
@@ -393,20 +398,10 @@ const faqs = [
       We'll audit your GBP and top pages, outline quick wins, and map a 90-day plan to lift calls.
     </p>
     <div class="flex flex-wrap justify-center gap-4">
-      <Button
-        variant="primary"
-        size="lg"
-        href="/contact#book"
-        data-evt="cta_results_growth_plan"
-      >
+      <Button variant="primary" size="lg" href="/contact#book" data-evt="cta_results_growth_plan">
         Get a Free Growth Plan
       </Button>
-      <Button
-        variant="outline"
-        size="lg"
-        href="/services"
-        data-evt="cta_results_explore_services"
-      >
+      <Button variant="outline" size="lg" href="/services" data-evt="cta_results_explore_services">
         Explore Services
       </Button>
     </div>

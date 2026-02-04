@@ -11,12 +11,13 @@ export const description =
   "Get more calls and booked jobs with premium web design, Google Business Profile optimization, and Local SEO. Transparent pricing, measurable results, and month-to-month options.";
 import PackagesPrimary from "../../components/sections/PackagesPrimary.astro";
 import PackagesSecondary from "../../components/sections/PackagesSecondary.astro";
-
 ---
 
 <Layout {title} {description}>
   <!-- HERO -->
-  <section class="relative flex min-h-[440px] flex-col items-center justify-center overflow-hidden bg-secondary pb-20 pt-16">
+  <section
+    class="relative flex min-h-[440px] flex-col items-center justify-center overflow-hidden bg-secondary pb-20 pt-16"
+  >
     <div
       class="pointer-events-none absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light"
     >
@@ -42,12 +43,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
         <Button variant="primary" size="lg" href="/contact#book" data-evt="cta_services_book_call">
           Book a Call
         </Button>
-        <Button
-          variant="outline"
-          size="lg"
-          href="#packages"
-          data-evt="cta_services_view_packages"
-        >
+        <Button variant="outline" size="lg" href="#packages" data-evt="cta_services_view_packages">
           View Packages
         </Button>
       </div>
@@ -64,11 +60,14 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
   </Section>
 
   <!-- WHO WE HELP -->
-  <Section class="border-t border-border-subtle bg-background-cream" containerClass="max-w-5xl text-center">
+  <Section
+    class="border-t border-border-subtle bg-background-cream"
+    containerClass="max-w-5xl text-center"
+  >
     <h2 class="mb-5 font-heading text-3xl font-bold text-heading md:text-4xl">Who We Help</h2>
     <p class="mb-6 text-lg text-body">
-      We work with all types of local home service businesses—if you book jobs in your city or
-      town, our services are for you:
+      We work with all types of local home service businesses—if you book jobs in your city or town,
+      our services are for you:
     </p>
     <div class="flex flex-wrap justify-center gap-3">
       {
@@ -89,7 +88,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
         ))
       }
     </div>
-    <p class="mt-4 text-sm text-body/70">
+    <p class="text-body/70 mt-4 text-sm">
       Not sure if we can help your niche? <a
         href="/contact#book"
         class="text-primary underline hover:text-primary"
@@ -102,165 +101,166 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
   </Section>
 
   <!-- CORE SERVICES -->
-  <Section id="core-services" class="border-t border-border-subtle bg-white" containerClass="max-w-6xl">
-      <h2 class="mb-10 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
-        Our Core Services
-        <span class="mx-auto mt-2 block h-1 w-20 rounded bg-primary"></span>
-      </h2>
+  <Section
+    id="core-services"
+    class="border-t border-border-subtle bg-white"
+    containerClass="max-w-6xl"
+  >
+    <h2 class="mb-10 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
+      Our Core Services
+      <span class="mx-auto mt-2 block h-1 w-20 rounded bg-primary"></span>
+    </h2>
 
-      <div class="grid gap-8 md:grid-cols-3">
-        {
+    <div class="grid gap-8 md:grid-cols-3">
+      {
+        [
           [
+            "Google Business Profile Optimization",
+            "/services/google-business-profile-optimization",
             [
-              "Google Business Profile Optimization",
-              "/services/google-business-profile-optimization",
-              [
-                "Claim, optimize & actively manage your GBP listing",
-                "Ongoing reviews & optimized photos (EXIF/geo, alt naming)",
-                "Keyword/category strategy & monthly reporting",
-              ],
+              "Claim, optimize & actively manage your GBP listing",
+              "Ongoing reviews & optimized photos (EXIF/geo, alt naming)",
+              "Keyword/category strategy & monthly reporting",
             ],
+          ],
+          [
+            "Local SEO & Content",
+            "/services/local-seo",
             [
-              "Local SEO & Content",
-              "/services/local-seo",
-              [
-                "On-page & technical fixes (titles, metas, headers, CWV, schema)",
-                "Service & location content + internal linking",
-                "Citations & local authority building with clear reporting",
-              ],
+              "On-page & technical fixes (titles, metas, headers, CWV, schema)",
+              "Service & location content + internal linking",
+              "Citations & local authority building with clear reporting",
             ],
+          ],
+          [
+            "Website Design & Conversion",
+            "/services/web-design",
             [
-              "Website Design & Conversion",
-              "/services/web-design",
-              [
-                "Mobile-first, conversion-ready design with SEO baked in",
-                "Fast hosting, security & analytics",
-                "Lead capture, reviews & calls built in",
-              ],
+              "Mobile-first, conversion-ready design with SEO baked in",
+              "Fast hosting, security & analytics",
+              "Lead capture, reviews & calls built in",
             ],
-          ].map(([title, href, bullets]) => (
-            <article class="card-elevated grid grid-rows-[auto_1fr_auto]">
-              <h3 class="mb-3 font-heading text-xl font-bold text-primary">{title}</h3>
-              <ul class="list-inside list-disc space-y-1 text-body">
-                {(bullets as string[]).map((b) => (
-                  <li>{b}</li>
-                ))}
-              </ul>
-              <a
-                href={href as string}
-                class="mt-6 inline-flex items-center font-semibold text-primary underline hover:text-primary"
-              >
-                Learn more &rarr;
-              </a>
-            </article>
-          ))
-        }
-      </div>
+          ],
+        ].map(([title, href, bullets]) => (
+          <article class="card-elevated grid grid-rows-[auto_1fr_auto]">
+            <h3 class="mb-3 font-heading text-xl font-bold text-primary">{title}</h3>
+            <ul class="list-inside list-disc space-y-1 text-body">
+              {(bullets as string[]).map((b) => (
+                <li>{b}</li>
+              ))}
+            </ul>
+            <a
+              href={href as string}
+              class="mt-6 inline-flex items-center font-semibold text-primary underline hover:text-primary"
+            >
+              Learn more &rarr;
+            </a>
+          </article>
+        ))
+      }
+    </div>
   </Section>
 
   <!-- WHY CHOOSE US -->
   <Section class="border-t border-border-subtle bg-background-cream" containerClass="max-w-6xl">
-      <h2 class="mb-8 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
-        Why Home Service Pros Trust Lilos Growth
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
-      </h2>
+    <h2 class="mb-8 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
+      Why Home Service Pros Trust Lilos Growth
+      <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
+    </h2>
 
-      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
-        {
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
+      {
+        [
           [
-            [
-              "Built by Home Service Owners",
-              "We’ve lived it—so we build what actually generates booked jobs.",
-            ],
-            [
-              "Specialists in Home Services",
-              "No generic agency fluff, just trades-focused growth.",
-            ],
-            ["No Long-Term Contract", "Month-to-month. We earn your business with results."],
-            ["Results You Can See", "Local rankings, calls, and jobs—measurable improvements."],
-            ["No Big Agency Fluff", "Direct access to your strategist. No runarounds."],
-            [
-              "Easy, Honest, & Human",
-              "Clear reporting, plain English, and a process that makes sense.",
-            ],
-          ].map(([title, body]) => (
-            <div class="card flex flex-col items-center">
-              <span class="bg-primary/10 mb-4 flex h-14 w-14 items-center justify-center rounded-xl">
-                <svg
-                  class="h-7 w-7 text-primary"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M3 12l6 6l12-12" />
-                </svg>
-              </span>
-              <h3 class="mb-1 text-center font-heading text-lg font-semibold text-heading">
-                {title}
-              </h3>
-              <p class="text-center text-[15px] text-body">{body}</p>
-            </div>
-          ))
-        }
-      </div>
+            "Built by Home Service Owners",
+            "We’ve lived it—so we build what actually generates booked jobs.",
+          ],
+          ["Specialists in Home Services", "No generic agency fluff, just trades-focused growth."],
+          ["No Long-Term Contract", "Month-to-month. We earn your business with results."],
+          ["Results You Can See", "Local rankings, calls, and jobs—measurable improvements."],
+          ["No Big Agency Fluff", "Direct access to your strategist. No runarounds."],
+          [
+            "Easy, Honest, & Human",
+            "Clear reporting, plain English, and a process that makes sense.",
+          ],
+        ].map(([title, body]) => (
+          <div class="card flex flex-col items-center">
+            <span class="bg-primary/10 mb-4 flex h-14 w-14 items-center justify-center rounded-xl">
+              <svg
+                class="h-7 w-7 text-primary"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M3 12l6 6l12-12" />
+              </svg>
+            </span>
+            <h3 class="mb-1 text-center font-heading text-lg font-semibold text-heading">
+              {title}
+            </h3>
+            <p class="text-center text-[15px] text-body">{body}</p>
+          </div>
+        ))
+      }
+    </div>
   </Section>
 
   <!-- 4-STEP SYSTEM -->
   <Section class="border-t border-border-subtle bg-white" containerClass="max-w-6xl">
-      <h2 class="mb-6 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
-        Our Proven 4-Step Local SEO System
-        <span class="mx-auto mt-2 block h-1 w-20 rounded bg-primary"></span>
-      </h2>
-      <p class="mb-12 text-center text-lg text-body">
-        Exactly how we get you ranking higher and driving more local calls.
-      </p>
+    <h2 class="mb-6 text-center font-heading text-4xl font-bold text-heading md:text-5xl">
+      Our Proven 4-Step Local SEO System
+      <span class="mx-auto mt-2 block h-1 w-20 rounded bg-primary"></span>
+    </h2>
+    <p class="mb-12 text-center text-lg text-body">
+      Exactly how we get you ranking higher and driving more local calls.
+    </p>
 
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
-        {
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+      {
+        [
           [
-            [
-              "1",
-              "Keyword & Market Research",
-              "We start with data—what your local customers actually search for.",
-            ],
-            [
-              "2",
-              "Profile & Website Optimization",
-              "We fully optimize your GBP and website to boost visibility.",
-            ],
-            [
-              "3",
-              "Content & Authority Building",
-              "Location pages, blogs, and high-quality local links.",
-            ],
-            [
-              "4",
-              "Ongoing Management & Results",
-              "We track, report, and keep optimizing so results improve.",
-            ],
-          ].map(([num, title, body]) => (
-            <div class="card-elevated flex flex-col items-center text-center">
-              <div class="bg-primary/10 mb-4 flex h-14 w-14 items-center justify-center rounded-full text-2xl font-extrabold text-primary">
-                {num}
-              </div>
-              <h3 class="mb-2 font-heading text-lg font-bold text-heading">{title}</h3>
-              <p class="text-[15px] text-body">{body}</p>
+            "1",
+            "Keyword & Market Research",
+            "We start with data—what your local customers actually search for.",
+          ],
+          [
+            "2",
+            "Profile & Website Optimization",
+            "We fully optimize your GBP and website to boost visibility.",
+          ],
+          [
+            "3",
+            "Content & Authority Building",
+            "Location pages, blogs, and high-quality local links.",
+          ],
+          [
+            "4",
+            "Ongoing Management & Results",
+            "We track, report, and keep optimizing so results improve.",
+          ],
+        ].map(([num, title, body]) => (
+          <div class="card-elevated flex flex-col items-center text-center">
+            <div class="bg-primary/10 mb-4 flex h-14 w-14 items-center justify-center rounded-full text-2xl font-extrabold text-primary">
+              {num}
             </div>
-          ))
-        }
-      </div>
+            <h3 class="mb-2 font-heading text-lg font-bold text-heading">{title}</h3>
+            <p class="text-[15px] text-body">{body}</p>
+          </div>
+        ))
+      }
+    </div>
   </Section>
 
   <!-- MINI TESTIMONIAL -->
   <Section padding="sm" class="border-t border-border-subtle bg-white" containerClass="max-w-3xl">
-      <div class="rounded-2xl bg-background-cream p-8 text-center shadow">
-        <p class="mb-2 text-lg font-medium">
-          “After just 60 days, we jumped from the bottom of Google Maps to the top 3. The phones
-          ring every week now.”
-        </p>
-        <div class="text-body/70 text-sm">— John T., Plumbing Business Owner</div>
-      </div>
+    <div class="rounded-2xl bg-background-cream p-8 text-center shadow">
+      <p class="mb-2 text-lg font-medium">
+        “After just 60 days, we jumped from the bottom of Google Maps to the top 3. The phones ring
+        every week now.”
+      </p>
+      <div class="text-body/70 text-sm">— John T., Plumbing Business Owner</div>
+    </div>
   </Section>
 
   <!-- TESTIMONIALS -->
@@ -282,46 +282,46 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
 
   <!-- FAQ -->
   <Section id="faq" class="border-t border-border-subtle bg-white" containerClass="max-w-4xl">
-      <h2 class="mb-8 text-center font-heading text-3xl font-bold text-heading md:text-4xl">
-        Frequently Asked Questions
-        <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
-      </h2>
+    <h2 class="mb-8 text-center font-heading text-3xl font-bold text-heading md:text-4xl">
+      Frequently Asked Questions
+      <span class="mx-auto mt-2 block h-1 w-14 rounded bg-primary"></span>
+    </h2>
 
-      <div class="space-y-6">
-        {
+    <div class="space-y-6">
+      {
+        [
           [
-            [
-              "Do you work with my industry or niche?",
-              "If you’re a local service business—even if not listed above—there’s a 99% chance we can help. Reach out and ask!",
-            ],
-            [
-              "How quickly will I see results?",
-              "Most companies start seeing more calls, leads, and improved rankings within 30–60 days. We focus on quick wins from day one.",
-            ],
-            [
-              "Are there any setup fees?",
-              "Some one-time projects (like a full site build) may have setup fees. Ongoing services are month-to-month and transparent.",
-            ],
-            [
-              "Do I need to understand SEO or websites to get results?",
-              "Nope! You run your business; we handle the digital work—clear communication, no jargon.",
-            ],
-            [
-              "Can you help if I already have a website or GBP?",
-              "Absolutely. We improve and optimize existing sites and profiles—or build new if that’s the better path.",
-            ],
-            [
-              "Will I have a dedicated point of contact?",
-              "Yes—direct access to a home service marketing strategist. No call centers or handoffs.",
-            ],
-          ].map(([q, a]) => (
-            <div class="card-sm rounded-2xl border border-border-subtle bg-white shadow">
-              <h3 class="mb-2 font-heading text-lg font-semibold text-heading">{q}</h3>
-              <p class="text-base text-body">{a}</p>
-            </div>
-          ))
-        }
-      </div>
+            "Do you work with my industry or niche?",
+            "If you’re a local service business—even if not listed above—there’s a 99% chance we can help. Reach out and ask!",
+          ],
+          [
+            "How quickly will I see results?",
+            "Most companies start seeing more calls, leads, and improved rankings within 30–60 days. We focus on quick wins from day one.",
+          ],
+          [
+            "Are there any setup fees?",
+            "Some one-time projects (like a full site build) may have setup fees. Ongoing services are month-to-month and transparent.",
+          ],
+          [
+            "Do I need to understand SEO or websites to get results?",
+            "Nope! You run your business; we handle the digital work—clear communication, no jargon.",
+          ],
+          [
+            "Can you help if I already have a website or GBP?",
+            "Absolutely. We improve and optimize existing sites and profiles—or build new if that’s the better path.",
+          ],
+          [
+            "Will I have a dedicated point of contact?",
+            "Yes—direct access to a home service marketing strategist. No call centers or handoffs.",
+          ],
+        ].map(([q, a]) => (
+          <div class="card-sm rounded-2xl border border-border-subtle bg-white shadow">
+            <h3 class="mb-2 font-heading text-lg font-semibold text-heading">{q}</h3>
+            <p class="text-base text-body">{a}</p>
+          </div>
+        ))
+      }
+    </div>
   </Section>
 </Layout>
 
