@@ -1,477 +1,334 @@
 ---
 /**
- * Results Page - Refactored with Design System
- *
- * Showcases client case studies and results using the new component system.
+ * Results Page - Enhanced with service filtering and visual hierarchy
  */
 import PageLayout from "~/layouts/PageLayout.astro";
-import Badge from "~/components/core/Badge.astro";
-import Button from "~/components/core/Button.astro";
-import StatCard from "~/components/composed/StatCard.astro";
-import CaseStudyCard from "~/components/composed/CaseStudyCard.astro";
-import FilterTab from "~/components/composed/FilterTab.astro";
-import Image from "~/components/common/Image.astro";
-import Section from "~/components/core/Section.astro";
+import CaseStudyCard from "~/components/results/CaseStudyCard.astro";
+import ResultsCTABand from "~/components/results/ResultsCTABand.astro";
 
-const title = "Client Results & Case Studies | Lilos Growth";
-const description =
-  "Real results for home service businesses: more calls, better rankings, faster websites. See how we help pest control, HVAC, restoration, and other local businesses grow.";
+import { resultsStats, resultsCaseStudies, resultsFaqs, serviceTypeLabels } from "~/data/results";
+import type { ServiceType } from "~/data/results";
 
-// Stats data
-const stats = [
-  {
-    label: "Avg. lead growth",
-    value: "+142%",
-    note: "12-month median across active clients",
-  },
-  {
-    label: "GBP calls increase",
-    value: "3.2×",
-    note: "After profile optimization & posting",
-  },
-  {
-    label: "Cost per lead",
-    value: "−38%",
-    note: "Landing page + tracking improvements",
-  },
-  {
-    label: "Core Web Vitals",
-    value: "96%",
-    note: "Pass rate on Astro-built sites",
-  },
-];
-
-// Case studies data
-const caseStudies = [
-  {
-    client: "Blue Door Pest Control",
-    location: "Jupiter, FL",
-    sector: "Pest Control",
-    serviceTypes: ["website", "gbp", "local-seo"] as const,
-    description:
-      "Full-service engagement: Astro website rebuild, GBP optimization with weekly posts, and local SEO strategy targeting Jupiter and surrounding Palm Beach County cities.",
-    metrics: [
-      { label: "organic leads", value: "+118%" },
-      { label: "cost per lead", value: "−41%" },
-      { label: "GBP calls", value: "+89%" },
-    ],
-    screenshot: {
-      src: "/images/case-studies/blue-door-screenshot.webp",
-      alt: "Blue Door Pest Control website",
-    },
-    logo: {
-      src: "/clients/blue-door-pest-control.jpg",
-      alt: "Blue Door Pest Control",
-    },
-    websiteUrl: "https://bluedoorpestcontrol.com",
-    caseStudyUrl: "/results",
-    featured: true,
-  },
-  {
-    client: "Tamarack Restoration",
-    location: "Carlsbad, CA",
-    sector: "Restoration",
-    serviceTypes: ["website", "gbp", "local-seo"] as const,
-    description:
-      "Fast Astro build with service-area pages, GBP optimization, and local link building for water damage and mold remediation searches.",
-    metrics: [
-      { label: "Maps top-3 keywords", value: "+5" },
-      { label: "page load time", value: "<1s" },
-    ],
-    screenshot: {
-      src: "/images/case-studies/tamarack-screenshot.webp",
-      alt: "Tamarack Restoration website",
-    },
-    caseStudyUrl: "/results",
-  },
-  {
-    client: "Carlsbad Home Services",
-    location: "Carlsbad, CA",
-    sector: "Home Services",
-    serviceTypes: ["website", "local-seo"] as const,
-    description:
-      "Conversion-focused website with service pages and FAQ schema, plus local SEO targeting North County San Diego service areas.",
-    metrics: [
-      { label: "quote requests", value: "+52%" },
-      { label: "cost per lead", value: "−33%" },
-    ],
-    screenshot: {
-      src: "/images/case-studies/carlsbad-home-screenshot.webp",
-      alt: "Carlsbad Home Services website",
-    },
-    caseStudyUrl: "/results",
-  },
-  {
-    client: "Carlsbad Fix It",
-    location: "Carlsbad, CA",
-    sector: "Handyman",
-    serviceTypes: ["website", "gbp", "local-seo"] as const,
-    description:
-      "Complete local presence overhaul: fast website, optimized GBP with service menus, and location-specific content for handyman searches.",
-    metrics: [
-      { label: "Maps visibility", value: "+73%" },
-      { label: "avg. session time", value: "+45%" },
-    ],
-    screenshot: {
-      src: "/images/case-studies/carlsbad-fixit-screenshot.webp",
-      alt: "Carlsbad Fix It website",
-    },
-    caseStudyUrl: "/results",
-  },
-  {
-    client: "Postal Systems",
-    location: "San Diego, CA",
-    sector: "Commercial Services",
-    serviceTypes: ["website", "gbp", "local-seo"] as const,
-    description:
-      "Niche B2B focus: productized service pages for mailbox installation, GBP optimization with product listings, and local SEO for commercial property managers.",
-    metrics: [
-      { label: "GBP calls", value: "3.1×" },
-      { label: "form conversion", value: "+22%" },
-    ],
-    screenshot: {
-      src: "/images/case-studies/postal-systems-screenshot.webp",
-      alt: "Postal Systems website",
-    },
-    caseStudyUrl: "/results",
-  },
-];
-
-// GBP Performance Data
-const gbpResults = [
-  {
-    client: "Blue Door Pest Control",
-    metric: "Direction Requests",
-    value: "194",
-    growth: "+19.0%",
-    period: "Sep 2025 – Dec 2025",
-    image: "/images/results/blue-door-gbp.png",
-  },
-  {
-    client: "Carlsbad Fix It",
-    metric: "Business Profile Interactions",
-    value: "38",
-    growth: "Upward Trend",
-    period: "Sep 2025 – Dec 2025",
-    image: "/images/results/carlsbad-fixit-gbp.png",
-  },
-];
-
-// Service type labels for filtering
-const serviceTypeLabels = {
-  all: "All Results",
-  website: "Websites",
-  gbp: "GBP Optimization",
-  "local-seo": "Local SEO",
-};
-
-// FAQs
-const faqs = [
-  {
-    question: "How quickly will I see results?",
-    answer:
-      "Technical improvements (speed, structure) are immediate. Local SEO momentum typically builds over 6–12 weeks as Google re-crawls and trusts the changes.",
-  },
-  {
-    question: "Do I need to increase my ad spend?",
-    answer:
-      "Usually no. We focus on organic visibility first. Paid ads only make sense once tracking is solid and landing pages convert well.",
-  },
-  {
-    question: "Can you work with my existing website?",
-    answer:
-      "Yes. We can optimize an existing site or rebuild on Astro for better speed and maintainability. We preserve URLs and redirects either way.",
-  },
-  {
-    question: "How do you measure success?",
-    answer:
-      "Leads and booked jobs are the primary metrics. We also track GBP actions (calls, directions, clicks), conversion rates, page speed, and keyword rankings.",
-  },
-  {
-    question: "What do you need from me to get started?",
-    answer:
-      "Access to Google Analytics, Search Console, and your GBP. Quick feedback loops on content approvals help us move faster.",
-  },
-  {
-    question: "Are there long-term contracts?",
-    answer:
-      "Month-to-month is available. Most clients choose 3–6 month engagements to let organic SEO compound, but you're never locked in.",
-  },
-];
+const featuredStudy = resultsCaseStudies.find(s => s.featured);
+const otherStudies = resultsCaseStudies.filter(s => !s.featured);
 ---
 
-<PageLayout {title} {description}>
+<PageLayout
+  title="Client Results & Case Studies | Lilos Growth"
+  description="Real results for home service businesses: more calls, better rankings, faster websites. See how we help pest control, HVAC, restoration, and other local businesses grow."
+>
   <!-- HERO -->
   <section class="relative overflow-hidden bg-secondary">
-    <div
-      class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light"
-      aria-hidden="true"
-    >
-    </div>
-
+    <div class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light"></div>
     <div class="relative mx-auto max-w-6xl px-4 py-16 md:py-20">
       <div class="max-w-3xl">
-        <p class="text-sm font-semibold uppercase tracking-widest text-primary">Proven Results</p>
-
-        <h1 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-5xl">
+        <p class="text-sm font-semibold uppercase tracking-widest text-primary">
+          Proven Results
+        </p>
+        <h1 class="mt-3 font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">
           More calls. Better rankings.<br class="hidden sm:block" />
           <span class="text-primary">Real growth.</span>
         </h1>
-
-        <p class="mt-4 text-base text-white/80">
-          We help home service businesses dominate local search with fast websites, optimized Google
-          Business Profiles, and local SEO that actually drives calls.
+        <p class="mt-4 text-lg text-white/80 md:text-xl">
+          We help home service businesses dominate local search with fast websites, 
+          optimized Google Business Profiles, and local SEO that actually drives calls.
         </p>
-
         <div class="mt-6 flex flex-wrap gap-2">
-          <Badge variant="info">Website Design</Badge>
-          <Badge variant="info">GBP Optimization</Badge>
-          <Badge variant="info">Local SEO</Badge>
+          <span class="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white">
+            Website Design
+          </span>
+          <span class="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white">
+            GBP Optimization
+          </span>
+          <span class="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white">
+            Local SEO
+          </span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- STATS -->
-  <Section
-    padding="sm"
-    class="border-b border-border-subtle bg-surface-base"
-    containerClass="max-w-6xl"
-  >
-    <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-      {
-        stats.map((stat) => (
-          <div data-stagger-item>
-            <StatCard {...stat} />
+  <section class="border-b border-gray-100 bg-white py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+        {resultsStats.map((stat) => (
+          <div class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-gradient-to-br from-white to-gray-50 p-6 shadow-sm transition-shadow hover:shadow-md">
+            <div class="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-primary/5 transition-transform group-hover:scale-110"></div>
+            <div class="relative">
+              <p class="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                {stat.label}
+              </p>
+              <p class="mt-2 font-heading text-3xl font-bold tracking-tight text-heading md:text-4xl">
+                {stat.value}
+              </p>
+              {stat.note && (
+                <p class="mt-1 text-xs text-gray-500">{stat.note}</p>
+              )}
+            </div>
           </div>
-        ))
-      }
+        ))}
+      </div>
     </div>
-  </Section>
+  </section>
 
   <!-- FEATURED CASE STUDY -->
-  {
-    caseStudies
-      .filter((cs) => cs.featured)
-      .map((study) => (
-        <Section
-          padding="sm"
-          class="border-b border-border-subtle bg-background-cream"
-          containerClass="max-w-6xl"
-        >
-          <div class="mb-8 flex items-center gap-3">
-            <Badge variant="primary">Featured</Badge>
-            <h2 class="font-heading text-xl font-bold text-heading md:text-2xl">
-              Client Spotlight
-            </h2>
-          </div>
+  {featuredStudy && (
+    <section class="border-b border-gray-100 bg-cream py-16 md:py-20">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="mb-8 flex items-center gap-3">
+          <span class="rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
+            Featured
+          </span>
+          <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
+            Client Spotlight
+          </h2>
+        </div>
 
-          <CaseStudyCard {...study} />
-        </Section>
-      ))
-  }
-
-  <!-- GBP PERFORMANCE SECTION -->
-  <Section class="border-b border-border-subtle bg-surface-base" containerClass="max-w-6xl">
-    <div class="mb-12 text-center">
-      <Badge variant="primary" class="mb-4">GBP Management</Badge>
-      <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
-        Google Business Profile Performance
-      </h2>
-      <p class="mx-auto mt-4 max-w-2xl text-base text-body">
-        Real-time performance data from profiles we manage. We focus on the metrics that matter:
-        direction requests, calls, and direct customer interactions.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-      {
-        gbpResults.map((result) => (
-          <div class="card-elevated overflow-hidden p-0">
-            <div class="border-b border-border-subtle bg-background-subtle p-6">
-              <div class="flex items-start justify-between">
-                <div>
-                  <h3 class="font-heading text-lg font-bold text-heading">{result.client}</h3>
-                  <p class="text-sm text-muted">{result.period}</p>
-                </div>
-                <div class="text-right">
-                  <div class="text-2xl font-bold text-primary">{result.value}</div>
-                  <div class="text-xs font-semibold uppercase tracking-wider text-success">
-                    {result.growth}
-                  </div>
-                </div>
-              </div>
-              <p class="mt-2 text-sm font-medium text-body">{result.metric}</p>
-            </div>
-            <div class="bg-secondary/5 relative aspect-[16/9]">
-              <Image
-                src={result.image}
-                alt={`${result.client} GBP Performance`}
-                class="h-full w-full object-cover object-top"
-                width={1280}
-                height={720}
-                sizes="(max-width: 1024px) 100vw, 640px"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
-          </div>
-        ))
-      }
-    </div>
-  </Section>
-
-  <!-- MORE CASE STUDIES -->
-  <Section class="bg-background-cream" containerClass="max-w-6xl">
-    <h2 class="mb-4 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
-      More Client Wins
-    </h2>
-    <p class="mb-12 text-center text-base text-body">
-      From pest control to restoration to handyman services—we help home service businesses across
-      industries dominate their local markets.
-    </p>
-
-    <!-- Filter Tabs -->
-    <div class="mb-8 flex flex-wrap justify-center gap-3" role="tablist">
-      <FilterTab id="all" label={serviceTypeLabels.all} active={true} />
-      <FilterTab id="website" label={serviceTypeLabels.website} />
-      <FilterTab id="gbp" label={serviceTypeLabels.gbp} />
-      <FilterTab id="local-seo" label={serviceTypeLabels["local-seo"]} />
-    </div>
-
-    <!-- Case Studies Grid -->
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2" id="case-studies-grid">
-      {
-        caseStudies
-          .filter((cs) => !cs.featured)
-          .map((study) => <CaseStudyCard {...study} data-services={study.serviceTypes.join(",")} />)
-      }
-    </div>
-  </Section>
-
-  <!-- FAQs -->
-  <Section
-    id="faq"
-    class="border-t border-border-subtle bg-surface-base"
-    containerClass="max-w-4xl"
-  >
-    <h2 class="mb-4 text-center font-heading text-xl font-bold text-heading md:text-2xl">
-      Common Questions
-    </h2>
-    <p class="mb-8 text-center text-body">
-      Answers about working together, timelines, and what to expect.
-    </p>
-
-    <div class="space-y-4">
-      {
-        faqs.map((faq) => (
-          <details class="group card">
-            <summary class="flex cursor-pointer items-center justify-between font-semibold text-heading">
-              {faq.question}
-              <span class="ml-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background-subtle text-muted transition-colors group-open:bg-primary group-open:text-white">
-                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 9l-7 7-7-7"
+        <div class="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-xl">
+          <div class="grid gap-0 lg:grid-cols-2">
+            <!-- Screenshot Side -->
+            <div class="relative bg-gray-100">
+              {featuredStudy.screenshot && (
+                <div class="aspect-[4/3] overflow-hidden lg:aspect-auto lg:absolute lg:inset-0">
+                  <img
+                    src={featuredStudy.screenshot.src}
+                    alt={featuredStudy.screenshot.alt || featuredStudy.client}
+                    class="h-full w-full object-cover object-top"
+                    loading="eager"
                   />
+                </div>
+              )}
+              {featuredStudy.websiteUrl && (
+                <a
+                  href={featuredStudy.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-sm font-semibold text-heading shadow-lg backdrop-blur transition hover:bg-white"
+                >
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  View Live Site
+                </a>
+              )}
+            </div>
+
+            <!-- Content Side -->
+            <div class="flex flex-col justify-center p-8 lg:p-10">
+              <div class="flex items-center gap-3">
+                {featuredStudy.image?.src && (
+                  <img
+                    src={featuredStudy.image.src}
+                    alt={featuredStudy.image.alt || featuredStudy.client}
+                    class="h-10 w-auto object-contain"
+                  />
+                )}
+              </div>
+
+              <h3 class="mt-4 font-heading text-2xl font-bold text-heading md:text-3xl">
+                {featuredStudy.title}
+              </h3>
+              
+              <p class="mt-1 text-sm text-gray-500">
+                {featuredStudy.city} · {featuredStudy.sectorTag}
+              </p>
+
+              <!-- Service Badges -->
+              <div class="mt-4 flex flex-wrap gap-2">
+                {featuredStudy.serviceTypes.map((type: ServiceType) => (
+                  <span class:list={[
+                    "inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold",
+                    type === 'website' && "bg-blue-100 text-blue-700",
+                    type === 'gbp' && "bg-green-100 text-green-700",
+                    type === 'local-seo' && "bg-purple-100 text-purple-700",
+                  ]}>
+                    {type === 'website' && (
+                      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    )}
+                    {type === 'gbp' && (
+                      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    )}
+                    {type === 'local-seo' && (
+                      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                    )}
+                    {serviceTypeLabels[type]}
+                  </span>
+                ))}
+              </div>
+
+              <p class="mt-4 text-body">
+                {featuredStudy.blurb}
+              </p>
+
+              <!-- KPIs -->
+              <div class="mt-6 grid grid-cols-3 gap-4">
+                {featuredStudy.kpis.slice(0, 3).map((kpi) => (
+                  <div class="text-center">
+                    <p class="font-heading text-2xl font-bold text-primary md:text-3xl">
+                      {kpi.value}
+                    </p>
+                    <p class="mt-1 text-xs uppercase tracking-wider text-gray-500">
+                      {kpi.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div class="mt-8">
+                <a
+                  href={featuredStudy.ctaHref || "/contact"}
+                  class="btn btn-primary"
+                >
+                  {featuredStudy.ctaText || "Learn More"}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ALL CASE STUDIES -->
+  <section class="bg-white py-16 md:py-20">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="mb-10 text-center">
+        <h2 class="font-heading text-3xl font-bold text-heading md:text-4xl">
+          More Client Wins
+        </h2>
+        <p class="mx-auto mt-3 max-w-2xl text-lg text-body">
+          From pest control to restoration to handyman services—we help home service 
+          businesses across industries dominate their local markets.
+        </p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="mb-8 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Filter by service type">
+        <button
+          type="button"
+          role="tab"
+          aria-selected="true"
+          data-filter="all"
+          class="filter-tab rounded-full px-5 py-2 text-sm font-semibold transition-colors bg-primary text-white"
+        >
+          All Results
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          data-filter="website"
+          class="filter-tab rounded-full px-5 py-2 text-sm font-semibold transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200"
+        >
+          Websites
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          data-filter="gbp"
+          class="filter-tab rounded-full px-5 py-2 text-sm font-semibold transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200"
+        >
+          GBP Optimization
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          data-filter="local-seo"
+          class="filter-tab rounded-full px-5 py-2 text-sm font-semibold transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200"
+        >
+          Local SEO
+        </button>
+      </div>
+
+      <!-- Case Study Grid -->
+      <div id="results-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2">
+        {otherStudies.map((study) => (
+          <CaseStudyCard study={study} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-gray-100 bg-cream py-16 md:py-20">
+    <div class="mx-auto max-w-3xl px-4">
+      <h2 class="text-center font-heading text-3xl font-bold text-heading md:text-4xl">
+        Common Questions
+      </h2>
+      <p class="mx-auto mt-3 max-w-xl text-center text-body">
+        Answers about working together, timelines, and what to expect.
+      </p>
+
+      <div class="mt-10 space-y-4">
+        {resultsFaqs.map((faq, index) => (
+          <details class="group rounded-2xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 [&::-webkit-details-marker]:hidden">
+              <h3 class="font-heading text-base font-semibold text-heading pr-4">
+                {faq.q}
+              </h3>
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-500 transition-colors group-open:bg-primary group-open:text-white">
+                <svg
+                  class="h-4 w-4 transition-transform group-open:rotate-45"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12" />
                 </svg>
               </span>
             </summary>
-            <p class="mt-4 text-sm leading-relaxed text-body">{faq.answer}</p>
+            <div class="px-6 pb-4 text-body">
+              {faq.a}
+            </div>
           </details>
-        ))
-      }
+        ))}
+      </div>
     </div>
-  </Section>
+  </section>
 
-  <!-- FINAL CTA -->
-  <Section
-    class="border-t border-border-subtle bg-background-cream"
-    containerClass="max-w-3xl text-center"
-  >
-    <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
-      See what this could look like in your city
-    </h2>
-    <p class="mb-8 text-base text-body">
-      We'll audit your GBP and top pages, outline quick wins, and map a 90-day plan to lift calls.
-    </p>
-    <div class="flex flex-wrap justify-center gap-4">
-      <Button variant="primary" size="lg" href="/contact#book" data-evt="cta_results_growth_plan">
-        Get a Free Growth Plan
-      </Button>
-      <Button variant="outline" size="lg" href="/services" data-evt="cta_results_explore_services">
-        Explore Services
-      </Button>
-    </div>
-  </Section>
+  <!-- CTA -->
+  <ResultsCTABand />
+
 </PageLayout>
 
-<script is:inline>
+<script>
   // Filter functionality
-  document.addEventListener("DOMContentLoaded", () => {
-    const tabs = document.querySelectorAll(".filter-tab");
-    const caseStudies = document.querySelectorAll("[data-services]");
-
-    tabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        const filter = tab.getAttribute("data-filter");
-
-        // Update active tab
-        tabs.forEach((t) => {
-          t.classList.remove("bg-primary", "text-white", "shadow-md");
-          t.classList.add("bg-background-subtle", "text-body");
-          t.setAttribute("aria-selected", "false");
-        });
-
-        tab.classList.remove("bg-background-subtle", "text-body");
-        tab.classList.add("bg-primary", "text-white", "shadow-md");
-        tab.setAttribute("aria-selected", "true");
-
-        // Filter case studies
-        caseStudies.forEach((study) => {
-          const services = study.getAttribute("data-services") || "";
-          const shouldShow = filter === "all" || services.includes(filter);
-
-          if (shouldShow) {
-            study.style.display = "";
-            study.classList.add("animate-fade-in");
-          } else {
-            study.style.display = "none";
-          }
-        });
+  const tabs = document.querySelectorAll('.filter-tab');
+  const cards = document.querySelectorAll('#results-grid > article');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const filter = tab.getAttribute('data-filter');
+      
+      // Update tab states
+      tabs.forEach(t => {
+        t.classList.remove('bg-primary', 'text-white');
+        t.classList.add('bg-gray-100', 'text-gray-700');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.remove('bg-gray-100', 'text-gray-700');
+      tab.classList.add('bg-primary', 'text-white');
+      tab.setAttribute('aria-selected', 'true');
+      
+      // Filter cards
+      cards.forEach(card => {
+        const services = card.getAttribute('data-services') || '';
+        if (filter === 'all' || services.includes(filter)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
       });
     });
   });
 </script>
-
-<style>
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in {
-    animation: fade-in 0.3s ease-out;
-  }
-
-  /* Smooth accordion animation */
-  details summary::-webkit-details-marker {
-    display: none;
-  }
-
-  details[open] summary svg {
-    transform: rotate(180deg);
-  }
-
-  details summary svg {
-    transition: transform 0.2s ease;
-  }
-</style>
