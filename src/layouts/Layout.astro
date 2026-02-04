@@ -90,41 +90,14 @@ declare global {
     <!-- Allow pages to push extra head assets (e.g., Calendly CSS/preconnect) -->
     <slot name="head" />
 
-    <!-- Optimized Font Loading: Preconnect + Preload + font-display=swap -->
+    <!-- System Fonts for fastest LCP - no external font blocking -->
+
+    <!-- Optional: Uncomment below for Google Fonts (will add ~100-200ms to LCP) -->
+    <!--
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
-    />
-    <link
-      id="gfonts-css"
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
-      media="print"
-    />
-    <script is:inline>
-      (() => {
-        const l = document.getElementById("gfonts-css");
-        if (!l) return;
-        const apply = () => {
-          l.media = "all";
-        };
-        // Flip to all once loaded; fallback after 3s for edge cases.
-        l.addEventListener?.("load", apply, { once: true });
-        setTimeout(apply, 3000);
-      })();
-    </script>
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
-      />
-    </noscript>
-
-    <!-- Resource Hints for Third-Party Services -->
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap&display=swap" />
+    -->
     <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
     <link rel="preconnect" href="https://vitals.vercel-insights.com" crossorigin />
 
