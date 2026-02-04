@@ -11,6 +11,26 @@ import type { ServiceType } from "~/data/results";
 
 const featuredStudy = resultsCaseStudies.find(s => s.featured);
 const otherStudies = resultsCaseStudies.filter(s => !s.featured);
+
+// GBP Performance Data
+const gbpResults = [
+  {
+    client: "Blue Door Pest Control",
+    metric: "Direction Requests",
+    value: "194",
+    growth: "+19.0%",
+    period: "Sep 2025 – Dec 2025",
+    image: "/images/results/blue-door-gbp.png",
+  },
+  {
+    client: "Carlsbad Fix It",
+    metric: "Business Profile Interactions",
+    value: "38",
+    growth: "Upward Trend",
+    period: "Sep 2025 – Dec 2025",
+    image: "/images/results/carlsbad-fixit-gbp.png",
+  },
+];
 ---
 
 <PageLayout
@@ -196,6 +216,57 @@ const otherStudies = resultsCaseStudies.filter(s => !s.featured);
       </div>
     </section>
   )}
+
+  <!-- GBP PERFORMANCE SECTION -->
+  <section class="border-b border-gray-200 bg-gray-50 py-16 md:py-20">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="mb-12 text-center">
+        <span class="mb-4 inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+          GBP Management
+        </span>
+        <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">
+          Google Business Profile Performance
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base text-gray-600">
+          Real-time performance data from profiles we manage. We focus on the metrics that matter:
+          direction requests, calls, and direct customer interactions.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        {
+          gbpResults.map((result) => (
+            <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
+              <div class="border-b border-gray-200 bg-gray-50 p-6">
+                <div class="flex items-start justify-between">
+                  <div>
+                    <h3 class="font-heading text-lg font-bold text-heading">{result.client}</h3>
+                    <p class="text-sm text-gray-500">{result.period}</p>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-2xl font-bold text-primary">{result.value}</div>
+                    <div class="text-xs font-semibold uppercase tracking-wider text-green-600">
+                      {result.growth}
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-2 text-sm font-medium text-gray-700">{result.metric}</p>
+              </div>
+              <div class="relative aspect-[16/9] bg-gray-100">
+                <img
+                  src={result.image}
+                  alt={`${result.client} GBP Performance`}
+                  class="h-full w-full object-cover object-top"
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
   <!-- ALL CASE STUDIES -->
   <section class="bg-white py-16 md:py-20">
