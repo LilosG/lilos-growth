@@ -90,14 +90,13 @@ declare global {
     <!-- Allow pages to push extra head assets (e.g., Calendly CSS/preconnect) -->
     <slot name="head" />
 
-    <!-- System Fonts for fastest LCP - no external font blocking -->
+    <!-- Preconnect to CDN for faster CSS loading -->
+    <link rel="preconnect" href="https://lilosgrowth.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 
-    <!-- Optional: Uncomment below for Google Fonts (will add ~100-200ms to LCP) -->
-    <!--
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap&display=swap" />
-    -->
+    <!-- System Fonts for fastest LCP - no external font blocking -->
+    <!-- Note: Vercel Analytics and SpeedInsights load asynchronously -->
     <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
     <link rel="preconnect" href="https://vitals.vercel-insights.com" crossorigin />
 
