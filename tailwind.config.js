@@ -8,123 +8,210 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: { DEFAULT: "1rem", md: "1.5rem" },
+      padding: {
+        DEFAULT: "var(--container-padding)",
+        lg: "var(--container-padding-lg)",
+      },
     },
     extend: {
       colors: {
         // Primary brand colors
-        primary: "#f56b2a",
-        "primary-hover": "#e65c1e",
-        "primary-dark": "#f34e00",
-        
-        // Secondary brand colors  
-        secondary: "#1f2d3d",
-        "secondary-hover": "#27394b",
-        "secondary-light": "#2e4159",
-        
+        primary: {
+          DEFAULT: "var(--color-primary)",
+          hover: "var(--color-primary-hover)",
+          dark: "var(--color-primary-dark)",
+          light: "var(--color-primary-light)",
+          50: "var(--color-primary-50)",
+          100: "var(--color-primary-100)",
+        },
+
+        // Secondary brand colors
+        secondary: {
+          DEFAULT: "var(--color-secondary)",
+          hover: "var(--color-secondary-hover)",
+          light: "var(--color-secondary-light)",
+          dark: "var(--color-secondary-dark)",
+        },
+
         // Semantic colors
-        heading: "#1f2d3d",
-        body: "#4a4a4a",
-        
+        heading: "var(--color-heading)",
+        body: "var(--color-body)",
+        "body-light": "var(--color-body-light)",
+        muted: "var(--color-muted)",
+        subtle: "var(--color-subtle)",
+
+        // Surface colors
+        surface: {
+          base: "var(--color-surface-base)",
+          raised: "var(--color-surface-raised)",
+          overlay: "var(--color-surface-overlay)",
+        },
+
         // Background colors
-        cream: "#fff9f6",
-        bluelight: "#f0f4f8",
-        graylight: "#f8fafc",
-        pattern: "#eaeaea",
-      },
-      fontFamily: {
-        heading: ["Poppins", "sans-serif"],
-        body: ["Inter", "sans-serif"],
-      },
-      fontSize: {
-        base: ["16px", { lineHeight: "1.7" }],
-        sm: ["15px", { lineHeight: "1.6" }],
-        lg: ["18px", { lineHeight: "1.6" }],
-        xl: ["20px", { lineHeight: "1.3" }],
-        "2xl": ["24px", { lineHeight: "1.2" }],
-        "3xl": ["28px", { lineHeight: "1.2" }],
-        "4xl": ["32px", { lineHeight: "1.1" }],
-        "5xl": ["36px", { lineHeight: "1.1" }],
-        "6xl": ["44px", { lineHeight: "1.05" }],
-      },
-      maxWidth: {
-        "2xl": "40rem",
-        "3xl": "48rem",
-        "4xl": "56rem",
-        "5xl": "64rem",
-        "6xl": "72rem",
-      },
-      spacing: {
-        4: "1rem",
-        5: "1.25rem",
-        6: "1.5rem",
-        7: "1.75rem",
-        8: "2rem",
-        10: "2.5rem",
-        12: "3rem",
-        16: "4rem",
-        20: "5rem",
-        24: "6rem",
-        28: "7rem",
-        32: "8rem",
-      },
-      borderRadius: { 
-        xl: "1rem", 
-        "2xl": "1.5rem", 
-        "3xl": "2rem", 
-        full: "9999px" 
-      },
-      animation: { 
-        fade: "fadeInUp 1s both" 
-      },
-      keyframes: {
-        fadeInUp: {
-          "0%": { opacity: 0, transform: "translateY(2rem)" },
-          "100%": { opacity: 1, transform: "translateY(0)" },
+        background: {
+          base: "var(--color-background-base)",
+          subtle: "var(--color-background-subtle)",
+          cream: "var(--color-background-cream)",
+          blue: "var(--color-background-blue)",
+        },
+
+        // Border colors
+        border: {
+          base: "var(--color-border-base)",
+          subtle: "var(--color-border-subtle)",
+          strong: "var(--color-border-strong)",
+        },
+
+        // Status colors
+        success: {
+          DEFAULT: "var(--color-success)",
+          light: "var(--color-success-light)",
+        },
+        warning: {
+          DEFAULT: "var(--color-warning)",
+          light: "var(--color-warning-light)",
+        },
+        error: {
+          DEFAULT: "var(--color-error)",
+          light: "var(--color-error-light)",
+        },
+        info: {
+          DEFAULT: "var(--color-info)",
+          light: "var(--color-info-light)",
+        },
+
+        // Service type colors
+        service: {
+          website: "var(--color-service-website)",
+          "website-light": "var(--color-service-website-light)",
+          gbp: "var(--color-service-gbp)",
+          "gbp-light": "var(--color-service-gbp-light)",
+          seo: "var(--color-service-seo)",
+          "seo-light": "var(--color-service-seo-light)",
         },
       },
-      boxShadow: {
-        xl: "0 10px 40px -10px rgba(31,45,61,.12), 0 2px 8px rgba(31,45,61,.06)",
-        "outline-primary": "0 0 0 3px rgba(245, 107, 42, 0.25)",
-      },
-      borderWidth: { 3: "3px", 6: "6px" },
-      zIndex: { 60: "60" },
 
-      typography: (theme) => ({
+      fontFamily: {
+        heading: "var(--font-heading)",
+        body: "var(--font-body)",
+      },
+
+      fontSize: {
+        xs: ["var(--text-xs)", { lineHeight: "var(--leading-normal)" }],
+        sm: ["var(--text-sm)", { lineHeight: "var(--leading-normal)" }],
+        base: ["var(--text-base)", { lineHeight: "var(--leading-relaxed)" }],
+        lg: ["var(--text-lg)", { lineHeight: "var(--leading-normal)" }],
+        xl: ["var(--text-xl)", { lineHeight: "var(--leading-snug)" }],
+        "2xl": ["var(--text-2xl)", { lineHeight: "var(--leading-snug)" }],
+        "3xl": ["var(--text-3xl)", { lineHeight: "var(--leading-snug)" }],
+        "4xl": ["var(--text-4xl)", { lineHeight: "var(--leading-tight)" }],
+        "5xl": ["var(--text-5xl)", { lineHeight: "var(--leading-tight)" }],
+        "6xl": ["var(--text-6xl)", { lineHeight: "var(--leading-tight)" }],
+      },
+
+      spacing: {
+        xs: "var(--space-xs)",
+        sm: "var(--space-sm)",
+        md: "var(--space-md)",
+        lg: "var(--space-lg)",
+        xl: "var(--space-xl)",
+        "2xl": "var(--space-2xl)",
+        "3xl": "var(--space-3xl)",
+        "4xl": "var(--space-4xl)",
+      },
+
+      borderRadius: {
+        sm: "var(--radius-sm)",
+        md: "var(--radius-md)",
+        lg: "var(--radius-lg)",
+        xl: "var(--radius-xl)",
+        "2xl": "var(--radius-2xl)",
+        "3xl": "var(--radius-3xl)",
+        full: "var(--radius-full)",
+        card: "var(--radius-card)",
+        button: "var(--radius-button)",
+        input: "var(--radius-input)",
+        badge: "var(--radius-badge)",
+      },
+
+      boxShadow: {
+        xs: "var(--shadow-xs)",
+        sm: "var(--shadow-sm)",
+        md: "var(--shadow-md)",
+        lg: "var(--shadow-lg)",
+        xl: "var(--shadow-xl)",
+        "2xl": "var(--shadow-2xl)",
+        primary: "var(--shadow-primary)",
+        "primary-lg": "var(--shadow-primary-lg)",
+      },
+
+      transitionDuration: {
+        fast: "var(--transition-fast)",
+        base: "var(--transition-base)",
+        slow: "var(--transition-slow)",
+      },
+
+      zIndex: {
+        base: "var(--z-base)",
+        dropdown: "var(--z-dropdown)",
+        sticky: "var(--z-sticky)",
+        fixed: "var(--z-fixed)",
+        "modal-backdrop": "var(--z-modal-backdrop)",
+        modal: "var(--z-modal)",
+        popover: "var(--z-popover)",
+        tooltip: "var(--z-tooltip)",
+      },
+
+      maxWidth: {
+        xs: "var(--container-xs)",
+        sm: "var(--container-sm)",
+        md: "var(--container-md)",
+        lg: "var(--container-lg)",
+        xl: "var(--container-xl)",
+        "2xl": "var(--container-2xl)",
+        prose: "var(--width-prose)",
+      },
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      typography: (_theme) => ({
         DEFAULT: {
           css: {
-            "--tw-prose-body": theme("colors.body"),
-            "--tw-prose-headings": theme("colors.heading"),
-            "--tw-prose-links": theme("colors.heading"),
-            "--tw-prose-bold": theme("colors.heading"),
-            "--tw-prose-bullets": theme("colors.body"),
+            "--tw-prose-body": "var(--color-body)",
+            "--tw-prose-headings": "var(--color-heading)",
+            "--tw-prose-links": "var(--color-heading)",
+            "--tw-prose-bold": "var(--color-heading)",
+            "--tw-prose-bullets": "var(--color-body)",
             maxWidth: "100%",
             a: {
               textDecoration: "underline",
               textDecorationThickness: "1px",
               textUnderlineOffset: "4px",
-              "&:hover": { color: theme("colors.primary") },
+              "&:hover": { color: "var(--color-primary)" },
             },
-            h1: { letterSpacing: "-0.02em", lineHeight: "1.15", marginBottom: "0.5em" },
+            h1: {
+              letterSpacing: "-0.02em",
+              lineHeight: "var(--leading-tight)",
+              marginBottom: "0.5em",
+            },
             h2: {
               letterSpacing: "-0.01em",
-              lineHeight: "1.2",
+              lineHeight: "var(--leading-snug)",
               marginTop: "1.2em",
               marginBottom: "0.6em",
             },
             h3: {
               letterSpacing: "-0.005em",
-              lineHeight: "1.25",
+              lineHeight: "var(--leading-snug)",
               marginTop: "1em",
               marginBottom: "0.5em",
             },
-            p: { lineHeight: "1.75" },
+            p: { lineHeight: "var(--leading-relaxed)" },
             ul: { marginTop: "0.75em", marginBottom: "0.75em" },
             "ul > li": { marginTop: "0.35em", marginBottom: "0.35em" },
             "code, kbd": {
-              backgroundColor: theme("colors.graylight"),
+              backgroundColor: "var(--color-background-subtle)",
               padding: "0.15em 0.35em",
-              borderRadius: "0.375rem",
+              borderRadius: "var(--radius-sm)",
             },
           },
         },
@@ -132,10 +219,10 @@ export default {
           css: {
             "--tw-prose-body": "rgba(255,255,255,0.8)",
             "--tw-prose-headings": "#fff",
-            "--tw-prose-links": theme("colors.primary"),
+            "--tw-prose-links": "var(--color-primary)",
             "--tw-prose-bold": "#fff",
             "--tw-prose-bullets": "rgba(255,255,255,0.8)",
-            a: { "&:hover": { color: theme("colors.primary-hover") } },
+            a: { "&:hover": { color: "var(--color-primary-hover)" } },
             "code, kbd": { backgroundColor: "rgba(255,255,255,0.08)" },
           },
         },
@@ -145,7 +232,8 @@ export default {
 
   plugins: [
     typographyPlugin,
-    plugin(({ addVariant, addBase, addUtilities, addComponents, theme }) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    plugin(({ addVariant, addBase, addUtilities, addComponents, theme: _theme }) => {
       addVariant("intersect", "&:not([no-intersect])");
 
       addBase({
@@ -158,124 +246,290 @@ export default {
           margin: "0",
           paddingBottom: "0",
           overflowX: "hidden",
-          backgroundColor: theme("colors.white"),
+          backgroundColor: "var(--color-background-base)",
+          fontFamily: "var(--font-body)",
+          color: "var(--color-body)",
         },
         main: { flex: "1 1 auto" },
         "#page > section:last-child": { marginBottom: "0", paddingBottom: "0" },
         footer: { marginTop: "auto" },
       });
 
-      addUtilities(
-        {
-          ".sticky-cta": {
-            position: "fixed",
-            right: "1rem",
-            bottom: "max(1rem, env(safe-area-inset-bottom))",
-            zIndex: theme("zIndex.60"),
-          },
-          ".content-scale-95": { transform: "scale(0.95)", transformOrigin: "top center" },
-          ".content-scale-90": { transform: "scale(0.90)", transformOrigin: "top center" },
+      addUtilities({
+        ".sticky-cta": {
+          position: "fixed",
+          right: "1rem",
+          bottom: "max(1rem, env(safe-area-inset-bottom))",
+          zIndex: "var(--z-fixed)",
         },
-        ["responsive"]
-      );
+      });
 
-      // Button system - single source of truth
+      // Component system - single source of truth
       addComponents({
-        // Focus ring utility
-        ".focus-ring": {
-          outline: "none",
-          "&:focus-visible": {
-            boxShadow: `0 0 0 2px white, 0 0 0 4px ${theme("colors.primary")}`,
-          },
+        // ============================================
+        // CARD COMPONENTS
+        // ============================================
+
+        ".card": {
+          backgroundColor: "var(--color-surface-base)",
+          borderRadius: "var(--radius-card)",
+          padding: "var(--space-card-padding)",
+          border: "1px solid var(--color-border-subtle)",
+          transition: "all var(--transition-base)",
         },
-        
-        // Link underline utility
-        ".link-underline": {
-          textDecorationThickness: "1px",
-          textUnderlineOffset: "4px",
-          "&:hover, &:focus, &:focus-visible": {
-            textDecoration: "underline",
+
+        ".card-elevated": {
+          backgroundColor: "var(--color-surface-raised)",
+          borderRadius: "var(--radius-card)",
+          padding: "var(--space-card-padding)",
+          boxShadow: "var(--shadow-md)",
+          border: "1px solid var(--color-border-subtle)",
+          transition: "all var(--transition-base)",
+          "&:hover": {
+            boxShadow: "var(--shadow-lg)",
+            transform: "translateY(-2px)",
           },
         },
 
-        // Base button
+        ".card-interactive": {
+          backgroundColor: "var(--color-surface-base)",
+          borderRadius: "var(--radius-card)",
+          padding: "var(--space-card-padding)",
+          border: "2px solid transparent",
+          boxShadow: "var(--shadow-sm)",
+          transition: "all var(--transition-base)",
+          cursor: "pointer",
+          "&:hover": {
+            borderColor: "var(--color-primary)",
+            boxShadow: "var(--shadow-primary)",
+            transform: "translateY(-4px)",
+          },
+        },
+
+        ".card-outlined": {
+          backgroundColor: "transparent",
+          borderRadius: "var(--radius-card)",
+          padding: "var(--space-card-padding)",
+          border: "2px solid var(--color-border-base)",
+          transition: "all var(--transition-base)",
+        },
+
+        ".card-sm": {
+          padding: "var(--space-card-padding-sm)",
+        },
+
+        // ============================================
+        // BUTTON COMPONENTS
+        // ============================================
+
         ".btn": {
           display: "inline-flex",
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: theme("borderRadius.full"),
-          fontWeight: "600",
-          transition: "all 150ms ease",
-          boxShadow: theme("boxShadow.sm"),
+          gap: "0.5rem",
+          borderRadius: "var(--radius-button)",
+          fontFamily: "var(--font-heading)",
+          fontWeight: "var(--font-semibold)",
+          transition: "all var(--transition-fast)",
           outline: "none",
-          padding: `${theme("spacing.3")} ${theme("spacing.6")}`,
-          fontSize: theme("fontSize.base")[0],
+          cursor: "pointer",
+          textDecoration: "none",
+          whiteSpace: "nowrap",
+          "&:disabled": {
+            opacity: "0.5",
+            cursor: "not-allowed",
+          },
+        },
+
+        ".btn-sm": {
+          padding: "0.5rem 1rem",
+          fontSize: "var(--text-sm)",
           lineHeight: "1.5",
-          "&:focus-visible": {
-            boxShadow: `0 0 0 2px white, 0 0 0 4px ${theme("colors.primary")}`,
-          },
         },
-        
-        // Size variants
-        ".btn-sm": { 
-          padding: `${theme("spacing.2")} ${theme("spacing.4")}`,
-          fontSize: "14px",
-          lineHeight: "22px",
+
+        ".btn-md": {
+          padding: "0.75rem 1.5rem",
+          fontSize: "var(--text-base)",
+          lineHeight: "1.5",
         },
-        ".btn-md": { 
-          padding: `0.625rem ${theme("spacing.5")}`,
-          fontSize: "15px",
-          lineHeight: "22px",
+
+        ".btn-lg": {
+          padding: "1rem 2rem",
+          fontSize: "var(--text-lg)",
+          lineHeight: "1.5",
         },
-        ".btn-lg": { 
-          padding: `${theme("spacing.3")} ${theme("spacing.6")}`,
-          fontSize: theme("fontSize.base")[0],
-          lineHeight: "24px",
-        },
-        
-        // Primary button
+
         ".btn-primary": {
-          backgroundColor: theme("colors.primary"),
+          backgroundColor: "var(--color-primary)",
           color: "white",
-          border: `1px solid ${theme("colors.primary")}`,
+          boxShadow: "var(--shadow-sm)",
           "&:hover": {
-            backgroundColor: theme("colors.primary-hover"),
-            borderColor: theme("colors.primary-hover"),
+            backgroundColor: "var(--color-primary-hover)",
+            boxShadow: "var(--shadow-md)",
+          },
+          "&:active": {
+            backgroundColor: "var(--color-primary-dark)",
+          },
+          "&:focus-visible": {
+            outline: "2px solid var(--color-primary)",
+            outlineOffset: "2px",
           },
         },
-        
-        // Secondary button
+
         ".btn-secondary": {
-          backgroundColor: "white",
-          color: theme("colors.secondary"),
-          border: "1px solid",
-          borderColor: theme("colors.gray.300"),
+          backgroundColor: "var(--color-secondary)",
+          color: "white",
+          boxShadow: "var(--shadow-sm)",
           "&:hover": {
-            backgroundColor: theme("colors.gray.50"),
-            borderColor: theme("colors.gray.400"),
+            backgroundColor: "var(--color-secondary-hover)",
+            boxShadow: "var(--shadow-md)",
+          },
+          "&:focus-visible": {
+            outline: "2px solid var(--color-secondary)",
+            outlineOffset: "2px",
           },
         },
-        
-        // Outline primary button
-        ".btn-outline-primary": {
-          backgroundColor: "white",
-          color: theme("colors.primary"),
-          border: `1px solid ${theme("colors.primary")}`,
+
+        ".btn-outline": {
+          backgroundColor: "transparent",
+          color: "var(--color-primary)",
+          border: "2px solid var(--color-primary)",
           "&:hover": {
-            backgroundColor: theme("colors.primary"),
+            backgroundColor: "var(--color-primary)",
             color: "white",
           },
-        },
-        
-        // Tertiary/ghost button
-        ".btn-tertiary": {
-          backgroundColor: "transparent",
-          color: theme("colors.body"),
-          border: "none",
-          boxShadow: "none",
-          "&:hover": {
-            color: theme("colors.heading"),
+          "&:focus-visible": {
+            outline: "2px solid var(--color-primary)",
+            outlineOffset: "2px",
           },
+        },
+
+        ".btn-ghost": {
+          backgroundColor: "transparent",
+          color: "var(--color-body)",
+          "&:hover": {
+            backgroundColor: "var(--color-background-subtle)",
+            color: "var(--color-heading)",
+          },
+        },
+
+        // ============================================
+        // BADGE COMPONENTS
+        // ============================================
+
+        ".badge": {
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "0.375rem",
+          padding: "0.25rem 0.75rem",
+          borderRadius: "var(--radius-badge)",
+          fontSize: "var(--text-xs)",
+          fontWeight: "var(--font-semibold)",
+          textTransform: "uppercase",
+          letterSpacing: "0.05em",
+          whiteSpace: "nowrap",
+        },
+
+        ".badge-primary": {
+          backgroundColor: "var(--color-primary-100)",
+          color: "var(--color-primary-dark)",
+        },
+
+        ".badge-success": {
+          backgroundColor: "var(--color-success-light)",
+          color: "var(--color-success)",
+        },
+
+        ".badge-info": {
+          backgroundColor: "var(--color-info-light)",
+          color: "var(--color-info)",
+        },
+
+        ".badge-website": {
+          backgroundColor: "var(--color-service-website-light)",
+          color: "var(--color-service-website)",
+        },
+
+        ".badge-gbp": {
+          backgroundColor: "var(--color-service-gbp-light)",
+          color: "var(--color-service-gbp)",
+        },
+
+        ".badge-seo": {
+          backgroundColor: "var(--color-service-seo-light)",
+          color: "var(--color-service-seo)",
+        },
+
+        // ============================================
+        // INPUT COMPONENTS
+        // ============================================
+
+        ".input": {
+          width: "100%",
+          padding: "0.75rem 1rem",
+          borderRadius: "var(--radius-input)",
+          border: "1px solid var(--color-border-base)",
+          fontSize: "var(--text-base)",
+          fontFamily: "var(--font-body)",
+          color: "var(--color-heading)",
+          backgroundColor: "var(--color-surface-base)",
+          transition: "all var(--transition-fast)",
+          outline: "none",
+          "&:hover": {
+            borderColor: "var(--color-border-strong)",
+          },
+          "&:focus": {
+            borderColor: "var(--color-primary)",
+            boxShadow: "0 0 0 3px var(--color-primary-50)",
+          },
+          "&::placeholder": {
+            color: "var(--color-muted)",
+          },
+          "&:disabled": {
+            backgroundColor: "var(--color-background-subtle)",
+            cursor: "not-allowed",
+            opacity: "0.6",
+          },
+        },
+
+        ".input-error": {
+          borderColor: "var(--color-error)",
+          "&:focus": {
+            borderColor: "var(--color-error)",
+            boxShadow: "0 0 0 3px var(--color-error-light)",
+          },
+        },
+
+        // ============================================
+        // UTILITY COMPONENTS
+        // ============================================
+
+        ".focus-ring": {
+          outline: "none",
+          "&:focus-visible": {
+            outline: "2px solid var(--color-primary)",
+            outlineOffset: "2px",
+          },
+        },
+
+        ".link-underline": {
+          textDecorationThickness: "1px",
+          textUnderlineOffset: "4px",
+          transition: "color var(--transition-fast)",
+          "&:hover": {
+            textDecoration: "underline",
+            color: "var(--color-primary)",
+          },
+        },
+
+        ".section-padding": {
+          paddingTop: "var(--space-section-padding)",
+          paddingBottom: "var(--space-section-padding)",
+        },
+
+        ".section-padding-sm": {
+          paddingTop: "var(--space-section-padding-sm)",
+          paddingBottom: "var(--space-section-padding-sm)",
         },
       });
     }),

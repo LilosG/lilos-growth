@@ -17,6 +17,11 @@ import PackagesSecondary from "../components/sections/PackagesSecondary.astro";
 ---
 
 <Layout title={title} description={description} metadata={metadata}>
+  <fragment slot="head">
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="/Lilos_Growth_Logo_Corrected.svg" type="image/svg+xml" fetchpriority="high" />
+  </fragment>
+
   <!-- HERO SECTION -->
   <section
     class="relative flex min-h-[680px] items-center overflow-hidden bg-secondary pb-20 pt-10"
@@ -33,7 +38,10 @@ import PackagesSecondary from "../components/sections/PackagesSecondary.astro";
           src="/Lilos_Growth_Logo_Corrected.svg"
           alt="Lilos Growth Logo"
           class="mb-10 w-40 logo--halo"
+          width="160"
+          height="160"
           fetchpriority="high"
+          loading="eager"
         />
         <h1
           class="mb-2 text-left font-heading text-4xl font-extrabold leading-tight tracking-tight text-white md:text-6xl"
