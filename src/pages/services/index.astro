@@ -2,7 +2,7 @@
 import Layout from "~/layouts/PageLayout.astro";
 import Button from "~/components/core/Button.astro";
 import Section from "~/components/core/Section.astro";
-import TestimonialBand from "~/components/results/TestimonialBand.astro";
+import Testimonial from "~/components/sections/Testimonial.astro";
 import TrustBand from "~/components/composed/TrustBand.astro";
 import { servicesTestimonials, servicesTrustStats, trustLogos } from "~/data/proof";
 
@@ -273,7 +273,7 @@ import PackagesSecondary from "../../components/sections/PackagesSecondary.astro
         Premium websites, GBP management, and local SEO—executed with clarity and consistency.
       </p>
     </div>
-    <TestimonialBand items={servicesTestimonials} />
+    <Testimonial items={servicesTestimonials} />
   </Section>
 
   <!-- PACKAGES (aligned buttons) -->

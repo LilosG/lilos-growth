@@ -1,0 +1,8 @@
+---
+import ComposedServiceCard from "~/components/composed/ServiceCard.astro";
+import type { Props } from "~/components/composed/ServiceCard.astro";
+
+const props = Astro.props as Props;
+---
+
+<ComposedServiceCard {...props} />

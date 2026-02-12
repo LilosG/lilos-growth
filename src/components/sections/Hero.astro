@@ -1,0 +1,15 @@
+---
+import WidgetsHero from "~/components/widgets/Hero.astro";
+
+const props = Astro.props;
+---
+
+<WidgetsHero {...props}>
+  <slot name="title" slot="title" />
+  <slot name="subtitle" slot="subtitle" />
+  <slot name="tagline" slot="tagline" />
+  <slot name="content" slot="content" />
+  <slot name="actions" slot="actions" />
+  <slot name="image" slot="image" />
+  <slot name="bg" slot="bg" />
+</WidgetsHero>

@@ -91,8 +91,10 @@
      ============================================ */
 
   /* Font Families - System fonts for fastest LCP (no external requests) */
-  --font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-heading:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   /* Font Sizes - Reduced by ~12% for professional feel */
   --text-xs: 0.625rem; /* 10px - Minimal use only */

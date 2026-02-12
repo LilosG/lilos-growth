@@ -14,6 +14,13 @@ const total = ordered.length;
 const slice = ordered.slice(0, pageSize);
 const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
+const categories = Array.from(new Set(ordered.map((entry) => entry.data.category))).sort();
+const tags = Array.from(
+  new Set(
+    ordered.flatMap((entry) => entry.data.tags ?? []).filter((tag) => tag && tag.trim().length > 0)
+  )
+).sort((a, b) => a.localeCompare(b));
+
 const pageTitle = "Blog";
 const pageDescription =
   "Latest articles on Local SEO, Google Business Profile, websites, and growth.";
@@ -86,6 +93,46 @@ const pageDescription =
           </nav>
         )
       }
+    </div>
+  </section>
+
+  <section class="border-t border-gray-100 bg-gray-50 py-10">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 lg:grid-cols-2">
+      <div>
+        <h2 class="mb-3 text-lg font-bold text-heading">Browse Categories</h2>
+        <ul class="flex flex-wrap gap-2">
+          {
+            categories.map((category) => (
+              <li>
+                <a
+                  href={`/blog/category/${encodeURIComponent(category)}`}
+                  class="inline-flex rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-body transition hover:border-primary hover:text-primary"
+                >
+                  {category}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="mb-3 text-lg font-bold text-heading">Browse Tags</h2>
+        <ul class="flex flex-wrap gap-2">
+          {
+            tags.map((tag) => (
+              <li>
+                <a
+                  href={`/blog/tag/${encodeURIComponent(tag)}`}
+                  class="inline-flex rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-body transition hover:border-primary hover:text-primary"
+                >
+                  #{tag}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </section>
 </Layout>
