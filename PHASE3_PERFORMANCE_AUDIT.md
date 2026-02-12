@@ -1,11 +1,13 @@
 # Phase 3 Performance Audit (Current State + Next Actions)
 
 ## Scope
+
 This phase reviews image weight, CSS output, and build configuration readiness for performance optimization.
 
 ## 1) Image Optimization Audit
 
 ### Largest source image assets detected
+
 Top heavy files currently in repo/public assets:
 
 1. `public/favicon.svg` — 1,828,838 bytes
@@ -16,10 +18,12 @@ Top heavy files currently in repo/public assets:
 6. `public/clients/screenshots/tamarack-restoration-full.png` — 501,936 bytes
 
 ### Key finding
+
 - The largest flagged visual assets are SVG/JPG/PNG files served from `public/` and not always routed through Astro image transforms.
 - `public/Lilos_Growth_Logo_Corrected.svg` is referenced widely and is unusually heavy for a logo.
 
 ### Optimization opportunities
+
 - Replace oversized logo SVG usage with optimized WebP/AVIF where possible for UI contexts.
 - Re-export/optimize `favicon.svg` and logo SVG (remove editor metadata/paths complexity).
 - Convert large JPEG/PNG screenshots to modern formats (WebP/AVIF) and use responsive dimensions.
@@ -27,14 +31,18 @@ Top heavy files currently in repo/public assets:
 ## 2) CSS Optimization Audit
 
 ### Built CSS output
+
 After production build, CSS bundles are:
+
 - `dist/client/_astro/privacy.CdH1mQad.css` — 118,041 bytes
 - `dist/client/_astro/index.Bsv8DXEl.css` — 19,316 bytes
 
 ### Key finding
+
 - One CSS bundle (`privacy.*.css`) is disproportionately larger than the rest and should be audited for page-specific style volume.
 
 ### Tailwind purge status
+
 - Tailwind content scanning is configured in `tailwind.config.js` with broad source globs:
   - `./src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}`
 - This indicates purge/content scanning is enabled.
@@ -42,12 +50,14 @@ After production build, CSS bundles are:
 ## 3) Build Configuration Review
 
 ### Current optimization strengths
+
 - Astro compression integration enabled (`astro-compress`) for CSS/HTML/JS/SVG.
 - Image optimization via sharp is enabled in compression integration.
 - Vercel adapter + static output pipeline is configured.
 - Markdown pipeline includes lazy image plugin.
 
 ### Risks/notes
+
 - Build emits warning: `The utility `` contains an invalid theme value and was not generated.`
   - This may indicate an invalid Tailwind class/token and should be resolved to avoid style drift.
 
@@ -64,4 +74,5 @@ After production build, CSS bundles are:
    - Trace and remove invalid utility causing build warning.
 
 ## Status
+
 Phase 3 audit completed. Ready to execute optimization changes in the next step.

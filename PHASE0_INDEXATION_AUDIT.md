@@ -9,6 +9,7 @@ This report captures the current state after `npm install` and `npm run build`. 
 - Root cause: sitemap includes blog tag/category archive pages and utility routes (`/thank-you`, `/offers/*`, `/offline`, `/privacy`) that are set to noindex.
 
 ### Full noindex-in-sitemap URL list (102)
+
 - https://lilosgrowth.com/blog/category/Announcements
 - https://lilosgrowth.com/blog/category/Announcements/1
 - https://lilosgrowth.com/blog/category/Content
@@ -113,6 +114,7 @@ This report captures the current state after `npm install` and `npm run build`. 
 - https://lilosgrowth.com/thank-you
 
 ### Should be indexed vs should stay noindex
+
 - **Should remain noindex**: `/thank-you`, `/offers/local-seo`, `/offers/local-seo-locked`, `/offline`, `/privacy`, blog tag archives (`/blog/tag/**`), blog category archives (`/blog/category/**`) if taxonomy pages are intentionally thin/utility.
 - **Should be indexed**: primary commercial pages (`/services/**`, `/packages`, `/results`, `/about`, `/contact`, `/local-seo-tools`), blog posts (`/blog/<slug>`), legal policy page (`/privacy-policy`, `/terms`) where appropriate.
 
@@ -123,6 +125,7 @@ This report captures the current state after `npm install` and `npm run build`. 
 - Existing `astro.config.ts` sitemap filter attempts to exclude some URLs but uses relative paths in `startsWith`/set checks while `@astrojs/sitemap` passes absolute URLs; this mismatch allows noindex URLs to leak into sitemap.
 
 ### Proposed sitemap fixes (not executed)
+
 1. Normalize `page` to pathname in sitemap filter (`new URL(page).pathname`) before comparisons.
 2. Exclude all routes matching noindex policy:
    - `/offers/**`
@@ -140,6 +143,7 @@ This report captures the current state after `npm install` and `npm run build`. 
 - Orphan pages detected: **62** (close alignment with Ahrefs 62).
 
 ### Full orphan URL list (62)
+
 - /blog/category/Announcements
 - /blog/category/Announcements/1
 - /blog/category/Content
@@ -204,6 +208,7 @@ This report captures the current state after `npm install` and `npm run build`. 
 - /thank-you
 
 ### Orphan categorization
+
 - **Valuable content to internally link**:
   - `/blog/tag/**` taxonomy hubs (if kept indexable in future strategy).
   - `/blog/category/**` taxonomy hubs (if kept/indexed).
@@ -212,6 +217,7 @@ This report captures the current state after `npm install` and `npm run build`. 
   - `/offers/local-seo-locked`, `/offline`, `/thank-you`, `/privacy` (keep out of crawl paths and sitemap).
 
 ### Proposed orphan resolution plan (not executed)
+
 1. Keep taxonomy pages noindex + remove from sitemap + optionally add discoverability links only for UX (blog nav/sidebar), not for indexation.
 2. If taxonomy pages should rank, reverse policy: set indexable, add links from `/blog`, posts, and nav taxonomy blocks.
 3. Keep conversion utility pages (`/thank-you`, locked offers) noindex and out of global nav/footer; optionally block via robots/disallow where appropriate.

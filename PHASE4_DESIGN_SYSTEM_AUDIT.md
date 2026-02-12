@@ -1,26 +1,32 @@
 # Phase 4 Design System & Component Audit (Findings Only)
 
 ## Scope
+
 This phase reviews visual consistency and reusable component coverage to move toward agency-grade UI system quality.
 
 ## 1) Visual Consistency Audit
 
 ### Color/token consistency
+
 - Design tokens are centralized in `src/styles/tokens.css` and mapped in Tailwind theme extensions.
 - However, multiple pages/components still use ad-hoc hex classes/inline colors (`bg-[#...]`, `hover:bg-[#...]`, `text-[#...]`) instead of tokenized utilities.
 
 Examples found:
+
 - `src/pages/offers/local-seo-locked.astro` uses `hover:bg-[#c9400a]`.
 - `src/pages/offers/local-seo.astro` uses `hover:bg-[#c9400a]`.
 - `src/pages/about.astro` uses `text-[#f6b100]` and a hex hover background.
 - `src/components/widgets/Footer.astro` uses `bg-[#fff4ed]` and a custom shadow token inline.
 
 ### Typography/spacing consistency
+
 - Global typography/spacing tokens exist and are integrated into Tailwind (`tailwind.config.js` + `tokens.css`).
 - Still, there is mixed usage of bespoke utility values and one-off class patterns in some legacy page sections.
 
 ### Inline style usage (anti-pattern hotspots)
+
 Inline styles still appear in active code:
+
 - `src/pages/contact.astro` (iframe sizing)
 - `src/components/PromoPackageCard.astro`
 - `src/components/PackageCardMini.astro`
@@ -32,6 +38,7 @@ Inline styles still appear in active code:
 ## 2) Reusable Component Library Audit
 
 Requested component set status:
+
 - ✅ `src/components/ui/Button.astro` exists
 - ❌ `src/components/ui/Card.astro` missing
 - ❌ `src/components/sections/Hero.astro` missing
@@ -40,6 +47,7 @@ Requested component set status:
 - ❌ `src/components/sections/Testimonial.astro` missing
 
 Current overlap indicates partial equivalents already exist:
+
 - `src/components/core/Card.astro` (base card)
 - `src/components/composed/ServiceCard.astro` (service card)
 - `src/components/widgets/Hero.astro` (hero section)
@@ -60,4 +68,5 @@ Current overlap indicates partial equivalents already exist:
 5. Define and document the canonical layering rule (`core` base, `ui` primitives, `sections` page blocks).
 
 ## Status
+
 Phase 4 audit completed. Ready to implement design-system normalization in the next step.

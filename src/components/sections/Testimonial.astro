@@ -1,7 +1,12 @@
 ---
 import TestimonialBand from "~/components/results/TestimonialBand.astro";
+import type { Testimonial } from "~/data/results";
 
-const props = Astro.props;
+interface Props {
+  items: Testimonial[];
+}
+
+const { items } = Astro.props as Props;
 ---
 
-<TestimonialBand {...props} />
+<TestimonialBand items={items} />

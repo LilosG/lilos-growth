@@ -78,7 +78,9 @@ const trimToMax = (value: string, maxLength: number) => {
 
 const templateValue = typeof seoProps.titleTemplate === "string" ? seoProps.titleTemplate : "%s";
 const baseTitle = typeof seoProps.title === "string" ? seoProps.title : "";
-const renderedTitle = templateValue.includes("%s") ? templateValue.replace("%s", baseTitle) : baseTitle;
+const renderedTitle = templateValue.includes("%s")
+  ? templateValue.replace("%s", baseTitle)
+  : baseTitle;
 
 if (renderedTitle.length > MAX_TITLE_LENGTH) {
   seoProps.titleTemplate = "%s";

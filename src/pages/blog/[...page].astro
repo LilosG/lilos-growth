@@ -27,7 +27,9 @@ const allOrdered = toListing(allEntries);
 const categories = Array.from(new Set(allOrdered.map((entry) => entry.data.category))).sort();
 const tags = Array.from(
   new Set(
-    allOrdered.flatMap((entry) => entry.data.tags ?? []).filter((tag) => tag && tag.trim().length > 0)
+    allOrdered
+      .flatMap((entry) => entry.data.tags ?? [])
+      .filter((tag) => tag && tag.trim().length > 0)
   )
 ).sort((a, b) => a.localeCompare(b));
 ---
@@ -240,35 +242,38 @@ const tags = Array.from(
       <div>
         <h2 class="mb-3 text-lg font-bold text-heading">Browse Categories</h2>
         <ul class="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <li>
-              <a
-                href={`/blog/category/${encodeURIComponent(category)}`}
-                class="inline-flex rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-body transition hover:border-primary hover:text-primary"
-              >
-                {category}
-              </a>
-            </li>
-          ))}
+          {
+            categories.map((category) => (
+              <li>
+                <a
+                  href={`/blog/category/${encodeURIComponent(category)}`}
+                  class="inline-flex rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-body transition hover:border-primary hover:text-primary"
+                >
+                  {category}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
 
       <div>
         <h2 class="mb-3 text-lg font-bold text-heading">Browse Tags</h2>
         <ul class="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <li>
-              <a
-                href={`/blog/tag/${encodeURIComponent(tag)}`}
-                class="inline-flex rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-body transition hover:border-primary hover:text-primary"
-              >
-                #{tag}
-              </a>
-            </li>
-          ))}
+          {
+            tags.map((tag) => (
+              <li>
+                <a
+                  href={`/blog/tag/${encodeURIComponent(tag)}`}
+                  class="inline-flex rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-body transition hover:border-primary hover:text-primary"
+                >
+                  #{tag}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
   </section>
-
 </Layout>
