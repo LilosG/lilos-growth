@@ -1,0 +1,10 @@
+---
+import CoreCard from "~/components/core/Card.astro";
+import type { Props } from "~/components/core/Card.astro";
+
+const props = Astro.props as Props;
+---
+
+<CoreCard {...props}>
+  <slot />
+</CoreCard>

@@ -21,7 +21,7 @@ const {
   twitter = {},
 } = Astro.props;
 
-const seoProps: AstroSeoProps = merge(
+let seoProps: AstroSeoProps = merge(
   {
     title: "",
     titleTemplate: "%s",
@@ -60,6 +60,34 @@ const seoProps: AstroSeoProps = merge(
     twitter: twitter,
   }
 );
+
+const MAX_TITLE_LENGTH = 60;
+const MAX_DESCRIPTION_LENGTH = 160;
+
+const trimToMax = (value: string, maxLength: number) => {
+  const normalized = value.replace(/\s+/g, " ").trim();
+  if (normalized.length <= maxLength) return normalized;
+
+  const budget = Math.max(1, maxLength - 1);
+  const clipped = normalized.slice(0, budget + 1);
+  const lastWordBoundary = clipped.lastIndexOf(" ");
+  const safe =
+    lastWordBoundary > budget * 0.6 ? clipped.slice(0, lastWordBoundary) : clipped.slice(0, budget);
+  return `${safe.trimEnd()}…`;
+};
+
+const templateValue = typeof seoProps.titleTemplate === "string" ? seoProps.titleTemplate : "%s";
+const baseTitle = typeof seoProps.title === "string" ? seoProps.title : "";
+const renderedTitle = templateValue.includes("%s") ? templateValue.replace("%s", baseTitle) : baseTitle;
+
+if (renderedTitle.length > MAX_TITLE_LENGTH) {
+  seoProps.titleTemplate = "%s";
+  seoProps.title = trimToMax(baseTitle, MAX_TITLE_LENGTH);
+}
+
+if (typeof seoProps.description === "string") {
+  seoProps.description = trimToMax(seoProps.description, MAX_DESCRIPTION_LENGTH);
+}
 ---
 
 <AstroSeo {...seoProps} />

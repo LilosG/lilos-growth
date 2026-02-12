@@ -8,7 +8,7 @@ const CACHE_VERSION = "v1";
 const CACHE_NAME = `lilos-growth-${CACHE_VERSION}`;
 
 // Assets to cache immediately on install
-const PRECACHE_ASSETS = ["/", "/offline.html", "/Lilos_Growth_Logo_Corrected.svg"];
+const PRECACHE_ASSETS = ["/", "/offline.html", "/logo-lcp-320.webp"];
 
 // Cache strategies
 const CACHE_STRATEGIES = {

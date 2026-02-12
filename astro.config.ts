@@ -30,7 +30,18 @@ export default defineConfig({
     tailwind({ applyBaseStyles: false }),
     sitemap({
       filter: (page) => {
-        if (page.startsWith("/offers/")) return false;
+        const pathname = (() => {
+          try {
+            return new URL(page).pathname;
+          } catch {
+            return page;
+          }
+        })();
+
+        if (pathname.startsWith("/offers/")) return false;
+        if (pathname.startsWith("/blog/tag/")) return false;
+        if (pathname.startsWith("/blog/category/")) return false;
+
         return !new Set([
           "/cards-preview",
           "/plans-preview",
@@ -38,7 +49,8 @@ export default defineConfig({
           "/results-refactored",
           "/offline",
           "/privacy",
-        ]).has(page);
+          "/thank-you",
+        ]).has(pathname);
       },
       customPages: ["https://lilosgrowth.com/blog"],
     }),
