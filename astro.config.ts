@@ -32,9 +32,9 @@ export default defineConfig({
       filter: (page) => {
         const pathname = (() => {
           try {
-            return new URL(page).pathname;
+            return decodeURIComponent(new URL(page, "https://lilosgrowth.com").pathname);
           } catch {
-            return page;
+            return decodeURIComponent(page);
           }
         })();
 

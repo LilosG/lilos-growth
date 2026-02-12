@@ -33,14 +33,19 @@ function removeBlocks(xml, predicate) {
   }
 
   if (removed > 0) {
-    // Clean up excess blank lines
     updated = updated.replace(/\n{3,}/g, "\n\n");
   }
 
   return { xml: updated, removed };
 }
 
-const distDir = "dist";
+function normalizeUrl(url) {
+  const u = new URL(url);
+  const pathname = decodeURIComponent(u.pathname).replace(/\/$/, "") || "/";
+  return `${u.origin}${pathname}`;
+}
+
+const distDir = "dist/client";
 const mainPath = path.join(distDir, "sitemap-0.xml");
 const blogPath = path.join(distDir, "sitemap-blog.xml");
 
@@ -56,16 +61,15 @@ const blogXml = loadXml(blogPath);
 let updatedMain = mainXml;
 let totalRemoved = 0;
 
-// 1) Remove URLs that also appear in sitemap-blog.xml (blog posts)
 if (blogXml) {
   const blogUrls = new Set(
     parseUrlBlocks(blogXml)
-      .map((u) => u.loc.trim())
+      .map((u) => normalizeUrl(u.loc.trim()))
       .filter((loc) => loc.includes("/blog/"))
   );
 
   if (blogUrls.size > 0) {
-    const result = removeBlocks(updatedMain, (loc) => blogUrls.has(loc.trim()));
+    const result = removeBlocks(updatedMain, (loc) => blogUrls.has(normalizeUrl(loc.trim())));
     updatedMain = result.xml;
     totalRemoved += result.removed;
     console.log(
@@ -78,17 +82,23 @@ if (blogXml) {
   console.log("  • sitemap-blog.xml not found, skipping blog URL dedupe.");
 }
 
-// 2) Drop a few low-priority / orphan-y utility URLs from sitemap-0.xml
 const dropList = new Set([
+  "https://lilosgrowth.com/offers/local-seo",
   "https://lilosgrowth.com/offers/local-seo-locked",
+  "https://lilosgrowth.com/offline",
   "https://lilosgrowth.com/privacy",
+  "https://lilosgrowth.com/thank-you",
   "https://lilosgrowth.com/cards-preview",
   "https://lilosgrowth.com/plans-preview",
 ]);
 
 const dropResult = removeBlocks(updatedMain, (loc) => {
-  const norm = loc.trim().replace(/\/$/, "");
-  return dropList.has(norm);
+  const norm = normalizeUrl(loc.trim());
+  return (
+    dropList.has(norm) ||
+    norm.startsWith("https://lilosgrowth.com/blog/tag/") ||
+    norm.startsWith("https://lilosgrowth.com/blog/category/")
+  );
 });
 
 updatedMain = dropResult.xml;
