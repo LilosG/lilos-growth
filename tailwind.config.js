@@ -1,5 +1,4 @@
 import plugin from "tailwindcss/plugin";
-import typographyPlugin from "@tailwindcss/typography";
 
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}"],
@@ -169,69 +168,12 @@ export default {
         lg: "var(--container-lg)",
         xl: "var(--container-xl)",
         "2xl": "var(--container-2xl)",
-        prose: "var(--width-prose)",
       },
-
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      typography: (_theme) => ({
-        DEFAULT: {
-          css: {
-            "--tw-prose-body": "var(--color-body)",
-            "--tw-prose-headings": "var(--color-heading)",
-            "--tw-prose-links": "var(--color-heading)",
-            "--tw-prose-bold": "var(--color-heading)",
-            "--tw-prose-bullets": "var(--color-body)",
-            maxWidth: "100%",
-            a: {
-              textDecoration: "underline",
-              textDecorationThickness: "1px",
-              textUnderlineOffset: "4px",
-              "&:hover": { color: "var(--color-primary)" },
-            },
-            h1: {
-              letterSpacing: "-0.02em",
-              lineHeight: "var(--leading-tight)",
-              marginBottom: "0.5em",
-            },
-            h2: {
-              letterSpacing: "-0.01em",
-              lineHeight: "var(--leading-snug)",
-              marginTop: "1.2em",
-              marginBottom: "0.6em",
-            },
-            h3: {
-              letterSpacing: "-0.005em",
-              lineHeight: "var(--leading-snug)",
-              marginTop: "1em",
-              marginBottom: "0.5em",
-            },
-            p: { lineHeight: "var(--leading-relaxed)" },
-            ul: { marginTop: "0.75em", marginBottom: "0.75em" },
-            "ul > li": { marginTop: "0.35em", marginBottom: "0.35em" },
-            "code, kbd": {
-              backgroundColor: "var(--color-background-subtle)",
-              padding: "0.15em 0.35em",
-              borderRadius: "var(--radius-sm)",
-            },
-          },
-        },
-        invert: {
-          css: {
-            "--tw-prose-body": "rgba(255,255,255,0.8)",
-            "--tw-prose-headings": "#fff",
-            "--tw-prose-links": "var(--color-primary)",
-            "--tw-prose-bold": "#fff",
-            "--tw-prose-bullets": "rgba(255,255,255,0.8)",
-            a: { "&:hover": { color: "var(--color-primary-hover)" } },
-            "code, kbd": { backgroundColor: "rgba(255,255,255,0.08)" },
-          },
-        },
-      }),
     },
   },
 
   plugins: [
-    typographyPlugin,
+    // Typography plugin removed - prose styles inlined on privacy page only
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     plugin(({ addVariant, addBase, addUtilities, addComponents, theme: _theme }) => {
       addVariant("intersect", "&:not([no-intersect])");
