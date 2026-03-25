@@ -37,6 +37,16 @@ const CLIENT_SITES = [
     url: "https://sandiegocommercialmailboxes.com",
     viewport: { width: 1200, height: 800 },
   },
+  {
+    name: "wheyland-electric",
+    url: "https://wheylandelectric.com",
+    viewport: { width: 1200, height: 800 },
+  },
+  {
+    name: "kelari-party-rentals",
+    url: "https://kelaripartyrentals.com",
+    viewport: { width: 1200, height: 800 },
+  },
 ];
 
 const OUTPUT_DIR = join(process.cwd(), "public", "clients", "screenshots");

@@ -223,6 +223,42 @@ export const resultsCaseStudies: CaseStudy[] = [
     ctaText: "View approach",
     ctaHref: "/services/google-business-profile-optimization",
   },
+  {
+    id: "wheyland-electric-carlsbad-ca",
+    title: "Wheyland Electric",
+    client: "Wheyland Electric",
+    city: "Carlsbad, CA",
+    sectorTag: "Electrician",
+    locationTag: "California",
+    serviceTypes: ["website", "gbp", "local-seo"],
+    websiteUrl: "https://wheylandelectric.com",
+    screenshot: {
+      src: "/clients/screenshots/wheyland-electric-full.png",
+      alt: "Wheyland Electric website",
+    },
+    kpis: [],
+    blurb: "",
+    ctaText: "View approach",
+    ctaHref: "/services",
+  },
+  {
+    id: "kelari-party-rentals-carlsbad-ca",
+    title: "Kelari Party Rentals",
+    client: "Kelari Party Rentals",
+    city: "Carlsbad, CA",
+    sectorTag: "Party Rentals",
+    locationTag: "California",
+    serviceTypes: ["website", "gbp", "local-seo"],
+    websiteUrl: "https://kelaripartyrentals.com",
+    screenshot: {
+      src: "/clients/screenshots/kelari-party-rentals-full.png",
+      alt: "Kelari Party Rentals website",
+    },
+    kpis: [],
+    blurb: "",
+    ctaText: "View approach",
+    ctaHref: "/services",
+  },
 ];
 
 export const caseStudies = resultsCaseStudies;
