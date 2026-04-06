@@ -116,12 +116,10 @@
         <option value="other">Other Home Service</option>
       </select>
     </div>
-
     <div class="lroi-field">
       <div class="lroi-label">City Name<span class="lroi-tip-wrap"><span class="lroi-tip-icon">i</span><span class="lroi-tip-box">The primary city you want to rank in on Google Maps.</span></span></div>
       <input type="text" id="lroi-city" placeholder="e.g., Carlsbad, San Diego, Oceanside" />
     </div>
-
     <div class="lroi-field">
       <div class="lroi-label">City Population<span class="lroi-tip-wrap"><span class="lroi-tip-icon">i</span><span class="lroi-tip-box">Used to estimate monthly local search volume for your service type.</span></span></div>
       <select id="lroi-pop">
@@ -133,7 +131,6 @@
         <option value="1m+">1M+</option>
       </select>
     </div>
-
     <div class="lroi-field-row">
       <div class="lroi-field">
         <div class="lroi-label">Average Ticket Size ($)<span class="lroi-tip-wrap"><span class="lroi-tip-icon">i</span><span class="lroi-tip-box">Your average revenue per completed job or service call.</span></span></div>
@@ -146,7 +143,6 @@
         <div class="lroi-err" id="lroi-err-jobs">Enter a valid number of jobs</div>
       </div>
     </div>
-
     <div class="lroi-field-row">
       <div class="lroi-field">
         <div class="lroi-label">% Jobs from Local Search<span class="lroi-tip-wrap"><span class="lroi-tip-icon">i</span><span class="lroi-tip-box">Rough % of current jobs that come from Google Search or Maps.</span></span></div>
@@ -159,7 +155,6 @@
         <div class="lroi-err" id="lroi-err-invest">Enter a valid dollar amount</div>
       </div>
     </div>
-
     <div class="lroi-field" style="margin-bottom:28px">
       <div class="lroi-label">Current GMB Position<span class="lroi-tip-wrap"><span class="lroi-tip-icon">i</span><span class="lroi-tip-box">Where your Google Business Profile currently ranks in Maps results.</span></span></div>
       <select id="lroi-gmb">
@@ -169,7 +164,6 @@
         <option value="16+">#16+</option>
       </select>
     </div>
-
     <button class="lroi-btn" id="lroi-calc-btn">Calculate My ROI</button>
   </div>
 
@@ -219,84 +213,124 @@
       </div>
     </div>
   </div>
-
   <div class="lroi-powered">Powered by <a href="/">Lilos Growth</a> · Helping home service businesses achieve predictable, long-term growth through SEO.</div>
 </div>
 
-<script>
+<script is:inline>
 (function(){
-  const SVC={plumbing:1.0,hvac:1.1,electrical:0.9,roofing:0.85,pest:0.8,landscaping:0.75,cleaning:0.7,gc:0.8,garage:0.65,restoration:0.6,other:0.75};
-  const SVC_LBL={plumbing:'Plumbing',hvac:'HVAC',electrical:'Electrician',roofing:'Roofing',pest:'Pest Control',landscaping:'Landscaping',cleaning:'Cleaning Services',gc:'General Contractor',garage:'Garage Door',restoration:'Restoration',other:'Home Service'};
-  const POP={u50k:280,'50-100k':520,'100-250k':980,'250-500k':1800,'500k-1m':3200,'1m+':5800};
-  const CTR={top3:.24,'4-10':.06,'11-15':.015,'16+':.003};
-  const GMB_LBL={top3:'#1–3 Map Pack','4-10':'#4–10','11-15':'#11–15','16+':'#16+'};
-  const fmt=n=>'$'+Math.round(n).toLocaleString();
+  var SVC={plumbing:1.0,hvac:1.1,electrical:0.9,roofing:0.85,pest:0.8,landscaping:0.75,cleaning:0.7,gc:0.8,garage:0.65,restoration:0.6,other:0.75};
+  var SVC_LBL={plumbing:'Plumbing',hvac:'HVAC',electrical:'Electrician',roofing:'Roofing',pest:'Pest Control',landscaping:'Landscaping',cleaning:'Cleaning Services',gc:'General Contractor',garage:'Garage Door',restoration:'Restoration',other:'Home Service'};
+  var POP={u50k:280,'50-100k':520,'100-250k':980,'250-500k':1800,'500k-1m':3200,'1m+':5800};
+  var CTR={top3:0.24,'4-10':0.06,'11-15':0.015,'16+':0.003};
+  var GMB_LBL={top3:'#1–3 Map Pack','4-10':'#4–10','11-15':'#11–15','16+':'#16+'};
+
+  function fmt(n){return '$'+Math.round(n).toLocaleString();}
+  function el(id){return document.getElementById(id);}
+  function setText(id,val){var e=el(id);if(e)e.textContent=val;}
 
   function validate(){
-    let ok=true;
-    [{id:'lroi-ticket',err:'lroi-err-ticket',check:v=>v!==''&&!isNaN(v)&&Number(v)>0},
-     {id:'lroi-jobs',err:'lroi-err-jobs',check:v=>v!==''&&!isNaN(v)&&Number(v)>0},
-     {id:'lroi-pct',err:'lroi-err-pct',check:v=>v!==''&&!isNaN(v)&&Number(v)>=0&&Number(v)<=100},
-     {id:'lroi-invest',err:'lroi-err-invest',check:v=>v!==''&&!isNaN(v)&&Number(v)>0}
-    ].forEach(f=>{
-      const el=document.getElementById(f.id);
-      const errEl=document.getElementById(f.err);
-      if(!f.check(el.value)){el.classList.add('lroi-error');errEl.style.display='block';ok=false;}
-      else{el.classList.remove('lroi-error');errEl.style.display='none';}
+    var ok=true;
+    var fields=[
+      {id:'lroi-ticket',err:'lroi-err-ticket',check:function(v){return v!==''&&!isNaN(Number(v))&&Number(v)>0;}},
+      {id:'lroi-jobs',err:'lroi-err-jobs',check:function(v){return v!==''&&!isNaN(Number(v))&&Number(v)>0;}},
+      {id:'lroi-pct',err:'lroi-err-pct',check:function(v){return v!==''&&!isNaN(Number(v))&&Number(v)>=0&&Number(v)<=100;}},
+      {id:'lroi-invest',err:'lroi-err-invest',check:function(v){return v!==''&&!isNaN(Number(v))&&Number(v)>0;}}
+    ];
+    fields.forEach(function(f){
+      var input=el(f.id);
+      var errEl=el(f.err);
+      if(!input||!errEl)return;
+      if(!f.check(input.value)){
+        input.classList.add('lroi-error');
+        errEl.style.display='block';
+        ok=false;
+      } else {
+        input.classList.remove('lroi-error');
+        errEl.style.display='none';
+      }
     });
     return ok;
   }
 
-  document.getElementById('lroi-calc-btn').addEventListener('click',function(){
-    if(!validate())return;
-    const svc=document.getElementById('lroi-service').value;
-    const city=document.getElementById('lroi-city').value.trim();
-    const pop=document.getElementById('lroi-pop').value;
-    const ticket=Number(document.getElementById('lroi-ticket').value);
-    const jobs=Number(document.getElementById('lroi-jobs').value);
-    const pct=Number(document.getElementById('lroi-pct').value);
-    const invest=Number(document.getElementById('lroi-invest').value);
-    const gmb=document.getElementById('lroi-gmb').value;
+  var calcBtn=el('lroi-calc-btn');
+  if(calcBtn){
+    calcBtn.addEventListener('click',function(){
+      if(!validate())return;
+      var svcEl=el('lroi-service');
+      var cityEl=el('lroi-city');
+      var popEl=el('lroi-pop');
+      var ticketEl=el('lroi-ticket');
+      var jobsEl=el('lroi-jobs');
+      var pctEl=el('lroi-pct');
+      var investEl=el('lroi-invest');
+      var gmbEl=el('lroi-gmb');
+      if(!svcEl||!cityEl||!popEl||!ticketEl||!jobsEl||!pctEl||!investEl||!gmbEl)return;
 
-    const searches=Math.round(POP[pop]*SVC[svc]);
-    const curVisits=Math.round(searches*CTR[gmb]);
-    const tgtVisits=Math.round(searches*CTR.top3);
-    const delta=Math.max(0,tgtVisits-curVisits);
-    const cr=Math.min(Math.max(curVisits>0?(jobs*(pct/100))/curVisits:0.08,0.03),0.18);
-    const addLeads=Math.round(delta*cr);
-    const addRevMo=addLeads*ticket;
-    const addRevYr=addRevMo*12;
-    const investYr=invest*12;
-    const roi=investYr>0?Math.round(((addRevYr-investYr)/investYr)*100):0;
-    const payback=addRevMo>0?Math.ceil(invest/addRevMo):null;
+      var svc=svcEl.value;
+      var city=cityEl.value.trim();
+      var pop=popEl.value;
+      var ticket=Number(ticketEl.value);
+      var jobs=Number(jobsEl.value);
+      var pct=Number(pctEl.value);
+      var invest=Number(investEl.value);
+      var gmb=gmbEl.value;
 
-    document.getElementById('lroi-ey').textContent=(city||'Your Market')+' · '+SVC_LBL[svc];
-    document.getElementById('lroi-r-cur').textContent=curVisits.toLocaleString();
-    document.getElementById('lroi-r-curpos').textContent='GMB '+GMB_LBL[gmb];
-    document.getElementById('lroi-r-tgt').textContent=tgtVisits.toLocaleString();
-    document.getElementById('lroi-r-del').textContent='+'+delta.toLocaleString();
-    document.getElementById('lroi-r-leads').textContent='+'+addLeads;
-    document.getElementById('lroi-r-revmo').textContent=fmt(addRevMo);
-    document.getElementById('lroi-r-revyr').textContent=fmt(addRevYr);
+      var searches=Math.round((POP[pop]||1800)*(SVC[svc]||1.0));
+      var curCTR=CTR[gmb]||0.015;
+      var curVisits=Math.round(searches*curCTR);
+      var tgtVisits=Math.round(searches*CTR.top3);
+      var delta=Math.max(0,tgtVisits-curVisits);
+      var rawCR=curVisits>0?(jobs*(pct/100))/curVisits:0.08;
+      var cr=Math.min(Math.max(rawCR,0.03),0.18);
+      var addLeads=Math.round(delta*cr);
+      var addRevMo=addLeads*ticket;
+      var addRevYr=addRevMo*12;
+      var investYr=invest*12;
+      var roi=investYr>0?Math.round(((addRevYr-investYr)/investYr)*100):0;
+      var payback=addRevMo>0?Math.ceil(invest/addRevMo):null;
 
-    const banner=document.getElementById('lroi-banner');
-    banner.className='lroi-roi-banner '+(roi>=0?'lroi-roi-pos':'lroi-roi-neg');
-    document.getElementById('lroi-r-roi').textContent=(roi>=0?'+':'')+roi.toLocaleString()+'%';
-    document.getElementById('lroi-r-detail').textContent=fmt(investYr)+'/yr invested → '+fmt(addRevYr)+'/yr in additional revenue';
-    const pb=document.getElementById('lroi-r-payback');
-    if(payback&&payback<=12){pb.style.display='inline-block';pb.textContent='Estimated payback: '+payback+' month'+(payback!==1?'s':'');}
-    else{pb.style.display='none';}
+      setText('lroi-ey',(city||'Your Market')+' · '+(SVC_LBL[svc]||svc));
+      setText('lroi-r-cur',curVisits.toLocaleString());
+      setText('lroi-r-curpos','GMB '+(GMB_LBL[gmb]||gmb));
+      setText('lroi-r-tgt',tgtVisits.toLocaleString());
+      setText('lroi-r-del','+'+delta.toLocaleString());
+      setText('lroi-r-leads','+'+addLeads);
+      setText('lroi-r-revmo',fmt(addRevMo));
+      setText('lroi-r-revyr',fmt(addRevYr));
+      setText('lroi-r-roi',(roi>=0?'+':'')+roi.toLocaleString()+'%');
+      setText('lroi-r-detail',fmt(investYr)+'/yr invested → '+fmt(addRevYr)+'/yr in additional revenue');
 
-    const res=document.getElementById('lroi-results');
-    res.style.display='block';
-    setTimeout(()=>res.scrollIntoView({behavior:'smooth',block:'start'}),50);
-  });
+      var banner=el('lroi-banner');
+      if(banner)banner.className='lroi-roi-banner '+(roi>=0?'lroi-roi-pos':'lroi-roi-neg');
 
-  ['lroi-ticket','lroi-jobs','lroi-pct','lroi-invest'].forEach(id=>{
-    document.getElementById(id).addEventListener('input',function(){
-      this.classList.remove('lroi-error');
-      document.getElementById('lroi-err-'+id.replace('lroi-','')).style.display='none';
+      var pb=el('lroi-r-payback');
+      if(pb){
+        if(payback&&payback<=12){
+          pb.style.display='inline-block';
+          pb.textContent='Estimated payback: '+payback+' month'+(payback!==1?'s':'');
+        } else {
+          pb.style.display='none';
+        }
+      }
+
+      var res=el('lroi-results');
+      if(res){
+        res.style.display='block';
+        setTimeout(function(){res.scrollIntoView({behavior:'smooth',block:'start'});},50);
+      }
     });
+  }
+
+  ['lroi-ticket','lroi-jobs','lroi-pct','lroi-invest'].forEach(function(id){
+    var input=el(id);
+    var errKey=id.replace('lroi-','');
+    var errEl=el('lroi-err-'+errKey);
+    if(input&&errEl){
+      input.addEventListener('input',function(){
+        input.classList.remove('lroi-error');
+        errEl.style.display='none';
+      });
+    }
   });
 })();
 </script>
