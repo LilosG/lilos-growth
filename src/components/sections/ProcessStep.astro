@@ -1,0 +1,49 @@
+---
+/**
+ * Process Step Component
+ *
+ * Displays a numbered step in a process or workflow.
+ * Used for "How It Works" or "Our Process" sections.
+ *
+ * @component
+ * @example
+ * <ProcessStep
+ *   number={1}
+ *   title="Keyword & Market Research"
+ *   description="We analyze your market, competitors, and customer search patterns..."
+ * />
+ */
+
+import Card from "../ui/Card.astro";
+
+export interface Props {
+  /** Step number */
+  number: number;
+  /** Step title */
+  title: string;
+  /** Step description */
+  description: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const { number, title, description, class: className = "" } = Astro.props;
+---
+
+<Card variant="elevated" as="article" class={`text-center ${className}`}>
+  <!-- Step number badge -->
+  <div
+    class="border-primary/20 mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border-2 bg-primary-50 font-heading text-lg font-bold text-primary"
+    aria-label={`Step ${number}`}
+  >
+    {number}
+  </div>
+
+  <h3 class="mb-3 font-heading text-lg font-semibold text-heading">
+    {title}
+  </h3>
+
+  <p class="text-sm leading-relaxed text-body">
+    {description}
+  </p>
+</Card>
