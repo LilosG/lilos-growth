@@ -5,12 +5,16 @@
 
 <div id="lroi-root">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap");
 
-    #lroi-root *{box-sizing:border-box;margin:0;padding:0}
+    #lroi-root * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     #lroi-root {
-      font-family: 'DM Sans', sans-serif;
+      font-family: "DM Sans", sans-serif;
       background: #f8f7f4;
       min-height: 100%;
       padding: 56px 20px 72px;
@@ -31,7 +35,7 @@
       align-items: center;
       gap: 8px;
       margin-bottom: 18px;
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: 11px;
       font-weight: 700;
       color: #f97316;
@@ -45,7 +49,7 @@
       background: #f97316;
     }
     .lroi-header h1 {
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: clamp(28px, 5vw, 42px);
       font-weight: 800;
       color: #0f1f3d;
@@ -65,10 +69,12 @@
       border: 1px solid #e8e4de;
       border-radius: 20px;
       padding: 40px;
-      box-shadow: 0 4px 24px rgba(15,31,61,0.07), 0 1px 4px rgba(15,31,61,0.04);
+      box-shadow:
+        0 4px 24px rgba(15, 31, 61, 0.07),
+        0 1px 4px rgba(15, 31, 61, 0.04);
     }
     .lroi-section-label {
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
@@ -78,7 +84,9 @@
       padding-bottom: 10px;
       border-bottom: 1px solid #f1f0ed;
     }
-    .lroi-field { margin-bottom: 22px; }
+    .lroi-field {
+      margin-bottom: 22px;
+    }
     .lroi-field-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -86,8 +94,12 @@
       margin-bottom: 22px;
     }
     @media (max-width: 500px) {
-      .lroi-field-row { grid-template-columns: 1fr; }
-      .lroi-card { padding: 28px 22px; }
+      .lroi-field-row {
+        grid-template-columns: 1fr;
+      }
+      .lroi-card {
+        padding: 28px 22px;
+      }
     }
     .lroi-label {
       display: flex;
@@ -99,7 +111,10 @@
       margin-bottom: 8px;
       letter-spacing: 0.01em;
     }
-    .lroi-tip-wrap { position: relative; display: inline-flex; }
+    .lroi-tip-wrap {
+      position: relative;
+      display: inline-flex;
+    }
     .lroi-tip-icon {
       width: 16px;
       height: 16px;
@@ -116,7 +131,10 @@
       user-select: none;
       transition: background 0.15s;
     }
-    .lroi-tip-wrap:hover .lroi-tip-icon { background: #e2e8f0; color: #475569; }
+    .lroi-tip-wrap:hover .lroi-tip-icon {
+      background: #e2e8f0;
+      color: #475569;
+    }
     .lroi-tip-box {
       display: none;
       position: absolute;
@@ -131,10 +149,10 @@
       width: 210px;
       z-index: 30;
       pointer-events: none;
-      box-shadow: 0 4px 16px rgba(15,31,61,0.2);
+      box-shadow: 0 4px 16px rgba(15, 31, 61, 0.2);
     }
     .lroi-tip-box::before {
-      content: '';
+      content: "";
       position: absolute;
       left: -5px;
       top: 12px;
@@ -143,8 +161,12 @@
       background: #0f1f3d;
       transform: rotate(45deg);
     }
-    .lroi-tip-wrap:hover .lroi-tip-box { display: block; }
-    .lroi-input-wrap { position: relative; }
+    .lroi-tip-wrap:hover .lroi-tip-box {
+      display: block;
+    }
+    .lroi-input-wrap {
+      position: relative;
+    }
     .lroi-prefix {
       position: absolute;
       left: 13px;
@@ -171,7 +193,7 @@
       width: 100%;
       padding: 12px 14px;
       font-size: 14.5px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: "DM Sans", sans-serif;
       font-weight: 500;
       border: 1.5px solid #e8e4de;
       border-radius: 10px;
@@ -180,18 +202,28 @@
       outline: none;
       appearance: none;
       -webkit-appearance: none;
-      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+      transition:
+        border-color 0.15s,
+        box-shadow 0.15s,
+        background 0.15s;
     }
     #lroi-root input[type="text"]:focus,
     #lroi-root input[type="number"]:focus,
     #lroi-root select:focus {
       border-color: #0f1f3d;
       background: #fff;
-      box-shadow: 0 0 0 3px rgba(15,31,61,0.08);
+      box-shadow: 0 0 0 3px rgba(15, 31, 61, 0.08);
     }
-    #lroi-root input.lroi-has-prefix { padding-left: 28px; }
-    #lroi-root input.lroi-has-suffix { padding-right: 34px; }
-    #lroi-root input.lroi-error { border-color: #fca5a5; background: #fef9f9; }
+    #lroi-root input.lroi-has-prefix {
+      padding-left: 28px;
+    }
+    #lroi-root input.lroi-has-suffix {
+      padding-right: 34px;
+    }
+    #lroi-root input.lroi-error {
+      border-color: #fca5a5;
+      background: #fef9f9;
+    }
     .lroi-err {
       font-size: 11.5px;
       color: #dc2626;
@@ -211,26 +243,36 @@
       padding: 16px;
       font-size: 15px;
       font-weight: 700;
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       background: #f97316;
       color: #fff;
       border: none;
       border-radius: 12px;
       cursor: pointer;
       letter-spacing: 0.03em;
-      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
-      box-shadow: 0 4px 16px rgba(249,115,22,0.3);
+      transition:
+        background 0.15s,
+        transform 0.1s,
+        box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
       margin-top: 6px;
     }
-    .lroi-btn:hover { background: #ea6c0a; box-shadow: 0 6px 20px rgba(249,115,22,0.38); transform: translateY(-1px); }
-    .lroi-btn:active { transform: scale(0.99) translateY(0); box-shadow: none; }
+    .lroi-btn:hover {
+      background: #ea6c0a;
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.38);
+      transform: translateY(-1px);
+    }
+    .lroi-btn:active {
+      transform: scale(0.99) translateY(0);
+      box-shadow: none;
+    }
     .lroi-results {
       margin-top: 28px;
       background: #fff;
       border: 1px solid #e8e4de;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 4px 24px rgba(15,31,61,0.07);
+      box-shadow: 0 4px 24px rgba(15, 31, 61, 0.07);
       display: none;
     }
     .lroi-results-hd {
@@ -240,33 +282,35 @@
       overflow: hidden;
     }
     .lroi-results-hd::after {
-      content: '';
+      content: "";
       position: absolute;
       top: -40px;
       right: -40px;
       width: 160px;
       height: 160px;
       border-radius: 50%;
-      background: rgba(249,115,22,0.08);
+      background: rgba(249, 115, 22, 0.08);
     }
     .lroi-results-ey {
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: 11px;
       font-weight: 600;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255, 255, 255, 0.45);
       text-transform: uppercase;
       letter-spacing: 0.1em;
       margin-bottom: 4px;
     }
     .lroi-results-ti {
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: 19px;
       font-weight: 700;
       color: #fff;
     }
-    .lroi-results-bd { padding: 32px; }
+    .lroi-results-bd {
+      padding: 32px;
+    }
     .lroi-sec-label {
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: 10px;
       font-weight: 700;
       color: #94a3b8;
@@ -281,72 +325,150 @@
       margin-bottom: 28px;
     }
     @media (max-width: 500px) {
-      .lroi-traffic { grid-template-columns: 1fr; gap: 10px; }
-      .lroi-arrow { display: none; }
+      .lroi-traffic {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .lroi-arrow {
+        display: none;
+      }
     }
-    .lroi-tbox { border-radius: 12px; padding: 16px 12px; text-align: center; border: 1.5px solid; }
-    .lroi-tbox-cur { background: #f8f7f4; border-color: #e8e4de; }
-    .lroi-tbox-tgt { background: #eff6ff; border-color: #bfdbfe; }
-    .lroi-tbox-del { background: #f0fdf4; border-color: #86efac; }
+    .lroi-tbox {
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+      border: 1.5px solid;
+    }
+    .lroi-tbox-cur {
+      background: #f8f7f4;
+      border-color: #e8e4de;
+    }
+    .lroi-tbox-tgt {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+    .lroi-tbox-del {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
     .lroi-tbox-lbl {
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: 9.5px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       margin-bottom: 6px;
     }
-    .lroi-tbox-cur .lroi-tbox-lbl { color: #94a3b8; }
-    .lroi-tbox-tgt .lroi-tbox-lbl { color: #3b82f6; }
-    .lroi-tbox-del .lroi-tbox-lbl { color: #16a34a; }
+    .lroi-tbox-cur .lroi-tbox-lbl {
+      color: #94a3b8;
+    }
+    .lroi-tbox-tgt .lroi-tbox-lbl {
+      color: #3b82f6;
+    }
+    .lroi-tbox-del .lroi-tbox-lbl {
+      color: #16a34a;
+    }
     .lroi-tbox-num {
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: 26px;
       font-weight: 800;
       line-height: 1;
       letter-spacing: -0.02em;
     }
-    .lroi-tbox-cur .lroi-tbox-num { color: #64748b; }
-    .lroi-tbox-tgt .lroi-tbox-num { color: #1d4ed8; }
-    .lroi-tbox-del .lroi-tbox-num { color: #16a34a; }
-    .lroi-tbox-sub { font-size: 10px; margin-top: 5px; }
-    .lroi-tbox-cur .lroi-tbox-sub { color: #94a3b8; }
-    .lroi-tbox-tgt .lroi-tbox-sub { color: #3b82f6; }
-    .lroi-tbox-del .lroi-tbox-sub { color: #16a34a; }
-    .lroi-arrow { text-align: center; color: #cbd5e1; font-size: 16px; }
-    .lroi-divider { height: 1px; background: #f1f0ed; margin: 0 0 24px; }
+    .lroi-tbox-cur .lroi-tbox-num {
+      color: #64748b;
+    }
+    .lroi-tbox-tgt .lroi-tbox-num {
+      color: #1d4ed8;
+    }
+    .lroi-tbox-del .lroi-tbox-num {
+      color: #16a34a;
+    }
+    .lroi-tbox-sub {
+      font-size: 10px;
+      margin-top: 5px;
+    }
+    .lroi-tbox-cur .lroi-tbox-sub {
+      color: #94a3b8;
+    }
+    .lroi-tbox-tgt .lroi-tbox-sub {
+      color: #3b82f6;
+    }
+    .lroi-tbox-del .lroi-tbox-sub {
+      color: #16a34a;
+    }
+    .lroi-arrow {
+      text-align: center;
+      color: #cbd5e1;
+      font-size: 16px;
+    }
+    .lroi-divider {
+      height: 1px;
+      background: #f1f0ed;
+      margin: 0 0 24px;
+    }
     .lroi-metrics {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       margin-bottom: 24px;
     }
-    @media (max-width: 420px) { .lroi-metrics { grid-template-columns: 1fr; } }
-    .lroi-mc { text-align: center; border-radius: 12px; padding: 18px 10px; border: 1.5px solid; }
-    .lroi-mc-n { background: #f8f7f4; border-color: #e8e4de; }
-    .lroi-mc-h { background: #0f1f3d; border-color: #0f1f3d; }
+    @media (max-width: 420px) {
+      .lroi-metrics {
+        grid-template-columns: 1fr;
+      }
+    }
+    .lroi-mc {
+      text-align: center;
+      border-radius: 12px;
+      padding: 18px 10px;
+      border: 1.5px solid;
+    }
+    .lroi-mc-n {
+      background: #f8f7f4;
+      border-color: #e8e4de;
+    }
+    .lroi-mc-h {
+      background: #0f1f3d;
+      border-color: #0f1f3d;
+    }
     .lroi-mc-lbl {
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: 9.5px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       margin-bottom: 7px;
     }
-    .lroi-mc-n .lroi-mc-lbl { color: #94a3b8; }
-    .lroi-mc-h .lroi-mc-lbl { color: rgba(255,255,255,0.5); }
+    .lroi-mc-n .lroi-mc-lbl {
+      color: #94a3b8;
+    }
+    .lroi-mc-h .lroi-mc-lbl {
+      color: rgba(255, 255, 255, 0.5);
+    }
     .lroi-mc-val {
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: 24px;
       font-weight: 800;
       line-height: 1;
       letter-spacing: -0.02em;
     }
-    .lroi-mc-n .lroi-mc-val { color: #1a1a2e; }
-    .lroi-mc-h .lroi-mc-val { color: #fff; }
-    .lroi-mc-sub { font-size: 10px; margin-top: 5px; }
-    .lroi-mc-n .lroi-mc-sub { color: #94a3b8; }
-    .lroi-mc-h .lroi-mc-sub { color: rgba(255,255,255,0.4); }
+    .lroi-mc-n .lroi-mc-val {
+      color: #1a1a2e;
+    }
+    .lroi-mc-h .lroi-mc-val {
+      color: #fff;
+    }
+    .lroi-mc-sub {
+      font-size: 10px;
+      margin-top: 5px;
+    }
+    .lroi-mc-n .lroi-mc-sub {
+      color: #94a3b8;
+    }
+    .lroi-mc-h .lroi-mc-sub {
+      color: rgba(255, 255, 255, 0.4);
+    }
     .lroi-roi-banner {
       border-radius: 16px;
       padding: 28px 24px;
@@ -354,30 +476,52 @@
       margin-bottom: 24px;
       border: 1.5px solid;
     }
-    .lroi-roi-pos { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-color: #86efac; }
-    .lroi-roi-neg { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border-color: #fca5a5; }
+    .lroi-roi-pos {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border-color: #86efac;
+    }
+    .lroi-roi-neg {
+      background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+      border-color: #fca5a5;
+    }
     .lroi-roi-ey {
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       margin-bottom: 8px;
     }
-    .lroi-roi-pos .lroi-roi-ey { color: #16a34a; }
-    .lroi-roi-neg .lroi-roi-ey { color: #dc2626; }
+    .lroi-roi-pos .lroi-roi-ey {
+      color: #16a34a;
+    }
+    .lroi-roi-neg .lroi-roi-ey {
+      color: #dc2626;
+    }
     .lroi-roi-num {
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: clamp(52px, 10vw, 72px);
       font-weight: 800;
       line-height: 1;
       letter-spacing: -0.03em;
     }
-    .lroi-roi-pos .lroi-roi-num { color: #15803d; }
-    .lroi-roi-neg .lroi-roi-num { color: #dc2626; }
-    .lroi-roi-detail { font-size: 13px; margin-top: 10px; line-height: 1.5; }
-    .lroi-roi-pos .lroi-roi-detail { color: #166534; }
-    .lroi-roi-neg .lroi-roi-detail { color: #991b1b; }
+    .lroi-roi-pos .lroi-roi-num {
+      color: #15803d;
+    }
+    .lroi-roi-neg .lroi-roi-num {
+      color: #dc2626;
+    }
+    .lroi-roi-detail {
+      font-size: 13px;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+    .lroi-roi-pos .lroi-roi-detail {
+      color: #166534;
+    }
+    .lroi-roi-neg .lroi-roi-detail {
+      color: #991b1b;
+    }
     .lroi-payback {
       display: none;
       margin-top: 12px;
@@ -386,7 +530,7 @@
       color: #15803d;
       font-size: 12px;
       font-weight: 700;
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       padding: 5px 16px;
       border-radius: 20px;
       letter-spacing: 0.02em;
@@ -398,39 +542,74 @@
       margin-bottom: 24px;
       line-height: 1.65;
     }
-    .lroi-cta { text-align: center; }
+    .lroi-cta {
+      text-align: center;
+    }
     .lroi-cta-link {
       display: inline-block;
       background: #f97316;
       color: #fff;
       font-weight: 700;
-      font-family: 'Sora', sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: 14.5px;
       padding: 15px 36px;
       border-radius: 12px;
       text-decoration: none;
       letter-spacing: 0.03em;
-      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
-      box-shadow: 0 4px 16px rgba(249,115,22,0.28);
+      transition:
+        background 0.15s,
+        transform 0.1s,
+        box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(249, 115, 22, 0.28);
     }
-    .lroi-cta-link:hover { background: #ea6c0a; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(249,115,22,0.36); text-decoration: none; }
-    .lroi-cta-sub { font-size: 12px; color: #94a3b8; margin-top: 12px; }
-    .lroi-powered { text-align: center; font-size: 12px; color: #94a3b8; margin-top: 24px; }
-    .lroi-powered a { color: #f97316; font-weight: 600; text-decoration: none; }
-    .lroi-powered a:hover { text-decoration: underline; }
+    .lroi-cta-link:hover {
+      background: #ea6c0a;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.36);
+      text-decoration: none;
+    }
+    .lroi-cta-sub {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 12px;
+    }
+    .lroi-powered {
+      text-align: center;
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 24px;
+    }
+    .lroi-powered a {
+      color: #f97316;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .lroi-powered a:hover {
+      text-decoration: underline;
+    }
   </style>
 
   <div class="lroi-inner">
     <div class="lroi-header">
-      <div class="lroi-eyebrow"><span class="lroi-dot"></span>Lilos Growth<span class="lroi-dot"></span></div>
+      <div class="lroi-eyebrow">
+        <span class="lroi-dot"></span>Lilos Growth<span class="lroi-dot"></span>
+      </div>
       <h1>Local SEO ROI Calculator</h1>
-      <p>Discover your potential return on investment from local SEO. Enter your business details below to see realistic projections for your market.</p>
+      <p>
+        Discover your potential return on investment from local SEO. Enter your business details
+        below to see realistic projections for your market.
+      </p>
     </div>
 
     <div class="lroi-card">
       <div class="lroi-section-label">Business Details</div>
       <div class="lroi-field">
-        <div class="lroi-label">Service Type<span class="lroi-tip-wrap"><span class="lroi-tip-icon">i</span><span class="lroi-tip-box">Your primary home service trade — affects estimated local search volume.</span></span></div>
+        <div class="lroi-label">
+          Service Type<span class="lroi-tip-wrap"
+            ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
+              >Your primary home service trade — affects estimated local search volume.</span
+            ></span>
+        </div>
         <select id="lroi-service">
           <option value="plumbing">Plumbing</option>
           <option value="hvac">HVAC</option>
@@ -447,11 +626,21 @@
       </div>
       <div class="lroi-field-row">
         <div class="lroi-field">
-          <div class="lroi-label">City Name<span class="lroi-tip-wrap"><span class="lroi-tip-icon">i</span><span class="lroi-tip-box">The primary city you want to rank in on Google Maps.</span></span></div>
+          <div class="lroi-label">
+            City Name<span class="lroi-tip-wrap"
+              ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
+                >The primary city you want to rank in on Google Maps.</span
+              ></span>
+          </div>
           <input type="text" id="lroi-city" placeholder="e.g., Carlsbad, San Diego" />
         </div>
         <div class="lroi-field">
-          <div class="lroi-label">City Population<span class="lroi-tip-wrap"><span class="lroi-tip-icon">i</span><span class="lroi-tip-box">Used to estimate monthly local search volume for your service type.</span></span></div>
+          <div class="lroi-label">
+            City Population<span class="lroi-tip-wrap"
+              ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
+                >Used to estimate monthly local search volume for your service type.</span
+              ></span>
+          </div>
           <select id="lroi-pop">
             <option value="u50k">Under 50k</option>
             <option value="50-100k">50k – 100k</option>
@@ -465,30 +654,82 @@
       <div class="lroi-section-label" style="margin-top:8px">Revenue & Investment</div>
       <div class="lroi-field-row">
         <div class="lroi-field">
-          <div class="lroi-label">Average Ticket Size ($)<span class="lroi-tip-wrap"><span class="lroi-tip-icon">i</span><span class="lroi-tip-box">Your average revenue per completed job or service call.</span></span></div>
-          <div class="lroi-input-wrap"><span class="lroi-prefix">$</span><input type="number" id="lroi-ticket" class="lroi-has-prefix" placeholder="e.g., 850" min="1" /></div>
+          <div class="lroi-label">
+            Average Ticket Size ($)<span class="lroi-tip-wrap"
+              ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
+                >Your average revenue per completed job or service call.</span
+              ></span>
+          </div>
+          <div class="lroi-input-wrap">
+            <span class="lroi-prefix">$</span><input
+              type="number"
+              id="lroi-ticket"
+              class="lroi-has-prefix"
+              placeholder="e.g., 850"
+              min="1"
+            />
+          </div>
           <div class="lroi-err" id="lroi-err-ticket">Enter a valid dollar amount</div>
         </div>
         <div class="lroi-field">
-          <div class="lroi-label">Current Monthly Jobs<span class="lroi-tip-wrap"><span class="lroi-tip-icon">i</span><span class="lroi-tip-box">Total jobs your business closes per month from all sources.</span></span></div>
-          <div class="lroi-input-wrap"><input type="number" id="lroi-jobs" placeholder="e.g., 40" min="1" /></div>
+          <div class="lroi-label">
+            Current Monthly Jobs<span class="lroi-tip-wrap"
+              ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
+                >Total jobs your business closes per month from all sources.</span
+              ></span>
+          </div>
+          <div class="lroi-input-wrap">
+            <input type="number" id="lroi-jobs" placeholder="e.g., 40" min="1" />
+          </div>
           <div class="lroi-err" id="lroi-err-jobs">Enter a valid number of jobs</div>
         </div>
       </div>
       <div class="lroi-field-row">
         <div class="lroi-field">
-          <div class="lroi-label">% Jobs from Local Search<span class="lroi-tip-wrap"><span class="lroi-tip-icon">i</span><span class="lroi-tip-box">Rough % of current jobs that come from Google Search or Maps.</span></span></div>
-          <div class="lroi-input-wrap"><input type="number" id="lroi-pct" class="lroi-has-suffix" placeholder="e.g., 35" min="0" max="100" /><span class="lroi-suffix">%</span></div>
+          <div class="lroi-label">
+            % Jobs from Local Search<span class="lroi-tip-wrap"
+              ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
+                >Rough % of current jobs that come from Google Search or Maps.</span
+              ></span>
+          </div>
+          <div class="lroi-input-wrap">
+            <input
+              type="number"
+              id="lroi-pct"
+              class="lroi-has-suffix"
+              placeholder="e.g., 35"
+              min="0"
+              max="100"
+            /><span class="lroi-suffix">%</span>
+          </div>
           <div class="lroi-err" id="lroi-err-pct">Enter a value between 0 and 100</div>
         </div>
         <div class="lroi-field">
-          <div class="lroi-label">Monthly SEO Investment ($)<span class="lroi-tip-wrap"><span class="lroi-tip-icon">i</span><span class="lroi-tip-box">Your planned monthly spend on local SEO services.</span></span></div>
-          <div class="lroi-input-wrap"><span class="lroi-prefix">$</span><input type="number" id="lroi-invest" class="lroi-has-prefix" placeholder="e.g., 699" min="1" /></div>
+          <div class="lroi-label">
+            Monthly SEO Investment ($)<span class="lroi-tip-wrap"
+              ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
+                >Your planned monthly spend on local SEO services.</span
+              ></span>
+          </div>
+          <div class="lroi-input-wrap">
+            <span class="lroi-prefix">$</span><input
+              type="number"
+              id="lroi-invest"
+              class="lroi-has-prefix"
+              placeholder="e.g., 699"
+              min="1"
+            />
+          </div>
           <div class="lroi-err" id="lroi-err-invest">Enter a valid dollar amount</div>
         </div>
       </div>
       <div class="lroi-field" style="margin-bottom:32px">
-        <div class="lroi-label">Current GMB Position<span class="lroi-tip-wrap"><span class="lroi-tip-icon">i</span><span class="lroi-tip-box">Where your Google Business Profile currently ranks in Maps results.</span></span></div>
+        <div class="lroi-label">
+          Current GMB Position<span class="lroi-tip-wrap"
+            ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
+              >Where your Google Business Profile currently ranks in Maps results.</span
+            ></span>
+        </div>
         <select id="lroi-gmb">
           <option value="top3">#1–3 (Map Pack)</option>
           <option value="4-10">#4–10</option>
@@ -550,64 +791,188 @@
           <div class="lroi-roi-detail" id="lroi-r-detail">—</div>
           <div class="lroi-payback" id="lroi-r-payback">—</div>
         </div>
-        <p class="lroi-disclaimer">Projections are estimates based on industry GMB click-through data and your inputs. Actual results vary by market, competition, website quality, and execution.</p>
+        <p class="lroi-disclaimer">
+          Projections are estimates based on industry GMB click-through data and your inputs. Actual
+          results vary by market, competition, website quality, and execution.
+        </p>
         <div class="lroi-cta">
           <a class="lroi-cta-link" href="/contact#book">Book a Free Strategy Call →</a>
-          <div class="lroi-cta-sub">Lilos Growth · Local SEO for Home Service Businesses · Carlsbad, CA</div>
+          <div class="lroi-cta-sub">
+            Lilos Growth · Local SEO for Home Service Businesses · Carlsbad, CA
+          </div>
         </div>
       </div>
     </div>
-    <div class="lroi-powered">Powered by <a href="/">Lilos Growth</a> · Helping home service businesses achieve predictable, long-term growth through SEO.</div>
+    <div class="lroi-powered">
+      Powered by <a href="/">Lilos Growth</a> · Helping home service businesses achieve predictable,
+      long-term growth through SEO.
+    </div>
   </div>
 
   <script is:inline>
-    (function(){
-      var SVC={plumbing:1.0,hvac:1.1,electrical:0.9,roofing:0.85,pest:0.8,landscaping:0.75,cleaning:0.7,gc:0.8,garage:0.65,restoration:0.6,other:0.75};
-      var SVC_LBL={plumbing:"Plumbing",hvac:"HVAC",electrical:"Electrician",roofing:"Roofing",pest:"Pest Control",landscaping:"Landscaping",cleaning:"Cleaning Services",gc:"General Contractor",garage:"Garage Door",restoration:"Restoration",other:"Home Service"};
-      var POP={u50k:280,"50-100k":520,"100-250k":980,"250-500k":1800,"500k-1m":3200,"1m+":5800};
-      var CTR={top3:0.24,"4-10":0.06,"11-15":0.015,"16+":0.003};
-      var GMB_LBL={top3:"#1–3 Map Pack","4-10":"#4–10","11-15":"#11–15","16+":"#16+"};
-      function fmt(n){return"$"+Math.round(n).toLocaleString();}
-      function el(id){return document.getElementById(id);}
-      function setText(id,val){var e=el(id);if(e)e.textContent=val;}
-      function validate(){
-        var ok=true;
-        [{id:"lroi-ticket",err:"lroi-err-ticket",check:function(v){return v!=""&&!isNaN(+v)&&+v>0;}},{id:"lroi-jobs",err:"lroi-err-jobs",check:function(v){return v!=""&&!isNaN(+v)&&+v>0;}},{id:"lroi-pct",err:"lroi-err-pct",check:function(v){return v!=""&&!isNaN(+v)&&+v>=0&&+v<=100;}},{id:"lroi-invest",err:"lroi-err-invest",check:function(v){return v!=""&&!isNaN(+v)&&+v>0;}}].forEach(function(f){
-          var inp=el(f.id),errEl=el(f.err);if(!inp||!errEl)return;
-          if(!f.check(inp.value)){inp.classList.add("lroi-error");errEl.style.display="block";ok=false;}
-          else{inp.classList.remove("lroi-error");errEl.style.display="none";}
+    (function () {
+      var SVC = {
+        plumbing: 1.0,
+        hvac: 1.1,
+        electrical: 0.9,
+        roofing: 0.85,
+        pest: 0.8,
+        landscaping: 0.75,
+        cleaning: 0.7,
+        gc: 0.8,
+        garage: 0.65,
+        restoration: 0.6,
+        other: 0.75,
+      };
+      var SVC_LBL = {
+        plumbing: "Plumbing",
+        hvac: "HVAC",
+        electrical: "Electrician",
+        roofing: "Roofing",
+        pest: "Pest Control",
+        landscaping: "Landscaping",
+        cleaning: "Cleaning Services",
+        gc: "General Contractor",
+        garage: "Garage Door",
+        restoration: "Restoration",
+        other: "Home Service",
+      };
+      var POP = {
+        u50k: 280,
+        "50-100k": 520,
+        "100-250k": 980,
+        "250-500k": 1800,
+        "500k-1m": 3200,
+        "1m+": 5800,
+      };
+      var CTR = { top3: 0.24, "4-10": 0.06, "11-15": 0.015, "16+": 0.003 };
+      var GMB_LBL = { top3: "#1–3 Map Pack", "4-10": "#4–10", "11-15": "#11–15", "16+": "#16+" };
+      function fmt(n) {
+        return "$" + Math.round(n).toLocaleString();
+      }
+      function el(id) {
+        return document.getElementById(id);
+      }
+      function setText(id, val) {
+        var e = el(id);
+        if (e) e.textContent = val;
+      }
+      function validate() {
+        var ok = true;
+        [
+          {
+            id: "lroi-ticket",
+            err: "lroi-err-ticket",
+            check: function (v) {
+              return v != "" && !isNaN(+v) && +v > 0;
+            },
+          },
+          {
+            id: "lroi-jobs",
+            err: "lroi-err-jobs",
+            check: function (v) {
+              return v != "" && !isNaN(+v) && +v > 0;
+            },
+          },
+          {
+            id: "lroi-pct",
+            err: "lroi-err-pct",
+            check: function (v) {
+              return v != "" && !isNaN(+v) && +v >= 0 && +v <= 100;
+            },
+          },
+          {
+            id: "lroi-invest",
+            err: "lroi-err-invest",
+            check: function (v) {
+              return v != "" && !isNaN(+v) && +v > 0;
+            },
+          },
+        ].forEach(function (f) {
+          var inp = el(f.id),
+            errEl = el(f.err);
+          if (!inp || !errEl) return;
+          if (!f.check(inp.value)) {
+            inp.classList.add("lroi-error");
+            errEl.style.display = "block";
+            ok = false;
+          } else {
+            inp.classList.remove("lroi-error");
+            errEl.style.display = "none";
+          }
         });
         return ok;
       }
-      var btn=el("lroi-calc-btn");
-      if(btn){btn.addEventListener("click",function(){
-        if(!validate())return;
-        var svc=el("lroi-service").value,city=(el("lroi-city").value||"").trim(),pop=el("lroi-pop").value,ticket=+el("lroi-ticket").value,jobs=+el("lroi-jobs").value,pct=+el("lroi-pct").value,invest=+el("lroi-invest").value,gmb=el("lroi-gmb").value;
-        var searches=Math.round((POP[pop]||1800)*(SVC[svc]||1.0));
-        var curVisits=Math.round(searches*(CTR[gmb]||0.015));
-        var tgtVisits=Math.round(searches*CTR.top3);
-        var delta=Math.max(0,tgtVisits-curVisits);
-        var cr=Math.min(Math.max(curVisits>0?(jobs*(pct/100))/curVisits:0.08,0.03),0.18);
-        var addLeads=Math.round(delta*cr),addRevMo=addLeads*ticket,addRevYr=addRevMo*12,investYr=invest*12;
-        var roi=investYr>0?Math.round(((addRevYr-investYr)/investYr)*100):0;
-        var payback=addRevMo>0?Math.ceil(invest/addRevMo):null;
-        setText("lroi-ey",(city||"Your Market")+" · "+(SVC_LBL[svc]||svc));
-        setText("lroi-r-cur",curVisits.toLocaleString());
-        setText("lroi-r-curpos","GMB "+(GMB_LBL[gmb]||gmb));
-        setText("lroi-r-tgt",tgtVisits.toLocaleString());
-        setText("lroi-r-del","+"+delta.toLocaleString());
-        setText("lroi-r-leads","+"+addLeads);
-        setText("lroi-r-revmo",fmt(addRevMo));
-        setText("lroi-r-revyr",fmt(addRevYr));
-        setText("lroi-r-roi",(roi>=0?"+":"")+roi.toLocaleString()+"%");
-        setText("lroi-r-detail",fmt(investYr)+"/yr invested → "+fmt(addRevYr)+"/yr in additional revenue");
-        var banner=el("lroi-banner");if(banner)banner.className="lroi-roi-banner "+(roi>=0?"lroi-roi-pos":"lroi-roi-neg");
-        var pb=el("lroi-r-payback");if(pb){if(payback&&payback<=12){pb.style.display="inline-block";pb.textContent="Estimated payback: "+payback+" month"+(payback!==1?"s":"");}else{pb.style.display="none";}}
-        var res=el("lroi-results");if(res){res.style.display="block";setTimeout(function(){res.scrollIntoView({behavior:"smooth",block:"start"});},50);}
-      });}
-      ["lroi-ticket","lroi-jobs","lroi-pct","lroi-invest"].forEach(function(id){
-        var inp=el(id),errEl=el("lroi-err-"+id.replace("lroi-",""));
-        if(inp&&errEl){inp.addEventListener("input",function(){inp.classList.remove("lroi-error");errEl.style.display="none";});}
+      var btn = el("lroi-calc-btn");
+      if (btn) {
+        btn.addEventListener("click", function () {
+          if (!validate()) return;
+          var svc = el("lroi-service").value,
+            city = (el("lroi-city").value || "").trim(),
+            pop = el("lroi-pop").value,
+            ticket = +el("lroi-ticket").value,
+            jobs = +el("lroi-jobs").value,
+            pct = +el("lroi-pct").value,
+            invest = +el("lroi-invest").value,
+            gmb = el("lroi-gmb").value;
+          var searches = Math.round((POP[pop] || 1800) * (SVC[svc] || 1.0));
+          var curVisits = Math.round(searches * (CTR[gmb] || 0.015));
+          var tgtVisits = Math.round(searches * CTR.top3);
+          var delta = Math.max(0, tgtVisits - curVisits);
+          var cr = Math.min(
+            Math.max(curVisits > 0 ? (jobs * (pct / 100)) / curVisits : 0.08, 0.03),
+            0.18
+          );
+          var addLeads = Math.round(delta * cr),
+            addRevMo = addLeads * ticket,
+            addRevYr = addRevMo * 12,
+            investYr = invest * 12;
+          var roi = investYr > 0 ? Math.round(((addRevYr - investYr) / investYr) * 100) : 0;
+          var payback = addRevMo > 0 ? Math.ceil(invest / addRevMo) : null;
+          setText("lroi-ey", (city || "Your Market") + " · " + (SVC_LBL[svc] || svc));
+          setText("lroi-r-cur", curVisits.toLocaleString());
+          setText("lroi-r-curpos", "GMB " + (GMB_LBL[gmb] || gmb));
+          setText("lroi-r-tgt", tgtVisits.toLocaleString());
+          setText("lroi-r-del", "+" + delta.toLocaleString());
+          setText("lroi-r-leads", "+" + addLeads);
+          setText("lroi-r-revmo", fmt(addRevMo));
+          setText("lroi-r-revyr", fmt(addRevYr));
+          setText("lroi-r-roi", (roi >= 0 ? "+" : "") + roi.toLocaleString() + "%");
+          setText(
+            "lroi-r-detail",
+            fmt(investYr) + "/yr invested → " + fmt(addRevYr) + "/yr in additional revenue"
+          );
+          var banner = el("lroi-banner");
+          if (banner)
+            banner.className = "lroi-roi-banner " + (roi >= 0 ? "lroi-roi-pos" : "lroi-roi-neg");
+          var pb = el("lroi-r-payback");
+          if (pb) {
+            if (payback && payback <= 12) {
+              pb.style.display = "inline-block";
+              pb.textContent =
+                "Estimated payback: " + payback + " month" + (payback !== 1 ? "s" : "");
+            } else {
+              pb.style.display = "none";
+            }
+          }
+          var res = el("lroi-results");
+          if (res) {
+            res.style.display = "block";
+            setTimeout(function () {
+              res.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 50);
+          }
+        });
+      }
+      ["lroi-ticket", "lroi-jobs", "lroi-pct", "lroi-invest"].forEach(function (id) {
+        var inp = el(id),
+          errEl = el("lroi-err-" + id.replace("lroi-", ""));
+        if (inp && errEl) {
+          inp.addEventListener("input", function () {
+            inp.classList.remove("lroi-error");
+            errEl.style.display = "none";
+          });
+        }
       });
     })();
   </script>
