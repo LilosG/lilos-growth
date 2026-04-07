@@ -1,717 +1,355 @@
 ---
-// FILE: src/pages/packages.astro
 import Layout from "~/layouts/PageLayout.astro";
-import Button from "~/components/ui/Button.astro";
-import Badge from "~/components/ui/Badge.astro";
-import Card from "~/components/ui/Card.astro";
-import PricingCard from "~/components/sections/PricingCard.astro";
-import ProcessStep from "~/components/sections/ProcessStep.astro";
-import FeatureCard from "~/components/sections/FeatureCard.astro";
-import { Icon } from "astro-icon/components";
 
-export const title = "Plans & Pricing | Websites, Local SEO & GBP";
+export const title = "Pricing | Local SEO & Website Plans for Home Service Businesses";
 export const description =
-  "Transparent, no-contract pricing for Google Business Profile management, Local SEO, websites, and Website-as-a-Service. Built for home-service pros, month-to-month, no surprises.";
+  "Simple, transparent pricing for home service businesses. Three monthly retainers covering GBP management, Local SEO, and content — plus a one-time site build. Month-to-month, no contracts.";
 
-const processSteps = [
-  {
-    number: 1,
-    title: "Free Consultation",
-    description: "Tailored audit + growth plan—no obligation.",
-  },
-  {
-    number: 2,
-    title: "Custom Plan",
-    description: "Pick a package or we'll tailor one for goals & budget.",
-  },
-  {
-    number: 3,
-    title: "Launch & Optimize",
-    description: "We implement, improve, and report—end to end.",
-  },
-  {
-    number: 4,
-    title: "Grow & Report",
-    description: "Monthly reports + check-ins to keep momentum.",
-  },
-];
-
-const industries = [
-  "Plumbers",
-  "HVAC",
-  "Electricians",
-  "Roofers",
-  "Pest Control",
-  "Landscaping",
-  "Cleaning",
-  "Other Pros",
-];
-
-const whyChooseUs = [
-  {
-    icon: "tabler:tool",
-    title: "Home-Service Specialists",
-    description: "Niche focus = faster wins and clearer playbooks.",
-  },
-  {
-    icon: "tabler:calendar-check",
-    title: "Month-to-Month",
-    description: "No contracts. Stay only if we're delivering.",
-  },
-  {
-    icon: "tabler:checkbox",
-    title: "Done-for-You",
-    description: "We handle updates, optimizations, reviews & reporting.",
-  },
-];
+const metadata = { title, description };
 
 const faqs = [
   {
     question: "Do I have to sign a long-term contract?",
-    answer: "Never. All plans are month-to-month.",
+    answer: "Never. All plans are month-to-month. Stay because it's working.",
   },
   {
     question: "Can I upgrade, downgrade, or cancel?",
-    answer: "Yes—switch anytime, cancel with no penalty.",
+    answer: "Yes — switch plans or cancel anytime with no penalty.",
+  },
+  {
+    question: "What's included in GBP management across all plans?",
+    answer: "Every retainer includes full Google Business Profile management: weekly posts, EXIF-optimized photos, review replies, Q&A monitoring, category and services alignment, and monthly reporting.",
   },
   {
     question: "Do you offer custom packages?",
-    answer: "Absolutely—tell us your goals and we'll tailor a plan.",
+    answer: "Yes. If your situation doesn't fit a standard tier, reach out and we'll scope something specific to your goals and market.",
+  },
+  {
+    question: "Is the site build a separate purchase?",
+    answer: "Yes. The $1,200 site build is a one-time project. It can be paired with any retainer or purchased standalone. A $199/mo maintenance plan is available if you want hosting, updates, and support ongoing.",
+  },
+  {
+    question: "How quickly will I see results?",
+    answer: "Most clients see measurable gains — more GBP calls, improved rankings, more form submissions — within 30 to 60 days. We prioritize quick wins from day one.",
   },
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
 ---
 
-<Layout title={title} description={description}>
+<Layout
+  title={title}
+  description={description}
+  metadata={metadata}
+  schema={[faqSchema]}
+  breadcrumbs={[
+    { name: "Home", item: "https://lilosgrowth.com/" },
+    { name: "Pricing", item: "https://lilosgrowth.com/packages" },
+  ]}
+>
   <!-- HERO -->
-  <section
-    class="relative flex min-h-[340px] items-center justify-center overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-12 pt-12"
-  >
+  <section class="relative flex min-h-[300px] items-center justify-center overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-12 pt-12">
     <div class="relative z-10 mx-auto w-full max-w-3xl px-4 text-center">
-      <h1 class="mb-4 font-heading text-3xl font-extrabold text-white drop-shadow md:text-5xl">
-        Plans & Pricing
+      <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">Pricing</p>
+      <h1 class="mb-4 font-heading text-3xl font-extrabold text-white md:text-5xl">
+        Simple, Honest Plans
       </h1>
-      <p class="mb-4 text-base font-medium text-white/90">
-        Month-to-month. No setup fees. Built for home-service pros.
+      <p class="mx-auto max-w-xl text-base font-medium text-white/85 md:text-lg">
+        Month-to-month. No setup fees. No contracts. Built for home service businesses that want real results.
       </p>
-      <div class="mt-6 flex flex-wrap justify-center gap-3">
-        <Button
-          href="#packages"
-          variant="primary"
-          size="lg"
-          data-track
-          data-track-event="view_packages"
-        >
-          View Packages
-        </Button>
-        <Button href="#faq" variant="secondary" size="lg" data-track data-track-event="view_faq">
-          Frequently Asked Questions
-        </Button>
-      </div>
     </div>
   </section>
 
-  <!-- TRUST STRIP -->
-  <section class="border-t border-gray-100 bg-background-cream py-12">
-    <div class="mx-auto max-w-5xl px-4 text-center">
-      <h2 class="mb-3 font-heading text-xl font-bold text-heading md:text-2xl">
-        How Our Process Works
-      </h2>
-      <p class="mx-auto mb-10 max-w-2xl text-base text-body md:text-lg">
-        Straightforward onboarding, clear deliverables, and transparent reporting.
-      </p>
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
-        {
-          processSteps.map((step) => (
-            <ProcessStep number={step.number} title={step.title} description={step.description} />
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- WHO WE HELP -->
-  <section class="border-t border-gray-100 bg-white py-10">
-    <div class="mx-auto max-w-4xl px-4 text-center">
-      <h2 class="mb-6 font-heading text-xl font-bold text-heading md:text-2xl">Who We Help</h2>
-      <div class="flex flex-wrap justify-center gap-3">
-        {
-          industries.map((industry) => (
-            <Badge variant="primary" size="md">
-              {industry}
-            </Badge>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY CHOOSE US -->
-  <section class="border-t border-gray-100 bg-background-cream py-12">
-    <div class="mx-auto max-w-6xl px-4 text-center">
-      <h2 class="mb-8 font-heading text-xl font-bold text-heading md:text-2xl">
-        Why Choose Lilos Growth?
-      </h2>
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {
-          whyChooseUs.map((reason) => (
-            <FeatureCard icon={reason.icon} title={reason.title} description={reason.description} />
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- PACKAGES -->
-  <section id="packages" class="border-t border-gray-100 bg-white py-16">
-    <div class="mx-auto max-w-7xl space-y-16 px-4">
-      <!-- GBP (Google Business Profile) -->
-      <div>
-        <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
-          Google Business Profile (GBP)
-        </h2>
-        <p class="mx-auto mb-8 max-w-3xl text-center text-base text-body md:text-lg">
-          Comprehensive management to win the Map Pack and convert more calls.
-        </p>
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <!-- Starter -->
-          <PricingCard
-            title="Starter"
-            price="$199"
-            period="mo"
-            badge="Best for getting established"
-            features={[
-              "Full GBP setup/optimization + category & services alignment",
-              "Posts: <strong>6/mo</strong> &nbsp;•&nbsp; Photos: <strong>6/mo</strong> (EXIF-optimized names, alt text)",
-              "Review replies <strong>up to 30/mo</strong>; Q&A weekly",
-              "Services/Products refresh <strong>quarterly</strong>",
-              "Citation cleanup <strong>quarterly</strong>; monthly performance report",
-              "<em>No rollovers.</em>",
-            ]}
-            ctaText="Get Started"
-            ctaHref="#contact"
-          />
-
-          <!-- Growth -->
-          <PricingCard
-            title="Growth"
-            price="$399"
-            period="mo"
-            badge="Includes everything in Starter"
-            featured={true}
-            features={[
-              "Posts: <strong>~3/week</strong> &nbsp;•&nbsp; Fresh photos ongoing (EXIF-optimized)",
-              "Review replies: <strong>no cap</strong> + proactive requests",
-              "Services/Products refresh <strong>monthly</strong>",
-              "Ongoing citation management (top platforms + corrections)",
-              "Quarterly heatmap & competitor snapshot; monthly report + 30-min call",
-              "<em>No rollovers.</em>",
-            ]}
-            ctaText="Get Started"
-            ctaHref="#contact"
-          />
-        </div>
+  <!-- RETAINER PLANS -->
+  <section id="plans" class="border-t border-gray-100 bg-white py-20">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="mb-12 text-center">
+        <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">Monthly Retainers</h2>
+        <p class="mt-3 text-base text-body">All plans include GBP management. Pick the level of SEO and content execution that fits your goals.</p>
       </div>
 
-      <!-- Local SEO -->
-      <div>
-        <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
-          Local SEO (Single Location)
-        </h2>
-        <p class="mx-auto mb-8 max-w-3xl text-center text-base text-body md:text-lg">
-          On-page, technical, citations, and local authority building—built for service areas.
-        </p>
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
 
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <!-- Essentials -->
-          <PricingCard
-            title="Essentials"
-            price="$499"
-            period="mo"
-            features={[
-              "<strong>Up to 5 pages</strong> + <strong>5 blog posts</strong> per month (≈750–1,000 words)",
-              "On-page & technical fixes batched monthly (titles, metas, H1/H2, internal links, schema basics)",
-              "Citations: 10–20 initial, then 5–10/mo",
-              "Monthly report + 30-min call",
-              "<em>No rollovers.</em>",
-            ]}
-            ctaText="Get Started"
-            ctaHref="#contact"
-          />
-
-          <!-- Growth -->
-          <PricingCard
-            title="Growth"
-            price="$799"
-            period="mo"
-            featured={true}
-            features={[
-              "<strong>Up to 10 pages</strong> + <strong>10 blog posts</strong> per month",
-              "2–4 local backlinks/mo (assoc/partner/sponsor/guest)",
-              "Core Web Vitals, schema & crawl prioritization",
-              "Ongoing citations; quarterly heatmap & competitor review",
-              "Monthly report + 45-min call",
-              "<em>No rollovers.</em>",
-            ]}
-            ctaText="Get Started"
-            ctaHref="#contact"
-          />
-
-          <!-- Pro -->
-          <PricingCard
-            title="Pro"
-            price="$1,199"
-            period="mo"
-            features={[
-              "<strong>Up to 20 pages</strong> + <strong>10 blog posts</strong> per month",
-              "4–6 local backlinks/mo; conversion testing on top pages",
-              "Bi-weekly check-ins",
-              "<em>No rollovers.</em>",
-            ]}
-            ctaText="Request Pro"
-            ctaHref="#contact"
-          />
-        </div>
-      </div>
-
-      <!-- Websites (One-time builds) -->
-      <div>
-        <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
-          Websites (One-Time Builds)
-        </h2>
-        <p class="mx-auto mb-8 max-w-3xl text-center text-base text-body md:text-lg">
-          Own your site outright. Launch quickly with conversion-ready pages.
-        </p>
-
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <!-- Launch Lite -->
-          <Card variant="elevated" class="flex h-full flex-col">
-            <h3 class="mb-2 font-heading text-lg font-bold text-heading md:text-xl">Launch Lite</h3>
-            <div class="mb-4 text-2xl font-bold text-primary md:text-3xl">
-              $499<span class="text-base font-normal text-gray-500"> one-time</span>
-            </div>
-            <ul class="mb-6 flex-1 space-y-2 text-sm text-body">
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                />
-                <span
-                  >≈ <strong>10 pages</strong>: Home, 3 services, About/Contact, + core supporting
-                  pages</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                />
-                <span>Form + click-to-call; basic schema</span>
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                />
-                <span><strong>3–5 business-day launch</strong></span>
-              </li>
-            </ul>
-            <div class="mt-auto border-t border-gray-100 pt-4">
-              <Button href="#contact" variant="primary" size="md" class="w-full">
-                Start Website
-              </Button>
-            </div>
-          </Card>
-
-          <!-- Starter -->
-          <Card variant="elevated" class="relative flex h-full flex-col border-2 border-primary">
-            <Badge
-              variant="primary"
-              size="sm"
-              class="absolute -top-3 left-1/2 -translate-x-1/2 shadow-md"
-            >
-              Popular
-            </Badge>
-            <h3 class="mb-2 mt-2 font-heading text-lg font-bold text-heading md:text-xl">
-              Starter
-            </h3>
-            <div class="mb-4 text-2xl font-bold text-primary md:text-3xl">
-              $750<span class="text-base font-normal text-gray-500"> one-time</span>
-            </div>
-            <ul class="mb-6 flex-1 space-y-2 text-sm text-body">
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                />
-                <span
-                  ><strong>15 pages</strong>: Home + 9 service/city pages + supporting pages</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                />
-                <span>Titles/metas/H1–H2; internal link scaffold; stock library</span>
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                />
-                <span><strong>5–7 business-day launch</strong></span>
-              </li>
-            </ul>
-            <div class="mt-auto border-t border-gray-100 pt-4">
-              <Button href="#contact" variant="primary" size="md" class="w-full">
-                Start Website
-              </Button>
-            </div>
-          </Card>
-
-          <!-- Standard -->
-          <Card variant="elevated" class="flex h-full flex-col">
-            <h3 class="mb-2 font-heading text-lg font-bold text-heading md:text-xl">Standard</h3>
-            <div class="mb-4 text-2xl font-bold text-primary md:text-3xl">
-              $1,500<span class="text-base font-normal text-gray-500"> one-time</span>
-            </div>
-            <ul class="mb-6 flex-1 space-y-2 text-sm text-body">
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                />
-                <span>≈ <strong>25 pages</strong></span>
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                />
-                <span>Enhanced schema (LocalBusiness + Services)</span>
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                />
-                <span>Conversion blocks (badges, FAQs, reviews)</span>
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                />
-                <span><strong>10–14 business-day launch</strong></span>
-              </li>
-            </ul>
-            <div class="mt-auto border-t border-gray-100 pt-4">
-              <Button href="#contact" variant="primary" size="md" class="w-full">
-                Start Website
-              </Button>
-            </div>
-          </Card>
-        </div>
-
-        <p class="text-body/80 mx-auto mt-4 max-w-3xl text-center text-sm">
-          Global website notes: client supplies branding/services/service areas/5–10 reviews;
-          premium stock billed at cost; hosting not included (WaS covers hosting/updates).
-        </p>
-      </div>
-
-      <!-- Website-as-a-Service (WaS) -->
-      <div>
-        <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
-          Website-as-a-Service (WaS)
-        </h2>
-        <p class="mx-auto mb-8 max-w-3xl text-center text-base text-body md:text-lg">
-          Subscription website with hosting, updates, and ongoing support.
-        </p>
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <!-- WaS Base -->
-          <PricingCard
-            title="Base"
-            price="$250"
-            period="mo"
-            features={["<strong>Up to 5 minor updates/mo</strong>", "≤ 1 new page/mo"]}
-            ctaText="Get WaS"
-            ctaHref="#contact"
-          />
-
-          <!-- WaS Plus -->
-          <PricingCard
-            title="Plus"
-            price="$750"
-            period="mo"
-            badge="Growing Teams"
-            featured={true}
-            features={[
-              "<strong>Up to 15 updates/mo</strong>",
-              "≤ 3 new pages/mo; quarterly CRO refresh",
-            ]}
-            ctaText="Get WaS"
-            ctaHref="#contact"
-          />
-        </div>
-      </div>
-
-      <!-- Bundles -->
-      <div>
-        <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
-          Bundles
-        </h2>
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <Card variant="elevated" class="flex flex-col border-2 border-primary">
-            <h3 class="mb-2 font-heading text-lg font-bold text-heading md:text-xl">
-              GBP + SEO Essentials
-            </h3>
-            <div class="mb-4 text-2xl font-bold text-primary md:text-3xl">
-              $699<span class="text-base font-normal text-gray-500">/mo</span>
-            </div>
-            <ul class="mb-6 flex-1 space-y-2 text-sm text-body">
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                />
-                <span>Everything in GBP Starter + Local SEO Essentials</span>
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                />
-                <span>Unified reporting + strategy</span>
-              </li>
-            </ul>
-            <div class="mt-auto border-t border-gray-100 pt-4">
-              <Button href="#contact" variant="primary" size="md" class="w-full">
-                Choose Bundle
-              </Button>
-            </div>
-          </Card>
-
-          <Card
-            variant="elevated"
-            class="flex flex-col border-2 border-primary bg-gradient-to-br from-primary to-primary-dark text-white"
-          >
-            <h3 class="mb-2 font-heading text-lg font-bold text-white md:text-xl">All-In-One</h3>
-            <div class="mb-4 text-2xl font-bold text-white md:text-3xl">
-              $1,299<span class="text-base font-normal text-white/80">/mo</span>
-            </div>
-            <ul class="mb-6 flex-1 space-y-2 text-sm text-white/90">
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-white"
-                />
-                <span>Website + Local SEO + GBP management</span>
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="tabler:circle-check-filled"
-                  class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-white"
-                />
-                <span>Optional launch promo: <strong>$999</strong> first 90 days → then $1,299</span
-                >
-              </li>
-            </ul>
-            <div class="mt-auto border-t border-white/20 pt-4">
-              <Button href="#contact" variant="white" size="md" class="w-full">
-                Choose All-In-One
-              </Button>
-            </div>
-          </Card>
-        </div>
-      </div>
-
-      <!-- Add-ons & Surcharges -->
-      <div>
-        <h2 class="mb-4 text-center font-heading text-xl font-bold text-heading md:text-2xl">
-          Add-ons & Surcharges
-        </h2>
-        <Card variant="elevated" class="mx-auto max-w-4xl">
-          <ul class="space-y-2 text-sm text-body">
-            <li class="flex items-start">
-              <Icon
-                name="tabler:circle-check-filled"
-                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-              />
-              <span
-                ><strong>LSA Management:</strong> $300/mo + 10% of ad spend over $3k (setup $299)</span
-              >
+        <!-- Foundation -->
+        <article class="relative flex flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
+          <h3 class="font-heading text-xl font-bold text-heading">Foundation</h3>
+          <div class="mt-2 flex items-baseline gap-1">
+            <span class="font-heading text-4xl font-extrabold text-primary">$599</span>
+            <span class="text-sm text-body">/mo</span>
+          </div>
+          <p class="mt-3 text-sm text-body">The right starting point. GBP fully managed plus steady on-page SEO progress each month.</p>
+          <div class="my-6 h-px bg-gray-100"></div>
+          <ul class="flex-1 space-y-3 text-sm text-body">
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Full GBP management — posts, photos, reviews, Q&A</span>
             </li>
-            <li class="flex items-start">
-              <Icon
-                name="tabler:circle-check-filled"
-                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-              />
-              <span
-                ><strong>GA4 + GTM Setup:</strong> $149 one-time (included in SEO Growth/Pro)</span
-              >
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>On-page fixes — titles, metas, H1s, internal links, schema</span>
             </li>
-            <li class="flex items-start">
-              <Icon
-                name="tabler:circle-check-filled"
-                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-              />
-              <span
-                ><strong>Multi-location:</strong> +$150/mo per extra GBP; +$200/mo per extra SEO location</span
-              >
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Up to 5 pages/mo — service or location pages</span>
             </li>
-            <li class="flex items-start">
-              <Icon
-                name="tabler:circle-check-filled"
-                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-              />
-              <span><strong>Rush Ticket (48 hrs):</strong> +$100 per ticket</span>
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Citation cleanup and core directory listings</span>
             </li>
-            <li class="flex items-start">
-              <Icon
-                name="tabler:circle-check-filled"
-                class="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-              />
-              <span
-                ><strong>Optional:</strong> Call tracking & lead attribution (pass-through + setup);
-                Citation burst/cleanup from $199/location; Review funnels from $149/mo; Photo/Video pack
-                from $499/quarter</span
-              >
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Monthly performance report</span>
             </li>
           </ul>
-        </Card>
+          
+            href="/contact#book"
+            data-evt="cta_pricing_foundation"
+            class="mt-8 block rounded-xl border border-primary px-6 py-3 text-center text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
+          >
+            Get Started
+          </a>
+        </article>
+
+        <!-- Growth — featured -->
+        <article class="relative flex flex-col rounded-3xl border-2 border-primary bg-white p-8 shadow-lg">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
+            <span class="rounded-full bg-primary px-4 py-1 text-xs font-bold uppercase tracking-wider text-white shadow">Most Popular</span>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-heading">Growth</h3>
+          <div class="mt-2 flex items-baseline gap-1">
+            <span class="font-heading text-4xl font-extrabold text-primary">$999</span>
+            <span class="text-sm text-body">/mo</span>
+          </div>
+          <p class="mt-3 text-sm text-body">Higher content volume, backlinks, and AEO schema — built for businesses ready to compete aggressively in local search.</p>
+          <div class="my-6 h-px bg-gray-100"></div>
+          <ul class="flex-1 space-y-3 text-sm text-body">
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Everything in Foundation</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Up to 5 pages/mo + 2 blog posts</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>2–3 local backlinks/mo</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>AI search visibility — AEO schema, FAQ/HowTo, entity optimization</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Quarterly competitor snapshot + heatmap</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Monthly report + 45-min strategy call</span>
+            </li>
+          </ul>
+          
+            href="/contact#book"
+            data-evt="cta_pricing_growth"
+            class="mt-8 block rounded-xl bg-primary px-6 py-3 text-center text-sm font-semibold text-white shadow transition hover:bg-primary-dark"
+          >
+            Get Started
+          </a>
+        </article>
+
+        <!-- Authority -->
+        <article class="relative flex flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
+          <h3 class="font-heading text-xl font-bold text-heading">Authority</h3>
+          <div class="mt-2 flex items-baseline gap-1">
+            <span class="font-heading text-4xl font-extrabold text-primary">$1,499</span>
+            <span class="text-sm text-body">/mo</span>
+          </div>
+          <p class="mt-3 text-sm text-body">Maximum output for businesses that want to dominate their market. High content volume, aggressive link acquisition, and priority access.</p>
+          <div class="my-6 h-px bg-gray-100"></div>
+          <ul class="flex-1 space-y-3 text-sm text-body">
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Everything in Growth</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Up to 10 pages/mo + 4 blog posts</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>4–6 local backlinks/mo</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Quarterly AI Visibility Audit included</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <span>Bi-weekly check-ins + priority turnaround</span>
+            </li>
+          </ul>
+          
+            href="/contact#book"
+            data-evt="cta_pricing_authority"
+            class="mt-8 block rounded-xl border border-primary px-6 py-3 text-center text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
+          >
+            Get Started
+          </a>
+        </article>
+
+      </div>
+
+      <p class="mt-8 text-center text-sm text-body">
+        Not sure which plan fits? <a href="/contact#book" class="font-semibold text-primary underline underline-offset-2 hover:text-primary-dark">Book a free 15-minute audit</a> and we'll recommend the right starting point.
+      </p>
+    </div>
+  </section>
+
+  <!-- SITE BUILD ADD-ON -->
+  <section class="border-t border-gray-100 bg-cream py-20">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="mb-10 text-center">
+        <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">Website Build</h2>
+        <p class="mt-3 text-base text-body">A one-time project. Own your site outright. Pair with any retainer or purchase standalone.</p>
+      </div>
+
+      <div class="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <div class="p-8 md:border-r md:border-gray-100">
+            <div class="flex items-baseline gap-1">
+              <span class="font-heading text-4xl font-extrabold text-primary">$1,200</span>
+              <span class="text-sm text-body">one-time</span>
+            </div>
+            <p class="mt-3 text-sm text-body">Full site built on Astro and Tailwind CSS — the same stack powering our client sites. Fast, static, SEO-native, and structured to rank from day one.</p>
+            <div class="my-6 h-px bg-gray-100"></div>
+            <ul class="space-y-3 text-sm text-body">
+              <li class="flex items-start gap-2">
+                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <span>15–20 pages — home, services, city pages, blog, contact</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <span>City × service money page matrix</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <span>Schema markup, GA4, click-to-call, form tracking</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <span>Core Web Vitals optimized — sub-second load times</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <span>7–10 business day delivery</span>
+              </li>
+            </ul>
+            
+              href="/contact#book"
+              data-evt="cta_pricing_build"
+              class="mt-8 inline-block rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow transition hover:bg-primary-dark"
+            >
+              Start Your Build
+            </a>
+          </div>
+          <div class="bg-cream p-8">
+            <h3 class="mb-1 font-heading text-base font-bold text-heading">Add maintenance</h3>
+            <div class="flex items-baseline gap-1">
+              <span class="font-heading text-2xl font-extrabold text-primary">$199</span>
+              <span class="text-sm text-body">/mo</span>
+            </div>
+            <p class="mt-3 text-sm text-body">Keep your site fast, secure, and up to date without lifting a finger.</p>
+            <ul class="mt-4 space-y-2 text-sm text-body">
+              <li class="flex items-start gap-2">
+                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <span>Hosting, security monitoring, and uptime</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <span>Up to 5 minor edits/mo via support ticket</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <span>Analytics and lead tracking maintained</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <span>Month-to-month — no long-term commitment</span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- COMPARE TABLE -->
-  <section class="border-t border-gray-100 bg-background-cream py-12">
-    <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
-        At-a-Glance Comparison
-      </h2>
-      <div class="overflow-x-auto rounded-2xl border border-gray-100 bg-white shadow">
-        <table class="min-w-full text-left">
-          <thead>
-            <tr class="bg-secondary/10 text-sm text-heading">
-              <th class="px-6 py-4 font-heading font-bold">Features</th>
-              <th class="px-6 py-4 text-center font-heading font-bold">GBP</th>
-              <th class="px-6 py-4 text-center font-heading font-bold">Local SEO</th>
-              <th class="px-6 py-4 text-center font-heading font-bold">Websites</th>
-              <th class="px-6 py-4 text-center font-heading font-bold">WaS</th>
-              <th class="px-6 py-4 text-center font-heading font-bold">Bundles</th>
-            </tr>
-          </thead>
-          <tbody class="text-sm text-body">
-            <tr class="border-t">
-              <td class="px-6 py-3">Map Pack management</td>
-              <td class="text-center">✓</td>
-              <td class="text-center">✓</td>
-              <td class="text-center">–</td>
-              <td class="text-center">–</td>
-              <td class="text-center">✓</td>
-            </tr>
-            <tr class="border-t">
-              <td class="px-6 py-3">On-page & technical SEO</td>
-              <td class="text-center">–</td>
-              <td class="text-center">✓</td>
-              <td class="text-center">Basic</td>
-              <td class="text-center">Basic</td>
-              <td class="text-center">✓</td>
-            </tr>
-            <tr class="border-t">
-              <td class="px-6 py-3">Content & pages</td>
-              <td class="text-center">Posts/photos</td>
-              <td class="text-center">Pages + blogs</td>
-              <td class="text-center">Site build</td>
-              <td class="text-center">Updates</td>
-              <td class="text-center">All</td>
-            </tr>
-            <tr class="border-t">
-              <td class="px-6 py-3">Citations</td>
-              <td class="text-center">Cleanup/ongoing</td>
-              <td class="text-center">Build + ongoing</td>
-              <td class="text-center">–</td>
-              <td class="text-center">–</td>
-              <td class="text-center">✓</td>
-            </tr>
-            <tr class="border-t">
-              <td class="px-6 py-3">Calls & reporting</td>
-              <td class="text-center">Monthly</td>
-              <td class="text-center">Monthly/45-min+</td>
-              <td class="text-center">–</td>
-              <td class="text-center">–</td>
-              <td class="text-center">Monthly</td>
-            </tr>
-          </tbody>
-        </table>
+  <!-- PROOF STRIP -->
+  <section class="border-t border-gray-100 bg-white py-16">
+    <div class="mx-auto max-w-5xl px-4">
+      <p class="mb-8 text-center text-sm font-semibold uppercase tracking-widest text-body">Verified client results</p>
+      <div class="grid grid-cols-1 gap-6 text-center sm:grid-cols-3">
+        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+          <div class="font-heading text-4xl font-bold tracking-tight text-primary">+900%</div>
+          <p class="mt-2 text-sm text-body">Keyword growth in 30 days — Wheyland Electric</p>
+        </div>
+        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+          <div class="font-heading text-4xl font-bold tracking-tight text-primary">3×</div>
+          <p class="mt-2 text-sm text-body">GBP calls after site launch — Wheyland Electric</p>
+        </div>
+        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+          <div class="font-heading text-4xl font-bold tracking-tight text-primary">+350%</div>
+          <p class="mt-2 text-sm text-body">Web leads in first 3 weeks — Wheyland Electric</p>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="border-t border-gray-100 bg-white py-12">
-    <div class="mx-auto max-w-4xl px-4 text-center">
-      <h2 class="mb-8 font-heading text-xl font-bold text-heading md:text-2xl">
-        What Our Clients Say
-      </h2>
-      <div class="flex flex-col items-stretch justify-center gap-6 md:flex-row">
-        <Card variant="elevated" class="flex-1">
-          <div class="text-accent mb-3 text-2xl">★★★★★</div>
-          <p class="mb-3 font-heading text-base font-semibold text-heading md:text-lg">
-            "We booked more calls in 2 months than all last year."
-          </p>
-          <span class="text-sm text-body">– Mike S., HVAC Company</span>
-        </Card>
-        <Card variant="elevated" class="flex-1">
-          <div class="text-accent mb-3 text-2xl">★★★★★</div>
-          <p class="mb-3 font-heading text-base font-semibold text-heading md:text-lg">
-            "The site and Maps ranking paid for itself fast. Seamless process."
-          </p>
-          <span class="text-sm text-body">– Sarah K., Plumbing Contractor</span>
-        </Card>
-      </div>
+      <p class="mt-6 text-center text-sm text-body">
+        <a href="/results" class="font-semibold text-primary underline underline-offset-2 hover:text-primary-dark">See the full Wheyland Electric case study →</a>
+      </p>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="border-t border-gray-100 bg-background-cream py-16" id="faq">
-    <div class="mx-auto max-w-4xl px-4">
-      <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
+  <section class="border-t border-gray-100 bg-cream py-20" id="faq">
+    <div class="mx-auto max-w-3xl px-4">
+      <h2 class="mb-10 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
         Frequently Asked Questions
       </h2>
       <div class="space-y-4">
-        {
-          faqs.map((faq) => (
-            <Card variant="elevated">
-              <h3 class="mb-2 font-heading text-base font-bold text-heading md:text-lg">
-                {faq.question}
-              </h3>
-              <p class="text-sm text-body md:text-base">{faq.answer}</p>
-            </Card>
-          ))
-        }
+        {faqs.map((faq) => (
+          <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+            <h3 class="mb-2 font-heading text-base font-semibold text-heading">{faq.question}</h3>
+            <p class="text-sm text-body">{faq.answer}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- FINAL CTA -->
-  <section class="bg-gradient-to-br from-primary to-primary-dark py-12">
-    <div class="mx-auto max-w-3xl px-4 text-center">
-      <h2 class="mb-3 font-heading text-xl font-extrabold text-white md:text-2xl">
-        Ready to Grow? Get a Free Consultation.
+  <section class="bg-gradient-to-br from-secondary to-secondary-dark py-16">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="mb-3 font-heading text-2xl font-extrabold text-white md:text-3xl">
+        Not sure where to start?
       </h2>
-      <p class="mb-6 text-base text-white/90 md:text-lg">
-        Book a free website & SEO audit—no hard sell, just insights.
+      <p class="mb-8 text-base text-white/85">
+        Book a free 15-minute audit. We'll review your GBP and site, identify the biggest gaps, and recommend the right plan — no pitch, just findings.
       </p>
-      <Button
-        href="#contact"
-        variant="white"
-        size="lg"
-        data-track
-        data-track-event="final_cta_click"
+      
+        href="/contact#book"
+        data-evt="cta_pricing_final"
+        class="inline-flex items-center rounded-full bg-primary px-8 py-3.5 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-dark"
       >
         Book My Free Audit
-      </Button>
+        <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"/></svg>
+      </a>
     </div>
   </section>
+
 </Layout>
