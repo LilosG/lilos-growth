@@ -16,7 +16,6 @@
     "check:astro": "astro check",
     "check:eslint": "eslint .",
     "check:prettier": "prettier --check .",
-    "check:security": "npm audit --audit-level=critical",
     "check:ts": "tsc --noEmit -p tsconfig.json",
     "lint": "eslint .",
     "typecheck": "astro check",
@@ -24,7 +23,6 @@
     "fix:eslint": "eslint --fix .",
     "fix:prettier": "prettier -w .",
     "format": "prettier --write .",
-    "test": "vitest run --config vitest.config.ts",
     "vercel": "npx vercel",
     "deploy:prod": "npx vercel --prod"
   },

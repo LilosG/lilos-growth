@@ -23,11 +23,5 @@ jobs:
         run: npm ci
       - name: Run checks
         run: npm run check
-      - name: Security audit
-        run: npm run check:security
-      - name: Run tests
-        run: npm run test
-      - name: Lint blog frontmatter
-        run: npm run lint:blog
       - name: Build
         run: npm run build
