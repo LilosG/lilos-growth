@@ -181,12 +181,16 @@ export interface Disclaimer {
 }
 
 // COMPONENTS
-export interface CallToAction extends Omit<HTMLAttributes<"a">, "slot"> {
-  variant?: "primary" | "secondary" | "tertiary" | "link";
+export interface CallToAction {
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "white";
   text?: string;
+  href?: string;
+  target?: "_blank" | "_self";
   icon?: string;
-  classes?: Record<string, string>;
   type?: "button" | "submit" | "reset";
+  class?: string;
+  ariaLabel?: string;
+  classes?: Record<string, string>;
 }
 
 export interface ItemGrid {

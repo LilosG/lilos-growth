@@ -49,7 +49,14 @@ const {
         {
           callToAction && (
             <div class="mb-8 mt-[-40px] text-primary">
-              <Button variant="link" {...callToAction} />
+              <Button
+                variant={callToAction?.variant ?? "ghost"}
+                href={callToAction?.href}
+                target={callToAction?.target}
+                icon={callToAction?.icon}
+              >
+                {callToAction?.text}
+              </Button>
             </div>
           )
         }

@@ -50,7 +50,15 @@ const {
           {Array.isArray(actions) ? (
             actions.map((action) => (
               <div class="flex w-full sm:w-auto">
-                <Button {...(action || {})} class="w-full sm:mb-0" />
+                <Button
+                  variant={action?.variant ?? "primary"}
+                  href={action?.href}
+                  target={action?.target}
+                  icon={action?.icon}
+                  class="w-full sm:mb-0"
+                >
+                  {action?.text}
+                </Button>
               </div>
             ))
           ) : (

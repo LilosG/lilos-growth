@@ -51,7 +51,17 @@ const {
           ) : (
             callToAction &&
             callToAction.text &&
-            callToAction.href && <Button variant="primary" {...callToAction} class="mb-12 w-auto" />
+            callToAction.href && (
+              <Button
+                variant={callToAction?.variant ?? "primary"}
+                href={callToAction?.href}
+                target={callToAction?.target}
+                icon={callToAction?.icon}
+                class="mb-12 w-auto"
+              >
+                {callToAction?.text}
+              </Button>
+            )
           )
         }
       </div>
