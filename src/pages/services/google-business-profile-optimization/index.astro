@@ -84,7 +84,53 @@ const faqs = [
 ];
 ---
 
-<Layout {title} {description}>
+<Layout
+  title={title}
+  description={description}
+  breadcrumbs={[
+    { name: "Home", item: "https://lilosgrowth.com/" },
+    { name: "Services", item: "https://lilosgrowth.com/services" },
+    { name: "Google Business Profile", item: "https://lilosgrowth.com/services/google-business-profile-optimization" },
+  ]}
+  schema={[
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": "https://lilosgrowth.com/services/google-business-profile-optimization#service",
+      "name": "Google Business Profile Optimization & Maps SEO",
+      "description": "End-to-end Google Business Profile management for home service businesses — optimization, weekly posts, EXIF-optimized photos, review management, Q&A, and monthly reporting.",
+      "provider": { "@id": "https://lilosgrowth.com/#org" },
+      "areaServed": { "@type": "Country", "name": "United States" },
+      "url": "https://lilosgrowth.com/services/google-business-profile-optimization",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How fast can you improve my Google Maps ranking?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Most clients see measurable gains in 30-60 days with consistent posting, reviews, and ongoing profile updates." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you optimize my profile if I already have a GBP listing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Audits, rebuilds, and ongoing optimization are our core service." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you guarantee Map Pack rankings?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No one can guarantee specific positions, but we provide consistent, data-driven work and transparent reporting." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a setup fee or long contract?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No setup fees and no long-term contracts. All plans are month-to-month." }
+        }
+      ]
+    }
+  ]}
+>
   <!-- HERO -->
   <section
     class="relative flex min-h-[440px] flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-16 pt-12"
@@ -170,44 +216,28 @@ const faqs = [
         Clear value. Month-to-month. No rollovers.
       </p>
 
-      <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2">
-        <!-- Google Business Profile— $299/mo -->
-        <PricingCard
-          title="Google Business Profile"
-          price="$299"
-          period="mo"
-          description="Essential GBP management for steady local visibility."
-          features={[
-            "Setup or audit with <strong>keyword research & category mapping</strong>",
-            "Business info, services & products maintained (quarterly refresh)",
-            "<strong>6 posts/mo</strong> (offers, updates) — no rollovers",
-            "<strong>6 photos/mo</strong>, <strong>EXIF/alt optimized</strong> for local relevance — no rollovers",
-            "Review replies <strong>up to 30/mo</strong> + templates",
-            "Q&A monitored weekly; profile improvements & testing",
-            "Citation cleanup (quarterly core listings)",
-            "Monthly performance report",
-          ]}
-          ctaText="Get Started"
-          ctaHref="#contact"
-        />
-
-        <!-- GBP + Local SEO -->
-        <PricingCard
-          title="GBP + Local SEO"
-          price="$699"
-          period="mo"
-          badge="Includes everything in Starter"
-          description="Win more service-area searches and outpace competitors."
-          featured={true}
-          features={[
-            "<strong>3 posts/week</strong> (offers, FAQs, highlights) — no rollovers",
-            "Fresh photos ongoing, <strong>EXIF/alt optimized</strong> for geo & keywords",
-            "Review replies <strong>no cap</strong> + proactive request prompts",
-            "Services & products <strong>refreshed monthly</strong>",
-            "<strong>Ongoing citations</strong> incl. <strong>200+ directories</strong> (core + industry/niche)",
-            "Quarterly heatmap & competitor snapshot",
-            "Monthly report + <strong>30-min strategy call</strong>",
-          ]}
+      <div class="mx-auto max-w-2xl">
+        <div class="rounded-3xl border-2 border-primary bg-white p-8 text-center shadow-lg">
+          <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5">
+            <svg class="h-4 w-4 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            <span class="text-sm font-semibold text-primary">Included in every retainer plan</span>
+          </div>
+          <h3 class="mb-3 font-heading text-xl font-bold text-heading">GBP management is bundled — not an add-on</h3>
+          <p class="mb-6 text-sm text-body">Every Lilos Growth retainer includes full Google Business Profile management. You get posts, photos, review management, Q&A, category optimization, and monthly reporting — on every plan, starting at $599/mo.</p>
+          <ul class="mb-8 grid grid-cols-1 gap-2 text-left text-sm text-body sm:grid-cols-2">
+            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Weekly posts + EXIF-optimized photos</li>
+            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Review replies + proactive requests</li>
+            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Q&A monitoring and updates</li>
+            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Category and services alignment</li>
+            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Citation cleanup + core listings</li>
+            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Monthly performance report</li>
+          </ul>
+          <a href="/packages" class="inline-flex items-center rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow transition hover:bg-primary-dark">
+            See all plans &amp; pricing
+            <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"/></svg>
+          </a>
+        </div>
+      <div class="hidden"><!-- placeholder closing tag -->
           ctaText="Upgrade to Growth"
           ctaHref="#contact"
         />
@@ -349,29 +379,4 @@ const faqs = [
   </section>
 </Layout>
 
-<script type="application/ld+json" is:inline>
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Google Business Profile Management",
-    "serviceType": "Google Business Profile Management",
-    "provider": { "@id": "https://lilosgrowth.com/#local" },
-    "areaServed": { "@type": "Country", "name": "United States" },
-    "offers": [
-      {
-        "@type": "Offer",
-        "name": "GBP — Starter",
-        "priceCurrency": "USD",
-        "price": "199",
-        "availability": "https://schema.org/InStock"
-      },
-      {
-        "@type": "Offer",
-        "name": "GBP — Growth",
-        "priceCurrency": "USD",
-        "price": "399",
-        "availability": "https://schema.org/InStock"
-      }
-    ]
-  }
-</script>
+
