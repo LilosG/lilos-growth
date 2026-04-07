@@ -70,12 +70,58 @@ const faqs = [
   {
     question: "Will I get reports and strategy time?",
     answer:
-      "Every plan includes transparent reporting plus scheduled calls (Essentials: 30-min, Growth: 45-min, Pro: bi-weekly check-ins).",
+      "Every plan includes transparent monthly reporting plus scheduled strategy calls. Foundation and Growth include monthly calls; Authority includes bi-weekly check-ins.",
   },
 ];
 ---
 
-<Layout {title} {description}>
+<Layout
+  title={title}
+  description={description}
+  breadcrumbs={[
+    { name: "Home", item: "https://lilosgrowth.com/" },
+    { name: "Services", item: "https://lilosgrowth.com/services" },
+    { name: "Local SEO", item: "https://lilosgrowth.com/services/local-seo" },
+  ]}
+  schema={[
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": "https://lilosgrowth.com/services/local-seo#service",
+      "name": "Local SEO for Home Service Businesses",
+      "description": "Local SEO services including on-page optimization, service and location pages, citation building, local link acquisition, and Google Business Profile management for home service businesses.",
+      "provider": { "@id": "https://lilosgrowth.com/#org" },
+      "areaServed": { "@type": "Country", "name": "United States" },
+      "url": "https://lilosgrowth.com/services/local-seo",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How soon will I see results from local SEO?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Most clients see measurable gains in 30-60 days. We prioritize high-impact fixes and pages first." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you require contracts or charge setup fees?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No contracts and no setup fees. All plans are month-to-month." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you cover multiple cities or locations?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. We right-size page creation and tracking for your service footprint. Multi-location fees apply." }
+        },
+        {
+          "@type": "Question",
+          "name": "Will I get reports and strategy time?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Every plan includes transparent monthly reporting plus scheduled strategy calls." }
+        }
+      ]
+    }
+  ]}
+>
   <!-- HERO -->
   <section
     class="relative flex min-h-[420px] flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-16 pt-12"
@@ -152,10 +198,10 @@ const faqs = [
       </p>
 
       <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-3">
-        <!-- Essentials -->
+        <!-- Foundation -->
         <PricingCard
-          title="Essentials"
-          price="$499"
+          title="Foundation"
+          price="$599"
           period="mo"
           badge="Single Location"
           features={[
@@ -174,9 +220,9 @@ const faqs = [
         <!-- Growth -->
         <PricingCard
           title="Growth"
-          price="$799"
+          price="$999"
           period="mo"
-          badge="Includes Essentials"
+          badge="Includes Foundation"
           featured={true}
           features={[
             "<strong>Up to 10</strong> new/optimized service or location pages per month",
@@ -193,8 +239,8 @@ const faqs = [
 
         <!-- Pro -->
         <PricingCard
-          title="Pro"
-          price="$1,199"
+          title="Authority"
+          price="$1,499"
           period="mo"
           badge="On Request"
           features={[
@@ -206,7 +252,7 @@ const faqs = [
             "Bi-weekly check-ins with your strategist",
             "<small>No rollovers.</small>",
           ]}
-          ctaText="Request Pro"
+          ctaText="Get Started"
           ctaHref="#contact"
         />
       </div>
