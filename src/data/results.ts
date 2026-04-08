@@ -110,7 +110,6 @@ export const resultsCaseStudies: CaseStudy[] = [
     sectorTag: "Pest Control",
     locationTag: "Florida",
     serviceTypes: ["website", "gbp", "local-seo"],
-    featured: true,
     websiteUrl: "https://bluedoorpest.com",
     image: { src: "/clients/blue-door-pest-control.jpg", alt: "Blue Door Pest Control logo" },
     screenshot: {
@@ -231,12 +230,21 @@ export const resultsCaseStudies: CaseStudy[] = [
     sectorTag: "Electrician",
     locationTag: "California",
     serviceTypes: ["website", "gbp", "local-seo"],
+    featured: true,
     websiteUrl: "https://wheylandelectric.com",
     screenshot: {
       src: "/clients/screenshots/wheyland-electric-full.png",
       alt: "Wheyland Electric website",
     },
-    kpis: [],
+    kpis: [
+      { label: "web leads — first 3 weeks", value: "+350%", sr: "three hundred fifty percent increase in web leads" },
+      { label: "GBP calls month one", value: "3×" },
+      { label: "keywords ranked", value: "+900%" },
+    ],
+    blurb:
+      "Full rebuild from scratch on Astro/Tailwind. 107 pages, 64 city × service money pages, 13 blog posts at launch. Previous agency managed their site for 10 years and averaged 4 leads/month. We delivered 18 leads in the first 3 weeks.",
+    ctaText: "Read the full case study",
+    ctaHref: "/results/wheyland-electric",
   },
   {
     id: "kelari-party-rentals-carlsbad-ca",
