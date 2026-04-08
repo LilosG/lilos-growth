@@ -1,251 +1,231 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
-import Button from "~/components/ui/Button.astro";
-import Card from "~/components/ui/Card.astro";
-import ServiceOfferingCard from "~/components/sections/ServiceOfferingCard.astro";
-import ProcessStep from "~/components/sections/ProcessStep.astro";
-import { Icon } from "astro-icon/components";
 
-export const title = "Additional Marketing Services for Home Service Businesses";
+export const title = "AI Visibility Audit for Home Service Businesses | Lilos Growth";
 export const description =
-  "Order stand-alone services like citation building, Google Business Profile setup, and one-time SEO tune-ups. No contracts — just fast, transparent work built for local home services.";
-export const breadcrumbs = [
-  { name: "Services", item: "/services" },
-  { name: "Additional Services", item: "/additional-services" },
-];
+  "Find out if AI assistants like ChatGPT, Perplexity, and Google AI Overviews are recommending your competitors instead of you. One-time audit with a clear action plan. $349.";
 
-const services = [
-  {
-    icon: "tabler:map-pin",
-    title: "Citation Builder",
-    price: "$49",
-    period: "month",
-    badge: "Best for: New locations & ranking boosts",
-    description: "List your business on 250+ top directories to build consistent citations.",
-    features: [
-      "Clean, accurate NAP across 100+ directories",
-      "Consistent brand & category data",
-      "Improved local rankings over time",
-    ],
-  },
-  {
-    icon: "tabler:briefcase",
-    title: "Google Business Profile Setup",
-    price: "$399",
-    period: "one-time",
-    badge: "Best for: New businesses or GBP resets",
-    description:
-      "Complete profile creation & verification — optimized and ready to attract new customers.",
-    features: [
-      "Full GBP creation & verification",
-      "Business info, logo & photos added",
-      "First Google Post & Q&A",
-      "Login & live profile link delivered",
-    ],
-  },
-  {
-    icon: "tabler:star",
-    title: "GBP 30-Day Optimization",
-    price: "$499",
-    period: "one-time",
-    badge: "Best for: Fast visibility & profile fixes",
-    description:
-      "A focused 30-day sprint to clean up, optimize, and grow visibility in the Map Pack.",
-    features: [
-      "Full audit & expert optimizations",
-      "Keyword-rich services & categories",
-      "Weekly posts & photo updates",
-      "Review responses & reporting",
-    ],
-  },
-  {
-    icon: "tabler:chart-line",
-    title: "SEO Consulting & Website Tune-Up",
-    price: "$499",
-    period: "30 days",
-    badge: "Best for: Quick website wins & SEO clarity",
-    description: "A clear SEO roadmap plus a 30-day execution burst on the highest-impact fixes.",
-    features: [
-      "Website SEO audit & strategy call",
-      "Meta, headings, content & internal links",
-      "Tech & UX tune-ups as needed",
-      "Results report with next steps",
-    ],
-  },
-];
-
-const processSteps = [
-  {
-    number: 1,
-    title: "Pick Your Service",
-    description: "Choose any one-time service above — or ask for a custom solution.",
-  },
-  {
-    number: 2,
-    title: "Share Your Details",
-    description: "We'll collect essentials with a quick form so we can get started.",
-  },
-  {
-    number: 3,
-    title: "We Get to Work",
-    description: "Our experts implement the work quickly and keep you updated.",
-  },
-  {
-    number: 4,
-    title: "You Get Results",
-    description: "Receive a clear report, outcomes, and recommendations — done.",
-  },
-];
+const metadata = { title, description };
 
 const faqs = [
   {
-    question: "Can I order an additional service without a monthly package?",
-    answer:
-      "<strong>Yes.</strong> Every service on this page is available individually — no contract or ongoing bundle required.",
+    question: "What exactly is an AI Visibility Audit?",
+    answer: "We audit how your business appears — or fails to appear — when AI tools like ChatGPT, Perplexity, and Google AI Overviews answer local service queries in your market. We check schema completeness, entity consistency, GBP strength, citation accuracy, and content structure against what AI systems use to decide who to recommend.",
   },
   {
-    question: "What if I need help choosing the right service?",
-    answer:
-      'Just <a href="#contact" class="text-primary underline hover:text-primary-dark">contact us</a> and we\'ll recommend the best fit for your goals and budget.',
+    question: "Why does AI visibility matter for a local service business?",
+    answer: "A growing share of local searches now end with an AI-generated answer — not a list of blue links. If your schema is incomplete, your entity data is inconsistent, or your content isn't structured for AI parsing, you won't get cited even if you rank well organically. This gap is widening fast and most agencies aren't addressing it yet.",
   },
   {
-    question: "How fast will I get results?",
-    answer:
-      "Most one-time services are completed in <strong>7–14 days</strong>. We'll keep you updated the whole way.",
+    question: "What do I get as a deliverable?",
+    answer: "A written audit report covering: schema gaps and errors, GBP entity completeness score, citation consistency across top directories, AI Overview appearance check for your primary service keywords, and a prioritized action plan with specific fixes.",
   },
   {
-    question: "Can I combine these with a monthly package?",
-    answer:
-      "Absolutely. Many monthly plans include these services for added savings — ask for details.",
+    question: "How long does it take?",
+    answer: "Delivery within 5 business days of receiving your business details.",
   },
   {
-    question: "Is there support after the service is complete?",
-    answer:
-      "Yes — you'll get a results report, actionable next steps, and 14 days of email support.",
+    question: "Does this lead into a monthly retainer?",
+    answer: "Only if it makes sense. The audit stands alone as a paid deliverable. If we find issues that a retainer would fix, we'll tell you clearly. No pressure.",
   },
   {
-    question: "Can I talk to someone before ordering?",
-    answer:
-      'Definitely. <a href="#contact" class="text-primary underline hover:text-primary-dark">Reach out</a> for honest, pressure-free advice from a strategist.',
+    question: "What if I'm already a Lilos Growth retainer client?",
+    answer: "The quarterly AI Visibility Audit is included in the Authority plan. Foundation and Growth clients can add it as a one-time purchase anytime.",
   },
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://lilosgrowth.com/additional-services#ai-audit",
+  "name": "AI Visibility Audit",
+  "description": "A one-time audit of how your home service business appears in AI-generated search results — ChatGPT, Perplexity, and Google AI Overviews. Includes schema audit, entity scoring, citation check, and action plan.",
+  "provider": { "@id": "https://lilosgrowth.com/#org" },
+  "areaServed": { "@type": "Country", "name": "United States" },
+  "offers": {
+    "@type": "Offer",
+    "name": "AI Visibility Audit",
+    "priceCurrency": "USD",
+    "price": "349",
+    "availability": "https://schema.org/InStock"
+  }
+};
 ---
 
-<Layout title={title} description={description} breadcrumbs={breadcrumbs}>
+<Layout
+  title={title}
+  description={description}
+  metadata={metadata}
+  schema={[serviceSchema, faqSchema]}
+  breadcrumbs={[
+    { name: "Home", item: "https://lilosgrowth.com/" },
+    { name: "AI Visibility Audit", item: "https://lilosgrowth.com/additional-services" },
+  ]}
+>
   <!-- HERO -->
-  <section
-    class="relative overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-16 pt-12"
-  >
-    <div class="relative z-10 mx-auto max-w-3xl px-4 text-center">
-      <img src="/logo-lcp-320.webp" alt="Lilos Growth Logo" class="logo--halo mx-auto mb-6 w-32" />
-      <h1
-        class="mb-2 font-heading text-3xl font-extrabold leading-tight tracking-tight text-white md:text-4xl lg:text-5xl"
-      >
-        Additional Services &amp; One-Time Projects
+  <section class="relative flex min-h-[340px] items-center justify-center overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-12 pt-12">
+    <div class="relative z-10 mx-auto w-full max-w-3xl px-4 text-center">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">One-Time Audit · $349</p>
+      <h1 class="mb-4 font-heading text-3xl font-extrabold leading-tight text-white md:text-5xl">
+        Is AI sending your customers<br class="hidden md:block" /> to your competitors?
       </h1>
-      <span
-        class="text-accent mb-3 mt-2 block font-heading text-lg font-semibold uppercase tracking-wider md:text-xl"
-        >No Contract • No Commitment • Just Results</span
+      <p class="mx-auto mb-8 max-w-xl text-base font-medium text-white/85 md:text-lg">
+        ChatGPT, Perplexity, and Google AI Overviews are answering local service queries right now. Find out if your business is getting cited — or invisible.
+      </p>
+      
+        href="/contact#book"
+        data-evt="cta_ai_audit_hero"
+        class="inline-flex items-center rounded-full bg-primary px-8 py-3.5 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-dark"
       >
-      <p class="mx-auto mb-6 max-w-2xl text-base leading-relaxed text-white/90 md:text-lg">
-        Stand-alone services and quick projects you can order anytime. Pay only for what you need —
-        no long-term commitments or fluff.
-      </p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <Button href="#services" variant="primary" size="lg">
-          Explore Services
-          <Icon name="tabler:arrow-right" class="ml-2 h-4 w-4" slot="icon-right" />
-        </Button>
-        <Button href="#faq" variant="secondary" size="lg">
-          FAQ
-          <Icon name="tabler:arrow-right" class="ml-2 h-4 w-4" slot="icon-right" />
-        </Button>
+        Get My AI Audit — $349
+        <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- WHAT WE CHECK -->
+  <section class="border-t border-gray-100 bg-white py-20">
+    <div class="mx-auto max-w-5xl px-4">
+      <div class="mb-12 text-center">
+        <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">What we audit</h2>
+        <p class="mt-3 text-base text-body">Five areas that determine whether AI tools recommend your business or your competitor.</p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <article class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+            <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+          </div>
+          <h3 class="mb-2 font-heading text-base font-semibold text-heading">Schema completeness</h3>
+          <p class="text-sm text-body">LocalBusiness, Service, FAQ, HowTo — we check every schema type AI systems use to understand and cite your business.</p>
+        </article>
+
+        <article class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+            <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582"/></svg>
+          </div>
+          <h3 class="mb-2 font-heading text-base font-semibold text-heading">Entity consistency</h3>
+          <p class="text-sm text-body">Your business name, address, phone, and category data across your site, GBP, and top directories — inconsistency kills AI visibility.</p>
+        </article>
+
+        <article class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+            <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
+          </div>
+          <h3 class="mb-2 font-heading text-base font-semibold text-heading">GBP entity strength</h3>
+          <p class="text-sm text-body">Your Google Business Profile is one of the strongest signals AI tools use. We score completeness, category alignment, and content quality.</p>
+        </article>
+
+        <article class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+            <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+          </div>
+          <h3 class="mb-2 font-heading text-base font-semibold text-heading">AI Overview appearance</h3>
+          <p class="text-sm text-body">We run your primary service keywords through Google and check whether you, your competitors, or neither appear in AI-generated answers.</p>
+        </article>
+
+        <article class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+            <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+          </div>
+          <h3 class="mb-2 font-heading text-base font-semibold text-heading">Content structure</h3>
+          <p class="text-sm text-body">FAQ blocks, Q&A patterns, HowTo markup, and answer-ready copy — we check whether your content is structured for AI parsing.</p>
+        </article>
+
+        <article class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+            <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+          </div>
+          <h3 class="mb-2 font-heading text-base font-semibold text-heading">Prioritized action plan</h3>
+          <p class="text-sm text-body">Every audit ends with a clear, ranked list of fixes — what to do first, what it fixes, and how long it takes. No vague recommendations.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES GRID -->
-  <section id="services" class="border-t border-gray-100 bg-white py-16">
-    <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-3 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
-        Order Additional Services Individually
-      </h2>
-      <p class="mx-auto mb-10 max-w-3xl text-center text-base text-body md:text-lg">
-        Every option below is available as a one-time purchase — no monthly plan required.
-      </p>
-
-      <div class="grid gap-6 md:grid-cols-2">
-        {
-          services.map((service) => (
-            <ServiceOfferingCard
-              icon={service.icon}
-              title={service.title}
-              price={service.price}
-              period={service.period}
-              badge={service.badge}
-              description={service.description}
-              features={service.features}
-              ctaText="Order Now"
-              ctaHref="#contact"
-            />
-          ))
-        }
+  <!-- PRICING + CTA -->
+  <section class="border-t border-gray-100 bg-cream py-20">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="font-heading text-2xl font-bold text-heading md:text-3xl">One-time. No retainer required.</h2>
+      <div class="my-8 overflow-hidden rounded-3xl border-2 border-primary bg-white shadow-lg">
+        <div class="p-8">
+          <div class="mb-1 text-sm font-semibold uppercase tracking-widest text-primary">AI Visibility Audit</div>
+          <div class="flex items-baseline justify-center gap-1">
+            <span class="font-heading text-5xl font-extrabold text-heading">$349</span>
+            <span class="text-base text-body">one-time</span>
+          </div>
+          <p class="mt-4 text-sm text-body">Delivered within 5 business days. Includes written report + prioritized action plan.</p>
+          <div class="my-6 h-px bg-gray-100"></div>
+          <ul class="mb-8 space-y-3 text-left text-sm text-body">
+            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Schema completeness audit</li>
+            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>GBP entity completeness score</li>
+            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Citation consistency check</li>
+            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>AI Overview appearance check — your keywords</li>
+            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Content structure review</li>
+            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Prioritized action plan with specific fixes</li>
+          </ul>
+          
+            href="/contact#book"
+            data-evt="cta_ai_audit_pricing"
+            class="block rounded-xl bg-primary px-6 py-3.5 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-primary-dark"
+          >
+            Get My AI Audit — $349
+          </a>
+          <p class="mt-3 text-xs text-body">No retainer required. No upsell pressure. Just the audit.</p>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="border-t border-gray-100 bg-background-cream py-16">
-    <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-3 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
-        How Our Additional Services Work
-      </h2>
-      <p class="mx-auto mb-10 max-w-3xl text-center text-base text-body md:text-lg">
-        Simple, fast, and transparent — no pushy sales calls, just a straightforward process.
+      <p class="text-sm text-body">
+        Already a retainer client? The quarterly AI Visibility Audit is included in the
+        <a href="/packages" class="font-semibold text-primary underline underline-offset-2 hover:text-primary-dark">Authority plan</a>.
       </p>
-
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
-        {
-          processSteps.map((step) => (
-            <ProcessStep number={step.number} title={step.title} description={step.description} />
-          ))
-        }
-      </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="border-t border-gray-100 bg-white py-16">
-    <div class="mx-auto max-w-4xl px-4">
-      <h2 class="mb-8 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
-        Additional Services FAQ
+  <section class="border-t border-gray-100 bg-white py-20" id="faq">
+    <div class="mx-auto max-w-3xl px-4">
+      <h2 class="mb-10 text-center font-heading text-2xl font-bold text-heading md:text-3xl">
+        Common questions
       </h2>
-
       <div class="space-y-4">
-        {
-          faqs.map((faq) => (
-            <Card variant="elevated" class="border-l-4 border-primary">
-              <h3 class="mb-2 font-heading text-base font-bold text-primary md:text-lg">
-                {faq.question}
-              </h3>
-              <p class="text-sm text-body md:text-base" set:html={faq.answer} />
-            </Card>
-          ))
-        }
+        {faqs.map((faq) => (
+          <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+            <h3 class="mb-2 font-heading text-base font-semibold text-heading">{faq.question}</h3>
+            <p class="text-sm text-body">{faq.answer}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="bg-gradient-to-br from-primary to-primary-dark py-12">
-    <div class="mx-auto max-w-3xl px-4 text-center">
+  <!-- FINAL CTA -->
+  <section class="bg-gradient-to-br from-secondary to-secondary-dark py-16">
+    <div class="mx-auto max-w-2xl px-4 text-center">
       <h2 class="mb-3 font-heading text-2xl font-extrabold text-white md:text-3xl">
-        Ready to Get Started?
+        Ready to find out where you stand?
       </h2>
-      <p class="mb-6 text-base text-white/90 md:text-lg">
-        Order a service or talk to a strategist — no pressure, just honest advice.
+      <p class="mb-8 text-base text-white/85">
+        Book a call and we'll confirm the audit scope, collect your business details, and deliver your report within 5 business days.
       </p>
-      <Button href="#contact" variant="white" size="lg"> Contact Us Today </Button>
+      
+        href="/contact#book"
+        data-evt="cta_ai_audit_final"
+        class="inline-flex items-center rounded-full bg-primary px-8 py-3.5 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-dark"
+      >
+        Book My AI Audit
+        <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"/></svg>
+      </a>
     </div>
   </section>
+
 </Layout>
