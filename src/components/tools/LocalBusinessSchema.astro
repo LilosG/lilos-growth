@@ -1,0 +1,165 @@
+---
+/**
+ * Local Business Schema Generator - Headless
+ */
+---
+
+<div class="flex flex-1 flex-col">
+  <form id="schema-form" class="flex flex-1 flex-col gap-3">
+    <div>
+      <label class="mb-1 block text-xs font-medium text-gray-600">Business Name *</label>
+      <input
+        id="schema-name"
+        type="text"
+        required
+        placeholder="Acme Plumbing"
+        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+      />
+    </div>
+    <div class="grid gap-3 sm:grid-cols-2">
+      <div>
+        <label class="mb-1 block text-xs font-medium text-gray-600">Phone *</label>
+        <input
+          id="schema-phone"
+          type="tel"
+          required
+          placeholder="+1-555-123-4567"
+          class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+        />
+      </div>
+      <div>
+        <label class="mb-1 block text-xs font-medium text-gray-600">Website URL *</label>
+        <input
+          id="schema-url"
+          type="url"
+          required
+          placeholder="https://example.com"
+          class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+        />
+      </div>
+    </div>
+    <div>
+      <label class="mb-1 block text-xs font-medium text-gray-600">Street Address *</label>
+      <input
+        id="schema-street"
+        type="text"
+        required
+        placeholder="123 Main Street"
+        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+      />
+    </div>
+    <div class="grid gap-3 sm:grid-cols-3">
+      <div>
+        <label class="mb-1 block text-xs font-medium text-gray-600">City *</label>
+        <input
+          id="schema-city"
+          type="text"
+          required
+          placeholder="Denver"
+          class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+        />
+      </div>
+      <div>
+        <label class="mb-1 block text-xs font-medium text-gray-600">State *</label>
+        <input
+          id="schema-state"
+          type="text"
+          required
+          placeholder="CO"
+          class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+        />
+      </div>
+      <div>
+        <label class="mb-1 block text-xs font-medium text-gray-600">ZIP *</label>
+        <input
+          id="schema-zip"
+          type="text"
+          required
+          placeholder="80202"
+          class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+        />
+      </div>
+    </div>
+    <div>
+      <label class="mb-1 block text-xs font-medium text-gray-600">Business Type</label>
+      <select
+        id="schema-type"
+        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+      >
+        <option value="LocalBusiness">Local Business</option>
+        <option value="Plumber">Plumber</option>
+        <option value="Electrician">Electrician</option>
+        <option value="HVACBusiness">HVAC Business</option>
+        <option value="RoofingContractor">Roofing Contractor</option>
+        <option value="PestControlCompany">Pest Control</option>
+        <option value="LandscapingBusiness">Landscaping</option>
+        <option value="CleaningCompany">Cleaning Company</option>
+      </select>
+    </div>
+    <div>
+      <label class="mb-1 block text-xs font-medium text-gray-600">Description</label>
+      <textarea
+        id="schema-desc"
+        rows="2"
+        placeholder="Brief description of your business..."
+        class="focus:ring-primary/40 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2"
+      ></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-auto h-11 w-full">Generate Schema</button>
+  </form>
+  <div id="schema-result" class="mt-4 hidden">
+    <div class="mb-2 flex items-center justify-between">
+      <span class="text-xs font-medium text-gray-500">JSON-LD Output</span>
+      <button
+        id="schema-copy"
+        type="button"
+        class="text-xs font-semibold text-primary hover:underline">Copy</button
+      >
+    </div>
+    <pre
+      id="schema-output"
+      class="max-h-64 overflow-auto rounded-lg bg-gray-900 p-4 text-xs text-green-400">
+    </pre>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById("schema-form");
+    const resultEl = document.getElementById("schema-result");
+    const outputEl = document.getElementById("schema-output");
+    const copyBtn = document.getElementById("schema-copy");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": document.getElementById("schema-type").value,
+        name: document.getElementById("schema-name").value.trim(),
+        telephone: document.getElementById("schema-phone").value.trim(),
+        url: document.getElementById("schema-url").value.trim(),
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: document.getElementById("schema-street").value.trim(),
+          addressLocality: document.getElementById("schema-city").value.trim(),
+          addressRegion: document.getElementById("schema-state").value.trim(),
+          postalCode: document.getElementById("schema-zip").value.trim(),
+          addressCountry: "US",
+        },
+      };
+      const desc = document.getElementById("schema-desc").value.trim();
+      if (desc) schema.description = desc;
+      outputEl.textContent = JSON.stringify(schema, null, 2);
+      resultEl.classList.remove("hidden");
+    });
+
+    copyBtn.addEventListener("click", function () {
+      navigator.clipboard.writeText(outputEl.textContent).then(function () {
+        copyBtn.textContent = "Copied!";
+        setTimeout(function () {
+          copyBtn.textContent = "Copy";
+        }, 2000);
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,82 @@
+---
+/**
+ * Landing Page Outline Generator - Headless
+ */
+---
+
+<div class="flex flex-1 flex-col">
+  <form id="lpo-form" class="flex flex-1 flex-col space-y-3">
+    <input
+      id="lpo-service"
+      type="text"
+      required
+      placeholder="Service (e.g., Water Heater Repair)"
+      class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+    />
+    <input
+      id="lpo-city"
+      type="text"
+      required
+      placeholder="City/Area (e.g., Denver, CO)"
+      class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+    />
+    <button type="submit" class="btn btn-primary mt-auto h-11 w-full">Generate Outline</button>
+  </form>
+  <div id="lpo-result" class="mt-4 hidden">
+    <div class="mb-2 flex items-center justify-between">
+      <span class="text-xs font-medium text-gray-500">Your Outline</span>
+      <button id="lpo-copy" type="button" class="text-xs font-semibold text-primary hover:underline"
+        >Copy</button
+      >
+    </div>
+    <pre
+      id="lpo-output"
+      class="max-h-64 overflow-auto rounded-lg border border-gray-200 bg-gray-50 p-4 text-xs text-gray-700">
+    </pre>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById("lpo-form");
+    const resultEl = document.getElementById("lpo-result");
+    const outputEl = document.getElementById("lpo-output");
+    const copyBtn = document.getElementById("lpo-copy");
+
+    function generate(service, city) {
+      return (
+        "# " +
+        service +
+        " in " +
+        city +
+        "\n\n## Hero Section\n- Headline: Professional " +
+        service +
+        " in " +
+        city +
+        "\n- Subheadline: Fast, reliable service from licensed pros\n- CTA: Get a Free Quote / Call Now\n\n## Problem/Pain Points\n- Common " +
+        service.toLowerCase() +
+        " issues in " +
+        city +
+        "\n- Why homeowners need professional help\n\n## Services Offered\n- List 3-5 specific services\n- Emergency/same-day availability\n\n## Why Choose Us\n- Licensed & insured\n- Upfront pricing\n- Local reputation\n\n## Service Process\n1. Contact us\n2. Free estimate\n3. Professional service\n4. Final walkthrough\n\n## Social Proof\n- Google reviews\n- Testimonials\n\n## FAQ Section\n- Cost questions\n- Timeline questions\n- Service area\n\n## Final CTA\n- Schedule Your Free Estimate\n- Phone number"
+      );
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const service = document.getElementById("lpo-service").value.trim();
+      const city = document.getElementById("lpo-city").value.trim();
+      if (!service || !city) return;
+      outputEl.textContent = generate(service, city);
+      resultEl.classList.remove("hidden");
+    });
+
+    copyBtn.addEventListener("click", function () {
+      navigator.clipboard.writeText(outputEl.textContent).then(function () {
+        copyBtn.textContent = "Copied!";
+        setTimeout(function () {
+          copyBtn.textContent = "Copy";
+        }, 2000);
+      });
+    });
+  })();
+</script>

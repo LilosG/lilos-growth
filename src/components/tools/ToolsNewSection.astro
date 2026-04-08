@@ -1,0 +1,22 @@
+---
+import ReviewLinkGenerator from "./ReviewLinkGenerator.astro";
+import GBPCategoryFinder from "./GBPCategoryFinder.astro";
+import LandingPageOutlineGenerator from "./LandingPageOutlineGenerator.astro";
+---
+
+<section class="mx-auto max-w-7xl px-4 py-16">
+  <header class="mb-8 text-center">
+    <h2 class="font-heading text-4xl font-extrabold text-secondary">
+      Lead-Winning Local SEO Tools
+    </h2>
+    <p class="text-secondary/70 mt-2">
+      Instant value for visitors, light email gate on exports for you.
+    </p>
+  </header>
+
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <ReviewLinkGenerator />
+    <GBPCategoryFinder />
+    <LandingPageOutlineGenerator />
+  </div>
+</section>

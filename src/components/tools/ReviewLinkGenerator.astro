@@ -1,0 +1,114 @@
+---
+/**
+ * Review Link Generator - Headless
+ */
+---
+
+<div class="review-link-generator">
+  <form id="rev-form" class="space-y-3">
+    <div class="grid gap-3 sm:grid-cols-3">
+      <input
+        id="rev-name"
+        type="text"
+        required
+        placeholder="Business name"
+        class="focus:ring-primary/20 h-12 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm text-heading focus:border-primary focus:outline-none focus:ring-2"
+      />
+      <input
+        id="rev-city"
+        type="text"
+        placeholder="City"
+        class="focus:ring-primary/20 h-12 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm text-heading focus:border-primary focus:outline-none focus:ring-2"
+      />
+      <input
+        id="rev-region"
+        type="text"
+        placeholder="State or ZIP"
+        class="focus:ring-primary/20 h-12 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm text-heading focus:border-primary focus:outline-none focus:ring-2"
+      />
+    </div>
+    <button
+      type="submit"
+      class="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3.5 text-base font-bold text-white transition-all hover:bg-primary-hover hover:shadow-md"
+      >Find Place</button
+    >
+  </form>
+  <div id="rev-result" class="mt-4"></div>
+</div>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById("rev-form");
+    const result = document.getElementById("rev-result");
+
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const name = document.getElementById("rev-name").value.trim();
+      const city = document.getElementById("rev-city").value.trim();
+      const region = document.getElementById("rev-region").value.trim();
+      if (!name) {
+        result.innerHTML =
+          '<div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">Please enter a business name.</div>';
+        return;
+      }
+
+      let q = name;
+      if (city) q += " " + city;
+      if (region) q += " " + region;
+
+      result.innerHTML =
+        '<div class="rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-600">Searching…</div>';
+
+      try {
+        const res = await fetch("/api/places?q=" + encodeURIComponent(q));
+        const data = await res.json();
+        if (data && data.place_id) {
+          const profileUrl =
+            "https://www.google.com/maps/place/?q=place_id:" + encodeURIComponent(data.place_id);
+          const reviewUrl =
+            "https://search.google.com/local/writereview?placeid=" +
+            encodeURIComponent(data.place_id);
+          const qrUrl =
+            "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +
+            encodeURIComponent(reviewUrl);
+          result.innerHTML = `
+            <div class="rounded-lg border border-gray-200 bg-gray-50 p-4 space-y-3">
+              <div class="font-semibold text-heading">${escapeHtml(data.name || "Match Found")}</div>
+              <div class="text-sm text-gray-600">${escapeHtml(data.address || "")}</div>
+              <div class="flex flex-wrap gap-2">
+                <a href="${profileUrl}" target="_blank" class="btn btn-secondary btn-sm">View Profile</a>
+                <a href="${reviewUrl}" target="_blank" class="btn btn-primary btn-sm">Write Review</a>
+              </div>
+              <div class="pt-2">
+                <div class="text-xs font-medium text-gray-500 mb-2">QR Code</div>
+                <img src="${qrUrl}" alt="QR" width="150" height="150" class="rounded-lg border border-gray-200" />
+              </div>
+              <div>
+                <label class="text-xs font-medium text-gray-500 mb-1 block">Review Link</label>
+                <input type="text" readonly value="${reviewUrl}" class="h-10 w-full rounded-lg border border-gray-300 bg-white px-3 text-sm" onclick="this.select()" />
+              </div>
+            </div>`;
+        } else if (data && data.error) {
+          result.innerHTML =
+            '<div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">' +
+            escapeHtml(data.error) +
+            "</div>";
+        } else {
+          result.innerHTML =
+            '<div class="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">No match found. Try adding city/state.</div>';
+        }
+      } catch {
+        result.innerHTML =
+          '<div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">Something went wrong. Please try again.</div>';
+      }
+    });
+  })();
+</script>
