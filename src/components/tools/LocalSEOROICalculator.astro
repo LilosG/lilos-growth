@@ -5,7 +5,7 @@
 
 <div id="lroi-root">
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap");
+    /* Uses site font stack */
 
     #lroi-root * {
       box-sizing: border-box;
@@ -14,7 +14,7 @@
     }
 
     #lroi-root {
-      font-family: "DM Sans", sans-serif;
+      font-family: var(--font-body, sans-serif);
       background: #f8f7f4;
       min-height: 100%;
       padding: 56px 20px 72px;
@@ -35,10 +35,10 @@
       align-items: center;
       gap: 8px;
       margin-bottom: 18px;
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       font-size: 11px;
       font-weight: 700;
-      color: #f97316;
+      color: var(--color-primary, #e8601c);
       letter-spacing: 0.14em;
       text-transform: uppercase;
     }
@@ -46,13 +46,13 @@
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background: #f97316;
+      background: var(--color-primary, #e8601c);
     }
     .lroi-header h1 {
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       font-size: clamp(28px, 5vw, 42px);
       font-weight: 800;
-      color: #0f1f3d;
+      color: var(--color-secondary, #1a2e4a);
       margin-bottom: 14px;
       line-height: 1.15;
       letter-spacing: -0.02em;
@@ -74,7 +74,7 @@
         0 1px 4px rgba(15, 31, 61, 0.04);
     }
     .lroi-section-label {
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
@@ -140,7 +140,7 @@
       position: absolute;
       left: 22px;
       top: -8px;
-      background: #0f1f3d;
+      background: var(--color-secondary, #1a2e4a);
       color: #e2e8f0;
       font-size: 11.5px;
       line-height: 1.5;
@@ -158,7 +158,7 @@
       top: 12px;
       width: 10px;
       height: 10px;
-      background: #0f1f3d;
+      background: var(--color-secondary, #1a2e4a);
       transform: rotate(45deg);
     }
     .lroi-tip-wrap:hover .lroi-tip-box {
@@ -193,7 +193,7 @@
       width: 100%;
       padding: 12px 14px;
       font-size: 14.5px;
-      font-family: "DM Sans", sans-serif;
+      font-family: var(--font-body, sans-serif);
       font-weight: 500;
       border: 1.5px solid #e8e4de;
       border-radius: 10px;
@@ -210,9 +210,9 @@
     #lroi-root input[type="text"]:focus,
     #lroi-root input[type="number"]:focus,
     #lroi-root select:focus {
-      border-color: #0f1f3d;
+      border-color: var(--color-secondary, #1a2e4a);
       background: #fff;
-      box-shadow: 0 0 0 3px rgba(15, 31, 61, 0.08);
+      box-shadow: 0 0 0 3px rgba(26, 46, 74, 0.08);
     }
     #lroi-root input.lroi-has-prefix {
       padding-left: 28px;
@@ -243,8 +243,8 @@
       padding: 16px;
       font-size: 15px;
       font-weight: 700;
-      font-family: "Sora", sans-serif;
-      background: #f97316;
+      font-family: var(--font-heading, "Inter", sans-serif);
+      background: var(--color-primary, #e8601c);
       color: #fff;
       border: none;
       border-radius: 12px;
@@ -254,12 +254,12 @@
         background 0.15s,
         transform 0.1s,
         box-shadow 0.15s;
-      box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
+      box-shadow: 0 4px 16px rgba(232, 96, 28, 0.3);
       margin-top: 6px;
     }
     .lroi-btn:hover {
-      background: #ea6c0a;
-      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.38);
+      background: var(--color-primary-dark, #c94e14);
+      box-shadow: 0 6px 20px rgba(232, 96, 28, 0.38);
       transform: translateY(-1px);
     }
     .lroi-btn:active {
@@ -276,7 +276,7 @@
       display: none;
     }
     .lroi-results-hd {
-      background: #0f1f3d;
+      background: var(--color-secondary, #1a2e4a);
       padding: 24px 32px;
       position: relative;
       overflow: hidden;
@@ -292,7 +292,7 @@
       background: rgba(249, 115, 22, 0.08);
     }
     .lroi-results-ey {
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       font-size: 11px;
       font-weight: 600;
       color: rgba(255, 255, 255, 0.45);
@@ -301,7 +301,7 @@
       margin-bottom: 4px;
     }
     .lroi-results-ti {
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       font-size: 19px;
       font-weight: 700;
       color: #fff;
@@ -310,7 +310,7 @@
       padding: 32px;
     }
     .lroi-sec-label {
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       font-size: 10px;
       font-weight: 700;
       color: #94a3b8;
@@ -352,7 +352,7 @@
       border-color: #86efac;
     }
     .lroi-tbox-lbl {
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       font-size: 9.5px;
       font-weight: 700;
       text-transform: uppercase;
@@ -369,7 +369,7 @@
       color: #16a34a;
     }
     .lroi-tbox-num {
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       font-size: 26px;
       font-weight: 800;
       line-height: 1;
@@ -429,11 +429,11 @@
       border-color: #e8e4de;
     }
     .lroi-mc-h {
-      background: #0f1f3d;
-      border-color: #0f1f3d;
+      background: var(--color-secondary, #1a2e4a);
+      border-color: var(--color-secondary, #1a2e4a);
     }
     .lroi-mc-lbl {
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       font-size: 9.5px;
       font-weight: 700;
       text-transform: uppercase;
@@ -447,7 +447,7 @@
       color: rgba(255, 255, 255, 0.5);
     }
     .lroi-mc-val {
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       font-size: 24px;
       font-weight: 800;
       line-height: 1;
@@ -485,7 +485,7 @@
       border-color: #fca5a5;
     }
     .lroi-roi-ey {
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
@@ -499,7 +499,7 @@
       color: #dc2626;
     }
     .lroi-roi-num {
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       font-size: clamp(52px, 10vw, 72px);
       font-weight: 800;
       line-height: 1;
@@ -530,7 +530,7 @@
       color: #15803d;
       font-size: 12px;
       font-weight: 700;
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       padding: 5px 16px;
       border-radius: 20px;
       letter-spacing: 0.02em;
@@ -547,10 +547,10 @@
     }
     .lroi-cta-link {
       display: inline-block;
-      background: #f97316;
+      background: var(--color-primary, #e8601c);
       color: #fff;
       font-weight: 700;
-      font-family: "Sora", sans-serif;
+      font-family: var(--font-heading, "Inter", sans-serif);
       font-size: 14.5px;
       padding: 15px 36px;
       border-radius: 12px;
@@ -560,12 +560,12 @@
         background 0.15s,
         transform 0.1s,
         box-shadow 0.15s;
-      box-shadow: 0 4px 16px rgba(249, 115, 22, 0.28);
+      box-shadow: 0 4px 16px rgba(232, 96, 28, 0.28);
     }
     .lroi-cta-link:hover {
-      background: #ea6c0a;
+      background: var(--color-primary-dark, #c94e14);
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.36);
+      box-shadow: 0 6px 20px rgba(232, 96, 28, 0.36);
       text-decoration: none;
     }
     .lroi-cta-sub {
@@ -573,20 +573,7 @@
       color: #94a3b8;
       margin-top: 12px;
     }
-    .lroi-powered {
-      text-align: center;
-      font-size: 12px;
-      color: #94a3b8;
-      margin-top: 24px;
-    }
-    .lroi-powered a {
-      color: #f97316;
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .lroi-powered a:hover {
-      text-decoration: underline;
-    }
+
   </style>
 
   <div class="lroi-inner">
@@ -797,16 +784,11 @@
         </p>
         <div class="lroi-cta">
           <a class="lroi-cta-link" href="/contact#book">Book a Free Strategy Call →</a>
-          <div class="lroi-cta-sub">
-            Lilos Growth · Local SEO for Home Service Businesses · Carlsbad, CA
-          </div>
+          <div class="lroi-cta-sub">No commitment. Just a free audit and action plan.</div>
         </div>
       </div>
     </div>
-    <div class="lroi-powered">
-      Powered by <a href="/">Lilos Growth</a> · Helping home service businesses achieve predictable,
-      long-term growth through SEO.
-    </div>
+
   </div>
 
   <script is:inline>
