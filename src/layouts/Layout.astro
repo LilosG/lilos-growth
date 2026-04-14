@@ -78,8 +78,8 @@ declare global {
         --color-secondary: #1f2d3d;
         --color-heading: #1f2d3d;
         --color-body: #374151;
-        --font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        --font-heading: "Barlow", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
       }
       *,
       *::before,
@@ -110,7 +110,6 @@ declare global {
         line-height: 1.2;
       }
       h1 {
-        font-size: 2.5rem;
         font-weight: 800;
       }
       h2 {
@@ -121,11 +120,11 @@ declare global {
         font-size: 1.5rem;
         font-weight: 600;
       }
-      a {
+      a:not([class]) {
         color: var(--color-primary);
         text-decoration: none;
       }
-      a:hover {
+      a:not([class]):hover {
         text-decoration: underline;
       }
       img {
@@ -185,6 +184,9 @@ declare global {
     <slot name="head" />
 
     <!-- Preconnect to CDN for faster CSS loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://lilosgrowth.com" />
     <link rel="preconnect" href="https://www.google-analytics.com" />
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />

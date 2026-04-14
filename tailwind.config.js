@@ -106,6 +106,8 @@ export default {
         "4xl": ["var(--text-4xl)", { lineHeight: "var(--leading-tight)" }],
         "5xl": ["var(--text-5xl)", { lineHeight: "var(--leading-tight)" }],
         "6xl": ["var(--text-6xl)", { lineHeight: "var(--leading-tight)" }],
+        "7xl": ["var(--text-7xl)", { lineHeight: "var(--leading-tight)" }],
+        "8xl": ["var(--text-8xl)", { lineHeight: "var(--leading-none)" }],
       },
 
       spacing: {

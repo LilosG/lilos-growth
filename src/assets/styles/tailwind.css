@@ -77,10 +77,8 @@
   --space-section-padding-sm: 3rem;
 
   /* Typography */
-  --font-heading:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-body:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-heading: "Barlow", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   --text-xs: 0.625rem;
   --text-sm: 0.75rem;
   --text-base: 0.875rem;
@@ -91,6 +89,8 @@
   --text-4xl: 1.875rem;
   --text-5xl: 2.25rem;
   --text-6xl: 3rem;
+  --text-7xl: 3.75rem;
+  --text-8xl: 4.5rem;
   --leading-tight: 1.25;
   --leading-snug: 1.4;
   --leading-normal: 1.5;
@@ -216,12 +216,14 @@ h6 {
   @apply font-heading text-heading;
 }
 
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
+@layer base {
+  a:not([class]) {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  a:not([class]):hover {
+    text-decoration: underline;
+  }
 }
 img {
   max-width: 100%;
@@ -249,13 +251,7 @@ img {
 
 /* ---- 5. COMPONENT STYLES ---- */
 @layer components {
-  /* CTA tracking */
-  [data-evt^="cta_"] {
-    @apply btn btn-primary;
-  }
-  [data-evt^="cta_"][data-cta="secondary"] {
-    @apply btn btn-outline;
-  }
+  /* CTA tracking — visual styling must not be driven by analytics attributes */
 
   /* Card grids */
   #results-grid > *,
