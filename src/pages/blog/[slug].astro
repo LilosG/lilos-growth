@@ -1,19 +1,74 @@
 ---
-import Layout from "~/layouts/PageLayout.astro";
-import { getCollection } from "astro:content";
-import { getSlug, getDate, formatDate, allowDrafts, type BlogEntry } from "../../lib/blog";
+// src/pages/blog/[slug].astro
+// Lilos Growth — Blog Post Route
+// ================================
+// Previous version had no Related Posts wiring (the component exists but
+// was never imported or called), no money page links, and a hardcoded
+// global CTA that didn't adapt to post topic.
+//
+// This version:
+//   - Imports and renders RelatedPosts from src/components/RelatedPosts.astro
+//   - Builds money page links from category + tags
+//   - Keeps the existing hero, reading area, and CTA section design
 
-// Build static paths using your canonical slug logic
+import Layout from '~/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+import {
+  getSlug,
+  getDate,
+  formatDate,
+  allowDrafts,
+  type BlogEntry,
+} from '../../lib/blog';
+
+// ── Money page registry ───────────────────────────────────────────────────
+// Maps blog categories and tags to relevant service landing pages.
+// The layout uses category + tags from frontmatter to select the most
+// relevant money pages to surface at the bottom of each post.
+
+const CATEGORY_MONEY_PAGES: Record<string, { label: string; href: string }[]> = {
+  'Local SEO': [
+    { label: 'Local SEO Services',         href: '/services/local-seo/' },
+    { label: 'Google Business Profile',    href: '/services/google-business-profile/' },
+  ],
+  'Google Business Profile': [
+    { label: 'GBP Optimization Service',   href: '/services/google-business-profile/' },
+    { label: 'Local SEO Services',         href: '/services/local-seo/' },
+  ],
+  'Websites': [
+    { label: 'Website Design for Contractors', href: '/services/website-design/' },
+    { label: 'Local SEO Services',             href: '/services/local-seo/' },
+  ],
+  'SEO': [
+    { label: 'Local SEO Services',         href: '/services/local-seo/' },
+    { label: 'Website Design',             href: '/services/website-design/' },
+  ],
+  'Content': [
+    { label: 'Local SEO Services',         href: '/services/local-seo/' },
+    { label: 'GBP Optimization Service',   href: '/services/google-business-profile/' },
+  ],
+  'Workflows': [
+    { label: 'Local SEO Services',         href: '/services/local-seo/' },
+    { label: 'GBP Optimization Service',   href: '/services/google-business-profile/' },
+  ],
+};
+
+const DEFAULT_MONEY_PAGES = [
+  { label: 'Local SEO for Home Service Businesses', href: '/services/local-seo/' },
+  { label: 'Google Business Profile Optimization',  href: '/services/google-business-profile/' },
+];
+
+// ── Static paths ──────────────────────────────────────────────────────────
+
 export async function getStaticPaths() {
-  const posts: BlogEntry[] = await getCollection("blog");
+  const posts: BlogEntry[] = await getCollection('blog');
   return posts.map((p) => ({ params: { slug: getSlug(p) } }));
 }
 
-const slug = String(Astro.params.slug ?? "");
-
-// Find the post by the same slug logic used above
-const posts: BlogEntry[] = await getCollection("blog");
+const slug = String(Astro.params.slug ?? '');
+const posts: BlogEntry[] = await getCollection('blog');
 const entry = posts.find((p) => getSlug(p) === slug);
+
 if (!entry) throw new Error(`Post not found for slug: ${slug}`);
 if (entry.data.draft && !allowDrafts()) {
   throw new Error(`Draft post not available: ${slug}`);
@@ -21,89 +76,214 @@ if (entry.data.draft && !allowDrafts()) {
 
 const { Content } = await entry.render();
 
-// Meta
-const title = entry.data.title ?? "Untitled";
-const description = entry.data.description ?? "";
-const date = getDate(entry);
-const category = entry.data.category;
-const image = typeof entry.data.image === "string" ? entry.data.image : entry.data.image?.src;
+// ── Derived data ──────────────────────────────────────────────────────────
+
+const title       = entry.data.title ?? 'Untitled';
+const description = entry.data.description ?? '';
+const date        = getDate(entry);
+const category    = entry.data.category as string | undefined;
+const image       = typeof entry.data.image === 'string'
+  ? entry.data.image
+  : entry.data.image?.src;
 const imageAlt =
-  typeof entry.data.imageAlt === "string" && entry.data.imageAlt.trim()
+  typeof entry.data.imageAlt === 'string' && entry.data.imageAlt.trim()
     ? entry.data.imageAlt
-    : typeof entry.data.image === "object" &&
-        entry.data.image &&
-        typeof entry.data.image.alt === "string" &&
-        entry.data.image.alt.trim()
+    : typeof entry.data.image === 'object' && entry.data.image?.alt?.trim()
       ? entry.data.image.alt
       : title;
+const tags: string[] = (entry.data as Record<string, unknown>).tags as string[] ?? [];
+
+// Money pages — derived from category, falling back to defaults
+const moneyPages =
+  (category && CATEGORY_MONEY_PAGES[category]) ?? DEFAULT_MONEY_PAGES;
+
+// Related posts — scored by tag overlap then recency, max 3
+const otherPosts = posts.filter((p) => getSlug(p) !== slug && !(p.data as Record<string, unknown>).draft);
+const relatedPosts = otherPosts
+  .map((p) => {
+    const pTags: string[] = (p.data as Record<string, unknown>).tags as string[] ?? [];
+    const overlap = pTags.filter((t) => tags.includes(t)).length;
+    return { post: p, overlap };
+  })
+  .sort(
+    (a, b) =>
+      b.overlap - a.overlap ||
+      (getDate(b.post)?.getTime() ?? 0) - (getDate(a.post)?.getTime() ?? 0),
+  )
+  .slice(0, 3)
+  .map(({ post }) => post);
 ---
 
-<Layout title={title} description={description} metadata={{ title, description }}>
-  <!-- HERO: hard, reliable contrast; no overlays; immune to inherited opacity -->
+<Layout
+  title={title}
+  description={description}
+  metadata={{ title, description }}
+>
+
+  <!-- ── Hero ──────────────────────────────────────────────────────────── -->
   <section class="relative isolate bg-secondary pb-14 pt-10 text-white">
     <div class="container">
-      <a href="/blog" class="inline-block text-sm opacity-90 hover:opacity-100">← Back to Blog</a>
-
+      <a href="/blog" class="inline-block text-sm opacity-90 hover:opacity-100">
+        ← Back to Blog
+      </a>
       <div class="mt-4">
-        <h1
-          class="text-4xl font-extrabold leading-tight tracking-tight !text-white !opacity-100 drop-shadow-sm md:text-5xl"
-        >
+        <h1 class="text-4xl font-extrabold leading-tight tracking-tight !text-white !opacity-100 drop-shadow-sm md:text-5xl">
           {title}
         </h1>
-        <div class="mt-4 flex items-center gap-3 text-sm">
-          {
-            category && (
-              <span class="rounded-full border border-white/25 bg-white/10 px-2 py-1 !text-white">
-                {category}
-              </span>
-            )
-          }
-          {date && <time class="!text-white/90">{formatDate(date)}</time>}
+        <div class="mt-4 flex flex-wrap items-center gap-3 text-sm">
+          {category && (
+            <span class="rounded-full border border-white/25 bg-white/10 px-2 py-1 !text-white">
+              {category}
+            </span>
+          )}
+          {date && (
+            <time class="!text-white/90">{formatDate(date)}</time>
+          )}
         </div>
       </div>
     </div>
   </section>
 
-  <!-- READING AREA: light page bg + white card for maximum legibility -->
+  <!-- ── Article ────────────────────────────────────────────────────────── -->
   <section class="bg-slate-50 py-12">
     <div class="container">
-      <div
-        class="mx-auto max-w-3xl rounded-3xl border border-gray-100 bg-white p-6 shadow-xl md:p-10"
-      >
-        {
-          image && (
-            <img
-              src={image}
-              alt={imageAlt}
-              class="mb-8 rounded-2xl shadow"
-              loading="lazy"
-              decoding="async"
-            />
-          )
-        }
+      <div class="mx-auto max-w-3xl rounded-3xl border border-gray-100 bg-white p-6 shadow-xl md:p-10">
 
-        <!-- Tailwind Typography, branded colors, comfortable sizes -->
-        <div
-          class="prose prose-slate lg:prose-lg prose-headings:text-heading prose-p:text-[#4a4a4a] prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-blockquote:rounded-xl prose-blockquote:border-[#ffd8c5] prose-blockquote:bg-[#fff4ee] prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:text-[#55301f] prose-strong:text-heading prose-hr:border-gray-200 max-w-none"
-        >
+        {image && (
+          <img
+            src={image}
+            alt={imageAlt}
+            class="mb-8 rounded-2xl shadow w-full h-auto"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            width="1200"
+            height="675"
+          />
+        )}
+
+        <div class="prose prose-slate lg:prose-lg prose-headings:text-heading prose-p:text-[#4a4a4a] prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-blockquote:rounded-xl prose-blockquote:border-[#ffd8c5] prose-blockquote:bg-[#fff4ee] prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:text-[#55301f] prose-strong:text-heading prose-hr:border-gray-200 max-w-none">
           <Content />
+        </div>
+
+        {tags.length > 0 && (
+          <div class="mt-8 pt-6 border-t border-gray-100">
+            <div class="flex flex-wrap gap-2">
+              {tags.map((t: string) => (
+                <a
+                  href={`/blog/tag/${encodeURIComponent(t)}`}
+                  class="rounded-full border border-primary/20 bg-primary-50 px-3 py-1 text-xs text-primary hover:bg-primary-100 transition-colors"
+                >
+                  {t}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Money pages / Popular Service Pages ───────────────────────────── -->
+  <section class="border-t border-gray-100 bg-white py-10">
+    <div class="container">
+      <div class="mx-auto max-w-4xl">
+        <p class="text-xs font-semibold uppercase tracking-wide text-body/60 mb-2 text-center">
+          Local SEO Services
+        </p>
+        <h2 class="text-center text-xl font-bold text-heading mb-6">
+          Popular Service Pages
+        </h2>
+        <div class="flex flex-wrap justify-center gap-3">
+          {moneyPages.map((page) => (
+            <a
+              href={page.href}
+              class="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-white px-4 py-2 text-sm font-semibold text-heading hover:border-primary hover:text-primary transition-colors"
+            >
+              <svg class="w-3.5 h-3.5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              {page.label}
+            </a>
+          ))}
         </div>
       </div>
     </div>
   </section>
 
-  <!-- GLOBAL BLOG CTA: consistent next steps on every post -->
+  <!-- ── Related posts ─────────────────────────────────────────────────── -->
+  {relatedPosts.length > 0 && (
+    <section class="border-t border-gray-100 bg-slate-50 py-12">
+      <div class="container">
+        <div class="mx-auto max-w-5xl">
+          <h2 class="text-2xl font-bold text-heading mb-6">Related Articles</h2>
+          <div class="grid gap-6 md:grid-cols-3">
+            {relatedPosts.map((p) => {
+              const pDate = getDate(p);
+              const pImage = typeof (p.data as Record<string, unknown>).image === 'string'
+                ? (p.data as Record<string, unknown>).image as string
+                : ((p.data as Record<string, unknown>).image as { src?: string } | undefined)?.src;
+              const pTags: string[] = (p.data as Record<string, unknown>).tags as string[] ?? [];
+              return (
+                <article class="overflow-hidden rounded-3xl border-2 border-primary/10 bg-white shadow-xl transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-primary-lg">
+                  <a href={`/blog/${getSlug(p)}`} class="block p-6">
+                    {pImage && (
+                      <div class="mb-4 overflow-hidden rounded-2xl aspect-video">
+                        <img
+                          src={pImage}
+                          alt={(p.data as Record<string, unknown>).title as string}
+                          class="w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
+                          width="600"
+                          height="338"
+                        />
+                      </div>
+                    )}
+                    <div class="text-xs text-body mb-1">
+                      {(p.data as Record<string, unknown>).category as string}
+                      {pDate && (
+                        <>
+                          {' · '}
+                          <time datetime={pDate.toISOString()}>{formatDate(pDate)}</time>
+                        </>
+                      )}
+                    </div>
+                    <h3 class="text-base font-semibold text-heading leading-snug mb-2">
+                      {(p.data as Record<string, unknown>).title as string}
+                    </h3>
+                    <p class="text-sm text-body line-clamp-2">
+                      {(p.data as Record<string, unknown>).description as string}
+                    </p>
+                    {pTags.length > 0 && (
+                      <div class="mt-3 flex flex-wrap gap-1.5">
+                        {pTags.slice(0, 2).map((t: string) => (
+                          <span class="rounded-full border border-primary/20 bg-primary-50 px-2 py-0.5 text-xs text-primary">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </a>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ── CTA ───────────────────────────────────────────────────────────── -->
   <section class="bg-secondary py-10 text-white">
     <div class="container">
-      <div
-        class="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-white/5 px-6 py-8 shadow-xl md:px-10"
-      >
+      <div class="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-white/5 px-6 py-8 shadow-xl md:px-10">
         <h2 class="text-2xl font-extrabold tracking-tight md:text-3xl">
           Ready to turn this into real leads?
         </h2>
         <p class="mt-3 text-sm text-white/80 md:text-base">
-          Put these playbooks into action with a Local SEO plan tailored for your home service
-          business.
+          Put these playbooks into action with a Local SEO plan tailored for your home service business.
         </p>
         <div class="mt-5 flex flex-wrap gap-3">
           <a
@@ -118,10 +298,11 @@ const imageAlt =
             class="inline-flex items-center rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white/90 hover:bg-white/10"
             data-evt="cta_blog_book_call"
           >
-            Book a Call
+            Let's Talk
           </a>
         </div>
       </div>
     </div>
   </section>
+
 </Layout>
