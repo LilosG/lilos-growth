@@ -132,8 +132,8 @@ const relatedPosts = otherPosts
           <div class="mt-8 pt-6 border-t border-gray-100">
             <div class="flex flex-wrap gap-2">
               {tags.map((t) => (
-                
-                  href={"/blog/tag/" + encodeURIComponent(t)}
+                <a
+                  href={`/blog/tag/${encodeURIComponent(t)}`}
                   class="rounded-full border border-primary/20 bg-primary-50 px-3 py-1 text-xs text-primary hover:bg-primary-100 transition-colors"
                 >
                   {t}
