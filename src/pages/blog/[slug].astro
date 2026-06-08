@@ -50,6 +50,16 @@ const moneyPages = (category && CATEGORY_MONEY_PAGES[category]) ?? [
   { label: "Local SEO for Home Service Businesses", href: "/services/local-seo/" },
   { label: "Google Business Profile Optimization", href: "/services/google-business-profile/" },
 ];
+const relatedPosts = posts
+  .filter((p) => getSlug(p) !== slug && !p.data.draft)
+  .map((p) => {
+    const pTags = p.data.tags ?? [];
+    const overlap = pTags.filter((t) => tags.includes(t)).length;
+    return { post: p, overlap };
+  })
+  .sort((a, b) => b.overlap - a.overlap || (getDate(b.post)?.getTime() ?? 0) - (getDate(a.post)?.getTime() ?? 0))
+  .slice(0, 3)
+  .map(({ post }) => post);
 
 ---
 
@@ -126,6 +136,34 @@ const moneyPages = (category && CATEGORY_MONEY_PAGES[category]) ?? [
       </div>
     </div>
   </section>
+
+
+  <!-- RELATED ARTICLES -->
+  {
+    relatedPosts.length === 0 ? null : (
+      <section class="border-t border-gray-100 bg-slate-50 py-12">
+        <div class="container">
+          <div class="mx-auto max-w-5xl">
+            <h2 class="text-2xl font-bold text-heading mb-6">Related Articles</h2>
+            <div class="grid gap-6 md:grid-cols-3">
+              {
+                relatedPosts.map((p) => {
+                  const pDate = getDate(p);
+                  return (
+                    <a href={`/blog/${getSlug(p)}`} class="block overflow-hidden rounded-3xl border-2 border-primary/10 bg-white shadow-xl p-6 hover:-translate-y-1 transition-transform">
+                      <div class="text-xs text-body mb-1">{p.data.category}</div>
+                      <h3 class="text-base font-semibold text-heading leading-snug mb-2">{p.data.title}</h3>
+                      <p class="text-sm text-body line-clamp-2">{p.data.description}</p>
+                    </a>
+                  );
+                })
+              }
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   <!-- GLOBAL BLOG CTA: consistent next steps on every post -->
   <section class="bg-secondary py-10 text-white">
