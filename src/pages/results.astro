@@ -1,8 +1,7 @@
 ---
 import PageLayout from "~/layouts/PageLayout.astro";
 import CaseStudyCard from "~/components/results/CaseStudyCard.astro";
-import ResultsCTABand from "~/components/results/ResultsCTABand.astro";
-import { resultsStats, resultsCaseStudies, resultsFaqs, serviceTypeLabels } from "~/data/results";
+import { resultsCaseStudies, resultsFaqs, serviceTypeLabels } from "~/data/results";
 import type { ServiceType } from "~/data/results";
 
 const featuredStudy = resultsCaseStudies.find((s) => s.featured);
@@ -39,22 +38,36 @@ const agencyStats = [
   title="Client Results & Case Studies | Lilos Growth"
   description="Real results for home service businesses: more calls, better rankings, faster websites. See how we help pest control, HVAC, restoration, and other local businesses grow."
 >
-
   <!-- HERO -->
   <section class="relative overflow-hidden bg-secondary pb-24 pt-20" aria-label="Results hero">
-    <div class="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] translate-x-1/3 -translate-y-1/4 rounded-full opacity-[0.10]" style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);" aria-hidden="true"></div>
+    <div
+      class="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
+      style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
+      aria-hidden="true"
+    >
+    </div>
     <div class="relative z-10 mx-auto max-w-5xl px-6">
       <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Proven Results</p>
       <h1 class="mb-4 font-heading text-5xl font-extrabold leading-tight text-white md:text-6xl">
         More calls. Better rankings.<br /><span class="text-primary">Real growth.</span>
       </h1>
       <p class="mb-8 max-w-2xl text-lg font-medium text-white/65">
-        We help home service businesses dominate local search with fast websites, optimized Google Business Profiles, and local SEO that actually drives calls.
+        We help home service businesses dominate local search with fast websites, optimized Google
+        Business Profiles, and local SEO that actually drives calls.
       </p>
       <div class="flex flex-wrap gap-3">
-        <span class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white">Website Design</span>
-        <span class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white">GBP Optimization</span>
-        <span class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white">Local SEO</span>
+        <span
+          class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white"
+          >Website Design</span
+        >
+        <span
+          class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white"
+          >GBP Optimization</span
+        >
+        <span
+          class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white"
+          >Local SEO</span
+        >
       </div>
     </div>
   </section>
@@ -63,119 +76,173 @@ const agencyStats = [
   <section class="bg-white py-16">
     <div class="mx-auto max-w-5xl px-6">
       <div class="grid grid-cols-2 gap-5 md:grid-cols-4">
-        {agencyStats.map((stat) => (
-          <div class="rounded-2xl border border-border-subtle bg-white p-6 text-center shadow-sm transition hover:border-primary/30 hover:shadow-md">
-            <p class="font-heading text-4xl font-extrabold text-primary">{stat.value}</p>
-            <p class="mt-1 text-sm font-bold text-heading">{stat.label}</p>
-            <p class="mt-1 text-xs text-muted">{stat.sub}</p>
-          </div>
-        ))}
+        {
+          agencyStats.map((stat) => (
+            <div class="hover:border-primary/30 rounded-2xl border border-border-subtle bg-white p-6 text-center shadow-sm transition hover:shadow-md">
+              <p class="font-heading text-4xl font-extrabold text-primary">{stat.value}</p>
+              <p class="mt-1 text-sm font-bold text-heading">{stat.label}</p>
+              <p class="mt-1 text-xs text-muted">{stat.sub}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- FEATURED CASE STUDY -->
-  {featuredStudy && (
-    <section class="bg-background-cream py-20">
-      <div class="mx-auto max-w-5xl px-6">
-        <div class="mb-8 flex items-center gap-3">
-          <span class="rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">Featured</span>
-          <h2 class="font-heading text-2xl font-bold text-heading">Client Spotlight</h2>
-        </div>
-        <div class="overflow-hidden rounded-3xl border border-border-subtle bg-white shadow-2xl">
-          <div class="grid grid-cols-1 lg:grid-cols-2">
-            <div class="relative bg-secondary-dark">
-              {featuredStudy.screenshot && (
-                <div class="aspect-[4/3] overflow-hidden lg:absolute lg:inset-0 lg:aspect-auto">
-                  <img
-                    src={featuredStudy.screenshot.src}
-                    alt={featuredStudy.screenshot.alt || featuredStudy.client}
-                    class="h-full w-full object-cover object-top"
-                    loading="eager"
-                  />
-                </div>
-              )}
-              {featuredStudy.websiteUrl && (
-                <a
-                  href={featuredStudy.websiteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-sm font-semibold text-heading shadow-lg backdrop-blur transition hover:bg-white"
-                >
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                  View Live Site
-                </a>
-              )}
-            </div>
-            <div class="flex flex-col justify-center p-8 lg:p-10">
-              {featuredStudy.image?.src && (
-                <img src={featuredStudy.image.src} alt={featuredStudy.image.alt || featuredStudy.client} class="mb-4 h-10 w-auto object-contain" />
-              )}
-              <h3 class="font-heading text-2xl font-bold text-heading md:text-3xl">{featuredStudy.title}</h3>
-              <p class="mt-1 text-sm text-muted">{featuredStudy.city} · {featuredStudy.sectorTag}</p>
-              <div class="mt-4 flex flex-wrap gap-2">
-                {featuredStudy.serviceTypes.map((type: ServiceType) => (
-                  <span class:list={[
-                    "inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold",
-                    type === "website" && "bg-service-website-light text-service-website",
-                    type === "gbp" && "bg-service-gbp-light text-service-gbp",
-                    type === "local-seo" && "bg-service-seo-light text-service-seo",
-                  ]}>
-                    {serviceTypeLabels[type]}
-                  </span>
-                ))}
-              </div>
-              <p class="mt-4 text-base text-body">{featuredStudy.blurb}</p>
-              <div class="mt-6 grid grid-cols-3 gap-4 border-t border-border-subtle pt-6">
-                {featuredStudy.kpis.slice(0, 3).map((kpi) => (
-                  <div class="text-center">
-                    <p class="font-heading text-2xl font-bold text-primary md:text-3xl">{kpi.value}</p>
-                    <p class="mt-1 text-xs uppercase tracking-wider text-muted">{kpi.label}</p>
+  {
+    featuredStudy && (
+      <section class="bg-background-cream py-20">
+        <div class="mx-auto max-w-5xl px-6">
+          <div class="mb-8 flex items-center gap-3">
+            <span class="rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
+              Featured
+            </span>
+            <h2 class="font-heading text-2xl font-bold text-heading">Client Spotlight</h2>
+          </div>
+          <div class="overflow-hidden rounded-3xl border border-border-subtle bg-white shadow-2xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+              <div class="relative bg-secondary-dark">
+                {featuredStudy.screenshot && (
+                  <div class="aspect-[4/3] overflow-hidden lg:absolute lg:inset-0 lg:aspect-auto">
+                    <img
+                      src={featuredStudy.screenshot.src}
+                      alt={featuredStudy.screenshot.alt || featuredStudy.client}
+                      class="h-full w-full object-cover object-top"
+                      loading="eager"
+                    />
                   </div>
-                ))}
+                )}
+                {featuredStudy.websiteUrl && (
+                  <a
+                    href={featuredStudy.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-sm font-semibold text-heading shadow-lg backdrop-blur transition hover:bg-white"
+                  >
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                    View Live Site
+                  </a>
+                )}
               </div>
-              <div class="mt-8">
-                <a href={featuredStudy.ctaHref || "/contact"} class="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-heading text-sm font-bold text-white shadow transition hover:bg-primary-dark">
-                  {featuredStudy.ctaText || "Learn More"}
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"/></svg>
-                </a>
+              <div class="flex flex-col justify-center p-8 lg:p-10">
+                {featuredStudy.image?.src && (
+                  <img
+                    src={featuredStudy.image.src}
+                    alt={featuredStudy.image.alt || featuredStudy.client}
+                    class="mb-4 h-10 w-auto object-contain"
+                  />
+                )}
+                <h3 class="font-heading text-2xl font-bold text-heading md:text-3xl">
+                  {featuredStudy.title}
+                </h3>
+                <p class="mt-1 text-sm text-muted">
+                  {featuredStudy.city} · {featuredStudy.sectorTag}
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                  {featuredStudy.serviceTypes.map((type: ServiceType) => (
+                    <span
+                      class:list={[
+                        "inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold",
+                        type === "website" && "bg-service-website-light text-service-website",
+                        type === "gbp" && "bg-service-gbp-light text-service-gbp",
+                        type === "local-seo" && "bg-service-seo-light text-service-seo",
+                      ]}
+                    >
+                      {serviceTypeLabels[type]}
+                    </span>
+                  ))}
+                </div>
+                <p class="mt-4 text-base text-body">{featuredStudy.blurb}</p>
+                <div class="mt-6 grid grid-cols-3 gap-4 border-t border-border-subtle pt-6">
+                  {featuredStudy.kpis.slice(0, 3).map((kpi) => (
+                    <div class="text-center">
+                      <p class="font-heading text-2xl font-bold text-primary md:text-3xl">
+                        {kpi.value}
+                      </p>
+                      <p class="mt-1 text-xs uppercase tracking-wider text-muted">{kpi.label}</p>
+                    </div>
+                  ))}
+                </div>
+                <div class="mt-8">
+                  <a
+                    href={featuredStudy.ctaHref || "/contact"}
+                    class="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-heading text-sm font-bold text-white shadow transition hover:bg-primary-dark"
+                  >
+                    {featuredStudy.ctaText || "Learn More"}
+                    <svg
+                      class="h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M5 12h14M13 18l6-6-6-6" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  )}
+      </section>
+    )
+  }
 
   <!-- GBP PERFORMANCE -->
   <section class="bg-white py-20">
     <div class="mx-auto max-w-5xl px-6">
       <div class="mb-12 text-center">
-        <span class="mb-4 inline-flex items-center rounded-full bg-service-gbp-light px-3 py-1 text-sm font-semibold text-service-gbp">GBP Management</span>
-        <h2 class="font-heading text-3xl font-bold text-heading md:text-4xl">Google Business Profile Performance</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-base text-body">Real performance data from profiles we manage. Direction requests, calls, and direct customer interactions.</p>
+        <span
+          class="mb-4 inline-flex items-center rounded-full bg-service-gbp-light px-3 py-1 text-sm font-semibold text-service-gbp"
+          >GBP Management</span
+        >
+        <h2 class="font-heading text-3xl font-bold text-heading md:text-4xl">
+          Google Business Profile Performance
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base text-body">
+          Real performance data from profiles we manage. Direction requests, calls, and direct
+          customer interactions.
+        </p>
       </div>
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {gbpResults.map((result) => (
-          <div class="overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-lg">
-            <div class="border-b border-border-subtle bg-background-cream p-6">
-              <div class="flex items-start justify-between">
-                <div>
-                  <h3 class="font-heading text-lg font-bold text-heading">{result.client}</h3>
-                  <p class="text-sm text-muted">{result.period}</p>
+        {
+          gbpResults.map((result) => (
+            <div class="overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-lg">
+              <div class="border-b border-border-subtle bg-background-cream p-6">
+                <div class="flex items-start justify-between">
+                  <div>
+                    <h3 class="font-heading text-lg font-bold text-heading">{result.client}</h3>
+                    <p class="text-sm text-muted">{result.period}</p>
+                  </div>
+                  <div class="text-right">
+                    <div class="font-heading text-2xl font-bold text-primary">{result.value}</div>
+                    <div class="text-xs font-semibold uppercase tracking-wider text-service-gbp">
+                      {result.growth}
+                    </div>
+                  </div>
                 </div>
-                <div class="text-right">
-                  <div class="font-heading text-2xl font-bold text-primary">{result.value}</div>
-                  <div class="text-xs font-semibold uppercase tracking-wider text-service-gbp">{result.growth}</div>
-                </div>
+                <p class="mt-2 text-sm font-medium text-body">{result.metric}</p>
               </div>
-              <p class="mt-2 text-sm font-medium text-body">{result.metric}</p>
+              <div class="relative aspect-[16/9] bg-background-subtle">
+                <img
+                  src={result.image}
+                  alt={`${result.client} GBP Performance`}
+                  class="h-full w-full object-cover object-top"
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
             </div>
-            <div class="relative aspect-[16/9] bg-background-subtle">
-              <img src={result.image} alt={`${result.client} GBP Performance`} class="h-full w-full object-cover object-top" loading="eager" decoding="async" />
-            </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </section>
@@ -184,16 +251,53 @@ const agencyStats = [
   <section class="bg-background-cream py-20">
     <div class="mx-auto max-w-5xl px-6">
       <div class="mb-10 text-center">
-        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">More Client Wins</p>
-        <h2 class="font-heading text-3xl font-bold text-heading md:text-4xl">From pest control to restoration — we help home service businesses dominate their local markets</h2>
+        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+          More Client Wins
+        </p>
+        <h2 class="font-heading text-3xl font-bold text-heading md:text-4xl">
+          From pest control to restoration — we help home service businesses dominate their local
+          markets
+        </h2>
       </div>
 
       <!-- Filter Tabs -->
-      <div class="mb-8 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Filter by service type">
-        <button type="button" role="tab" aria-selected="true" data-filter="all" class="filter-tab rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-colors">All Results</button>
-        <button type="button" role="tab" aria-selected="false" data-filter="website" class="filter-tab rounded-full bg-white border border-border-base px-5 py-2 text-sm font-semibold text-body transition-colors hover:border-primary/30">Websites</button>
-        <button type="button" role="tab" aria-selected="false" data-filter="gbp" class="filter-tab rounded-full bg-white border border-border-base px-5 py-2 text-sm font-semibold text-body transition-colors hover:border-primary/30">GBP Optimization</button>
-        <button type="button" role="tab" aria-selected="false" data-filter="local-seo" class="filter-tab rounded-full bg-white border border-border-base px-5 py-2 text-sm font-semibold text-body transition-colors hover:border-primary/30">Local SEO</button>
+      <div
+        class="mb-8 flex flex-wrap justify-center gap-2"
+        role="tablist"
+        aria-label="Filter by service type"
+      >
+        <button
+          type="button"
+          role="tab"
+          aria-selected="true"
+          data-filter="all"
+          class="filter-tab rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-colors"
+          >All Results</button
+        >
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          data-filter="website"
+          class="filter-tab hover:border-primary/30 rounded-full border border-border-base bg-white px-5 py-2 text-sm font-semibold text-body transition-colors"
+          >Websites</button
+        >
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          data-filter="gbp"
+          class="filter-tab hover:border-primary/30 rounded-full border border-border-base bg-white px-5 py-2 text-sm font-semibold text-body transition-colors"
+          >GBP Optimization</button
+        >
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          data-filter="local-seo"
+          class="filter-tab hover:border-primary/30 rounded-full border border-border-base bg-white px-5 py-2 text-sm font-semibold text-body transition-colors"
+          >Local SEO</button
+        >
       </div>
 
       <div id="results-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -206,39 +310,73 @@ const agencyStats = [
   <section class="bg-white py-24">
     <div class="mx-auto max-w-3xl px-6">
       <p class="mb-3 text-center text-xs font-bold uppercase tracking-widest text-primary">FAQ</p>
-      <h2 class="mb-12 text-center font-heading text-4xl font-extrabold text-heading md:text-5xl">Common Questions</h2>
+      <h2 class="mb-12 text-center font-heading text-4xl font-extrabold text-heading md:text-5xl">
+        Common Questions
+      </h2>
       <div class="space-y-2">
-        {resultsFaqs.map((faq) => (
-          <details class="group rounded-2xl border border-border-base bg-white shadow-sm transition hover:border-primary/30">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-heading text-base font-bold text-heading">
-              {faq.q}
-              <svg class="h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-            </summary>
-            <div class="px-6 pb-6 text-base leading-relaxed text-body">{faq.a}</div>
-          </details>
-        ))}
+        {
+          resultsFaqs.map((faq) => (
+            <details class="hover:border-primary/30 group rounded-2xl border border-border-base bg-white shadow-sm transition">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-heading text-base font-bold text-heading">
+                {faq.q}
+                <svg
+                  class="h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-6 text-base leading-relaxed text-body">{faq.a}</div>
+            </details>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- FINAL CTA -->
   <section class="relative overflow-hidden bg-secondary py-32">
-    <div class="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] translate-x-1/3 -translate-y-1/4 rounded-full opacity-[0.10]" style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);" aria-hidden="true"></div>
+    <div
+      class="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
+      style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
+      aria-hidden="true"
+    >
+    </div>
     <div class="relative z-10 mx-auto max-w-3xl px-6 text-center">
-      <h2 class="mb-6 font-heading text-5xl font-extrabold leading-tight text-white md:text-6xl">Ready to be our<br /><span class="text-primary">next case study?</span></h2>
-      <p class="mb-10 text-xl font-medium text-white/65">We'll audit your GBP and site, find the 3 biggest gaps costing you calls, and map out exactly what to do next — free.</p>
+      <h2 class="mb-6 font-heading text-5xl font-extrabold leading-tight text-white md:text-6xl">
+        Ready to be our<br /><span class="text-primary">next case study?</span>
+      </h2>
+      <p class="mb-10 text-xl font-medium text-white/65">
+        We'll audit your GBP and site, find the 3 biggest gaps costing you calls, and map out
+        exactly what to do next — free.
+      </p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="/contact#book" data-evt="cta_results_final" class="inline-flex items-center gap-2.5 rounded-full bg-primary px-10 py-4 font-heading text-lg font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.45)] transition hover:bg-primary-dark">
+        <a
+          href="/contact#book"
+          data-evt="cta_results_final"
+          class="inline-flex items-center gap-2.5 rounded-full bg-primary px-10 py-4 font-heading text-lg font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.45)] transition hover:bg-primary-dark"
+        >
           Get a Free Audit
-          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"/></svg>
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
+          >
         </a>
-        <a href="/packages" class="inline-flex items-center gap-2 rounded-full border-2 border-white/25 px-8 py-4 font-heading text-base font-bold text-white transition hover:border-white/50 hover:bg-white/8">
+        <a
+          href="/packages"
+          class="hover:bg-white/8 inline-flex items-center gap-2 rounded-full border-2 border-white/25 px-8 py-4 font-heading text-base font-bold text-white transition hover:border-white/50"
+        >
           See Pricing
         </a>
       </div>
     </div>
   </section>
-
 </PageLayout>
 
 <script>
@@ -258,7 +396,7 @@ const agencyStats = [
       tab.setAttribute("aria-selected", "true");
       cards.forEach((card) => {
         const services = card.getAttribute("data-services") || "";
-        card.style.display = (filter === "all" || services.includes(filter)) ? "" : "none";
+        card.style.display = filter === "all" || services.includes(filter) ? "" : "none";
       });
     });
   });

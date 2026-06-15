@@ -1,6 +1,5 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
-import { servicesTestimonials } from "~/data/proof";
 
 export const title = "Local SEO & Website Services for Home Service Businesses | Lilos Growth";
 export const description =
@@ -8,45 +7,82 @@ export const description =
 ---
 
 <Layout {title} {description}>
-
   <!-- HERO -->
   <section class="relative overflow-hidden bg-secondary pb-28 pt-20" aria-label="Services hero">
-    <div class="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] translate-x-1/3 -translate-y-1/4 rounded-full opacity-[0.10]" style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);" aria-hidden="true"></div>
+    <div
+      class="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
+      style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
+      aria-hidden="true"
+    >
+    </div>
     <div class="relative z-10 mx-auto max-w-6xl px-6">
       <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
         <div>
           <p class="mb-4 text-xs font-bold uppercase tracking-widest text-primary">Services</p>
-          <h1 class="mb-5 font-heading text-5xl font-extrabold leading-[1.08] text-white md:text-6xl">
+          <h1
+            class="mb-5 font-heading text-5xl font-extrabold leading-[1.08] text-white md:text-6xl"
+          >
             Premium Websites<br />+ Local SEO
           </h1>
-          <p class="mb-3 text-xl font-bold uppercase tracking-wider text-primary">GBP Optimization Included</p>
+          <p class="mb-3 text-xl font-bold uppercase tracking-wider text-primary">
+            GBP Optimization Included
+          </p>
           <p class="mb-10 max-w-lg text-lg font-medium text-white/65">
-            Built for plumbers, HVAC, cleaning, pest control, landscaping, and other local trades. We deliver web design, GBP management, and local SEO that drives calls.
+            Built for plumbers, HVAC, cleaning, pest control, landscaping, and other local trades.
+            We deliver web design, GBP management, and local SEO that drives calls.
           </p>
           <div class="flex flex-wrap gap-4">
-            <a href="/contact#book" data-evt="cta_services_book_call" class="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 font-heading text-base font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.4)] transition hover:bg-primary-dark">
+            <a
+              href="/contact#book"
+              data-evt="cta_services_book_call"
+              class="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 font-heading text-base font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.4)] transition hover:bg-primary-dark"
+            >
               Book a Free Call
-              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"/></svg>
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
+              >
             </a>
-            <a href="#packages" data-evt="cta_services_view_packages" class="inline-flex items-center gap-2 rounded-full border-2 border-white/25 px-8 py-4 font-heading text-base font-bold text-white transition hover:border-white/50 hover:bg-white/8">
+            <a
+              href="#packages"
+              data-evt="cta_services_view_packages"
+              class="hover:bg-white/8 inline-flex items-center gap-2 rounded-full border-2 border-white/25 px-8 py-4 font-heading text-base font-bold text-white transition hover:border-white/50"
+            >
               View Packages
             </a>
           </div>
         </div>
         <!-- Trust block -->
         <div class="grid grid-cols-2 gap-4">
-          {[
-            { value: "+900%", label: "Keyword growth", sub: "Wheyland Electric, 30 days" },
-            { value: "3×", label: "GBP calls", sub: "First month post-launch" },
-            { value: "+350%", label: "Web leads", sub: "18 leads in 3 weeks" },
-            { value: "96%", label: "Client retention", sub: "Month-over-month" },
-          ].map((stat, i) => (
-            <div class:list={["rounded-2xl border p-6 text-center", i === 1 ? "border-primary bg-primary/10" : "border-white/10 bg-white/5"]}>
-              <p class:list={["font-heading text-3xl font-extrabold", i === 1 ? "text-primary" : "text-white"]}>{stat.value}</p>
-              <p class="mt-1 text-sm font-bold text-white">{stat.label}</p>
-              <p class="mt-1 text-xs text-white/40">{stat.sub}</p>
-            </div>
-          ))}
+          {
+            [
+              { value: "+900%", label: "Keyword growth", sub: "Wheyland Electric, 30 days" },
+              { value: "3×", label: "GBP calls", sub: "First month post-launch" },
+              { value: "+350%", label: "Web leads", sub: "18 leads in 3 weeks" },
+              { value: "96%", label: "Client retention", sub: "Month-over-month" },
+            ].map((stat, i) => (
+              <div
+                class:list={[
+                  "rounded-2xl border p-6 text-center",
+                  i === 1 ? "bg-primary/10 border-primary" : "border-white/10 bg-white/5",
+                ]}
+              >
+                <p
+                  class:list={[
+                    "font-heading text-3xl font-extrabold",
+                    i === 1 ? "text-primary" : "text-white",
+                  ]}
+                >
+                  {stat.value}
+                </p>
+                <p class="mt-1 text-sm font-bold text-white">{stat.label}</p>
+                <p class="mt-1 text-xs text-white/40">{stat.sub}</p>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
@@ -55,73 +91,168 @@ export const description =
   <!-- TRUSTED BY -->
   <section class="border-b border-border-subtle bg-white py-10">
     <div class="mx-auto max-w-5xl px-6">
-      <p class="mb-6 text-center text-xs font-bold uppercase tracking-widest text-muted">Trusted by service companies across the U.S.</p>
+      <p class="mb-6 text-center text-xs font-bold uppercase tracking-widest text-muted">
+        Trusted by service companies across the U.S.
+      </p>
       <div class="flex flex-wrap items-center justify-center gap-10 md:gap-16">
-        <img src="/clients/blue-door-pest-control.jpg" alt="Blue Door Pest Control" class="h-9 w-auto max-w-[120px] object-contain opacity-50 grayscale transition hover:opacity-90 hover:grayscale-0" loading="lazy" />
-        <img src="/clients/tamarack-restoration.webp" alt="Tamarack Restoration" class="h-9 w-auto max-w-[120px] object-contain opacity-50 grayscale transition hover:opacity-90 hover:grayscale-0" loading="lazy" />
-        <img src="/clients/carlsbad-fixit.svg" alt="Carlsbad Fix It" class="h-9 w-auto max-w-[120px] object-contain opacity-50 grayscale transition hover:opacity-90 hover:grayscale-0" loading="lazy" />
-        <img src="/clients/carlsbad-home-services.png" alt="Carlsbad Home Services" class="h-9 w-auto max-w-[120px] object-contain opacity-50 grayscale transition hover:opacity-90 hover:grayscale-0" loading="lazy" />
+        <img
+          src="/clients/blue-door-pest-control.jpg"
+          alt="Blue Door Pest Control"
+          class="h-9 w-auto max-w-[120px] object-contain opacity-50 grayscale transition hover:opacity-90 hover:grayscale-0"
+          loading="lazy"
+        />
+        <img
+          src="/clients/tamarack-restoration.webp"
+          alt="Tamarack Restoration"
+          class="h-9 w-auto max-w-[120px] object-contain opacity-50 grayscale transition hover:opacity-90 hover:grayscale-0"
+          loading="lazy"
+        />
+        <img
+          src="/clients/carlsbad-fixit.svg"
+          alt="Carlsbad Fix It"
+          class="h-9 w-auto max-w-[120px] object-contain opacity-50 grayscale transition hover:opacity-90 hover:grayscale-0"
+          loading="lazy"
+        />
+        <img
+          src="/clients/carlsbad-home-services.png"
+          alt="Carlsbad Home Services"
+          class="h-9 w-auto max-w-[120px] object-contain opacity-50 grayscale transition hover:opacity-90 hover:grayscale-0"
+          loading="lazy"
+        />
       </div>
     </div>
   </section>
 
   <!-- CORE SERVICES — Alternating image/text layout -->
   <section id="core-services" class="bg-white" aria-label="Core services">
-
     <!-- Service 1: GBP -->
     <div class="border-b border-border-subtle py-20">
       <div class="mx-auto max-w-5xl px-6">
         <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
           <div>
-            <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-service-gbp-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-gbp">
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <div
+              class="mb-4 inline-flex items-center gap-2 rounded-full bg-service-gbp-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-gbp"
+            >
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                ></path><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
+              >
               GBP Management
             </div>
-            <h2 class="mb-4 font-heading text-3xl font-extrabold text-heading md:text-4xl">Rank Higher in Google Maps and Local Search</h2>
-            <p class="mb-6 text-base leading-relaxed text-body">Your Google Business Profile is the single most important asset for local visibility. We fully optimize it, then actively manage it every week — posts, photos, Q&amp;A, reviews, and category strategy.</p>
+            <h2 class="mb-4 font-heading text-3xl font-extrabold text-heading md:text-4xl">
+              Rank Higher in Google Maps and Local Search
+            </h2>
+            <p class="mb-6 text-base leading-relaxed text-body">
+              Your Google Business Profile is the single most important asset for local visibility.
+              We fully optimize it, then actively manage it every week — posts, photos, Q&amp;A,
+              reviews, and category strategy.
+            </p>
             <ul class="mb-8 space-y-3 text-sm text-body">
-              {[
-                "Claim, optimize & actively manage your GBP listing",
-                "Ongoing reviews & optimized photos (EXIF/geo, alt naming)",
-                "Keyword/category strategy & monthly reporting",
-                "Q&A seeding, service area optimization, post cadence",
-                "Included free in every Local SEO retainer",
-              ].map((item) => (
-                <li class="flex items-start gap-2.5">
-                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-service-gbp" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                  {item}
-                </li>
-              ))}
+              {
+                [
+                  "Claim, optimize & actively manage your GBP listing",
+                  "Ongoing reviews & optimized photos (EXIF/geo, alt naming)",
+                  "Keyword/category strategy & monthly reporting",
+                  "Q&A seeding, service area optimization, post cadence",
+                  "Included free in every Local SEO retainer",
+                ].map((item) => (
+                  <li class="flex items-start gap-2.5">
+                    <svg
+                      class="mt-0.5 h-4 w-4 shrink-0 text-service-gbp"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                    {item}
+                  </li>
+                ))
+              }
             </ul>
-            <a href="/services/google-business-profile-optimization" class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark">
+            <a
+              href="/services/google-business-profile-optimization"
+              class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark"
+            >
               Learn more about GBP management &rarr;
             </a>
           </div>
           <!-- Visual: stat block -->
           <div class="rounded-3xl bg-background-cream p-10">
             <div class="mb-6 flex items-center gap-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-service-gbp-light">
-                <svg class="h-5 w-5 text-service-gbp" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+              <div
+                class="flex h-10 w-10 items-center justify-center rounded-xl bg-service-gbp-light"
+              >
+                <svg
+                  class="h-5 w-5 text-service-gbp"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  ></path></svg
+                >
               </div>
               <p class="font-heading text-sm font-bold text-heading">GBP Results — Real Clients</p>
             </div>
             <div class="space-y-5">
-              {[
-                { client: "Blue Door Pest Control", metric: "Direction Requests", value: "194", period: "Sep–Dec 2025", growth: "+19%" },
-                { client: "Carlsbad Fix It", metric: "Profile Interactions", value: "38", period: "Sep–Dec 2025", growth: "↑ Trend" },
-                { client: "Wheyland Electric", metric: "Monthly GBP Calls", value: "21", period: "Mar 2026", growth: "+200%" },
-              ].map((r) => (
-                <div class="flex items-center justify-between rounded-xl border border-border-subtle bg-white p-4 shadow-sm">
-                  <div>
-                    <p class="text-sm font-bold text-heading">{r.client}</p>
-                    <p class="text-xs text-muted">{r.metric} · {r.period}</p>
+              {
+                [
+                  {
+                    client: "Blue Door Pest Control",
+                    metric: "Direction Requests",
+                    value: "194",
+                    period: "Sep–Dec 2025",
+                    growth: "+19%",
+                  },
+                  {
+                    client: "Carlsbad Fix It",
+                    metric: "Profile Interactions",
+                    value: "38",
+                    period: "Sep–Dec 2025",
+                    growth: "↑ Trend",
+                  },
+                  {
+                    client: "Wheyland Electric",
+                    metric: "Monthly GBP Calls",
+                    value: "21",
+                    period: "Mar 2026",
+                    growth: "+200%",
+                  },
+                ].map((r) => (
+                  <div class="flex items-center justify-between rounded-xl border border-border-subtle bg-white p-4 shadow-sm">
+                    <div>
+                      <p class="text-sm font-bold text-heading">{r.client}</p>
+                      <p class="text-xs text-muted">
+                        {r.metric} · {r.period}
+                      </p>
+                    </div>
+                    <div class="text-right">
+                      <p class="font-heading text-2xl font-extrabold text-heading">{r.value}</p>
+                      <p class="text-xs font-bold text-service-gbp">{r.growth}</p>
+                    </div>
                   </div>
-                  <div class="text-right">
-                    <p class="font-heading text-2xl font-extrabold text-heading">{r.value}</p>
-                    <p class="text-xs font-bold text-service-gbp">{r.growth}</p>
-                  </div>
-                </div>
-              ))}
+                ))
+              }
             </div>
           </div>
         </div>
@@ -133,48 +264,105 @@ export const description =
       <div class="mx-auto max-w-5xl px-6">
         <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
           <!-- Visual first on desktop reversed -->
-          <div class="order-2 lg:order-1 rounded-3xl bg-secondary p-10">
-            <p class="mb-6 text-xs font-bold uppercase tracking-widest text-primary/60">Our SEO Process</p>
+          <div class="order-2 rounded-3xl bg-secondary p-10 lg:order-1">
+            <p class="text-primary/60 mb-6 text-xs font-bold uppercase tracking-widest">
+              Our SEO Process
+            </p>
             <div class="space-y-4">
-              {[
-                { num: "01", title: "Audit & Keyword Research", body: "What your local customers actually search for." },
-                { num: "02", title: "On-Page & Technical Fixes", body: "Titles, metas, H1s, schema, Core Web Vitals." },
-                { num: "03", title: "Content & Location Pages", body: "Service × city pages that rank and convert." },
-                { num: "04", title: "Citations & Link Building", body: "Clean NAP data, quality local authority links." },
-                { num: "05", title: "Reporting & Strategy Calls", body: "Monthly rankings, calls, and leads — clear data." },
-              ].map((step) => (
-                <div class="flex items-start gap-4">
-                  <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 font-heading text-xs font-bold text-primary">{step.num}</span>
-                  <div>
-                    <p class="font-heading text-sm font-bold text-white">{step.title}</p>
-                    <p class="text-xs text-white/50">{step.body}</p>
+              {
+                [
+                  {
+                    num: "01",
+                    title: "Audit & Keyword Research",
+                    body: "What your local customers actually search for.",
+                  },
+                  {
+                    num: "02",
+                    title: "On-Page & Technical Fixes",
+                    body: "Titles, metas, H1s, schema, Core Web Vitals.",
+                  },
+                  {
+                    num: "03",
+                    title: "Content & Location Pages",
+                    body: "Service × city pages that rank and convert.",
+                  },
+                  {
+                    num: "04",
+                    title: "Citations & Link Building",
+                    body: "Clean NAP data, quality local authority links.",
+                  },
+                  {
+                    num: "05",
+                    title: "Reporting & Strategy Calls",
+                    body: "Monthly rankings, calls, and leads — clear data.",
+                  },
+                ].map((step) => (
+                  <div class="flex items-start gap-4">
+                    <span class="bg-primary/15 mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg font-heading text-xs font-bold text-primary">
+                      {step.num}
+                    </span>
+                    <div>
+                      <p class="font-heading text-sm font-bold text-white">{step.title}</p>
+                      <p class="text-xs text-white/50">{step.body}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              }
             </div>
           </div>
           <div class="order-1 lg:order-2">
-            <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-service-seo-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-seo">
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <div
+              class="mb-4 inline-flex items-center gap-2 rounded-full bg-service-seo-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-seo"
+            >
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                ><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg
+              >
               Local SEO
             </div>
-            <h2 class="mb-4 font-heading text-3xl font-extrabold text-heading md:text-4xl">Rank #1 for the searches that matter most</h2>
-            <p class="mb-6 text-base leading-relaxed text-body">We handle the full stack of local SEO — on-page fixes, content, citations, backlinks, and AEO schema. Month-to-month. GBP management included.</p>
+            <h2 class="mb-4 font-heading text-3xl font-extrabold text-heading md:text-4xl">
+              Rank #1 for the searches that matter most
+            </h2>
+            <p class="mb-6 text-base leading-relaxed text-body">
+              We handle the full stack of local SEO — on-page fixes, content, citations, backlinks,
+              and AEO schema. Month-to-month. GBP management included.
+            </p>
             <ul class="mb-8 space-y-3 text-sm text-body">
-              {[
-                "On-page & technical fixes (titles, metas, headers, CWV, schema)",
-                "Service & location content + internal linking strategy",
-                "Citations & local authority building",
-                "AEO schema — FAQ, HowTo, entity optimization for AI search",
-                "Transparent monthly reporting with real call data",
-              ].map((item) => (
-                <li class="flex items-start gap-2.5">
-                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-service-seo" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                  {item}
-                </li>
-              ))}
+              {
+                [
+                  "On-page & technical fixes (titles, metas, headers, CWV, schema)",
+                  "Service & location content + internal linking strategy",
+                  "Citations & local authority building",
+                  "AEO schema — FAQ, HowTo, entity optimization for AI search",
+                  "Transparent monthly reporting with real call data",
+                ].map((item) => (
+                  <li class="flex items-start gap-2.5">
+                    <svg
+                      class="mt-0.5 h-4 w-4 shrink-0 text-service-seo"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                    {item}
+                  </li>
+                ))
+              }
             </ul>
-            <a href="/services/local-seo" class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark">
+            <a
+              href="/services/local-seo"
+              class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark"
+            >
               See local SEO plans &rarr;
             </a>
           </div>
@@ -187,49 +375,88 @@ export const description =
       <div class="mx-auto max-w-5xl px-6">
         <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
           <div>
-            <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-service-website-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-website">
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
+            <div
+              class="mb-4 inline-flex items-center gap-2 rounded-full bg-service-website-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-website"
+            >
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                ><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M7 8h10M7 12h6"
+                ></path></svg
+              >
               Website Design
             </div>
-            <h2 class="mb-4 font-heading text-3xl font-extrabold text-heading md:text-4xl">Websites That Convert — Built to Rank</h2>
-            <p class="mb-6 text-base leading-relaxed text-body">Mobile-first, fast, and structured to rank from day one. We build on Astro + Tailwind CSS — the same stack powering your clients' sites. $1,200 one-time, 7–10 business day delivery.</p>
+            <h2 class="mb-4 font-heading text-3xl font-extrabold text-heading md:text-4xl">
+              Websites That Convert — Built to Rank
+            </h2>
+            <p class="mb-6 text-base leading-relaxed text-body">
+              Mobile-first, fast, and structured to rank from day one. We build on Astro + Tailwind
+              CSS — the same stack powering your clients' sites. $1,200 one-time, 7–10 business day
+              delivery.
+            </p>
             <ul class="mb-8 space-y-3 text-sm text-body">
-              {[
-                "15–20 pages: home, services, city pages, blog, contact",
-                "City × service money page matrix built in",
-                "Schema markup, GA4, click-to-call, form tracking",
-                "Core Web Vitals optimized — sub-second load times",
-                "Pair with any retainer or purchase standalone",
-              ].map((item) => (
-                <li class="flex items-start gap-2.5">
-                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-service-website" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                  {item}
-                </li>
-              ))}
+              {
+                [
+                  "15–20 pages: home, services, city pages, blog, contact",
+                  "City × service money page matrix built in",
+                  "Schema markup, GA4, click-to-call, form tracking",
+                  "Core Web Vitals optimized — sub-second load times",
+                  "Pair with any retainer or purchase standalone",
+                ].map((item) => (
+                  <li class="flex items-start gap-2.5">
+                    <svg
+                      class="mt-0.5 h-4 w-4 shrink-0 text-service-website"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                    {item}
+                  </li>
+                ))
+              }
             </ul>
-            <a href="/services/web-design" class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark">
+            <a
+              href="/services/web-design"
+              class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark"
+            >
               Learn about our web design process &rarr;
             </a>
           </div>
           <!-- Visual: feature highlights -->
-          <div class="rounded-3xl border-2 border-service-website/20 bg-service-website-light/30 p-10">
-            <p class="mb-6 font-heading text-sm font-bold text-heading">Every site we build includes:</p>
+          <div
+            class="border-service-website/20 bg-service-website-light/30 rounded-3xl border-2 p-10"
+          >
+            <p class="mb-6 font-heading text-sm font-bold text-heading">
+              Every site we build includes:
+            </p>
             <div class="grid grid-cols-2 gap-4">
-              {[
-                { icon: "⚡", label: "Sub-second load" },
-                { icon: "📱", label: "Mobile-first" },
-                { icon: "🔍", label: "SEO-native" },
-                { icon: "📊", label: "GA4 tracking" },
-                { icon: "🗺️", label: "Schema markup" },
-                { icon: "📍", label: "City pages" },
-                { icon: "📞", label: "Click-to-call" },
-                { icon: "✍️", label: "Blog ready" },
-              ].map((f) => (
-                <div class="flex items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-sm">
-                  <span class="text-lg">{f.icon}</span>
-                  <span class="text-sm font-semibold text-heading">{f.label}</span>
-                </div>
-              ))}
+              {
+                [
+                  { icon: "⚡", label: "Sub-second load" },
+                  { icon: "📱", label: "Mobile-first" },
+                  { icon: "🔍", label: "SEO-native" },
+                  { icon: "📊", label: "GA4 tracking" },
+                  { icon: "🗺️", label: "Schema markup" },
+                  { icon: "📍", label: "City pages" },
+                  { icon: "📞", label: "Click-to-call" },
+                  { icon: "✍️", label: "Blog ready" },
+                ].map((f) => (
+                  <div class="flex items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-sm">
+                    <span class="text-lg">{f.icon}</span>
+                    <span class="text-sm font-semibold text-heading">{f.label}</span>
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -242,57 +469,115 @@ export const description =
     <div class="mx-auto max-w-5xl px-6">
       <div class="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
         <div>
-          <div class="mb-5 inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary">
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          <div
+            class="bg-primary/20 mb-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary"
+          >
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+              ></path></svg
+            >
             AI-Powered SEO Audit
           </div>
-          <h2 class="mb-4 font-heading text-3xl font-extrabold text-white md:text-4xl">Know exactly what's costing you calls</h2>
+          <h2 class="mb-4 font-heading text-3xl font-extrabold text-white md:text-4xl">
+            Know exactly what's costing you calls
+          </h2>
           <p class="mb-6 text-base leading-relaxed text-white/60">
-            We use AI-assisted auditing to analyze your GBP, website, and local citations at once — surfacing the exact gaps suppressing your rankings. No generic checklist. Specific, prioritized action items.
+            We use AI-assisted auditing to analyze your GBP, website, and local citations at once —
+            surfacing the exact gaps suppressing your rankings. No generic checklist. Specific,
+            prioritized action items.
           </p>
           <ul class="mb-8 space-y-3 text-sm text-white/70">
-            {[
-              "GBP health score with specific action items",
-              "Competitor gap analysis — what they rank for that you don't",
-              "Citation inconsistencies across 50+ directories",
-              "AI search visibility (AEO) readiness score",
-              "Technical fixes ranked by revenue impact",
-            ].map((item) => (
-              <li class="flex items-start gap-3">
-                <svg class="mt-0.5 h-4 w-4 shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                {item}
-              </li>
-            ))}
+            {
+              [
+                "GBP health score with specific action items",
+                "Competitor gap analysis — what they rank for that you don't",
+                "Citation inconsistencies across 50+ directories",
+                "AI search visibility (AEO) readiness score",
+                "Technical fixes ranked by revenue impact",
+              ].map((item) => (
+                <li class="flex items-start gap-3">
+                  <svg
+                    class="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
+                  {item}
+                </li>
+              ))
+            }
           </ul>
-          <a href="/contact#book" data-evt="cta_services_ai_audit" class="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-heading text-base font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.4)] transition hover:bg-primary-dark">
+          <a
+            href="/contact#book"
+            data-evt="cta_services_ai_audit"
+            class="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-heading text-base font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.4)] transition hover:bg-primary-dark"
+          >
             Get Your Free Audit
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"/></svg>
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
+            >
           </a>
         </div>
         <div class="rounded-2xl border border-white/10 bg-white/5 p-8">
-          <p class="mb-5 text-xs font-bold uppercase tracking-wider text-primary/60">Sample Audit Output</p>
+          <p class="text-primary/60 mb-5 text-xs font-bold uppercase tracking-wider">
+            Sample Audit Output
+          </p>
           <div class="space-y-4">
-            {[
-              { label: "GBP Health Score", score: 43, grade: "Needs Work", color: "bg-red-500" },
-              { label: "On-Page SEO", score: 61, grade: "Improving", color: "bg-warning" },
-              { label: "Citation Consistency", score: 38, grade: "Critical", color: "bg-red-500" },
-              { label: "Local Pack Visibility", score: 22, grade: "Low", color: "bg-red-500" },
-              { label: "AI Search Readiness", score: 15, grade: "Not Started", color: "bg-red-500" },
-            ].map((row) => (
-              <div>
-                <div class="mb-1.5 flex justify-between">
-                  <span class="text-xs font-semibold text-white/70">{row.label}</span>
-                  <span class="text-xs text-white/40">{row.grade}</span>
+            {
+              [
+                { label: "GBP Health Score", score: 43, grade: "Needs Work", color: "bg-red-500" },
+                { label: "On-Page SEO", score: 61, grade: "Improving", color: "bg-warning" },
+                {
+                  label: "Citation Consistency",
+                  score: 38,
+                  grade: "Critical",
+                  color: "bg-red-500",
+                },
+                { label: "Local Pack Visibility", score: 22, grade: "Low", color: "bg-red-500" },
+                {
+                  label: "AI Search Readiness",
+                  score: 15,
+                  grade: "Not Started",
+                  color: "bg-red-500",
+                },
+              ].map((row) => (
+                <div>
+                  <div class="mb-1.5 flex justify-between">
+                    <span class="text-xs font-semibold text-white/70">{row.label}</span>
+                    <span class="text-xs text-white/40">{row.grade}</span>
+                  </div>
+                  <div class="h-2 overflow-hidden rounded-full bg-white/10">
+                    <div class={`h-full rounded-full ${row.color}`} style={`width:${row.score}%`} />
+                  </div>
                 </div>
-                <div class="h-2 overflow-hidden rounded-full bg-white/10">
-                  <div class={`h-full rounded-full ${row.color}`} style={`width:${row.score}%`}></div>
-                </div>
-              </div>
-            ))}
+              ))
+            }
           </div>
-          <div class="mt-6 rounded-xl border border-primary/30 bg-primary/10 p-4">
+          <div class="border-primary/30 bg-primary/10 mt-6 rounded-xl border p-4">
             <p class="text-xs font-bold text-primary">Top Priority Fix Identified</p>
-            <p class="mt-1 text-xs text-white/60">Primary GBP category is wrong. Correcting it could move you from #11 to top 3 in the Map Pack within 30 days.</p>
+            <p class="mt-1 text-xs text-white/60">
+              Primary GBP category is wrong. Correcting it could move you from #11 to top 3 in the
+              Map Pack within 30 days.
+            </p>
           </div>
         </div>
       </div>
@@ -304,25 +589,52 @@ export const description =
     <div class="mx-auto max-w-5xl px-6">
       <div class="mb-14 text-center">
         <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Why us</p>
-        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">Why Home Service Pros Trust Lilos Growth</h2>
+        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+          Why Home Service Pros Trust Lilos Growth
+        </h2>
       </div>
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
-        {[
-          ["Built by Home Service Owners", "We've lived it — we build what actually generates booked jobs."],
-          ["Specialists in Home Services", "No generic agency fluff. Trades-focused growth only."],
-          ["No Long-Term Contracts", "Month-to-month. We earn your business with results every month."],
-          ["Results You Can See", "Local rankings, calls, and jobs — measurable, reported monthly."],
-          ["No Big Agency Layers", "Direct access to your strategist. No runarounds."],
-          ["AI-Assisted Auditing", "We use AI tools to find and prioritize exactly what's suppressing your rankings."],
-        ].map(([title, body]) => (
-          <div class="flex flex-col rounded-2xl border border-border-subtle bg-white p-8 shadow-sm transition duration-200 hover:border-primary/20 hover:shadow-md">
-            <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
-              <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+        {
+          [
+            [
+              "Built by Home Service Owners",
+              "We've lived it — we build what actually generates booked jobs.",
+            ],
+            [
+              "Specialists in Home Services",
+              "No generic agency fluff. Trades-focused growth only.",
+            ],
+            [
+              "No Long-Term Contracts",
+              "Month-to-month. We earn your business with results every month.",
+            ],
+            [
+              "Results You Can See",
+              "Local rankings, calls, and jobs — measurable, reported monthly.",
+            ],
+            ["No Big Agency Layers", "Direct access to your strategist. No runarounds."],
+            [
+              "AI-Assisted Auditing",
+              "We use AI tools to find and prioritize exactly what's suppressing your rankings.",
+            ],
+          ].map(([title, body]) => (
+            <div class="hover:border-primary/20 flex flex-col rounded-2xl border border-border-subtle bg-white p-8 shadow-sm transition duration-200 hover:shadow-md">
+              <div class="bg-primary/10 mb-4 flex h-10 w-10 items-center justify-center rounded-xl">
+                <svg
+                  class="h-5 w-5 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+              </div>
+              <h3 class="mb-2 font-heading text-base font-bold text-heading">{title}</h3>
+              <p class="text-sm text-body">{body}</p>
             </div>
-            <h3 class="mb-2 font-heading text-base font-bold text-heading">{title}</h3>
-            <p class="text-sm text-body">{body}</p>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </section>
@@ -330,27 +642,51 @@ export const description =
   <!-- TESTIMONIALS -->
   <section class="bg-white py-24">
     <div class="mx-auto max-w-5xl px-6">
-      <p class="mb-3 text-center text-xs font-bold uppercase tracking-widest text-primary">What clients say</p>
-      <h2 class="mb-14 text-center font-heading text-4xl font-extrabold text-heading md:text-5xl">Service teams choose Lilos Growth for results</h2>
+      <p class="mb-3 text-center text-xs font-bold uppercase tracking-widest text-primary">
+        What clients say
+      </p>
+      <h2 class="mb-14 text-center font-heading text-4xl font-extrabold text-heading md:text-5xl">
+        Service teams choose Lilos Growth for results
+      </h2>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {[
-          { q: "After 60 days we went from the bottom of Google Maps to the top 3. The phones ring every week now.", name: "Luis R.", role: "Plumbing Business Owner · Carlsbad, CA" },
-          { q: "Straightforward reporting and real results. We're booking more jobs without paid ads.", name: "Brandon A.", role: "Electrical Contractor · San Diego, CA" },
-          { q: "Fast turnaround, real strategy, and a site that feels like a premium brand. We're really proud of our web presence.", name: "Brandon B.", role: "Electrical Contractor" },
-        ].map((t) => (
-          <article class="flex flex-col rounded-2xl border border-border-base bg-white p-8 shadow-sm transition hover:border-primary/30 hover:shadow-md">
-            <div class="mb-4 flex gap-0.5">
-              {Array(5).fill(null).map(() => (
-                <svg class="h-4 w-4 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              ))}
-            </div>
-            <blockquote class="mb-6 flex-1 text-base leading-relaxed text-body">"{t.q}"</blockquote>
-            <footer>
-              <p class="text-sm font-bold text-heading">{t.name}</p>
-              <p class="text-xs text-muted">{t.role}</p>
-            </footer>
-          </article>
-        ))}
+        {
+          [
+            {
+              q: "After 60 days we went from the bottom of Google Maps to the top 3. The phones ring every week now.",
+              name: "Luis R.",
+              role: "Plumbing Business Owner · Carlsbad, CA",
+            },
+            {
+              q: "Straightforward reporting and real results. We're booking more jobs without paid ads.",
+              name: "Brandon A.",
+              role: "Electrical Contractor · San Diego, CA",
+            },
+            {
+              q: "Fast turnaround, real strategy, and a site that feels like a premium brand. We're really proud of our web presence.",
+              name: "Brandon B.",
+              role: "Electrical Contractor",
+            },
+          ].map((t) => (
+            <article class="hover:border-primary/30 flex flex-col rounded-2xl border border-border-base bg-white p-8 shadow-sm transition hover:shadow-md">
+              <div class="mb-4 flex gap-0.5">
+                {Array(5)
+                  .fill(null)
+                  .map(() => (
+                    <svg class="h-4 w-4 text-warning" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+              </div>
+              <blockquote class="mb-6 flex-1 text-base leading-relaxed text-body">
+                "{t.q}"
+              </blockquote>
+              <footer>
+                <p class="text-sm font-bold text-heading">{t.name}</p>
+                <p class="text-xs text-muted">{t.role}</p>
+              </footer>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -360,49 +696,169 @@ export const description =
     <div class="mx-auto max-w-5xl px-6">
       <div class="mb-14 text-center">
         <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Pricing</p>
-        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">Simple, Honest Pricing</h2>
-        <p class="mx-auto mt-4 max-w-xl text-base text-muted">Month-to-month. No setup fees. No contracts. GBP management included in every plan.</p>
+        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+          Simple, Honest Pricing
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-base text-muted">
+          Month-to-month. No setup fees. No contracts. GBP management included in every plan.
+        </p>
       </div>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-        <article class="flex flex-col rounded-2xl border border-border-subtle bg-white p-8 shadow-sm transition hover:border-primary/30 hover:shadow-md">
+        <article
+          class="hover:border-primary/30 flex flex-col rounded-2xl border border-border-subtle bg-white p-8 shadow-sm transition hover:shadow-md"
+        >
           <h3 class="font-heading text-xl font-bold text-heading">Foundation</h3>
-          <div class="mt-2 flex items-baseline gap-1"><span class="font-heading text-4xl font-extrabold text-primary">$599</span><span class="text-sm text-body">/mo</span></div>
-          <p class="mt-3 text-sm text-body">GBP fully managed plus steady on-page SEO progress each month.</p>
+          <div class="mt-2 flex items-baseline gap-1">
+            <span class="font-heading text-4xl font-extrabold text-primary">$599</span><span
+              class="text-sm text-body">/mo</span
+            >
+          </div>
+          <p class="mt-3 text-sm text-body">
+            GBP fully managed plus steady on-page SEO progress each month.
+          </p>
           <div class="my-5 h-px bg-border-subtle"></div>
           <ul class="flex-1 space-y-2.5 text-sm text-body">
-            {["Full GBP management — posts, photos, reviews, Q&A","On-page fixes — titles, metas, schema","Up to 5 pages/mo + citation cleanup","Monthly performance report"].map(f => (
-              <li class="flex items-start gap-2"><svg class="mt-0.5 h-4 w-4 shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>{f}</li>
-            ))}
+            {
+              [
+                "Full GBP management — posts, photos, reviews, Q&A",
+                "On-page fixes — titles, metas, schema",
+                "Up to 5 pages/mo + citation cleanup",
+                "Monthly performance report",
+              ].map((f) => (
+                <li class="flex items-start gap-2">
+                  <svg
+                    class="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
+                  {f}
+                </li>
+              ))
+            }
           </ul>
-          <a href="/contact#book" data-evt="cta_pricing_foundation" class="mt-8 block rounded-xl border-2 border-primary px-6 py-3 text-center text-sm font-semibold text-primary transition hover:bg-primary hover:text-white">Get Started</a>
+          <a
+            href="/contact#book"
+            data-evt="cta_pricing_foundation"
+            class="mt-8 block rounded-xl border-2 border-primary px-6 py-3 text-center text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
+            >Get Started</a
+          >
         </article>
-        <article class="relative flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-lg">
-          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2"><span class="rounded-full bg-primary px-4 py-1 text-xs font-bold uppercase tracking-wider text-white shadow">Most Popular</span></div>
+        <article
+          class="relative flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-lg"
+        >
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
+            <span
+              class="rounded-full bg-primary px-4 py-1 text-xs font-bold uppercase tracking-wider text-white shadow"
+              >Most Popular</span
+            >
+          </div>
           <h3 class="font-heading text-xl font-bold text-heading">Growth</h3>
-          <div class="mt-2 flex items-baseline gap-1"><span class="font-heading text-4xl font-extrabold text-primary">$999</span><span class="text-sm text-body">/mo</span></div>
-          <p class="mt-3 text-sm text-body">Higher content volume, backlinks, and AI search visibility.</p>
+          <div class="mt-2 flex items-baseline gap-1">
+            <span class="font-heading text-4xl font-extrabold text-primary">$999</span><span
+              class="text-sm text-body">/mo</span
+            >
+          </div>
+          <p class="mt-3 text-sm text-body">
+            Higher content volume, backlinks, and AI search visibility.
+          </p>
           <div class="my-5 h-px bg-border-subtle"></div>
           <ul class="flex-1 space-y-2.5 text-sm text-body">
-            {["Everything in Foundation","5 pages/mo + 2 blog posts + 2–3 backlinks","AEO schema — FAQ, HowTo, entity optimization","Monthly report + 45-min strategy call"].map(f => (
-              <li class="flex items-start gap-2"><svg class="mt-0.5 h-4 w-4 shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>{f}</li>
-            ))}
+            {
+              [
+                "Everything in Foundation",
+                "5 pages/mo + 2 blog posts + 2–3 backlinks",
+                "AEO schema — FAQ, HowTo, entity optimization",
+                "Monthly report + 45-min strategy call",
+              ].map((f) => (
+                <li class="flex items-start gap-2">
+                  <svg
+                    class="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
+                  {f}
+                </li>
+              ))
+            }
           </ul>
-          <a href="/contact#book" data-evt="cta_pricing_growth" class="mt-8 block rounded-xl bg-primary px-6 py-3 text-center text-sm font-semibold text-white shadow transition hover:bg-primary-dark">Get Started</a>
+          <a
+            href="/contact#book"
+            data-evt="cta_pricing_growth"
+            class="mt-8 block rounded-xl bg-primary px-6 py-3 text-center text-sm font-semibold text-white shadow transition hover:bg-primary-dark"
+            >Get Started</a
+          >
         </article>
-        <article class="flex flex-col rounded-2xl border border-border-subtle bg-white p-8 shadow-sm transition hover:border-primary/30 hover:shadow-md">
+        <article
+          class="hover:border-primary/30 flex flex-col rounded-2xl border border-border-subtle bg-white p-8 shadow-sm transition hover:shadow-md"
+        >
           <h3 class="font-heading text-xl font-bold text-heading">Authority</h3>
-          <div class="mt-2 flex items-baseline gap-1"><span class="font-heading text-4xl font-extrabold text-primary">$1,499</span><span class="text-sm text-body">/mo</span></div>
-          <p class="mt-3 text-sm text-body">Maximum output for businesses that want to dominate their market.</p>
+          <div class="mt-2 flex items-baseline gap-1">
+            <span class="font-heading text-4xl font-extrabold text-primary">$1,499</span><span
+              class="text-sm text-body">/mo</span
+            >
+          </div>
+          <p class="mt-3 text-sm text-body">
+            Maximum output for businesses that want to dominate their market.
+          </p>
           <div class="my-5 h-px bg-border-subtle"></div>
           <ul class="flex-1 space-y-2.5 text-sm text-body">
-            {["Everything in Growth","Up to 10 pages/mo + 4 blogs + 4–6 backlinks","Quarterly AI Visibility Audit included","Bi-weekly check-ins + priority turnaround"].map(f => (
-              <li class="flex items-start gap-2"><svg class="mt-0.5 h-4 w-4 shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>{f}</li>
-            ))}
+            {
+              [
+                "Everything in Growth",
+                "Up to 10 pages/mo + 4 blogs + 4–6 backlinks",
+                "Quarterly AI Visibility Audit included",
+                "Bi-weekly check-ins + priority turnaround",
+              ].map((f) => (
+                <li class="flex items-start gap-2">
+                  <svg
+                    class="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
+                  {f}
+                </li>
+              ))
+            }
           </ul>
-          <a href="/contact#book" data-evt="cta_pricing_authority" class="mt-8 block rounded-xl border-2 border-primary px-6 py-3 text-center text-sm font-semibold text-primary transition hover:bg-primary hover:text-white">Get Started</a>
+          <a
+            href="/contact#book"
+            data-evt="cta_pricing_authority"
+            class="mt-8 block rounded-xl border-2 border-primary px-6 py-3 text-center text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
+            >Get Started</a
+          >
         </article>
       </div>
-      <p class="mt-8 text-center text-sm text-body">Not sure which plan fits? <a href="/contact#book" class="font-semibold text-primary underline underline-offset-2 hover:text-primary-dark">Book a free 15-minute audit</a> and we'll recommend the right starting point.</p>
+      <p class="mt-8 text-center text-sm text-body">
+        Not sure which plan fits? <a
+          href="/contact#book"
+          class="font-semibold text-primary underline underline-offset-2 hover:text-primary-dark"
+          >Book a free 15-minute audit</a
+        > and we'll recommend the right starting point.
+      </p>
     </div>
   </section>
 
@@ -410,43 +866,104 @@ export const description =
   <section id="faq" class="bg-white py-24">
     <div class="mx-auto max-w-3xl px-6">
       <p class="mb-3 text-center text-xs font-bold uppercase tracking-widest text-primary">FAQ</p>
-      <h2 class="mb-12 text-center font-heading text-4xl font-extrabold text-heading md:text-5xl">Frequently Asked Questions</h2>
+      <h2 class="mb-12 text-center font-heading text-4xl font-extrabold text-heading md:text-5xl">
+        Frequently Asked Questions
+      </h2>
       <div class="space-y-2">
-        {[
-          ["Do you work with my industry or niche?", "If you're a local service business — even if not listed above — there's a 99% chance we can help. Reach out and ask."],
-          ["How quickly will I see results?", "Most companies start seeing more calls, leads, and improved rankings within 30–60 days. We focus on quick wins from day one."],
-          ["Are there any setup fees?", "Some one-time projects (like a full site build) have a flat fee. Ongoing services are month-to-month and fully transparent."],
-          ["Do I need to understand SEO or websites to get results?", "Nope. You run your business; we handle the digital work — clear communication, no jargon."],
-          ["Can you help if I already have a website or GBP?", "Absolutely. We improve and optimize existing sites and profiles — or build new if that's the better path."],
-          ["Will I have a dedicated point of contact?", "Yes — direct access to a home service marketing strategist. No call centers or handoffs."],
-        ].map(([q, a]) => (
-          <details class="group rounded-2xl border border-border-base bg-white shadow-sm transition hover:border-primary/30">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-heading text-base font-bold text-heading">
-              {q}
-              <svg class="h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-            </summary>
-            <div class="px-6 pb-6 text-base leading-relaxed text-body">{a}</div>
-          </details>
-        ))}
+        {
+          [
+            [
+              "Do you work with my industry or niche?",
+              "If you're a local service business — even if not listed above — there's a 99% chance we can help. Reach out and ask.",
+            ],
+            [
+              "How quickly will I see results?",
+              "Most companies start seeing more calls, leads, and improved rankings within 30–60 days. We focus on quick wins from day one.",
+            ],
+            [
+              "Are there any setup fees?",
+              "Some one-time projects (like a full site build) have a flat fee. Ongoing services are month-to-month and fully transparent.",
+            ],
+            [
+              "Do I need to understand SEO or websites to get results?",
+              "Nope. You run your business; we handle the digital work — clear communication, no jargon.",
+            ],
+            [
+              "Can you help if I already have a website or GBP?",
+              "Absolutely. We improve and optimize existing sites and profiles — or build new if that's the better path.",
+            ],
+            [
+              "Will I have a dedicated point of contact?",
+              "Yes — direct access to a home service marketing strategist. No call centers or handoffs.",
+            ],
+          ].map(([q, a]) => (
+            <details class="hover:border-primary/30 group rounded-2xl border border-border-base bg-white shadow-sm transition">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-heading text-base font-bold text-heading">
+                {q}
+                <svg
+                  class="h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-6 text-base leading-relaxed text-body">{a}</div>
+            </details>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- FINAL CTA -->
   <section class="relative overflow-hidden bg-secondary py-32" aria-label="Final CTA">
-    <div class="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] translate-x-1/3 -translate-y-1/4 rounded-full opacity-[0.10]" style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);" aria-hidden="true"></div>
+    <div
+      class="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
+      style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
+      aria-hidden="true"
+    >
+    </div>
     <div class="relative z-10 mx-auto max-w-3xl px-6 text-center">
-      <h2 class="mb-6 font-heading text-5xl font-extrabold leading-tight text-white md:text-6xl">Ready to get<br /><span class="text-primary">more calls?</span></h2>
-      <p class="mb-10 text-xl font-medium text-white/70">Book a free 15-minute audit. We review your GBP and site, find the biggest gaps, and tell you exactly what to do next.</p>
-      <a href="/contact#book" data-evt="cta_services_final" class="inline-flex items-center gap-2.5 rounded-full bg-primary px-12 py-5 font-heading text-xl font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.45)] transition hover:bg-primary-dark">
+      <h2 class="mb-6 font-heading text-5xl font-extrabold leading-tight text-white md:text-6xl">
+        Ready to get<br /><span class="text-primary">more calls?</span>
+      </h2>
+      <p class="mb-10 text-xl font-medium text-white/70">
+        Book a free 15-minute audit. We review your GBP and site, find the biggest gaps, and tell
+        you exactly what to do next.
+      </p>
+      <a
+        href="/contact#book"
+        data-evt="cta_services_final"
+        class="inline-flex items-center gap-2.5 rounded-full bg-primary px-12 py-5 font-heading text-xl font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.45)] transition hover:bg-primary-dark"
+      >
         Book a Call
-        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"/></svg>
+        <svg
+          class="h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
+        >
       </a>
     </div>
   </section>
-
 </Layout>
 
 <script type="application/ld+json" is:inline>
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://lilosgrowth.com/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://lilosgrowth.com/services"}]}
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://lilosgrowth.com/" },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Services",
+        "item": "https://lilosgrowth.com/services"
+      }
+    ]
+  }
 </script>

@@ -3,7 +3,6 @@ import Layout from "~/layouts/PageLayout.astro";
 import Button from "~/components/ui/Button.astro";
 import Badge from "~/components/ui/Badge.astro";
 import Card from "~/components/ui/Card.astro";
-import PricingCard from "~/components/sections/PricingCard.astro";
 import FeatureCard from "~/components/sections/FeatureCard.astro";
 import { Icon } from "astro-icon/components";
 
@@ -74,45 +73,58 @@ const faqs = [
       "@context": "https://schema.org",
       "@type": "Service",
       "@id": "https://lilosgrowth.com/services/web-design#service",
-      "name": "Website Design & Development for Home Service Businesses",
-      "description": "One-time website builds on Astro and Tailwind CSS for home service businesses. Conversion-ready, SEO-native, schema-marked up, and delivered in 7-10 business days.",
-      "provider": { "@id": "https://lilosgrowth.com/#org" },
-      "areaServed": { "@type": "Country", "name": "United States" },
-      "url": "https://lilosgrowth.com/services/web-design",
-      "offers": {
+      name: "Website Design & Development for Home Service Businesses",
+      description:
+        "One-time website builds on Astro and Tailwind CSS for home service businesses. Conversion-ready, SEO-native, schema-marked up, and delivered in 7-10 business days.",
+      provider: { "@id": "https://lilosgrowth.com/#org" },
+      areaServed: { "@type": "Country", name: "United States" },
+      url: "https://lilosgrowth.com/services/web-design",
+      offers: {
         "@type": "Offer",
-        "name": "Website Build",
-        "priceCurrency": "USD",
-        "price": "1200",
-        "availability": "https://schema.org/InStock"
-      }
+        name: "Website Build",
+        priceCurrency: "USD",
+        price: "1200",
+        availability: "https://schema.org/InStock",
+      },
     },
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": [
+      mainEntity: [
         {
           "@type": "Question",
-          "name": "Do I own the website after the build?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The $1,200 build is a one-time project. You own the finished site outright." }
+          name: "Do I own the website after the build?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. The $1,200 build is a one-time project. You own the finished site outright.",
+          },
         },
         {
           "@type": "Question",
-          "name": "Is hosting included?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Hosting and ongoing updates are available through our $199/mo maintenance plan. It is optional and month-to-month." }
+          name: "Is hosting included?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Hosting and ongoing updates are available through our $199/mo maintenance plan. It is optional and month-to-month.",
+          },
         },
         {
           "@type": "Question",
-          "name": "How quickly can my site be live?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Standard delivery is 7-10 business days. Timeline depends on how quickly client content is provided." }
+          name: "How quickly can my site be live?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Standard delivery is 7-10 business days. Timeline depends on how quickly client content is provided.",
+          },
         },
         {
           "@type": "Question",
-          "name": "Can you help with SEO after launch?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The site build includes SEO foundations. Pair it with a monthly retainer for ongoing local SEO management." }
-        }
-      ]
-    }
+          name: "Can you help with SEO after launch?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. The site build includes SEO foundations. Pair it with a monthly retainer for ongoing local SEO management.",
+          },
+        },
+      ],
+    },
   ]}
 >
   <!-- HERO -->
@@ -191,31 +203,79 @@ const faqs = [
               <span class="font-heading text-4xl font-extrabold text-primary">$1,200</span>
               <span class="text-sm text-body">one-time</span>
             </div>
-            <p class="mt-3 text-sm text-body">Built on Astro and Tailwind CSS — the same stack powering our client sites. Fast, static, SEO-native, and structured to rank from day one.</p>
+            <p class="mt-3 text-sm text-body">
+              Built on Astro and Tailwind CSS — the same stack powering our client sites. Fast,
+              static, SEO-native, and structured to rank from day one.
+            </p>
             <div class="my-6 h-px bg-gray-100"></div>
             <ul class="space-y-3 text-sm text-body">
               <li class="flex items-start gap-2">
-                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <svg
+                  class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                  ></path></svg
+                >
                 <span>15–20 pages — home, services, city pages, blog, contact</span>
               </li>
               <li class="flex items-start gap-2">
-                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <svg
+                  class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                  ></path></svg
+                >
                 <span>City × service money page matrix</span>
               </li>
               <li class="flex items-start gap-2">
-                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <svg
+                  class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                  ></path></svg
+                >
                 <span>Schema markup, GA4, click-to-call, form tracking</span>
               </li>
               <li class="flex items-start gap-2">
-                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <svg
+                  class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                  ></path></svg
+                >
                 <span>Core Web Vitals optimized — sub-second load times</span>
               </li>
               <li class="flex items-start gap-2">
-                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <svg
+                  class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                  ></path></svg
+                >
                 <span>7–10 business day delivery</span>
               </li>
             </ul>
-            
+            <a
               href="/contact#book"
               data-evt="cta_webdesign_build"
               class="mt-8 inline-block rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow transition hover:bg-primary-dark"
@@ -229,22 +289,60 @@ const faqs = [
               <span class="font-heading text-2xl font-extrabold text-primary">$199</span>
               <span class="text-sm text-body">/mo</span>
             </div>
-            <p class="mt-3 text-sm text-body">Keep your site fast, secure, and up to date. Month-to-month, no commitment.</p>
+            <p class="mt-3 text-sm text-body">
+              Keep your site fast, secure, and up to date. Month-to-month, no commitment.
+            </p>
             <ul class="mt-4 space-y-2 text-sm text-body">
               <li class="flex items-start gap-2">
-                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <svg
+                  class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                  ></path></svg
+                >
                 <span>Hosting, security monitoring, and uptime</span>
               </li>
               <li class="flex items-start gap-2">
-                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <svg
+                  class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                  ></path></svg
+                >
                 <span>Up to 5 minor edits/mo via support ticket</span>
               </li>
               <li class="flex items-start gap-2">
-                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <svg
+                  class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                  ></path></svg
+                >
                 <span>Analytics and lead tracking maintained</span>
               </li>
               <li class="flex items-start gap-2">
-                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <svg
+                  class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                  ></path></svg
+                >
                 <span>Month-to-month — cancel anytime</span>
               </li>
             </ul>
@@ -253,8 +351,6 @@ const faqs = [
       </div>
     </div>
   </section>
-
-
 
   <!-- WHY CHOOSE US -->
   <section class="border-t border-gray-100 bg-white py-16" id="why">
@@ -308,5 +404,3 @@ const faqs = [
     </div>
   </section>
 </Layout>
-
-

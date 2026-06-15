@@ -237,7 +237,11 @@ export const resultsCaseStudies: CaseStudy[] = [
       alt: "Wheyland Electric website",
     },
     kpis: [
-      { label: "web leads — first 3 weeks", value: "+350%", sr: "three hundred fifty percent increase in web leads" },
+      {
+        label: "web leads — first 3 weeks",
+        value: "+350%",
+        sr: "three hundred fifty percent increase in web leads",
+      },
       { label: "GBP calls month one", value: "3×" },
       { label: "keywords ranked", value: "+900%" },
     ],
