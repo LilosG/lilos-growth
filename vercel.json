@@ -102,15 +102,6 @@
       ]
     },
     {
-      "source": "/privacy",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
       "source": "/offline",
       "headers": [
         {

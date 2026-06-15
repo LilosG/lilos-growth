@@ -71,7 +71,7 @@ Each party may receive “**Confidential Information**” of the other. The rece
 
 ## 9) Data, Privacy & Security
 
-We handle personal data as described in our **[Privacy Policy](/privacy-policy)**. Client is responsible for its own privacy notices and for ensuring it has a lawful basis to share any personal data with us. We use reasonable administrative, technical, and physical safeguards, but **no system is 100% secure**.
+We handle personal data as described in our **[Privacy Policy](/privacy)**. Client is responsible for its own privacy notices and for ensuring it has a lawful basis to share any personal data with us. We use reasonable administrative, technical, and physical safeguards, but **no system is 100% secure**.
 
 ## 10) Platform & Third-Party Services
 

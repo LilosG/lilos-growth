@@ -48,7 +48,6 @@ export default defineConfig({
           "/index-refactored",
           "/results-refactored",
           "/offline",
-          "/privacy",
           "/thank-you",
         ]).has(pathname);
       },
