@@ -1,76 +1,199 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import { packages, gbpOneTime, gbpRecurring, seoOneTime, seoTiers, websiteBuilds, websiteAsAService, audits, addOns } from '~/data/packages';
+import Layout from "~/layouts/PageLayout.astro";
+import {
+  packages,
+  gbpOneTime,
+  gbpRecurring,
+  seoOneTime,
+  seoTiers,
+  websiteBuilds,
+  websiteAsAService,
+  audits,
+  addOns,
+} from "~/data/packages";
 
 const metadata = {
-  title: 'Pricing & Packages | Local SEO, GBP & Website Design | Lilos Growth',
-  description: 'Clear, transparent pricing for local SEO, Google Business Profile management, and website design. Three package tiers, standalone GBP, website builds, and audits. Month-to-month, no contracts.',
+  title: "Pricing & Packages | Local SEO, GBP & Website Design | Lilos Growth",
+  description:
+    "Clear, transparent pricing for local SEO, Google Business Profile management, and website design. Three package tiers, standalone GBP, website builds, and audits. Month-to-month, no contracts.",
 };
 
 const faqs = [
-  { q: 'Why is the first month more expensive?', a: 'Month one includes significantly more work — full audit, written strategy document, GBP optimization, technical SEO foundation, schema installation, and citation cleanup. Every client gets a complete strategy document before execution begins. The setup fee reflects that work honestly. Ongoing months are the retainer rate.' },
-  { q: 'Can I start with just GBP and add SEO later?', a: 'Yes — and that\'s how most clients start. GBP management at $249/mo is the lowest-barrier entry. Once you\'re seeing results, usually within 60 days, adding an SEO retainer is a natural next step. The GBP work feeds directly into the SEO strategy.' },
-  { q: 'What\'s the difference between the free GBP audit and the Local Search Audit?', a: 'The free audit covers your Google Business Profile only — scored, benchmarked, findings delivered. The Local Search Audit ($499) covers your entire digital footprint: GBP, technical SEO, keyword landscape, competitive position, schema, citations, AI visibility, and a full 90-day action plan. The $499 is credited in full toward any retainer.' },
-  { q: 'Do the website builds include SEO?', a: 'Yes. Every build includes on-page SEO, schema, GA4, GSC, and the service × city page architecture built to rank. Ongoing monthly content, citations, and backlinks are the retainer. The site is the foundation — the retainer is what makes it compound.' },
-  { q: 'What does "local content assets" mean?', a: 'Service pages, city pages, service × city pages, FAQs, listicles, location blog posts — whatever type of content moves the needle in your market that month. Purpose-built local search assets targeting real keywords with real search volume. Not generic blog posts.' },
-  { q: 'Is there a minimum commitment?', a: 'No minimum. Month-to-month on everything. We ask for 30 days notice to offboard cleanly — no penalty, no contract, no lock-in.' },
+  {
+    q: "Why is the first month more expensive?",
+    a: "Month one includes significantly more work — full audit, written strategy document, GBP optimization, technical SEO foundation, schema installation, and citation cleanup. Every client gets a complete strategy document before execution begins. The setup fee reflects that work honestly. Ongoing months are the retainer rate.",
+  },
+  {
+    q: "Can I start with just GBP and add SEO later?",
+    a: "Yes — and that's how most clients start. GBP management at $249/mo is the lowest-barrier entry. Once you're seeing results, usually within 60 days, adding an SEO retainer is a natural next step. The GBP work feeds directly into the SEO strategy.",
+  },
+  {
+    q: "What's the difference between the free GBP audit and the Local Search Audit?",
+    a: "The free audit covers your Google Business Profile only — scored, benchmarked, findings delivered. The Local Search Audit ($499) covers your entire digital footprint: GBP, technical SEO, keyword landscape, competitive position, schema, citations, AI visibility, and a full 90-day action plan. The $499 is credited in full toward any retainer.",
+  },
+  {
+    q: "Do the website builds include SEO?",
+    a: "Yes. Every build includes on-page SEO, schema, GA4, GSC, and the service × city page architecture built to rank. Ongoing monthly content, citations, and backlinks are the retainer. The site is the foundation — the retainer is what makes it compound.",
+  },
+  {
+    q: 'What does "local content assets" mean?',
+    a: "Service pages, city pages, service × city pages, FAQs, listicles, location blog posts — whatever type of content moves the needle in your market that month. Purpose-built local search assets targeting real keywords with real search volume. Not generic blog posts.",
+  },
+  {
+    q: "Is there a minimum commitment?",
+    a: "No minimum. Month-to-month on everything. We ask for 30 days notice to offboard cleanly — no penalty, no contract, no lock-in.",
+  },
 ];
 ---
 
 <Layout metadata={metadata}>
-
   <!-- HERO -->
-  <section class="relative overflow-hidden bg-white pt-20 pb-20">
-    <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(245,107,42,0.06) 0%,transparent 70%);" aria-hidden="true"></div>
+  <section class="relative overflow-hidden bg-white pb-20 pt-20">
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(245,107,42,0.06) 0%,transparent 70%);"
+      aria-hidden="true"
+    >
+    </div>
     <div class="relative mx-auto max-w-4xl px-6 text-center">
       <p class="mb-4 text-xs font-bold uppercase tracking-widest text-primary">Pricing</p>
-      <h1 class="mb-5 font-heading text-5xl font-extrabold leading-tight text-heading md:text-6xl">Clear pricing. Real work.<br /><span class="text-primary">No surprises.</span></h1>
-      <p class="mx-auto max-w-xl text-lg text-muted">Three pillars — Google Business Profile, Local SEO, and Website Design. Each stands alone or stacks into a complete local search strategy. Every retainer is month-to-month. Written strategy included with every engagement.</p>
+      <h1 class="mb-5 font-heading text-5xl font-extrabold leading-tight text-heading md:text-6xl">
+        Clear pricing. Real work.<br /><span class="text-primary">No surprises.</span>
+      </h1>
+      <p class="mx-auto max-w-xl text-lg text-muted">
+        Three pillars — Google Business Profile, Local SEO, and Website Design. Each stands alone or
+        stacks into a complete local search strategy. Every retainer is month-to-month. Written
+        strategy included with every engagement.
+      </p>
       <div class="mt-8 flex flex-wrap justify-center gap-6 text-sm font-medium text-muted">
-        <span class="flex items-center gap-2"><svg class="h-4 w-4 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>No contracts — cancel anytime</span>
-        <span class="flex items-center gap-2"><svg class="h-4 w-4 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Written strategy with every engagement</span>
-        <span class="flex items-center gap-2"><svg class="h-4 w-4 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Real reporting on real metrics every month</span>
+        <span class="flex items-center gap-2"
+          ><svg
+            class="h-4 w-4 text-primary"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+            ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+            ></path></svg
+          >No contracts — cancel anytime</span
+        >
+        <span class="flex items-center gap-2"
+          ><svg
+            class="h-4 w-4 text-primary"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+            ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+            ></path></svg
+          >Written strategy with every engagement</span
+        >
+        <span class="flex items-center gap-2"
+          ><svg
+            class="h-4 w-4 text-primary"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+            ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+            ></path></svg
+          >Real reporting on real metrics every month</span
+        >
       </div>
     </div>
   </section>
 
   <!-- BUNDLED PACKAGES -->
-  <section class="bg-background-subtle py-24 border-y border-border-subtle" id="packages">
+  <section class="border-y border-border-subtle bg-background-subtle py-24" id="packages">
     <div class="mx-auto max-w-5xl px-6">
       <div class="mb-14 text-center">
-        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Most clients start here</p>
-        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">Bundled Packages — GBP + Local SEO</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-base text-muted">GBP management and local SEO working together under one strategy. One report, one point of contact, one direction. Add a website build at any time — it's a separate one-time fee, the retainer stays the same.</p>
+        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+          Most clients start here
+        </p>
+        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+          Bundled Packages — GBP + Local SEO
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base text-muted">
+          GBP management and local SEO working together under one strategy. One report, one point of
+          contact, one direction. Add a website build at any time — it's a separate one-time fee,
+          the retainer stays the same.
+        </p>
       </div>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {packages.map(pkg => (
-          <article class={`relative flex flex-col rounded-2xl border p-8 transition ${pkg.featured ? 'border-primary bg-secondary shadow-2xl' : 'border-border-subtle bg-white shadow-sm hover:border-primary/30 hover:shadow-md'}`}>
-            {pkg.featured && (
-              <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-                <span class="rounded-full bg-primary px-5 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow">{pkg.badge}</span>
+        {
+          packages.map((pkg) => (
+            <article
+              class={`relative flex flex-col rounded-2xl border p-8 transition ${pkg.featured ? "border-primary bg-secondary shadow-2xl" : "hover:border-primary/30 border-border-subtle bg-white shadow-sm hover:shadow-md"}`}
+            >
+              {pkg.featured && (
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span class="rounded-full bg-primary px-5 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow">
+                    {pkg.badge}
+                  </span>
+                </div>
+              )}
+              <p
+                class={`mb-1 text-xs font-bold uppercase tracking-widest ${pkg.featured ? "text-primary" : "text-muted"}`}
+              >
+                {pkg.tagline}
+              </p>
+              <h3
+                class={`font-heading text-2xl font-extrabold ${pkg.featured ? "text-white" : "text-heading"}`}
+              >
+                {pkg.name}
+              </h3>
+              <div class="mt-3 flex items-baseline gap-1">
+                <span
+                  class={`font-heading text-5xl font-extrabold ${pkg.featured ? "text-white" : "text-primary"}`}
+                >
+                  ${pkg.price}
+                </span>
+                <span class={`text-sm ${pkg.featured ? "text-white/50" : "text-body"}`}>/mo</span>
               </div>
-            )}
-            <p class={`mb-1 text-xs font-bold uppercase tracking-widest ${pkg.featured ? 'text-primary' : 'text-muted'}`}>{pkg.tagline}</p>
-            <h3 class={`font-heading text-2xl font-extrabold ${pkg.featured ? 'text-white' : 'text-heading'}`}>{pkg.name}</h3>
-            <div class="mt-3 flex items-baseline gap-1">
-              <span class={`font-heading text-5xl font-extrabold ${pkg.featured ? 'text-white' : 'text-primary'}`}>${pkg.price}</span>
-              <span class={`text-sm ${pkg.featured ? 'text-white/50' : 'text-body'}`}>/mo</span>
-            </div>
-            <p class={`mt-1 text-xs ${pkg.featured ? 'text-white/40' : 'text-muted'}`}>Setup month: ${pkg.setupPrice}</p>
-            <div class={`my-5 h-px ${pkg.featured ? 'bg-white/10' : 'bg-border-subtle'}`}></div>
-            <ul class="flex-1 space-y-2.5 text-sm mb-8">
-              {pkg.inclusions.map(inc => (
-                <li class={`flex items-start gap-2 ${pkg.featured ? 'text-white/75' : 'text-body'}`}>
-                  <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                  {inc}
-                </li>
-              ))}
-            </ul>
-            <a href="/contact#book" class={`block rounded-xl px-6 py-3.5 text-center text-sm font-bold transition ${pkg.featured ? 'bg-primary text-white shadow hover:bg-primary-dark' : 'border-2 border-primary text-primary hover:bg-primary hover:text-white'}`}>Get Started</a>
-          </article>
-        ))}
+              <p class={`mt-1 text-xs ${pkg.featured ? "text-white/40" : "text-muted"}`}>
+                Setup month: ${pkg.setupPrice}
+              </p>
+              <div class={`my-5 h-px ${pkg.featured ? "bg-white/10" : "bg-border-subtle"}`} />
+              <ul class="mb-8 flex-1 space-y-2.5 text-sm">
+                {pkg.inclusions.map((inc) => (
+                  <li
+                    class={`flex items-start gap-2 ${pkg.featured ? "text-white/75" : "text-body"}`}
+                  >
+                    <svg
+                      class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                    {inc}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/contact#book"
+                class={`block rounded-xl px-6 py-3.5 text-center text-sm font-bold transition ${pkg.featured ? "bg-primary text-white shadow hover:bg-primary-dark" : "border-2 border-primary text-primary hover:bg-primary hover:text-white"}`}
+              >
+                Get Started
+              </a>
+            </article>
+          ))
+        }
       </div>
-      <p class="mt-8 text-center text-sm text-muted">Want to add a website? Site build is a one-time fee added to any package. Your retainer rate stays the same. <a href="#website" class="font-semibold text-primary underline underline-offset-2 hover:text-primary-dark">See website pricing below →</a></p>
+      <p class="mt-8 text-center text-sm text-muted">
+        Want to add a website? Site build is a one-time fee added to any package. Your retainer rate
+        stays the same. <a
+          href="#website"
+          class="font-semibold text-primary underline underline-offset-2 hover:text-primary-dark"
+          >See website pricing below →</a
+        >
+      </p>
     </div>
   </section>
 
@@ -78,126 +201,254 @@ const faqs = [
   <section class="bg-white py-24" id="gbp">
     <div class="mx-auto max-w-5xl px-6">
       <div class="mb-14 text-center">
-        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Google Business Profile</p>
-        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">The entry point. Most clients start here.</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-base text-muted">A fully optimized, actively managed GBP generates calls without ad spend. It's the highest-ROI local search asset for most local businesses — and most profiles are leaving more than half their potential on the table.</p>
+        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+          Google Business Profile
+        </p>
+        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+          The entry point. Most clients start here.
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base text-muted">
+          A fully optimized, actively managed GBP generates calls without ad spend. It's the
+          highest-ROI local search asset for most local businesses — and most profiles are leaving
+          more than half their potential on the table.
+        </p>
       </div>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <article class="flex flex-col rounded-2xl border border-border-subtle bg-white p-8 shadow-sm">
+        <article
+          class="flex flex-col rounded-2xl border border-border-subtle bg-white p-8 shadow-sm"
+        >
           <div class="mb-1 inline-flex items-center gap-2">
-            <span class="rounded-full border border-border-base px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-muted">One-time</span>
+            <span
+              class="rounded-full border border-border-base px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-muted"
+              >One-time</span
+            >
           </div>
           <h3 class="mt-3 font-heading text-2xl font-extrabold text-heading">{gbpOneTime.name}</h3>
           <div class="mt-2 flex items-baseline gap-1">
-            <span class="font-heading text-5xl font-extrabold text-primary">${gbpOneTime.price}</span>
+            <span class="font-heading text-5xl font-extrabold text-primary"
+              >${gbpOneTime.price}</span
+            >
             <span class="text-sm text-body">one-time</span>
           </div>
           <p class="mt-1 text-xs text-muted">Delivery: {gbpOneTime.delivery}</p>
           <div class="my-5 h-px bg-border-subtle"></div>
           <p class="mb-5 text-sm leading-relaxed text-body">{gbpOneTime.description}</p>
-          <ul class="flex-1 space-y-2.5 text-sm mb-6">
-            {gbpOneTime.inclusions.map(inc => (
-              <li class="flex items-start gap-2 text-body">
-                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                {inc}
-              </li>
-            ))}
+          <ul class="mb-6 flex-1 space-y-2.5 text-sm">
+            {
+              gbpOneTime.inclusions.map((inc) => (
+                <li class="flex items-start gap-2 text-body">
+                  <svg
+                    class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
+                  {inc}
+                </li>
+              ))
+            }
           </ul>
-          {gbpOneTime.note && <p class="mb-6 rounded-xl bg-primary/5 border border-primary/20 px-4 py-3 text-xs text-primary font-medium">{gbpOneTime.note}</p>}
-          <a href="/contact#book" class="block rounded-xl border-2 border-primary px-6 py-3.5 text-center text-sm font-bold text-primary transition hover:bg-primary hover:text-white">Get Started</a>
+          {
+            gbpOneTime.note && (
+              <p class="bg-primary/5 border-primary/20 mb-6 rounded-xl border px-4 py-3 text-xs font-medium text-primary">
+                {gbpOneTime.note}
+              </p>
+            )
+          }
+          <a
+            href="/contact#book"
+            class="block rounded-xl border-2 border-primary px-6 py-3.5 text-center text-sm font-bold text-primary transition hover:bg-primary hover:text-white"
+            >Get Started</a
+          >
         </article>
         <article class="flex flex-col rounded-2xl border border-primary bg-secondary p-8 shadow-xl">
           <div class="mb-1 inline-flex items-center gap-2">
-            <span class="rounded-full border border-white/20 px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-white/60">Ongoing management</span>
+            <span
+              class="rounded-full border border-white/20 px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-white/60"
+              >Ongoing management</span
+            >
           </div>
           <h3 class="mt-3 font-heading text-2xl font-extrabold text-white">{gbpRecurring.name}</h3>
           <div class="mt-2 flex items-baseline gap-1">
-            <span class="font-heading text-5xl font-extrabold text-white">${gbpRecurring.price}</span>
+            <span class="font-heading text-5xl font-extrabold text-white"
+              >${gbpRecurring.price}</span
+            >
             <span class="text-sm text-white/50">/mo</span>
           </div>
           <p class="mt-1 text-xs text-white/40">{gbpRecurring.description}</p>
           <div class="my-5 h-px bg-white/10"></div>
-          <ul class="flex-1 space-y-2.5 text-sm mb-8">
-            {gbpRecurring.inclusions.map(inc => (
-              <li class="flex items-start gap-2 text-white/75">
-                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                {inc}
-              </li>
-            ))}
+          <ul class="mb-8 flex-1 space-y-2.5 text-sm">
+            {
+              gbpRecurring.inclusions.map((inc) => (
+                <li class="flex items-start gap-2 text-white/75">
+                  <svg
+                    class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
+                  {inc}
+                </li>
+              ))
+            }
           </ul>
-          <a href="/contact#book" class="block rounded-xl bg-primary px-6 py-3.5 text-center text-sm font-bold text-white shadow transition hover:bg-primary-dark">Get Started</a>
+          <a
+            href="/contact#book"
+            class="block rounded-xl bg-primary px-6 py-3.5 text-center text-sm font-bold text-white shadow transition hover:bg-primary-dark"
+            >Get Started</a
+          >
         </article>
       </div>
     </div>
   </section>
 
   <!-- SEO STANDALONE -->
-  <section class="bg-background-subtle py-24 border-y border-border-subtle" id="seo">
+  <section class="border-y border-border-subtle bg-background-subtle py-24" id="seo">
     <div class="mx-auto max-w-5xl px-6">
       <div class="mb-14 text-center">
         <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Local SEO</p>
-        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">Build the asset that compounds month over month.</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-base text-muted">On-page, technical, citations, content, and local authority — built to rank in your market and grow continuously. On retainer, your site adds 10–20 new optimized pages per month, expanding your local footprint automatically.</p>
+        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+          Build the asset that compounds month over month.
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base text-muted">
+          On-page, technical, citations, content, and local authority — built to rank in your market
+          and grow continuously. On retainer, your site adds 10–20 new optimized pages per month,
+          expanding your local footprint automatically.
+        </p>
       </div>
 
       <!-- SEO One-Time -->
       <div class="mb-10 overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-sm">
         <div class="grid grid-cols-1 md:grid-cols-2">
           <div class="p-8 md:border-r md:border-border-subtle">
-            <span class="rounded-full border border-border-base px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-muted">One-time</span>
-            <h3 class="mt-4 font-heading text-2xl font-extrabold text-heading">{seoOneTime.name}</h3>
+            <span
+              class="rounded-full border border-border-base px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-muted"
+              >One-time</span
+            >
+            <h3 class="mt-4 font-heading text-2xl font-extrabold text-heading">
+              {seoOneTime.name}
+            </h3>
             <div class="mt-2 flex items-baseline gap-1">
-              <span class="font-heading text-5xl font-extrabold text-primary">${seoOneTime.price}</span>
+              <span class="font-heading text-5xl font-extrabold text-primary"
+                >${seoOneTime.price}</span
+              >
               <span class="text-sm text-body">one-time</span>
             </div>
             <p class="mt-1 text-xs text-muted">Delivery: {seoOneTime.delivery}</p>
-            {seoOneTime.note && <p class="mt-4 rounded-xl bg-primary/5 border border-primary/20 px-4 py-3 text-xs text-primary font-medium">{seoOneTime.note}</p>}
-            <a href="/contact#book" class="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-7 py-3.5 font-heading text-base font-bold text-white shadow transition hover:bg-primary-dark">Get Started →</a>
+            {
+              seoOneTime.note && (
+                <p class="bg-primary/5 border-primary/20 mt-4 rounded-xl border px-4 py-3 text-xs font-medium text-primary">
+                  {seoOneTime.note}
+                </p>
+              )
+            }
+            <a
+              href="/contact#book"
+              class="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-7 py-3.5 font-heading text-base font-bold text-white shadow transition hover:bg-primary-dark"
+              >Get Started →</a
+            >
           </div>
           <div class="bg-background-subtle p-8">
-            <p class="mb-4 text-xs font-bold uppercase tracking-widest text-muted">What's included</p>
+            <p class="mb-4 text-xs font-bold uppercase tracking-widest text-muted">
+              What's included
+            </p>
             <ul class="space-y-2.5 text-sm">
-              {seoOneTime.inclusions.map(inc => (
-                <li class="flex items-start gap-2 text-body">
-                  <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                  {inc}
-                </li>
-              ))}
+              {
+                seoOneTime.inclusions.map((inc) => (
+                  <li class="flex items-start gap-2 text-body">
+                    <svg
+                      class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                    {inc}
+                  </li>
+                ))
+              }
             </ul>
           </div>
         </div>
       </div>
 
       <!-- SEO Retainer Tiers -->
-      <div class="mb-6 rounded-xl bg-primary/5 border border-primary/20 px-5 py-4 text-sm text-body">
-        <strong class="text-heading">Every retainer includes:</strong> written strategy document and full foundation audit in the setup month. GBP management is not included in standalone SEO tiers — add it for $249/mo or choose a bundled package above.
+      <div
+        class="bg-primary/5 border-primary/20 mb-6 rounded-xl border px-5 py-4 text-sm text-body"
+      >
+        <strong class="text-heading">Every retainer includes:</strong> written strategy document and
+        full foundation audit in the setup month. GBP management is not included in standalone SEO tiers
+        — add it for $249/mo or choose a bundled package above.
       </div>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {seoTiers.map(tier => (
-          <article class={`relative flex flex-col rounded-2xl border p-8 transition ${tier.featured ? 'border-primary bg-white shadow-xl ring-2 ring-primary/20' : 'border-border-subtle bg-white shadow-sm hover:border-primary/30 hover:shadow-md'}`}>
-            {tier.featured && (
-              <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-                <span class="rounded-full bg-primary px-5 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow">Most Popular</span>
+        {
+          seoTiers.map((tier) => (
+            <article
+              class={`relative flex flex-col rounded-2xl border p-8 transition ${tier.featured ? "ring-primary/20 border-primary bg-white shadow-xl ring-2" : "hover:border-primary/30 border-border-subtle bg-white shadow-sm hover:shadow-md"}`}
+            >
+              {tier.featured && (
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span class="rounded-full bg-primary px-5 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow">
+                    Most Popular
+                  </span>
+                </div>
+              )}
+              <h3 class="font-heading text-xl font-extrabold text-heading">{tier.name}</h3>
+              <div class="mt-2 flex items-baseline gap-1">
+                <span class="font-heading text-4xl font-extrabold text-primary">${tier.price}</span>
+                <span class="text-sm text-body">/mo</span>
               </div>
-            )}
-            <h3 class="font-heading text-xl font-extrabold text-heading">{tier.name}</h3>
-            <div class="mt-2 flex items-baseline gap-1">
-              <span class="font-heading text-4xl font-extrabold text-primary">${tier.price}</span>
-              <span class="text-sm text-body">/mo</span>
-            </div>
-            <p class="mt-1 mb-5 text-xs text-muted">Setup month: ${tier.setupPrice}</p>
-            <div class="h-px mb-5 bg-border-subtle"></div>
-            <ul class="flex-1 space-y-2.5 text-sm mb-8">
-              {tier.inclusions.map(inc => (
-                <li class="flex items-start gap-2 text-body">
-                  <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                  {inc}
-                </li>
-              ))}
-            </ul>
-            <a href="/contact#book" class={`block rounded-xl px-6 py-3.5 text-center text-sm font-bold transition ${tier.featured ? 'bg-primary text-white shadow hover:bg-primary-dark' : 'border-2 border-primary text-primary hover:bg-primary hover:text-white'}`}>Get Started</a>
-          </article>
-        ))}
+              <p class="mb-5 mt-1 text-xs text-muted">Setup month: ${tier.setupPrice}</p>
+              <div class="mb-5 h-px bg-border-subtle" />
+              <ul class="mb-8 flex-1 space-y-2.5 text-sm">
+                {tier.inclusions.map((inc) => (
+                  <li class="flex items-start gap-2 text-body">
+                    <svg
+                      class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                    {inc}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/contact#book"
+                class={`block rounded-xl px-6 py-3.5 text-center text-sm font-bold transition ${tier.featured ? "bg-primary text-white shadow hover:bg-primary-dark" : "border-2 border-primary text-primary hover:bg-primary hover:text-white"}`}
+              >
+                Get Started
+              </a>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -206,115 +457,224 @@ const faqs = [
   <section class="bg-white py-24" id="website">
     <div class="mx-auto max-w-5xl px-6">
       <div class="mb-14 text-center">
-        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Website Design & Build</p>
-        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">Built to rank from day one.</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-base text-muted">Every site built on Astro + Tailwind + Vercel — fast, schema-first, and structured around the service × city page architecture that dominates local search. Not a template. Not a page builder.</p>
+        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+          Website Design & Build
+        </p>
+        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+          Built to rank from day one.
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base text-muted">
+          Every site built on Astro + Tailwind + Vercel — fast, schema-first, and structured around
+          the service × city page architecture that dominates local search. Not a template. Not a
+          page builder.
+        </p>
       </div>
-      <div class="mb-6 overflow-hidden rounded-xl border border-border-subtle bg-background-subtle px-6 py-4">
-        <p class="text-sm text-body"><strong class="text-heading">Standard inclusions across all builds:</strong> LocalBusiness + Services schema, GA4, Google Search Console, click-to-call, contact form with reCAPTCHA, and full on-page SEO. Client provides logo, brand colors, service list, service areas, and 5–10 reviews.</p>
+      <div
+        class="mb-6 overflow-hidden rounded-xl border border-border-subtle bg-background-subtle px-6 py-4"
+      >
+        <p class="text-sm text-body">
+          <strong class="text-heading">Standard inclusions across all builds:</strong> LocalBusiness
+          + Services schema, GA4, Google Search Console, click-to-call, contact form with reCAPTCHA,
+          and full on-page SEO. Client provides logo, brand colors, service list, service areas, and
+          5–10 reviews.
+        </p>
       </div>
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-3 mb-12">
-        {websiteBuilds.map(build => (
-          <article class={`relative flex flex-col rounded-2xl border p-8 transition ${build.featured ? 'border-primary bg-white shadow-xl ring-2 ring-primary/20' : 'border-border-subtle bg-white shadow-sm hover:border-primary/30 hover:shadow-md'}`}>
-            {build.featured && (
-              <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-                <span class="rounded-full bg-primary px-5 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow">Most Popular</span>
+      <div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+        {
+          websiteBuilds.map((build) => (
+            <article
+              class={`relative flex flex-col rounded-2xl border p-8 transition ${build.featured ? "ring-primary/20 border-primary bg-white shadow-xl ring-2" : "hover:border-primary/30 border-border-subtle bg-white shadow-sm hover:shadow-md"}`}
+            >
+              {build.featured && (
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span class="rounded-full bg-primary px-5 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow">
+                    Most Popular
+                  </span>
+                </div>
+              )}
+              <h3 class="font-heading text-2xl font-extrabold text-heading">{build.name}</h3>
+              <div class="mt-2 flex items-baseline gap-1">
+                <span class="font-heading text-5xl font-extrabold text-primary">
+                  ${build.price}
+                </span>
+                <span class="text-sm text-body">one-time</span>
               </div>
-            )}
-            <h3 class="font-heading text-2xl font-extrabold text-heading">{build.name}</h3>
-            <div class="mt-2 flex items-baseline gap-1">
-              <span class="font-heading text-5xl font-extrabold text-primary">${build.price}</span>
-              <span class="text-sm text-body">one-time</span>
-            </div>
-            <div class="mt-2 flex gap-3">
-              <span class="rounded-full bg-background-subtle border border-border-subtle px-2.5 py-0.5 text-xs font-semibold text-muted">{build.pages}</span>
-              <span class="rounded-full bg-background-subtle border border-border-subtle px-2.5 py-0.5 text-xs font-semibold text-muted">{build.timeline}</span>
-            </div>
-            <div class="my-5 h-px bg-border-subtle"></div>
-            <p class="mb-2 text-sm text-body">{build.description}</p>
-            <p class="mb-5 text-xs text-muted italic">{build.bestFor}</p>
-            <ul class="flex-1 space-y-2.5 text-sm mb-8">
-              {build.inclusions.map(inc => (
-                <li class="flex items-start gap-2 text-body">
-                  <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                  {inc}
-                </li>
-              ))}
-            </ul>
-            <a href="/contact#book" class={`block rounded-xl px-6 py-3.5 text-center text-sm font-bold transition ${build.featured ? 'bg-primary text-white shadow hover:bg-primary-dark' : 'border-2 border-primary text-primary hover:bg-primary hover:text-white'}`}>Start Your Build</a>
-          </article>
-        ))}
+              <div class="mt-2 flex gap-3">
+                <span class="rounded-full border border-border-subtle bg-background-subtle px-2.5 py-0.5 text-xs font-semibold text-muted">
+                  {build.pages}
+                </span>
+                <span class="rounded-full border border-border-subtle bg-background-subtle px-2.5 py-0.5 text-xs font-semibold text-muted">
+                  {build.timeline}
+                </span>
+              </div>
+              <div class="my-5 h-px bg-border-subtle" />
+              <p class="mb-2 text-sm text-body">{build.description}</p>
+              <p class="mb-5 text-xs italic text-muted">{build.bestFor}</p>
+              <ul class="mb-8 flex-1 space-y-2.5 text-sm">
+                {build.inclusions.map((inc) => (
+                  <li class="flex items-start gap-2 text-body">
+                    <svg
+                      class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                    {inc}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/contact#book"
+                class={`block rounded-xl px-6 py-3.5 text-center text-sm font-bold transition ${build.featured ? "bg-primary text-white shadow hover:bg-primary-dark" : "border-2 border-primary text-primary hover:bg-primary hover:text-white"}`}
+              >
+                Start Your Build
+              </a>
+            </article>
+          ))
+        }
       </div>
 
       <!-- WaS -->
       <div class="rounded-2xl border border-border-subtle bg-background-subtle p-8">
         <div class="mb-6">
-          <p class="mb-1 text-xs font-bold uppercase tracking-widest text-primary">Website as a Service</p>
-          <h3 class="font-heading text-2xl font-extrabold text-heading">Don't want to own or maintain the site?</h3>
-          <p class="mt-2 text-base text-muted">We handle hosting, updates, and ongoing additions. A high-performance local site without managing any of it.</p>
+          <p class="mb-1 text-xs font-bold uppercase tracking-widest text-primary">
+            Website as a Service
+          </p>
+          <h3 class="font-heading text-2xl font-extrabold text-heading">
+            Don't want to own or maintain the site?
+          </h3>
+          <p class="mt-2 text-base text-muted">
+            We handle hosting, updates, and ongoing additions. A high-performance local site without
+            managing any of it.
+          </p>
         </div>
         <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-          {websiteAsAService.map(was => (
-            <div class="rounded-xl border border-border-subtle bg-white p-6 shadow-sm">
-              <h4 class="font-heading text-lg font-bold text-heading">{was.name}</h4>
-              <div class="mt-1 flex items-baseline gap-1">
-                <span class="font-heading text-3xl font-extrabold text-primary">${was.price}</span>
-                <span class="text-sm text-body">/mo</span>
+          {
+            websiteAsAService.map((was) => (
+              <div class="rounded-xl border border-border-subtle bg-white p-6 shadow-sm">
+                <h4 class="font-heading text-lg font-bold text-heading">{was.name}</h4>
+                <div class="mt-1 flex items-baseline gap-1">
+                  <span class="font-heading text-3xl font-extrabold text-primary">
+                    ${was.price}
+                  </span>
+                  <span class="text-sm text-body">/mo</span>
+                </div>
+                <div class="my-4 h-px bg-border-subtle" />
+                <ul class="space-y-2 text-sm">
+                  {was.inclusions.map((inc) => (
+                    <li class="flex items-start gap-2 text-body">
+                      <svg
+                        class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M4.5 12.75l6 6 9-13.5"
+                        />
+                      </svg>
+                      {inc}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="/contact#book"
+                  class="mt-6 block rounded-xl border-2 border-primary px-5 py-2.5 text-center text-sm font-bold text-primary transition hover:bg-primary hover:text-white"
+                >
+                  Get Started
+                </a>
               </div>
-              <div class="my-4 h-px bg-border-subtle"></div>
-              <ul class="space-y-2 text-sm">
-                {was.inclusions.map(inc => (
-                  <li class="flex items-start gap-2 text-body">
-                    <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                    {inc}
-                  </li>
-                ))}
-              </ul>
-              <a href="/contact#book" class="mt-6 block rounded-xl border-2 border-primary px-5 py-2.5 text-center text-sm font-bold text-primary transition hover:bg-primary hover:text-white">Get Started</a>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
     </div>
   </section>
 
   <!-- AUDITS -->
-  <section class="bg-background-subtle py-24 border-y border-border-subtle" id="audits">
+  <section class="border-y border-border-subtle bg-background-subtle py-24" id="audits">
     <div class="mx-auto max-w-5xl px-6">
       <div class="mb-14 text-center">
-        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Start with a real look at where you stand</p>
-        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">Every engagement starts with an audit.</h2>
+        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+          Start with a real look at where you stand
+        </p>
+        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+          Every engagement starts with an audit.
+        </h2>
       </div>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {audits.map(audit => (
-          <article class={`flex flex-col rounded-2xl border p-8 shadow-sm transition ${audit.price === 0 ? 'border-primary/30 bg-white' : 'border-border-subtle bg-white hover:border-primary/30 hover:shadow-md'}`}>
-            <div class="mb-3 flex items-start justify-between">
-              <span class={`rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider ${audit.price === 0 ? 'bg-primary text-white' : 'border border-border-base text-muted'}`}>{audit.price === 0 ? 'Free' : 'Paid'}</span>
-            </div>
-            <h3 class="font-heading text-2xl font-extrabold text-heading">{audit.name}</h3>
-            <div class="mt-2 flex items-baseline gap-1">
-              {audit.price === 0
-                ? <span class="font-heading text-4xl font-extrabold text-primary">Free</span>
-                : <><span class="font-heading text-4xl font-extrabold text-primary">${audit.price}</span><span class="text-sm text-body">one-time</span></>
-              }
-            </div>
-            {audit.delivery && <p class="mt-1 text-xs text-muted">Delivery: {audit.delivery}</p>}
-            <div class="my-5 h-px bg-border-subtle"></div>
-            <p class="mb-5 text-sm leading-relaxed text-body">{audit.description}</p>
-            <ul class="flex-1 space-y-2.5 text-sm mb-6">
-              {audit.inclusions.map(inc => (
-                <li class="flex items-start gap-2 text-body">
-                  <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                  {inc}
-                </li>
-              ))}
-            </ul>
-            {audit.note && <p class="mb-6 rounded-xl bg-primary/5 border border-primary/20 px-4 py-3 text-xs text-primary font-medium">{audit.note}</p>}
-            <a href="/contact#book" class={`block rounded-xl px-6 py-3.5 text-center text-sm font-bold transition ${audit.price === 0 ? 'bg-primary text-white shadow hover:bg-primary-dark' : 'border-2 border-primary text-primary hover:bg-primary hover:text-white'}`}>
-              {audit.price === 0 ? 'Request Your Free Audit →' : 'Get Started'}
-            </a>
-          </article>
-        ))}
+        {
+          audits.map((audit) => (
+            <article
+              class={`flex flex-col rounded-2xl border p-8 shadow-sm transition ${audit.price === 0 ? "border-primary/30 bg-white" : "hover:border-primary/30 border-border-subtle bg-white hover:shadow-md"}`}
+            >
+              <div class="mb-3 flex items-start justify-between">
+                <span
+                  class={`rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider ${audit.price === 0 ? "bg-primary text-white" : "border border-border-base text-muted"}`}
+                >
+                  {audit.price === 0 ? "Free" : "Paid"}
+                </span>
+              </div>
+              <h3 class="font-heading text-2xl font-extrabold text-heading">{audit.name}</h3>
+              <div class="mt-2 flex items-baseline gap-1">
+                {audit.price === 0 ? (
+                  <span class="font-heading text-4xl font-extrabold text-primary">Free</span>
+                ) : (
+                  <>
+                    <span class="font-heading text-4xl font-extrabold text-primary">
+                      ${audit.price}
+                    </span>
+                    <span class="text-sm text-body">one-time</span>
+                  </>
+                )}
+              </div>
+              {audit.delivery && <p class="mt-1 text-xs text-muted">Delivery: {audit.delivery}</p>}
+              <div class="my-5 h-px bg-border-subtle" />
+              <p class="mb-5 text-sm leading-relaxed text-body">{audit.description}</p>
+              <ul class="mb-6 flex-1 space-y-2.5 text-sm">
+                {audit.inclusions.map((inc) => (
+                  <li class="flex items-start gap-2 text-body">
+                    <svg
+                      class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                    {inc}
+                  </li>
+                ))}
+              </ul>
+              {audit.note && (
+                <p class="bg-primary/5 border-primary/20 mb-6 rounded-xl border px-4 py-3 text-xs font-medium text-primary">
+                  {audit.note}
+                </p>
+              )}
+              <a
+                href="/contact#book"
+                class={`block rounded-xl px-6 py-3.5 text-center text-sm font-bold transition ${audit.price === 0 ? "bg-primary text-white shadow hover:bg-primary-dark" : "border-2 border-primary text-primary hover:bg-primary hover:text-white"}`}
+              >
+                {audit.price === 0 ? "Request Your Free Audit →" : "Get Started"}
+              </a>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -322,41 +682,98 @@ const faqs = [
   <!-- AI VISIBILITY -->
   <section class="bg-secondary py-24" id="ai-visibility">
     <div class="mx-auto max-w-5xl px-6">
-      <div class="grid grid-cols-1 gap-12 md:grid-cols-2 items-center">
+      <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
         <div>
-          <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">AI Search Visibility</p>
-          <h2 class="mb-5 font-heading text-4xl font-extrabold text-white">We optimize for where search is going, not just where it's been.</h2>
-          <p class="mb-6 text-base leading-relaxed text-white/65">Google AI Overviews, ChatGPT Search, Perplexity, and Gemini are answering local search queries directly — and citing specific businesses in those answers. We track your AI visibility score monthly and build the structured content, schema, and entity signals that drive citations.</p>
-          <div class="space-y-3 mb-8">
-            {[
-              'FAQ schema and structured Q&A content',
-              'Entity clarity — Google understands exactly what your business does',
-              'Authoritative local content that AI systems cite as sources',
-              'Complete, consistent GBP data feeding Google\'s knowledge graph',
-            ].map(item => (
-              <div class="flex items-start gap-3">
-                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                <span class="text-sm text-white/75">{item}</span>
-              </div>
-            ))}
+          <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+            AI Search Visibility
+          </p>
+          <h2 class="mb-5 font-heading text-4xl font-extrabold text-white">
+            We optimize for where search is going, not just where it's been.
+          </h2>
+          <p class="mb-6 text-base leading-relaxed text-white/65">
+            Google AI Overviews, ChatGPT Search, Perplexity, and Gemini are answering local search
+            queries directly — and citing specific businesses in those answers. We track your AI
+            visibility score monthly and build the structured content, schema, and entity signals
+            that drive citations.
+          </p>
+          <div class="mb-8 space-y-3">
+            {
+              [
+                "FAQ schema and structured Q&A content",
+                "Entity clarity — Google understands exactly what your business does",
+                "Authoritative local content that AI systems cite as sources",
+                "Complete, consistent GBP data feeding Google's knowledge graph",
+              ].map((item) => (
+                <div class="flex items-start gap-3">
+                  <svg
+                    class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
+                  <span class="text-sm text-white/75">{item}</span>
+                </div>
+              ))
+            }
           </div>
-          <p class="text-sm text-white/50">Included in Growth and Authority packages. Standalone quarterly audit: $299.</p>
+          <p class="text-sm text-white/50">
+            Included in Growth and Authority packages. Standalone quarterly audit: $299.
+          </p>
         </div>
         <div class="grid grid-cols-2 gap-4">
-          {[
-            { name: 'Google AI Overviews', desc: 'Surfaces above organic results for local searches', gradient: 'from-blue-400 to-blue-600' },
-            { name: 'ChatGPT Search', desc: 'Business citations in AI-generated answers', gradient: 'from-teal-400 to-teal-600' },
-            { name: 'Perplexity', desc: 'Citation-based local business surfacing', gradient: 'from-purple-400 to-purple-600' },
-            { name: 'Google Gemini', desc: 'Integrated Maps and knowledge graph data', gradient: 'from-orange-400 to-orange-600' },
-          ].map(p => (
-            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-              <div class={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${p.gradient} shadow`}>
-                <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          {
+            [
+              {
+                name: "Google AI Overviews",
+                desc: "Surfaces above organic results for local searches",
+                gradient: "from-blue-400 to-blue-600",
+              },
+              {
+                name: "ChatGPT Search",
+                desc: "Business citations in AI-generated answers",
+                gradient: "from-teal-400 to-teal-600",
+              },
+              {
+                name: "Perplexity",
+                desc: "Citation-based local business surfacing",
+                gradient: "from-purple-400 to-purple-600",
+              },
+              {
+                name: "Google Gemini",
+                desc: "Integrated Maps and knowledge graph data",
+                gradient: "from-orange-400 to-orange-600",
+              },
+            ].map((p) => (
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <div
+                  class={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${p.gradient} shadow`}
+                >
+                  <svg
+                    class="h-5 w-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                    />
+                  </svg>
+                </div>
+                <h4 class="font-heading text-sm font-bold text-white">{p.name}</h4>
+                <p class="mt-1 text-xs text-white/50">{p.desc}</p>
               </div>
-              <h4 class="font-heading text-sm font-bold text-white">{p.name}</h4>
-              <p class="mt-1 text-xs text-white/50">{p.desc}</p>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
     </div>
@@ -370,33 +787,51 @@ const faqs = [
         <h2 class="font-heading text-4xl font-extrabold text-heading">Additional services</h2>
       </div>
       <div class="overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-sm">
-        {addOns.map((addon, i) => (
-          <div class={`flex items-center justify-between px-6 py-4 ${i < addOns.length - 1 ? 'border-b border-border-subtle' : ''}`}>
-            <span class="text-sm font-medium text-body">{addon.name}</span>
-            <span class="font-heading text-sm font-bold text-primary">{addon.price}</span>
-          </div>
-        ))}
+        {
+          addOns.map((addon, i) => (
+            <div
+              class={`flex items-center justify-between px-6 py-4 ${i < addOns.length - 1 ? "border-b border-border-subtle" : ""}`}
+            >
+              <span class="text-sm font-medium text-body">{addon.name}</span>
+              <span class="font-heading text-sm font-bold text-primary">{addon.price}</span>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="bg-background-subtle py-24 border-y border-border-subtle">
+  <section class="border-y border-border-subtle bg-background-subtle py-24">
     <div class="mx-auto max-w-3xl px-6">
       <div class="mb-12 text-center">
-        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Common questions</p>
-        <h2 class="font-heading text-4xl font-extrabold text-heading">Pricing questions, answered</h2>
+        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+          Common questions
+        </p>
+        <h2 class="font-heading text-4xl font-extrabold text-heading">
+          Pricing questions, answered
+        </h2>
       </div>
       <div class="space-y-3">
-        {faqs.map(faq => (
-          <details class="group rounded-2xl border border-border-base bg-white shadow-sm transition hover:border-primary/30">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-heading text-base font-bold text-heading">
-              {faq.q}
-              <svg class="h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-            </summary>
-            <div class="px-6 pb-6 text-sm leading-relaxed text-body">{faq.a}</div>
-          </details>
-        ))}
+        {
+          faqs.map((faq) => (
+            <details class="hover:border-primary/30 group rounded-2xl border border-border-base bg-white shadow-sm transition">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-heading text-base font-bold text-heading">
+                {faq.q}
+                <svg
+                  class="h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-6 text-sm leading-relaxed text-body">{faq.a}</div>
+            </details>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -404,15 +839,29 @@ const faqs = [
   <!-- FINAL CTA -->
   <section class="bg-white py-24">
     <div class="mx-auto max-w-3xl px-6 text-center">
-      <h2 class="mb-4 font-heading text-4xl font-extrabold text-heading md:text-5xl">Ready to get started?</h2>
-      <p class="mb-10 text-lg text-muted">Start with the free GBP audit or book a 30-minute call. We'll look at your current presence, show you exactly where the gaps are, and tell you what it would take to close them.</p>
+      <h2 class="mb-4 font-heading text-4xl font-extrabold text-heading md:text-5xl">
+        Ready to get started?
+      </h2>
+      <p class="mb-10 text-lg text-muted">
+        Start with the free GBP audit or book a 30-minute call. We'll look at your current presence,
+        show you exactly where the gaps are, and tell you what it would take to close them.
+      </p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="/contact#book" class="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 font-heading text-lg font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.35)] transition hover:bg-primary-dark">Get Your Free GBP Audit →</a>
-        <a href="/contact#book" class="inline-flex items-center gap-2 rounded-full border-2 border-heading/20 px-10 py-4 font-heading text-lg font-bold text-heading transition hover:border-primary hover:text-primary">Book a Call</a>
+        <a
+          href="/contact#book"
+          class="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 font-heading text-lg font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.35)] transition hover:bg-primary-dark"
+          >Get Your Free GBP Audit →</a
+        >
+        <a
+          href="/contact#book"
+          class="border-heading/20 inline-flex items-center gap-2 rounded-full border-2 px-10 py-4 font-heading text-lg font-bold text-heading transition hover:border-primary hover:text-primary"
+          >Book a Call</a
+        >
       </div>
-      <p class="mt-8 text-xs uppercase tracking-widest text-muted">No contracts · No hidden fees · No fluff</p>
+      <p class="mt-8 text-xs uppercase tracking-widest text-muted">
+        No contracts · No hidden fees · No fluff
+      </p>
       <p class="mt-2 text-sm text-muted">mike@lilosgrowth.com · Carlsbad, CA</p>
     </div>
   </section>
-
 </Layout>

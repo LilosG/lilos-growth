@@ -1,7 +1,8 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
 
-export const title = "Wheyland Electric Case Study — 3 Leads/Mo to 18 Leads in 3 Weeks | Lilos Growth";
+export const title =
+  "Wheyland Electric Case Study — 3 Leads/Mo to 18 Leads in 3 Weeks | Lilos Growth";
 export const description =
   "Wheyland Electric was averaging 3 web leads per month after 10 years with a legacy agency. We rebuilt their site and launched in late February 2026. First 3 weeks: 18 form submissions, 21 GBP calls, 50 ranked keywords.";
 
@@ -11,11 +12,15 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   "@id": "https://lilosgrowth.com/results/wheyland-electric#article",
-  "headline": "Wheyland Electric: From 3 Leads/Month to 18 Leads in 3 Weeks",
-  "description": "How Lilos Growth rebuilt Wheyland Electric\'s website and local SEO from the ground up, generating 18 web leads in the first 3 weeks after a decade of stagnation with a legacy agency.",
-  "author": { "@type": "Organization", "name": "Lilos Growth", "url": "https://lilosgrowth.com" },
-  "publisher": { "@id": "https://lilosgrowth.com/#org" },
-  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://lilosgrowth.com/results/wheyland-electric" },
+  headline: "Wheyland Electric: From 3 Leads/Month to 18 Leads in 3 Weeks",
+  description:
+    "How Lilos Growth rebuilt Wheyland Electric’s website and local SEO from the ground up, generating 18 web leads in the first 3 weeks after a decade of stagnation with a legacy agency.",
+  author: { "@type": "Organization", name: "Lilos Growth", url: "https://lilosgrowth.com" },
+  publisher: { "@id": "https://lilosgrowth.com/#org" },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": "https://lilosgrowth.com/results/wheyland-electric",
+  },
 };
 
 const stats = [
@@ -39,7 +44,16 @@ const keywords = [
 ];
 
 const services = ["EV", "Panel", "Service", "Lighting", "Fan", "Spa", "Outlet"];
-const cities = ["Carlsbad", "Del Mar", "Encinitas", "Oceanside", "Rancho Santa Fe", "San Marcos", "Vista", "Solana Beach"];
+const cities = [
+  "Carlsbad",
+  "Del Mar",
+  "Encinitas",
+  "Oceanside",
+  "Rancho Santa Fe",
+  "San Marcos",
+  "Vista",
+  "Solana Beach",
+];
 ---
 
 <Layout
@@ -53,20 +67,30 @@ const cities = ["Carlsbad", "Del Mar", "Encinitas", "Oceanside", "Rancho Santa F
     { name: "Wheyland Electric", item: "https://lilosgrowth.com/results/wheyland-electric" },
   ]}
 >
-
   <!-- HERO -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-16 pt-12">
+  <section
+    class="relative overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-16 pt-12"
+  >
     <div class="relative z-10 mx-auto max-w-4xl px-4">
       <div class="mb-4 flex flex-wrap gap-2">
-        <span class="rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold text-primary">Case Study</span>
-        <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/80">Electrician · Carlsbad, CA</span>
-        <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/80">Website Build + Local SEO + GBP</span>
+        <span class="bg-primary/20 rounded-full px-3 py-1 text-xs font-semibold text-primary"
+          >Case Study</span
+        >
+        <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/80"
+          >Electrician · Carlsbad, CA</span
+        >
+        <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/80"
+          >Website Build + Local SEO + GBP</span
+        >
       </div>
       <h1 class="mb-4 font-heading text-3xl font-extrabold leading-tight text-white md:text-5xl">
-        Wheyland Electric:<br class="hidden md:block" />3 leads/mo to 18 leads<br class="hidden md:block" />in 3 weeks
+        Wheyland Electric:<br class="hidden md:block" />3 leads/mo to 18 leads<br
+          class="hidden md:block"
+        />in 3 weeks
       </h1>
       <p class="max-w-2xl text-base font-medium text-white/85 md:text-lg">
-        A 10-year-old site managed by a legacy agency. Virtually no organic footprint. We rebuilt from the ground up in late February 2026 — and the results showed up immediately.
+        A 10-year-old site managed by a legacy agency. Virtually no organic footprint. We rebuilt
+        from the ground up in late February 2026 — and the results showed up immediately.
       </p>
     </div>
   </section>
@@ -74,15 +98,21 @@ const cities = ["Carlsbad", "Del Mar", "Encinitas", "Oceanside", "Rancho Santa F
   <!-- STATS BAND -->
   <section class="border-b border-gray-100 bg-white py-12">
     <div class="mx-auto max-w-5xl px-4">
-      <p class="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-body">Verified results — first 28 days post-launch</p>
+      <p class="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-body">
+        Verified results — first 28 days post-launch
+      </p>
       <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-        {stats.map((s) => (
-          <div class="rounded-2xl border border-gray-100 bg-white p-5 text-center shadow-sm">
-            <div class="font-heading text-3xl font-extrabold text-primary md:text-4xl">{s.value}</div>
-            <div class="mt-1 text-sm font-semibold text-heading">{s.label}</div>
-            <div class="mt-0.5 text-xs text-body">{s.sub}</div>
-          </div>
-        ))}
+        {
+          stats.map((s) => (
+            <div class="rounded-2xl border border-gray-100 bg-white p-5 text-center shadow-sm">
+              <div class="font-heading text-3xl font-extrabold text-primary md:text-4xl">
+                {s.value}
+              </div>
+              <div class="mt-1 text-sm font-semibold text-heading">{s.label}</div>
+              <div class="mt-0.5 text-xs text-body">{s.sub}</div>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -91,60 +121,88 @@ const cities = ["Carlsbad", "Del Mar", "Encinitas", "Oceanside", "Rancho Santa F
   <section class="border-t border-gray-100 bg-white py-20">
     <div class="mx-auto max-w-3xl px-4">
       <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-body">The situation</p>
-      <h2 class="mb-6 font-heading text-2xl font-bold text-heading md:text-3xl">10 years. Same agency. 3 leads a month.</h2>
+      <h2 class="mb-6 font-heading text-2xl font-bold text-heading md:text-3xl">
+        10 years. Same agency. 3 leads a month.
+      </h2>
       <div class="space-y-4 text-[15px] leading-relaxed text-body">
-        <p>Wheyland Electric is a licensed residential and commercial electrician serving North County San Diego — Carlsbad, Encinitas, Oceanside, Vista, Del Mar, Rancho Santa Fe, San Marcos, and Solana Beach. Their services include EV charger installation, electrical panel upgrades, service calls, recessed lighting, ceiling fans, spa and jacuzzi electrical, and outlet and GFCI repairs.</p>
-        <p>Their site had been managed by the same agency for a decade. It had minimal organic visibility, virtually no local keyword coverage, and was averaging around 3 web form submissions per month. GBP calls hovered around 6–8 per month.</p>
-        <p>They came to Lilos Growth in February 2026 looking for a full rebuild and a real local SEO strategy.</p>
+        <p>
+          Wheyland Electric is a licensed residential and commercial electrician serving North
+          County San Diego — Carlsbad, Encinitas, Oceanside, Vista, Del Mar, Rancho Santa Fe, San
+          Marcos, and Solana Beach. Their services include EV charger installation, electrical panel
+          upgrades, service calls, recessed lighting, ceiling fans, spa and jacuzzi electrical, and
+          outlet and GFCI repairs.
+        </p>
+        <p>
+          Their site had been managed by the same agency for a decade. It had minimal organic
+          visibility, virtually no local keyword coverage, and was averaging around 3 web form
+          submissions per month. GBP calls hovered around 6–8 per month.
+        </p>
+        <p>
+          They came to Lilos Growth in February 2026 looking for a full rebuild and a real local SEO
+          strategy.
+        </p>
       </div>
 
-      <div class="my-8 border-l-4 border-primary bg-cream py-5 pl-6 pr-4">
+      <div class="bg-cream my-8 border-l-4 border-primary py-5 pl-6 pr-4">
         <p class="font-heading text-base font-semibold leading-relaxed text-heading md:text-lg">
-          "The previous agency managed this site for 10 years and averaged 4 leads/month. The new site launched in late February 2026 and generated 18 leads in its first 3 weeks."
+          "The previous agency managed this site for 10 years and averaged 4 leads/month. The new
+          site launched in late February 2026 and generated 18 leads in its first 3 weeks."
         </p>
-        <p class="mt-2 text-sm text-body">— Verified via StaticForms submission data and Google Search Console</p>
+        <p class="mt-2 text-sm text-body">
+          — Verified via StaticForms submission data and Google Search Console
+        </p>
       </div>
     </div>
   </section>
 
   <!-- BEFORE VS AFTER -->
-  <section class="border-t border-gray-100 bg-cream py-20">
+  <section class="bg-cream border-t border-gray-100 py-20">
     <div class="mx-auto max-w-3xl px-4">
       <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-body">Before vs. after</p>
-      <h2 class="mb-8 font-heading text-2xl font-bold text-heading md:text-3xl">The numbers speak for themselves.</h2>
+      <h2 class="mb-8 font-heading text-2xl font-bold text-heading md:text-3xl">
+        The numbers speak for themselves.
+      </h2>
       <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
         <div class="grid grid-cols-2">
           <div class="border-r border-gray-100 p-6">
-            <div class="mb-4 text-xs font-semibold uppercase tracking-widest text-red-500">Before — Feb 15 baseline</div>
-            {[
-              ["Web leads/mo", "3"],
-              ["GBP calls/mo", "~7"],
-              ["Keywords ranked", "5"],
-              ["Search impressions", "1,114"],
-              ["Avg. position", "#21.3"],
-              ["Top-3 keywords", "1"],
-            ].map(([metric, value]) => (
-              <div class="flex items-baseline justify-between border-b border-gray-50 py-2 last:border-0">
-                <span class="text-sm text-body">{metric}</span>
-                <span class="font-heading text-sm font-bold text-red-500">{value}</span>
-              </div>
-            ))}
+            <div class="mb-4 text-xs font-semibold uppercase tracking-widest text-red-500">
+              Before — Feb 15 baseline
+            </div>
+            {
+              [
+                ["Web leads/mo", "3"],
+                ["GBP calls/mo", "~7"],
+                ["Keywords ranked", "5"],
+                ["Search impressions", "1,114"],
+                ["Avg. position", "#21.3"],
+                ["Top-3 keywords", "1"],
+              ].map(([metric, value]) => (
+                <div class="flex items-baseline justify-between border-b border-gray-50 py-2 last:border-0">
+                  <span class="text-sm text-body">{metric}</span>
+                  <span class="font-heading text-sm font-bold text-red-500">{value}</span>
+                </div>
+              ))
+            }
           </div>
           <div class="p-6">
-            <div class="mb-4 text-xs font-semibold uppercase tracking-widest text-green-600">After — first 28 days</div>
-            {[
-              ["Web leads/mo", "18 in 3 wks"],
-              ["GBP calls/mo", "21"],
-              ["Keywords ranked", "50"],
-              ["Search impressions", "8,277"],
-              ["Avg. position", "#14.2"],
-              ["Top-3 keywords", "5"],
-            ].map(([metric, value]) => (
-              <div class="flex items-baseline justify-between border-b border-gray-50 py-2 last:border-0">
-                <span class="text-sm text-body">{metric}</span>
-                <span class="font-heading text-sm font-bold text-green-600">{value}</span>
-              </div>
-            ))}
+            <div class="mb-4 text-xs font-semibold uppercase tracking-widest text-green-600">
+              After — first 28 days
+            </div>
+            {
+              [
+                ["Web leads/mo", "18 in 3 wks"],
+                ["GBP calls/mo", "21"],
+                ["Keywords ranked", "50"],
+                ["Search impressions", "8,277"],
+                ["Avg. position", "#14.2"],
+                ["Top-3 keywords", "5"],
+              ].map(([metric, value]) => (
+                <div class="flex items-baseline justify-between border-b border-gray-50 py-2 last:border-0">
+                  <span class="text-sm text-body">{metric}</span>
+                  <span class="font-heading text-sm font-bold text-green-600">{value}</span>
+                </div>
+              ))
+            }
           </div>
         </div>
       </div>
@@ -154,39 +212,56 @@ const cities = ["Carlsbad", "Del Mar", "Encinitas", "Oceanside", "Rancho Santa F
   <!-- KEYWORD RANKINGS -->
   <section class="border-t border-gray-100 bg-white py-20">
     <div class="mx-auto max-w-3xl px-4">
-      <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-body">Top keywords — post launch</p>
-      <h2 class="mb-8 font-heading text-2xl font-bold text-heading md:text-3xl">From 5 keywords to 50 in one month.</h2>
+      <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-body">
+        Top keywords — post launch
+      </p>
+      <h2 class="mb-8 font-heading text-2xl font-bold text-heading md:text-3xl">
+        From 5 keywords to 50 in one month.
+      </h2>
       <div class="space-y-2">
-        {keywords.map((k) => (
-          <div class="flex items-center justify-between rounded-xl border border-gray-100 bg-white px-4 py-3 shadow-sm">
-            <span class="text-sm text-body">{k.kw}</span>
-            <span class={`rounded-full px-3 py-1 text-xs font-bold ${parseInt(k.pos.replace('#','')) <= 3 ? 'bg-green-100 text-green-700' : parseInt(k.pos.replace('#','')) <= 10 ? 'bg-blue-100 text-blue-700' : 'bg-orange-100 text-orange-700'}`}>{k.pos}</span>
-          </div>
-        ))}
+        {
+          keywords.map((k) => (
+            <div class="flex items-center justify-between rounded-xl border border-gray-100 bg-white px-4 py-3 shadow-sm">
+              <span class="text-sm text-body">{k.kw}</span>
+              <span
+                class={`rounded-full px-3 py-1 text-xs font-bold ${parseInt(k.pos.replace("#", "")) <= 3 ? "bg-green-100 text-green-700" : parseInt(k.pos.replace("#", "")) <= 10 ? "bg-blue-100 text-blue-700" : "bg-orange-100 text-orange-700"}`}
+              >
+                {k.pos}
+              </span>
+            </div>
+          ))
+        }
       </div>
       <p class="mt-4 text-xs text-body">Source: Ahrefs position tracker. Snapshot: March 2026.</p>
     </div>
   </section>
 
   <!-- WHAT WE BUILT -->
-  <section class="border-t border-gray-100 bg-cream py-20">
+  <section class="bg-cream border-t border-gray-100 py-20">
     <div class="mx-auto max-w-4xl px-4">
       <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-body">What we built</p>
-      <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">107 pages. 8 cities. 64 money pages. Launched in under 2 weeks.</h2>
-      <p class="mb-10 text-[15px] text-body">Built on Astro and Tailwind CSS. Every page purpose-built for organic search — structured around the services Wheyland offers and the cities they serve.</p>
+      <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
+        107 pages. 8 cities. 64 money pages. Launched in under 2 weeks.
+      </h2>
+      <p class="mb-10 text-[15px] text-body">
+        Built on Astro and Tailwind CSS. Every page purpose-built for organic search — structured
+        around the services Wheyland offers and the cities they serve.
+      </p>
 
       <div class="mb-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-        {[
-          { num: "107", label: "Total pages indexed" },
-          { num: "64", label: "City × service money pages" },
-          { num: "13", label: "Blog posts at launch" },
-          { num: "8", label: "Service area cities" },
-        ].map((s) => (
-          <div class="rounded-2xl border border-gray-100 bg-white p-5 text-center shadow-sm">
-            <div class="font-heading text-3xl font-extrabold text-primary">{s.num}</div>
-            <div class="mt-1 text-xs text-body">{s.label}</div>
-          </div>
-        ))}
+        {
+          [
+            { num: "107", label: "Total pages indexed" },
+            { num: "64", label: "City × service money pages" },
+            { num: "13", label: "Blog posts at launch" },
+            { num: "8", label: "Service area cities" },
+          ].map((s) => (
+            <div class="rounded-2xl border border-gray-100 bg-white p-5 text-center shadow-sm">
+              <div class="font-heading text-3xl font-extrabold text-primary">{s.num}</div>
+              <div class="mt-1 text-xs text-body">{s.label}</div>
+            </div>
+          ))
+        }
       </div>
 
       <h3 class="mb-4 font-heading text-base font-semibold text-heading">City × service matrix</h3>
@@ -195,16 +270,24 @@ const cities = ["Carlsbad", "Del Mar", "Encinitas", "Oceanside", "Rancho Santa F
           <thead>
             <tr class="border-b border-gray-100 bg-gray-50">
               <th class="px-4 py-3 text-left font-semibold text-heading">City</th>
-              {services.map((s) => <th class="px-3 py-3 text-center font-semibold text-heading">{s}</th>)}
+              {
+                services.map((s) => (
+                  <th class="px-3 py-3 text-center font-semibold text-heading">{s}</th>
+                ))
+              }
             </tr>
           </thead>
           <tbody>
-            {cities.map((city, i) => (
-              <tr class={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                <td class="px-4 py-2.5 font-medium text-heading">{city}</td>
-                {services.map(() => <td class="px-3 py-2.5 text-center text-green-600">✓</td>)}
-              </tr>
-            ))}
+            {
+              cities.map((city, i) => (
+                <tr class={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
+                  <td class="px-4 py-2.5 font-medium text-heading">{city}</td>
+                  {services.map(() => (
+                    <td class="px-3 py-2.5 text-center text-green-600">✓</td>
+                  ))}
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>
@@ -215,22 +298,50 @@ const cities = ["Carlsbad", "Del Mar", "Encinitas", "Oceanside", "Rancho Santa F
   <section class="border-t border-gray-100 bg-white py-20">
     <div class="mx-auto max-w-4xl px-4">
       <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-body">The method</p>
-      <h2 class="mb-10 font-heading text-2xl font-bold text-heading md:text-3xl">The system behind the results.</h2>
+      <h2 class="mb-10 font-heading text-2xl font-bold text-heading md:text-3xl">
+        The system behind the results.
+      </h2>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {[
-          { n: "01", title: "Full site rebuild", desc: "Astro + Tailwind. Static-first, sub-second load times, Core Web Vitals optimized from day one." },
-          { n: "02", title: "City × service architecture", desc: "Every service, every city — 64 dedicated pages targeting the exact queries buyers use when searching for an electrician in their area." },
-          { n: "03", title: "Schema & entity markup", desc: "LocalBusiness, Service, FAQ, and HowTo schema across all pages — structured for Google and AI search." },
-          { n: "04", title: "GBP optimization", desc: "Categories, services, EXIF-optimized photos, weekly posts, and review management from launch day." },
-          { n: "05", title: "GA4 + conversion tracking", desc: "Form submissions, click-to-call, and GBP actions all tracked and attributed from day one." },
-          { n: "06", title: "Targeted blog content", desc: "13 posts at launch targeting in-market EV charger and panel upgrade searches across North County." },
-        ].map((item) => (
-          <article class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-            <div class="mb-3 font-heading text-2xl font-bold text-primary/30">{item.n}</div>
-            <h3 class="mb-2 font-heading text-base font-semibold text-heading">{item.title}</h3>
-            <p class="text-sm text-body">{item.desc}</p>
-          </article>
-        ))}
+        {
+          [
+            {
+              n: "01",
+              title: "Full site rebuild",
+              desc: "Astro + Tailwind. Static-first, sub-second load times, Core Web Vitals optimized from day one.",
+            },
+            {
+              n: "02",
+              title: "City × service architecture",
+              desc: "Every service, every city — 64 dedicated pages targeting the exact queries buyers use when searching for an electrician in their area.",
+            },
+            {
+              n: "03",
+              title: "Schema & entity markup",
+              desc: "LocalBusiness, Service, FAQ, and HowTo schema across all pages — structured for Google and AI search.",
+            },
+            {
+              n: "04",
+              title: "GBP optimization",
+              desc: "Categories, services, EXIF-optimized photos, weekly posts, and review management from launch day.",
+            },
+            {
+              n: "05",
+              title: "GA4 + conversion tracking",
+              desc: "Form submissions, click-to-call, and GBP actions all tracked and attributed from day one.",
+            },
+            {
+              n: "06",
+              title: "Targeted blog content",
+              desc: "13 posts at launch targeting in-market EV charger and panel upgrade searches across North County.",
+            },
+          ].map((item) => (
+            <article class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+              <div class="text-primary/30 mb-3 font-heading text-2xl font-bold">{item.n}</div>
+              <h3 class="mb-2 font-heading text-base font-semibold text-heading">{item.title}</h3>
+              <p class="text-sm text-body">{item.desc}</p>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -242,17 +353,24 @@ const cities = ["Carlsbad", "Del Mar", "Encinitas", "Oceanside", "Rancho Santa F
         You run a trades business in your market.
       </h2>
       <p class="mb-8 text-base text-white/85">
-        We've done this for an electrician in North County San Diego. We know the system. Book a free 15-minute audit and we'll show you exactly what's holding your site back.
+        We've done this for an electrician in North County San Diego. We know the system. Book a
+        free 15-minute audit and we'll show you exactly what's holding your site back.
       </p>
-      
+      <a
         href="/contact#book"
         data-evt="cta_case_study_wheyland"
         class="inline-flex items-center rounded-full bg-primary px-8 py-3.5 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-dark"
       >
         Get a free site audit
-        <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"/></svg>
+        <svg
+          class="ml-2 h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          viewBox="0 0 24 24"
+          aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
+        >
       </a>
     </div>
   </section>
-
 </Layout>

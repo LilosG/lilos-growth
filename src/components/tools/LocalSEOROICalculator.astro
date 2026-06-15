@@ -573,7 +573,6 @@
       color: #94a3b8;
       margin-top: 12px;
     }
-
   </style>
 
   <div class="lroi-inner">
@@ -595,7 +594,8 @@
           Service Type<span class="lroi-tip-wrap"
             ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
               >Your primary home service trade — affects estimated local search volume.</span
-            ></span>
+            ></span
+          >
         </div>
         <select id="lroi-service">
           <option value="plumbing">Plumbing</option>
@@ -617,7 +617,8 @@
             City Name<span class="lroi-tip-wrap"
               ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
                 >The primary city you want to rank in on Google Maps.</span
-              ></span>
+              ></span
+            >
           </div>
           <input type="text" id="lroi-city" placeholder="e.g., Carlsbad, San Diego" />
         </div>
@@ -626,7 +627,8 @@
             City Population<span class="lroi-tip-wrap"
               ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
                 >Used to estimate monthly local search volume for your service type.</span
-              ></span>
+              ></span
+            >
           </div>
           <select id="lroi-pop">
             <option value="u50k">Under 50k</option>
@@ -645,7 +647,8 @@
             Average Ticket Size ($)<span class="lroi-tip-wrap"
               ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
                 >Your average revenue per completed job or service call.</span
-              ></span>
+              ></span
+            >
           </div>
           <div class="lroi-input-wrap">
             <span class="lroi-prefix">$</span><input
@@ -663,7 +666,8 @@
             Current Monthly Jobs<span class="lroi-tip-wrap"
               ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
                 >Total jobs your business closes per month from all sources.</span
-              ></span>
+              ></span
+            >
           </div>
           <div class="lroi-input-wrap">
             <input type="number" id="lroi-jobs" placeholder="e.g., 40" min="1" />
@@ -677,7 +681,8 @@
             % Jobs from Local Search<span class="lroi-tip-wrap"
               ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
                 >Rough % of current jobs that come from Google Search or Maps.</span
-              ></span>
+              ></span
+            >
           </div>
           <div class="lroi-input-wrap">
             <input
@@ -696,7 +701,8 @@
             Monthly SEO Investment ($)<span class="lroi-tip-wrap"
               ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
                 >Your planned monthly spend on local SEO services.</span
-              ></span>
+              ></span
+            >
           </div>
           <div class="lroi-input-wrap">
             <span class="lroi-prefix">$</span><input
@@ -715,7 +721,8 @@
           Current GMB Position<span class="lroi-tip-wrap"
             ><span class="lroi-tip-icon">i</span><span class="lroi-tip-box"
               >Where your Google Business Profile currently ranks in Maps results.</span
-            ></span>
+            ></span
+          >
         </div>
         <select id="lroi-gmb">
           <option value="top3">#1–3 (Map Pack)</option>
@@ -788,12 +795,11 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <script is:inline>
     (function () {
-      var SVC = {
+      const SVC = {
         plumbing: 1.0,
         hvac: 1.1,
         electrical: 0.9,
@@ -806,7 +812,7 @@
         restoration: 0.6,
         other: 0.75,
       };
-      var SVC_LBL = {
+      const SVC_LBL = {
         plumbing: "Plumbing",
         hvac: "HVAC",
         electrical: "Electrician",
@@ -819,7 +825,7 @@
         restoration: "Restoration",
         other: "Home Service",
       };
-      var POP = {
+      const POP = {
         u50k: 280,
         "50-100k": 520,
         "100-250k": 980,
@@ -827,8 +833,8 @@
         "500k-1m": 3200,
         "1m+": 5800,
       };
-      var CTR = { top3: 0.24, "4-10": 0.06, "11-15": 0.015, "16+": 0.003 };
-      var GMB_LBL = { top3: "#1–3 Map Pack", "4-10": "#4–10", "11-15": "#11–15", "16+": "#16+" };
+      const CTR = { top3: 0.24, "4-10": 0.06, "11-15": 0.015, "16+": 0.003 };
+      const GMB_LBL = { top3: "#1–3 Map Pack", "4-10": "#4–10", "11-15": "#11–15", "16+": "#16+" };
       function fmt(n) {
         return "$" + Math.round(n).toLocaleString();
       }
@@ -836,11 +842,11 @@
         return document.getElementById(id);
       }
       function setText(id, val) {
-        var e = el(id);
+        const e = el(id);
         if (e) e.textContent = val;
       }
       function validate() {
-        var ok = true;
+        let ok = true;
         [
           {
             id: "lroi-ticket",
@@ -871,7 +877,7 @@
             },
           },
         ].forEach(function (f) {
-          var inp = el(f.id),
+          const inp = el(f.id),
             errEl = el(f.err);
           if (!inp || !errEl) return;
           if (!f.check(inp.value)) {
@@ -885,11 +891,11 @@
         });
         return ok;
       }
-      var btn = el("lroi-calc-btn");
+      const btn = el("lroi-calc-btn");
       if (btn) {
         btn.addEventListener("click", function () {
           if (!validate()) return;
-          var svc = el("lroi-service").value,
+          const svc = el("lroi-service").value,
             city = (el("lroi-city").value || "").trim(),
             pop = el("lroi-pop").value,
             ticket = +el("lroi-ticket").value,
@@ -897,20 +903,20 @@
             pct = +el("lroi-pct").value,
             invest = +el("lroi-invest").value,
             gmb = el("lroi-gmb").value;
-          var searches = Math.round((POP[pop] || 1800) * (SVC[svc] || 1.0));
-          var curVisits = Math.round(searches * (CTR[gmb] || 0.015));
-          var tgtVisits = Math.round(searches * CTR.top3);
-          var delta = Math.max(0, tgtVisits - curVisits);
-          var cr = Math.min(
+          const searches = Math.round((POP[pop] || 1800) * (SVC[svc] || 1.0));
+          const curVisits = Math.round(searches * (CTR[gmb] || 0.015));
+          const tgtVisits = Math.round(searches * CTR.top3);
+          const delta = Math.max(0, tgtVisits - curVisits);
+          const cr = Math.min(
             Math.max(curVisits > 0 ? (jobs * (pct / 100)) / curVisits : 0.08, 0.03),
             0.18
           );
-          var addLeads = Math.round(delta * cr),
+          const addLeads = Math.round(delta * cr),
             addRevMo = addLeads * ticket,
             addRevYr = addRevMo * 12,
             investYr = invest * 12;
-          var roi = investYr > 0 ? Math.round(((addRevYr - investYr) / investYr) * 100) : 0;
-          var payback = addRevMo > 0 ? Math.ceil(invest / addRevMo) : null;
+          const roi = investYr > 0 ? Math.round(((addRevYr - investYr) / investYr) * 100) : 0;
+          const payback = addRevMo > 0 ? Math.ceil(invest / addRevMo) : null;
           setText("lroi-ey", (city || "Your Market") + " · " + (SVC_LBL[svc] || svc));
           setText("lroi-r-cur", curVisits.toLocaleString());
           setText("lroi-r-curpos", "GMB " + (GMB_LBL[gmb] || gmb));
@@ -924,10 +930,10 @@
             "lroi-r-detail",
             fmt(investYr) + "/yr invested → " + fmt(addRevYr) + "/yr in additional revenue"
           );
-          var banner = el("lroi-banner");
+          const banner = el("lroi-banner");
           if (banner)
             banner.className = "lroi-roi-banner " + (roi >= 0 ? "lroi-roi-pos" : "lroi-roi-neg");
-          var pb = el("lroi-r-payback");
+          const pb = el("lroi-r-payback");
           if (pb) {
             if (payback && payback <= 12) {
               pb.style.display = "inline-block";
@@ -937,7 +943,7 @@
               pb.style.display = "none";
             }
           }
-          var res = el("lroi-results");
+          const res = el("lroi-results");
           if (res) {
             res.style.display = "block";
             setTimeout(function () {
@@ -947,7 +953,7 @@
         });
       }
       ["lroi-ticket", "lroi-jobs", "lroi-pct", "lroi-invest"].forEach(function (id) {
-        var inp = el(id),
+        const inp = el(id),
           errEl = el("lroi-err-" + id.replace("lroi-", ""));
         if (inp && errEl) {
           inp.addEventListener("input", function () {

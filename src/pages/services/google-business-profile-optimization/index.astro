@@ -3,7 +3,6 @@ import Layout from "~/layouts/PageLayout.astro";
 import Button from "~/components/ui/Button.astro";
 import Badge from "~/components/ui/Badge.astro";
 import Card from "~/components/ui/Card.astro";
-import PricingCard from "~/components/sections/PricingCard.astro";
 import FeatureCard from "~/components/sections/FeatureCard.astro";
 import { Icon } from "astro-icon/components";
 
@@ -90,45 +89,61 @@ const faqs = [
   breadcrumbs={[
     { name: "Home", item: "https://lilosgrowth.com/" },
     { name: "Services", item: "https://lilosgrowth.com/services" },
-    { name: "Google Business Profile", item: "https://lilosgrowth.com/services/google-business-profile-optimization" },
+    {
+      name: "Google Business Profile",
+      item: "https://lilosgrowth.com/services/google-business-profile-optimization",
+    },
   ]}
   schema={[
     {
       "@context": "https://schema.org",
       "@type": "Service",
       "@id": "https://lilosgrowth.com/services/google-business-profile-optimization#service",
-      "name": "Google Business Profile Optimization & Maps SEO",
-      "description": "End-to-end Google Business Profile management for home service businesses — optimization, weekly posts, EXIF-optimized photos, review management, Q&A, and monthly reporting.",
-      "provider": { "@id": "https://lilosgrowth.com/#org" },
-      "areaServed": { "@type": "Country", "name": "United States" },
-      "url": "https://lilosgrowth.com/services/google-business-profile-optimization",
+      name: "Google Business Profile Optimization & Maps SEO",
+      description:
+        "End-to-end Google Business Profile management for home service businesses — optimization, weekly posts, EXIF-optimized photos, review management, Q&A, and monthly reporting.",
+      provider: { "@id": "https://lilosgrowth.com/#org" },
+      areaServed: { "@type": "Country", name: "United States" },
+      url: "https://lilosgrowth.com/services/google-business-profile-optimization",
     },
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": [
+      mainEntity: [
         {
           "@type": "Question",
-          "name": "How fast can you improve my Google Maps ranking?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Most clients see measurable gains in 30-60 days with consistent posting, reviews, and ongoing profile updates." }
+          name: "How fast can you improve my Google Maps ranking?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Most clients see measurable gains in 30-60 days with consistent posting, reviews, and ongoing profile updates.",
+          },
         },
         {
           "@type": "Question",
-          "name": "Can you optimize my profile if I already have a GBP listing?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Audits, rebuilds, and ongoing optimization are our core service." }
+          name: "Can you optimize my profile if I already have a GBP listing?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. Audits, rebuilds, and ongoing optimization are our core service.",
+          },
         },
         {
           "@type": "Question",
-          "name": "Do you guarantee Map Pack rankings?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No one can guarantee specific positions, but we provide consistent, data-driven work and transparent reporting." }
+          name: "Do you guarantee Map Pack rankings?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No one can guarantee specific positions, but we provide consistent, data-driven work and transparent reporting.",
+          },
         },
         {
           "@type": "Question",
-          "name": "Is there a setup fee or long contract?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No setup fees and no long-term contracts. All plans are month-to-month." }
-        }
-      ]
-    }
+          name: "Is there a setup fee or long contract?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No setup fees and no long-term contracts. All plans are month-to-month.",
+          },
+        },
+      ],
+    },
   ]}
 >
   <!-- HERO -->
@@ -218,29 +233,116 @@ const faqs = [
 
       <div class="mx-auto max-w-2xl">
         <div class="rounded-3xl border-2 border-primary bg-white p-8 text-center shadow-lg">
-          <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5">
-            <svg class="h-4 w-4 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+          <div class="bg-primary/10 mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5">
+            <svg
+              class="h-4 w-4 text-primary"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+              ></path></svg
+            >
             <span class="text-sm font-semibold text-primary">Included in every retainer plan</span>
           </div>
-          <h3 class="mb-3 font-heading text-xl font-bold text-heading">GBP management is bundled — not an add-on</h3>
-          <p class="mb-6 text-sm text-body">Every Lilos Growth retainer includes full Google Business Profile management. You get posts, photos, review management, Q&A, category optimization, and monthly reporting — on every plan, starting at $599/mo.</p>
+          <h3 class="mb-3 font-heading text-xl font-bold text-heading">
+            GBP management is bundled — not an add-on
+          </h3>
+          <p class="mb-6 text-sm text-body">
+            Every Lilos Growth retainer includes full Google Business Profile management. You get
+            posts, photos, review management, Q&A, category optimization, and monthly reporting — on
+            every plan, starting at $599/mo.
+          </p>
           <ul class="mb-8 grid grid-cols-1 gap-2 text-left text-sm text-body sm:grid-cols-2">
-            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Weekly posts + EXIF-optimized photos</li>
-            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Review replies + proactive requests</li>
-            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Q&A monitoring and updates</li>
-            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Category and services alignment</li>
-            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Citation cleanup + core listings</li>
-            <li class="flex items-center gap-2"><svg class="h-4 w-4 flex-shrink-0 text-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Monthly performance report</li>
+            <li class="flex items-center gap-2">
+              <svg
+                class="h-4 w-4 flex-shrink-0 text-primary"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                ></path></svg
+              >Weekly posts + EXIF-optimized photos
+            </li>
+            <li class="flex items-center gap-2">
+              <svg
+                class="h-4 w-4 flex-shrink-0 text-primary"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                ></path></svg
+              >Review replies + proactive requests
+            </li>
+            <li class="flex items-center gap-2">
+              <svg
+                class="h-4 w-4 flex-shrink-0 text-primary"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                ></path></svg
+              >Q&A monitoring and updates
+            </li>
+            <li class="flex items-center gap-2">
+              <svg
+                class="h-4 w-4 flex-shrink-0 text-primary"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                ></path></svg
+              >Category and services alignment
+            </li>
+            <li class="flex items-center gap-2">
+              <svg
+                class="h-4 w-4 flex-shrink-0 text-primary"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                ></path></svg
+              >Citation cleanup + core listings
+            </li>
+            <li class="flex items-center gap-2">
+              <svg
+                class="h-4 w-4 flex-shrink-0 text-primary"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
+                ></path></svg
+              >Monthly performance report
+            </li>
           </ul>
-          <a href="/packages" class="inline-flex items-center rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow transition hover:bg-primary-dark">
+          <a
+            href="/packages"
+            class="inline-flex items-center rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow transition hover:bg-primary-dark"
+          >
             See all plans &amp; pricing
-            <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"/></svg>
+            <svg
+              class="ml-2 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              viewBox="0 0 24 24"
+              aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
+            >
           </a>
         </div>
-      <div class="hidden"><!-- placeholder closing tag -->
-          ctaText="Upgrade to Growth"
-          ctaHref="#contact"
-        />
       </div>
     </div>
   </section>
@@ -378,5 +480,3 @@ const faqs = [
     </div>
   </section>
 </Layout>
-
-

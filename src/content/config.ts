@@ -1,8 +1,10 @@
 import { defineCollection, z } from "astro:content";
 
 const ImageObj = z.object({
-  src: z.string(), alt: z.string().default(""),
-  width: z.number().optional(), height: z.number().optional(),
+  src: z.string(),
+  alt: z.string().default(""),
+  width: z.number().optional(),
+  height: z.number().optional(),
 });
 
 const blog = defineCollection({
@@ -33,10 +35,13 @@ const blog = defineCollection({
 const authors = defineCollection({
   type: "content",
   schema: z.object({
-    name: z.string(), role: z.string().optional(), bio: z.string().optional(),
+    name: z.string(),
+    role: z.string().optional(),
+    bio: z.string().optional(),
     avatar: z.union([z.string(), ImageObj]).optional(),
     url: z.string().url().optional(),
-    twitter: z.string().optional(), linkedin: z.string().optional(),
+    twitter: z.string().optional(),
+    linkedin: z.string().optional(),
   }),
 });
 
