@@ -12,7 +12,7 @@ These Terms of Service (“**Terms**”) govern your access to and use of the we
 
 **Company & Contact**
 
-- **Legal Business Name:** Lilos Pets LLC
+- **Legal Business Name:** Lilos Online LLC
 - **Business Name:** Lilos Growth
 - **Website:** lilosgrowth.com
 - **Support Email:** [hello@lilosgrowth.com](mailto:hello@lilosgrowth.com)
