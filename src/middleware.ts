@@ -3,7 +3,6 @@ import { defineMiddleware } from "astro:middleware";
 const NOINDEX_PATHS: string[] = [
   "/offers/local-seo",
   "/offers/local-seo-locked",
-  "/privacy",
 
   // Keep offline route if used by PWA/service worker, but noindex it.
   "/offline",
