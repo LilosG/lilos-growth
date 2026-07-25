@@ -1,4 +1,5 @@
 import plugin from "tailwindcss/plugin";
+import typography from "@tailwindcss/typography";
 
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}"],
@@ -175,7 +176,7 @@ export default {
   },
 
   plugins: [
-    // Typography plugin removed - prose styles inlined on privacy page only
+    typography,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     plugin(({ addVariant, addBase, addUtilities, addComponents, theme: _theme }) => {
       addVariant("intersect", "&:not([no-intersect])");
