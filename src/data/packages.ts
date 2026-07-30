@@ -66,13 +66,19 @@ export const caseStudies = [
   },
 ];
 
+/**
+ * Bundle = GBP + Local SEO together. Priced as the matching standalone
+ * SEO tier (see seoTiers below) + a flat $250/mo for full GBP
+ * management, consistently across every tier — Local: $500+$250=$750,
+ * Growth: $750+$250=$1,000, Authority: $1,250+$250=$1,500.
+ */
 export const packages = [
   {
     id: "pkg-local",
     name: "Local",
     tagline: "GBP + SEO Foundation",
-    price: 599,
-    setupPrice: 999,
+    price: 750,
+    setupPrice: 1150,
     badge: "Entry point",
     featured: false,
     inclusions: [
@@ -88,8 +94,8 @@ export const packages = [
     id: "pkg-growth",
     name: "Growth",
     tagline: "GBP + SEO Growth",
-    price: 999,
-    setupPrice: 1499,
+    price: 1000,
+    setupPrice: 1500,
     badge: "Most Popular",
     featured: true,
     inclusions: [
@@ -108,8 +114,8 @@ export const packages = [
     id: "pkg-authority",
     name: "Authority",
     tagline: "GBP + SEO Authority",
-    price: 1499,
-    setupPrice: 1999,
+    price: 1500,
+    setupPrice: 2000,
     badge: "Authority",
     featured: false,
     inclusions: [
@@ -126,66 +132,39 @@ export const packages = [
   },
 ];
 
-export const gbpOneTime = {
-  name: "GBP Complete Optimization",
-  price: 499,
-  delivery: "5–7 business days",
-  description:
-    "A one-time deep optimization of your Google Business Profile — every field, every category, every signal. Built to rank and convert from day one.",
+/**
+ * GBP is a single tier — month-to-month with no setup fee already
+ * covers the "just want it fixed, no commitment" case a separate
+ * one-time SKU used to try to solve. Automation keeps the standing
+ * price fair without a first-month markup.
+ */
+export const gbpManagement = {
+  name: "GBP Management",
+  price: 300,
+  description: "Month-to-month · no setup fee · no contract",
   inclusions: [
-    "Full profile audit and scoring against local pack benchmarks",
-    "Category selection (primary + secondary) optimized for your market",
-    "Business description rewritten for keyword relevance and conversion",
-    "Service menu: all services added with optimized descriptions",
-    "Photos: organization, naming, geo-tagging recommendations",
-    "Q&A section: 10 pre-loaded optimized questions and answers",
-    "Attributes and features fully populated",
-    "Citation consistency check — top 5 directories audited",
-    "Delivered with optimization report and recommendations doc",
-  ],
-  note: "This fee is credited in full toward any ongoing GBP management plan started within 30 days.",
-};
-
-export const gbpRecurring = {
-  name: "GBP Active Management",
-  price: 249,
-  description: "Month-to-month · cancel anytime · 30-day notice to offboard",
-  inclusions: [
-    "4 GBP posts per month (service spotlight, offers, seasonal)",
-    "8–12 photos added per month",
-    "Review monitoring and response within 24 hours",
-    "Q&A monitoring and response",
+    "Full profile optimization & category alignment",
+    "Weekly posts + EXIF-optimized photos",
+    "Review replies + proactive requests",
+    "Q&A monitoring and updates",
     "Monthly profile audit — catch suspensions, edits, spam early",
-    "Google Updates monitoring and attribute refresh",
     "Monthly performance report: views, calls, direction requests",
-    "Direct access via email — no ticketing system",
   ],
 };
 
-export const seoOneTime = {
-  name: "Local Search Audit",
-  price: 499,
-  delivery: "5–7 business days",
-  note: "This $499 is credited in full toward any retainer started within 30 days.",
-  inclusions: [
-    "GBP scored and benchmarked against top 3 local pack competitors",
-    "Technical SEO audit: crawlability, Core Web Vitals, mobile, indexing",
-    "Keyword landscape: 50–100 local keywords mapped to pages and gaps",
-    "Competitive analysis: top 3 organic and Maps competitors",
-    "Schema audit: what's installed, what's missing, what's broken",
-    "Citation audit: accuracy and consistency across top 30 directories",
-    "AI visibility assessment: ChatGPT Search, Perplexity, AI Overviews",
-    "Full written 90-day action plan with prioritized recommendations",
-    "Delivered as a structured PDF + strategy document",
-  ],
-};
-
+/**
+ * Local SEO, standalone — no GBP included. Same deliverable-volume
+ * logic as before (more pages/posts/backlinks per month = more real
+ * recurring hours), just rounded and re-priced so the bundle above
+ * has one clean, consistent delta.
+ */
 export const seoTiers = [
   {
     name: "SEO Local",
-    price: 399,
-    setupPrice: 699,
+    price: 500,
+    setupPrice: 800,
     featured: false,
+    bestFor: "Best for: a single-service business in a smaller or less competitive market.",
     inclusions: [
       "Written strategy document + foundation audit (setup month)",
       "5 local content assets per month",
@@ -198,9 +177,10 @@ export const seoTiers = [
   },
   {
     name: "SEO Growth",
-    price: 749,
-    setupPrice: 1249,
+    price: 750,
+    setupPrice: 1250,
     featured: true,
+    bestFor: "Best for: businesses ready to actively compete for rankings.",
     inclusions: [
       "Everything in SEO Local",
       "10 local content assets per month",
@@ -215,9 +195,10 @@ export const seoTiers = [
   },
   {
     name: "SEO Authority",
-    price: 1249,
-    setupPrice: 1749,
+    price: 1250,
+    setupPrice: 1750,
     featured: false,
+    bestFor: "Best for: multi-service businesses or competitive metro markets.",
     inclusions: [
       "Everything in SEO Growth",
       "15 local content assets per month",
@@ -232,94 +213,70 @@ export const seoTiers = [
   },
 ];
 
+/**
+ * Website builds — same scalable Astro city×service framework on
+ * every tier. Tiers differ by how much of the city×service matrix is
+ * live at launch, not by artificially rationing pages. bundledPrice
+ * is the flat rate when paired with any ongoing GBP/SEO package —
+ * no minimum term, just a real upfront number that makes walking away
+ * a real cost without requiring a contract.
+ */
 export const websiteBuilds = [
   {
-    name: "Starter Build",
-    price: 1999,
+    name: "Starter",
+    price: 1250,
+    bundledPrice: 1000,
     featured: false,
-    pages: "5–7 pages",
-    timeline: "2–3 weeks",
-    description: "A clean, fast local site built to rank for your primary service and city.",
-    bestFor: "Best for: single-location businesses with 1–3 core services.",
+    timeline: "1–2 weeks",
+    description:
+      "The same scalable Astro framework as every build. Launches with 1–2 cities × your core services live.",
+    bestFor: "Best for: single-location businesses testing the waters or with 1–3 core services.",
     inclusions: [
-      "Home, About, Services (1–3), Contact",
-      "LocalBusiness schema + Services schema",
+      "Same city × service Astro framework as Growth",
+      "Home, About, Services, Contact",
+      "LocalBusiness + Service schema",
       "GA4 + Google Search Console setup",
       "Click-to-call + contact form with reCAPTCHA",
       "Mobile-first, Core Web Vitals optimized",
-      "On-page SEO on all pages",
-      "Vercel hosting setup",
+      "Add cities or services anytime — the framework's already built",
     ],
   },
   {
-    name: "Standard Build",
-    price: 3499,
+    name: "Growth",
+    price: 2250,
+    bundledPrice: 1000,
     featured: true,
-    pages: "10–15 pages",
-    timeline: "3–4 weeks",
+    timeline: "2–4 weeks",
     description:
-      "Full local SEO site with service pages, city pages, and service × city page architecture.",
-    bestFor: "Best for: businesses serving multiple cities or with 4–8 services.",
+      "Full city × service matrix live at launch — broader day-one coverage on the same framework.",
+    bestFor: "Best for: businesses serving multiple cities or with 4+ services.",
     inclusions: [
       "Everything in Starter",
-      "Up to 8 service pages — written and optimized",
-      "Up to 6 city/location pages — written and optimized",
-      "Service × city page architecture (up to 20 pages)",
+      "Full city × service matrix live at launch",
+      "Blog foundation (seed posts included)",
       "FAQ page with FAQ schema",
-      "Blog foundation (3 seed posts)",
       "Google Review widget integration",
-    ],
-  },
-  {
-    name: "Authority Build",
-    price: 5999,
-    featured: false,
-    pages: "25–40+ pages",
-    timeline: "4–6 weeks",
-    description:
-      "A complete local search authority site built to dominate every service and city in your market.",
-    bestFor: "Best for: established businesses ready to own their market.",
-    inclusions: [
-      "Everything in Standard",
-      "Unlimited service pages",
-      "Up to 20 city/location pages",
-      "Full service × city matrix (up to 50 pages)",
-      "Case study or results pages",
-      "Full AEO content — FAQ, HowTo, entity pages",
-      "AI-optimized structured content throughout",
-      "Custom schema beyond LocalBusiness",
-      "30-day post-launch support included",
+      "Add cities or services anytime — the framework's already built",
     ],
   },
 ];
 
-export const websiteAsAService = [
-  {
-    name: "WaaS Starter",
-    price: 149,
-    inclusions: [
-      "Starter site build included (no upfront fee)",
-      "Vercel hosting — fast, reliable, global CDN",
-      "Ongoing page additions (up to 2/mo)",
-      "Monthly plugin and dependency updates",
-      "Uptime monitoring",
-      "You own your content and domain",
-    ],
-  },
-  {
-    name: "WaaS Growth",
-    price: 249,
-    inclusions: [
-      "Standard site build included (no upfront fee)",
-      "Everything in WaaS Starter",
-      "Up to 5 new pages per month",
-      "Quarterly content refresh on top pages",
-      "Priority support — 24-hour response",
-      "Annual CRO review and UX improvements",
-    ],
-  },
-];
+export const websiteAsAService = {
+  name: "Website as a Service",
+  price: 199,
+  inclusions: [
+    "Hosting, security monitoring, and uptime",
+    "Up to 5 minor edits/mo via support ticket",
+    "Analytics and lead tracking maintained",
+    "Month-to-month — cancel anytime",
+  ],
+};
 
+/**
+ * One-time audits. "Local Search Audit" used to exist as two separate
+ * near-identical entries in this file (seoOneTime + audits) and
+ * rendered twice on the same page — consolidated to one.
+ */
 export const audits = [
   {
     name: "Free GBP Audit",
@@ -339,7 +296,7 @@ export const audits = [
   },
   {
     name: "Local Search Audit",
-    price: 499,
+    price: 500,
     delivery: "5–7 business days",
     description:
       "A comprehensive audit of your entire local search presence — GBP, technical SEO, keyword landscape, competitive position, schema, citations, and AI visibility. Delivered as a structured PDF with a 90-day action plan.",
@@ -353,17 +310,17 @@ export const audits = [
       "AI visibility assessment: ChatGPT, Perplexity, AI Overviews",
       "Full 90-day written action plan",
     ],
-    note: "The $499 fee is credited in full toward any retainer started within 30 days.",
+    note: "This $500 fee is credited in full toward any retainer started within 30 days.",
   },
 ];
 
 export const addOns = [
   { name: "Extra local content asset (beyond plan)", price: "$75/asset" },
   { name: "Additional city or service page (one-time)", price: "$150/page" },
-  { name: "Review response management only", price: "$99/mo" },
-  { name: "AI visibility quarterly audit (standalone)", price: "$299/quarter" },
-  { name: "Citation cleanup (one-time, up to 50 directories)", price: "$349" },
-  { name: "Schema implementation (one-time)", price: "$299" },
+  { name: "Review response management only", price: "$100/mo" },
+  { name: "AI visibility quarterly audit (standalone)", price: "$300/quarter" },
+  { name: "Citation cleanup (one-time, up to 50 directories)", price: "$350" },
+  { name: "Schema implementation (one-time)", price: "$300" },
   { name: "Local backlink (per link, vetted)", price: "$150–$300" },
-  { name: "Strategy consultation (60 min, no retainer)", price: "$199" },
+  { name: "Strategy consultation (60 min, no retainer)", price: "$200" },
 ];
