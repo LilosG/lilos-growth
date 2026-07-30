@@ -908,9 +908,9 @@ export const metadata = {
               <div class="grid grid-cols-3 gap-2">
                 {
                   [
-                    { label: "Local", val: 599 },
-                    { label: "Growth", val: 999 },
-                    { label: "Authority", val: 1499 },
+                    { label: "Local", val: 750 },
+                    { label: "Growth", val: 1000 },
+                    { label: "Authority", val: 1500 },
                   ].map((p, i) => (
                     <button
                       type="button"
@@ -1035,7 +1035,7 @@ export const metadata = {
                 $36,000
               </div>
               <div class="mt-1 text-xs text-white/50" id="roi-investment">
-                Investment: $999/mo · No contracts · Cancel anytime
+                Investment: $1,000/mo · No contracts · Cancel anytime
               </div>
             </div>
           </div>
@@ -1052,7 +1052,7 @@ export const metadata = {
 
   <script>
     (function () {
-      let selectedPlan = 999;
+      let selectedPlan = 1000;
 
       function selectPlan(btn: HTMLButtonElement) {
         document.querySelectorAll(".roi-plan-btn").forEach(function (b) {
@@ -1061,7 +1061,7 @@ export const metadata = {
         });
         btn.className =
           "roi-plan-btn rounded-xl border py-3 text-xs font-bold transition border-primary bg-primary text-white shadow";
-        selectedPlan = parseInt(btn.dataset.val ?? "999", 10);
+        selectedPlan = parseInt(btn.dataset.val ?? "1000", 10);
         calcROI();
       }
 

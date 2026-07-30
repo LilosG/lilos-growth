@@ -101,9 +101,9 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
           <div class="grid grid-cols-3 gap-2">
             {
               [
-                { label: "Local", val: 599 },
-                { label: "Growth", val: 999 },
-                { label: "Authority", val: 1499 },
+                { label: "Local", val: 750 },
+                { label: "Growth", val: 1000 },
+                { label: "Authority", val: 1500 },
               ].map((p, i) => (
                 <button
                   type="button"
@@ -151,7 +151,7 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
           <div class="text-sm">
             <div class="font-bold text-heading">Return on Investment</div>
             <div class="text-muted" id="roi-step-4">
-              Revenue ($5,400) − Investment ($999) = $4,401/mo profit · ROI = 440%
+              Revenue ($5,400) − Investment ($1,000) = $4,400/mo profit · ROI = 440%
             </div>
           </div>
         </li>
@@ -168,7 +168,7 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
         <div class="flex justify-between"><dt class="text-muted">New Customers</dt><dd class="font-bold text-heading" id="roi-p-customers">+12 customers</dd></div>
         <div class="flex justify-between"><dt class="text-muted">Revenue Increase</dt><dd class="font-bold text-primary" id="roi-p-revenue">$5,400/mo</dd></div>
         <div class="border-t border-border-subtle pt-2.5"></div>
-        <div class="flex justify-between"><dt class="text-muted">Investment</dt><dd class="font-bold text-heading" id="roi-p-invest">$999/mo</dd></div>
+        <div class="flex justify-between"><dt class="text-muted">Investment</dt><dd class="font-bold text-heading" id="roi-p-invest">$1,000/mo</dd></div>
         <div class="flex justify-between"><dt class="text-muted">Net Profit</dt><dd class="font-bold text-primary" id="roi-p-profit">$4,401/mo</dd></div>
         <div class="flex justify-between"><dt class="font-bold text-heading">ROI</dt><dd class="font-heading text-lg font-extrabold text-primary" id="roi-p-roi">+440%</dd></div>
       </dl>
@@ -239,7 +239,7 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
 
 <script>
   (function () {
-    let selectedPlan = 999;
+    let selectedPlan = 1000;
 
     const RAMP = [0.05, 0.12, 0.22, 0.35, 0.5, 0.65, 0.78, 0.87, 0.93, 0.97, 0.99, 1.0];
     const GROWTH_RATE = 1.42; // matches the site's published "+142% avg lead growth"
@@ -366,7 +366,7 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
         b.className = "roi-plan-btn rounded-xl border py-3 text-xs font-bold transition border-border-base bg-white text-muted hover:border-primary hover:text-primary";
       });
       btn.className = "roi-plan-btn rounded-xl border py-3 text-xs font-bold transition border-primary bg-primary text-white shadow";
-      selectedPlan = parseInt(btn.dataset.val ?? "999", 10);
+      selectedPlan = parseInt(btn.dataset.val ?? "1000", 10);
       calcROI();
     }
 
