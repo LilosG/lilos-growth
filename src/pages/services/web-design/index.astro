@@ -1,5 +1,6 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
+import CheckListItem from "~/components/ui/CheckListItem.astro";
 import Button from "~/components/ui/Button.astro";
 import Badge from "~/components/ui/Badge.astro";
 import Card from "~/components/ui/Card.astro";
@@ -241,23 +242,7 @@ const faqs = [
               <p class="mb-5 text-xs italic text-muted">{build.bestFor}</p>
               <ul class="space-y-2.5 text-sm text-body">
                 {build.inclusions.map((inc) => (
-                  <li class="flex items-start gap-2">
-                    <svg
-                      class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4.5 12.75l6 6 9-13.5"
-                      />
-                    </svg>
-                    <span>{inc}</span>
-                  </li>
+                  <CheckListItem>{inc}</CheckListItem>
                 ))}
               </ul>
               <a
@@ -288,19 +273,7 @@ const faqs = [
         <ul class="mt-4 space-y-2 text-sm text-body">
           {
             websiteAsAService.inclusions.map((inc) => (
-              <li class="flex items-start gap-2">
-                <svg
-                  class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-                <span>{inc}</span>
-              </li>
+              <CheckListItem>{inc}</CheckListItem>
             ))
           }
         </ul>

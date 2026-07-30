@@ -1,0 +1,43 @@
+---
+/**
+ * A single checkmark + text list item, used throughout pricing and
+ * feature lists. Replaces what used to be the same ~12-line SVG block
+ * hand-copied into every page that needed a checklist (49 copies
+ * across 7 pages as of the last audit).
+ *
+ * Usage:
+ *   <ul>
+ *     <CheckListItem>Full profile optimization</CheckListItem>
+ *     <CheckListItem align="center" iconClass="text-white">Weekly posts</CheckListItem>
+ *   </ul>
+ */
+export interface Props {
+  /** Vertical alignment of the icon relative to the text. "start" (default) suits
+   * multi-line text; "center" suits short single-line text. */
+  align?: "start" | "center";
+  /** Tailwind color class for the icon and, by default, the text. */
+  iconClass?: string;
+  /** Tailwind color class for the text, if different from the icon. */
+  textClass?: string;
+  /** Additional classes on the <li> itself. */
+  class?: string;
+}
+
+const { align = "start", iconClass = "text-primary", textClass, class: className = "" } = Astro.props;
+
+const alignClass = align === "center" ? "items-center" : "items-start";
+---
+
+<li class={`flex ${alignClass} gap-2 ${className}`}>
+  <svg
+    class={`${align === "start" ? "mt-0.5 " : ""}h-4 w-4 flex-shrink-0 ${iconClass}`}
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.5"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+  </svg>
+  <span class={textClass}><slot /></span>
+</li>

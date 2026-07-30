@@ -1,5 +1,6 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
+import CheckListItem from "~/components/ui/CheckListItem.astro";
 import { clientStats, caseStudies, packages } from "~/data/packages";
 
 export const metadata = {
@@ -1136,22 +1137,7 @@ export const metadata = {
                 "Scope of work included if issues are found",
                 "No pitch — you decide what to do with it",
               ].map((item) => (
-                <li class="flex items-start gap-3 text-sm text-body">
-                  <svg
-                    class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
-                  {item}
-                </li>
+                <CheckListItem>{item}</CheckListItem>
               ))
             }
           </ul>

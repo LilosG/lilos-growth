@@ -1,5 +1,6 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
+import CheckListItem from "~/components/ui/CheckListItem.astro";
 import {
   packages,
   gbpManagement,
@@ -227,22 +228,7 @@ const faqs = [
           <ul class="mb-8 flex-1 space-y-2.5 text-sm">
             {
               gbpManagement.inclusions.map((inc) => (
-                <li class="flex items-start gap-2 text-body">
-                  <svg
-                    class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
-                  {inc}
-                </li>
+                <CheckListItem>{inc}</CheckListItem>
               ))
             }
           </ul>
@@ -302,22 +288,7 @@ const faqs = [
               <div class="mb-5 h-px bg-border-subtle" />
               <ul class="mb-8 flex-1 space-y-2.5 text-sm">
                 {tier.inclusions.map((inc) => (
-                  <li class="flex items-start gap-2 text-body">
-                    <svg
-                      class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4.5 12.75l6 6 9-13.5"
-                      />
-                    </svg>
-                    {inc}
-                  </li>
+                  <CheckListItem>{inc}</CheckListItem>
                 ))}
               </ul>
               <a
@@ -392,22 +363,7 @@ const faqs = [
               <p class="mb-5 text-xs italic text-muted">{build.bestFor}</p>
               <ul class="mb-8 flex-1 space-y-2.5 text-sm">
                 {build.inclusions.map((inc) => (
-                  <li class="flex items-start gap-2 text-body">
-                    <svg
-                      class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4.5 12.75l6 6 9-13.5"
-                      />
-                    </svg>
-                    {inc}
-                  </li>
+                  <CheckListItem>{inc}</CheckListItem>
                 ))}
               </ul>
               <a
@@ -447,22 +403,7 @@ const faqs = [
             <div class="my-4 h-px bg-border-subtle" />
             <ul class="space-y-2 text-sm">
               {websiteAsAService.inclusions.map((inc) => (
-                <li class="flex items-start gap-2 text-body">
-                  <svg
-                    class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
-                  {inc}
-                </li>
+                <CheckListItem>{inc}</CheckListItem>
               ))}
             </ul>
             <a
@@ -519,22 +460,7 @@ const faqs = [
               <p class="mb-5 text-sm leading-relaxed text-body">{audit.description}</p>
               <ul class="mb-6 flex-1 space-y-2.5 text-sm">
                 {audit.inclusions.map((inc) => (
-                  <li class="flex items-start gap-2 text-body">
-                    <svg
-                      class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4.5 12.75l6 6 9-13.5"
-                      />
-                    </svg>
-                    {inc}
-                  </li>
+                  <CheckListItem>{inc}</CheckListItem>
                 ))}
               </ul>
               {audit.note && (

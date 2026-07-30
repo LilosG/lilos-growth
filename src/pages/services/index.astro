@@ -1,5 +1,6 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
+import CheckListItem from "~/components/ui/CheckListItem.astro";
 import { packages } from "~/data/packages";
 
 export const title = "Local SEO & Website Services for Home Service Businesses | Lilos Growth";
@@ -168,22 +169,7 @@ export const description =
                   "Q&A seeding, service area optimization, post cadence",
                   "Included free in every Local SEO retainer",
                 ].map((item) => (
-                  <li class="flex items-start gap-2.5">
-                    <svg
-                      class="mt-0.5 h-4 w-4 shrink-0 text-service-gbp"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4.5 12.75l6 6 9-13.5"
-                      />
-                    </svg>
-                    {item}
-                  </li>
+                  <CheckListItem>{item}</CheckListItem>
                 ))
               }
             </ul>
@@ -341,22 +327,7 @@ export const description =
                   "AEO schema — FAQ, HowTo, entity optimization for AI search",
                   "Transparent monthly reporting with real call data",
                 ].map((item) => (
-                  <li class="flex items-start gap-2.5">
-                    <svg
-                      class="mt-0.5 h-4 w-4 shrink-0 text-service-seo"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4.5 12.75l6 6 9-13.5"
-                      />
-                    </svg>
-                    {item}
-                  </li>
+                  <CheckListItem>{item}</CheckListItem>
                 ))
               }
             </ul>
@@ -407,22 +378,7 @@ export const description =
                   "Core Web Vitals optimized — sub-second load times",
                   "Pair with any retainer or purchase standalone",
                 ].map((item) => (
-                  <li class="flex items-start gap-2.5">
-                    <svg
-                      class="mt-0.5 h-4 w-4 shrink-0 text-service-website"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4.5 12.75l6 6 9-13.5"
-                      />
-                    </svg>
-                    {item}
-                  </li>
+                  <CheckListItem>{item}</CheckListItem>
                 ))
               }
             </ul>
@@ -504,22 +460,7 @@ export const description =
                 "AI search visibility (AEO) readiness score",
                 "Technical fixes ranked by revenue impact",
               ].map((item) => (
-                <li class="flex items-start gap-3">
-                  <svg
-                    class="mt-0.5 h-4 w-4 shrink-0 text-primary"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
-                  {item}
-                </li>
+                <CheckListItem>{item}</CheckListItem>
               ))
             }
           </ul>
@@ -727,22 +668,7 @@ export const description =
               <div class="my-5 h-px bg-border-subtle" />
               <ul class="flex-1 space-y-2.5 text-sm text-body">
                 {pkg.inclusions.map((f) => (
-                  <li class="flex items-start gap-2">
-                    <svg
-                      class="mt-0.5 h-4 w-4 shrink-0 text-primary"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4.5 12.75l6 6 9-13.5"
-                      />
-                    </svg>
-                    {f}
-                  </li>
+                  <CheckListItem>{f}</CheckListItem>
                 ))}
               </ul>
               <a
