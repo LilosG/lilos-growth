@@ -4,56 +4,56 @@
  */
 ---
 
-<div class="flex flex-1 flex-col">
-  <form id="serp-form" class="flex flex-1 flex-col space-y-3">
+<div class="flex flex-col">
+  <form id="serp-form" class="flex flex-col space-y-3">
     <div>
-      <label class="mb-1 block text-xs font-medium text-gray-600"
-        >Page Title <span class="text-gray-400">(~60 chars)</span></label
+      <label class="mb-1 block text-xs font-medium text-body"
+        >Page Title <span class="text-muted">(~60 chars)</span></label
       >
       <input
         id="serp-title"
         type="text"
         maxlength="70"
         placeholder="Best Plumber in Denver | 24/7 Service"
-        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
       />
-      <div class="mt-1 text-xs text-gray-500"><span id="title-count">0</span>/60</div>
+      <div class="mt-1 text-xs text-muted"><span id="title-count">0</span>/60</div>
     </div>
     <div>
-      <label class="mb-1 block text-xs font-medium text-gray-600">Page URL</label>
+      <label class="mb-1 block text-xs font-medium text-body">Page URL</label>
       <input
         id="serp-url"
         type="url"
         placeholder="https://example.com/plumbing"
-        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
       />
     </div>
     <div>
-      <label class="mb-1 block text-xs font-medium text-gray-600"
-        >Meta Description <span class="text-gray-400">(~155 chars)</span></label
+      <label class="mb-1 block text-xs font-medium text-body"
+        >Meta Description <span class="text-muted">(~155 chars)</span></label
       >
       <textarea
         id="serp-desc"
         rows="2"
         maxlength="170"
         placeholder="Professional plumbing services in Denver..."
-        class="focus:ring-primary/40 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2"
+        class="focus:ring-primary/40 w-full rounded-lg border border-border-base px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2"
       ></textarea>
-      <div class="mt-1 text-xs text-gray-500"><span id="desc-count">0</span>/155</div>
+      <div class="mt-1 text-xs text-muted"><span id="desc-count">0</span>/155</div>
     </div>
     <div>
-      <span class="mb-2 block text-xs font-medium text-gray-500">Preview</span>
-      <div class="rounded-lg border border-gray-200 bg-white p-4">
+      <span class="mb-2 block text-xs font-medium text-muted">Preview</span>
+      <div class="rounded-lg border border-border-subtle bg-white p-4">
         <div id="preview-url" class="truncate text-sm text-green-700">example.com</div>
         <div id="preview-title" class="truncate text-lg text-blue-800 hover:underline">
           Your Page Title
         </div>
-        <div id="preview-desc" class="line-clamp-2 text-sm text-gray-600">
+        <div id="preview-desc" class="line-clamp-2 text-sm text-body">
           Your meta description appears here.
         </div>
       </div>
     </div>
-    <button type="button" id="serp-preview-btn" class="btn btn-primary mt-auto h-11 w-full"
+    <button type="button" id="serp-preview-btn" class="btn btn-primary h-11 w-full"
       >Update Preview</button
     >
   </form>

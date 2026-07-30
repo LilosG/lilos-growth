@@ -4,17 +4,17 @@
  */
 ---
 
-<div class="flex flex-1 flex-col">
-  <form id="gbp-cat-form" class="flex flex-1 flex-col gap-3">
+<div class="flex flex-col">
+  <form id="gbp-cat-form" class="flex flex-col gap-3">
     <input
       id="gbp-cat-input"
       type="text"
       required
       placeholder="Type your business type (e.g., plumber, dentist)"
-      class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm text-heading placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2"
+      class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm text-heading placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2"
       autocomplete="off"
     />
-    <button type="submit" class="btn btn-primary mt-auto h-11">Find Categories</button>
+    <button type="submit" class="btn btn-primary h-11">Find Categories</button>
   </form>
   <div id="gbp-cat-results" class="mt-4" aria-live="polite"></div>
 </div>
@@ -417,12 +417,12 @@
       return;
     }
     let html =
-      '<div class="flex items-center justify-between mb-2"><span class="text-xs font-medium text-gray-500">' +
+      '<div class="flex items-center justify-between mb-2"><span class="text-xs font-medium text-muted">' +
       categories.length +
       ' matches</span><button type="button" id="gbp-copy-all" class="text-xs font-semibold text-primary hover:underline">Copy All</button></div><ul class="space-y-1">';
     for (let i = 0; i < categories.length; i++) {
       html +=
-        '<li class="group flex items-center justify-between rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm transition hover:border-primary/30 hover:bg-primary/5"><span class="text-heading">' +
+        '<li class="group flex items-center justify-between rounded-lg border border-border-subtle bg-white px-3 py-2 text-sm transition hover:border-primary/30 hover:bg-primary/5"><span class="text-heading">' +
         categories[i] +
         '</span><button type="button" class="copy-cat text-xs text-primary opacity-0 transition group-hover:opacity-100 hover:underline" data-cat="' +
         categories[i] +

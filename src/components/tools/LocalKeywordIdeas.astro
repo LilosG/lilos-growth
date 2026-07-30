@@ -4,44 +4,44 @@
  */
 ---
 
-<div class="local-keyword-ideas flex flex-1 flex-col">
-  <form id="keywords-form" class="flex flex-1 flex-col space-y-3">
+<div class="local-keyword-ideas flex flex-col">
+  <form id="keywords-form" class="flex flex-col space-y-3">
     <div>
-      <label class="mb-1 block text-xs font-medium text-gray-600">Primary Service *</label>
+      <label class="mb-1 block text-xs font-medium text-body">Primary Service *</label>
       <input
         id="keywords-service"
         type="text"
         required
         placeholder="plumbing, HVAC, pest control"
-        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
       />
     </div>
     <div>
-      <label class="mb-1 block text-xs font-medium text-gray-600">City/Area *</label>
+      <label class="mb-1 block text-xs font-medium text-body">City/Area *</label>
       <input
         id="keywords-city"
         type="text"
         required
         placeholder="Denver, CO"
-        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
       />
     </div>
     <div>
-      <label class="mb-1 block text-xs font-medium text-gray-600"
-        >Nearby Areas <span class="text-gray-400">(optional)</span></label
+      <label class="mb-1 block text-xs font-medium text-body"
+        >Nearby Areas <span class="text-muted">(optional)</span></label
       >
       <input
         id="keywords-nearby"
         type="text"
         placeholder="Aurora, Lakewood, Boulder"
-        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
       />
     </div>
-    <button type="submit" class="btn btn-primary mt-auto h-11 w-full">Generate Keywords</button>
+    <button type="submit" class="btn btn-primary h-11 w-full">Generate Keywords</button>
   </form>
   <div id="keywords-result" class="mt-4 hidden">
     <div class="mb-2 flex items-center justify-between">
-      <span class="text-xs font-medium text-gray-500">Keyword Ideas</span>
+      <span class="text-xs font-medium text-muted">Keyword Ideas</span>
       <button
         id="keywords-copy"
         type="button"
@@ -50,7 +50,7 @@
     </div>
     <div
       id="keywords-output"
-      class="max-h-64 overflow-auto rounded-lg border border-gray-200 bg-gray-50 p-3"
+      class="max-h-64 overflow-auto rounded-lg border border-border-subtle bg-background-subtle p-3"
     >
     </div>
   </div>
@@ -103,7 +103,7 @@
 
       const unique = [...new Set(keywords)].sort();
       outputEl.innerHTML = unique
-        .map((kw) => '<div class="py-1 text-sm text-gray-700">' + kw + "</div>")
+        .map((kw) => '<div class="py-1 text-sm text-body">' + kw + "</div>")
         .join("");
       outputEl.dataset.keywords = unique.join("\n");
       resultEl.classList.remove("hidden");

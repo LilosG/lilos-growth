@@ -64,7 +64,7 @@ const stats = [
       <div class="mb-8 flex flex-wrap gap-3">
         <span
           class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white"
-          >GBP Tools</span
+          >Quick Tools</span
         >
         <span
           class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white"
@@ -72,7 +72,7 @@ const stats = [
         >
         <span
           class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white"
-          >Content Planning</span
+          >SEO &amp; Marketing</span
         >
       </div>
       <a
@@ -189,10 +189,10 @@ const stats = [
       <!-- Quick Tools -->
       <div class="mb-16">
         <h2 class="mb-8 font-heading text-xl font-bold text-heading">Quick Tools</h2>
-        <div class="grid items-start gap-6 md:grid-cols-3">
+        <div class="grid gap-6 md:grid-cols-3">
           <article class="tool-card group">
-            <div class="tool-card-header tool-card-header--green">
-              <div class="tool-card-icon tool-card-icon--green">
+            <div class="tool-card-header tool-card-header--primary">
+              <div class="tool-card-icon tool-card-icon--primary">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
@@ -213,8 +213,8 @@ const stats = [
           </article>
 
           <article class="tool-card group">
-            <div class="tool-card-header tool-card-header--blue">
-              <div class="tool-card-icon tool-card-icon--blue">
+            <div class="tool-card-header tool-card-header--primary">
+              <div class="tool-card-icon tool-card-icon--primary">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
@@ -235,8 +235,8 @@ const stats = [
           </article>
 
           <article class="tool-card group">
-            <div class="tool-card-header tool-card-header--blue">
-              <div class="tool-card-icon tool-card-icon--blue">
+            <div class="tool-card-header tool-card-header--primary">
+              <div class="tool-card-icon tool-card-icon--primary">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
@@ -261,7 +261,7 @@ const stats = [
       <!-- Schema Tools -->
       <div class="mb-16">
         <h2 class="mb-8 font-heading text-xl font-bold text-heading">Schema Generators</h2>
-        <div class="grid items-start gap-6 lg:grid-cols-2">
+        <div class="grid gap-6 lg:grid-cols-2">
           <article class="tool-card group">
             <div class="tool-card-header tool-card-header--purple">
               <div class="tool-card-icon tool-card-icon--purple">
@@ -311,10 +311,10 @@ const stats = [
       <!-- SEO & Marketing -->
       <div>
         <h2 class="mb-8 font-heading text-xl font-bold text-heading">SEO & Marketing</h2>
-        <div class="grid items-start gap-6 lg:grid-cols-2">
+        <div class="grid gap-6 lg:grid-cols-2">
           <article class="tool-card group">
-            <div class="tool-card-header tool-card-header--blue">
-              <div class="tool-card-icon tool-card-icon--blue">
+            <div class="tool-card-header tool-card-header--primary">
+              <div class="tool-card-icon tool-card-icon--primary">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
@@ -334,8 +334,8 @@ const stats = [
           </article>
 
           <article class="tool-card group">
-            <div class="tool-card-header tool-card-header--green">
-              <div class="tool-card-icon tool-card-icon--green">
+            <div class="tool-card-header tool-card-header--primary">
+              <div class="tool-card-icon tool-card-icon--primary">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
@@ -403,45 +403,43 @@ const stats = [
 
 <style>
   .tool-card {
-    @apply flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-lg;
+    @apply flex h-full flex-col overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-sm transition-shadow hover:shadow-lg;
   }
 
   .tool-card-header {
     @apply flex items-center gap-3 border-b px-5 py-4;
   }
-  .tool-card-header--green {
-    @apply border-green-100 bg-gradient-to-r from-green-50 to-green-50/50;
-  }
-  .tool-card-header--blue {
-    @apply border-blue-100 bg-gradient-to-r from-blue-50 to-blue-50/50;
+  .tool-card-header--primary {
+    border-bottom-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-primary) 6%, white),
+      white
+    );
   }
   .tool-card-header--purple {
-    @apply border-purple-100 bg-gradient-to-r from-purple-50 to-purple-50/50;
+    @apply border-purple-100 bg-gradient-to-r from-purple-50 to-transparent;
   }
 
   .tool-card-icon {
     @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-xl;
   }
-  .tool-card-icon--green {
-    @apply bg-green-100 text-green-600;
-  }
-  .tool-card-icon--blue {
-    @apply bg-blue-100 text-blue-600;
+  .tool-card-icon--primary {
+    background: color-mix(in srgb, var(--color-primary) 10%, white);
+    color: var(--color-primary);
   }
   .tool-card-icon--purple {
     @apply bg-purple-100 text-purple-600;
   }
 
+  /* Cards in a row share equal height (grid default items-stretch); the body
+     centers its content vertically so cards with fewer fields don't glue the
+     submit button to the bottom with an awkward empty gap -- the extra space
+     becomes balanced breathing room instead. */
   .tool-card-body {
-    @apply flex flex-1 flex-col p-5;
+    @apply flex flex-1 flex-col justify-center p-5;
   }
-
-  /* Push buttons to bottom of cards */
   .tool-card-body :global(form) {
-    @apply flex flex-1 flex-col;
-  }
-  .tool-card-body :global(form > button[type="submit"]),
-  .tool-card-body :global(form > .btn) {
-    @apply mt-auto;
+    @apply flex flex-col gap-4;
   }
 </style>
