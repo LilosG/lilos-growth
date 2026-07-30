@@ -17,6 +17,7 @@ export type KPI = {
   label: string;
   value: string;
   sr?: string;
+  category?: "local-seo" | "gbp" | "leads";
 };
 
 export type ServiceType = "website" | "gbp" | "local-seo";
@@ -264,6 +265,37 @@ export const resultsCaseStudies: CaseStudy[] = [
       alt: "Kelari Party Rentals website",
     },
     kpis: [],
+  },
+  {
+    id: "park-101-carlsbad-ca",
+    title: "Park 101",
+    client: "Park 101",
+    city: "Carlsbad, CA",
+    sectorTag: "Restaurant",
+    locationTag: "California",
+    serviceTypes: ["gbp"],
+    kpis: [
+      {
+        label: "GBP calls, May → June",
+        value: "+313%",
+        sr: "three hundred thirteen percent increase in GBP calls month over month",
+        category: "gbp",
+      },
+      {
+        label: "Profile interactions, May → June",
+        value: "+121%",
+        sr: "one hundred twenty one percent increase in profile interactions month over month",
+        category: "gbp",
+      },
+      {
+        label: "June calls vs June 2025",
+        value: "+188.5%",
+        sr: "one hundred eighty eight point five percent increase in calls versus the same month last year",
+        category: "gbp",
+      },
+    ],
+    blurb:
+      "GBP management only, no site rebuild. Took over the profile at the start of May 2026. Calls averaged ~208/mo across Feb-Apr (213 in May — consistent with that baseline, not a fluke low month) before jumping to 880 in June. Profile interactions followed the same pattern: ~3,161/mo average Feb-Apr, 3,523 in May, then 7,798 in June. June also beat June 2025 by +188.5% (calls) and +109.7% (interactions) — same month, year prior, so it's not a seasonal artifact.",
   },
 ];
 
