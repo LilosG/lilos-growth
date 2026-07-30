@@ -125,301 +125,115 @@ export const description =
     </div>
   </section>
 
-  <!-- CORE SERVICES — Alternating image/text layout -->
-  <section id="core-services" class="bg-white" aria-label="Core services">
-    <!-- Service 1: GBP -->
-    <div class="border-b border-border-subtle py-20">
-      <div class="mx-auto max-w-5xl px-6">
-        <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
-            <div
-              class="mb-4 inline-flex items-center gap-2 rounded-full bg-service-gbp-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-gbp"
-            >
-              <svg
-                class="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                ></path><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
-              >
-              GBP Management
-            </div>
-            <h2 class="mb-4 font-heading text-3xl font-extrabold text-heading md:text-4xl">
-              Rank Higher in Google Maps and Local Search
-            </h2>
-            <p class="mb-6 text-base leading-relaxed text-body">
-              Your Google Business Profile is the single most important asset for local visibility.
-              We fully optimize it, then actively manage it every week — posts, photos, Q&amp;A,
-              reviews, and category strategy.
-            </p>
-            <ul class="mb-8 space-y-3 text-sm text-body">
-              {
-                [
-                  "Claim, optimize & actively manage your GBP listing",
-                  "Ongoing reviews & optimized photos (EXIF/geo, alt naming)",
-                  "Keyword/category strategy & monthly reporting",
-                  "Q&A seeding, service area optimization, post cadence",
-                  "Included free in every Local SEO retainer",
-                ].map((item) => (
-                  <CheckListItem>{item}</CheckListItem>
-                ))
-              }
-            </ul>
-            <a
-              href="/services/google-business-profile-optimization"
-              class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark"
-            >
-              Learn more about GBP management &rarr;
-            </a>
-          </div>
-          <!-- Visual: stat block -->
-          <div class="rounded-3xl bg-background-cream p-10">
-            <div class="mb-6 flex items-center gap-3">
-              <div
-                class="flex h-10 w-10 items-center justify-center rounded-xl bg-service-gbp-light"
-              >
-                <svg
-                  class="h-5 w-5 text-service-gbp"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  ></path></svg
-                >
-              </div>
-              <p class="font-heading text-sm font-bold text-heading">GBP Results — Real Clients</p>
-            </div>
-            <div class="space-y-5">
-              {
-                [
-                  {
-                    client: "Blue Door Pest Control",
-                    metric: "Direction Requests",
-                    value: "194",
-                    period: "Sep–Dec 2025",
-                    growth: "+19%",
-                  },
-                  {
-                    client: "Carlsbad Fix It",
-                    metric: "Profile Interactions",
-                    value: "38",
-                    period: "Sep–Dec 2025",
-                    growth: "↑ Trend",
-                  },
-                  {
-                    client: "Wheyland Electric",
-                    metric: "Monthly GBP Calls",
-                    value: "21",
-                    period: "Mar 2026",
-                    growth: "+250% vs Feb",
-                  },
-                ].map((r) => (
-                  <div class="flex items-center justify-between rounded-xl border border-border-subtle bg-white p-4 shadow-sm">
-                    <div>
-                      <p class="text-sm font-bold text-heading">{r.client}</p>
-                      <p class="text-xs text-muted">
-                        {r.metric} · {r.period}
-                      </p>
-                    </div>
-                    <div class="text-right">
-                      <p class="font-heading text-2xl font-extrabold text-heading">{r.value}</p>
-                      <p class="text-xs font-bold text-service-gbp">{r.growth}</p>
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-        </div>
+  <!-- CORE SERVICES — compact directory, links to the dedicated pages -->
+  <section id="core-services" class="bg-white py-24" aria-label="Core services">
+    <div class="mx-auto max-w-5xl px-6">
+      <div class="mb-14 text-center">
+        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">What We Do</p>
+        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+          Three services. Stand alone or stack together.
+        </h2>
       </div>
-    </div>
-
-    <!-- Service 2: Local SEO -->
-    <div class="border-b border-border-subtle py-20">
-      <div class="mx-auto max-w-5xl px-6">
-        <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
-          <!-- Visual first on desktop reversed -->
-          <div class="order-2 rounded-3xl bg-secondary p-10 lg:order-1">
-            <p class="text-primary/60 mb-6 text-xs font-bold uppercase tracking-widest">
-              Our SEO Process
-            </p>
-            <div class="space-y-4">
-              {
-                [
-                  {
-                    num: "01",
-                    title: "Audit & Keyword Research",
-                    body: "What your local customers actually search for.",
-                  },
-                  {
-                    num: "02",
-                    title: "On-Page & Technical Fixes",
-                    body: "Titles, metas, H1s, schema, Core Web Vitals.",
-                  },
-                  {
-                    num: "03",
-                    title: "Content & Location Pages",
-                    body: "Service × city pages that rank and convert.",
-                  },
-                  {
-                    num: "04",
-                    title: "Citations & Link Building",
-                    body: "Clean NAP data, quality local authority links.",
-                  },
-                  {
-                    num: "05",
-                    title: "Reporting & Strategy Calls",
-                    body: "Monthly rankings, calls, and leads — clear data.",
-                  },
-                ].map((step) => (
-                  <div class="flex items-start gap-4">
-                    <span class="bg-primary/15 mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg font-heading text-xs font-bold text-primary">
-                      {step.num}
-                    </span>
-                    <div>
-                      <p class="font-heading text-sm font-bold text-white">{step.title}</p>
-                      <p class="text-xs text-white/50">{step.body}</p>
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-          <div class="order-1 lg:order-2">
-            <div
-              class="mb-4 inline-flex items-center gap-2 rounded-full bg-service-seo-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-seo"
-            >
-              <svg
-                class="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                ><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg
-              >
-              Local SEO
-            </div>
-            <h2 class="mb-4 font-heading text-3xl font-extrabold text-heading md:text-4xl">
-              Rank #1 for the searches that matter most
-            </h2>
-            <p class="mb-6 text-base leading-relaxed text-body">
-              We handle the full stack of local SEO — on-page fixes, content, citations, backlinks,
-              and AEO schema. Month-to-month. GBP management included.
-            </p>
-            <ul class="mb-8 space-y-3 text-sm text-body">
-              {
-                [
-                  "On-page & technical fixes (titles, metas, headers, CWV, schema)",
-                  "Service & location content + internal linking strategy",
-                  "Citations & local authority building",
-                  "AEO schema — FAQ, HowTo, entity optimization for AI search",
-                  "Transparent monthly reporting with real call data",
-                ].map((item) => (
-                  <CheckListItem>{item}</CheckListItem>
-                ))
-              }
-            </ul>
-            <a
-              href="/services/local-seo"
-              class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark"
-            >
-              See local SEO plans &rarr;
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Service 3: Web Design -->
-    <div class="py-20">
-      <div class="mx-auto max-w-5xl px-6">
-        <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
-            <div
-              class="mb-4 inline-flex items-center gap-2 rounded-full bg-service-website-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-website"
-            >
-              <svg
-                class="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                ><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M7 8h10M7 12h6"
-                ></path></svg
-              >
-              Website Design
-            </div>
-            <h2 class="mb-4 font-heading text-3xl font-extrabold text-heading md:text-4xl">
-              Websites That Convert — Built to Rank
-            </h2>
-            <p class="mb-6 text-base leading-relaxed text-body">
-              Mobile-first, fast, and structured to rank from day one. Built on Astro + Tailwind
-              CSS — the same framework on every tier. Starting at $1,250 one-time, 1–2 week
-              delivery.
-            </p>
-            <ul class="mb-8 space-y-3 text-sm text-body">
-              {
-                [
-                  "15–20 pages: home, services, city pages, blog, contact",
-                  "City × service money page matrix built in",
-                  "Schema markup, GA4, click-to-call, form tracking",
-                  "Core Web Vitals optimized — sub-second load times",
-                  "Pair with any retainer or purchase standalone",
-                ].map((item) => (
-                  <CheckListItem>{item}</CheckListItem>
-                ))
-              }
-            </ul>
-            <a
-              href="/services/web-design"
-              class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark"
-            >
-              Learn about our web design process &rarr;
-            </a>
-          </div>
-          <!-- Visual: feature highlights -->
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <!-- GBP -->
+        <div class="flex flex-col rounded-3xl border border-border-subtle bg-background-cream p-8">
           <div
-            class="border-service-website/20 bg-service-website-light/30 rounded-3xl border-2 p-10"
+            class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-service-gbp-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-gbp"
           >
-            <p class="mb-6 font-heading text-sm font-bold text-heading">
-              Every site we build includes:
-            </p>
-            <div class="grid grid-cols-2 gap-4">
-              {
-                [
-                  { icon: "⚡", label: "Sub-second load" },
-                  { icon: "📱", label: "Mobile-first" },
-                  { icon: "🔍", label: "SEO-native" },
-                  { icon: "📊", label: "GA4 tracking" },
-                  { icon: "🗺️", label: "Schema markup" },
-                  { icon: "📍", label: "City pages" },
-                  { icon: "📞", label: "Click-to-call" },
-                  { icon: "✍️", label: "Blog ready" },
-                ].map((f) => (
-                  <div class="flex items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-sm">
-                    <span class="text-lg">{f.icon}</span>
-                    <span class="text-sm font-semibold text-heading">{f.label}</span>
-                  </div>
-                ))
-              }
-            </div>
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              ></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              ></path></svg
+            >
+            GBP Management
           </div>
+          <h3 class="mb-3 font-heading text-xl font-extrabold text-heading">
+            Rank higher in Maps and local search
+          </h3>
+          <p class="mb-6 flex-1 text-sm leading-relaxed text-body">
+            We fully optimize your Google Business Profile, then actively manage it every week —
+            posts, photos, Q&amp;A, reviews, category strategy. $300/mo, one plan, no setup fee.
+          </p>
+          <a
+            href="/services/google-business-profile-optimization"
+            class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark"
+          >
+            See GBP management &rarr;
+          </a>
+        </div>
+
+        <!-- Local SEO -->
+        <div class="flex flex-col rounded-3xl border border-border-subtle bg-background-cream p-8">
+          <div
+            class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-service-seo-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-seo"
+          >
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              ><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg
+            >
+            Local SEO
+          </div>
+          <h3 class="mb-3 font-heading text-xl font-extrabold text-heading">
+            Rank for the searches that matter most
+          </h3>
+          <p class="mb-6 flex-1 text-sm leading-relaxed text-body">
+            On-page fixes, service &amp; location content, citations, local link building, and AEO
+            schema for AI search. Structured for how search works now, not just classic blue links.
+          </p>
+          <a
+            href="/services/local-seo"
+            class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark"
+          >
+            See local SEO plans &rarr;
+          </a>
+        </div>
+
+        <!-- Website -->
+        <div class="flex flex-col rounded-3xl border border-border-subtle bg-background-cream p-8">
+          <div
+            class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-service-website-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-website"
+          >
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              ><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M7 8h10M7 12h6"
+              ></path></svg
+            >
+            Website Design
+          </div>
+          <h3 class="mb-3 font-heading text-xl font-extrabold text-heading">
+            Websites that convert, built to rank
+          </h3>
+          <p class="mb-6 flex-1 text-sm leading-relaxed text-body">
+            Mobile-first, fast, same scalable Astro framework on every tier. Starting at $1,250
+            one-time, or $1,000 bundled with any ongoing GBP/SEO package.
+          </p>
+          <a
+            href="/services/web-design"
+            class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark"
+          >
+            See website pricing &rarr;
+          </a>
         </div>
       </div>
     </div>
   </section>
+
 
   <!-- AI AUDIT SECTION -->
   <section class="bg-secondary py-24" aria-label="AI Audit">
@@ -633,62 +447,53 @@ export const description =
     </div>
   </section>
 
-  <!-- PACKAGES -->
+  <!-- PACKAGES TEASER -->
   <section id="packages" class="bg-background-cream py-24">
-    <div class="mx-auto max-w-5xl px-6">
-      <div class="mb-14 text-center">
-        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Pricing</p>
-        <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
-          Simple, Honest Pricing
-        </h2>
-        <p class="mx-auto mt-4 max-w-xl text-base text-muted">
-          Month-to-month. No setup fees. No contracts. GBP management included in every plan.
-        </p>
-      </div>
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+    <div class="mx-auto max-w-3xl px-6 text-center">
+      <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Pricing</p>
+      <h2 class="mb-4 font-heading text-4xl font-extrabold text-heading md:text-5xl">
+        Simple, Honest Pricing
+      </h2>
+      <p class="mx-auto mb-10 max-w-xl text-base text-muted">
+        Month-to-month. No setup fees. No contracts. GBP management included in every bundled
+        plan, starting at $750/mo.
+      </p>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
         {
           packages.map((pkg) => (
-            <article
-              class={`relative flex flex-col rounded-2xl border p-8 shadow-sm transition ${pkg.featured ? "border-2 border-primary shadow-lg" : "hover:border-primary/30 border-border-subtle bg-white hover:shadow-md"}`}
+            <div
+              class={`rounded-2xl border p-6 ${pkg.featured ? "border-2 border-primary shadow-lg" : "border-border-subtle bg-white"}`}
             >
               {pkg.featured && (
-                <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                  <span class="rounded-full bg-primary px-4 py-1 text-xs font-bold uppercase tracking-wider text-white shadow">
-                    {pkg.badge}
-                  </span>
-                </div>
+                <span class="mb-2 inline-block rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                  {pkg.badge}
+                </span>
               )}
-              <h3 class="font-heading text-xl font-bold text-heading">{pkg.name}</h3>
-              <div class="mt-2 flex items-baseline gap-1">
-                <span class="font-heading text-4xl font-extrabold text-primary">
+              <h3 class="font-heading text-lg font-bold text-heading">{pkg.name}</h3>
+              <div class="mt-1 flex items-baseline justify-center gap-1">
+                <span class="font-heading text-3xl font-extrabold text-primary">
                   ${pkg.price.toLocaleString()}
                 </span>
                 <span class="text-sm text-body">/mo</span>
               </div>
-              <div class="my-5 h-px bg-border-subtle" />
-              <ul class="flex-1 space-y-2.5 text-sm text-body">
-                {pkg.inclusions.map((f) => (
-                  <CheckListItem>{f}</CheckListItem>
-                ))}
-              </ul>
-              <a
-                href="/contact#book"
-                data-evt={`cta_pricing_${pkg.id}`}
-                class={`mt-8 block rounded-xl px-6 py-3 text-center text-sm font-semibold transition ${pkg.featured ? "bg-primary text-white shadow hover:bg-primary-dark" : "border-2 border-primary text-primary hover:bg-primary hover:text-white"}`}
-              >
-                Get Started
-              </a>
-            </article>
+            </div>
           ))
         }
       </div>
-      <p class="mt-8 text-center text-sm text-body">
-        Not sure which plan fits? <a
-          href="/contact#book"
-          class="font-semibold text-primary underline underline-offset-2 hover:text-primary-dark"
-          >Book a free 15-minute audit</a
-        > and we'll recommend the right starting point.
-      </p>
+      <a
+        href="/packages"
+        class="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-heading text-base font-bold text-white shadow transition hover:bg-primary-dark"
+      >
+        See Full Pricing &amp; What's Included
+        <svg
+          class="h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          viewBox="0 0 24 24"
+          aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
+        >
+      </a>
     </div>
   </section>
 
