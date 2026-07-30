@@ -2,9 +2,9 @@
 import Layout from "~/layouts/PageLayout.astro";
 
 export const title =
-  "Wheyland Electric Case Study — 3 Leads/Mo to 18 Leads in 3 Weeks | Lilos Growth";
+  "Wheyland Electric Case Study — 9x Website Leads, 10x Keywords | Lilos Growth";
 export const description =
-  "Wheyland Electric was averaging 3 web leads per month after 10 years with a legacy agency. We rebuilt their site and launched in late February 2026. First 3 weeks: 18 form submissions, 21 GBP calls, 50 ranked keywords.";
+  "Wheyland Electric was averaging 3-4 web form leads and 2-3 click-to-call leads per month after 10 years with a legacy agency. Five months after our rebuild: ~35 form leads/mo, ~28 click-to-call leads/mo, organic traffic up 909%, keywords ranked up 1,430%.";
 
 const metadata = { title, description };
 
@@ -12,9 +12,9 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   "@id": "https://lilosgrowth.com/results/wheyland-electric#article",
-  headline: "Wheyland Electric: From 3 Leads/Month to 18 Leads in 3 Weeks",
+  headline: "Wheyland Electric: 9x Website Leads and 909% More Organic Traffic",
   description:
-    "How Lilos Growth rebuilt Wheyland Electric’s website and local SEO from the ground up, generating 18 web leads in the first 3 weeks after a decade of stagnation with a legacy agency.",
+    "How Lilos Growth rebuilt Wheyland Electric's website, ran local SEO, and managed Google Business Profile — verified via Semrush, GA4, and Google Business Profile Performance data across the first five months.",
   author: { "@type": "Organization", name: "Lilos Growth", url: "https://lilosgrowth.com" },
   publisher: { "@id": "https://lilosgrowth.com/#org" },
   mainEntityOfPage: {
@@ -24,10 +24,12 @@ const articleSchema = {
 };
 
 const stats = [
-  { value: "+900%", label: "Keyword growth", sub: "5 → 50 ranked keywords" },
-  { value: "+643%", label: "Search impressions", sub: "1,114 → 8,277 in 28 days" },
-  { value: "+350%", label: "Web leads", sub: "3/mo avg → 18 in 3 weeks" },
-  { value: "3×", label: "GBP calls", sub: "~7 → 21 calls in March 2026" },
+  { value: "+909%", label: "Organic traffic", sub: "43 → 434 sessions · Semrush", tag: "Local SEO" },
+  { value: "+1,430%", label: "Keywords ranked", sub: "20 → 306 keywords · Semrush", tag: "Local SEO" },
+  { value: "~9×", label: "Website form leads", sub: "3-4/mo → ~35/mo · GA4", tag: "Leads" },
+  { value: "~10×", label: "Click-to-call leads", sub: "2-3/mo → ~28/mo · GA4", tag: "Leads" },
+  { value: "+224%", label: "GBP profile views", sub: "2,104 views, YoY · GBP", tag: "GBP" },
+  { value: "~6×", label: "GBP calls, sustained", sub: "~2/mo → ~12/mo · GBP", tag: "GBP" },
 ];
 
 const keywords = [
@@ -84,13 +86,14 @@ const cities = [
         >
       </div>
       <h1 class="mb-4 font-heading text-3xl font-extrabold leading-tight text-white md:text-5xl">
-        Wheyland Electric:<br class="hidden md:block" />3 leads/mo to 18 leads<br
+        Wheyland Electric:<br class="hidden md:block" />9x website leads,<br
           class="hidden md:block"
-        />in 3 weeks
+        />909% more traffic
       </h1>
       <p class="max-w-2xl text-base font-medium text-white/85 md:text-lg">
         A 10-year-old site managed by a legacy agency. Virtually no organic footprint. We rebuilt
-        from the ground up in late February 2026 — and the results showed up immediately.
+        from the ground up in late February 2026 — and five months later the growth held, across
+        organic traffic, Google Business Profile, and every lead channel we track.
       </p>
     </div>
   </section>
@@ -99,12 +102,15 @@ const cities = [
   <section class="border-b border-gray-100 bg-white py-12">
     <div class="mx-auto max-w-5xl px-4">
       <p class="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-body">
-        Verified results — first 28 days post-launch
+        Verified results — 5 months post-launch (Feb 28 – Jul 28, 2026)
       </p>
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-3">
         {
           stats.map((s) => (
             <div class="rounded-2xl border border-gray-100 bg-white p-5 text-center shadow-sm">
+              <span class="mb-2 inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
+                {s.tag}
+              </span>
               <div class="font-heading text-3xl font-extrabold text-primary md:text-4xl">
                 {s.value}
               </div>
@@ -122,7 +128,7 @@ const cities = [
     <div class="mx-auto max-w-3xl px-4">
       <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-body">The situation</p>
       <h2 class="mb-6 font-heading text-2xl font-bold text-heading md:text-3xl">
-        10 years. Same agency. 3 leads a month.
+        10 years. Same agency. A handful of leads a month.
       </h2>
       <div class="space-y-4 text-[15px] leading-relaxed text-body">
         <p>
@@ -134,8 +140,8 @@ const cities = [
         </p>
         <p>
           Their site had been managed by the same agency for a decade. It had minimal organic
-          visibility, virtually no local keyword coverage, and was averaging around 3 web form
-          submissions per month. GBP calls hovered around 6–8 per month.
+          visibility, virtually no local keyword coverage, and was generating 3-4 website form leads
+          and 2-3 click-to-call leads per month. GBP calls averaged around 2 per month.
         </p>
         <p>
           They came to Lilos Growth in February 2026 looking for a full rebuild and a real local SEO
@@ -145,11 +151,14 @@ const cities = [
 
       <div class="bg-cream my-8 border-l-4 border-primary py-5 pl-6 pr-4">
         <p class="font-heading text-base font-semibold leading-relaxed text-heading md:text-lg">
-          "The previous agency managed this site for 10 years and averaged 4 leads/month. The new
-          site launched in late February 2026 and generated 18 leads in its first 3 weeks."
+          "The previous agency had them at 3-4 web form leads and 2-3 click-to-call leads per month.
+          The new site launched in late February 2026 and generated 18 form submissions in its first
+          3 weeks — and five months later, form leads are averaging ~35/mo and click-to-call is
+          averaging ~28/mo."
         </p>
         <p class="mt-2 text-sm text-body">
-          — Verified via StaticForms submission data and Google Search Console
+          — Verified via Google Analytics 4 event tracking (click_to_call, form_submit) and Google
+          Business Profile Performance data
         </p>
       </div>
     </div>
@@ -166,15 +175,15 @@ const cities = [
         <div class="grid grid-cols-2">
           <div class="border-r border-gray-100 p-6">
             <div class="mb-4 text-xs font-semibold uppercase tracking-widest text-red-500">
-              Before — Feb 15 baseline
+              Before — pre-Feb 2026
             </div>
             {
               [
-                ["Web leads/mo", "3"],
-                ["GBP calls/mo", "~7"],
-                ["Keywords ranked", "5"],
-                ["Search impressions", "1,114"],
-                ["Avg. position", "#21.3"],
+                ["Website form leads/mo", "3-4"],
+                ["Click-to-call leads/mo", "2-3"],
+                ["GBP calls/mo", "~2"],
+                ["Organic traffic", "43"],
+                ["Keywords ranked", "20"],
                 ["Top-3 keywords", "1"],
               ].map(([metric, value]) => (
                 <div class="flex items-baseline justify-between border-b border-gray-50 py-2 last:border-0">
@@ -186,16 +195,16 @@ const cities = [
           </div>
           <div class="p-6">
             <div class="mb-4 text-xs font-semibold uppercase tracking-widest text-green-600">
-              After — first 28 days
+              After — 5 months (Jul 2026)
             </div>
             {
               [
-                ["Web leads/mo", "18 in 3 wks"],
-                ["GBP calls/mo", "21"],
-                ["Keywords ranked", "50"],
-                ["Search impressions", "8,277"],
-                ["Avg. position", "#14.2"],
-                ["Top-3 keywords", "5"],
+                ["Website form leads/mo", "~35"],
+                ["Click-to-call leads/mo", "~28"],
+                ["GBP calls/mo", "~12 sustained*"],
+                ["Organic traffic", "434"],
+                ["Keywords ranked", "306"],
+                ["Top-3 keywords", "29"],
               ].map(([metric, value]) => (
                 <div class="flex items-baseline justify-between border-b border-gray-50 py-2 last:border-0">
                   <span class="text-sm text-body">{metric}</span>
@@ -206,6 +215,10 @@ const cities = [
           </div>
         </div>
       </div>
+      <p class="mt-3 text-xs text-body">
+        * GBP calls spiked to 21 in the first month post-launch, then settled to a sustained ~12/mo
+        average over the following 4 months (60 total, Feb-Jun 2026).
+      </p>
     </div>
   </section>
 
@@ -213,11 +226,16 @@ const cities = [
   <section class="border-t border-gray-100 bg-white py-20">
     <div class="mx-auto max-w-3xl px-4">
       <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-body">
-        Top keywords — post launch
+        Keyword rankings
       </p>
-      <h2 class="mb-8 font-heading text-2xl font-bold text-heading md:text-3xl">
-        From 5 keywords to 50 in one month.
+      <h2 class="mb-4 font-heading text-2xl font-bold text-heading md:text-3xl">
+        From 20 keywords to 306 — 29 in the top 3.
       </h2>
+      <p class="mb-8 text-[15px] text-body">
+        Full breakdown, Semrush, Feb 28 → Jul 28, 2026: 29 keywords in the top 3 (up from 1), 38 in
+        positions 4-10, 63 in 11-20, 97 in 21-50, and 58 in 51-100. The list below is an early
+        keyword snapshot from the first month post-launch.
+      </p>
       <div class="space-y-2">
         {
           keywords.map((k) => (
@@ -232,7 +250,7 @@ const cities = [
           ))
         }
       </div>
-      <p class="mt-4 text-xs text-body">Source: Ahrefs position tracker. Snapshot: March 2026.</p>
+      <p class="mt-4 text-xs text-body">Early snapshot source: Ahrefs position tracker, March 2026. Aggregate totals above: Semrush, July 2026.</p>
     </div>
   </section>
 

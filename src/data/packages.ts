@@ -1,8 +1,8 @@
 export const clientStats = [
   {
-    stat: "613%",
+    stat: "+1,430%",
     label: "Keyword growth",
-    sub: "Wheyland Electric — 16 to 114 keywords in 90 days",
+    sub: "Wheyland Electric — 20 to 306 keywords in 5 months",
   },
   {
     stat: "3,400%",
@@ -10,9 +10,9 @@ export const clientStats = [
     sub: "Restoration client — 12 to 420 keywords in 12 months",
   },
   {
-    stat: "22",
+    stat: "29",
     label: "Top 3 Google rankings",
-    sub: "Wheyland Electric — from 1 at launch to 22 in 90 days",
+    sub: "Wheyland Electric — from 1 at launch to 29 in 5 months",
   },
 ];
 
@@ -23,14 +23,14 @@ export const caseStudies = [
     type: "Electrical Contractor · Carlsbad, CA",
     summary:
       "Full site build on Astro + Tailwind, local SEO retainer, GBP management. Started from near zero.",
-    timeframe: "90 days",
+    timeframe: "5 months",
     href: "/results/wheyland-electric",
     accentColor: "from-orange-500 to-orange-700",
     screenshot: "/images/results/wheyland.png",
     stats: [
-      { value: "613%", label: "Keyword growth", sub: "16 → 114" },
-      { value: "176", label: "Monthly organic visits", sub: "from 34" },
-      { value: "22", label: "Top 3 rankings", sub: "from 1" },
+      { value: "+1,430%", label: "Keyword growth", sub: "20 → 306" },
+      { value: "434", label: "Monthly organic visits", sub: "from 43" },
+      { value: "29", label: "Top 3 rankings", sub: "from 1" },
     ],
   },
   {
