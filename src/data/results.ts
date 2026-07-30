@@ -146,11 +146,27 @@ export const resultsCaseStudies: CaseStudy[] = [
       alt: "Tamarack Restoration website",
     },
     kpis: [
-      { label: "Maps top-3 keywords", value: "+5" },
-      { label: "page load time", value: "<1s" },
+      {
+        label: "keywords ranked",
+        value: "+2,184%",
+        sr: "twenty one hundred eighty four percent increase in keywords ranked",
+        category: "local-seo",
+      },
+      {
+        label: "organic traffic",
+        value: "+1,160%",
+        sr: "eleven hundred sixty percent increase in organic traffic",
+        category: "local-seo",
+      },
+      {
+        label: "organic leads",
+        value: "~15-20×",
+        sr: "fifteen to twenty times increase in organic leads",
+        category: "leads",
+      },
     ],
     blurb:
-      "Fast Astro build with service-area pages, GBP optimization, and local link building for water damage and mold remediation searches.",
+      "Fast Astro build with service-area pages, GBP optimization, and local link building for water damage and mold remediation searches. Started May 2025. Semrush: 19 → 434 keywords ranked (0 → 21 in the top 3), organic traffic 25 → 315 sessions/mo, plus branded search appearing for the first time (0 → 32) — people searching the company by name. Organic leads went from 1-2/mo to a sustained 25-30/mo, and these are high-ticket restoration jobs, not low-value form fills.",
     ctaText: "View approach",
     ctaHref: "/services/web-design",
   },
