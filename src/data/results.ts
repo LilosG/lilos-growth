@@ -17,6 +17,7 @@ export type KPI = {
   label: string;
   value: string;
   sr?: string;
+  category?: "local-seo" | "gbp" | "leads";
 };
 
 export type ServiceType = "website" | "gbp" | "local-seo";
@@ -238,15 +239,32 @@ export const resultsCaseStudies: CaseStudy[] = [
     },
     kpis: [
       {
-        label: "web leads — first 3 weeks",
-        value: "+350%",
-        sr: "three hundred fifty percent increase in web leads",
+        label: "organic traffic",
+        value: "+909%",
+        sr: "nine hundred nine percent increase in organic traffic",
+        category: "local-seo",
       },
-      { label: "GBP calls month one", value: "3×" },
-      { label: "keywords ranked", value: "+900%" },
+      {
+        label: "keywords ranked",
+        value: "+1,430%",
+        sr: "fourteen hundred thirty percent increase in keywords ranked",
+        category: "local-seo",
+      },
+      {
+        label: "website form leads",
+        value: "~9×",
+        sr: "approximately nine times increase in website form leads",
+        category: "leads",
+      },
+      {
+        label: "GBP profile views",
+        value: "+224%",
+        sr: "two hundred twenty four percent increase in GBP profile views",
+        category: "gbp",
+      },
     ],
     blurb:
-      "Full rebuild from scratch on Astro/Tailwind. 107 pages, 64 city × service money pages, 13 blog posts at launch. Previous agency managed their site for 10 years and averaged 4 leads/month. We delivered 18 leads in the first 3 weeks.",
+      "Full rebuild from scratch on Astro/Tailwind. 107 pages, 64 city × service money pages, 13 blog posts at launch. Previous agency had them at 3-4 web form leads/mo and 2-3 click-to-call leads/mo. Five months post-launch: ~35 form leads/mo and ~28 click-to-call leads/mo (GA4, May-Jun 2026 average), plus sustained GBP call growth.",
     ctaText: "Read the full case study",
     ctaHref: "/results/wheyland-electric",
   },
