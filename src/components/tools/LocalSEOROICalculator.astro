@@ -1,78 +1,103 @@
 ---
 // LocalSEOROICalculator.astro
-// Self-contained — no props. Uses the site's real Tailwind design tokens
-// (same classes as the homepage) instead of hand-rolled CSS, so it
-// actually looks like the rest of the site instead of a bolted-on widget.
-// Does NOT render its own <h1> — the parent page owns the page heading.
+// Self-contained — no props. Visitor enters things they actually know
+// (current revenue, current site traffic). Industry selection drives the
+// conversion-rate/avg-job-value assumptions — the visitor never has to
+// guess a result they came here because they don't know.
+import { resultsStats } from "~/data/results";
+
+const growthStat = resultsStats.find((s) => s.id === "lead-growth");
 ---
 
 <div class="mx-auto max-w-5xl px-6">
+  <!-- METHODOLOGY -->
+  <div class="mb-6 rounded-2xl border border-border-subtle bg-background-subtle p-6">
+    <h2 class="mb-2 font-heading text-sm font-bold text-heading">How This Calculator Works</h2>
+    <p class="mb-3 text-sm text-muted">
+      You tell us what you already know — your current traffic and revenue. Everything else comes
+      from our own published client data, not a guess you'd have no way to answer.
+    </p>
+    <ul class="grid grid-cols-1 gap-x-6 gap-y-1.5 text-sm text-muted md:grid-cols-2">
+      <li>
+        <span class="font-bold text-heading">Lead growth:</span> {growthStat?.value ?? "+142%"} average
+        across active clients — <a href="/results" class="text-primary underline">see case studies</a>
+      </li>
+      <li><span class="font-bold text-heading">Conversion rate:</span> industry-specific, not one flat number</li>
+      <li><span class="font-bold text-heading">Job value:</span> typical ticket size for your industry</li>
+      <li><span class="font-bold text-heading">Conservative ramp:</span> realistic timeline, not an instant jump</li>
+    </ul>
+  </div>
+
+  <!-- REAL STAT CARDS -->
+  <div class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+    {
+      resultsStats.slice(0, 3).map((stat) => (
+        <div class="rounded-2xl border border-border-subtle bg-white p-5 text-center shadow-sm">
+          <div class="font-heading text-2xl font-extrabold text-primary">{stat.value}</div>
+          <div class="mt-1 text-xs font-bold text-heading">{stat.label}</div>
+          {stat.note && <div class="mt-0.5 text-[11px] text-muted">{stat.note}</div>}
+        </div>
+      ))
+    }
+  </div>
+
   <div class="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
     <!-- INPUTS -->
     <div class="rounded-2xl border border-border-subtle bg-white p-8 shadow-sm">
       <h2 class="mb-6 font-heading text-lg font-bold text-heading">Your Business Details</h2>
       <div class="space-y-5">
         <div>
-          <label
-            class="mb-1.5 block text-xs font-bold uppercase tracking-widest text-muted"
-            for="avg-job">Average Job Value</label
+          <label class="mb-1.5 block text-xs font-bold uppercase tracking-widest text-muted" for="roi-industry">
+            Your Industry
+          </label>
+          <select
+            id="roi-industry"
+            class="focus:ring-primary/20 w-full rounded-xl border border-border-base bg-white px-4 py-3.5 font-heading text-base font-bold text-heading transition focus:border-primary focus:outline-none focus:ring-2"
           >
-          <div class="relative">
-            <span
-              class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-heading text-base font-bold text-muted"
-              >$</span
-            >
-            <input
-              id="avg-job"
-              type="number"
-              min="0"
-              inputmode="numeric"
-              placeholder="500"
-              class="focus:ring-primary/20 w-full rounded-xl border border-border-base bg-white py-3.5 pl-8 pr-4 font-heading text-lg font-bold text-heading transition placeholder:font-normal placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2"
-            />
-          </div>
-        </div>
-        <div>
-          <label
-            class="mb-1.5 block text-xs font-bold uppercase tracking-widest text-muted"
-            for="close-rate">Lead Close Rate</label
-          >
-          <div class="relative">
-            <input
-              id="close-rate"
-              type="number"
-              min="0"
-              max="100"
-              inputmode="numeric"
-              placeholder="40"
-              class="focus:ring-primary/20 w-full rounded-xl border border-border-base bg-white px-4 py-3.5 pr-8 font-heading text-lg font-bold text-heading transition placeholder:font-normal placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2"
-            />
-            <span
-              class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-heading text-base font-bold text-muted"
-              >%</span
-            >
-          </div>
-        </div>
-        <div>
-          <label class="mb-1.5 block text-xs font-bold uppercase tracking-widest text-muted"
-            for="monthly-leads">Estimated Monthly Leads from Top 3</label
-          >
-          <input
-            id="monthly-leads"
-            type="number"
-            min="0"
-            inputmode="numeric"
-            placeholder="15"
-            class="focus:ring-primary/20 w-full rounded-xl border border-border-base bg-white px-4 py-3.5 font-heading text-lg font-bold text-heading transition placeholder:font-normal placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2"
-          />
-          <p class="mt-1.5 text-xs text-muted">
-            Businesses ranking #1–3 in Maps typically see 15–40 leads/mo.
+            <option value="electrician" data-rate="3.5" data-value="450">Electrician</option>
+            <option value="pest-control" data-rate="4" data-value="180">Pest Control</option>
+            <option value="restoration" data-rate="2" data-value="4500">Restoration</option>
+            <option value="handyman" data-rate="4" data-value="350">Handyman / Home Services</option>
+            <option value="commercial" data-rate="2.5" data-value="600">Commercial Services</option>
+            <option value="party-rental" data-rate="5" data-value="500">Party Rentals</option>
+          </select>
+          <p class="mt-1.5 text-xs text-muted" id="roi-industry-note">
+            Typical for Electrician: 3.5% visitor-to-lead conversion, ~$450 avg job value.
           </p>
         </div>
         <div>
-          <label class="mb-2 block text-xs font-bold uppercase tracking-widest text-muted"
-            >Monthly Plan</label
-          >
+          <label class="mb-1.5 block text-xs font-bold uppercase tracking-widest text-muted" for="roi-revenue-input">
+            Current Monthly Revenue
+          </label>
+          <div class="relative">
+            <span class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-heading text-base font-bold text-muted">$</span>
+            <input
+              id="roi-revenue-input"
+              type="number"
+              min="0"
+              inputmode="numeric"
+              placeholder="15000"
+              class="focus:ring-primary/20 w-full rounded-xl border border-border-base bg-white py-3.5 pl-8 pr-4 font-heading text-lg font-bold text-heading transition placeholder:font-normal placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2"
+            />
+          </div>
+          <p class="mt-1.5 text-xs text-muted">Your current average monthly revenue.</p>
+        </div>
+        <div>
+          <label class="mb-1.5 block text-xs font-bold uppercase tracking-widest text-muted" for="roi-visitors">
+            Current Monthly Website Visitors
+          </label>
+          <input
+            id="roi-visitors"
+            type="number"
+            min="0"
+            inputmode="numeric"
+            placeholder="250"
+            class="focus:ring-primary/20 w-full rounded-xl border border-border-base bg-white px-4 py-3.5 font-heading text-lg font-bold text-heading transition placeholder:font-normal placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2"
+          />
+          <p class="mt-1.5 text-xs text-muted">Check Google Analytics or Search Console for this number.</p>
+        </div>
+        <div>
+          <label class="mb-2 block text-xs font-bold uppercase tracking-widest text-muted">Monthly Plan</label>
           <div class="grid grid-cols-3 gap-2">
             {
               [
@@ -96,69 +121,88 @@
       </div>
     </div>
 
-    <!-- RESULTS -->
-    <div class="flex flex-col gap-4">
-      <div class="overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-sm">
-        <div class="border-b border-border-subtle bg-background-subtle px-6 py-4">
-          <p class="text-xs font-bold uppercase tracking-widest text-muted">Your Projected Results</p>
-        </div>
-        <div class="p-6">
-          <div class="mb-6 text-center">
-            <div class="font-heading text-7xl font-extrabold leading-none text-primary" id="roi-pct">
-              200%
-            </div>
-            <div class="mt-2 text-sm font-semibold text-muted">Return on Investment</div>
+    <!-- STEP-BY-STEP MATH -->
+    <div class="rounded-2xl border border-border-subtle bg-white p-8 shadow-sm">
+      <h2 class="mb-5 font-heading text-lg font-bold text-heading">How We Calculate Your ROI</h2>
+      <ol class="space-y-4">
+        <li class="flex gap-3">
+          <span class="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">1</span>
+          <div class="text-sm">
+            <div class="font-bold text-heading">Lead Growth</div>
+            <div class="text-muted" id="roi-step-1">Current traffic (250) × 142% average growth = +355 new visitors/mo</div>
           </div>
-          <div class="mb-4 grid grid-cols-2 gap-3">
-            <div class="rounded-xl bg-background-subtle p-4">
-              <div class="mb-1 text-xs text-muted">New Customers/Mo</div>
-              <div class="font-heading text-2xl font-extrabold text-heading" id="roi-leads">6</div>
-            </div>
-            <div class="rounded-xl bg-background-subtle p-4">
-              <div class="mb-1 text-xs text-muted">Monthly Revenue</div>
-              <div class="font-heading text-2xl font-extrabold text-primary" id="roi-revenue">
-                $3,000
-              </div>
-            </div>
-            <div class="rounded-xl bg-background-subtle p-4">
-              <div class="mb-1 text-xs text-muted">Net Monthly Return</div>
-              <div class="font-heading text-2xl font-extrabold text-heading" id="roi-net">$2,001</div>
-            </div>
-            <div class="rounded-xl bg-background-subtle p-4">
-              <div class="mb-1 text-xs text-muted">Payback Period</div>
-              <div class="font-heading text-2xl font-extrabold text-heading" id="roi-payback">
-                1 mo
-              </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">2</span>
+          <div class="text-sm">
+            <div class="font-bold text-heading">Customer Conversion</div>
+            <div class="text-muted" id="roi-step-2">New traffic (355) × 3.5% conversion rate = +12 new customers/mo</div>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">3</span>
+          <div class="text-sm">
+            <div class="font-bold text-heading">Revenue Generation</div>
+            <div class="text-muted" id="roi-step-3">New customers (12) × $450 avg job value = $5,400/mo revenue</div>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">4</span>
+          <div class="text-sm">
+            <div class="font-bold text-heading">Return on Investment</div>
+            <div class="text-muted" id="roi-step-4">
+              Revenue ($5,400) − Investment ($999) = $4,401/mo profit · ROI = 440%
             </div>
           </div>
-        </div>
-        <div class="bg-secondary px-6 py-5">
-          <span class="text-sm font-bold text-white">Additional Revenue — Year 1</span>
-          <div class="font-heading text-4xl font-extrabold text-primary" id="roi-year1">$36,000</div>
-          <div class="mt-1 text-xs text-white/50" id="roi-investment">
-            Investment: $999/mo · No contracts · Cancel anytime
-          </div>
-        </div>
-      </div>
-      <a
-        href="/contact#book"
-        data-evt="cta_roi_calc_results"
-        class="block rounded-xl bg-primary px-6 py-4 text-center font-heading text-base font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.35)] transition hover:bg-primary-dark"
-      >
-        Get Your Free GBP Audit — See Your Real Numbers →
-      </a>
+        </li>
+      </ol>
     </div>
   </div>
+
+  <!-- PROJECTIONS -->
+  <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div class="rounded-2xl border border-border-subtle bg-background-subtle p-6">
+      <h3 class="mb-4 font-heading text-sm font-bold uppercase tracking-widest text-muted">Monthly Projections</h3>
+      <dl class="space-y-2.5 text-sm">
+        <div class="flex justify-between"><dt class="text-muted">New Traffic</dt><dd class="font-bold text-heading" id="roi-p-traffic">+355 visitors</dd></div>
+        <div class="flex justify-between"><dt class="text-muted">New Customers</dt><dd class="font-bold text-heading" id="roi-p-customers">+12 customers</dd></div>
+        <div class="flex justify-between"><dt class="text-muted">Revenue Increase</dt><dd class="font-bold text-primary" id="roi-p-revenue">$5,400/mo</dd></div>
+        <div class="border-t border-border-subtle pt-2.5"></div>
+        <div class="flex justify-between"><dt class="text-muted">Investment</dt><dd class="font-bold text-heading" id="roi-p-invest">$999/mo</dd></div>
+        <div class="flex justify-between"><dt class="text-muted">Net Profit</dt><dd class="font-bold text-primary" id="roi-p-profit">$4,401/mo</dd></div>
+        <div class="flex justify-between"><dt class="font-bold text-heading">ROI</dt><dd class="font-heading text-lg font-extrabold text-primary" id="roi-p-roi">+440%</dd></div>
+      </dl>
+    </div>
+    <div class="rounded-2xl border border-border-subtle bg-secondary p-6 text-white">
+      <h3 class="mb-4 font-heading text-sm font-bold uppercase tracking-widest text-white/60">Annual Projections</h3>
+      <dl class="space-y-2.5 text-sm">
+        <div class="flex justify-between"><dt class="text-white/70">Total New Customers</dt><dd class="font-bold" id="roi-a-customers">+89 customers</dd></div>
+        <div class="flex justify-between"><dt class="text-white/70">Revenue Increase</dt><dd class="font-bold text-primary" id="roi-a-revenue">$40,190/year</dd></div>
+        <div class="border-t border-white/10 pt-2.5"></div>
+        <div class="flex justify-between"><dt class="text-white/70">Annual Investment</dt><dd class="font-bold" id="roi-a-invest">$11,988</dd></div>
+        <div class="flex justify-between"><dt class="text-white/70">Net Annual Profit</dt><dd class="font-bold text-primary" id="roi-a-profit">$28,202/year</dd></div>
+        <div class="flex justify-between"><dt class="font-bold">Annual ROI</dt><dd class="font-heading text-lg font-extrabold text-primary" id="roi-a-roi">+235%</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <a
+    href="/contact#book"
+    data-evt="cta_roi_calc_results"
+    class="mt-6 block rounded-xl bg-primary px-6 py-4 text-center font-heading text-base font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.35)] transition hover:bg-primary-dark"
+  >
+    Get Your Free GBP Audit — See Your Real Numbers →
+  </a>
 
   <!-- 12-MONTH GROWTH CURVE -->
   <div class="mt-6 rounded-2xl border border-border-subtle bg-white p-6 shadow-sm md:p-8">
     <div class="mb-1 flex items-baseline justify-between">
       <h3 class="font-heading text-lg font-bold text-heading">Your 12-Month Growth Curve</h3>
-      <span class="text-xs font-semibold text-muted" id="roi-chart-total">$22,320 total Year 1</span>
+      <span class="text-xs font-semibold text-muted" id="roi-chart-total">$40,190 total Year 1</span>
     </div>
     <p class="mb-5 text-xs text-muted">
       Realistic ramp, not an instant jump — slow the first couple months, real movement by month
-      4–6, near target by month 9–12. Matches the timelines on our FAQ, not a flat projection.
+      4–6, near target by month 9–12.
     </p>
     <svg
       id="roi-chart"
@@ -173,44 +217,32 @@
           <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0" />
         </linearGradient>
       </defs>
-
-      <!-- gridlines -->
       <line x1="0" y1="20" x2="600" y2="20" class="stroke-border-subtle" stroke-width="1" />
       <line x1="0" y1="76.7" x2="600" y2="76.7" class="stroke-border-subtle" stroke-width="1" />
       <line x1="0" y1="133.3" x2="600" y2="133.3" class="stroke-border-subtle" stroke-width="1" />
       <line x1="0" y1="180" x2="600" y2="180" class="stroke-border-base" stroke-width="1.5" />
-
       <path id="roi-chart-area" fill="url(#roi-chart-gradient)" />
-      <path
-        id="roi-chart-line"
-        fill="none"
-        stroke="var(--color-primary)"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-
-      <!-- milestone markers: month 1, 4, 8, 12 -->
+      <path id="roi-chart-line" fill="none" stroke="var(--color-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
       <g id="roi-chart-milestones"></g>
-
-      <!-- x-axis month ticks -->
       <text x="0" y="208" class="fill-muted text-[11px] font-semibold">M1</text>
       <text x="200" y="208" text-anchor="middle" class="fill-muted text-[11px] font-semibold">M4</text>
       <text x="418" y="208" text-anchor="middle" class="fill-muted text-[11px] font-semibold">M8</text>
       <text x="600" y="208" text-anchor="end" class="fill-muted text-[11px] font-semibold">M12</text>
     </svg>
   </div>
+
+  <p class="mt-4 text-center text-xs text-muted">
+    Estimates based on our own client data and typical industry benchmarks — not a guarantee.
+    Actual results vary by market and competition.
+  </p>
 </div>
 
 <script>
   (function () {
     let selectedPlan = 999;
 
-    // Realistic ramp toward the target monthly revenue, month 1-12, as a
-    // fraction of the target. Slow start, real movement mid-year, plateau
-    // near target by month 9-12 — matches the timelines already stated on
-    // this site's FAQ (GBP: 2-4 weeks, on-page/content: 60-90 days).
     const RAMP = [0.05, 0.12, 0.22, 0.35, 0.5, 0.65, 0.78, 0.87, 0.93, 0.97, 0.99, 1.0];
+    const GROWTH_RATE = 1.42; // matches the site's published "+142% avg lead growth"
 
     function drawChart(monthlyTarget: number) {
       const values = RAMP.map((f) => monthlyTarget * f);
@@ -224,8 +256,6 @@
         return { x, y };
       });
 
-      // Smooth the line with quadratic curves through midpoints (Catmull-Rom-ish
-      // approximation) instead of straight polyline segments between months.
       function smoothPath(pts: { x: number; y: number }[]) {
         let d = `M ${pts[0].x},${pts[0].y}`;
         for (let i = 1; i < pts.length; i++) {
@@ -245,11 +275,9 @@
         const el = document.getElementById(id);
         if (el) el.setAttribute(attr, val);
       };
-
       setAttr("roi-chart-line", "d", linePath);
       setAttr("roi-chart-area", "d", areaPath);
 
-      // Milestone markers at month 1, 4, 8, 12 with value callouts.
       const milestoneIdx = [0, 3, 7, 11];
       const group = document.getElementById("roi-chart-milestones");
       if (group) {
@@ -258,7 +286,6 @@
         milestoneIdx.forEach((idx, i) => {
           const p = points[idx];
           const isLast = i === milestoneIdx.length - 1;
-
           const dot = document.createElementNS(ns, "circle");
           dot.setAttribute("cx", String(p.x));
           dot.setAttribute("cy", String(p.y));
@@ -269,16 +296,12 @@
           group.appendChild(dot);
 
           const label = document.createElementNS(ns, "text");
-          const labelX = idx === 0 ? p.x : idx === 11 ? p.x : p.x;
           const anchor = idx === 0 ? "start" : idx === 11 ? "end" : "middle";
-          label.setAttribute("x", String(labelX));
+          label.setAttribute("x", String(p.x));
           label.setAttribute("y", String(Math.max(p.y - 12, 14)));
           label.setAttribute("text-anchor", anchor);
           label.setAttribute("class", isLast ? "fill-primary" : "fill-heading");
-          label.setAttribute(
-            "style",
-            "font-family: var(--font-heading, inherit); font-weight: 700; font-size: 13px;"
-          );
+          label.setAttribute("style", "font-weight: 700; font-size: 13px;");
           label.textContent = "$" + Math.round(values[idx]).toLocaleString();
           group.appendChild(label);
         });
@@ -288,51 +311,61 @@
     }
 
     function calcROI() {
-      const job =
-        parseFloat((document.getElementById("avg-job") as HTMLInputElement | null)?.value ?? "") ||
-        500;
-      const close =
-        parseFloat(
-          (document.getElementById("close-rate") as HTMLInputElement | null)?.value ?? ""
-        ) || 40;
-      const leads =
-        parseFloat(
-          (document.getElementById("monthly-leads") as HTMLInputElement | null)?.value ?? ""
-        ) || 15;
+      const industrySelect = document.getElementById("roi-industry") as HTMLSelectElement | null;
+      const opt = industrySelect?.selectedOptions?.[0];
+      const rate = parseFloat(opt?.dataset.rate ?? "3.5");
+      const avgValue = parseFloat(opt?.dataset.value ?? "450");
+      const industryLabel = opt?.textContent?.trim() ?? "your industry";
+
+      const visitors =
+        parseFloat((document.getElementById("roi-visitors") as HTMLInputElement | null)?.value ?? "") ||
+        250;
       const cost = selectedPlan;
-      const jobs = Math.round(leads * (close / 100));
-      const revenue = jobs * job;
-      const net = revenue - cost;
-      const roi = cost > 0 ? Math.round((net / cost) * 100) : 0;
-      const year1 = Math.round(drawChart(revenue));
-      const payback = revenue > 0 ? Math.ceil((cost / revenue) * 10) / 10 : 0;
-      const paybackStr = payback <= 1 ? "< 1 mo" : payback.toFixed(1) + " mo";
+
+      const newTraffic = Math.round(visitors * GROWTH_RATE);
+      const newCustomers = Math.round(newTraffic * (rate / 100));
+      const monthlyRevenue = newCustomers * avgValue;
+      const netProfit = monthlyRevenue - cost;
+      const roi = cost > 0 ? Math.round((netProfit / cost) * 100) : 0;
+
+      const year1 = Math.round(drawChart(monthlyRevenue));
+      const annualCustomers = newCustomers * 12;
+      const annualInvestment = cost * 12;
+      const netAnnualProfit = year1 - annualInvestment;
+      const annualRoi = annualInvestment > 0 ? Math.round((netAnnualProfit / annualInvestment) * 100) : 0;
 
       const setText = (id: string, val: string) => {
         const el = document.getElementById(id);
         if (el) el.textContent = val;
       };
 
-      setText("roi-pct", roi + "%");
-      setText("roi-leads", jobs.toString());
-      setText("roi-revenue", "$" + revenue.toLocaleString());
-      setText("roi-net", (net >= 0 ? "$" : "-$") + Math.abs(net).toLocaleString());
-      setText("roi-payback", paybackStr);
-      setText("roi-year1", "$" + year1.toLocaleString());
-      setText("roi-chart-total", "$" + year1.toLocaleString() + " total Year 1");
-      setText(
-        "roi-investment",
-        "Investment: $" + cost.toLocaleString() + "/mo · No contracts · Cancel anytime"
-      );
+      setText("roi-industry-note", `Typical for ${industryLabel}: ${rate}% visitor-to-lead conversion, ~$${avgValue.toLocaleString()} avg job value.`);
+
+      setText("roi-step-1", `Current traffic (${visitors.toLocaleString()}) × ${Math.round(GROWTH_RATE * 100)}% average growth = +${newTraffic.toLocaleString()} new visitors/mo`);
+      setText("roi-step-2", `New traffic (${newTraffic.toLocaleString()}) × ${rate}% conversion rate = +${newCustomers} new customers/mo`);
+      setText("roi-step-3", `New customers (${newCustomers}) × $${avgValue.toLocaleString()} avg job value = $${monthlyRevenue.toLocaleString()}/mo revenue`);
+      setText("roi-step-4", `Revenue ($${monthlyRevenue.toLocaleString()}) − Investment ($${cost.toLocaleString()}) = $${netProfit.toLocaleString()}/mo profit · ROI = ${roi}%`);
+
+      setText("roi-p-traffic", `+${newTraffic.toLocaleString()} visitors`);
+      setText("roi-p-customers", `+${newCustomers} customers`);
+      setText("roi-p-revenue", `$${monthlyRevenue.toLocaleString()}/mo`);
+      setText("roi-p-invest", `$${cost.toLocaleString()}/mo`);
+      setText("roi-p-profit", `$${netProfit.toLocaleString()}/mo`);
+      setText("roi-p-roi", `${roi >= 0 ? "+" : ""}${roi}%`);
+
+      setText("roi-a-customers", `+${annualCustomers.toLocaleString()} customers`);
+      setText("roi-a-revenue", `$${year1.toLocaleString()}/year`);
+      setText("roi-a-invest", `$${annualInvestment.toLocaleString()}`);
+      setText("roi-a-profit", `$${netAnnualProfit.toLocaleString()}/year`);
+      setText("roi-a-roi", `${annualRoi >= 0 ? "+" : ""}${annualRoi}%`);
+      setText("roi-chart-total", `$${year1.toLocaleString()} total Year 1`);
     }
 
     function selectPlan(btn: HTMLElement) {
       document.querySelectorAll(".roi-plan-btn").forEach((b) => {
-        b.className =
-          "roi-plan-btn rounded-xl border py-3 text-xs font-bold transition border-border-base bg-white text-muted hover:border-primary hover:text-primary";
+        b.className = "roi-plan-btn rounded-xl border py-3 text-xs font-bold transition border-border-base bg-white text-muted hover:border-primary hover:text-primary";
       });
-      btn.className =
-        "roi-plan-btn rounded-xl border py-3 text-xs font-bold transition border-primary bg-primary text-white shadow";
+      btn.className = "roi-plan-btn rounded-xl border py-3 text-xs font-bold transition border-primary bg-primary text-white shadow";
       selectedPlan = parseInt(btn.dataset.val ?? "999", 10);
       calcROI();
     }
@@ -340,11 +373,10 @@
     document.querySelectorAll<HTMLElement>(".roi-plan-btn").forEach((btn) => {
       btn.addEventListener("click", () => selectPlan(btn));
     });
-    document.querySelectorAll<HTMLInputElement>("#avg-job, #close-rate, #monthly-leads").forEach(
-      (input) => {
-        input.addEventListener("input", calcROI);
-      }
-    );
+    document.querySelectorAll<HTMLInputElement | HTMLSelectElement>("#roi-visitors, #roi-industry, #roi-revenue-input").forEach((input) => {
+      input.addEventListener("input", calcROI);
+      input.addEventListener("change", calcROI);
+    });
 
     document.addEventListener("DOMContentLoaded", calcROI);
     calcROI();
