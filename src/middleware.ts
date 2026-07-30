@@ -1,25 +1,15 @@
 import { defineMiddleware } from "astro:middleware";
 
-const NOINDEX_PATHS: string[] = [
-  "/offers/local-seo",
-  "/offers/local-seo-locked",
-
-  // Keep offline route if used by PWA/service worker, but noindex it.
-  "/offline",
-];
-
-// If these are truly unused, we will also remove the routes entirely below.
-// Header-based noindex is still helpful while they exist.
-const NOINDEX_PREFIXES: string[] = [
-  "/cards-preview",
-  "/plans-preview",
-  "/index-refactored",
-  "/results-refactored",
-];
+// Only /offline remains here -- the old /offers/* promo landing pages
+// and /cards-preview, /plans-preview, /index-refactored,
+// /results-refactored routes this used to noindex have all been
+// deleted; they were confirmed orphaned (no internal links, no
+// consumers) and removed entirely rather than left as dead routes
+// with a noindex header.
+const NOINDEX_PATHS: string[] = ["/offline"];
 
 function shouldNoindex(pathname: string) {
-  if (NOINDEX_PATHS.includes(pathname)) return true;
-  return NOINDEX_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"));
+  return NOINDEX_PATHS.includes(pathname);
 }
 
 export const onRequest = defineMiddleware(async (context, next) => {
