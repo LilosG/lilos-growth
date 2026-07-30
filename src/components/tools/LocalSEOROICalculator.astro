@@ -149,11 +149,94 @@
       </a>
     </div>
   </div>
+
+  <!-- 12-MONTH GROWTH CURVE -->
+  <div class="mt-6 rounded-2xl border border-border-subtle bg-white p-6 shadow-sm md:p-8">
+    <div class="mb-1 flex items-baseline justify-between">
+      <h3 class="font-heading text-lg font-bold text-heading">Your 12-Month Growth Curve</h3>
+      <span class="text-xs font-semibold text-muted" id="roi-chart-total">$22,320 total Year 1</span>
+    </div>
+    <p class="mb-5 text-xs text-muted">
+      Realistic ramp, not an instant jump — slow the first couple months, real movement by month
+      4–6, near target by month 9–12. Matches the timelines on our FAQ, not a flat projection.
+    </p>
+    <svg
+      id="roi-chart"
+      viewBox="0 0 600 200"
+      class="h-auto w-full"
+      preserveAspectRatio="none"
+      role="img"
+      aria-label="Projected monthly revenue ramp over 12 months"
+    >
+      <line x1="0" y1="180" x2="600" y2="180" class="stroke-border-subtle" stroke-width="2" />
+      <path id="roi-chart-area" fill="var(--color-primary)" fill-opacity="0.08" />
+      <path
+        id="roi-chart-line"
+        fill="none"
+        stroke="var(--color-primary)"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <circle id="roi-chart-dot-first" r="4" class="fill-white" stroke="var(--color-primary)" stroke-width="2" />
+      <circle id="roi-chart-dot-last" r="4" fill="var(--color-primary)" />
+    </svg>
+    <div class="mt-2 flex justify-between text-xs font-semibold text-muted">
+      <span>Month 1 · <span id="roi-chart-m1">$150</span>/mo</span>
+      <span>Month 12 · <span id="roi-chart-m12" class="text-primary">$3,000</span>/mo</span>
+    </div>
+  </div>
 </div>
 
 <script>
   (function () {
     let selectedPlan = 999;
+
+    // Realistic ramp toward the target monthly revenue, month 1-12, as a
+    // fraction of the target. Slow start, real movement mid-year, plateau
+    // near target by month 9-12 — matches the timelines already stated on
+    // this site's FAQ (GBP: 2-4 weeks, on-page/content: 60-90 days).
+    const RAMP = [0.05, 0.12, 0.22, 0.35, 0.5, 0.65, 0.78, 0.87, 0.93, 0.97, 0.99, 1.0];
+
+    function drawChart(monthlyTarget: number) {
+      const values = RAMP.map((f) => monthlyTarget * f);
+      const max = Math.max(monthlyTarget, 1);
+      const w = 600;
+      const baseline = 180;
+      const top = 20;
+      const points = values.map((v, i) => {
+        const x = (i / (values.length - 1)) * w;
+        const y = baseline - (v / max) * (baseline - top);
+        return { x, y };
+      });
+
+      const linePath = points.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ");
+      const areaPath =
+        `M0,${baseline} L` +
+        points.map((p) => p.x + "," + p.y).join(" L") +
+        ` L${w},${baseline} Z`;
+
+      const setAttr = (id: string, attr: string, val: string) => {
+        const el = document.getElementById(id);
+        if (el) el.setAttribute(attr, val);
+      };
+
+      setAttr("roi-chart-line", "d", linePath);
+      setAttr("roi-chart-area", "d", areaPath);
+      setAttr("roi-chart-dot-first", "cx", String(points[0].x));
+      setAttr("roi-chart-dot-first", "cy", String(points[0].y));
+      setAttr("roi-chart-dot-last", "cx", String(points[points.length - 1].x));
+      setAttr("roi-chart-dot-last", "cy", String(points[points.length - 1].y));
+
+      const setText = (id: string, val: string) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+      };
+      setText("roi-chart-m1", "$" + Math.round(values[0]).toLocaleString());
+      setText("roi-chart-m12", "$" + Math.round(values[values.length - 1]).toLocaleString());
+
+      return values.reduce((sum, v) => sum + v, 0);
+    }
 
     function calcROI() {
       const job =
@@ -172,7 +255,7 @@
       const revenue = jobs * job;
       const net = revenue - cost;
       const roi = cost > 0 ? Math.round((net / cost) * 100) : 0;
-      const year1 = revenue * 12;
+      const year1 = Math.round(drawChart(revenue));
       const payback = revenue > 0 ? Math.ceil((cost / revenue) * 10) / 10 : 0;
       const paybackStr = payback <= 1 ? "< 1 mo" : payback.toFixed(1) + " mo";
 
@@ -187,6 +270,7 @@
       setText("roi-net", (net >= 0 ? "$" : "-$") + Math.abs(net).toLocaleString());
       setText("roi-payback", paybackStr);
       setText("roi-year1", "$" + year1.toLocaleString());
+      setText("roi-chart-total", "$" + year1.toLocaleString() + " total Year 1");
       setText(
         "roi-investment",
         "Investment: $" + cost.toLocaleString() + "/mo · No contracts · Cancel anytime"
