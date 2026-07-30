@@ -6,6 +6,7 @@ import Card from "~/components/ui/Card.astro";
 import PricingCard from "~/components/sections/PricingCard.astro";
 import ProcessStep from "~/components/sections/ProcessStep.astro";
 import { Icon } from "astro-icon/components";
+import { seoTiers } from "~/data/packages";
 
 export const title = "Local SEO Services for Home Service Businesses";
 export const description =
@@ -70,7 +71,7 @@ const faqs = [
   {
     question: "Will I get reports and strategy time?",
     answer:
-      "Every plan includes transparent monthly reporting plus scheduled strategy calls. Foundation and Growth include monthly calls; Authority includes bi-weekly check-ins.",
+      "Every plan includes transparent monthly reporting plus scheduled strategy calls. SEO Local and SEO Growth include monthly calls; SEO Authority includes bi-weekly check-ins.",
   },
 ];
 ---
@@ -167,8 +168,9 @@ const faqs = [
         What You Get with Local SEO
       </h2>
       <p class="mb-6 text-base text-body">
-        A practical, repeatable system to improve local visibility and convert more searches into
-        booked jobs.
+        A practical, repeatable system to turn local searches into booked jobs — built for Google,
+        Maps, and AI answer engines like AI Overviews and ChatGPT Search, not just classic blue
+        links.
       </p>
       <div class="flex flex-wrap justify-center gap-3">
         {
@@ -211,69 +213,26 @@ const faqs = [
       </p>
 
       <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-3">
-        <!-- Foundation -->
-        <PricingCard
-          title="Foundation"
-          price="$599"
-          period="mo"
-          badge="Single Location"
-          features={[
-            "Keyword research & on-page technical fixes (titles, metas, H1-H2, internal linking, schema basics)",
-            "<strong>Up to 5</strong> new/optimized service or location pages per month",
-            "<strong>Up to 5</strong> blog posts per month (≈750–1,000 words each)",
-            "Citations: <strong>10–20</strong> initial, then <strong>5–10/mo</strong> ongoing",
-            "Internal linking & titles/metas refresh as pages are added",
-            "Monthly performance report + <strong>30-min</strong> strategy call",
-            "<small>No rollovers.</small>",
-          ]}
-          ctaText="Get Started"
-          ctaHref="#contact"
-        />
-
-        <!-- Growth -->
-        <PricingCard
-          title="Growth"
-          price="$999"
-          period="mo"
-          badge="Includes Foundation"
-          featured={true}
-          features={[
-            "<strong>Up to 10</strong> new/optimized service or location pages per month",
-            "<strong>Up to 10</strong> blog posts per month",
-            "<strong>2–4</strong> local backlinks per month (association, partner, sponsor, or guest)",
-            "CWV/schema/crawl priority; ongoing citations maintenance",
-            "Quarterly heatmap & competitor review",
-            "Monthly report + <strong>45-min</strong> strategy call",
-            "<small>No rollovers.</small>",
-          ]}
-          ctaText="Choose Growth"
-          ctaHref="#contact"
-        />
-
-        <!-- Pro -->
-        <PricingCard
-          title="Authority"
-          price="$1,499"
-          period="mo"
-          badge="On Request"
-          features={[
-            "Includes everything in Growth",
-            "<strong>Up to 20</strong> new/optimized service or location pages per month",
-            "<strong>Up to 10</strong> blog posts per month",
-            "<strong>4–6</strong> local backlinks per month",
-            "Conversion testing on top pages (CRO experiments)",
-            "Bi-weekly check-ins with your strategist",
-            "<small>No rollovers.</small>",
-          ]}
-          ctaText="Get Started"
-          ctaHref="#contact"
-        />
+        {
+          seoTiers.map((tier) => (
+            <PricingCard
+              title={tier.name}
+              price={`$${tier.price.toLocaleString()}`}
+              period="mo"
+              featured={tier.featured}
+              features={[tier.bestFor, ...tier.inclusions, "No rollovers."]}
+              ctaText={tier.featured ? "Choose " + tier.name : "Get Started"}
+              ctaHref="#contact"
+            />
+          ))
+        }
       </div>
 
       <!-- Notes -->
       <p class="mt-6 text-center text-sm text-body-light">
-        Multi-location: +$200/mo per extra SEO location. Add-ons available (LSA management, call
-        tracking, citation bursts, PR/guest posts).
+        GBP management isn't included at these prices — add it for a flat $250/mo on any tier, or{" "}
+        <a href="/packages" class="font-semibold text-primary underline">see bundled pricing</a>.
+        Multi-location: +$200/mo per extra SEO location.
       </p>
     </div>
   </section>
