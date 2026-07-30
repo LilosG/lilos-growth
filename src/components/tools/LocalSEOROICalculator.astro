@@ -162,14 +162,25 @@
     </p>
     <svg
       id="roi-chart"
-      viewBox="0 0 600 200"
-      class="h-auto w-full"
-      preserveAspectRatio="none"
+      viewBox="0 0 600 220"
+      class="h-auto w-full overflow-visible"
       role="img"
       aria-label="Projected monthly revenue ramp over 12 months"
     >
-      <line x1="0" y1="180" x2="600" y2="180" class="stroke-border-subtle" stroke-width="2" />
-      <path id="roi-chart-area" fill="var(--color-primary)" fill-opacity="0.08" />
+      <defs>
+        <linearGradient id="roi-chart-gradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--color-primary)" stop-opacity="0.22" />
+          <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+
+      <!-- gridlines -->
+      <line x1="0" y1="20" x2="600" y2="20" class="stroke-border-subtle" stroke-width="1" />
+      <line x1="0" y1="76.7" x2="600" y2="76.7" class="stroke-border-subtle" stroke-width="1" />
+      <line x1="0" y1="133.3" x2="600" y2="133.3" class="stroke-border-subtle" stroke-width="1" />
+      <line x1="0" y1="180" x2="600" y2="180" class="stroke-border-base" stroke-width="1.5" />
+
+      <path id="roi-chart-area" fill="url(#roi-chart-gradient)" />
       <path
         id="roi-chart-line"
         fill="none"
@@ -178,13 +189,16 @@
         stroke-linecap="round"
         stroke-linejoin="round"
       />
-      <circle id="roi-chart-dot-first" r="4" class="fill-white" stroke="var(--color-primary)" stroke-width="2" />
-      <circle id="roi-chart-dot-last" r="4" fill="var(--color-primary)" />
+
+      <!-- milestone markers: month 1, 4, 8, 12 -->
+      <g id="roi-chart-milestones"></g>
+
+      <!-- x-axis month ticks -->
+      <text x="0" y="208" class="fill-muted text-[11px] font-semibold">M1</text>
+      <text x="200" y="208" text-anchor="middle" class="fill-muted text-[11px] font-semibold">M4</text>
+      <text x="418" y="208" text-anchor="middle" class="fill-muted text-[11px] font-semibold">M8</text>
+      <text x="600" y="208" text-anchor="end" class="fill-muted text-[11px] font-semibold">M12</text>
     </svg>
-    <div class="mt-2 flex justify-between text-xs font-semibold text-muted">
-      <span>Month 1 · <span id="roi-chart-m1">$150</span>/mo</span>
-      <span>Month 12 · <span id="roi-chart-m12" class="text-primary">$3,000</span>/mo</span>
-    </div>
   </div>
 </div>
 
@@ -210,11 +224,22 @@
         return { x, y };
       });
 
-      const linePath = points.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ");
-      const areaPath =
-        `M0,${baseline} L` +
-        points.map((p) => p.x + "," + p.y).join(" L") +
-        ` L${w},${baseline} Z`;
+      // Smooth the line with quadratic curves through midpoints (Catmull-Rom-ish
+      // approximation) instead of straight polyline segments between months.
+      function smoothPath(pts: { x: number; y: number }[]) {
+        let d = `M ${pts[0].x},${pts[0].y}`;
+        for (let i = 1; i < pts.length; i++) {
+          const midX = (pts[i - 1].x + pts[i].x) / 2;
+          const midY = (pts[i - 1].y + pts[i].y) / 2;
+          d += ` Q ${pts[i - 1].x},${pts[i - 1].y} ${midX},${midY}`;
+        }
+        const last = pts[pts.length - 1];
+        d += ` T ${last.x},${last.y}`;
+        return d;
+      }
+
+      const linePath = smoothPath(points);
+      const areaPath = `${linePath} L${w},${baseline} L0,${baseline} Z`;
 
       const setAttr = (id: string, attr: string, val: string) => {
         const el = document.getElementById(id);
@@ -223,17 +248,41 @@
 
       setAttr("roi-chart-line", "d", linePath);
       setAttr("roi-chart-area", "d", areaPath);
-      setAttr("roi-chart-dot-first", "cx", String(points[0].x));
-      setAttr("roi-chart-dot-first", "cy", String(points[0].y));
-      setAttr("roi-chart-dot-last", "cx", String(points[points.length - 1].x));
-      setAttr("roi-chart-dot-last", "cy", String(points[points.length - 1].y));
 
-      const setText = (id: string, val: string) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = val;
-      };
-      setText("roi-chart-m1", "$" + Math.round(values[0]).toLocaleString());
-      setText("roi-chart-m12", "$" + Math.round(values[values.length - 1]).toLocaleString());
+      // Milestone markers at month 1, 4, 8, 12 with value callouts.
+      const milestoneIdx = [0, 3, 7, 11];
+      const group = document.getElementById("roi-chart-milestones");
+      if (group) {
+        group.innerHTML = "";
+        const ns = "http://www.w3.org/2000/svg";
+        milestoneIdx.forEach((idx, i) => {
+          const p = points[idx];
+          const isLast = i === milestoneIdx.length - 1;
+
+          const dot = document.createElementNS(ns, "circle");
+          dot.setAttribute("cx", String(p.x));
+          dot.setAttribute("cy", String(p.y));
+          dot.setAttribute("r", isLast ? "5" : "4");
+          dot.setAttribute("fill", isLast ? "var(--color-primary)" : "white");
+          dot.setAttribute("stroke", "var(--color-primary)");
+          dot.setAttribute("stroke-width", "2");
+          group.appendChild(dot);
+
+          const label = document.createElementNS(ns, "text");
+          const labelX = idx === 0 ? p.x : idx === 11 ? p.x : p.x;
+          const anchor = idx === 0 ? "start" : idx === 11 ? "end" : "middle";
+          label.setAttribute("x", String(labelX));
+          label.setAttribute("y", String(Math.max(p.y - 12, 14)));
+          label.setAttribute("text-anchor", anchor);
+          label.setAttribute("class", isLast ? "fill-primary" : "fill-heading");
+          label.setAttribute(
+            "style",
+            "font-family: var(--font-heading, inherit); font-weight: 700; font-size: 13px;"
+          );
+          label.textContent = "$" + Math.round(values[idx]).toLocaleString();
+          group.appendChild(label);
+        });
+      }
 
       return values.reduce((sum, v) => sum + v, 0);
     }
