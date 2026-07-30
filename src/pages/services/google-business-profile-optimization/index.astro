@@ -3,8 +3,10 @@ import Layout from "~/layouts/PageLayout.astro";
 import Button from "~/components/ui/Button.astro";
 import Badge from "~/components/ui/Badge.astro";
 import Card from "~/components/ui/Card.astro";
+import CheckListItem from "~/components/ui/CheckListItem.astro";
 import FeatureCard from "~/components/sections/FeatureCard.astro";
 import { Icon } from "astro-icon/components";
+import { gbpManagement } from "~/data/packages";
 
 export const title =
   "Google Business Profile Optimization & Maps SEO for Home Service Businesses | Lilos Growth";
@@ -234,71 +236,16 @@ const faqs = [
 
       <div class="mx-auto max-w-md">
         <div class="rounded-3xl border-2 border-primary bg-white p-8 text-center shadow-lg">
-          <h3 class="mb-1 font-heading text-lg font-bold text-heading">GBP Management</h3>
+          <h3 class="mb-1 font-heading text-lg font-bold text-heading">{gbpManagement.name}</h3>
           <div class="mb-4 font-heading text-4xl font-extrabold text-primary">
-            $299<span class="text-base font-normal text-gray-500">/mo</span>
+            ${gbpManagement.price}<span class="text-base font-normal text-gray-500">/mo</span>
           </div>
           <ul class="mb-6 space-y-2 text-left text-sm text-body">
-            <li class="flex items-center gap-2">
-              <svg
-                class="h-4 w-4 flex-shrink-0 text-primary"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
-                ></path></svg
-              >Full profile optimization &amp; category alignment
-            </li>
-            <li class="flex items-center gap-2">
-              <svg
-                class="h-4 w-4 flex-shrink-0 text-primary"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
-                ></path></svg
-              >Weekly posts + EXIF-optimized photos
-            </li>
-            <li class="flex items-center gap-2">
-              <svg
-                class="h-4 w-4 flex-shrink-0 text-primary"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
-                ></path></svg
-              >Review replies + proactive requests
-            </li>
-            <li class="flex items-center gap-2">
-              <svg
-                class="h-4 w-4 flex-shrink-0 text-primary"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
-                ></path></svg
-              >Q&amp;A monitoring and updates
-            </li>
-            <li class="flex items-center gap-2">
-              <svg
-                class="h-4 w-4 flex-shrink-0 text-primary"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
-                ></path></svg
-              >Monthly performance report
-            </li>
+            {
+              gbpManagement.inclusions.map((inc) => (
+                <CheckListItem align="center">{inc}</CheckListItem>
+              ))
+            }
           </ul>
           <Button href="#contact" variant="primary" size="lg" class="w-full">Get Started</Button>
         </div>

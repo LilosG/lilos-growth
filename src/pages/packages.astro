@@ -157,24 +157,9 @@ const faqs = [
               <div class={`my-5 h-px ${pkg.featured ? "bg-white/10" : "bg-border-subtle"}`} />
               <ul class="mb-8 flex-1 space-y-2.5 text-sm">
                 {pkg.inclusions.map((inc) => (
-                  <li
-                    class={`flex items-start gap-2 ${pkg.featured ? "text-white/75" : "text-body"}`}
-                  >
-                    <svg
-                      class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4.5 12.75l6 6 9-13.5"
-                      />
-                    </svg>
+                  <CheckListItem textClass={pkg.featured ? "text-white/75" : "text-body"}>
                     {inc}
-                  </li>
+                  </CheckListItem>
                 ))}
               </ul>
               <a

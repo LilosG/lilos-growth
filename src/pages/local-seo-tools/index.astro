@@ -3,7 +3,7 @@
  * Local SEO Tools Page - Refactored for Professional Polish
  */
 import Layout from "~/layouts/PageLayout.astro";
-import ReviewLinkGenerator from "~/components/tools/ReviewLinkGenerator.astro";
+import CheckListItem from "~/components/ui/CheckListItem.astro";
 import GBPCategoryFinder from "~/components/tools/GBPCategoryFinder.astro";
 import FAQSchemaGenerator from "~/components/tools/FAQSchemaGenerator.astro";
 import SERPPreview from "~/components/tools/SERPPreview.astro";
@@ -151,115 +151,9 @@ const stats = [
                 for review cards and follow-up messages.
               </p>
               <ul class="mt-6 space-y-2 text-sm text-white/80">
-                <li class="flex items-center gap-2">
-                  <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 20 20"
-                    ><path
-                      fill-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clip-rule="evenodd"></path></svg
-                  >
-                  Works with any GBP listing
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 20 20"
-                    ><path
-                      fill-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clip-rule="evenodd"></path></svg
-                  >
-                  Instant QR code
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 20 20"
-                    ><path
-                      fill-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clip-rule="evenodd"></path></svg
-                  >
-                  One-click copy
-                </li>
-              </ul>
-            </div>
-            <div class="p-6 lg:col-span-3 lg:p-8">
-              <ReviewLinkGenerator />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ROI Calculator Feature Card -->
-      <div class="mb-16">
-        <div class="overflow-hidden rounded-2xl border-2 border-primary bg-white shadow-lg">
-          <div class="grid lg:grid-cols-5">
-            <div
-              class="flex flex-col justify-center bg-gradient-to-br from-secondary to-secondary-dark p-8 text-white lg:col-span-2"
-            >
-              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
-                <svg
-                  class="h-6 w-6 text-primary"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                  ></path>
-                </svg>
-              </div>
-              <div
-                class="bg-primary/20 mb-2 inline-flex w-fit rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary"
-              >
-                Featured Tool
-              </div>
-              <h2 class="font-heading text-xl font-bold text-white">Local SEO ROI Calculator</h2>
-              <p class="mt-3 text-white/85">
-                Enter your trade, city, average job value, and current lead volume. See your
-                projected revenue impact from ranking in the Map Pack.
-              </p>
-              <ul class="mt-5 space-y-2 text-sm text-white/80">
-                <li class="flex items-center gap-2">
-                  <svg
-                    class="h-4 w-4 text-primary"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                    ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
-                    ></path></svg
-                  >
-                  Works for any home service trade
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg
-                    class="h-4 w-4 text-primary"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                    ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
-                    ></path></svg
-                  >
-                  Instant results — no email required
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg
-                    class="h-4 w-4 text-primary"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                    ><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"
-                    ></path></svg
-                  >
-                  Based on real GMB click-through data
-                </li>
+                <CheckListItem align="center">Works for any home service trade</CheckListItem>
+                <CheckListItem align="center">Instant results — no email required</CheckListItem>
+                <CheckListItem align="center">Based on real GMB click-through data</CheckListItem>
               </ul>
             </div>
             <div class="flex flex-col items-center justify-center p-8 text-center lg:col-span-3">
