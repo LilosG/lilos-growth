@@ -197,20 +197,33 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
 
   <!-- 12-MONTH GROWTH CURVE -->
   <div class="mt-6 rounded-2xl border border-border-subtle bg-white p-6 shadow-sm md:p-8">
-    <div class="mb-1 flex items-baseline justify-between">
-      <h3 class="font-heading text-lg font-bold text-heading">Your 12-Month Growth Curve</h3>
-      <span class="text-xs font-semibold text-muted" id="roi-chart-total">$40,190 total Year 1</span>
+    <div class="mb-5 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div>
+        <h3 class="font-heading text-lg font-bold text-heading">Your 12-Month Growth Curve</h3>
+        <p class="mt-1 text-xs text-muted">
+          Each bar is <strong class="text-heading">additional revenue for that month</strong> — not
+          cumulative, not your total business revenue. Realistic ramp, not an instant jump: slow
+          the first couple months, real movement by month 4–6, near target by month 9–12.
+        </p>
+      </div>
+      <div class="bg-primary/5 flex-shrink-0 rounded-xl px-4 py-3 text-left sm:text-right">
+        <div class="text-[10px] font-bold uppercase tracking-wider text-muted">
+          Total Additional Revenue — Year 1
+        </div>
+        <div class="font-heading text-3xl font-extrabold text-primary" id="roi-chart-total">
+          $40,190
+        </div>
+      </div>
     </div>
-    <p class="mb-5 text-xs text-muted">
-      Realistic ramp, not an instant jump — slow the first couple months, real movement by month
-      4–6, near target by month 9–12.
+    <p class="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted">
+      Additional revenue by month ($)
     </p>
     <svg
       id="roi-chart"
       viewBox="0 0 600 250"
       class="h-auto w-full overflow-visible"
       role="img"
-      aria-label="Projected monthly revenue ramp, month by month, over 12 months"
+      aria-label="Projected additional monthly revenue, month by month, over 12 months"
     >
       <!-- gridlines -->
       <line x1="0" y1="20" x2="600" y2="20" class="stroke-border-subtle" stroke-width="1" />
@@ -223,6 +236,7 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
       <!-- month numbers below each bar -->
       <g id="roi-chart-month-labels"></g>
     </svg>
+    <p class="mt-2 text-center text-[11px] text-muted">Month</p>
   </div>
 
   <p class="mt-4 text-center text-xs text-muted">
@@ -377,7 +391,7 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
       setText("roi-a-invest", `$${annualInvestment.toLocaleString()}`);
       setText("roi-a-profit", `$${netAnnualProfit.toLocaleString()}/year`);
       setText("roi-a-roi", `${annualRoi >= 0 ? "+" : ""}${annualRoi}%`);
-      setText("roi-chart-total", `$${year1.toLocaleString()} total Year 1`);
+      setText("roi-chart-total", `$${year1.toLocaleString()}`);
     }
 
     function selectPlan(btn: HTMLElement) {
