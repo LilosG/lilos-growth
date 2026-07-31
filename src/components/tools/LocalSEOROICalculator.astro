@@ -322,8 +322,14 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
         250;
       const cost = selectedPlan;
 
-      const newTraffic = Math.round(visitors * GROWTH_RATE);
-      const newCustomers = Math.round(newTraffic * (rate / 100));
+      // "142% growth" means the increase equals 142% of current traffic --
+      // current (100) + increase (142) = new total (242). Both the increase
+      // AND the resulting total are shown explicitly below so the math is
+      // checkable at a glance, instead of showing only a bare "+142" that's
+      // easy to misread as "traffic went from 100 to 142."
+      const trafficIncrease = Math.round(visitors * GROWTH_RATE);
+      const newTotalTraffic = visitors + trafficIncrease;
+      const newCustomers = Math.round(trafficIncrease * (rate / 100));
       const monthlyRevenue = newCustomers * avgValue;
       const netProfit = monthlyRevenue - cost;
       const roi = cost > 0 ? Math.round((netProfit / cost) * 100) : 0;
@@ -341,12 +347,12 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
 
       setText("roi-industry-note", `Typical for ${industryLabel}: ${rate}% visitor-to-lead conversion, ~$${avgValue.toLocaleString()} avg job value.`);
 
-      setText("roi-step-1", `Current traffic (${visitors.toLocaleString()}) × ${Math.round(GROWTH_RATE * 100)}% average growth = +${newTraffic.toLocaleString()} new visitors/mo`);
-      setText("roi-step-2", `New traffic (${newTraffic.toLocaleString()}) × ${rate}% conversion rate = +${newCustomers} new customers/mo`);
+      setText("roi-step-1", `Current traffic (${visitors.toLocaleString()}) + ${Math.round(GROWTH_RATE * 100)}% average growth = +${trafficIncrease.toLocaleString()} additional visitors/mo (${newTotalTraffic.toLocaleString()} total)`);
+      setText("roi-step-2", `Additional traffic (${trafficIncrease.toLocaleString()}) × ${rate}% conversion rate = +${newCustomers} new customers/mo`);
       setText("roi-step-3", `New customers (${newCustomers}) × $${avgValue.toLocaleString()} avg job value = $${monthlyRevenue.toLocaleString()}/mo revenue`);
       setText("roi-step-4", `Revenue ($${monthlyRevenue.toLocaleString()}) − Investment ($${cost.toLocaleString()}) = $${netProfit.toLocaleString()}/mo profit · ROI = ${roi}%`);
 
-      setText("roi-p-traffic", `+${newTraffic.toLocaleString()} visitors`);
+      setText("roi-p-traffic", `+${trafficIncrease.toLocaleString()} visitors (${newTotalTraffic.toLocaleString()} total)`);
       setText("roi-p-customers", `+${newCustomers} customers`);
       setText("roi-p-revenue", `$${monthlyRevenue.toLocaleString()}/mo`);
       setText("roi-p-invest", `$${cost.toLocaleString()}/mo`);
