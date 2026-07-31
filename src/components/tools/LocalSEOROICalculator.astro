@@ -244,7 +244,22 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
 
     const RAMP = [0.05, 0.12, 0.22, 0.35, 0.5, 0.65, 0.78, 0.87, 0.93, 0.97, 0.99, 1.0];
     const RAMP_SUM = RAMP.reduce((sum, f) => sum + f, 0); // ~7.43 -- same ramp used for both revenue and customer counts, so the two annual figures reconcile with each other
-    const GROWTH_RATE = 1.42; // matches the site's published "+142% avg lead growth"
+    // Growth rate now scales with the selected plan instead of being a flat
+    // constant applied regardless of tier -- Authority includes meaningfully
+    // more work (unlimited pages, 4-6 backlinks/mo, full AEO) than Local, so
+    // it should produce more growth, not identical growth at a worse ROI.
+    // Calibrated proportionally to real content-asset volume per tier
+    // (Local: 5/mo, Growth: 10/mo, Authority: 15/mo -- a 1:2:3 ratio),
+    // anchored to the one real verified number available: +142% is the
+    // site's actual published average lead growth, kept as the Growth-tier
+    // baseline since Growth is the most-common plan. This is a calibrated
+    // estimate, not a verified per-tier stat -- swap in real segmented data
+    // if/when it exists.
+    const GROWTH_RATE_BY_PLAN: Record<number, number> = {
+      750: 0.7, // Local
+      1000: 1.42, // Growth -- real, unchanged
+      1500: 2.4, // Authority
+    };
 
     function drawChart(monthlyTarget: number) {
       const values = RAMP.map((f) => monthlyTarget * f);
@@ -328,13 +343,15 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
       // rendered broken text like "+-71 additional visitors."
       const visitors = Math.max(0, isNaN(rawVisitors) ? 250 : rawVisitors);
       const cost = selectedPlan;
+      const growthRate = GROWTH_RATE_BY_PLAN[cost] ?? 1.42;
 
-      // "142% growth" means the increase equals 142% of current traffic --
-      // current (100) + increase (142) = new total (242). Both the increase
-      // AND the resulting total are shown explicitly below so the math is
-      // checkable at a glance, instead of showing only a bare "+142" that's
-      // easy to misread as "traffic went from 100 to 142."
-      const trafficIncrease = Math.round(visitors * GROWTH_RATE);
+      // "growth rate" means the increase equals that % of current traffic --
+      // current (100) + increase (142) = new total (242) at the 142% (Growth
+      // plan) rate. Both the increase AND the resulting total are shown
+      // explicitly below so the math is checkable at a glance, instead of
+      // showing only a bare "+142" that's easy to misread as "traffic went
+      // from 100 to 142."
+      const trafficIncrease = Math.round(visitors * growthRate);
       const newTotalTraffic = visitors + trafficIncrease;
       const newCustomers = Math.round(trafficIncrease * (rate / 100));
       const monthlyRevenue = newCustomers * avgValue;
@@ -354,7 +371,7 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
 
       setText("roi-industry-note", `Typical for ${industryLabel}: ${rate}% visitor-to-lead conversion, ~$${avgValue.toLocaleString()} avg job value.`);
 
-      setText("roi-step-1", `Current traffic (${visitors.toLocaleString()}) + ${Math.round(GROWTH_RATE * 100)}% average growth = +${trafficIncrease.toLocaleString()} additional visitors/mo (${newTotalTraffic.toLocaleString()} total)`);
+      setText("roi-step-1", `Current traffic (${visitors.toLocaleString()}) + ${Math.round(growthRate * 100)}% growth on the selected plan = +${trafficIncrease.toLocaleString()} additional visitors/mo (${newTotalTraffic.toLocaleString()} total)`);
       setText("roi-step-2", `Additional traffic (${trafficIncrease.toLocaleString()}) × ${rate}% conversion rate = +${newCustomers} new customers/mo`);
       setText("roi-step-3", `New customers (${newCustomers}) × $${avgValue.toLocaleString()} avg job value = $${monthlyRevenue.toLocaleString()}/mo revenue`);
       setText("roi-step-4", `Revenue ($${monthlyRevenue.toLocaleString()}) − Investment ($${cost.toLocaleString()}) = $${netProfit.toLocaleString()}/mo profit · ROI = ${roi}%`);
