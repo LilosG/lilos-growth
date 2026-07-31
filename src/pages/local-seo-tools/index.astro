@@ -127,7 +127,7 @@ const stats = [
             Most Popular
           </span>
         </div>
-        <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
+        <div class="overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-lg">
           <div class="grid lg:grid-cols-5">
             <div class="flex flex-col justify-center bg-secondary p-8 text-white lg:col-span-2">
               <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
@@ -191,8 +191,8 @@ const stats = [
         <h2 class="mb-8 font-heading text-xl font-bold text-heading">Quick Tools</h2>
         <div class="grid gap-6 md:grid-cols-3">
           <article class="tool-card group">
-            <div class="tool-card-header tool-card-header--primary">
-              <div class="tool-card-icon tool-card-icon--primary">
+            <div class="tool-card-header tool-card-header--green">
+              <div class="tool-card-icon tool-card-icon--green">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
@@ -203,8 +203,9 @@ const stats = [
                 </svg>
               </div>
               <div>
+                <span class="tool-card-badge">Free Tool</span>
                 <h3 class="font-heading font-bold text-heading">GBP Category Finder</h3>
-                <p class="text-sm text-gray-500">Search Google's official categories</p>
+                <p class="text-sm text-muted">Search Google's official categories</p>
               </div>
             </div>
             <div class="tool-card-body">
@@ -213,8 +214,8 @@ const stats = [
           </article>
 
           <article class="tool-card group">
-            <div class="tool-card-header tool-card-header--primary">
-              <div class="tool-card-icon tool-card-icon--primary">
+            <div class="tool-card-header tool-card-header--blue">
+              <div class="tool-card-icon tool-card-icon--blue">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
@@ -225,8 +226,9 @@ const stats = [
                 </svg>
               </div>
               <div>
+                <span class="tool-card-badge">Free Tool</span>
                 <h3 class="font-heading font-bold text-heading">Landing Page Outline</h3>
-                <p class="text-sm text-gray-500">Get a conversion-ready structure</p>
+                <p class="text-sm text-muted">Get a conversion-ready structure</p>
               </div>
             </div>
             <div class="tool-card-body">
@@ -235,8 +237,8 @@ const stats = [
           </article>
 
           <article class="tool-card group">
-            <div class="tool-card-header tool-card-header--primary">
-              <div class="tool-card-icon tool-card-icon--primary">
+            <div class="tool-card-header tool-card-header--indigo">
+              <div class="tool-card-icon tool-card-icon--indigo">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
@@ -247,8 +249,9 @@ const stats = [
                 </svg>
               </div>
               <div>
+                <span class="tool-card-badge">Free Tool</span>
                 <h3 class="font-heading font-bold text-heading">Local Keyword Ideas</h3>
-                <p class="text-sm text-gray-500">Generate keyword variations</p>
+                <p class="text-sm text-muted">Generate keyword variations</p>
               </div>
             </div>
             <div class="tool-card-body">
@@ -275,8 +278,9 @@ const stats = [
                 </svg>
               </div>
               <div>
+                <span class="tool-card-badge">Free Tool</span>
                 <h3 class="font-heading font-bold text-heading">FAQ Schema Generator</h3>
-                <p class="text-sm text-gray-500">Create rich FAQ snippets for search</p>
+                <p class="text-sm text-muted">Create rich FAQ snippets for search</p>
               </div>
             </div>
             <div class="tool-card-body">
@@ -297,8 +301,9 @@ const stats = [
                 </svg>
               </div>
               <div>
+                <span class="tool-card-badge">Free Tool</span>
                 <h3 class="font-heading font-bold text-heading">Local Business Schema</h3>
-                <p class="text-sm text-gray-500">Generate JSON-LD structured data</p>
+                <p class="text-sm text-muted">Generate JSON-LD structured data</p>
               </div>
             </div>
             <div class="tool-card-body">
@@ -324,8 +329,9 @@ const stats = [
                 </svg>
               </div>
               <div>
+                <span class="tool-card-badge">Free Tool</span>
                 <h3 class="font-heading font-bold text-heading">SERP Preview</h3>
-                <p class="text-sm text-gray-500">See how your page appears in Google</p>
+                <p class="text-sm text-muted">See how your page appears in Google</p>
               </div>
             </div>
             <div class="tool-card-body">
@@ -334,8 +340,8 @@ const stats = [
           </article>
 
           <article class="tool-card group">
-            <div class="tool-card-header tool-card-header--primary">
-              <div class="tool-card-icon tool-card-icon--primary">
+            <div class="tool-card-header tool-card-header--teal">
+              <div class="tool-card-icon tool-card-icon--teal">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
@@ -346,8 +352,9 @@ const stats = [
                 </svg>
               </div>
               <div>
+                <span class="tool-card-badge">Free Tool</span>
                 <h3 class="font-heading font-bold text-heading">UTM Link Builder</h3>
-                <p class="text-sm text-gray-500">Create trackable campaign URLs</p>
+                <p class="text-sm text-muted">Create trackable campaign URLs</p>
               </div>
             </div>
             <div class="tool-card-body">
@@ -403,7 +410,7 @@ const stats = [
 
 <style>
   .tool-card {
-    @apply flex h-full flex-col overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-sm transition-shadow hover:shadow-lg;
+    @apply flex h-full flex-col overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-xl;
   }
 
   .tool-card-header {
@@ -420,6 +427,23 @@ const stats = [
   .tool-card-header--purple {
     @apply border-purple-100 bg-gradient-to-r from-purple-50 to-transparent;
   }
+  .tool-card-header--green {
+    border-bottom-color: color-mix(in srgb, var(--color-service-gbp) 20%, transparent);
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-service-gbp) 8%, white),
+      white
+    );
+  }
+  .tool-card-header--blue {
+    @apply border-blue-100 bg-gradient-to-r from-blue-50 to-transparent;
+  }
+  .tool-card-header--indigo {
+    @apply border-indigo-100 bg-gradient-to-r from-indigo-50 to-transparent;
+  }
+  .tool-card-header--teal {
+    @apply border-teal-100 bg-gradient-to-r from-teal-50 to-transparent;
+  }
 
   .tool-card-icon {
     @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-xl;
@@ -430,6 +454,23 @@ const stats = [
   }
   .tool-card-icon--purple {
     @apply bg-purple-100 text-purple-600;
+  }
+  .tool-card-icon--green {
+    background: color-mix(in srgb, var(--color-service-gbp) 15%, white);
+    color: var(--color-service-gbp);
+  }
+  .tool-card-icon--blue {
+    @apply bg-blue-100 text-blue-600;
+  }
+  .tool-card-icon--indigo {
+    @apply bg-indigo-100 text-indigo-600;
+  }
+  .tool-card-icon--teal {
+    @apply bg-teal-100 text-teal-600;
+  }
+
+  .tool-card-badge {
+    @apply mb-0.5 inline-block text-[10px] font-bold uppercase tracking-wider text-muted;
   }
 
   /* Cards in a row share equal height (grid default items-stretch); the body
