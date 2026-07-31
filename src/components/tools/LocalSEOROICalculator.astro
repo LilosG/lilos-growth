@@ -207,28 +207,21 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
     </p>
     <svg
       id="roi-chart"
-      viewBox="0 0 600 220"
+      viewBox="0 0 600 250"
       class="h-auto w-full overflow-visible"
       role="img"
-      aria-label="Projected monthly revenue ramp over 12 months"
+      aria-label="Projected monthly revenue ramp, month by month, over 12 months"
     >
-      <defs>
-        <linearGradient id="roi-chart-gradient" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="var(--color-primary)" stop-opacity="0.22" />
-          <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0" />
-        </linearGradient>
-      </defs>
+      <!-- gridlines -->
       <line x1="0" y1="20" x2="600" y2="20" class="stroke-border-subtle" stroke-width="1" />
-      <line x1="0" y1="76.7" x2="600" y2="76.7" class="stroke-border-subtle" stroke-width="1" />
-      <line x1="0" y1="133.3" x2="600" y2="133.3" class="stroke-border-subtle" stroke-width="1" />
-      <line x1="0" y1="180" x2="600" y2="180" class="stroke-border-base" stroke-width="1.5" />
-      <path id="roi-chart-area" fill="url(#roi-chart-gradient)" />
-      <path id="roi-chart-line" fill="none" stroke="var(--color-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-      <g id="roi-chart-milestones"></g>
-      <text x="0" y="208" class="fill-muted text-[11px] font-semibold">M1</text>
-      <text x="200" y="208" text-anchor="middle" class="fill-muted text-[11px] font-semibold">M4</text>
-      <text x="418" y="208" text-anchor="middle" class="fill-muted text-[11px] font-semibold">M8</text>
-      <text x="600" y="208" text-anchor="end" class="fill-muted text-[11px] font-semibold">M12</text>
+      <line x1="0" y1="66.7" x2="600" y2="66.7" class="stroke-border-subtle" stroke-width="1" />
+      <line x1="0" y1="113.3" x2="600" y2="113.3" class="stroke-border-subtle" stroke-width="1" />
+      <line x1="0" y1="160" x2="600" y2="160" class="stroke-border-subtle" stroke-width="1" />
+      <line x1="0" y1="200" x2="600" y2="200" class="stroke-border-base" stroke-width="1.5" />
+      <!-- 12 bars, one per month, plus a value label per bar -->
+      <g id="roi-chart-bars"></g>
+      <!-- month numbers below each bar -->
+      <g id="roi-chart-month-labels"></g>
     </svg>
   </div>
 
@@ -265,62 +258,58 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
       const values = RAMP.map((f) => monthlyTarget * f);
       const max = Math.max(monthlyTarget, 1);
       const w = 600;
-      const baseline = 180;
+      const baseline = 200;
       const top = 20;
-      const points = values.map((v, i) => {
-        const x = (i / (values.length - 1)) * w;
-        const y = baseline - (v / max) * (baseline - top);
-        return { x, y };
-      });
+      const n = values.length; // 12
+      const slot = w / n;
+      const barWidth = slot * 0.62;
 
-      function smoothPath(pts: { x: number; y: number }[]) {
-        let d = `M ${pts[0].x},${pts[0].y}`;
-        for (let i = 1; i < pts.length; i++) {
-          const midX = (pts[i - 1].x + pts[i].x) / 2;
-          const midY = (pts[i - 1].y + pts[i].y) / 2;
-          d += ` Q ${pts[i - 1].x},${pts[i - 1].y} ${midX},${midY}`;
-        }
-        const last = pts[pts.length - 1];
-        d += ` T ${last.x},${last.y}`;
-        return d;
-      }
+      const ns = "http://www.w3.org/2000/svg";
+      const barsGroup = document.getElementById("roi-chart-bars");
+      const labelsGroup = document.getElementById("roi-chart-month-labels");
 
-      const linePath = smoothPath(points);
-      const areaPath = `${linePath} L${w},${baseline} L0,${baseline} Z`;
+      if (barsGroup && labelsGroup) {
+        barsGroup.innerHTML = "";
+        labelsGroup.innerHTML = "";
 
-      const setAttr = (id: string, attr: string, val: string) => {
-        const el = document.getElementById(id);
-        if (el) el.setAttribute(attr, val);
-      };
-      setAttr("roi-chart-line", "d", linePath);
-      setAttr("roi-chart-area", "d", areaPath);
+        values.forEach((v, i) => {
+          const barHeight = Math.max((v / max) * (baseline - top), 1);
+          const x = i * slot + (slot - barWidth) / 2;
+          const y = baseline - barHeight;
+          const isLast = i === n - 1;
+          const isFirst = i === 0;
 
-      const milestoneIdx = [0, 3, 7, 11];
-      const group = document.getElementById("roi-chart-milestones");
-      if (group) {
-        group.innerHTML = "";
-        const ns = "http://www.w3.org/2000/svg";
-        milestoneIdx.forEach((idx, i) => {
-          const p = points[idx];
-          const isLast = i === milestoneIdx.length - 1;
-          const dot = document.createElementNS(ns, "circle");
-          dot.setAttribute("cx", String(p.x));
-          dot.setAttribute("cy", String(p.y));
-          dot.setAttribute("r", isLast ? "5" : "4");
-          dot.setAttribute("fill", isLast ? "var(--color-primary)" : "white");
-          dot.setAttribute("stroke", "var(--color-primary)");
-          dot.setAttribute("stroke-width", "2");
-          group.appendChild(dot);
+          const rect = document.createElementNS(ns, "rect");
+          rect.setAttribute("x", String(x));
+          rect.setAttribute("y", String(y));
+          rect.setAttribute("width", String(barWidth));
+          rect.setAttribute("height", String(barHeight));
+          rect.setAttribute("rx", "3");
+          rect.setAttribute("fill", "var(--color-primary)");
+          rect.setAttribute("fill-opacity", isLast ? "1" : isFirst ? "0.35" : String(0.35 + (i / (n - 1)) * 0.65));
+          barsGroup.appendChild(rect);
 
-          const label = document.createElementNS(ns, "text");
-          const anchor = idx === 0 ? "start" : idx === 11 ? "end" : "middle";
-          label.setAttribute("x", String(p.x));
-          label.setAttribute("y", String(Math.max(p.y - 12, 14)));
-          label.setAttribute("text-anchor", anchor);
-          label.setAttribute("class", isLast ? "fill-primary" : "fill-heading");
-          label.setAttribute("style", "font-weight: 700; font-size: 13px;");
-          label.textContent = "$" + Math.round(values[idx]).toLocaleString();
-          group.appendChild(label);
+          // Value label on every third bar plus first/last, so the chart
+          // stays readable instead of 12 overlapping numbers.
+          if (i === 0 || i === 5 || i === 8 || isLast) {
+            const label = document.createElementNS(ns, "text");
+            label.setAttribute("x", String(x + barWidth / 2));
+            label.setAttribute("y", String(Math.max(y - 8, 14)));
+            label.setAttribute("text-anchor", "middle");
+            label.setAttribute("class", isLast ? "fill-primary" : "fill-heading");
+            label.setAttribute("style", "font-weight: 700; font-size: 12px;");
+            label.textContent = "$" + Math.round(v).toLocaleString();
+            barsGroup.appendChild(label);
+          }
+
+          const monthLabel = document.createElementNS(ns, "text");
+          monthLabel.setAttribute("x", String(x + barWidth / 2));
+          monthLabel.setAttribute("y", String(baseline + 18));
+          monthLabel.setAttribute("text-anchor", "middle");
+          monthLabel.setAttribute("class", "fill-muted");
+          monthLabel.setAttribute("style", "font-size: 11px; font-weight: 600;");
+          monthLabel.textContent = String(i + 1);
+          labelsGroup.appendChild(monthLabel);
         });
       }
 
