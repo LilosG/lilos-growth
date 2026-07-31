@@ -2,8 +2,13 @@
 /**
  * Input Component
  *
- * Form input with built-in label, error, and helper text support.
- * Follows design system and accessibility best practices.
+ * Form input with a built-in label (visible by default), plus error and
+ * helper text support. A visible label is the default and accessible
+ * convention for this design system — six of the eight tool forms audited
+ * used a visible label above the field, and the two that relied on
+ * placeholder-only text had no accessible name for screen readers.
+ * `labelVisibility="sr-only"` keeps that placeholder-only look while still
+ * giving the field a real accessible name.
  *
  * @component
  * @example
@@ -14,6 +19,10 @@
  *   required
  *   helperText="We'll never share your email"
  * />
+ *
+ * @example Placeholder-only visual style, label kept for screen readers
+ * <Input id="gbp-cat-input" label="Business type" labelVisibility="sr-only"
+ *   placeholder="Type your business type (e.g., plumber, dentist)" />
  */
 
 export interface Props {
@@ -23,8 +32,10 @@ export interface Props {
   name?: string;
   /** Input type */
   type?: "text" | "email" | "tel" | "url" | "password" | "number";
-  /** Label text */
-  label?: string;
+  /** Label text. Always rendered for accessibility; see labelVisibility to control whether it's shown visually. */
+  label: string;
+  /** "visible" (default) renders the label above the input. "sr-only" keeps it for screen readers but hides it visually, for compact placeholder-only layouts. */
+  labelVisibility?: "visible" | "sr-only";
   /** Placeholder text */
   placeholder?: string;
   /** Helper text below input */
@@ -41,6 +52,8 @@ export interface Props {
   inputmode?: "text" | "email" | "tel" | "url" | "numeric";
   /** Default value */
   value?: string;
+  /** Maximum character length */
+  maxlength?: number;
   /** Additional CSS classes for input */
   class?: string;
 }
@@ -50,6 +63,7 @@ const {
   name = id,
   type = "text",
   label,
+  labelVisibility = "visible",
   placeholder,
   helperText,
   error,
@@ -58,22 +72,21 @@ const {
   autocomplete,
   inputmode,
   value,
+  maxlength,
   class: className = "",
 } = Astro.props;
 
 const hasError = !!error;
 const inputClasses = ["input", hasError && "input-error", className].filter(Boolean).join(" ");
+const labelClasses =
+  labelVisibility === "sr-only" ? "sr-only" : "block text-sm font-medium text-heading";
 ---
 
 <div class="space-y-1.5">
-  {
-    label && (
-      <label for={id} class="block text-sm font-medium text-heading">
-        {label}
-        {required && <span class="ml-1 text-error">*</span>}
-      </label>
-    )
-  }
+  <label for={id} class={labelClasses}>
+    {label}
+    {required && <span class="ml-1 text-error">*</span>}
+  </label>
 
   <input
     id={id}
@@ -86,6 +99,7 @@ const inputClasses = ["input", hasError && "input-error", className].filter(Bool
     autocomplete={autocomplete}
     inputmode={inputmode}
     value={value}
+    maxlength={maxlength}
     aria-invalid={hasError}
     aria-describedby={error ? `${id}-error` : helperText ? `${id}-helper` : undefined}
   />

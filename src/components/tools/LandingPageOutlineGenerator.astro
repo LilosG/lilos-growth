@@ -2,25 +2,22 @@
 /**
  * Landing Page Outline Generator - Headless
  */
+import Input from "~/components/ui/Input.astro";
+import Button from "~/components/ui/Button.astro";
 ---
 
-<div class="flex flex-col">
-  <form id="lpo-form" class="flex flex-col space-y-3">
-    <input
+<div class="flex flex-1 flex-col">
+  <form id="lpo-form" class="flex flex-1 flex-col gap-4">
+    <Input
       id="lpo-service"
-      type="text"
+      label="Service"
       required
-      placeholder="Service (e.g., Water Heater Repair)"
-      class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+      placeholder="e.g., Water Heater Repair"
     />
-    <input
-      id="lpo-city"
-      type="text"
-      required
-      placeholder="City/Area (e.g., Denver, CO)"
-      class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
-    />
-    <button type="submit" class="btn btn-primary h-11 w-full">Generate Outline</button>
+    <Input id="lpo-city" label="City/Area" required placeholder="e.g., Denver, CO" />
+    <Button type="submit" variant="primary" size="md" fullWidth class="mt-auto"
+      >Generate Outline</Button
+    >
   </form>
   <div id="lpo-result" class="mt-4 hidden">
     <div class="mb-2 flex items-center justify-between">

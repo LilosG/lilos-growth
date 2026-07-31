@@ -2,36 +2,18 @@
 /**
  * Review Link Generator - Headless
  */
+import Input from "~/components/ui/Input.astro";
+import Button from "~/components/ui/Button.astro";
 ---
 
 <div class="review-link-generator">
   <form id="rev-form" class="space-y-3">
     <div class="grid gap-3 sm:grid-cols-3">
-      <input
-        id="rev-name"
-        type="text"
-        required
-        placeholder="Business name"
-        class="focus:ring-primary/20 h-12 w-full rounded-lg border border-border-base bg-white px-4 text-sm text-heading focus:border-primary focus:outline-none focus:ring-2"
-      />
-      <input
-        id="rev-city"
-        type="text"
-        placeholder="City"
-        class="focus:ring-primary/20 h-12 w-full rounded-lg border border-border-base bg-white px-4 text-sm text-heading focus:border-primary focus:outline-none focus:ring-2"
-      />
-      <input
-        id="rev-region"
-        type="text"
-        placeholder="State or ZIP"
-        class="focus:ring-primary/20 h-12 w-full rounded-lg border border-border-base bg-white px-4 text-sm text-heading focus:border-primary focus:outline-none focus:ring-2"
-      />
+      <Input id="rev-name" label="Business name" required placeholder="Business name" />
+      <Input id="rev-city" label="City" placeholder="City" />
+      <Input id="rev-region" label="State or ZIP" placeholder="State or ZIP" />
     </div>
-    <button
-      type="submit"
-      class="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3.5 text-base font-bold text-white transition-all hover:bg-primary-hover hover:shadow-md"
-      >Find Place</button
-    >
+    <Button type="submit" variant="primary" size="md" fullWidth>Find Place</Button>
   </form>
   <div id="rev-result" class="mt-4"></div>
 </div>
@@ -92,8 +74,8 @@
                 <img src="${qrUrl}" alt="QR" width="150" height="150" class="rounded-lg border border-border-subtle" />
               </div>
               <div>
-                <label class="text-xs font-medium text-muted mb-1 block">Review Link</label>
-                <input type="text" readonly value="${reviewUrl}" class="h-10 w-full rounded-lg border border-border-base bg-white px-3 text-sm" onclick="this.select()" />
+                <label for="rev-review-link-output" class="mb-1 block text-sm font-medium text-heading">Review Link</label>
+                <input id="rev-review-link-output" type="text" readonly value="${reviewUrl}" class="input" onclick="this.select()" />
               </div>
             </div>`;
         } else if (data && data.error) {

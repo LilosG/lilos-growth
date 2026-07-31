@@ -2,43 +2,34 @@
 /**
  * SERP Preview - Headless
  */
+import Input from "~/components/ui/Input.astro";
+import Button from "~/components/ui/Button.astro";
 ---
 
-<div class="flex flex-col">
-  <form id="serp-form" class="flex flex-col space-y-3">
+<div class="flex flex-1 flex-col">
+  <form id="serp-form" class="flex flex-1 flex-col gap-4">
     <div>
-      <label class="mb-1 block text-xs font-medium text-body"
-        >Page Title <span class="text-muted">(~60 chars)</span></label
-      >
-      <input
+      <Input
         id="serp-title"
-        type="text"
-        maxlength="70"
+        label="Page Title"
+        maxlength={70}
         placeholder="Best Plumber in Denver | 24/7 Service"
-        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
       />
       <div class="mt-1 text-xs text-muted"><span id="title-count">0</span>/60</div>
     </div>
+    <Input id="serp-url" label="Page URL" type="url" placeholder="https://example.com/plumbing" />
     <div>
-      <label class="mb-1 block text-xs font-medium text-body">Page URL</label>
-      <input
-        id="serp-url"
-        type="url"
-        placeholder="https://example.com/plumbing"
-        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
-      />
-    </div>
-    <div>
-      <label class="mb-1 block text-xs font-medium text-body"
-        >Meta Description <span class="text-muted">(~155 chars)</span></label
-      >
-      <textarea
-        id="serp-desc"
-        rows="2"
-        maxlength="170"
-        placeholder="Professional plumbing services in Denver..."
-        class="focus:ring-primary/40 w-full rounded-lg border border-border-base px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2"
-      ></textarea>
+      <div class="space-y-1.5">
+        <label for="serp-desc" class="block text-sm font-medium text-heading"
+          >Meta Description</label
+        >
+        <textarea
+          id="serp-desc"
+          rows="2"
+          maxlength="170"
+          placeholder="Professional plumbing services in Denver..."
+          class="input resize-none"></textarea>
+      </div>
       <div class="mt-1 text-xs text-muted"><span id="desc-count">0</span>/155</div>
     </div>
     <div>
@@ -53,8 +44,13 @@
         </div>
       </div>
     </div>
-    <button type="button" id="serp-preview-btn" class="btn btn-primary h-11 w-full"
-      >Update Preview</button
+    <Button
+      type="button"
+      id="serp-preview-btn"
+      variant="primary"
+      size="md"
+      fullWidth
+      class="mt-auto">Update Preview</Button
     >
   </form>
 </div>

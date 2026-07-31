@@ -16,7 +16,7 @@ import { Icon } from "astro-icon/components";
 
 export interface Props {
   /** Visual variant */
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "white";
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "white" | "outline-white";
   /** Size variant */
   size?: "sm" | "md" | "lg";
   /** Button type (for form buttons) */
@@ -37,6 +37,8 @@ export interface Props {
   class?: string;
   /** ARIA label */
   ariaLabel?: string;
+  /** Element ID, e.g. for a JS event hook */
+  id?: string;
   /** Data attributes for tracking */
   [key: `data-${string}`]: string;
 }
@@ -53,6 +55,7 @@ const {
   fullWidth = false,
   class: className = "",
   ariaLabel,
+  id,
   ...rest
 } = Astro.props;
 
@@ -63,6 +66,7 @@ const variantClasses = {
   outline: "btn-outline",
   ghost: "btn-ghost",
   white: "btn-white",
+  "outline-white": "btn-outline-white",
 };
 
 const sizeClasses = {
@@ -89,6 +93,7 @@ const isLink = !!href && !disabled;
   isLink ? (
     <a
       href={href}
+      id={id}
       class={classes}
       aria-label={ariaLabel}
       {...(target === "_blank" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
@@ -99,7 +104,14 @@ const isLink = !!href && !disabled;
       {icon && iconPosition === "right" && <Icon name={icon} class="h-5 w-5" />}
     </a>
   ) : (
-    <button type={type} class={classes} disabled={disabled} aria-label={ariaLabel} {...rest}>
+    <button
+      type={type}
+      id={id}
+      class={classes}
+      disabled={disabled}
+      aria-label={ariaLabel}
+      {...rest}
+    >
       {icon && iconPosition === "left" && <Icon name={icon} class="h-5 w-5" />}
       <slot />
       {icon && iconPosition === "right" && <Icon name={icon} class="h-5 w-5" />}

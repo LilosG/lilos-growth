@@ -358,6 +358,34 @@ export default {
           },
         },
 
+        ".btn-white": {
+          backgroundColor: "white",
+          color: "var(--color-primary)",
+          boxShadow: "var(--shadow-sm)",
+          "&:hover": {
+            backgroundColor: "var(--color-primary-50)",
+            boxShadow: "var(--shadow-md)",
+          },
+          "&:focus-visible": {
+            outline: "2px solid white",
+            outlineOffset: "2px",
+          },
+        },
+
+        ".btn-outline-white": {
+          backgroundColor: "transparent",
+          color: "white",
+          border: "2px solid rgba(255, 255, 255, 0.3)",
+          "&:hover": {
+            borderColor: "rgba(255, 255, 255, 0.6)",
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
+          },
+          "&:focus-visible": {
+            outline: "2px solid white",
+            outlineOffset: "2px",
+          },
+        },
+
         // ============================================
         // BADGE COMPONENTS
         // ============================================

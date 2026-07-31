@@ -2,90 +2,38 @@
 /**
  * Local Business Schema Generator - Headless
  */
+import Input from "~/components/ui/Input.astro";
+import Button from "~/components/ui/Button.astro";
 ---
 
-<div class="flex flex-col">
-  <form id="schema-form" class="flex flex-col gap-3">
-    <div>
-      <label class="mb-1 block text-xs font-medium text-body">Business Name *</label>
-      <input
-        id="schema-name"
-        type="text"
-        required
-        placeholder="Acme Plumbing"
-        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
-      />
-    </div>
+<div class="flex flex-1 flex-col">
+  <form id="schema-form" class="flex flex-1 flex-col gap-4">
+    <Input id="schema-name" label="Business Name" required placeholder="Acme Plumbing" />
     <div class="grid gap-3 sm:grid-cols-2">
-      <div>
-        <label class="mb-1 block text-xs font-medium text-body">Phone *</label>
-        <input
-          id="schema-phone"
-          type="tel"
-          required
-          placeholder="+1-555-123-4567"
-          class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
-        />
-      </div>
-      <div>
-        <label class="mb-1 block text-xs font-medium text-body">Website URL *</label>
-        <input
-          id="schema-url"
-          type="url"
-          required
-          placeholder="https://example.com"
-          class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
-        />
-      </div>
-    </div>
-    <div>
-      <label class="mb-1 block text-xs font-medium text-body">Street Address *</label>
-      <input
-        id="schema-street"
-        type="text"
+      <Input
+        id="schema-phone"
+        label="Phone"
+        type="tel"
         required
-        placeholder="123 Main Street"
-        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
+        placeholder="+1-555-123-4567"
+      />
+      <Input
+        id="schema-url"
+        label="Website URL"
+        type="url"
+        required
+        placeholder="https://example.com"
       />
     </div>
+    <Input id="schema-street" label="Street Address" required placeholder="123 Main Street" />
     <div class="grid gap-3 sm:grid-cols-3">
-      <div>
-        <label class="mb-1 block text-xs font-medium text-body">City *</label>
-        <input
-          id="schema-city"
-          type="text"
-          required
-          placeholder="Denver"
-          class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
-        />
-      </div>
-      <div>
-        <label class="mb-1 block text-xs font-medium text-body">State *</label>
-        <input
-          id="schema-state"
-          type="text"
-          required
-          placeholder="CO"
-          class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
-        />
-      </div>
-      <div>
-        <label class="mb-1 block text-xs font-medium text-body">ZIP *</label>
-        <input
-          id="schema-zip"
-          type="text"
-          required
-          placeholder="80202"
-          class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
-        />
-      </div>
+      <Input id="schema-city" label="City" required placeholder="Denver" />
+      <Input id="schema-state" label="State" required placeholder="CO" />
+      <Input id="schema-zip" label="ZIP" required placeholder="80202" />
     </div>
-    <div>
-      <label class="mb-1 block text-xs font-medium text-body">Business Type</label>
-      <select
-        id="schema-type"
-        class="focus:ring-primary/40 h-11 w-full rounded-lg border border-border-base px-4 text-sm focus:border-primary focus:outline-none focus:ring-2"
-      >
+    <div class="space-y-1.5">
+      <label for="schema-type" class="block text-sm font-medium text-heading">Business Type</label>
+      <select id="schema-type" class="input">
         <option value="LocalBusiness">Local Business</option>
         <option value="Plumber">Plumber</option>
         <option value="Electrician">Electrician</option>
@@ -96,16 +44,17 @@
         <option value="CleaningCompany">Cleaning Company</option>
       </select>
     </div>
-    <div>
-      <label class="mb-1 block text-xs font-medium text-body">Description</label>
+    <div class="space-y-1.5">
+      <label for="schema-desc" class="block text-sm font-medium text-heading">Description</label>
       <textarea
         id="schema-desc"
         rows="2"
         placeholder="Brief description of your business..."
-        class="focus:ring-primary/40 w-full rounded-lg border border-border-base px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2"
-      ></textarea>
+        class="input"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary h-11 w-full">Generate Schema</button>
+    <Button type="submit" variant="primary" size="md" fullWidth class="mt-auto"
+      >Generate Schema</Button
+    >
   </form>
   <div id="schema-result" class="mt-4 hidden">
     <div class="mb-2 flex items-center justify-between">
