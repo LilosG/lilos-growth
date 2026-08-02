@@ -177,7 +177,7 @@ const agencyStats = [
                   <Button
                     href={featuredStudy.ctaHref || "/contact"}
                     variant="primary"
-                    size="md"
+                    size="lg"
                     icon="tabler:arrow-right"
                   >
                     {featuredStudy.ctaText || "Learn More"}
@@ -349,26 +349,16 @@ const agencyStats = [
         exactly what to do next — free.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a
+        <Button
           href="/contact#book"
           data-evt="cta_results_final"
-          class="inline-flex items-center gap-2.5 rounded-full bg-primary px-10 py-4 font-heading text-lg font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.45)] transition hover:bg-primary-dark"
+          variant="primary"
+          size="lg"
+          icon="tabler:arrow-right"
         >
           Get a Free Audit
-          <svg
-            class="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-          >
-        </a>
-        <a
-          href="/packages"
-          class="hover:bg-white/8 inline-flex items-center gap-2 rounded-full border-2 border-white/25 px-8 py-4 font-heading text-base font-bold text-white transition hover:border-white/50"
-        >
-          See Pricing
-        </a>
+        </Button>
+        <Button href="/packages" variant="outline-white" size="lg">See Pricing</Button>
       </div>
     </div>
   </section>
