@@ -89,12 +89,18 @@ were fixed as part of the rollout:
   the canonical spec (`variant="primary" size="lg"`, plain `shadow-sm`→`shadow-md`).
 
 The analysis below (patterns table, outstanding issues) reflects the pre-migration
-state and is kept for historical reference. Not in scope for this section and still
-open: `ReviewLinkGenerator.astro:32`'s bespoke button, the `Layout.astro` `.btn`
-collision affecting `404.astro`/`privacy.astro`/`privacy-policy.astro`, and the
-`.astro.bak` files — none of those are primary-CTA-on-a-page-in-this-rollout issues,
-so they weren't touched. See "Recommended follow-up" (item 2, 4) below, which remains
-open.
+state and is kept for historical reference, with one correction: the `Layout.astro`
+`.btn`/`.btn-primary` collision it describes (item 2 in "Recommended follow-up") was
+already resolved in the same commit that introduced this audit (`4a04095`,
+2026-07-31) — `Layout.astro`'s duplicate definition was removed and `404.astro`'s
+button was repatched onto the canonical version then. Verified via grep: `Layout.astro`
+has zero `.btn` references today. That follow-up item is stale and should be
+considered done, not open — flagging here since it wasn't touched as part of this
+rollout's own commits.
+
+Still genuinely open, not in scope for this section: `ReviewLinkGenerator.astro:32`'s
+bespoke button and the `.astro.bak` files — neither is a primary-CTA-on-a-page-in-this-
+rollout issue, so they weren't touched. See "Recommended follow-up" (item 4) below.
 
 The design system's canonical button is `src/components/ui/Button.astro`, which emits
 `class="btn btn-{variant} btn-{size}"`, and those classes are registered via a Tailwind
