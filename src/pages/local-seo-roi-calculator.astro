@@ -1,6 +1,7 @@
 ---
 import PageLayout from "~/layouts/PageLayout.astro";
 import LocalSEOROICalculator from "~/components/tools/LocalSEOROICalculator.astro";
+import Button from "~/components/ui/Button.astro";
 
 const title = "Local SEO ROI Calculator for Home Service Businesses | Lilos Growth";
 const description =
@@ -64,21 +65,15 @@ const toolSchema = {
         Book a free 15-minute audit. We'll pull real GSC and GBP data for your business and show you
         exactly where the gaps are.
       </p>
-      <a
+      <Button
         href="/contact#book"
         data-evt="cta_roi_calc_bottom"
-        class="inline-flex items-center rounded-full bg-primary px-8 py-3.5 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-dark"
+        variant="primary"
+        size="lg"
+        icon="tabler:arrow-right"
       >
         Book a Free Audit
-        <svg
-          class="ml-2 h-4 w-4"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="3"
-          viewBox="0 0 24 24"
-          aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-        >
-      </a>
+      </Button>
       <p class="mt-4 text-sm text-body">
         Or explore our <a
           href="/local-seo-tools"
