@@ -76,6 +76,26 @@ inconsistent shadow (`shadow-sm`, `shadow`, `shadow-md`, or none).
 
 ## 3. Primary CTA buttons sitewide
 
+**Status: Complete.** The primary-CTA migration to `Button.astro` (`variant="primary"
+size="lg"`, outline for secondary/bordered patterns) has been rolled out across every
+page listed below. Migrated: `index.astro`, `services/index.astro`,
+`local-seo-roi-calculator.astro`, `additional-services/index.astro`, `results.astro`,
+`contact.astro`, `packages.astro`, `about.astro`. Two bugs called out in this section
+were fixed as part of the rollout:
+- `about.astro:365`'s hardcoded `hover:bg-[#c9400a]` hex is gone — the button now
+  renders plain `class="btn btn-primary btn-lg"`, so hover resolves through the
+  `--color-primary-hover` token like every other primary CTA.
+- `contact.astro:146`'s no-shadow, undersized "Jump to Calendar" anchor now matches
+  the canonical spec (`variant="primary" size="lg"`, plain `shadow-sm`→`shadow-md`).
+
+The analysis below (patterns table, outstanding issues) reflects the pre-migration
+state and is kept for historical reference. Not in scope for this section and still
+open: `ReviewLinkGenerator.astro:32`'s bespoke button, the `Layout.astro` `.btn`
+collision affecting `404.astro`/`privacy.astro`/`privacy-policy.astro`, and the
+`.astro.bak` files — none of those are primary-CTA-on-a-page-in-this-rollout issues,
+so they weren't touched. See "Recommended follow-up" (item 2, 4) below, which remains
+open.
+
 The design system's canonical button is `src/components/ui/Button.astro`, which emits
 `class="btn btn-{variant} btn-{size}"`, and those classes are registered via a Tailwind
 plugin in `tailwind.config.js:270-360` (pill radius via `--radius-button` = `9999px`,
