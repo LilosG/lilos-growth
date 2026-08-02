@@ -205,3 +205,10 @@ the canonical `.input` class and the ad-hoc `h-11 rounded-lg` convention above.
    approximation. Confirmed via grep that every `iconColor` usage introduced across
    the rollout (homepage, local-seo-tools, services/index.astro) maps to a real enum
    member — no other card was left on an approximated color.
+9. `src/components/tools/ReviewLinkGenerator.astro` is fully built and was migrated to
+   Card/Button/Input during this rollout, but it's orphaned — not imported or rendered
+   anywhere in `src/` (confirmed via exhaustive grep). It was deliberately removed from
+   `local-seo-tools/index.astro` in commit `e34f4d5b`, predating this rollout, in favor
+   of a static marketing teaser card occupying that page slot instead. Needs a decision
+   — delete the dead file, or wire it into a live page slot — not resolved this
+   session; flagging for a future call, not fixing now.
