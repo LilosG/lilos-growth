@@ -212,3 +212,18 @@ the canonical `.input` class and the ad-hoc `h-11 rounded-lg` convention above.
    of a static marketing teaser card occupying that page slot instead. Needs a decision
    — delete the dead file, or wire it into a live page slot — not resolved this
    session; flagging for a future call, not fixing now.
+
+### Design ideas surfaced during the rollout (not bugs — future consideration)
+
+10. While normalizing `services/index.astro`'s outlier final CTA (`px-12 py-5
+    text-xl`, the only CTA in the whole rollout larger than its own page's hero
+    button) down to the standard `size="lg"`, the question came up of whether
+    final/bottom-of-page CTAs should get *deliberately* more visual weight than
+    mid-page CTAs sitewide. Investigated and confirmed this wasn't the reason for
+    that outlier (no other page's final CTA scales up relative to its hero — it was
+    drift, not a pattern), so it was normalized like everything else. But the
+    underlying idea is worth considering on its own merits: a distinct, larger
+    `Button` size (or treatment) reserved specifically for final/bottom-of-page CTAs,
+    separate from mid-page CTAs. This is a design proposal to evaluate deliberately,
+    not a consistency fix — do not fold into any future normalization pass without a
+    conscious decision to adopt it sitewide.
