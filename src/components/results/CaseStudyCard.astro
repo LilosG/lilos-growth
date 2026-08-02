@@ -5,6 +5,8 @@
 import { serviceTypeLabels } from "~/data/results";
 import type { CaseStudy, ServiceType } from "~/data/results";
 import Image from "~/components/common/Image.astro";
+import Card from "~/components/ui/Card.astro";
+import Button from "~/components/ui/Button.astro";
 
 export interface Props {
   study: CaseStudy;
@@ -28,8 +30,9 @@ const normalizeCaseStudyHref = (href?: string | null): string => {
 const ctaHref = normalizeCaseStudyHref(primaryHref);
 ---
 
-<article
-  class="group flex h-full flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-lg"
+<Card
+  as="article"
+  class="group flex h-full flex-col overflow-hidden !p-0 shadow-sm transition-all hover:shadow-lg"
   data-services={serviceTypes.join(",")}
 >
   <!-- Screenshot, or a branded placeholder when there isn't one (GBP-only engagements) -->
@@ -227,16 +230,9 @@ const ctaHref = normalizeCaseStudyHref(primaryHref);
     <!-- Footer -->
     <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
       <span class="text-xs font-medium uppercase tracking-wider text-gray-400"> Case Study </span>
-      <a
-        href={ctaHref}
-        class="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary-hover"
-      >
+      <Button href={ctaHref} variant="primary" size="sm" icon="tabler:chevron-right">
         {primaryText}
-        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
-          ></path>
-        </svg>
-      </a>
+      </Button>
     </div>
   </div>
-</article>
+</Card>

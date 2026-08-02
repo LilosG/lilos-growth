@@ -1,6 +1,8 @@
 ---
 import PageLayout from "~/layouts/PageLayout.astro";
 import CaseStudyCard from "~/components/results/CaseStudyCard.astro";
+import Card from "~/components/ui/Card.astro";
+import Button from "~/components/ui/Button.astro";
 import { resultsCaseStudies, resultsFaqs, serviceTypeLabels } from "~/data/results";
 import type { ServiceType } from "~/data/results";
 
@@ -78,11 +80,11 @@ const agencyStats = [
       <div class="grid grid-cols-2 gap-5 md:grid-cols-4">
         {
           agencyStats.map((stat) => (
-            <div class="hover:border-primary/30 rounded-2xl border border-border-subtle bg-white p-6 text-center shadow-sm transition hover:shadow-md">
+            <Card class="hover:border-primary/30 text-center shadow-sm transition hover:shadow-md">
               <p class="font-heading text-4xl font-extrabold text-primary">{stat.value}</p>
               <p class="mt-1 text-sm font-bold text-heading">{stat.label}</p>
               <p class="mt-1 text-xs text-muted">{stat.sub}</p>
-            </div>
+            </Card>
           ))
         }
       </div>
@@ -100,7 +102,7 @@ const agencyStats = [
             </span>
             <h2 class="font-heading text-2xl font-bold text-heading">Client Spotlight</h2>
           </div>
-          <div class="overflow-hidden rounded-3xl border border-border-subtle bg-white shadow-2xl">
+          <Card class="overflow-hidden !p-0 shadow-2xl">
             <div class="grid grid-cols-1 lg:grid-cols-2">
               <div class="relative bg-secondary-dark">
                 {featuredStudy.screenshot && (
@@ -172,25 +174,18 @@ const agencyStats = [
                   ))}
                 </div>
                 <div class="mt-8">
-                  <a
+                  <Button
                     href={featuredStudy.ctaHref || "/contact"}
-                    class="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-heading text-sm font-bold text-white shadow transition hover:bg-primary-dark"
+                    variant="primary"
+                    size="md"
+                    icon="tabler:arrow-right"
                   >
                     {featuredStudy.ctaText || "Learn More"}
-                    <svg
-                      class="h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M5 12h14M13 18l6-6-6-6" />
-                    </svg>
-                  </a>
+                  </Button>
                 </div>
               </div>
             </div>
-          </div>
+          </Card>
         </div>
       </section>
     )
@@ -215,7 +210,7 @@ const agencyStats = [
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
         {
           gbpResults.map((result) => (
-            <div class="overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-lg">
+            <Card class="overflow-hidden !p-0 shadow-lg">
               <div class="border-b border-border-subtle bg-background-cream p-6">
                 <div class="flex items-start justify-between">
                   <div>
@@ -240,7 +235,7 @@ const agencyStats = [
                   decoding="async"
                 />
               </div>
-            </div>
+            </Card>
           ))
         }
       </div>
