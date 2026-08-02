@@ -1,5 +1,6 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
+import Card from "~/components/ui/Card.astro";
 
 export const title = "About Lilos Growth | Built by Home Service Owners";
 export const description =
@@ -315,7 +316,7 @@ export const description =
         <span class="mx-auto mt-2 block h-1 w-12 rounded bg-primary"></span>
       </h2>
       <div class="grid gap-6">
-        <div class="rounded-2xl border border-gray-100 bg-background-blue p-6 shadow">
+        <Card class="!bg-background-blue shadow">
           <h3 class="mb-2 font-heading text-lg font-semibold text-heading">
             Do you work with my trade or niche?
           </h3>
@@ -324,8 +325,8 @@ export const description =
             electrical, roofing, restoration, and more. If you book jobs in a service area, we can
             help.
           </p>
-        </div>
-        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
+        </Card>
+        <Card class="shadow">
           <h3 class="mb-2 font-heading text-lg font-semibold text-heading">
             Are there contracts or setup fees?
           </h3>
@@ -334,8 +335,8 @@ export const description =
             one-time setup is needed (e.g., a full site build), we’ll outline it clearly before
             starting.
           </p>
-        </div>
-        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow">
+        </Card>
+        <Card class="shadow">
           <h3 class="mb-2 font-heading text-lg font-semibold text-heading">
             Will I have a dedicated point of contact?
           </h3>
@@ -343,7 +344,7 @@ export const description =
             Yes—every client works directly with a home-service strategist. No call centers or
             endless handoffs.
           </p>
-        </div>
+        </Card>
       </div>
     </div>
   </section>
