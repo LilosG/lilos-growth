@@ -54,6 +54,8 @@ export interface Props {
   iconShape?: "circle" | "rounded";
   /** "top" centers the badge above the slot content (feature-card style); "inline" places it beside the slot content in a row (tool-card header style) */
   iconPosition?: "top" | "inline";
+  /** Element ID, e.g. for an anchor/scroll-target hook */
+  id?: string;
   /** Data attributes, e.g. for a JS filter/selector hook */
   [key: `data-${string}`]: string;
 }
@@ -70,6 +72,7 @@ const {
   iconSize = "md",
   iconShape = "circle",
   iconPosition = "top",
+  id,
   ...rest
 } = Astro.props;
 
@@ -138,6 +141,7 @@ const iconGlyphClasses = iconGlyphSizeClasses[iconSize as keyof typeof iconGlyph
   isLink ? (
     <a
       href={href}
+      id={id}
       class={combinedClasses}
       {...(target === "_blank" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       {...rest}
@@ -163,7 +167,7 @@ const iconGlyphClasses = iconGlyphSizeClasses[iconSize as keyof typeof iconGlyph
       )}
     </a>
   ) : (
-    <Tag class={combinedClasses} {...rest}>
+    <Tag id={id} class={combinedClasses} {...rest}>
       {icon && iconPosition === "top" && (
         <div class="mb-4 flex justify-center">
           <div class={iconBoxClasses}>
