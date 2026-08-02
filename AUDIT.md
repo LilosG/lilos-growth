@@ -200,14 +200,7 @@ the canonical `.input` class and the ad-hoc `h-11 rounded-lg` convention above.
 7. `about.astro:365` still hardcodes `hover:bg-[#c9400a]` instead of the
    `--color-primary-dark` token — a section-3 (CTA button) finding, deferred since the
    rollout stayed scoped to section-1 card patterns.
-8. `ReviewLinkGenerator.astro`'s results container
-   (`src/components/tools/ReviewLinkGenerator.astro:18`) still uses plain
-   `class="mt-4"`, not the `empty:mt-0 mt-4` fix applied to `GBPCategoryFinder.astro`'s
-   identical results container during the tools migration. Deliberately left alone
-   since it's a standalone featured card with no sibling row to misalign against, but
-   it carries the same latent bug (extra margin reserved before any result exists) and
-   should get the same treatment if it's ever placed in a multi-card row.
-9. `Card.astro`'s `iconColor` enum gained a `pink` member during the homepage
+8. `Card.astro`'s `iconColor` enum gained a `pink` member during the homepage
    migration (`src/components/ui/Card.astro`) to replace a same-day `primary`
    approximation. Confirmed via grep that every `iconColor` usage introduced across
    the rollout (homepage, local-seo-tools, services/index.astro) maps to a real enum
