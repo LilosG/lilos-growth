@@ -1,6 +1,7 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
 import CheckListItem from "~/components/ui/CheckListItem.astro";
+import Card from "~/components/ui/Card.astro";
 import { packages } from "~/data/packages";
 
 export const title = "Local SEO & Website Services for Home Service Businesses | Lilos Growth";
@@ -136,7 +137,7 @@ export const description =
       </div>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         <!-- GBP -->
-        <div class="flex flex-col rounded-3xl border border-border-subtle bg-background-cream p-8">
+        <Card class="!bg-background-cream flex flex-col">
           <div
             class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-service-gbp-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-gbp"
           >
@@ -168,10 +169,10 @@ export const description =
           >
             See GBP management &rarr;
           </a>
-        </div>
+        </Card>
 
         <!-- Local SEO -->
-        <div class="flex flex-col rounded-3xl border border-border-subtle bg-background-cream p-8">
+        <Card class="!bg-background-cream flex flex-col">
           <div
             class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-service-seo-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-seo"
           >
@@ -198,10 +199,10 @@ export const description =
           >
             See local SEO plans &rarr;
           </a>
-        </div>
+        </Card>
 
         <!-- Website -->
-        <div class="flex flex-col rounded-3xl border border-border-subtle bg-background-cream p-8">
+        <Card class="!bg-background-cream flex flex-col">
           <div
             class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-service-website-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-website"
           >
@@ -229,7 +230,7 @@ export const description =
           >
             See website pricing &rarr;
           </a>
-        </div>
+        </Card>
       </div>
     </div>
   </section>
@@ -374,21 +375,18 @@ export const description =
               "We use AI tools to find and prioritize exactly what's suppressing your rankings.",
             ],
           ].map(([title, body]) => (
-            <div class="hover:border-primary/20 flex flex-col rounded-2xl border border-border-subtle bg-white p-8 shadow-sm transition duration-200 hover:shadow-md">
-              <div class="bg-primary/10 mb-4 flex h-10 w-10 items-center justify-center rounded-xl">
-                <svg
-                  class="h-5 w-5 text-primary"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  viewBox="0 0 24 24"
-                >
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-              </div>
+            <Card class="hover:border-primary/20 flex flex-col shadow-sm transition duration-200 hover:shadow-md">
+              <Card
+                icon="tabler:check"
+                iconColor="primary"
+                iconSize="sm"
+                iconShape="rounded"
+                iconPosition="inline"
+                class="!mb-4 !border-0 !bg-transparent !p-0 !shadow-none"
+              />
               <h3 class="mb-2 font-heading text-base font-bold text-heading">{title}</h3>
               <p class="text-sm text-body">{body}</p>
-            </div>
+            </Card>
           ))
         }
       </div>
@@ -423,7 +421,7 @@ export const description =
               role: "Electrical Contractor",
             },
           ].map((t) => (
-            <article class="hover:border-primary/30 flex flex-col rounded-2xl border border-border-base bg-white p-8 shadow-sm transition hover:shadow-md">
+            <Card as="article" class="hover:border-primary/30 flex flex-col shadow-sm transition hover:shadow-md">
               <div class="mb-4 flex gap-0.5">
                 {Array(5)
                   .fill(null)
@@ -440,7 +438,7 @@ export const description =
                 <p class="text-sm font-bold text-heading">{t.name}</p>
                 <p class="text-xs text-muted">{t.role}</p>
               </footer>
-            </article>
+            </Card>
           ))
         }
       </div>
