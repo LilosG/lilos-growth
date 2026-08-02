@@ -1,6 +1,9 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
 import CheckListItem from "~/components/ui/CheckListItem.astro";
+import Card from "~/components/ui/Card.astro";
+import Button from "~/components/ui/Button.astro";
+import Input from "~/components/ui/Input.astro";
 import { clientStats, caseStudies, packages } from "~/data/packages";
 
 export const metadata = {
@@ -125,11 +128,11 @@ export const metadata = {
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         {
           clientStats.map((s) => (
-            <div class="rounded-2xl border border-border-subtle bg-background-subtle p-8 text-center shadow-sm">
+            <Card class="!bg-background-subtle text-center shadow-sm">
               <div class="font-heading text-5xl font-extrabold text-primary">{s.stat}</div>
               <div class="mt-2 font-heading text-base font-bold text-heading">{s.label}</div>
               <div class="mt-1 text-sm text-muted">{s.sub}</div>
-            </div>
+            </Card>
           ))
         }
       </div>
@@ -322,68 +325,65 @@ export const metadata = {
         {
           [
             {
-              bg: "bg-orange-50",
-              icon_color: "text-primary",
-              icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>`,
+              icon: "tabler:map-pin",
+              iconColor: "primary" as const,
               title: "Google Business Profile",
               body: "Full setup, optimization, and monthly management. Posts, photos, review responses, Q&A, and performance reporting — done for you every month.",
               href: "/packages#gbp",
             },
             {
-              bg: "bg-blue-50",
-              icon_color: "text-blue-600",
-              icon: `<circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>`,
+              icon: "tabler:search",
+              iconColor: "blue" as const,
               title: "Local SEO & Content",
               body: "5–15 local content assets per month — service pages, city pages, FAQs, listicles. On-page fixes, technical SEO, schema, and citations continuously built.",
               href: "/packages#seo",
             },
             {
-              bg: "bg-purple-50",
-              icon_color: "text-purple-600",
-              icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>`,
+              icon: "tabler:building",
+              iconColor: "purple" as const,
               title: "Local Citation Building",
               body: "Consistent NAP across 100+ directories. Ongoing citation builds and cleanup so every listing sends the right signals to Google.",
               href: "/packages#seo",
             },
             {
-              bg: "bg-teal-50",
-              icon_color: "text-teal-600",
-              icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>`,
+              icon: "tabler:star",
+              iconColor: "teal" as const,
               title: "Reputation Management",
               body: "Every review responded to. Proactive review request guidance and templates. Monitoring across Google, Yelp, and industry directories.",
               href: "/packages#gbp",
             },
             {
-              bg: "bg-pink-50",
-              icon_color: "text-pink-600",
-              icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l6 0"/>`,
+              icon: "tabler:link",
+              // Card's iconColor enum has no "pink" — the source design used a distinct
+              // pink accent here, closest available approximation is primary.
+              iconColor: "primary" as const,
               title: "Local Link Building",
               body: "2–6 local backlinks per month depending on plan — associations, sponsorships, local press, partner pages. Real links that move rankings.",
               href: "/packages#seo",
             },
             {
-              bg: "bg-indigo-50",
-              icon_color: "text-indigo-600",
-              icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>`,
+              icon: "tabler:sparkles",
+              iconColor: "indigo" as const,
               title: "AI Search Visibility",
               body: "Google AI Overviews, ChatGPT Search, and Perplexity now surface local businesses. We track your AI visibility and build the schema and content that gets you cited.",
               href: "/packages#seo",
             },
           ].map((s) => (
-            <article class="hover:border-primary/30 flex flex-col rounded-2xl border border-border-subtle bg-white p-7 shadow-sm transition hover:shadow-md">
-              <div class={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl ${s.bg}`}>
-                <svg
-                  class={`h-5 w-5 ${s.icon_color}`}
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.75"
-                  viewBox="0 0 24 24"
-                  set:html={s.icon}
-                />
-              </div>
+            <Card
+              as="article"
+              class="hover:border-primary/30 flex flex-col transition hover:shadow-md"
+            >
+              <Card
+                icon={s.icon}
+                iconColor={s.iconColor}
+                iconSize="sm"
+                iconShape="rounded"
+                iconPosition="inline"
+                class="!mb-4 !border-0 !bg-transparent !p-0 !shadow-none"
+              />
               <h3 class="mb-2 font-heading text-base font-bold text-heading">{s.title}</h3>
               <p class="flex-1 text-sm leading-relaxed text-muted">{s.body}</p>
-            </article>
+            </Card>
           ))
         }
       </div>
@@ -778,7 +778,7 @@ export const metadata = {
               result: "+Organic Traffic",
             },
           ].map((t) => (
-            <article class="flex flex-col rounded-2xl border border-border-subtle bg-white p-6 shadow-sm">
+            <Card as="article" class="flex flex-col shadow-sm">
               <div class="mb-3 flex gap-0.5">
                 {Array(5)
                   .fill(0)
@@ -802,7 +802,7 @@ export const metadata = {
                   {t.result}
                 </span>
               </div>
-            </article>
+            </Card>
           ))
         }
       </div>
@@ -886,48 +886,34 @@ export const metadata = {
             }
           </ul>
         </div>
-        <div class="rounded-2xl border border-border-base bg-white p-8 shadow-md">
+        <Card class="shadow-md">
           <h3 class="mb-6 font-heading text-xl font-bold text-heading">Request your free audit</h3>
           <form method="POST" action="https://formspree.io/f/movlbqdk" class="flex flex-col gap-4">
             <input type="hidden" name="_redirect" value="https://lilosgrowth.com/thank-you" />
-            <input
-              type="text"
-              name="business_name"
-              placeholder="Business Name"
-              required
-              class="focus:ring-primary/20 w-full rounded-xl border border-border-base bg-white px-4 py-3 text-sm text-heading transition placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2"
-            />
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              required
-              class="focus:ring-primary/20 w-full rounded-xl border border-border-base bg-white px-4 py-3 text-sm text-heading transition placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2"
-            />
-            <input
-              type="url"
+            <Input id="audit-business-name" name="business_name" label="Business Name" required />
+            <Input id="audit-name" name="name" label="Your Name" required />
+            <Input
+              id="audit-website"
               name="website"
-              placeholder="Business Website URL"
+              label="Business Website URL"
+              type="url"
               required
-              class="focus:ring-primary/20 w-full rounded-xl border border-border-base bg-white px-4 py-3 text-sm text-heading transition placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2"
             />
-            <input
-              type="email"
+            <Input
+              id="audit-email"
               name="_replyto"
-              placeholder="Email Address"
+              label="Email Address"
+              type="email"
               required
-              class="focus:ring-primary/20 w-full rounded-xl border border-border-base bg-white px-4 py-3 text-sm text-heading transition placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2"
             />
-            <button
-              type="submit"
-              class="mt-1 w-full rounded-xl bg-primary px-6 py-3.5 font-heading text-base font-bold text-white shadow transition hover:bg-primary-dark"
-              >Get My Free Audit →</button
+            <Button type="submit" variant="primary" size="md" fullWidth class="mt-1"
+              >Get My Free Audit →</Button
             >
           </form>
           <p class="mt-4 text-center text-xs text-muted">
             No spam. No pitch calls unless you ask. Just your report.
           </p>
-        </div>
+        </Card>
       </div>
     </div>
   </section>
