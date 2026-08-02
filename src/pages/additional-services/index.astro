@@ -1,6 +1,7 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
 import CheckListItem from "~/components/ui/CheckListItem.astro";
+import Button from "~/components/ui/Button.astro";
 
 export const title = "AI Visibility Audit for Home Service Businesses | Lilos Growth";
 export const description =
@@ -94,21 +95,15 @@ const serviceSchema = {
         ChatGPT, Perplexity, and Google AI Overviews are answering local service queries right now.
         Find out if your business is getting cited — or invisible.
       </p>
-      <a
+      <Button
         href="/contact#book"
         data-evt="cta_ai_audit_hero"
-        class="inline-flex items-center rounded-full bg-primary px-8 py-3.5 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-dark"
+        variant="primary"
+        size="lg"
+        icon="tabler:arrow-right"
       >
         Get My AI Audit — $349
-        <svg
-          class="ml-2 h-4 w-4"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="3"
-          viewBox="0 0 24 24"
-          aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-        >
-      </a>
+      </Button>
     </div>
   </section>
 
@@ -298,13 +293,15 @@ const serviceSchema = {
             <CheckListItem align="center">Content structure review</CheckListItem>
             <CheckListItem align="center">Prioritized action plan with specific fixes</CheckListItem>
           </ul>
-          <a
+          <Button
             href="/contact#book"
             data-evt="cta_ai_audit_pricing"
-            class="block rounded-xl bg-primary px-6 py-3.5 text-center font-heading text-base font-semibold text-white shadow transition hover:bg-primary-dark"
+            variant="primary"
+            size="lg"
+            fullWidth
           >
             Get My AI Audit — $349
-          </a>
+          </Button>
           <p class="mt-3 text-xs text-body">
             No retainer required. No upsell pressure. Just the audit.
           </p>
@@ -350,21 +347,15 @@ const serviceSchema = {
         Book a call and we'll confirm the audit scope, collect your business details, and deliver
         your report within 5 business days.
       </p>
-      <a
+      <Button
         href="/contact#book"
         data-evt="cta_ai_audit_final"
-        class="inline-flex items-center rounded-full bg-primary px-8 py-3.5 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-dark"
+        variant="primary"
+        size="lg"
+        icon="tabler:arrow-right"
       >
         Book My AI Audit
-        <svg
-          class="ml-2 h-4 w-4"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="3"
-          viewBox="0 0 24 24"
-          aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-        >
-      </a>
+      </Button>
     </div>
   </section>
 </Layout>
