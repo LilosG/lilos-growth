@@ -1,6 +1,7 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
 import CheckListItem from "~/components/ui/CheckListItem.astro";
+import Card from "~/components/ui/Card.astro";
 import {
   packages,
   gbpManagement,
@@ -363,7 +364,7 @@ const faqs = [
       </div>
 
       <!-- WaS -->
-      <div class="rounded-2xl border border-border-subtle bg-background-subtle p-8">
+      <Card class="!bg-background-subtle">
         <div class="mb-6">
           <p class="mb-1 text-xs font-bold uppercase tracking-widest text-primary">
             Website as a Service
@@ -399,7 +400,7 @@ const faqs = [
             </a>
           </div>
         </div>
-      </div>
+      </Card>
     </div>
   </section>
 
@@ -573,7 +574,7 @@ const faqs = [
         <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Add-ons</p>
         <h2 class="font-heading text-4xl font-extrabold text-heading">Additional services</h2>
       </div>
-      <div class="overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-sm">
+      <Card class="overflow-hidden !p-0 shadow-sm">
         {
           addOns.map((addon, i) => (
             <div
@@ -584,7 +585,7 @@ const faqs = [
             </div>
           ))
         }
-      </div>
+      </Card>
     </div>
   </section>
 
