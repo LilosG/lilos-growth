@@ -203,8 +203,13 @@ the canonical `.input` class and the ad-hoc `h-11 rounded-lg` convention above.
 1. Delete the dead `.tool-card*` / `.tool-input` / `.tool-button-*` / `.tool-output*` /
    `.tool-badge*` block in `tailwind.css:426-536` — confirm zero references first (done
    above), then remove.
-2. Reconcile `Layout.astro`'s local `.btn`/`.btn-primary` with the canonical
-   `tailwind.config.js` version, or rename one pair to avoid the collision.
+2. ~~Reconcile `Layout.astro`'s local `.btn`/`.btn-primary` with the canonical
+   `tailwind.config.js` version, or rename one pair to avoid the collision.~~
+   **Resolved** — already fixed in `4a04095` (2026-07-31), the same commit that
+   introduced this audit: `Layout.astro`'s duplicate `.btn` definition was removed
+   and `404.astro`'s button was repatched onto the canonical version. Verified via
+   grep: `Layout.astro` has zero `.btn` references today. See the section 3 note for
+   detail.
 3. Decide on one canonical CTA button spec (radius + padding + shadow) and migrate the
    ~15 distinct hand-rolled variants in section 3 onto `Button.astro`, at least for
    pages sharing a template family (blog templates already share one variant near-
