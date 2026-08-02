@@ -1,5 +1,6 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
+import Button from "~/components/ui/Button.astro";
 
 export const title = "Contact Lilos Growth | Free Local SEO Audit & Consultation";
 export const description =
@@ -82,22 +83,18 @@ export const description =
           class="rounded-lg border border-gray-300 px-5 py-4 text-base transition focus:outline-primary"
         ></textarea>
 
-        <button
+        <Button
           type="submit"
-          class="mt-2 flex items-center justify-center rounded-xl bg-primary px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-primary-dark"
+          variant="primary"
+          size="lg"
+          icon="tabler:check"
+          iconPosition="left"
+          class="mt-2"
           data-track
           data-track-event="contact_submit"
         >
-          <svg
-            class="mr-2 h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            viewBox="0 0 24 24"
-            aria-hidden="true"><path d="M5 13l4 4L19 7"></path></svg
-          >
           Send Message
-        </button>
+        </Button>
       </form>
 
       <div class="mt-8 text-center text-sm text-body">
@@ -141,22 +138,16 @@ export const description =
               <span aria-hidden="true">•</span><span>We’ll send a quick recap after the call</span>
             </li>
           </ul>
-          <a
+          <Button
             href="#book"
-            class="inline-flex items-center rounded-xl bg-primary px-5 py-3 font-heading font-semibold text-white"
+            variant="primary"
+            size="lg"
+            icon="tabler:arrow-right"
             data-track
             data-track-event="jump_to_calendar"
           >
             Jump to Calendar
-            <svg
-              class="ml-2 h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="3"
-              aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-            >
-          </a>
+          </Button>
           <noscript>
             <p class="mt-4 text-sm">
               JavaScript is required to load the calendar. You can book directly

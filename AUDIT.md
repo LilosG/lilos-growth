@@ -227,3 +227,18 @@ the canonical `.input` class and the ad-hoc `h-11 rounded-lg` convention above.
     separate from mid-page CTAs. This is a design proposal to evaluate deliberately,
     not a consistency fix — do not fold into any future normalization pass without a
     conscious decision to adopt it sitewide.
+
+11. While migrating `contact.astro`'s "Jump to Calendar" anchor (`#book`, scrolls to
+    the on-page Calendly widget) to `Button`, the question came up of whether a CTA
+    that merely *navigates toward* conversion (an anchor/page link) should be
+    visually distinguished from a CTA that *performs* the conversion action itself
+    (e.g. the contact form's "Send Message" submit button). Kept `variant="primary"`
+    for "Jump to Calendar" — every other primary CTA already migrated in this
+    rollout (`/contact#book` links on `index.astro`, `services/index.astro`,
+    `results.astro`, etc.) is equally just a navigate-to-booking-surface link, not a
+    literal transaction, so this button isn't a new category and singling it out
+    would be inconsistent with everything already shipped. But the site has no
+    established convention distinguishing "navigate to the booking surface" CTAs
+    from "actually book/submit" CTAs — they're all styled identically today. Worth
+    considering deliberately as its own design decision; not something to resolve by
+    downgrading one button's variant now.
