@@ -2,6 +2,7 @@
 import Layout from "~/layouts/PageLayout.astro";
 import CheckListItem from "~/components/ui/CheckListItem.astro";
 import Card from "~/components/ui/Card.astro";
+import Button from "~/components/ui/Button.astro";
 import { packages } from "~/data/packages";
 
 export const title = "Local SEO & Website Services for Home Service Businesses | Lilos Growth";
@@ -35,20 +36,15 @@ export const description =
             We deliver web design, GBP management, and local SEO that drives calls.
           </p>
           <div class="flex flex-wrap gap-4">
-            <a
+            <Button
               href="/contact#book"
               data-evt="cta_services_book_call"
-              class="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 font-heading text-base font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.4)] transition hover:bg-primary-dark"
+              variant="primary"
+              size="lg"
+              icon="tabler:arrow-right"
             >
               Book a Free Call
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-              >
-            </a>
+            </Button>
             <a
               href="#packages"
               data-evt="cta_services_view_packages"
@@ -279,20 +275,15 @@ export const description =
               ))
             }
           </ul>
-          <a
+          <Button
             href="/contact#book"
             data-evt="cta_services_ai_audit"
-            class="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-heading text-base font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.4)] transition hover:bg-primary-dark"
+            variant="primary"
+            size="lg"
+            icon="tabler:arrow-right"
           >
             Get Your Free Audit
-            <svg
-              class="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-            >
-          </a>
+          </Button>
         </div>
         <div class="rounded-2xl border border-white/10 bg-white/5 p-8">
           <p class="text-primary/60 mb-5 text-xs font-bold uppercase tracking-wider">
@@ -478,20 +469,9 @@ export const description =
           ))
         }
       </div>
-      <a
-        href="/packages"
-        class="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-heading text-base font-bold text-white shadow transition hover:bg-primary-dark"
-      >
+      <Button href="/packages" variant="primary" size="lg" icon="tabler:arrow-right" class="mt-8">
         See Full Pricing &amp; What's Included
-        <svg
-          class="h-4 w-4"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="3"
-          viewBox="0 0 24 24"
-          aria-hidden="true"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-        >
-      </a>
+      </Button>
     </div>
   </section>
 
@@ -567,20 +547,15 @@ export const description =
         Book a free 15-minute audit. We review your GBP and site, find the biggest gaps, and tell
         you exactly what to do next.
       </p>
-      <a
+      <Button
         href="/contact#book"
         data-evt="cta_services_final"
-        class="inline-flex items-center gap-2.5 rounded-full bg-primary px-12 py-5 font-heading text-xl font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.45)] transition hover:bg-primary-dark"
+        variant="primary"
+        size="lg"
+        icon="tabler:arrow-right"
       >
         Book a Call
-        <svg
-          class="h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6"></path></svg
-        >
-      </a>
+      </Button>
     </div>
   </section>
 </Layout>
