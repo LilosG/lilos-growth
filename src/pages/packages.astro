@@ -2,6 +2,7 @@
 import Layout from "~/layouts/PageLayout.astro";
 import CheckListItem from "~/components/ui/CheckListItem.astro";
 import Card from "~/components/ui/Card.astro";
+import Button from "~/components/ui/Button.astro";
 import {
   packages,
   gbpManagement,
@@ -163,12 +164,14 @@ const faqs = [
                   </CheckListItem>
                 ))}
               </ul>
-              <a
+              <Button
                 href="/contact#book"
-                class={`block rounded-xl px-6 py-3.5 text-center text-sm font-bold transition ${pkg.featured ? "bg-primary text-white shadow hover:bg-primary-dark" : "border-2 border-primary text-primary hover:bg-primary hover:text-white"}`}
+                variant={pkg.featured ? "primary" : "outline"}
+                size="lg"
+                fullWidth
               >
                 Get Started
-              </a>
+              </Button>
             </article>
           ))
         }
@@ -218,11 +221,9 @@ const faqs = [
               ))
             }
           </ul>
-          <a
-            href="/contact#book"
-            class="block rounded-xl bg-primary px-6 py-3.5 text-center text-sm font-bold text-white shadow transition hover:bg-primary-dark"
-            >Get Started</a
-          >
+          <Button href="/contact#book" variant="primary" size="lg" fullWidth>
+            Get Started
+          </Button>
         </article>
       </div>
     </div>
@@ -277,12 +278,14 @@ const faqs = [
                   <CheckListItem>{inc}</CheckListItem>
                 ))}
               </ul>
-              <a
+              <Button
                 href="/contact#book"
-                class={`block rounded-xl px-6 py-3.5 text-center text-sm font-bold transition ${tier.featured ? "bg-primary text-white shadow hover:bg-primary-dark" : "border-2 border-primary text-primary hover:bg-primary hover:text-white"}`}
+                variant={tier.featured ? "primary" : "outline"}
+                size="lg"
+                fullWidth
               >
                 Get Started
-              </a>
+              </Button>
             </article>
           ))
         }
@@ -352,12 +355,14 @@ const faqs = [
                   <CheckListItem>{inc}</CheckListItem>
                 ))}
               </ul>
-              <a
+              <Button
                 href="/contact#book"
-                class={`block rounded-xl px-6 py-3.5 text-center text-sm font-bold transition ${build.featured ? "bg-primary text-white shadow hover:bg-primary-dark" : "border-2 border-primary text-primary hover:bg-primary hover:text-white"}`}
+                variant={build.featured ? "primary" : "outline"}
+                size="lg"
+                fullWidth
               >
                 Start Your Build
-              </a>
+              </Button>
             </article>
           ))
         }
@@ -392,12 +397,9 @@ const faqs = [
                 <CheckListItem>{inc}</CheckListItem>
               ))}
             </ul>
-            <a
-              href="/contact#book"
-              class="mt-6 block rounded-xl border-2 border-primary px-5 py-2.5 text-center text-sm font-bold text-primary transition hover:bg-primary hover:text-white"
-            >
+            <Button href="/contact#book" variant="outline" size="lg" fullWidth class="mt-6">
               Get Started
-            </a>
+            </Button>
           </div>
         </div>
       </Card>
@@ -454,12 +456,14 @@ const faqs = [
                   {audit.note}
                 </p>
               )}
-              <a
+              <Button
                 href="/contact#book"
-                class={`block rounded-xl px-6 py-3.5 text-center text-sm font-bold transition ${audit.price === 0 ? "bg-primary text-white shadow hover:bg-primary-dark" : "border-2 border-primary text-primary hover:bg-primary hover:text-white"}`}
+                variant={audit.price === 0 ? "primary" : "outline"}
+                size="lg"
+                fullWidth
               >
                 {audit.price === 0 ? "Request Your Free Audit →" : "Get Started"}
-              </a>
+              </Button>
             </article>
           ))
         }
@@ -635,11 +639,9 @@ const faqs = [
         show you exactly where the gaps are, and tell you what it would take to close them.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a
-          href="/contact#book"
-          class="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 font-heading text-lg font-bold text-white shadow-[0_8px_32px_rgba(245,107,42,0.35)] transition hover:bg-primary-dark"
-          >Get Your Free GBP Audit →</a
-        >
+        <Button href="/contact#book" variant="primary" size="lg" icon="tabler:arrow-right">
+          Get Your Free GBP Audit
+        </Button>
         <a
           href="/contact#book"
           class="border-heading/20 inline-flex items-center gap-2 rounded-full border-2 px-10 py-4 font-heading text-lg font-bold text-heading transition hover:border-primary hover:text-primary"
