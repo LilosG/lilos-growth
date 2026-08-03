@@ -201,12 +201,22 @@ const cornerBadgeClasses =
       )}
     </div>
 
-    {(bodyText || bestFor) && (
-      <div class={`mb-5 border-t pt-5 ${isDark ? "border-white/10" : "border-border-subtle"}`}>
-        {bodyText && <p class={`mb-2 text-sm ${isDark ? "text-white/75" : "text-body"}`}>{bodyText}</p>}
-        {bestFor && <p class={`text-xs italic ${isDark ? "text-white/50" : "text-muted"}`}>{bestFor}</p>}
-      </div>
-    )}
+    {
+      bodyText ? (
+        <>
+          <div class={`my-5 h-px ${isDark ? "bg-white/10" : "bg-border-subtle"}`} />
+          <p class={`mb-2 text-sm ${isDark ? "text-white/75" : "text-body"}`}>{bodyText}</p>
+          {bestFor && <p class={`mb-5 text-xs italic ${isDark ? "text-white/50" : "text-muted"}`}>{bestFor}</p>}
+        </>
+      ) : bestFor ? (
+        <>
+          <p class={`mb-5 mt-2 text-xs italic ${isDark ? "text-white/50" : "text-muted"}`}>{bestFor}</p>
+          <div class={`mb-5 h-px ${isDark ? "bg-white/10" : "bg-border-subtle"}`} />
+        </>
+      ) : (
+        <div class={`my-5 h-px ${isDark ? "bg-white/10" : "bg-border-subtle"}`} />
+      )
+    }
 
     <ul class="mb-6 flex-grow space-y-2.5">
       {
