@@ -218,17 +218,23 @@ current file state, not carried forward from prior text)
    **Resolved.** No `.bak` files exist anywhere under `src/pages` (re-verified via
    find). They already live at `reference/index.astro.bak.txt` and
    `reference/services-index.astro.bak.txt` — outside `src/pages`.
-5. Standardize the tool-form input convention. **Still open, but narrower than
-   previously described.** Re-verified: 8 of 9 tool components (`ReviewLinkGenerator`,
-   `FAQSchemaGenerator`, `UTMLinkBuilder`, `GBPCategoryFinder`, `LocalKeywordIdeas`,
-   `SERPPreview`, `LandingPageOutlineGenerator`, `LocalBusinessSchema`) already import
-   and use `ui/Input.astro`. Only `src/components/tools/LocalSEOROICalculator.astro`
-   (lines 74–96) still hand-rolls `<input>` markup with its own class string
-   (`rounded-xl`, `py-3.5`, plus a `$`-prefix affordance the shared `Input.astro`
-   doesn't support). Decide whether to add a prefix-icon slot to `Input.astro` or
-   leave this one component as an intentional exception.
 
 ### Resolved
+
+5. ~~Standardize the tool-form input convention. 8 of 9 tool components already used
+   `ui/Input.astro`; only `LocalSEOROICalculator.astro` still hand-rolled `<input>`
+   markup, including a `$`-prefix affordance the shared component didn't support.~~
+   **Resolved.** Added a `prefix?: string` prop to `Input.astro` (pointer-events-none
+   glyph, absolutely positioned, auto-adds `pl-8`) plus `min?: number` to preserve the
+   original `min="0"` behavior. The revenue and visitors fields now use `<Input>`,
+   converging on the same convention as the other 8 tools. The industry `<select>` —
+   which `Input.astro` doesn't support, since it only renders `<input>` — was converged
+   onto the plain `class="input"` convention already established by
+   `LocalBusinessSchema.astro:36` instead of forced through the input component.
+   Verified with `astro check` (0 errors) and `npm run build`, then functionally in the
+   browser: entered a new revenue value, confirmed the `$` prefix still renders and the
+   ROI panel (lead growth → conversions → revenue → ROI%) recalculates correctly, and
+   confirmed the industry select still drives the conversion-rate/job-value assumptions.
 
 7. ~~`src/components/tools/ReviewLinkGenerator.astro` is still orphaned.~~
    **Resolved.** Wired into `/local-seo-tools` as an 8th tool card, alongside SERP
