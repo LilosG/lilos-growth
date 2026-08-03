@@ -6,6 +6,7 @@ import Button from "~/components/ui/Button.astro";
 import Input from "~/components/ui/Input.astro";
 import PricingCard from "~/components/sections/PricingCard.astro";
 import { clientStats, caseStudies, packages } from "~/data/packages";
+import { normalizeCaseStudyHref } from "~/lib/caseStudies";
 
 const fmt = (n: number) => n.toLocaleString();
 
@@ -462,7 +463,7 @@ export const metadata = {
                 <div class="flex items-center justify-between border-t border-border-subtle pt-4">
                   <span class="text-xs text-muted">Timeframe: {cs.timeframe}</span>
                   <a
-                    href={cs.href}
+                    href={normalizeCaseStudyHref(cs.href)}
                     class="text-xs font-bold text-primary transition hover:text-primary-dark"
                   >
                     View case study →
