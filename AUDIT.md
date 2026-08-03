@@ -228,13 +228,17 @@ current file state, not carried forward from prior text)
    doesn't support). Decide whether to add a prefix-icon slot to `Input.astro` or
    leave this one component as an intentional exception.
 
-### Still open (re-verified)
-
-7. `src/components/tools/ReviewLinkGenerator.astro` is still orphaned — confirmed via
-   exhaustive grep, zero references to `ReviewLinkGenerator` anywhere in `src/`. Still
-   needs a decision: delete the dead file, or wire it into a live page slot.
-
 ### Resolved
+
+7. ~~`src/components/tools/ReviewLinkGenerator.astro` is still orphaned.~~
+   **Resolved.** Wired into `/local-seo-tools` as an 8th tool card, alongside SERP
+   Preview and UTM Link Builder in the SEO & Marketing grid, following the same
+   Card/icon/iconColor pattern as the other 7 tools (`tabler:qrcode` icon,
+   `iconColor="pink"`, the one enum member not already in use on that page).
+   Functionally verified end-to-end in the browser, not just rendering: filled in a
+   business name/city/state, submitted, and confirmed the Google Places lookup, the
+   generated review link (`search.google.com/local/writereview?placeid=...`), and
+   the QR code all work correctly.
 
 6. ~~Homepage's pricing-preview cards (`index.astro:909`, the `packages.map(...)` grid)
    and `packages.astro:127`'s four pricing-tier grids are still hand-rolled.~~
