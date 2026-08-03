@@ -13,6 +13,7 @@ import LandingPageOutlineGenerator from "~/components/tools/LandingPageOutlineGe
 import UTMLinkBuilder from "~/components/tools/UTMLinkBuilder.astro";
 import LocalBusinessSchema from "~/components/tools/LocalBusinessSchema.astro";
 import LocalKeywordIdeas from "~/components/tools/LocalKeywordIdeas.astro";
+import ReviewLinkGenerator from "~/components/tools/ReviewLinkGenerator.astro";
 
 const title = "Free Local SEO Tools | Lilos Growth";
 const description =
@@ -311,7 +312,7 @@ const stats = [
       <!-- SEO & Marketing -->
       <div>
         <h2 class="mb-8 font-heading text-xl font-bold text-heading">SEO & Marketing</h2>
-        <div class="grid gap-6 lg:grid-cols-2">
+        <div class="grid gap-6 md:grid-cols-3">
           <Card
             as="article"
             class="flex h-full flex-col shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
@@ -357,6 +358,30 @@ const stats = [
             </Card>
             <div class="mt-5 flex flex-1 flex-col border-t border-border-subtle pt-5">
               <UTMLinkBuilder />
+            </div>
+          </Card>
+
+          <Card
+            as="article"
+            class="flex h-full flex-col shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+          >
+            <Card
+              icon="tabler:qrcode"
+              iconColor="pink"
+              iconSize="sm"
+              iconShape="rounded"
+              iconPosition="inline"
+              class="!border-0 !bg-transparent !p-0 !shadow-none"
+            >
+              <span
+                class="mb-0.5 inline-block text-[10px] font-bold uppercase tracking-wider text-muted"
+                >Free Tool</span
+              >
+              <h3 class="font-heading font-bold text-heading">Review Link Generator</h3>
+              <p class="text-sm text-muted">Get a direct review link + QR code</p>
+            </Card>
+            <div class="mt-5 flex flex-1 flex-col border-t border-border-subtle pt-5">
+              <ReviewLinkGenerator />
             </div>
           </Card>
         </div>
