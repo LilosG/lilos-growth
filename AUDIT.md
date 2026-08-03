@@ -210,10 +210,15 @@ the canonical `.input` class and the ad-hoc `h-11 rounded-lg` convention above.
    and `404.astro`'s button was repatched onto the canonical version. Verified via
    grep: `Layout.astro` has zero `.btn` references today. See the section 3 note for
    detail.
-3. Decide on one canonical CTA button spec (radius + padding + shadow) and migrate the
-   ~15 distinct hand-rolled variants in section 3 onto `Button.astro`, at least for
-   pages sharing a template family (blog templates already share one variant near-
-   identically, easiest first target).
+3. ~~Decide on one canonical CTA button spec (radius + padding + shadow) and migrate
+   the ~15 distinct hand-rolled variants in section 3 onto `Button.astro`, at least
+   for pages sharing a template family (blog templates already share one variant
+   near-identically, easiest first target).~~
+   **Resolved** — this is exactly what the section 3 CTA-button standardization
+   rollout completed: canonical spec settled on `variant="primary" size="lg"` (outline
+   for secondary/bordered patterns), migrated across every page in section 3's table.
+   See the section 3 status note for the full page list and the two bugs fixed along
+   the way.
 4. Either delete `index.astro.bak` / `services/index.astro.bak` or move them out of
    `src/pages` if they're meant to be kept as reference.
 5. Standardize the tool-form input convention (`h-11`, ring opacity, visible label) and
