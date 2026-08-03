@@ -4,7 +4,10 @@ import CheckListItem from "~/components/ui/CheckListItem.astro";
 import Card from "~/components/ui/Card.astro";
 import Button from "~/components/ui/Button.astro";
 import Input from "~/components/ui/Input.astro";
+import PricingCard from "~/components/sections/PricingCard.astro";
 import { clientStats, caseStudies, packages } from "~/data/packages";
+
+const fmt = (n: number) => n.toLocaleString();
 
 export const metadata = {
   title: "Local SEO, GBP Management & Website Design | Lilos Growth",
@@ -907,67 +910,19 @@ export const metadata = {
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         {
           packages.map((pkg) => (
-            <article
-              class={`relative flex flex-col rounded-2xl border p-8 transition ${pkg.featured ? "border-primary bg-secondary shadow-xl" : "hover:border-primary/30 border-border-subtle bg-white shadow-sm hover:shadow-md"}`}
-            >
-              {pkg.featured && (
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span class="rounded-full bg-primary px-5 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow">
-                    {pkg.badge}
-                  </span>
-                </div>
-              )}
-              <p
-                class={`mb-1 text-xs font-bold uppercase tracking-widest ${pkg.featured ? "text-primary" : "text-muted"}`}
-              >
-                {pkg.tagline}
-              </p>
-              <h3
-                class={`font-heading text-2xl font-extrabold ${pkg.featured ? "text-white" : "text-heading"}`}
-              >
-                {pkg.name}
-              </h3>
-              <div class="mt-3 flex items-baseline gap-1">
-                <span
-                  class={`font-heading text-5xl font-extrabold ${pkg.featured ? "text-white" : "text-primary"}`}
-                >
-                  ${pkg.price}
-                </span>
-                <span class={`text-sm ${pkg.featured ? "text-white/50" : "text-body"}`}>/mo</span>
-              </div>
-              <p class={`mb-5 mt-1 text-xs ${pkg.featured ? "text-white/40" : "text-muted"}`}>
-                Setup month: ${pkg.setupPrice}
-              </p>
-              <div class={`mb-5 h-px ${pkg.featured ? "bg-white/10" : "bg-border-subtle"}`} />
-              <ul class="mb-8 flex-1 space-y-2.5 text-sm">
-                {pkg.inclusions.map((inc) => (
-                  <li
-                    class={`flex items-start gap-2 ${pkg.featured ? "text-white/75" : "text-body"}`}
-                  >
-                    <svg
-                      class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4.5 12.75l6 6 9-13.5"
-                      />
-                    </svg>
-                    {inc}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="/contact#book"
-                class={`block rounded-xl px-6 py-3.5 text-center text-sm font-bold transition ${pkg.featured ? "bg-primary text-white shadow hover:bg-primary-dark" : "border-2 border-primary text-primary hover:bg-primary hover:text-white"}`}
-              >
-                Get Started
-              </a>
-            </article>
+            <PricingCard
+              eyebrow={pkg.tagline}
+              title={pkg.name}
+              price={fmt(pkg.price)}
+              period="mo"
+              priceNote={`Setup month: $${fmt(pkg.setupPrice)}`}
+              features={pkg.inclusions}
+              ctaText="Get Started"
+              ctaHref="/contact#book"
+              featured={pkg.featured}
+              featuredStyle="dark"
+              badgeText={pkg.featured ? pkg.badge : undefined}
+            />
           ))
         }
       </div>
