@@ -178,7 +178,11 @@ const cornerBadgeClasses =
         <span class={`font-heading text-2xl font-bold md:text-3xl ${isDark ? "text-white" : "text-primary"}`}>
           {isFree ? "Free" : cleanPrice.startsWith("$") ? cleanPrice : `$${cleanPrice}`}
         </span>
-        {!isFree && <span class={`text-sm ${isDark ? "text-white/50" : "text-body-light"}`}>/{period}</span>}
+        {!isFree && (
+          <span class={`text-sm ${isDark ? "text-white/50" : "text-body-light"}`}>
+            {period === "one-time" ? period : `/${period}`}
+          </span>
+        )}
       </div>
       {priceNote && (
         <p class={`mt-1 text-xs ${isDark ? "text-white/40" : "text-muted"}`}>{priceNote}</p>

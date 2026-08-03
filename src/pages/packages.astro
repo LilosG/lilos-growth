@@ -303,48 +303,20 @@ const faqs = [
       <div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2">
         {
           websiteBuilds.map((build) => (
-            <article
-              class={`relative flex flex-col rounded-2xl border p-8 transition ${build.featured ? "ring-primary/20 border-primary bg-white shadow-xl ring-2" : "hover:border-primary/30 border-border-subtle bg-white shadow-sm hover:shadow-md"}`}
-            >
-              {build.featured && (
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span class="rounded-full bg-primary px-5 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow">
-                    Most Popular
-                  </span>
-                </div>
-              )}
-              <h3 class="font-heading text-2xl font-extrabold text-heading">{build.name}</h3>
-              <div class="mt-2 flex items-baseline gap-1">
-                <span class="font-heading text-5xl font-extrabold text-primary">
-                  ${fmt(build.price)}
-                </span>
-                <span class="text-sm text-body">one-time</span>
-              </div>
-              <p class="mt-2 text-xs font-semibold text-primary">
-                ${fmt(build.bundledPrice)} flat if bundled with any ongoing package
-              </p>
-              <div class="mt-2 flex gap-3">
-                <span class="rounded-full border border-border-subtle bg-background-subtle px-2.5 py-0.5 text-xs font-semibold text-muted">
-                  {build.timeline}
-                </span>
-              </div>
-              <div class="my-5 h-px bg-border-subtle" />
-              <p class="mb-2 text-sm text-body">{build.description}</p>
-              <p class="mb-5 text-xs italic text-muted">{build.bestFor}</p>
-              <ul class="mb-8 flex-1 space-y-2.5 text-sm">
-                {build.inclusions.map((inc) => (
-                  <CheckListItem>{inc}</CheckListItem>
-                ))}
-              </ul>
-              <Button
-                href="/contact#book"
-                variant={build.featured ? "primary" : "outline"}
-                size="lg"
-                fullWidth
-              >
-                Start Your Build
-              </Button>
-            </article>
+            <PricingCard
+              title={build.name}
+              price={fmt(build.price)}
+              period="one-time"
+              secondaryPrice={`$${fmt(build.bundledPrice)} flat if bundled with any ongoing package`}
+              timeline={build.timeline}
+              bodyText={build.description}
+              bestFor={build.bestFor}
+              features={build.inclusions}
+              ctaText="Start Your Build"
+              ctaHref="/contact#book"
+              featured={build.featured}
+              featuredStyle="ring"
+            />
           ))
         }
       </div>
