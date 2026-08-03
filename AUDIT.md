@@ -198,83 +198,70 @@ the canonical `.input` class and the ad-hoc `h-11 rounded-lg` convention above.
 
 ---
 
-## 5. Recommended follow-up (not implemented — audit only)
+## 5. Recommended follow-up (re-verified 2026-08-03 — every item re-checked against
+current file state, not carried forward from prior text)
 
-1. Delete the dead `.tool-card*` / `.tool-input` / `.tool-button-*` / `.tool-output*` /
-   `.tool-badge*` block in `tailwind.css:426-536` — confirm zero references first (done
-   above), then remove.
+1. ~~Delete the dead `.tool-card*` / `.tool-input` / `.tool-button-*` / `.tool-output*` /
+   `.tool-badge*` block in `tailwind.css:426-536`.~~
+   **Resolved.** The actual file is `src/assets/styles/tailwind.css` (447 lines total).
+   Grepped for `tool-card|tool-input|tool-button-|tool-output|tool-badge` — zero hits.
+   The block no longer exists.
 2. ~~Reconcile `Layout.astro`'s local `.btn`/`.btn-primary` with the canonical
-   `tailwind.config.js` version, or rename one pair to avoid the collision.~~
-   **Resolved** — already fixed in `4a04095` (2026-07-31), the same commit that
-   introduced this audit: `Layout.astro`'s duplicate `.btn` definition was removed
-   and `404.astro`'s button was repatched onto the canonical version. Verified via
-   grep: `Layout.astro` has zero `.btn` references today. See the section 3 note for
-   detail.
-3. ~~Decide on one canonical CTA button spec (radius + padding + shadow) and migrate
-   the ~15 distinct hand-rolled variants in section 3 onto `Button.astro`, at least
-   for pages sharing a template family (blog templates already share one variant
-   near-identically, easiest first target).~~
-   **Resolved** — this is exactly what the section 3 CTA-button standardization
-   rollout completed: canonical spec settled on `variant="primary" size="lg"` (outline
-   for secondary/bordered patterns), migrated across every page in section 3's table.
-   See the section 3 status note for the full page list and the two bugs fixed along
-   the way.
-4. Either delete `index.astro.bak` / `services/index.astro.bak` or move them out of
-   `src/pages` if they're meant to be kept as reference.
-5. Standardize the tool-form input convention (`h-11`, ring opacity, visible label) and
-   consider finally wiring `ui/Input.astro` into the tool components instead of the
-   copy-pasted class string.
+   `tailwind.config.js` version.~~
+   **Resolved** — `Layout.astro` has zero `.btn` references (re-verified).
+3. ~~Decide on one canonical CTA button spec and migrate hand-rolled variants onto
+   `Button.astro`.~~
+   **Resolved** — canonical spec (`variant="primary" size="lg"`) is in place and
+   applied across the pages migrated in section 3.
+4. ~~Delete `index.astro.bak` / `services/index.astro.bak` or move them out of
+   `src/pages`.~~
+   **Resolved.** No `.bak` files exist anywhere under `src/pages` (re-verified via
+   find). They already live at `reference/index.astro.bak.txt` and
+   `reference/services-index.astro.bak.txt` — outside `src/pages`.
+5. Standardize the tool-form input convention. **Still open, but narrower than
+   previously described.** Re-verified: 8 of 9 tool components (`ReviewLinkGenerator`,
+   `FAQSchemaGenerator`, `UTMLinkBuilder`, `GBPCategoryFinder`, `LocalKeywordIdeas`,
+   `SERPPreview`, `LandingPageOutlineGenerator`, `LocalBusinessSchema`) already import
+   and use `ui/Input.astro`. Only `src/components/tools/LocalSEOROICalculator.astro`
+   (lines 74–96) still hand-rolls `<input>` markup with its own class string
+   (`rounded-xl`, `py-3.5`, plus a `$`-prefix affordance the shared `Input.astro`
+   doesn't support). Decide whether to add a prefix-icon slot to `Input.astro` or
+   leave this one component as an intentional exception.
 
-### Deferred during the card-migration rollout
+### Still open (re-verified)
 
-6. Homepage's pricing-preview cards (`index.astro`, the `packages.map(...)` grid) and
-   `packages.astro`'s four pricing-tier grids (`packages`/`seoTiers`/`websiteBuilds`/
-   `audits`) are still hand-rolled and don't use the existing `PricingCard.astro`
-   component — a different fix shape than the rest of this audit (swapping to an
-   existing component, not extending Card/Button/Input props), deliberately left out
-   of the card-migration rollout to stay scoped to what AUDIT.md section 1 itemized.
-7. `about.astro:365` still hardcodes `hover:bg-[#c9400a]` instead of the
-   `--color-primary-dark` token — a section-3 (CTA button) finding, deferred since the
-   rollout stayed scoped to section-1 card patterns.
-8. `Card.astro`'s `iconColor` enum gained a `pink` member during the homepage
-   migration (`src/components/ui/Card.astro`) to replace a same-day `primary`
-   approximation. Confirmed via grep that every `iconColor` usage introduced across
-   the rollout (homepage, local-seo-tools, services/index.astro) maps to a real enum
-   member — no other card was left on an approximated color.
-9. `src/components/tools/ReviewLinkGenerator.astro` is fully built and was migrated to
-   Card/Button/Input during this rollout, but it's orphaned — not imported or rendered
-   anywhere in `src/` (confirmed via exhaustive grep). It was deliberately removed from
-   `local-seo-tools/index.astro` in commit `e34f4d5b`, predating this rollout, in favor
-   of a static marketing teaser card occupying that page slot instead. Needs a decision
-   — delete the dead file, or wire it into a live page slot — not resolved this
-   session; flagging for a future call, not fixing now.
+6. Homepage's pricing-preview cards (`index.astro:909`, the `packages.map(...)` grid)
+   and `packages.astro:127`'s four pricing-tier grids are still hand-rolled — confirmed
+   via grep, unchanged. `PricingCard.astro` exists and is proven out elsewhere
+   (used in `services/local-seo/index.astro`), so this is adoption, not a component gap.
+7. `src/components/tools/ReviewLinkGenerator.astro` is still orphaned — confirmed via
+   exhaustive grep, zero references to `ReviewLinkGenerator` anywhere in `src/`. Still
+   needs a decision: delete the dead file, or wire it into a live page slot.
 
-### Design ideas surfaced during the rollout (not bugs — future consideration)
+### Resolved on re-verification
 
-10. While normalizing `services/index.astro`'s outlier final CTA (`px-12 py-5
-    text-xl`, the only CTA in the whole rollout larger than its own page's hero
-    button) down to the standard `size="lg"`, the question came up of whether
-    final/bottom-of-page CTAs should get *deliberately* more visual weight than
-    mid-page CTAs sitewide. Investigated and confirmed this wasn't the reason for
-    that outlier (no other page's final CTA scales up relative to its hero — it was
-    drift, not a pattern), so it was normalized like everything else. But the
-    underlying idea is worth considering on its own merits: a distinct, larger
-    `Button` size (or treatment) reserved specifically for final/bottom-of-page CTAs,
-    separate from mid-page CTAs. This is a design proposal to evaluate deliberately,
-    not a consistency fix — do not fold into any future normalization pass without a
-    conscious decision to adopt it sitewide.
+8. ~~`about.astro:365` hardcodes `hover:bg-[#c9400a]` instead of the
+   `--color-primary-dark` token.~~
+   **Resolved (this claim was stale).** Grepped `about.astro` for `c9400a` and any
+   hardcoded hex hover color — zero hits. The bottom CTA section now reads
+   `<Button variant="primary" size="lg">` / `<Button variant="secondary" size="lg">`.
+   Already migrated to the token-driven component; nothing hardcoded remains.
+9. `Card.astro`'s `iconColor` enum's `pink` member — re-confirmed present in the type
+   union and in active use (`index.astro:352`). No action item here; informational only.
 
-11. While migrating `contact.astro`'s "Jump to Calendar" anchor (`#book`, scrolls to
-    the on-page Calendly widget) to `Button`, the question came up of whether a CTA
-    that merely *navigates toward* conversion (an anchor/page link) should be
-    visually distinguished from a CTA that *performs* the conversion action itself
-    (e.g. the contact form's "Send Message" submit button). Kept `variant="primary"`
-    for "Jump to Calendar" — every other primary CTA already migrated in this
-    rollout (`/contact#book` links on `index.astro`, `services/index.astro`,
-    `results.astro`, etc.) is equally just a navigate-to-booking-surface link, not a
-    literal transaction, so this button isn't a new category and singling it out
-    would be inconsistent with everything already shipped. But the site has no
-    established convention distinguishing "navigate to the booking surface" CTAs
-    from "actually book/submit" CTAs — they're all styled identically today. Worth
-    considering deliberately as its own design decision; not something to resolve by
-    downgrading one button's variant now.
+### Design ideas (not bugs — future consideration, re-verified against current code)
+
+10. Whether final/bottom-of-page CTAs should get *deliberately* more visual weight than
+    mid-page CTAs sitewide. Re-verified `services/index.astro`'s final CTA (line 472) is
+    still `size="lg"` — matching, not exceeding, the rest of the page's CTAs. The
+    underlying design question (a distinct larger `Button` treatment reserved for
+    final/bottom-of-page CTAs) remains open and unimplemented. Evaluate deliberately;
+    don't fold into a future normalization pass without a conscious decision to adopt it.
+
+11. Whether a CTA that merely *navigates toward* conversion (an anchor/page link) should
+    be visually distinguished from a CTA that *performs* the conversion action itself.
+    Re-verified `contact.astro`'s "Jump to Calendar" button (`href="#book"`, lines
+    141–150) is still `variant="primary"`, identical to every other CTA on the site.
+    The site still has no convention distinguishing "navigate to the booking surface"
+    CTAs from "actually book/submit" CTAs. Remains open as its own design decision, not
+    something to resolve by downgrading one button's variant.
