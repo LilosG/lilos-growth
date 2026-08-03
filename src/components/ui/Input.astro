@@ -23,6 +23,10 @@
  * @example Placeholder-only visual style, label kept for screen readers
  * <Input id="gbp-cat-input" label="Business type" labelVisibility="sr-only"
  *   placeholder="Type your business type (e.g., plumber, dentist)" />
+ *
+ * @example Prefix glyph inside the input
+ * <Input id="roi-revenue-input" label="Current Monthly Revenue" type="number"
+ *   prefix="$" placeholder="15000" />
  */
 
 export interface Props {
@@ -54,8 +58,12 @@ export interface Props {
   value?: string;
   /** Maximum character length */
   maxlength?: number;
+  /** Minimum value (for type="number") */
+  min?: number;
   /** Additional CSS classes for input */
   class?: string;
+  /** Short glyph (e.g. "$") rendered inside the input's left edge; adjusts left padding automatically */
+  prefix?: string;
 }
 
 const {
@@ -73,11 +81,16 @@ const {
   inputmode,
   value,
   maxlength,
+  min,
   class: className = "",
+  prefix,
 } = Astro.props;
 
 const hasError = !!error;
-const inputClasses = ["input", hasError && "input-error", className].filter(Boolean).join(" ");
+const hasPrefix = !!prefix;
+const inputClasses = ["input", hasError && "input-error", hasPrefix && "pl-8", className]
+  .filter(Boolean)
+  .join(" ");
 const labelClasses =
   labelVisibility === "sr-only" ? "sr-only" : "block text-sm font-medium text-heading";
 ---
@@ -88,21 +101,31 @@ const labelClasses =
     {required && <span class="ml-1 text-error">*</span>}
   </label>
 
-  <input
-    id={id}
-    name={name}
-    type={type}
-    class={inputClasses}
-    placeholder={placeholder}
-    required={required}
-    disabled={disabled}
-    autocomplete={autocomplete}
-    inputmode={inputmode}
-    value={value}
-    maxlength={maxlength}
-    aria-invalid={hasError}
-    aria-describedby={error ? `${id}-error` : helperText ? `${id}-helper` : undefined}
-  />
+  <div class={hasPrefix ? "relative" : undefined}>
+    {
+      hasPrefix && (
+        <span class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted">
+          {prefix}
+        </span>
+      )
+    }
+    <input
+      id={id}
+      name={name}
+      type={type}
+      class={inputClasses}
+      placeholder={placeholder}
+      required={required}
+      disabled={disabled}
+      autocomplete={autocomplete}
+      inputmode={inputmode}
+      value={value}
+      maxlength={maxlength}
+      min={min}
+      aria-invalid={hasError}
+      aria-describedby={error ? `${id}-error` : helperText ? `${id}-helper` : undefined}
+    />
+  </div>
 
   {
     error && (

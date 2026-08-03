@@ -4,6 +4,7 @@
 // (current revenue, current site traffic). Industry selection drives the
 // conversion-rate/avg-job-value assumptions — the visitor never has to
 // guess a result they came here because they don't know.
+import Input from "~/components/ui/Input.astro";
 import { resultsStats } from "~/data/results";
 
 const growthStat = resultsStats.find((s) => s.id === "lead-growth");
@@ -46,14 +47,9 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
     <div class="rounded-2xl border border-border-subtle bg-white p-8 shadow-sm">
       <h2 class="mb-6 font-heading text-lg font-bold text-heading">Your Business Details</h2>
       <div class="space-y-5">
-        <div>
-          <label class="mb-1.5 block text-xs font-bold uppercase tracking-widest text-muted" for="roi-industry">
-            Your Industry
-          </label>
-          <select
-            id="roi-industry"
-            class="focus:ring-primary/20 w-full rounded-xl border border-border-base bg-white px-4 py-3.5 font-heading text-base font-bold text-heading transition focus:border-primary focus:outline-none focus:ring-2"
-          >
+        <div class="space-y-1.5">
+          <label for="roi-industry" class="block text-sm font-medium text-heading">Your Industry</label>
+          <select id="roi-industry" class="input">
             <option value="electrician" data-rate="3.5" data-value="450">Electrician</option>
             <option value="pest-control" data-rate="4" data-value="180">Pest Control</option>
             <option value="restoration" data-rate="2" data-value="4500">Restoration</option>
@@ -61,41 +57,29 @@ const growthStat = resultsStats.find((s) => s.id === "lead-growth");
             <option value="commercial" data-rate="2.5" data-value="600">Commercial Services</option>
             <option value="party-rental" data-rate="5" data-value="500">Party Rentals</option>
           </select>
-          <p class="mt-1.5 text-xs text-muted" id="roi-industry-note">
+          <p class="text-sm text-muted" id="roi-industry-note">
             Typical for Electrician: 3.5% visitor-to-lead conversion, ~$450 avg job value.
           </p>
         </div>
-        <div>
-          <label class="mb-1.5 block text-xs font-bold uppercase tracking-widest text-muted" for="roi-revenue-input">
-            Current Monthly Revenue
-          </label>
-          <div class="relative">
-            <span class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-heading text-base font-bold text-muted">$</span>
-            <input
-              id="roi-revenue-input"
-              type="number"
-              min="0"
-              inputmode="numeric"
-              placeholder="15000"
-              class="focus:ring-primary/20 w-full rounded-xl border border-border-base bg-white py-3.5 pl-8 pr-4 font-heading text-lg font-bold text-heading transition placeholder:font-normal placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2"
-            />
-          </div>
-          <p class="mt-1.5 text-xs text-muted">Your current average monthly revenue.</p>
-        </div>
-        <div>
-          <label class="mb-1.5 block text-xs font-bold uppercase tracking-widest text-muted" for="roi-visitors">
-            Current Monthly Website Visitors
-          </label>
-          <input
-            id="roi-visitors"
-            type="number"
-            min="0"
-            inputmode="numeric"
-            placeholder="250"
-            class="focus:ring-primary/20 w-full rounded-xl border border-border-base bg-white px-4 py-3.5 font-heading text-lg font-bold text-heading transition placeholder:font-normal placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2"
-          />
-          <p class="mt-1.5 text-xs text-muted">Check Google Analytics or Search Console for this number.</p>
-        </div>
+        <Input
+          id="roi-revenue-input"
+          label="Current Monthly Revenue"
+          type="number"
+          min={0}
+          inputmode="numeric"
+          prefix="$"
+          placeholder="15000"
+          helperText="Your current average monthly revenue."
+        />
+        <Input
+          id="roi-visitors"
+          label="Current Monthly Website Visitors"
+          type="number"
+          min={0}
+          inputmode="numeric"
+          placeholder="250"
+          helperText="Check Google Analytics or Search Console for this number."
+        />
         <div>
           <label class="mb-2 block text-xs font-bold uppercase tracking-widest text-muted">Monthly Plan</label>
           <div class="grid grid-cols-3 gap-2">
