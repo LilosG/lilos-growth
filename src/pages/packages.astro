@@ -3,6 +3,7 @@ import Layout from "~/layouts/PageLayout.astro";
 import CheckListItem from "~/components/ui/CheckListItem.astro";
 import Card from "~/components/ui/Card.astro";
 import Button from "~/components/ui/Button.astro";
+import PricingCard from "~/components/sections/PricingCard.astro";
 import {
   packages,
   gbpManagement,
@@ -255,38 +256,18 @@ const faqs = [
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         {
           seoTiers.map((tier) => (
-            <article
-              class={`relative flex flex-col rounded-2xl border p-8 transition ${tier.featured ? "ring-primary/20 border-primary bg-white shadow-xl ring-2" : "hover:border-primary/30 border-border-subtle bg-white shadow-sm hover:shadow-md"}`}
-            >
-              {tier.featured && (
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span class="rounded-full bg-primary px-5 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow">
-                    Most Popular
-                  </span>
-                </div>
-              )}
-              <h3 class="font-heading text-xl font-extrabold text-heading">{tier.name}</h3>
-              <div class="mt-2 flex items-baseline gap-1">
-                <span class="font-heading text-4xl font-extrabold text-primary">${fmt(tier.price)}</span>
-                <span class="text-sm text-body">/mo</span>
-              </div>
-              <p class="mt-1 text-xs text-muted">Setup month: ${fmt(tier.setupPrice)}</p>
-              <p class="mb-5 mt-2 text-xs italic text-muted">{tier.bestFor}</p>
-              <div class="mb-5 h-px bg-border-subtle" />
-              <ul class="mb-8 flex-1 space-y-2.5 text-sm">
-                {tier.inclusions.map((inc) => (
-                  <CheckListItem>{inc}</CheckListItem>
-                ))}
-              </ul>
-              <Button
-                href="/contact#book"
-                variant={tier.featured ? "primary" : "outline"}
-                size="lg"
-                fullWidth
-              >
-                Get Started
-              </Button>
-            </article>
+            <PricingCard
+              title={tier.name}
+              price={fmt(tier.price)}
+              period="mo"
+              priceNote={`Setup month: $${fmt(tier.setupPrice)}`}
+              bestFor={tier.bestFor}
+              features={tier.inclusions}
+              ctaText="Get Started"
+              ctaHref="/contact#book"
+              featured={tier.featured}
+              featuredStyle="ring"
+            />
           ))
         }
       </div>

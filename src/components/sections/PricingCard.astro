@@ -22,7 +22,7 @@
 import Card from "../ui/Card.astro";
 import Button from "../ui/Button.astro";
 import Badge from "../ui/Badge.astro";
-import { Icon } from "astro-icon/components";
+import CheckListItem from "../ui/CheckListItem.astro";
 
 export interface Props {
   /** Plan title */
@@ -31,22 +31,48 @@ export interface Props {
   subtitle?: string;
   /** Short description (alternative to subtitle) */
   description?: string;
-  /** Monthly price (number only, no $ or /mo) */
+  /** Small-caps label rendered above the title (e.g. "GBP + SEO Foundation") */
+  eyebrow?: string;
+  /** Monthly price (number only, no $ or /mo). Pass "Free" or "0" to render "Free"
+   * with no $ sign and no /period suffix. */
   price: string;
   /** Period text (e.g., "mo", "one-time") */
   period?: string;
-  /** Badge text to show above title */
+  /** Badge text to show above title (non-featured cards only) */
   badge?: string;
+  /** Whether this is the featured/popular plan */
+  featured?: boolean;
+  /** Visual treatment when featured: "ring" (default, elevated + primary border on a
+   * light card) or "dark" (full inversion — bg-secondary, white text throughout). */
+  featuredStyle?: "ring" | "dark";
+  /** Overrides the featured ribbon's default "Most Popular" text */
+  badgeText?: string;
+  /** Independent top-right inline pill, not tied to `featured` (e.g. Free/Paid) */
+  cornerBadge?: { text: string; tone?: "primary" | "neutral" };
+  /** Secondary line under the main price, before the divider — e.g. "Setup month: $X"
+   * or "Delivery: 24–48 hours" (same slot serves either, never both at once). */
+  priceNote?: string;
+  /** Highlighted second price line under priceNote, e.g. "$1,000 flat if bundled" */
+  secondaryPrice?: string;
+  /** Small pill badge near the price block, e.g. "1–2 weeks" */
+  timeline?: string;
+  /** Paragraph shown after the price/divider, before the feature list */
+  bodyText?: string;
+  /** Italicized line after bodyText, before the feature list */
+  bestFor?: string;
   /** List of features */
   features: string[];
+  /** Tailwind class override for feature-list text color (icon color derives from
+   * featuredStyle automatically) */
+  featureTextClass?: string;
   /** CTA button text */
   ctaText: string;
   /** CTA button link */
   ctaHref: string;
-  /** Whether this is the featured/popular plan */
-  featured?: boolean;
   /** Optional footer note */
   footerNote?: string;
+  /** "plain" (default, italic text) or "boxed" (tinted callout) */
+  footerNoteVariant?: "plain" | "boxed";
   /** Additional CSS classes */
   class?: string;
 }
@@ -55,20 +81,39 @@ const {
   title,
   subtitle,
   description,
+  eyebrow,
   price,
   period = "mo",
   badge,
+  featured = false,
+  featuredStyle = "ring",
+  badgeText = "Most Popular",
+  cornerBadge,
+  priceNote,
+  secondaryPrice,
+  timeline,
+  bodyText,
+  bestFor,
   features,
+  featureTextClass,
   ctaText,
   ctaHref,
-  featured = false,
   footerNote,
+  footerNoteVariant = "plain",
   class: className = "",
 } = Astro.props;
 
+const isDark = featured && featuredStyle === "dark";
+
 // Remove $ if it exists in the price string
 const cleanPrice = price ? price.toString().replace(/^\$/, "").trim() : "";
+const isFree = cleanPrice.toLowerCase() === "free" || cleanPrice === "0";
 const displayDescription = subtitle || description;
+
+const cornerBadgeClasses =
+  cornerBadge?.tone === "primary"
+    ? "bg-primary text-white"
+    : "border border-border-base text-muted";
 ---
 
 <div class={`relative h-full ${className}`}>
@@ -76,16 +121,34 @@ const displayDescription = subtitle || description;
     featured && (
       <div class="absolute -top-4 left-1/2 z-10 -translate-x-1/2">
         <Badge variant="primary" size="sm" class="shadow-md">
-          Most Popular
+          {badgeText}
         </Badge>
       </div>
     )
   }
 
   <Card
-    variant={featured ? "elevated" : "default"}
-    class={`pricing-card-highlight h-full flex flex-col transition-all duration-300 hover:shadow-2xl ${featured ? "border-2 border-primary shadow-xl" : "border border-gray-200 shadow-sm hover:border-primary/30"}`}
+    variant={featured && featuredStyle === "ring" ? "elevated" : "default"}
+    class={`pricing-card-highlight h-full flex flex-col transition-all duration-300 hover:shadow-2xl ${
+      isDark
+        ? "border-primary bg-secondary shadow-2xl"
+        : featured
+          ? "border-2 border-primary shadow-xl"
+          : "border border-gray-200 shadow-sm hover:border-primary/30"
+    }`}
   >
+    {
+      cornerBadge && (
+        <div class="mb-3 flex items-start justify-between">
+          <span
+            class={`rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider ${cornerBadgeClasses}`}
+          >
+            {cornerBadge.text}
+          </span>
+        </div>
+      )
+    }
+
     {
       badge && !featured && (
         <div class="mb-3">
@@ -97,38 +160,73 @@ const displayDescription = subtitle || description;
     }
 
     <div class="mb-4">
-      <h3 class="font-heading text-lg font-bold text-heading md:text-xl">
+      {eyebrow && (
+        <p class={`mb-1 text-xs font-bold uppercase tracking-widest ${isDark ? "text-primary" : "text-muted"}`}>
+          {eyebrow}
+        </p>
+      )}
+      <h3 class={`font-heading text-lg font-bold md:text-xl ${isDark ? "text-white" : "text-heading"}`}>
         {title}
       </h3>
-      {displayDescription && <p class="mt-1 text-sm text-body">{displayDescription}</p>}
+      {displayDescription && (
+        <p class={`mt-1 text-sm ${isDark ? "text-white/75" : "text-body"}`}>{displayDescription}</p>
+      )}
     </div>
 
     <div class="mb-6">
       <div class="flex items-baseline gap-1">
-        <span class="font-heading text-2xl font-bold text-primary md:text-3xl"
-          >{cleanPrice.startsWith("$") ? cleanPrice : `$${cleanPrice}`}</span
-        >
-        <span class="text-sm text-body-light">/{period}</span>
+        <span class={`font-heading text-2xl font-bold md:text-3xl ${isDark ? "text-white" : "text-primary"}`}>
+          {isFree ? "Free" : cleanPrice.startsWith("$") ? cleanPrice : `$${cleanPrice}`}
+        </span>
+        {!isFree && <span class={`text-sm ${isDark ? "text-white/50" : "text-body-light"}`}>/{period}</span>}
       </div>
+      {priceNote && (
+        <p class={`mt-1 text-xs ${isDark ? "text-white/40" : "text-muted"}`}>{priceNote}</p>
+      )}
+      {secondaryPrice && (
+        <p class={`mt-2 text-xs font-semibold ${isDark ? "text-white" : "text-primary"}`}>
+          {secondaryPrice}
+        </p>
+      )}
+      {timeline && (
+        <div class="mt-2 flex gap-3">
+          <span class="rounded-full border border-border-subtle bg-background-subtle px-2.5 py-0.5 text-xs font-semibold text-muted">
+            {timeline}
+          </span>
+        </div>
+      )}
     </div>
+
+    {(bodyText || bestFor) && (
+      <div class={`mb-5 border-t pt-5 ${isDark ? "border-white/10" : "border-border-subtle"}`}>
+        {bodyText && <p class={`mb-2 text-sm ${isDark ? "text-white/75" : "text-body"}`}>{bodyText}</p>}
+        {bestFor && <p class={`text-xs italic ${isDark ? "text-white/50" : "text-muted"}`}>{bestFor}</p>}
+      </div>
+    )}
 
     <ul class="mb-6 flex-grow space-y-2.5">
       {
         features.map((feature) => (
-          <li class="flex items-start gap-2.5 text-sm leading-relaxed text-body">
-            <Icon
-              name="tabler:circle-check-filled"
-              class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-            />
+          <CheckListItem
+            iconClass="text-primary"
+            textClass={featureTextClass ?? (isDark ? "text-white/75" : "text-body")}
+          >
             <span set:html={feature} />
-          </li>
+          </CheckListItem>
         ))
       }
     </ul>
 
-    {footerNote && <p class="mb-4 text-xs italic text-body-light">{footerNote}</p>}
+    {footerNote && footerNoteVariant === "boxed" && (
+      <p class="bg-primary/5 border-primary/20 mb-6 rounded-xl border px-4 py-3 text-xs font-medium text-primary">
+        {footerNote}
+      </p>
+    )}
+    {footerNote && footerNoteVariant === "plain" && (
+      <p class={`mb-4 text-xs italic ${isDark ? "text-white/40" : "text-body-light"}`}>{footerNote}</p>
+    )}
 
-    <div class="mt-auto border-t border-gray-100 pt-4">
+    <div class={`mt-auto border-t pt-4 ${isDark ? "border-white/10" : "border-gray-100"}`}>
       <Button href={ctaHref} variant={featured ? "primary" : "outline"} size="md" class="w-full">
         {ctaText}
       </Button>
