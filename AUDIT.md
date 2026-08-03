@@ -230,13 +230,26 @@ current file state, not carried forward from prior text)
 
 ### Still open (re-verified)
 
-6. Homepage's pricing-preview cards (`index.astro:909`, the `packages.map(...)` grid)
-   and `packages.astro:127`'s four pricing-tier grids are still hand-rolled — confirmed
-   via grep, unchanged. `PricingCard.astro` exists and is proven out elsewhere
-   (used in `services/local-seo/index.astro`), so this is adoption, not a component gap.
 7. `src/components/tools/ReviewLinkGenerator.astro` is still orphaned — confirmed via
    exhaustive grep, zero references to `ReviewLinkGenerator` anywhere in `src/`. Still
    needs a decision: delete the dead file, or wire it into a live page slot.
+
+### Resolved
+
+6. ~~Homepage's pricing-preview cards (`index.astro:909`, the `packages.map(...)` grid)
+   and `packages.astro:127`'s four pricing-tier grids are still hand-rolled.~~
+   **Resolved.** All four pricing-tier grids — `seoTiers`, `websiteBuilds`,
+   `packages` (both `packages.astro` and `index.astro`'s preview), and `audits` —
+   are now migrated to `PricingCard.astro`. Each grid was verified against
+   `src/data/packages.ts` for exact price/copy parity in the browser before
+   committing, including the dark-mode "Growth" card's text legibility and the
+   `audits` grid's Free/Paid corner-badge and "Free"-price special case.
+   `PricingCard.astro` itself was extended with `eyebrow`, `featuredStyle`
+   ("ring"/"dark"), `badgeText`, `cornerBadge`, `priceNote`, `secondaryPrice`,
+   `timeline`, `bodyText`, `bestFor`, `featureTextClass`, `ctaVariant`, and
+   `footerNoteVariant` props to cover every field the four grids needed, plus two
+   bugs fixed along the way: a hardcoded `/{period}` slash that broke "one-time"
+   pricing, and a bodyText/bestFor divider-ordering regression.
 
 ### Resolved on re-verification
 
