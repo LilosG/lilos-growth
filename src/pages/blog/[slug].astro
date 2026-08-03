@@ -41,32 +41,32 @@ const tags: string[] = entry.data.tags ?? [];
 const CATEGORY_MONEY_PAGES: Record<string, { label: string; href: string }[]> = {
   "Local SEO": [
     { label: "Local SEO Services", href: "/services/local-seo/" },
-    { label: "Google Business Profile", href: "/services/google-business-profile/" },
+    { label: "Google Business Profile", href: "/services/google-business-profile-optimization/" },
   ],
   "Google Business Profile": [
-    { label: "GBP Optimization Service", href: "/services/google-business-profile/" },
+    { label: "GBP Optimization Service", href: "/services/google-business-profile-optimization/" },
     { label: "Local SEO Services", href: "/services/local-seo/" },
   ],
   Websites: [
-    { label: "Website Design for Contractors", href: "/services/website-design/" },
+    { label: "Website Design for Contractors", href: "/services/web-design/" },
     { label: "Local SEO Services", href: "/services/local-seo/" },
   ],
   SEO: [
     { label: "Local SEO Services", href: "/services/local-seo/" },
-    { label: "Website Design", href: "/services/website-design/" },
+    { label: "Website Design", href: "/services/web-design/" },
   ],
   Content: [
     { label: "Local SEO Services", href: "/services/local-seo/" },
-    { label: "GBP Optimization Service", href: "/services/google-business-profile/" },
+    { label: "GBP Optimization Service", href: "/services/google-business-profile-optimization/" },
   ],
   Workflows: [
     { label: "Local SEO Services", href: "/services/local-seo/" },
-    { label: "GBP Optimization Service", href: "/services/google-business-profile/" },
+    { label: "GBP Optimization Service", href: "/services/google-business-profile-optimization/" },
   ],
 };
 const moneyPages = (category && CATEGORY_MONEY_PAGES[category]) ?? [
   { label: "Local SEO for Home Service Businesses", href: "/services/local-seo/" },
-  { label: "Google Business Profile Optimization", href: "/services/google-business-profile/" },
+  { label: "Google Business Profile Optimization", href: "/services/google-business-profile-optimization/" },
 ];
 const relatedPosts = posts
   .filter((p) => getSlug(p) !== slug && !p.data.draft)
