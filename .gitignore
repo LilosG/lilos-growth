@@ -51,3 +51,6 @@ sandbox.config.json
 
 # Editor
 .vscode/settings.json
+
+# squirrelscan audit tooling
+squirrel.toml

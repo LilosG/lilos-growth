@@ -11,6 +11,11 @@
       ],
       "destination": "https://lilosgrowth.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy",
+      "permanent": true
     }
   ],
   "headers": [
