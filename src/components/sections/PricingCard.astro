@@ -69,6 +69,10 @@ export interface Props {
   ctaText: string;
   /** CTA button link */
   ctaHref: string;
+  /** Overrides the CTA button variant. Defaults to "primary" when featured, else
+   * "outline" — set explicitly when a card needs a solid CTA without the featured
+   * ribbon (e.g. a free-tier card that isn't "most popular"). */
+  ctaVariant?: "primary" | "outline";
   /** Optional footer note */
   footerNote?: string;
   /** "plain" (default, italic text) or "boxed" (tinted callout) */
@@ -98,6 +102,7 @@ const {
   featureTextClass,
   ctaText,
   ctaHref,
+  ctaVariant,
   footerNote,
   footerNoteVariant = "plain",
   class: className = "",
@@ -135,7 +140,7 @@ const cornerBadgeClasses =
         : featured
           ? "border-2 border-primary shadow-xl"
           : "border border-gray-200 shadow-sm hover:border-primary/30"
-    }`}
+    } ${className}`}
   >
     {
       cornerBadge && (
@@ -241,7 +246,7 @@ const cornerBadgeClasses =
     )}
 
     <div class={`mt-auto border-t pt-4 ${isDark ? "border-white/10" : "border-gray-100"}`}>
-      <Button href={ctaHref} variant={featured ? "primary" : "outline"} size="md" class="w-full">
+      <Button href={ctaHref} variant={ctaVariant ?? (featured ? "primary" : "outline")} size="md" class="w-full">
         {ctaText}
       </Button>
     </div>

@@ -338,51 +338,24 @@ const faqs = [
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
         {
           audits.map((audit) => (
-            <article
-              class={`flex flex-col rounded-2xl border p-8 shadow-sm transition ${audit.price === 0 ? "border-primary/30 bg-white" : "hover:border-primary/30 border-border-subtle bg-white hover:shadow-md"}`}
-            >
-              <div class="mb-3 flex items-start justify-between">
-                <span
-                  class={`rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider ${audit.price === 0 ? "bg-primary text-white" : "border border-border-base text-muted"}`}
-                >
-                  {audit.price === 0 ? "Free" : "Paid"}
-                </span>
-              </div>
-              <h3 class="font-heading text-2xl font-extrabold text-heading">{audit.name}</h3>
-              <div class="mt-2 flex items-baseline gap-1">
-                {audit.price === 0 ? (
-                  <span class="font-heading text-4xl font-extrabold text-primary">Free</span>
-                ) : (
-                  <>
-                    <span class="font-heading text-4xl font-extrabold text-primary">
-                      ${audit.price}
-                    </span>
-                    <span class="text-sm text-body">one-time</span>
-                  </>
-                )}
-              </div>
-              {audit.delivery && <p class="mt-1 text-xs text-muted">Delivery: {audit.delivery}</p>}
-              <div class="my-5 h-px bg-border-subtle" />
-              <p class="mb-5 text-sm leading-relaxed text-body">{audit.description}</p>
-              <ul class="mb-6 flex-1 space-y-2.5 text-sm">
-                {audit.inclusions.map((inc) => (
-                  <CheckListItem>{inc}</CheckListItem>
-                ))}
-              </ul>
-              {audit.note && (
-                <p class="bg-primary/5 border-primary/20 mb-6 rounded-xl border px-4 py-3 text-xs font-medium text-primary">
-                  {audit.note}
-                </p>
-              )}
-              <Button
-                href="/contact#book"
-                variant={audit.price === 0 ? "primary" : "outline"}
-                size="lg"
-                fullWidth
-              >
-                {audit.price === 0 ? "Request Your Free Audit →" : "Get Started"}
-              </Button>
-            </article>
+            <PricingCard
+              title={audit.name}
+              price={audit.price === 0 ? "Free" : fmt(audit.price)}
+              period="one-time"
+              priceNote={audit.delivery ? `Delivery: ${audit.delivery}` : undefined}
+              bodyText={audit.description}
+              features={audit.inclusions}
+              footerNote={audit.note ?? undefined}
+              footerNoteVariant="boxed"
+              ctaText={audit.price === 0 ? "Request Your Free Audit →" : "Get Started"}
+              ctaHref="/contact#book"
+              ctaVariant={audit.price === 0 ? "primary" : "outline"}
+              cornerBadge={{
+                text: audit.price === 0 ? "Free" : "Paid",
+                tone: audit.price === 0 ? "primary" : "neutral",
+              }}
+              class={audit.price === 0 ? "border-primary/30" : ""}
+            />
           ))
         }
       </div>
