@@ -1,26 +1,55 @@
 ---
-import Layout from "~/layouts/Layout.astro";
-import { getHomePermalink } from "~/utils/permalinks";
+import Layout from "~/layouts/PageLayout.astro";
+import { getHomePermalink, getPermalink } from "~/utils/permalinks";
 
-const title = `Error 404`;
+const title = `Page Not Found`;
 ---
 
-<Layout metadata={{ title }}>
-  <h1 class="sr-only">Page not found</h1>
-  <section class="flex h-full items-center p-16">
-    <div class="container mx-auto my-8 flex flex-col items-center justify-center px-5">
-      <div class="max-w-md text-center">
-        <h2 class="mb-8 text-9xl font-bold">
-          <span class="sr-only">Error</span>
-          <span class="text-primary">404</span>
-        </h2>
-        <p class="text-3xl font-semibold md:text-3xl">Sorry, we couldn't find this page.</p>
-        <p class="mb-8 mt-4 text-lg text-muted dark:text-slate-400">
-          But dont worry, you can find plenty of other things on our homepage.
+<Layout metadata={{ title }} noIndex={true}>
+  <section class="flex min-h-[60vh] items-center bg-slate-50 py-20">
+    <div class="container mx-auto px-5">
+      <div class="mx-auto max-w-lg text-center">
+        <p class="text-8xl font-bold text-primary">404</p>
+        <h1 class="mt-4 text-3xl font-bold text-heading md:text-4xl">Page not found</h1>
+        <p class="mb-8 mt-4 text-lg text-body">
+          Don't worry — here are some useful pages to get you back on track.
         </p>
-        <a rel="noopener noreferrer" href={getHomePermalink()} class="btn btn-md btn-primary ml-4"
-          >Back to homepage</a
-        >
+
+        <div class="mb-8 flex flex-wrap justify-center gap-3">
+          <a
+            href={getPermalink("/services/local-seo")}
+            class="inline-flex items-center rounded-full border border-primary bg-white px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
+          >
+            Local SEO Services
+          </a>
+          <a
+            href={getPermalink("/services/google-business-profile-optimization")}
+            class="inline-flex items-center rounded-full border border-primary bg-white px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
+          >
+            GBP Optimization
+          </a>
+          <a
+            href={getPermalink("/services/web-design")}
+            class="inline-flex items-center rounded-full border border-primary bg-white px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
+          >
+            Website Design
+          </a>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3">
+          <a
+            href={getPermalink("/contact#book")}
+            class="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow transition hover:bg-primary-dark"
+          >
+            Book a Free Call
+          </a>
+          <a
+            href={getHomePermalink()}
+            class="inline-flex items-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-heading transition hover:border-primary hover:text-primary"
+          >
+            Back to Homepage
+          </a>
+        </div>
       </div>
     </div>
   </section>

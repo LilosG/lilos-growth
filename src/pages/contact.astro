@@ -11,7 +11,8 @@ export const description =
   <div slot="head">
     <link rel="preconnect" href="https://assets.calendly.com" />
     <link rel="dns-prefetch" href="https://assets.calendly.com" />
-    <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+    <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" /></noscript>
     <style is:inline>
       #book .calendly-inline-widget {
         min-width: 320px;
@@ -37,7 +38,11 @@ export const description =
       <p class="mb-7 max-w-lg text-center text-base text-body">
         Fill out the form below and a home service marketing expert will reach out within 24 hours.<br
         />
-        Prefer email? <a
+        Call or text: <a
+          data-evt="contact_phone_click"
+          href="tel:+18587222920"
+          class="text-primary underline">(858) 722-2920</a
+        > &middot; Email: <a
           data-evt="contact_email_click"
           href="mailto:hello@lilosgrowth.com"
           class="text-primary underline">hello@lilosgrowth.com</a

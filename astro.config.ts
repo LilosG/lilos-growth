@@ -53,6 +53,9 @@ export default defineConfig({
         ]).has(pathname);
       },
       customPages: ["https://lilosgrowth.com/blog"],
+      serialize(item) {
+        return { ...item, lastmod: new Date().toISOString().split("T")[0] };
+      },
     }),
     mdx(),
     icon({

@@ -83,8 +83,10 @@ const renderedTitle = templateValue.includes("%s")
   : baseTitle;
 
 if (renderedTitle.length > MAX_TITLE_LENGTH) {
-  seoProps.titleTemplate = "%s";
-  seoProps.title = trimToMax(baseTitle, MAX_TITLE_LENGTH);
+  const suffix = templateValue.replace("%s", "").trim();
+  const suffixBudget = suffix ? suffix.length + 3 : 0; // " — Brand" + separator space
+  seoProps.titleTemplate = templateValue;
+  seoProps.title = trimToMax(baseTitle, MAX_TITLE_LENGTH - suffixBudget);
 }
 
 if (typeof seoProps.description === "string") {
