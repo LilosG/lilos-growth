@@ -143,48 +143,11 @@ function uniqueByTypeId(nodes: unknown[]): Record<string, unknown>[] {
   });
 }
 
-const isBlogPost =
-  pathname.startsWith("/blog/") &&
-  !pathname.startsWith("/blog/tag/") &&
-  !pathname.startsWith("/blog/category/") &&
-  pathname !== "/blog" &&
-  !/^\/blog\/\d+\/?$/.test(pathname);
-
-const blogPosting =
-  isBlogPost && title
-    ? {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "@id": new URL(pathname, siteUrl).toString() + "#article",
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": new URL(pathname, siteUrl).toString(),
-        },
-        headline: title,
-        ...(description ? { description } : {}),
-        author: {
-          "@type": "Organization",
-          name: "Lilos Growth",
-          url: siteUrl,
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "Lilos Growth",
-          url: siteUrl,
-          logo: {
-            "@type": "ImageObject",
-            url: new URL("/images/default.svg", siteUrl).toString(),
-          },
-        },
-      }
-    : null;
-
 const schemaNodes = uniqueByTypeId([
   organization,
   localBusiness,
   webSite,
   ...(breadcrumbList ? [breadcrumbList] : []),
-  ...(blogPosting ? [blogPosting] : []),
   ...schemaExtras,
 ]);
 

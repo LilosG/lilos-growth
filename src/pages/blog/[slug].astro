@@ -87,7 +87,22 @@ const relatedPosts = posts
   .map(({ post }) => post);
 ---
 
-<Layout title={title} description={description} metadata={{ title, description }}>
+<Layout
+  title={title}
+  description={description}
+  metadata={{
+    title,
+    description,
+    openGraph: image
+      ? { images: [{ url: new URL(image, "https://lilosgrowth.com").href, width: 1200, height: 630 }] }
+      : undefined,
+  }}
+  breadcrumbs={[
+    { name: "Home", item: "https://lilosgrowth.com/" },
+    { name: "Blog", item: "https://lilosgrowth.com/blog" },
+    { name: title, item: `https://lilosgrowth.com/blog/${slug}` },
+  ]}
+>
   <script
     type="application/ld+json"
     set:html={JSON.stringify({
@@ -163,8 +178,11 @@ const relatedPosts = posts
               src={image}
               alt={imageAlt}
               class="mb-8 rounded-2xl shadow"
-              loading="lazy"
+              loading="eager"
+              fetchpriority="high"
               decoding="async"
+              width="800"
+              height="450"
             />
           )
         }
@@ -174,6 +192,22 @@ const relatedPosts = posts
           class="prose prose-slate max-w-none lg:prose-lg prose-headings:text-heading prose-p:text-[#4a4a4a] prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-blockquote:rounded-xl prose-blockquote:border-[#ffd8c5] prose-blockquote:bg-[#fff4ee] prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:text-[#55301f] prose-strong:text-heading prose-hr:border-gray-200"
         >
           <Content />
+        </div>
+
+        <!-- Mid-article CTA -->
+        <div class="not-prose mt-8 rounded-2xl border border-primary/20 bg-[#fff4ee] px-6 py-5">
+          <p class="text-sm font-semibold text-heading">Ready to rank higher and get more calls?</p>
+          <p class="mt-1 text-sm text-body">
+            We build Local SEO systems for home service businesses — no contracts, transparent
+            reporting.
+          </p>
+          <a
+            href="/contact#book"
+            class="mt-3 inline-flex items-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white shadow transition hover:bg-primary-dark"
+            data-evt="cta_blog_mid_article"
+          >
+            Book a Free Audit →
+          </a>
         </div>
       </div>
     </div>
