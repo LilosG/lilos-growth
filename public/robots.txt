@@ -1,5 +1,12 @@
 User-agent: *
 Allow: /
 Disallow: /decapcms/
+Disallow: /thank-you
+Disallow: /cards-preview
+Disallow: /plans-preview
+Disallow: /index-refactored
+Disallow: /results-refactored
+Disallow: /offline
+Disallow: /offers/
 
 Sitemap: https://lilosgrowth.com/sitemap-index.xml

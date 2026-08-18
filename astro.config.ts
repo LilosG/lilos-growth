@@ -41,6 +41,7 @@ export default defineConfig({
         if (pathname.startsWith("/offers/")) return false;
         if (pathname.startsWith("/blog/tag/")) return false;
         if (pathname.startsWith("/blog/category/")) return false;
+        if (/^\/blog\/\d+$/.test(pathname)) return false;
 
         return !new Set([
           "/cards-preview",

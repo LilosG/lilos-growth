@@ -7,7 +7,7 @@ category: "Workflows"
 tags: ["drafts", "workflow", "content", "seo"]
 pubDate: 2025-10-11
 datePublished: "2025-10-11"
-draft: false
+draft: true
 image: "/images/blog/long-tail/hero.svg"
 imageAlt: "Content workflow draft banner"
 ---
