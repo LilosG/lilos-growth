@@ -831,7 +831,6 @@ export const metadata = {
     </div>
   </section>
 
-
   <!-- AUDIT LEAD MAGNET -->
   <section class="border-y border-border-subtle bg-background-subtle py-24" id="audit">
     <div class="mx-auto max-w-5xl px-6">
@@ -857,9 +856,7 @@ export const metadata = {
                 "Written PDF report — not a checklist email",
                 "Scope of work included if issues are found",
                 "No pitch — you decide what to do with it",
-              ].map((item) => (
-                <CheckListItem>{item}</CheckListItem>
-              ))
+              ].map((item) => <CheckListItem>{item}</CheckListItem>)
             }
           </ul>
         </div>
@@ -876,13 +873,7 @@ export const metadata = {
               type="url"
               required
             />
-            <Input
-              id="audit-email"
-              name="_replyto"
-              label="Email Address"
-              type="email"
-              required
-            />
+            <Input id="audit-email" name="_replyto" label="Email Address" type="email" required />
             <Button type="submit" variant="primary" size="md" fullWidth class="mt-1"
               >Get My Free Audit →</Button
             >

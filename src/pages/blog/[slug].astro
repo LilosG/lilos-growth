@@ -66,7 +66,10 @@ const CATEGORY_MONEY_PAGES: Record<string, { label: string; href: string }[]> = 
 };
 const moneyPages = (category && CATEGORY_MONEY_PAGES[category]) ?? [
   { label: "Local SEO for Home Service Businesses", href: "/services/local-seo" },
-  { label: "Google Business Profile Optimization", href: "/services/google-business-profile-optimization" },
+  {
+    label: "Google Business Profile Optimization",
+    href: "/services/google-business-profile-optimization",
+  },
 ];
 const relatedPosts = posts
   .filter((p) => getSlug(p) !== slug && !p.data.draft)
@@ -129,7 +132,7 @@ const relatedPosts = posts
 
         <!-- Tailwind Typography, branded colors, comfortable sizes -->
         <div
-          class="prose prose-slate lg:prose-lg prose-headings:text-heading prose-p:text-[#4a4a4a] prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-blockquote:rounded-xl prose-blockquote:border-[#ffd8c5] prose-blockquote:bg-[#fff4ee] prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:text-[#55301f] prose-strong:text-heading prose-hr:border-gray-200 max-w-none"
+          class="prose prose-slate max-w-none lg:prose-lg prose-headings:text-heading prose-p:text-[#4a4a4a] prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-blockquote:rounded-xl prose-blockquote:border-[#ffd8c5] prose-blockquote:bg-[#fff4ee] prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:text-[#55301f] prose-strong:text-heading prose-hr:border-gray-200"
         >
           <Content />
         </div>

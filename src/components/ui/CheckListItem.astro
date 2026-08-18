@@ -23,7 +23,12 @@ export interface Props {
   class?: string;
 }
 
-const { align = "start", iconClass = "text-primary", textClass, class: className = "" } = Astro.props;
+const {
+  align = "start",
+  iconClass = "text-primary",
+  textClass,
+  class: className = "",
+} = Astro.props;
 
 const alignClass = align === "center" ? "items-center" : "items-start";
 ---

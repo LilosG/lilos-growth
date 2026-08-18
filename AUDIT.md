@@ -22,24 +22,24 @@ an earlier version of the tools page, shadowed by a page-local, differently-valu
 
 ## 1. Tool cards / feature cards / bordered content blocks
 
-| # | File | Shared component or inline? | Icon treatment | Button/CTA placement | Border / shadow / radius |
-|---|------|------------------------------|-----------------|------------------------|----------------------------|
-| 1 | `src/pages/local-seo-tools/index.astro:193-364` (7 tool cards) | **Inline**, styled by a page-scoped `<style>` block at `index.astro:411-486` using bespoke `.tool-card*` class names | 40x40px icon box (`h-10 w-10`, `rounded-xl`), color keyed to a `--green/--blue/--indigo/--purple/--primary/--teal` modifier per card | No visible CTA button — each card *is* the form; submit button lives inside the embedded tool component | `rounded-2xl`, `border border-border-subtle`, `shadow-sm`, hover `-translate-y-1` + `shadow-xl` |
-| 2 | `src/pages/local-seo-tools/index.astro:130-186` (featured "Review Link Generator" card) | Inline, one-off, not reusing `.tool-card` | 48x48px icon box (`h-12 w-12`, `bg-white/10`, `rounded-xl`) on a dark `bg-secondary` panel — different size/treatment than the 7 cards below it | CTA (`Open ROI Calculator`) is a full-width button *inside* the card, `rounded-xl`, separate from the two-column card shell | `rounded-2xl`, `border border-border-subtle`, `shadow-lg` (no hover lift, unlike the grid cards) |
-| 3 | `src/components/sections/FeatureCard.astro` | **Shared component**, wraps `ui/Card.astro` with `variant="elevated"` | 56x56px circular gradient icon badge (`h-14 w-14 rounded-full bg-gradient-to-br from-primary to-primary-dark`), centered | No CTA — presentational only | Whatever `Card.astro`'s `elevated` variant defines, plus `hover:shadow-xl hover:-translate-y-1` |
-| 4 | `src/pages/services/index.astro:139,174,204` (3 "why choose us" blocks) | Inline | No icon | No CTA | `rounded-3xl`, `border border-border-subtle`, `bg-background-cream`, **no shadow** |
-| 5 | `src/pages/services/index.astro:377` | Inline | — | — | `rounded-2xl`, `border border-border-subtle`, `shadow-sm`, hover `shadow-md` + `border-primary/20` |
-| 6 | `src/pages/services/index.astro:426` | Inline | — | — | `rounded-2xl`, `border border-border-base` (different border token than #5), `shadow-sm` |
-| 7 | `src/pages/index.astro:128` (stat card) | Inline | No icon | No CTA | `rounded-2xl`, `border border-border-subtle`, `bg-background-subtle`, `shadow-sm` |
-| 8 | `src/pages/index.astro:373` | Inline | — | — | `rounded-2xl`, `border border-border-subtle`, `p-7` (unique padding value, everyone else uses p-5/p-6/p-8), `shadow-sm` |
-| 9 | `src/pages/index.astro:781` | Inline | — | — | `rounded-2xl`, `border border-border-subtle`, `p-6`, `shadow-sm` |
-| 10 | `src/pages/index.astro:889` | Inline | — | — | `rounded-2xl`, `border border-border-base`, `p-8`, `shadow-md` |
-| 11 | `src/pages/about.astro:318,328,338` | Inline | — | — | `rounded-2xl`, `border border-gray-100` (raw Tailwind gray, not a design token), `shadow` |
-| 12 | `src/pages/packages.astro:366` | Inline | — | — | `rounded-2xl`, `border border-border-subtle`, `bg-background-subtle`, **no shadow class** |
-| 13 | `src/pages/packages.astro:576` (pricing table shell) | Inline | — | — | `rounded-2xl`, `border border-border-subtle`, `shadow-sm` |
-| 14 | `src/components/sections/PricingCard.astro` | Shared component | Checkmarks, no icon badge | Full-width `Button` (uses design system) | Uses `Card.astro`-style tokens |
-| 15 | `src/components/results/CaseStudyCard.astro` | Inline in a dedicated component (not `Card.astro`) | Logo image, not an icon badge | CTA button at bottom | Own bespoke border/shadow/radius (not cross-checked against `.card`) |
-| 16 | `src/pages/services/web-design/index.astro:294,311` | **Shared**: `FeatureCard` + `ui/Card.astro` | Uses `FeatureCard`'s gradient circle icon | — | Correctly delegates to the shared system |
+| #   | File                                                                                    | Shared component or inline?                                                                                          | Icon treatment                                                                                                                                  | Button/CTA placement                                                                                                        | Border / shadow / radius                                                                                                |
+| --- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| 1   | `src/pages/local-seo-tools/index.astro:193-364` (7 tool cards)                          | **Inline**, styled by a page-scoped `<style>` block at `index.astro:411-486` using bespoke `.tool-card*` class names | 40x40px icon box (`h-10 w-10`, `rounded-xl`), color keyed to a `--green/--blue/--indigo/--purple/--primary/--teal` modifier per card            | No visible CTA button — each card _is_ the form; submit button lives inside the embedded tool component                     | `rounded-2xl`, `border border-border-subtle`, `shadow-sm`, hover `-translate-y-1` + `shadow-xl`                         |
+| 2   | `src/pages/local-seo-tools/index.astro:130-186` (featured "Review Link Generator" card) | Inline, one-off, not reusing `.tool-card`                                                                            | 48x48px icon box (`h-12 w-12`, `bg-white/10`, `rounded-xl`) on a dark `bg-secondary` panel — different size/treatment than the 7 cards below it | CTA (`Open ROI Calculator`) is a full-width button _inside_ the card, `rounded-xl`, separate from the two-column card shell | `rounded-2xl`, `border border-border-subtle`, `shadow-lg` (no hover lift, unlike the grid cards)                        |
+| 3   | `src/components/sections/FeatureCard.astro`                                             | **Shared component**, wraps `ui/Card.astro` with `variant="elevated"`                                                | 56x56px circular gradient icon badge (`h-14 w-14 rounded-full bg-gradient-to-br from-primary to-primary-dark`), centered                        | No CTA — presentational only                                                                                                | Whatever `Card.astro`'s `elevated` variant defines, plus `hover:shadow-xl hover:-translate-y-1`                         |
+| 4   | `src/pages/services/index.astro:139,174,204` (3 "why choose us" blocks)                 | Inline                                                                                                               | No icon                                                                                                                                         | No CTA                                                                                                                      | `rounded-3xl`, `border border-border-subtle`, `bg-background-cream`, **no shadow**                                      |
+| 5   | `src/pages/services/index.astro:377`                                                    | Inline                                                                                                               | —                                                                                                                                               | —                                                                                                                           | `rounded-2xl`, `border border-border-subtle`, `shadow-sm`, hover `shadow-md` + `border-primary/20`                      |
+| 6   | `src/pages/services/index.astro:426`                                                    | Inline                                                                                                               | —                                                                                                                                               | —                                                                                                                           | `rounded-2xl`, `border border-border-base` (different border token than #5), `shadow-sm`                                |
+| 7   | `src/pages/index.astro:128` (stat card)                                                 | Inline                                                                                                               | No icon                                                                                                                                         | No CTA                                                                                                                      | `rounded-2xl`, `border border-border-subtle`, `bg-background-subtle`, `shadow-sm`                                       |
+| 8   | `src/pages/index.astro:373`                                                             | Inline                                                                                                               | —                                                                                                                                               | —                                                                                                                           | `rounded-2xl`, `border border-border-subtle`, `p-7` (unique padding value, everyone else uses p-5/p-6/p-8), `shadow-sm` |
+| 9   | `src/pages/index.astro:781`                                                             | Inline                                                                                                               | —                                                                                                                                               | —                                                                                                                           | `rounded-2xl`, `border border-border-subtle`, `p-6`, `shadow-sm`                                                        |
+| 10  | `src/pages/index.astro:889`                                                             | Inline                                                                                                               | —                                                                                                                                               | —                                                                                                                           | `rounded-2xl`, `border border-border-base`, `p-8`, `shadow-md`                                                          |
+| 11  | `src/pages/about.astro:318,328,338`                                                     | Inline                                                                                                               | —                                                                                                                                               | —                                                                                                                           | `rounded-2xl`, `border border-gray-100` (raw Tailwind gray, not a design token), `shadow`                               |
+| 12  | `src/pages/packages.astro:366`                                                          | Inline                                                                                                               | —                                                                                                                                               | —                                                                                                                           | `rounded-2xl`, `border border-border-subtle`, `bg-background-subtle`, **no shadow class**                               |
+| 13  | `src/pages/packages.astro:576` (pricing table shell)                                    | Inline                                                                                                               | —                                                                                                                                               | —                                                                                                                           | `rounded-2xl`, `border border-border-subtle`, `shadow-sm`                                                               |
+| 14  | `src/components/sections/PricingCard.astro`                                             | Shared component                                                                                                     | Checkmarks, no icon badge                                                                                                                       | Full-width `Button` (uses design system)                                                                                    | Uses `Card.astro`-style tokens                                                                                          |
+| 15  | `src/components/results/CaseStudyCard.astro`                                            | Inline in a dedicated component (not `Card.astro`)                                                                   | Logo image, not an icon badge                                                                                                                   | CTA button at bottom                                                                                                        | Own bespoke border/shadow/radius (not cross-checked against `.card`)                                                    |
+| 16  | `src/pages/services/web-design/index.astro:294,311`                                     | **Shared**: `FeatureCard` + `ui/Card.astro`                                                                          | Uses `FeatureCard`'s gradient circle icon                                                                                                       | —                                                                                                                           | Correctly delegates to the shared system                                                                                |
 
 **Key finding:** only `services/web-design`, `services/local-seo`, and
 `services/google-business-profile-optimization` use `Card.astro` / `FeatureCard.astro`.
@@ -61,7 +61,7 @@ inconsistent shadow (`shadow-sm`, `shadow`, `shadow-md`, or none).
 - **None of these classes are used anywhere** in `src/components/tools/*` or
   `src/pages/local-seo-tools/index.astro` — confirmed by grep. This is dead CSS.
 - Meanwhile `src/pages/local-seo-tools/index.astro:411-486` defines its own **scoped**
-  `<style>` block reusing the *same* class names (`.tool-card`, `.tool-card-header`,
+  `<style>` block reusing the _same_ class names (`.tool-card`, `.tool-card-header`,
   `.tool-card-icon`, `.tool-card-body`) with **different values** — e.g. icon box is
   `h-10 w-10` locally vs `h-12 w-12` globally; header padding is `px-5 py-4` locally vs
   `p-6`/`p-8` (responsive) globally; the global version has no color-modifier classes
@@ -82,6 +82,7 @@ page listed below. Migrated: `index.astro`, `services/index.astro`,
 `local-seo-roi-calculator.astro`, `additional-services/index.astro`, `results.astro`,
 `contact.astro`, `packages.astro`, `about.astro`. Two bugs called out in this section
 were fixed as part of the rollout:
+
 - `about.astro:365`'s hardcoded `hover:bg-[#c9400a]` hex is gone — the button now
   renders plain `class="btn btn-primary btn-lg"`, so hover resolves through the
   `--color-primary-hover` token like every other primary CTA.
@@ -113,27 +114,28 @@ padding fixed per size, `shadow-sm`→`shadow-md` on hover).
 `<a>` tags. Grouping the distinct patterns found (representative refs only — the full
 grep turned up 70+ instances):
 
-| Pattern (radius / padding / shadow) | Representative file:line | Also seen at |
-|---|---|---|
-| `rounded-full`, `px-10 py-4`, `shadow-[0_8px_32px_rgba(245,107,42,0.4)]` | `index.astro:45` | `services/index.astro:40`, `services/index.astro.bak:23` (stale copy, see note below) |
-| `rounded-full`, `px-8 py-3.5`, plain `shadow` | `local-seo-roi-calculator.astro:70` | `additional-services/index.astro:100,356` |
-| `rounded-2xl`, `px-8 py-4`, `shadow-[0_8px_32px_rgba(245,107,42,0.4)]` | `local-seo-tools/index.astro:80` | none exact match elsewhere — unique combo |
-| `rounded-2xl`, `px-10 py-4`, `shadow-[0_8px_32px_rgba(245,107,42,0.45)]` | `local-seo-tools/index.astro:389` | `results.astro:360` |
-| `rounded-xl`, `px-6 py-3`, plain `shadow` | `results.astro:177` | — |
-| `rounded-xl`, `px-6 py-3.5`, plain `shadow` | `contact.astro:87` | `packages.astro:222`, `additional-services/index.astro:304` |
-| `rounded-xl`, `px-5 py-3`, no shadow | `contact.astro:146` | — |
-| `rounded-xl`, `px-6 py-3`, plain `shadow` | `about.astro:72` | — |
-| `rounded-2xl`, `px-8 py-4`, `hover:bg-[#c9400a]` (raw hex, not `--color-primary-dark` token) | `about.astro:365` | — |
-| `rounded-xl`, border-outline variant, `px-5 py-2.5` | `packages.astro:396` | — |
-| Bespoke button ignoring `.btn` entirely: `rounded-lg`, `px-6 py-3.5`, `hover:bg-primary-hover` | `components/tools/ReviewLinkGenerator.astro:32` | — |
+| Pattern (radius / padding / shadow)                                                            | Representative file:line                        | Also seen at                                                                          |
+| ---------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `rounded-full`, `px-10 py-4`, `shadow-[0_8px_32px_rgba(245,107,42,0.4)]`                       | `index.astro:45`                                | `services/index.astro:40`, `services/index.astro.bak:23` (stale copy, see note below) |
+| `rounded-full`, `px-8 py-3.5`, plain `shadow`                                                  | `local-seo-roi-calculator.astro:70`             | `additional-services/index.astro:100,356`                                             |
+| `rounded-2xl`, `px-8 py-4`, `shadow-[0_8px_32px_rgba(245,107,42,0.4)]`                         | `local-seo-tools/index.astro:80`                | none exact match elsewhere — unique combo                                             |
+| `rounded-2xl`, `px-10 py-4`, `shadow-[0_8px_32px_rgba(245,107,42,0.45)]`                       | `local-seo-tools/index.astro:389`               | `results.astro:360`                                                                   |
+| `rounded-xl`, `px-6 py-3`, plain `shadow`                                                      | `results.astro:177`                             | —                                                                                     |
+| `rounded-xl`, `px-6 py-3.5`, plain `shadow`                                                    | `contact.astro:87`                              | `packages.astro:222`, `additional-services/index.astro:304`                           |
+| `rounded-xl`, `px-5 py-3`, no shadow                                                           | `contact.astro:146`                             | —                                                                                     |
+| `rounded-xl`, `px-6 py-3`, plain `shadow`                                                      | `about.astro:72`                                | —                                                                                     |
+| `rounded-2xl`, `px-8 py-4`, `hover:bg-[#c9400a]` (raw hex, not `--color-primary-dark` token)   | `about.astro:365`                               | —                                                                                     |
+| `rounded-xl`, border-outline variant, `px-5 py-2.5`                                            | `packages.astro:396`                            | —                                                                                     |
+| Bespoke button ignoring `.btn` entirely: `rounded-lg`, `px-6 py-3.5`, `hover:bg-primary-hover` | `components/tools/ReviewLinkGenerator.astro:32` | —                                                                                     |
 
 Additional specific issues:
+
 - **`src/pages/about.astro:365`** hardcodes `hover:bg-[#c9400a]` instead of the
   `--color-primary-dark` token every other CTA uses for its hover state — a color that
   will drift silently if the brand primary is ever retuned.
 - **`src/pages/index.astro.bak`** and **`src/pages/services/index.astro.bak`** are
   stale, uncommitted-looking backup files still sitting in `src/pages/`. They contain
-  their *own* additional CTA/card variants (e.g. `index.astro.bak:309`
+  their _own_ additional CTA/card variants (e.g. `index.astro.bak:309`
   `rounded-2xl … px-12 py-5`) that don't match the live page. They shouldn't factor
   into any button/card standardization work, but worth flagging since Astro will treat
   `.astro.bak` as a non-route file only as long as the extension isn't `.astro` —
@@ -142,10 +144,10 @@ Additional specific issues:
   not use the `.btn .btn-primary` classes every sibling tool uses (`GBPCategoryFinder`,
   `FAQSchemaGenerator`, `LandingPageOutlineGenerator`, `SERPPreview`, `UTMLinkBuilder`,
   `LocalKeywordIdeas`, `LocalBusinessSchema` all use `class="btn btn-primary h-11 ..."`).
-  Yet the *same file*'s injected results HTML (`ReviewLinkGenerator.astro:87-88`) does
+  Yet the _same file_'s injected results HTML (`ReviewLinkGenerator.astro:87-88`) does
   use `btn btn-secondary btn-sm` / `btn btn-primary btn-sm` — so the file is
   internally inconsistent with itself.
-- **`src/layouts/Layout.astro:139-156`** defines a *third*, page-global `.btn` /
+- **`src/layouts/Layout.astro:139-156`** defines a _third_, page-global `.btn` /
   `.btn-primary` (pill radius via literal `9999px`, `padding: 0.75rem 1.5rem`,
   hardcoded hover color `#e65c1e`) inside a `<style>` block. This is a different value
   set than the canonical `tailwind.config.js` plugin version, but reuses the identical
@@ -162,21 +164,24 @@ Additional specific issues:
 `src/components` — confirmed by grep. Every tool's form fields are hand-written.
 
 Seven of eight tool components converged, likely by copy-paste, on:
+
 ```
 h-11 w-full rounded-lg border border-border-base px-4 text-sm
 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40
 ```
+
 (`GBPCategoryFinder.astro:14`, `LandingPageOutlineGenerator.astro:14,21`,
 `SERPPreview.astro:18,28`, `UTMLinkBuilder.astro:16` and 5 more inputs in the same
 file, `LocalKeywordIdeas.astro:16,26,37`, `LocalBusinessSchema.astro:16` and 6 more
 inputs/select/textarea in the same file). But two deviate:
 
-| File:line | Deviation |
-|---|---|
+| File:line                            | Deviation                                                                                                       |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
 | `ReviewLinkGenerator.astro:15,21,27` | `h-12` (not `h-11`), `focus:ring-primary/20` (not `/40`), adds explicit `bg-white`, no `placeholder:text-muted` |
-| `FAQSchemaGenerator.astro:16,23` | `h-10` (not `h-11`), adds `mb-2` inline instead of a wrapper gap, `focus:ring-primary/40` unchanged |
+| `FAQSchemaGenerator.astro:16,23`     | `h-10` (not `h-11`), adds `mb-2` inline instead of a wrapper gap, `focus:ring-primary/40` unchanged             |
 
 Label pattern is also inconsistent:
+
 - `SERPPreview.astro:10,23,32`, `UTMLinkBuilder.astro` (5x), `LocalKeywordIdeas.astro`
   (3x), `LocalBusinessSchema.astro` (6x) all render a visible
   `<label class="mb-1 block text-xs font-medium text-body">`.
@@ -199,6 +204,7 @@ the canonical `.input` class and the ad-hoc `h-11 rounded-lg` convention above.
 ---
 
 ## 5. Recommended follow-up (re-verified 2026-08-03 — every item re-checked against
+
 current file state, not carried forward from prior text)
 
 1. ~~Delete the dead `.tool-card*` / `.tool-input` / `.tool-button-*` / `.tool-output*` /
@@ -236,7 +242,7 @@ current file state, not carried forward from prior text)
    ROI panel (lead growth → conversions → revenue → ROI%) recalculates correctly, and
    confirmed the industry select still drives the conversion-rate/job-value assumptions.
 
-7. ~~`src/components/tools/ReviewLinkGenerator.astro` is still orphaned.~~
+6. ~~`src/components/tools/ReviewLinkGenerator.astro` is still orphaned.~~
    **Resolved.** Wired into `/local-seo-tools` as an 8th tool card, alongside SERP
    Preview and UTM Link Builder in the SEO & Marketing grid, following the same
    Card/icon/iconColor pattern as the other 7 tools (`tabler:qrcode` icon,
@@ -246,7 +252,7 @@ current file state, not carried forward from prior text)
    generated review link (`search.google.com/local/writereview?placeid=...`), and
    the QR code all work correctly.
 
-6. ~~Homepage's pricing-preview cards (`index.astro:909`, the `packages.map(...)` grid)
+7. ~~Homepage's pricing-preview cards (`index.astro:909`, the `packages.map(...)` grid)
    and `packages.astro:127`'s four pricing-tier grids are still hand-rolled.~~
    **Resolved.** All four pricing-tier grids — `seoTiers`, `websiteBuilds`,
    `packages` (both `packages.astro` and `index.astro`'s preview), and `audits` —
@@ -274,15 +280,15 @@ current file state, not carried forward from prior text)
 
 ### Design ideas (not bugs — future consideration, re-verified against current code)
 
-10. Whether final/bottom-of-page CTAs should get *deliberately* more visual weight than
+10. Whether final/bottom-of-page CTAs should get _deliberately_ more visual weight than
     mid-page CTAs sitewide. Re-verified `services/index.astro`'s final CTA (line 472) is
     still `size="lg"` — matching, not exceeding, the rest of the page's CTAs. The
     underlying design question (a distinct larger `Button` treatment reserved for
     final/bottom-of-page CTAs) remains open and unimplemented. Evaluate deliberately;
     don't fold into a future normalization pass without a conscious decision to adopt it.
 
-11. Whether a CTA that merely *navigates toward* conversion (an anchor/page link) should
-    be visually distinguished from a CTA that *performs* the conversion action itself.
+11. Whether a CTA that merely _navigates toward_ conversion (an anchor/page link) should
+    be visually distinguished from a CTA that _performs_ the conversion action itself.
     Re-verified `contact.astro`'s "Jump to Calendar" button (`href="#book"`, lines
     141–150) is still `variant="primary"`, identical to every other CTA on the site.
     The site still has no convention distinguishing "navigate to the booking surface"

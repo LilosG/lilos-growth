@@ -8,12 +8,7 @@ import Button from "~/components/ui/Button.astro";
 
 <div class="flex flex-1 flex-col">
   <form id="lpo-form" class="flex flex-1 flex-col gap-4">
-    <Input
-      id="lpo-service"
-      label="Service"
-      required
-      placeholder="e.g., Water Heater Repair"
-    />
+    <Input id="lpo-service" label="Service" required placeholder="e.g., Water Heater Repair" />
     <Input id="lpo-city" label="City/Area" required placeholder="e.g., Denver, CO" />
     <Button type="submit" variant="primary" size="md" fullWidth class="mt-auto"
       >Generate Outline</Button

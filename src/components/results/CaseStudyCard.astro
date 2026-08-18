@@ -73,7 +73,9 @@ const ctaHref = normalizeCaseStudyHref(primaryHref);
         } as const;
         const { bg, fg } = palette[primaryType as keyof typeof palette] ?? palette.gbp;
         return (
-          <div class={`relative flex aspect-[16/10] flex-col items-center justify-center gap-3 ${bg}`}>
+          <div
+            class={`relative flex aspect-[16/10] flex-col items-center justify-center gap-3 ${bg}`}
+          >
             <div class={`flex h-14 w-14 items-center justify-center rounded-2xl bg-white/70 ${fg}`}>
               {primaryType === "gbp" && (
                 <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -165,45 +165,65 @@ const cornerBadgeClasses =
     }
 
     <div class="mb-4">
-      {eyebrow && (
-        <p class={`mb-1 text-xs font-bold uppercase tracking-widest ${isDark ? "text-primary" : "text-muted"}`}>
-          {eyebrow}
-        </p>
-      )}
-      <h3 class={`font-heading text-lg font-bold md:text-xl ${isDark ? "text-white" : "text-heading"}`}>
+      {
+        eyebrow && (
+          <p
+            class={`mb-1 text-xs font-bold uppercase tracking-widest ${isDark ? "text-primary" : "text-muted"}`}
+          >
+            {eyebrow}
+          </p>
+        )
+      }
+      <h3
+        class={`font-heading text-lg font-bold md:text-xl ${isDark ? "text-white" : "text-heading"}`}
+      >
         {title}
       </h3>
-      {displayDescription && (
-        <p class={`mt-1 text-sm ${isDark ? "text-white/75" : "text-body"}`}>{displayDescription}</p>
-      )}
+      {
+        displayDescription && (
+          <p class={`mt-1 text-sm ${isDark ? "text-white/75" : "text-body"}`}>
+            {displayDescription}
+          </p>
+        )
+      }
     </div>
 
     <div class="mb-6">
       <div class="flex items-baseline gap-1">
-        <span class={`font-heading text-2xl font-bold md:text-3xl ${isDark ? "text-white" : "text-primary"}`}>
+        <span
+          class={`font-heading text-2xl font-bold md:text-3xl ${isDark ? "text-white" : "text-primary"}`}
+        >
           {isFree ? "Free" : cleanPrice.startsWith("$") ? cleanPrice : `$${cleanPrice}`}
         </span>
-        {!isFree && (
-          <span class={`text-sm ${isDark ? "text-white/50" : "text-body-light"}`}>
-            {period === "one-time" ? period : `/${period}`}
-          </span>
-        )}
+        {
+          !isFree && (
+            <span class={`text-sm ${isDark ? "text-white/50" : "text-body-light"}`}>
+              {period === "one-time" ? period : `/${period}`}
+            </span>
+          )
+        }
       </div>
-      {priceNote && (
-        <p class={`mt-1 text-xs ${isDark ? "text-white/40" : "text-muted"}`}>{priceNote}</p>
-      )}
-      {secondaryPrice && (
-        <p class={`mt-2 text-xs font-semibold ${isDark ? "text-white" : "text-primary"}`}>
-          {secondaryPrice}
-        </p>
-      )}
-      {timeline && (
-        <div class="mt-2 flex gap-3">
-          <span class="rounded-full border border-border-subtle bg-background-subtle px-2.5 py-0.5 text-xs font-semibold text-muted">
-            {timeline}
-          </span>
-        </div>
-      )}
+      {
+        priceNote && (
+          <p class={`mt-1 text-xs ${isDark ? "text-white/40" : "text-muted"}`}>{priceNote}</p>
+        )
+      }
+      {
+        secondaryPrice && (
+          <p class={`mt-2 text-xs font-semibold ${isDark ? "text-white" : "text-primary"}`}>
+            {secondaryPrice}
+          </p>
+        )
+      }
+      {
+        timeline && (
+          <div class="mt-2 flex gap-3">
+            <span class="rounded-full border border-border-subtle bg-background-subtle px-2.5 py-0.5 text-xs font-semibold text-muted">
+              {timeline}
+            </span>
+          </div>
+        )
+      }
     </div>
 
     {
@@ -211,11 +231,17 @@ const cornerBadgeClasses =
         <>
           <div class={`my-5 h-px ${isDark ? "bg-white/10" : "bg-border-subtle"}`} />
           <p class={`mb-2 text-sm ${isDark ? "text-white/75" : "text-body"}`}>{bodyText}</p>
-          {bestFor && <p class={`mb-5 text-xs italic ${isDark ? "text-white/50" : "text-muted"}`}>{bestFor}</p>}
+          {bestFor && (
+            <p class={`mb-5 text-xs italic ${isDark ? "text-white/50" : "text-muted"}`}>
+              {bestFor}
+            </p>
+          )}
         </>
       ) : bestFor ? (
         <>
-          <p class={`mb-5 mt-2 text-xs italic ${isDark ? "text-white/50" : "text-muted"}`}>{bestFor}</p>
+          <p class={`mb-5 mt-2 text-xs italic ${isDark ? "text-white/50" : "text-muted"}`}>
+            {bestFor}
+          </p>
           <div class={`mb-5 h-px ${isDark ? "bg-white/10" : "bg-border-subtle"}`} />
         </>
       ) : (
@@ -236,17 +262,28 @@ const cornerBadgeClasses =
       }
     </ul>
 
-    {footerNote && footerNoteVariant === "boxed" && (
-      <p class="bg-primary/5 border-primary/20 mb-6 rounded-xl border px-4 py-3 text-xs font-medium text-primary">
-        {footerNote}
-      </p>
-    )}
-    {footerNote && footerNoteVariant === "plain" && (
-      <p class={`mb-4 text-xs italic ${isDark ? "text-white/40" : "text-body-light"}`}>{footerNote}</p>
-    )}
+    {
+      footerNote && footerNoteVariant === "boxed" && (
+        <p class="bg-primary/5 border-primary/20 mb-6 rounded-xl border px-4 py-3 text-xs font-medium text-primary">
+          {footerNote}
+        </p>
+      )
+    }
+    {
+      footerNote && footerNoteVariant === "plain" && (
+        <p class={`mb-4 text-xs italic ${isDark ? "text-white/40" : "text-body-light"}`}>
+          {footerNote}
+        </p>
+      )
+    }
 
     <div class={`mt-auto border-t pt-4 ${isDark ? "border-white/10" : "border-gray-100"}`}>
-      <Button href={ctaHref} variant={ctaVariant ?? (featured ? "primary" : "outline")} size="md" class="w-full">
+      <Button
+        href={ctaHref}
+        variant={ctaVariant ?? (featured ? "primary" : "outline")}
+        size="md"
+        class="w-full"
+      >
         {ctaText}
       </Button>
     </div>

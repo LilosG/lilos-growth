@@ -59,13 +59,22 @@ import Button from "~/components/ui/Button.astro";
     addBtn.addEventListener("click", function () {
       var index = faqPairCount++;
       var div = document.createElement("div");
-      div.className = "faq-pair rounded-lg border border-border-subtle bg-background-subtle p-3 relative";
+      div.className =
+        "faq-pair rounded-lg border border-border-subtle bg-background-subtle p-3 relative";
       div.innerHTML =
         '<button type="button" class="absolute top-2 right-2 text-muted hover:text-red-500" onclick="this.parentElement.remove()">×</button>' +
-        '<div class="space-y-1.5 mb-2"><label for="faq-q-' + index + '" class="block text-sm font-medium text-heading">Question</label>' +
-        '<input id="faq-q-' + index + '" type="text" placeholder="Question" required class="input" /></div>' +
-        '<div class="space-y-1.5"><label for="faq-a-' + index + '" class="block text-sm font-medium text-heading">Answer</label>' +
-        '<textarea id="faq-a-' + index + '" rows="2" placeholder="Answer" required class="input resize-none"></textarea></div>';
+        '<div class="space-y-1.5 mb-2"><label for="faq-q-' +
+        index +
+        '" class="block text-sm font-medium text-heading">Question</label>' +
+        '<input id="faq-q-' +
+        index +
+        '" type="text" placeholder="Question" required class="input" /></div>' +
+        '<div class="space-y-1.5"><label for="faq-a-' +
+        index +
+        '" class="block text-sm font-medium text-heading">Answer</label>' +
+        '<textarea id="faq-a-' +
+        index +
+        '" rows="2" placeholder="Answer" required class="input resize-none"></textarea></div>';
       pairsContainer.appendChild(div);
     });
 

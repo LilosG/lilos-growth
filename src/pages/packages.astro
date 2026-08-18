@@ -181,15 +181,9 @@ const faqs = [
           <p class="mt-1 text-xs text-muted">{gbpManagement.description}</p>
           <div class="my-5 h-px bg-border-subtle"></div>
           <ul class="mb-8 flex-1 space-y-2.5 text-sm">
-            {
-              gbpManagement.inclusions.map((inc) => (
-                <CheckListItem>{inc}</CheckListItem>
-              ))
-            }
+            {gbpManagement.inclusions.map((inc) => <CheckListItem>{inc}</CheckListItem>)}
           </ul>
-          <Button href="/contact#book" variant="primary" size="lg" fullWidth>
-            Get Started
-          </Button>
+          <Button href="/contact#book" variant="primary" size="lg" fullWidth> Get Started </Button>
         </article>
       </div>
     </div>
@@ -309,11 +303,9 @@ const faqs = [
               </span>
               <span class="text-sm text-body">/mo</span>
             </div>
-            <div class="my-4 h-px bg-border-subtle" />
+            <div class="my-4 h-px bg-border-subtle"></div>
             <ul class="space-y-2 text-sm">
-              {websiteAsAService.inclusions.map((inc) => (
-                <CheckListItem>{inc}</CheckListItem>
-              ))}
+              {websiteAsAService.inclusions.map((inc) => <CheckListItem>{inc}</CheckListItem>)}
             </ul>
             <Button href="/contact#book" variant="outline" size="lg" fullWidth class="mt-6">
               Get Started

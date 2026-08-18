@@ -133,7 +133,7 @@ export const description =
       </div>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         <!-- GBP -->
-        <Card class="!bg-background-cream flex flex-col">
+        <Card class="flex flex-col !bg-background-cream">
           <div
             class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-service-gbp-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-gbp"
           >
@@ -147,8 +147,10 @@ export const description =
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              ></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              ></path></svg
+              ></path><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
             >
             GBP Management
           </div>
@@ -168,7 +170,7 @@ export const description =
         </Card>
 
         <!-- Local SEO -->
-        <Card class="!bg-background-cream flex flex-col">
+        <Card class="flex flex-col !bg-background-cream">
           <div
             class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-service-seo-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-seo"
           >
@@ -198,7 +200,7 @@ export const description =
         </Card>
 
         <!-- Website -->
-        <Card class="!bg-background-cream flex flex-col">
+        <Card class="flex flex-col !bg-background-cream">
           <div
             class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-service-website-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-website"
           >
@@ -230,7 +232,6 @@ export const description =
       </div>
     </div>
   </section>
-
 
   <!-- AI AUDIT SECTION -->
   <section class="bg-secondary py-24" aria-label="AI Audit">
@@ -270,9 +271,7 @@ export const description =
                 "Citation inconsistencies across 50+ directories",
                 "AI search visibility (AEO) readiness score",
                 "Technical fixes ranked by revenue impact",
-              ].map((item) => (
-                <CheckListItem>{item}</CheckListItem>
-              ))
+              ].map((item) => <CheckListItem>{item}</CheckListItem>)
             }
           </ul>
           <Button
@@ -412,7 +411,10 @@ export const description =
               role: "Electrical Contractor",
             },
           ].map((t) => (
-            <Card as="article" class="hover:border-primary/30 flex flex-col shadow-sm transition hover:shadow-md">
+            <Card
+              as="article"
+              class="hover:border-primary/30 flex flex-col shadow-sm transition hover:shadow-md"
+            >
               <div class="mb-4 flex gap-0.5">
                 {Array(5)
                   .fill(null)
@@ -444,8 +446,8 @@ export const description =
         Simple, Honest Pricing
       </h2>
       <p class="mx-auto mb-10 max-w-xl text-base text-muted">
-        Month-to-month. No setup fees. No contracts. GBP management included in every bundled
-        plan, starting at $750/mo.
+        Month-to-month. No setup fees. No contracts. GBP management included in every bundled plan,
+        starting at $750/mo.
       </p>
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
         {
