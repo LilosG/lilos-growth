@@ -14,3 +14,6 @@ package-lock.json
 *.min.css
 DESIGN_SYSTEM.md
 src/data/post/markdown-elements-demo-post.mdx
+
+# Auto-generated blog content from Notion pipeline — formatting not enforced
+src/content/blog/
