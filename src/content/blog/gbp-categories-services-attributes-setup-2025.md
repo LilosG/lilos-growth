@@ -10,6 +10,19 @@ datePublished: "2025-10-19"
 draft: false
 image: "/images/blog/gbp-categories-services-attributes-setup-2025/hero.svg"
 imageAlt: "Flow from category to services to attributes to proof"
+faqs:
+  - question: "How many secondary categories should I add to my Google Business Profile?"
+    answer: "Only add secondary categories for distinct, in-demand services you truly deliver and can support with content on your website. Most home service businesses need three to five total categories. Adding unrelated categories dilutes your relevance signal."
+  - question: "How often should I change my primary GBP category?"
+    answer: "Review it quarterly or when your primary service offering changes. Frequent switches look risky and can trigger a manual review from Google."
+  - question: "Do GBP services affect ranking or just conversions?"
+    answer: "Both. Services add relevance signals that can improve ranking, and they can trigger justifications — phrases Google shows under your listing like 'Has water heater repair' — especially when your website mirrors the same language."
+  - question: "Can a service-area business display an address on their Google Business Profile?"
+    answer: "No. Service-area businesses should hide their address and list cities and ZIP codes instead. Displaying an address that is not staffed or accessible to the public violates Google's guidelines."
+  - question: "What documentation helps if my Google Business Profile gets suspended?"
+    answer: "Gather business registration documents, signage photos for storefronts, vehicle wrap or equipment photos for SABs, invoices showing services rendered, and website pages matching your declared service categories."
+  - question: "Do attributes like 'Emergency service' help rankings?"
+    answer: "Yes, when true. Attributes increase conversion rates by clarifying your operating model to potential customers, and conversion signals feed back into prominence over time." 
 ---
 
 <!-- Paste the full blog body here and save -->

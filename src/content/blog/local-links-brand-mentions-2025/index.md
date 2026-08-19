@@ -11,6 +11,17 @@ draft: false
 image:
   src: "/images/blog/local-links-brand-mentions-2025/hero.svg"
   alt: "Network of local links and mentions feeding a home-service brand"
+faqs:
+  - question: "Do I need high domain authority links to rank in the local map pack?"
+    answer: "Not necessarily. For local map pack rankings, relevance and local proximity of the linking site often matter more than raw domain authority. A link from a city news outlet, neighborhood association, or local HOA website can outperform a high-DA blog with no local connection."
+  - question: "What if a local publication wants exclusive content in exchange for a link?"
+    answer: "Offer a unique photo, a local data point, or a first-person job story that is specific to that outlet's audience. Keep your main service pages and Answer Pages on your own site — do not give away the content you need for your own rankings."
+  - question: "Can I turn TV or radio appearances into backlinks?"
+    answer: "Yes. Publish a recap page on your site with quotes, key takeaways, and any video or audio clips. Then ask the producer or outlet to link to your recap page for attribution. This turns earned media into a durable SEO asset."
+  - question: "How long before local links improve my map pack rankings?"
+    answer: "Expect referral traffic within weeks and measurable ranking distance improvements in one to three months, assuming your reviews and relevance signals are already healthy. Local links work best as a multiplier on top of a solid GBP and review foundation."
+  - question: "Should I still build directory citations if I am focused on earning links?"
+    answer: "Yes, but focus energy differently. Keep your NAP consistent across major directories for foundational trust, then spend the majority of your link-building effort on local PR, partnerships, and community assets — those drive real ranking signals and actual calls." 
 ---
 
 > **TL;DR:** Skip generic link swaps. For local services, the fastest wins come from **proof-backed local PR** (jobs, safety tips, data), **vendor/association co-marketing**, **community sponsorships with deliverables**, and **Answer Page assets** reporters can cite. Build an **opportunity pipeline**, assign **owners**, and run **weekly outreach with SLAs**. Measure by **coverage, clicks, calls, and ranking lift**—not just DA.

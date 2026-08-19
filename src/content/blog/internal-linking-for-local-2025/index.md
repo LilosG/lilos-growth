@@ -10,6 +10,17 @@ datePublished: "2025-10-19"
 draft: false
 image: "/images/blog/internal-linking-for-local-2025/hero.svg"
 imageAlt: "Hub-and-spoke internal link map for local sites"
+faqs:
+  - question: "Should I link to every city page from my main navigation?"
+    answer: "No. Keep your main navigation lean — it should link to service hubs, not individual city pages. Use a footer list for your top five to ten cities and a dedicated service-areas index page for the full list."
+  - question: "How many internal links should a service hub page have?"
+    answer: "Three to eight primary links to Service plus City pages is the right range for most hubs. Add a 'view all locations' link to an index page if you serve more than eight cities. More than that on one page dilutes link equity and makes the page harder to navigate."
+  - question: "Can I cross-link between city pages?"
+    answer: "Yes, but cautiously. Prioritize links within the same geographic cluster — for example, linking your San Diego page to your Chula Vista page makes sense. Avoid turning city pages into full directories that link to dozens of other pages."
+  - question: "Do breadcrumb links matter for local SEO?"
+    answer: "Yes. Breadcrumbs help both users and crawlers understand page hierarchy — Home to Service Hub to Service plus City — and they generate BreadcrumbList structured data that Google can show in search results."
+  - question: "Should I use nofollow on internal links to conserve PageRank?"
+    answer: "No. Nofollow on internal links is an outdated practice that cuts off PageRank flow to your own pages. Use internal links freely to signal importance and pass relevance between related pages." 
 ---
 
 > **TL;DR:** Local sites win with a **hub → spoke → proof** link system: Service Hubs, City Hubs, and **Service + City** pages interlinked with **literal anchors**. Add links from FAQs, blog posts, header/footer “utility rails,” and GBP Posts. Audit quarterly to fix orphans, thin anchors, and dead ends.
