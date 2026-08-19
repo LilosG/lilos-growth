@@ -11,6 +11,13 @@ draft: false
 image:
   src: "/images/blog/local-landing-page-blueprints-2025/hero.svg"
   alt: "Blueprint of a high-performing local landing page"
+faqs:
+  - question: "Do I need a separate landing page for every city I serve?"
+    answer: "Only for cities where you serve customers regularly and can provide unique proof — real job examples, local reviews, and specific service details for that area. Thin pages with no local evidence hurt more than they help."
+  - question: "Can I combine multiple services on one city landing page?"
+    answer: "Yes for a city hub page that links to individual service pages. But dedicated Service plus City pages — for example, 'Plumbing in Chula Vista' — should stay focused on a single service for cleaner relevance signals."
+  - question: "What should I do if my pricing varies significantly by job?"
+    answer: "Give a realistic range and list the two or three variables that affect price most (job complexity, materials, emergency vs. scheduled). Link to a pricing explainer page or offer a free estimate CTA. Transparency builds trust and reduces low-quality leads." 
 ---
 
 <!-- Paste the full blog body here and save -->

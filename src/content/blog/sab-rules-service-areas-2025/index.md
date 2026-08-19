@@ -10,6 +10,19 @@ datePublished: "2025-10-19"
 draft: false
 image: "/images/blog/sab-rules-service-areas-2025/hero.svg"
 imageAlt: "Diagram showing SAB address hidden with service areas selected"
+faqs:
+  - question: "Can I keep my address visible on Google Business Profile if I occasionally meet customers at my location?"
+    answer: "Only if you consistently support walk-in customers with visible signage and staffed hours. If you do not have a customer-facing office, choose service-area business mode and hide the address — listing a non-customer-facing address violates Google's guidelines."
+  - question: "How many service area cities should I list on my Google Business Profile?"
+    answer: "Start with ten to twenty cities or ZIP codes where your crews go on a weekly basis. Expand in geographic rings as your prominence grows in those areas. Listing fifty cities you rarely serve signals spam and does not help rankings."
+  - question: "Do service area settings alone help me rank farther from my base location?"
+    answer: "Not by themselves. You also need prominence signals — reviews from customers in those cities, links, and brand mentions — plus relevance signals such as city landing pages on your website. Service area settings tell Google where you work; everything else tells Google how credible you are there."
+  - question: "Can I create a separate GBP profile for each technician's home address to cover more territory?"
+    answer: "No. This violates Google's guidelines. You are permitted one profile per legitimate business location. Do not list technician homes, storage units, or addresses where you do not conduct business operations."
+  - question: "We used a coworking address last year — what should we do now?"
+    answer: "Switch your profile to service-area business mode and hide the address. Remove the coworking location from your listing. Strengthen your evidence kit — reviews, website, invoices — before making the change to reduce the risk of triggering a manual review."
+  - question: "What happens if we move our office or warehouse?"
+    answer: "Update your business registration and website first, then update your GBP address. Expect a manual review; have your evidence kit ready with the new address documentation. Avoid making other profile changes simultaneously." 
 ---
 
 <!-- PASTE THE FULL BLOG BODY BELOW THIS LINE -->

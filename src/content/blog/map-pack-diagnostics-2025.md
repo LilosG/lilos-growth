@@ -10,6 +10,15 @@ datePublished: "2025-10-19"
 draft: false
 image: "/images/blog/map-pack-diagnostics-2025/hero.svg"
 imageAlt: "Decision flow from proximity to prominence to relevance"
+faqs:
+  - question: "How do I know if proximity is my main map pack ranking issue?"
+    answer: "If you appear in the map pack within one to two miles of your business but drop off quickly beyond that, proximity is likely the primary constraint. Focus on service-area configuration, city-specific landing pages, and earning reviews from customers in those farther markets."
+  - question: "Can I win map pack rankings farther away without moving my business location?"
+    answer: "Yes. City-intent landing pages, stronger brand mentions, and growing prominence through reviews and local links can extend your ranking radius. Expect gradual improvement over two to four months rather than immediate results."
+  - question: "What if my GBP profile looks strong but I am still stuck in rankings?"
+    answer: "Check for duplicate listings or Google's filter (two businesses from the same address or phone number). Also verify your primary category, look for NAP inconsistencies across citations, and audit whether your website mirrors your GBP service descriptions."
+  - question: "How long should I wait after making a category change before evaluating results?"
+    answer: "Give it two to three weeks before drawing conclusions. Avoid stacking additional profile changes during that window, which makes it harder to isolate what worked." 
 ---
 
 <!-- Paste the full blog body here and save -->

@@ -10,6 +10,15 @@ datePublished: "2025-10-19"
 draft: false
 image: "/images/blog/review-velocity-topical-coverage-2025/hero.svg"
 imageAlt: "Ladder showing review velocity steps and topical prompts"
+faqs:
+  - question: "Is asking customers to mention a specific topic or service in their review considered review gating?"
+    answer: "No, if phrased neutrally — for example, 'If helpful, feel free to mention the service or the city.' It becomes a problem if you only invite satisfied customers to review (gating) or if you script the exact wording."
+  - question: "Can I offer a discount or gift card in exchange for Google reviews?"
+    answer: "No. Incentivizing Google or Yelp reviews violates their terms of service. Keep any loyalty programs completely separate from review requests."
+  - question: "Can I re-engage past customers I never asked for a review?"
+    answer: "Yes. A one-time batch outreach to customers from the past six to twelve months is acceptable. Respect unsubscribe requests and platform volume limits."
+  - question: "Do photos included in customer reviews help my Google Business Profile rankings?"
+    answer: "Photos in reviews add visual proof and topical richness. Coach your technicians to take a clear before/after photo (with customer permission) so customers can reference it when writing their review." 
 ---
 
 <!-- Paste the full blog body here and save -->

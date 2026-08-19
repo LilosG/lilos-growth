@@ -10,6 +10,17 @@ datePublished: "2025-10-19"
 draft: false
 image: "/images/blog/gbp-utm-call-tracking-2025/hero.svg"
 imageAlt: "Diagram of GBP and LSA flowing into tracked calls and analytics"
+faqs:
+  - question: "Will using a dynamic call tracking number hurt my local SEO?"
+    answer: "Not when implemented correctly. Use dynamic number insertion only on your website via a JavaScript swap, and keep your real canonical phone number on your GBP listing and all directory citations. This preserves NAP consistency while giving you full attribution data on website traffic."
+  - question: "Should I put a tracking number as the primary phone on my Google Business Profile?"
+    answer: "You can use a tracking number as primary with your real number as secondary, but it adds maintenance overhead and increases the risk of NAP inconsistencies if the tracking number changes. Many businesses keep their real number as the GBP primary and rely on dynamic number insertion for website-level call attribution instead."
+  - question: "How do I track form leads from Local Services Ads?"
+    answer: "Export LSA lead data weekly via the LSA dashboard or use a connector to push leads into your CRM with a google_lsa source tag. Attach revenue when jobs close so you can calculate actual cost-per-booked-job, not just cost-per-lead."
+  - question: "How many tracking numbers do I need for dynamic number insertion?"
+    answer: "Start with four to eight numbers per location. Add more if you see collision warnings in your call tracking platform, which indicate the same number is being shown to multiple simultaneous visitors."
+  - question: "How should I handle attribution when multiple channels touch the same customer?"
+    answer: "Use position-based or data-driven attribution models rather than last-click. Last-click attribution systematically undervalues awareness channels like GBP and organic search and will cause you to over-invest in bottom-funnel channels." 
 ---
 
 > **TL;DR:** Add **consistent UTMs** to every GBP link, deploy **dynamic call tracking** with a clearly defined **call flow**, and run a **weekly QA ritual**. For LSA, capture Google’s proxy calls + form leads, mirror them into your CRM, and reconcile against booked jobs. If you can’t trace **lead → booking → revenue**, you’re guessing.
