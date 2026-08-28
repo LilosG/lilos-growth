@@ -40,7 +40,6 @@ const noIndex = props.noIndex ?? false;
 // Prefer Astro.site when available (respects site config)
 const site = Astro.site?.toString() ?? "https://lilosgrowth.com";
 const siteUrl = site.endsWith("/") ? site : site + "/";
-const pathname = Astro.url.pathname || "/";
 
 /**
  * === Global Organization (site-wide, single source of truth) ===
