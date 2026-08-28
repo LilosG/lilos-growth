@@ -1,12 +1,15 @@
 ---
 import Logo from "../Logo.astro";
 import { getPermalink } from "~/utils/permalinks";
+
+const footerLinkClass =
+  "rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary";
 ---
 
 <footer class="border-t-2 border-primary bg-secondary text-white">
   <div class="mx-auto w-full max-w-7xl px-4 py-14 md:px-6 md:py-16">
-    <!-- 2-column layout at md+: Brand/Contact (wide) + Links grid (Services + Company) -->
-    <div class="grid grid-cols-1 gap-10 md:grid-cols-[1.1fr,1.4fr] md:gap-12">
+    <!-- 2-column layout at md+: Brand/Contact + Links grid (4 cols) -->
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-[1.1fr,1.8fr] md:gap-12">
       <!-- Brand / Contact / CTA -->
       <section aria-labelledby="footer-brand">
         <Logo class="mb-3 w-28" />
@@ -51,8 +54,8 @@ import { getPermalink } from "~/utils/permalinks";
         </div>
       </section>
 
-      <!-- Links grid: Services + Company -->
-      <div class="grid grid-cols-1 gap-10 sm:grid-cols-2">
+      <!-- Links grid: Services + Industries + Locations + Company -->
+      <div class="grid grid-cols-2 gap-8 sm:grid-cols-4">
         <!-- Services -->
         <nav aria-labelledby="footer-services">
           <h3
@@ -62,48 +65,47 @@ import { getPermalink } from "~/utils/permalinks";
             Services
           </h3>
           <ul class="space-y-2 leading-6 text-white/90">
-            <li>
-              <a
-                href={getPermalink("/services/local-seo")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
-                >Local SEO</a
-              >
-            </li>
-            <li>
-              <a
-                href={getPermalink("/services/google-business-profile-optimization")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
-                >Google Business Profile</a
-              >
-            </li>
-            <li>
-              <a
-                href={getPermalink("/services/web-design")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
-                >Website Design</a
-              >
-            </li>
+            <li><a href={getPermalink("/services/local-seo")} class={footerLinkClass}>Local SEO</a></li>
+            <li><a href={getPermalink("/services/google-business-profile-optimization")} class={footerLinkClass}>Google Business Profile</a></li>
+            <li><a href={getPermalink("/services/web-design")} class={footerLinkClass}>Website Design</a></li>
           </ul>
-
-          <!-- Subtle divider + tool link -->
           <div class="mt-4 border-t border-white/10 pt-4">
             <ul class="space-y-2 leading-6 text-white/80">
-              <li>
-                <a
-                  href={getPermalink("/blog")}
-                  class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
-                  >Blog</a
-                >
-              </li>
-              <li>
-                <a
-                  href={getPermalink("/local-seo-tools")}
-                  class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
-                  >Local SEO Tools</a
-                >
-              </li>
+              <li><a href={getPermalink("/blog")} class={footerLinkClass}>Blog</a></li>
+              <li><a href={getPermalink("/local-seo-tools")} class={footerLinkClass}>Local SEO Tools</a></li>
             </ul>
           </div>
+        </nav>
+
+        <!-- Industries -->
+        <nav aria-labelledby="footer-industries">
+          <h3 id="footer-industries" class="mb-3 text-[15px] font-semibold tracking-wide text-primary">
+            Industries
+          </h3>
+          <ul class="space-y-2 leading-6 text-white/90">
+            <li><a href={getPermalink("/plumber-seo")} class={footerLinkClass}>Plumbers</a></li>
+            <li><a href={getPermalink("/electrician-seo")} class={footerLinkClass}>Electricians</a></li>
+            <li><a href={getPermalink("/hvac-seo")} class={footerLinkClass}>HVAC</a></li>
+            <li><a href={getPermalink("/pest-control-seo")} class={footerLinkClass}>Pest Control</a></li>
+            <li><a href={getPermalink("/roofing-seo")} class={footerLinkClass}>Roofing</a></li>
+            <li><a href={getPermalink("/water-damage-restoration-seo")} class={footerLinkClass}>Restoration</a></li>
+            <li><a href={getPermalink("/cleaning-company-seo")} class={footerLinkClass}>Cleaning</a></li>
+            <li><a href={getPermalink("/party-rental-seo")} class={footerLinkClass}>Party Rentals</a></li>
+            <li><a href={getPermalink("/restaurant-seo")} class={footerLinkClass}>Restaurants</a></li>
+          </ul>
+        </nav>
+
+        <!-- Locations -->
+        <nav aria-labelledby="footer-locations">
+          <h3 id="footer-locations" class="mb-3 text-[15px] font-semibold tracking-wide text-primary">
+            Locations
+          </h3>
+          <ul class="space-y-2 leading-6 text-white/90">
+            <li><a href={getPermalink("/local-seo-san-diego")} class={footerLinkClass}>San Diego SEO</a></li>
+            <li><a href={getPermalink("/local-seo-los-angeles")} class={footerLinkClass}>Los Angeles SEO</a></li>
+            <li><a href={getPermalink("/local-seo-orange-county")} class={footerLinkClass}>Orange County SEO</a></li>
+            <li><a href={getPermalink("/local-seo-las-vegas")} class={footerLinkClass}>Las Vegas SEO</a></li>
+          </ul>
         </nav>
 
         <!-- Company -->
@@ -112,35 +114,10 @@ import { getPermalink } from "~/utils/permalinks";
             Company
           </h3>
           <ul class="space-y-2 leading-6 text-white/90">
-            <li>
-              <a
-                href={getPermalink("/packages")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
-                >Packages</a
-              >
-            </li>
-            <li>
-              <a
-                href={getPermalink("/about")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
-                >About</a
-              >
-            </li>
-            <li>
-              <a
-                href={getPermalink("/contact")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
-                >Contact</a
-              >
-            </li>
-
-            <li>
-              <a
-                href={getPermalink("/privacy")}
-                class="rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
-                >Privacy Policy</a
-              >
-            </li>
+            <li><a href={getPermalink("/packages")} class={footerLinkClass}>Packages</a></li>
+            <li><a href={getPermalink("/about")} class={footerLinkClass}>About</a></li>
+            <li><a href={getPermalink("/contact")} class={footerLinkClass}>Contact</a></li>
+            <li><a href={getPermalink("/privacy")} class={footerLinkClass}>Privacy Policy</a></li>
           </ul>
         </nav>
       </div>
