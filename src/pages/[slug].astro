@@ -77,7 +77,8 @@ const processSteps = [
   {
     number: 5,
     title: "Reports & Calls",
-    description: "Monthly ranking and traffic reports plus strategy calls — clear metrics, no fluff.",
+    description:
+      "Monthly ranking and traffic reports plus strategy calls — clear metrics, no fluff.",
   },
 ];
 
@@ -180,389 +181,464 @@ const locationServices = isLocation
   : [];
 ---
 
-<Layout
-  title={pageTitle}
-  description={pageDescription}
-  breadcrumbs={breadcrumbs}
-  schema={schema}
->
-
-  {isIndustry && (
-    <>
-      <!-- HERO -->
-      <section class="relative overflow-hidden bg-secondary pb-28 pt-20" aria-label="Hero">
-        <div
-          class="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
-          style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
-          aria-hidden="true"
-        />
-        <div class="relative z-10 mx-auto w-full max-w-3xl px-6 text-center">
-          <p class="mb-4 text-xs font-bold uppercase tracking-widest text-primary">
-            {industry!.name} SEO
-          </p>
-          <h1 class="mb-5 font-heading text-5xl font-extrabold leading-[1.08] text-white md:text-6xl">
-            {industry!.headline}
-          </h1>
-          <p class="mb-10 text-lg font-medium leading-relaxed text-white/70">
-            {industry!.intro}
-          </p>
-          <div class="flex flex-wrap justify-center gap-4">
-            <Button href="/contact#book" data-evt={`cta_${industry!.slug}_book`} variant="primary" size="lg" icon="tabler:arrow-right">
-              Get a Free Audit
-            </Button>
-            <a
-              href="#plans"
-              class="hover:bg-white/8 inline-flex items-center gap-2 rounded-full border-2 border-white/25 px-8 py-4 font-heading text-base font-bold text-white transition hover:border-white/50"
-            >
-              See Plans
-            </a>
+<Layout title={pageTitle} description={pageDescription} breadcrumbs={breadcrumbs} schema={schema}>
+  {
+    isIndustry && (
+      <>
+        <section class="relative overflow-hidden bg-secondary pb-28 pt-20" aria-label="Hero">
+          <div
+            class="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
+            style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
+            aria-hidden="true"
+          />
+          <div class="relative z-10 mx-auto w-full max-w-3xl px-6 text-center">
+            <p class="mb-4 text-xs font-bold uppercase tracking-widest text-primary">
+              {industry!.name} SEO
+            </p>
+            <h1 class="mb-5 font-heading text-5xl font-extrabold leading-[1.08] text-white md:text-6xl">
+              {industry!.headline}
+            </h1>
+            <p class="mb-10 text-lg font-medium leading-relaxed text-white/70">{industry!.intro}</p>
+            <div class="flex flex-wrap justify-center gap-4">
+              <Button
+                href="/contact#book"
+                data-evt={`cta_${industry!.slug}_book`}
+                variant="primary"
+                size="lg"
+                icon="tabler:arrow-right"
+              >
+                Get a Free Audit
+              </Button>
+              <a
+                href="#plans"
+                class="hover:bg-white/8 inline-flex items-center gap-2 rounded-full border-2 border-white/25 px-8 py-4 font-heading text-base font-bold text-white transition hover:border-white/50"
+              >
+                See Plans
+              </a>
+            </div>
+            <div class="mt-6 flex items-center justify-center gap-2">
+              <Icon name="tabler:star-filled" class="h-5 w-5 text-warning" />
+              <span class="text-sm font-semibold text-white/80">
+                5-Star Rated by Local Businesses
+              </span>
+            </div>
           </div>
-          <div class="mt-6 flex items-center justify-center gap-2">
-            <Icon name="tabler:star-filled" class="h-5 w-5 text-warning" />
-            <span class="text-sm font-semibold text-white/80">5-Star Rated by Local Businesses</span>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- PAIN POINTS -->
-      <section class="border-t border-gray-100 bg-background-cream py-24" aria-label="Pain points">
-        <div class="mx-auto max-w-5xl px-6">
-          <div class="mb-14 text-center">
-            <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">The Problem</p>
-            <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
-              Why {industry!.name} Struggle to Rank
+        <section
+          class="border-t border-gray-100 bg-background-cream py-24"
+          aria-label="Pain points"
+        >
+          <div class="mx-auto max-w-5xl px-6">
+            <div class="mb-14 text-center">
+              <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+                The Problem
+              </p>
+              <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+                Why {industry!.name} Struggle to Rank
+              </h2>
+              <p class="mt-4 text-base text-body">These are the gaps we close — fast.</p>
+            </div>
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              {industry!.painPoints.map((point) => (
+                <Card class="flex items-start gap-4 shadow-sm">
+                  <div class="bg-primary/10 mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full">
+                    <Icon name="tabler:alert-circle" class="h-5 w-5 text-primary" />
+                  </div>
+                  <p class="text-sm leading-relaxed text-body">{point}</p>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="border-t border-gray-100 bg-white py-24" aria-label="What you get">
+          <div class="mx-auto max-w-5xl px-6 text-center">
+            <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+              What's Included
+            </p>
+            <h2 class="mb-4 font-heading text-4xl font-extrabold text-heading md:text-5xl">
+              What You Get
             </h2>
-            <p class="mt-4 text-base text-body">These are the gaps we close — fast.</p>
+            <p class="mx-auto mb-10 max-w-xl text-base text-muted">
+              A practical local SEO system built for {industry!.name.toLowerCase()} — not a generic
+              package with your trade name swapped in.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+              {industry!.whatYouGet.map((item) => (
+                <Badge variant="primary" size="lg">
+                  {item}
+                </Badge>
+              ))}
+            </div>
           </div>
-          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            {industry!.painPoints.map((point) => (
-              <Card class="flex items-start gap-4 shadow-sm">
-                <div class="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/10">
-                  <Icon name="tabler:alert-circle" class="h-5 w-5 text-primary" />
-                </div>
-                <p class="text-sm leading-relaxed text-body">{point}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- WHAT YOU GET -->
-      <section class="border-t border-gray-100 bg-white py-24" aria-label="What you get">
-        <div class="mx-auto max-w-5xl px-6 text-center">
-          <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">What's Included</p>
-          <h2 class="mb-4 font-heading text-4xl font-extrabold text-heading md:text-5xl">What You Get</h2>
-          <p class="mx-auto mb-10 max-w-xl text-base text-muted">
-            A practical local SEO system built for {industry!.name.toLowerCase()} — not a generic package with your trade name swapped in.
-          </p>
-          <div class="flex flex-wrap justify-center gap-3">
-            {industry!.whatYouGet.map((item) => (
-              <Badge variant="primary" size="lg">{item}</Badge>
-            ))}
+        <section class="border-t border-gray-100 bg-background-cream py-24" aria-label="Process">
+          <div class="mx-auto max-w-6xl px-6">
+            <div class="mb-14 text-center">
+              <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+                How It Works
+              </p>
+              <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+                Our Local SEO System (5 Steps)
+              </h2>
+            </div>
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-5">
+              {processSteps.map((step) => (
+                <ProcessStep
+                  number={step.number}
+                  title={step.title}
+                  description={step.description}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- PROCESS -->
-      <section class="border-t border-gray-100 bg-background-cream py-24" aria-label="Process">
-        <div class="mx-auto max-w-6xl px-6">
-          <div class="mb-14 text-center">
-            <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">How It Works</p>
-            <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
-              Our Local SEO System (5 Steps)
-            </h2>
-          </div>
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-5">
-            {processSteps.map((step) => (
-              <ProcessStep number={step.number} title={step.title} description={step.description} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <!-- PLANS -->
-      <section id="plans" class="border-t border-gray-100 bg-white py-24" aria-label="Pricing">
-        <div class="mx-auto max-w-6xl px-6">
-          <div class="mb-14 text-center">
-            <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Pricing</p>
-            <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">Plans & Pricing</h2>
-            <p class="mt-4 text-base text-muted">Month-to-month. No setup fees. No rollovers.</p>
-          </div>
-          <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-3">
-            {packages.map((pkg) => (
-              <PricingCard
-                title={pkg.name}
-                eyebrow={pkg.tagline}
-                price={String(pkg.price)}
-                period="mo"
-                featured={pkg.featured}
-                badgeText={pkg.badge}
-                features={pkg.inclusions}
-                ctaText={pkg.featured ? `Choose ${pkg.name}` : "Get Started"}
-                ctaHref="/contact#book"
-              />
-            ))}
-          </div>
-          <p class="mt-8 text-center text-sm text-body-light">
-            Need just GBP management? Add it for $250/mo, or{" "}
-            <a href="/packages" class="font-semibold text-primary underline">view all packages</a>.
-          </p>
-        </div>
-      </section>
-
-      <!-- FAQ -->
-      <section id="faq" class="border-t border-gray-100 bg-background-cream py-24" aria-label="FAQ">
-        <div class="mx-auto max-w-3xl px-6">
-          <div class="mb-12 text-center">
-            <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">FAQ</p>
-            <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
-              Frequently Asked Questions
-            </h2>
-          </div>
-          <div class="space-y-2">
-            {industry!.faqs.map((faq) => (
-              <details class="group hover:border-primary/30 rounded-2xl border border-border-base bg-white shadow-sm transition">
-                <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-heading text-base font-bold text-heading">
-                  {faq.question}
-                  <svg
-                    class="h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M19 9l-7 7-7-7" />
-                  </svg>
-                </summary>
-                <div class="px-6 pb-6 text-base leading-relaxed text-body">{faq.answer}</div>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <!-- CTA -->
-      <section class="relative overflow-hidden bg-secondary py-32" aria-label="CTA">
-        <div
-          class="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
-          style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
-          aria-hidden="true"
-        />
-        <div class="relative z-10 mx-auto max-w-3xl px-6 text-center">
-          <h2 class="mb-6 font-heading text-5xl font-extrabold leading-tight text-white md:text-6xl">
-            Ready to Win<br /><span class="text-primary">More Jobs?</span>
-          </h2>
-          <p class="mb-10 text-xl font-medium text-white/70">
-            Get a free local SEO audit — no hard sell, just a clear picture of where you stand and what to fix first.
-          </p>
-          <Button href="/contact#book" data-evt={`cta_${industry!.slug}_final`} variant="primary" size="lg" icon="tabler:arrow-right">
-            Book My Free Audit
-          </Button>
-        </div>
-      </section>
-    </>
-  )}
-
-  {isLocation && (
-    <>
-      <!-- HERO -->
-      <section class="relative overflow-hidden bg-secondary pb-28 pt-20" aria-label="Hero">
-        <div
-          class="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
-          style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
-          aria-hidden="true"
-        />
-        <div class="relative z-10 mx-auto w-full max-w-3xl px-6 text-center">
-          <p class="mb-4 text-xs font-bold uppercase tracking-widest text-primary">
-            Local SEO · {location!.city}, {location!.stateAbbr}
-          </p>
-          <h1 class="mb-5 font-heading text-5xl font-extrabold leading-[1.08] text-white md:text-6xl">
-            Local SEO for {location!.city} Businesses
-          </h1>
-          <p class="mb-10 text-lg font-medium leading-relaxed text-white/70">
-            {location!.description}
-          </p>
-          <div class="flex flex-wrap justify-center gap-4">
-            <Button href="/contact#book" data-evt={`cta_${location!.slug}_book`} variant="primary" size="lg" icon="tabler:arrow-right">
-              Get a Free Audit
-            </Button>
-            <a
-              href="#services"
-              class="hover:bg-white/8 inline-flex items-center gap-2 rounded-full border-2 border-white/25 px-8 py-4 font-heading text-base font-bold text-white transition hover:border-white/50"
-            >
-              Our Services
-            </a>
-          </div>
-          <div class="mt-6 flex items-center justify-center gap-2">
-            <Icon name="tabler:star-filled" class="h-5 w-5 text-warning" />
-            <span class="text-sm font-semibold text-white/80">5-Star Rated by Local Businesses</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- MARKETS SERVED -->
-      <section class="border-t border-gray-100 bg-background-cream py-24" aria-label="Markets served">
-        <div class="mx-auto max-w-5xl px-6 text-center">
-          <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Coverage</p>
-          <h2 class="mb-4 font-heading text-4xl font-extrabold text-heading md:text-5xl">
-            Areas We Serve in {location!.city}
-          </h2>
-          <p class="mx-auto mb-10 max-w-xl text-base text-muted">
-            We build city-level SEO targeting for each community in your service area — not just broad metro optimization.
-          </p>
-          <div class="flex flex-wrap justify-center gap-3">
-            {location!.neighborhoods.map((neighborhood) => (
-              <Badge variant="secondary" size="lg">{neighborhood}</Badge>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <!-- INDUSTRIES SERVED -->
-      <section class="border-t border-gray-100 bg-white py-24" aria-label="Industries served">
-        <div class="mx-auto max-w-5xl px-6">
-          <div class="mb-14 text-center">
-            <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Trades We Serve</p>
-            <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
-              Industries We Serve in {location!.city}
-            </h2>
-            <p class="mt-4 text-base text-muted">
-              Local SEO for home service and trade businesses across the {location!.city} metro.
+        <section id="plans" class="border-t border-gray-100 bg-white py-24" aria-label="Pricing">
+          <div class="mx-auto max-w-6xl px-6">
+            <div class="mb-14 text-center">
+              <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Pricing</p>
+              <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+                Plans & Pricing
+              </h2>
+              <p class="mt-4 text-base text-muted">Month-to-month. No setup fees. No rollovers.</p>
+            </div>
+            <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-3">
+              {packages.map((pkg) => (
+                <PricingCard
+                  title={pkg.name}
+                  eyebrow={pkg.tagline}
+                  price={String(pkg.price)}
+                  period="mo"
+                  featured={pkg.featured}
+                  badgeText={pkg.badge}
+                  features={pkg.inclusions}
+                  ctaText={pkg.featured ? `Choose ${pkg.name}` : "Get Started"}
+                  ctaHref="/contact#book"
+                />
+              ))}
+            </div>
+            <p class="mt-8 text-center text-sm text-body-light">
+              Need just GBP management? Add it for $250/mo, or{" "}
+              <a href="/packages" class="font-semibold text-primary underline">
+                view all packages
+              </a>
+              .
             </p>
           </div>
-          <div class="flex flex-wrap justify-center gap-3">
-            {location!.trades.map((trade) => {
-              const match = industries.find((i) => i.name === trade || i.name.startsWith(trade));
-              return match ? (
-                <a
-                  href={`/${match.slug}`}
-                  class="rounded-full border border-border-base bg-background-cream px-5 py-2.5 text-sm font-semibold text-heading transition hover:border-primary hover:text-primary hover:shadow-sm"
-                >
-                  {trade}
-                </a>
-              ) : (
-                <span class="rounded-full border border-border-base bg-background-cream px-5 py-2.5 text-sm font-semibold text-heading">
-                  {trade}
-                </span>
-              );
-            })}
+        </section>
+
+        <section
+          id="faq"
+          class="border-t border-gray-100 bg-background-cream py-24"
+          aria-label="FAQ"
+        >
+          <div class="mx-auto max-w-3xl px-6">
+            <div class="mb-12 text-center">
+              <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">FAQ</p>
+              <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+                Frequently Asked Questions
+              </h2>
+            </div>
+            <div class="space-y-2">
+              {industry!.faqs.map((faq) => (
+                <details class="hover:border-primary/30 group rounded-2xl border border-border-base bg-white shadow-sm transition">
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-heading text-base font-bold text-heading">
+                    {faq.question}
+                    <svg
+                      class="h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div class="px-6 pb-6 text-base leading-relaxed text-body">{faq.answer}</div>
+                </details>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- WHY THIS CITY -->
-      <section class="border-t border-gray-100 bg-background-cream py-24" aria-label="Market context">
-        <div class="mx-auto max-w-4xl px-6 text-center">
-          <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Market Context</p>
-          <h2 class="mb-6 font-heading text-4xl font-extrabold text-heading md:text-5xl">
-            The {location!.city} Local Search Market
-          </h2>
-          <p class="text-lg leading-relaxed text-body">{location!.whyCity}</p>
-        </div>
-      </section>
-
-      <!-- SERVICES -->
-      <section id="services" class="border-t border-gray-100 bg-white py-24" aria-label="Services">
-        <div class="mx-auto max-w-5xl px-6">
-          <div class="mb-14 text-center">
-            <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">What We Do</p>
-            <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
-              How We Help {location!.city} Businesses
+        <section class="relative overflow-hidden bg-secondary py-32" aria-label="CTA">
+          <div
+            class="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
+            style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
+            aria-hidden="true"
+          />
+          <div class="relative z-10 mx-auto max-w-3xl px-6 text-center">
+            <h2 class="mb-6 font-heading text-5xl font-extrabold leading-tight text-white md:text-6xl">
+              Ready to Win
+              <>
+                <br />
+                <span class="text-primary">More Jobs?</span>
+              </>
             </h2>
-            <p class="mt-4 text-base text-muted">Three core services, each built for local search performance.</p>
+            <p class="mb-10 text-xl font-medium text-white/70">
+              Get a free local SEO audit — no hard sell, just a clear picture of where you stand and
+              what to fix first.
+            </p>
+            <Button
+              href="/contact#book"
+              data-evt={`cta_${industry!.slug}_final`}
+              variant="primary"
+              size="lg"
+              icon="tabler:arrow-right"
+            >
+              Book My Free Audit
+            </Button>
           </div>
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {locationServices.map((service) => (
-              <a
-                href={service.href}
-                class="group flex flex-col rounded-2xl border border-border-base bg-background-cream p-8 transition hover:border-primary hover:shadow-md"
+        </section>
+      </>
+    )
+  }
+
+  {
+    isLocation && (
+      <>
+        <section class="relative overflow-hidden bg-secondary pb-28 pt-20" aria-label="Hero">
+          <div
+            class="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
+            style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
+            aria-hidden="true"
+          />
+          <div class="relative z-10 mx-auto w-full max-w-3xl px-6 text-center">
+            <p class="mb-4 text-xs font-bold uppercase tracking-widest text-primary">
+              Local SEO · {location!.city}, {location!.stateAbbr}
+            </p>
+            <h1 class="mb-5 font-heading text-5xl font-extrabold leading-[1.08] text-white md:text-6xl">
+              Local SEO for {location!.city} Businesses
+            </h1>
+            <p class="mb-10 text-lg font-medium leading-relaxed text-white/70">
+              {location!.description}
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+              <Button
+                href="/contact#book"
+                data-evt={`cta_${location!.slug}_book`}
+                variant="primary"
+                size="lg"
+                icon="tabler:arrow-right"
               >
-                <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                  <Icon name={service.icon} class="h-6 w-6 text-primary" />
-                </div>
-                <h3 class="mb-3 font-heading text-xl font-extrabold text-heading group-hover:text-primary">
-                  {service.title}
-                </h3>
-                <p class="flex-1 text-sm leading-relaxed text-body">{service.description}</p>
-                <span class="mt-4 inline-flex items-center gap-1 font-heading text-sm font-bold text-primary">
-                  Learn more &rarr;
-                </span>
+                Get a Free Audit
+              </Button>
+              <a
+                href="#services"
+                class="hover:bg-white/8 inline-flex items-center gap-2 rounded-full border-2 border-white/25 px-8 py-4 font-heading text-base font-bold text-white transition hover:border-white/50"
+              >
+                Our Services
               </a>
-            ))}
+            </div>
+            <div class="mt-6 flex items-center justify-center gap-2">
+              <Icon name="tabler:star-filled" class="h-5 w-5 text-warning" />
+              <span class="text-sm font-semibold text-white/80">
+                5-Star Rated by Local Businesses
+              </span>
+            </div>
           </div>
-          <div class="mt-10 text-center">
-            <Button href="/packages" variant="outline" size="md">View All Plans & Pricing</Button>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- PROCESS -->
-      <section class="border-t border-gray-100 bg-background-cream py-24" aria-label="Process">
-        <div class="mx-auto max-w-6xl px-6">
-          <div class="mb-14 text-center">
-            <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">How It Works</p>
-            <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
-              Our Local SEO System (5 Steps)
+        <section
+          class="border-t border-gray-100 bg-background-cream py-24"
+          aria-label="Markets served"
+        >
+          <div class="mx-auto max-w-5xl px-6 text-center">
+            <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Coverage</p>
+            <h2 class="mb-4 font-heading text-4xl font-extrabold text-heading md:text-5xl">
+              Areas We Serve in {location!.city}
             </h2>
+            <p class="mx-auto mb-10 max-w-xl text-base text-muted">
+              We build city-level SEO targeting for each community in your service area — not just
+              broad metro optimization.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+              {location!.neighborhoods.map((neighborhood) => (
+                <Badge variant="secondary" size="lg">
+                  {neighborhood}
+                </Badge>
+              ))}
+            </div>
           </div>
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-5">
-            {processSteps.map((step) => (
-              <ProcessStep number={step.number} title={step.title} description={step.description} />
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- FAQ -->
-      <section id="faq" class="border-t border-gray-100 bg-white py-24" aria-label="FAQ">
-        <div class="mx-auto max-w-3xl px-6">
-          <div class="mb-12 text-center">
-            <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">FAQ</p>
-            <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
-              {location!.city} Local SEO — FAQs
-            </h2>
-          </div>
-          <div class="space-y-2">
-            {location!.faqs.map((faq) => (
-              <details class="group hover:border-primary/30 rounded-2xl border border-border-base bg-white shadow-sm transition">
-                <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-heading text-base font-bold text-heading">
-                  {faq.question}
-                  <svg
-                    class="h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
+        <section class="border-t border-gray-100 bg-white py-24" aria-label="Industries served">
+          <div class="mx-auto max-w-5xl px-6">
+            <div class="mb-14 text-center">
+              <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+                Trades We Serve
+              </p>
+              <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+                Industries We Serve in {location!.city}
+              </h2>
+              <p class="mt-4 text-base text-muted">
+                Local SEO for home service and trade businesses across the {location!.city} metro.
+              </p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-3">
+              {location!.trades.map((trade) => {
+                const match = industries.find((i) => i.name === trade || i.name.startsWith(trade));
+                return match ? (
+                  <a
+                    href={`/${match.slug}`}
+                    class="rounded-full border border-border-base bg-background-cream px-5 py-2.5 text-sm font-semibold text-heading transition hover:border-primary hover:text-primary hover:shadow-sm"
                   >
-                    <path d="M19 9l-7 7-7-7" />
-                  </svg>
-                </summary>
-                <div class="px-6 pb-6 text-base leading-relaxed text-body">{faq.answer}</div>
-              </details>
-            ))}
+                    {trade}
+                  </a>
+                ) : (
+                  <span class="rounded-full border border-border-base bg-background-cream px-5 py-2.5 text-sm font-semibold text-heading">
+                    {trade}
+                  </span>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- CTA -->
-      <section class="relative overflow-hidden bg-secondary py-32" aria-label="CTA">
-        <div
-          class="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
-          style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
-          aria-hidden="true"
-        />
-        <div class="relative z-10 mx-auto max-w-3xl px-6 text-center">
-          <h2 class="mb-6 font-heading text-5xl font-extrabold leading-tight text-white md:text-6xl">
-            Ready to Rank Higher<br /><span class="text-primary">in {location!.city}?</span>
-          </h2>
-          <p class="mb-10 text-xl font-medium text-white/70">
-            Get a free audit — no hard sell, just a clear picture of where you stand and what to fix first.
-          </p>
-          <Button href="/contact#book" data-evt={`cta_${location!.slug}_final`} variant="primary" size="lg" icon="tabler:arrow-right">
-            Book My Free Audit
-          </Button>
-        </div>
-      </section>
-    </>
-  )}
+        <section
+          class="border-t border-gray-100 bg-background-cream py-24"
+          aria-label="Market context"
+        >
+          <div class="mx-auto max-w-4xl px-6 text-center">
+            <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+              Market Context
+            </p>
+            <h2 class="mb-6 font-heading text-4xl font-extrabold text-heading md:text-5xl">
+              The {location!.city} Local Search Market
+            </h2>
+            <p class="text-lg leading-relaxed text-body">{location!.whyCity}</p>
+          </div>
+        </section>
+
+        <section
+          id="services"
+          class="border-t border-gray-100 bg-white py-24"
+          aria-label="Services"
+        >
+          <div class="mx-auto max-w-5xl px-6">
+            <div class="mb-14 text-center">
+              <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+                What We Do
+              </p>
+              <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+                How We Help {location!.city} Businesses
+              </h2>
+              <p class="mt-4 text-base text-muted">
+                Three core services, each built for local search performance.
+              </p>
+            </div>
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+              {locationServices.map((service) => (
+                <a
+                  href={service.href}
+                  class="group flex flex-col rounded-2xl border border-border-base bg-background-cream p-8 transition hover:border-primary hover:shadow-md"
+                >
+                  <div class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-xl">
+                    <Icon name={service.icon} class="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 class="mb-3 font-heading text-xl font-extrabold text-heading group-hover:text-primary">
+                    {service.title}
+                  </h3>
+                  <p class="flex-1 text-sm leading-relaxed text-body">{service.description}</p>
+                  <span class="mt-4 inline-flex items-center gap-1 font-heading text-sm font-bold text-primary">
+                    Learn more &rarr;
+                  </span>
+                </a>
+              ))}
+            </div>
+            <div class="mt-10 text-center">
+              <Button href="/packages" variant="outline" size="md">
+                View All Plans & Pricing
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        <section class="border-t border-gray-100 bg-background-cream py-24" aria-label="Process">
+          <div class="mx-auto max-w-6xl px-6">
+            <div class="mb-14 text-center">
+              <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+                How It Works
+              </p>
+              <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+                Our Local SEO System (5 Steps)
+              </h2>
+            </div>
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-5">
+              {processSteps.map((step) => (
+                <ProcessStep
+                  number={step.number}
+                  title={step.title}
+                  description={step.description}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" class="border-t border-gray-100 bg-white py-24" aria-label="FAQ">
+          <div class="mx-auto max-w-3xl px-6">
+            <div class="mb-12 text-center">
+              <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">FAQ</p>
+              <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+                {location!.city} Local SEO — FAQs
+              </h2>
+            </div>
+            <div class="space-y-2">
+              {location!.faqs.map((faq) => (
+                <details class="hover:border-primary/30 group rounded-2xl border border-border-base bg-white shadow-sm transition">
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-heading text-base font-bold text-heading">
+                    {faq.question}
+                    <svg
+                      class="h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div class="px-6 pb-6 text-base leading-relaxed text-body">{faq.answer}</div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="relative overflow-hidden bg-secondary py-32" aria-label="CTA">
+          <div
+            class="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
+            style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
+            aria-hidden="true"
+          />
+          <div class="relative z-10 mx-auto max-w-3xl px-6 text-center">
+            <h2 class="mb-6 font-heading text-5xl font-extrabold leading-tight text-white md:text-6xl">
+              Ready to Rank Higher
+              <>
+                <br />
+                <span class="text-primary">in {location!.city}?</span>
+              </>
+            </h2>
+            <p class="mb-10 text-xl font-medium text-white/70">
+              Get a free audit — no hard sell, just a clear picture of where you stand and what to
+              fix first.
+            </p>
+            <Button
+              href="/contact#book"
+              data-evt={`cta_${location!.slug}_final`}
+              variant="primary"
+              size="lg"
+              icon="tabler:arrow-right"
+            >
+              Book My Free Audit
+            </Button>
+          </div>
+        </section>
+      </>
+    )
+  }
 </Layout>

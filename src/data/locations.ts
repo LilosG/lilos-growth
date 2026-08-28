@@ -199,7 +199,8 @@ export const locations: LocationData[] = [
           "Generally less competitive than core LA — there are fewer competitors in many OC submarkets and the search volume is still strong. It's a good market to build rankings efficiently.",
       },
       {
-        question: "Do you work with businesses primarily in South OC (Mission Viejo, Laguna Niguel)?",
+        question:
+          "Do you work with businesses primarily in South OC (Mission Viejo, Laguna Niguel)?",
         answer:
           "Yes. South OC has its own competitive dynamics — different from North OC around Anaheim. We understand the geography and build city-specific targeting accordingly.",
       },
@@ -254,7 +255,8 @@ export const locations: LocationData[] = [
           "Excellent. The metro's growth rate means a constant influx of new homeowners who haven't established contractor relationships yet — they find their plumber, electrician, and HVAC tech through Google. Early local SEO investment pays off well here.",
       },
       {
-        question: "Should I target 'Las Vegas' or specific communities like Henderson or Summerlin?",
+        question:
+          "Should I target 'Las Vegas' or specific communities like Henderson or Summerlin?",
         answer:
           "Both. 'Las Vegas HVAC' captures broad searches, but Henderson and Summerlin residents often search with their specific community name. We build pages for both the broad metro and key suburbs.",
       },

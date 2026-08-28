@@ -94,7 +94,11 @@ const relatedPosts = posts
     title,
     description,
     openGraph: image
-      ? { images: [{ url: new URL(image, "https://lilosgrowth.com").href, width: 1200, height: 630 }] }
+      ? {
+          images: [
+            { url: new URL(image, "https://lilosgrowth.com").href, width: 1200, height: 630 },
+          ],
+        }
       : undefined,
   }}
   breadcrumbs={[
@@ -195,7 +199,7 @@ const relatedPosts = posts
         </div>
 
         <!-- Mid-article CTA -->
-        <div class="not-prose mt-8 rounded-2xl border border-primary/20 bg-[#fff4ee] px-6 py-5">
+        <div class="not-prose border-primary/20 mt-8 rounded-2xl border bg-[#fff4ee] px-6 py-5">
           <p class="text-sm font-semibold text-heading">Ready to rank higher and get more calls?</p>
           <p class="mt-1 text-sm text-body">
             We build Local SEO systems for home service businesses — no contracts, transparent
