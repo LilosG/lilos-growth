@@ -4,6 +4,7 @@ export interface GbpProof {
   value: string;
   period: string;
   comparison?: string;
+  work: string;
   image: string;
   imageWidth: number;
   imageHeight: number;
@@ -18,6 +19,7 @@ export const gbpProof: readonly GbpProof[] = [
     value: "194",
     period: "Sep 2025–Dec 2025",
     comparison: "+19.0% vs Sep 2024–Dec 2024",
+    work: "Google Business Profile optimization and weekly posts, alongside website and local SEO work.",
     image: "/images/results/blue-door-gbp.png",
     imageWidth: 2048,
     imageHeight: 1091,
@@ -29,6 +31,7 @@ export const gbpProof: readonly GbpProof[] = [
     metric: "Business Profile interactions",
     value: "38",
     period: "Sep 2025–Dec 2025",
+    work: "Google Business Profile optimization with service menus, alongside website and local SEO work.",
     image: "/images/results/carlsbad-fixit-gbp.png",
     imageWidth: 2048,
     imageHeight: 1127,

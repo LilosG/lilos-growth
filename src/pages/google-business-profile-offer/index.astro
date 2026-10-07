@@ -1,198 +1,235 @@
 ---
 import PageLayout from "~/layouts/PageLayout.astro";
 import Button from "~/components/ui/Button.astro";
-import GbpProofGrid from "~/components/results/GbpProofGrid.astro";
-import { gbpIntroOffer as offer } from "~/data/gbpIntroOffer";
+import GbpProofCard from "~/components/results/GbpProofCard.astro";
+import { gbpIntroOffer as offer, getGbpCheckoutUrl, getGbpOfferFaqs } from "~/data/gbpIntroOffer";
+import { gbpProof } from "~/data/gbpProof";
 
 const formAction = "https://formspree.io/f/movlbqdk";
+const checkoutUrl = getGbpCheckoutUrl(import.meta.env.PUBLIC_GBP_INTRO_CHECKOUT_URL);
 const price = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: offer.currency,
   maximumFractionDigits: 0,
 }).format(offer.price);
 const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profileCount} profiles`;
+const ctaHref = checkoutUrl ?? "#request";
+const ctaText = checkoutUrl ? `Get the offer — ${price}` : `Get started for ${price}`;
+const ctaHelp = checkoutUrl
+  ? "Secure, one-time checkout. For an existing, verified Google profile."
+  : "Send your details. We’ll check your profile and email a secure payment link.";
+const groups = [
+  {
+    title: "Get the details right",
+    description: "Help customers understand what you do, where you work, and how to reach you.",
+    items: offer.optimization,
+  },
+  {
+    title: "Keep your profile active",
+    description: `We handle the updates and review responses for ${offer.managementDays} days after optimization.`,
+    items: offer.management,
+  },
+  {
+    title: "Make review requests easier",
+    description: "Give customers a simple way to leave a review, and see what we completed.",
+    items: offer.handoff,
+  },
+];
+const steps = checkoutUrl
+  ? [
+      {
+        title: "Get the offer",
+        body: `Pay ${price} once through our secure checkout. This offer is for an existing, verified profile.`,
+      },
+      {
+        title: "Keep ownership",
+        body: "After we confirm payment, we email instructions to add us as a manager. You keep your account and ownership.",
+      },
+      {
+        title: "We get to work",
+        body: `We optimize your profile, then start your ${offer.managementDays} days of management. You receive a completed-work summary.`,
+      },
+    ]
+  : [
+      {
+        title: "Tell us your business",
+        body: "Send your name, email, business name, and city. We’ll look up your existing profile and confirm eligibility.",
+      },
+      {
+        title: "Pay once. Keep ownership.",
+        body: `We email a secure ${price} payment link. After payment is confirmed, we send manager-access instructions. No Google password needed.`,
+      },
+      {
+        title: "We get to work",
+        body: `We optimize your profile, then start your ${offer.managementDays} days of management. You receive a completed-work summary.`,
+      },
+    ];
+const faqs = getGbpOfferFaqs(Boolean(checkoutUrl));
 ---
 
 <PageLayout
-  title="Google Business Profile Optimization Offer | Lilos Growth"
-  description="One verified Google Business Profile optimized, followed by 30 days of management for $199 one-time. See the work included and request a purchase link."
+  title={`${price} Google Business Profile Optimization + ${offer.managementDays} Days | Lilos Growth`}
+  description={`Get your existing Google Business Profile optimized, then managed for ${offer.managementDays} days for ${price} total. Four weekly posts, review responses, photo updates, and a review link + QR code. No automatic renewal.`}
   showFloatingCalendly={false}
   headerVariant="focused"
-  focusedHeaderCtaText="Request link"
-  focusedHeaderCtaTracking="header"
+  footerVariant="focused"
+  focusedHeaderCtaHref={ctaHref}
+  focusedHeaderCtaText={checkoutUrl ? `Get the offer — ${price}` : "Get started"}
+  focusedHeaderCtaTracking={checkoutUrl ? "checkout" : "header"}
   breadcrumbs={[
     { name: "Home", item: "/" },
-    { name: "Google Business Profile Offer", item: "/google-business-profile-offer/" },
+    { name: "Google Business Profile Offer", item: "/google-business-profile-offer" },
   ]}
 >
-  <section class="bg-secondary px-4 py-16 text-white sm:py-20">
-    <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.35fr_1fr] lg:items-center">
-      <div>
-        <p class="mb-4 text-sm font-bold uppercase tracking-widest text-primary">
-          For an existing, verified profile
+  <section
+    class="border-b border-border-base bg-background-cream px-4 py-12 sm:px-6 sm:py-16 lg:py-20"
+  >
+    <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-14">
+      <div class="flex flex-col">
+        <p class="mb-5 text-sm font-bold uppercase tracking-widest text-heading">
+          Google profile tune-up · {price} one-time
         </p>
         <h1
-          class="max-w-3xl font-heading text-4xl font-extrabold leading-tight !text-white sm:text-5xl lg:text-6xl"
+          class="max-w-2xl font-heading text-[2.5rem] font-extrabold leading-[1.08] tracking-tight text-heading sm:text-[3.25rem] lg:text-[3.75rem]"
         >
-          Google Business Profile Optimization + 30 Days of Management
+          {offer.headline}
         </h1>
-        <p class="mt-5 font-heading text-3xl font-extrabold text-primary sm:text-4xl">
-          {price} one-time
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-body sm:text-xl">
+          Get your existing Google Business Profile optimized, then managed for {
+            offer.managementDays
+          } days—for <strong class="text-heading">{price} total.</strong>
         </p>
-        <p class="mt-5 max-w-2xl text-lg leading-relaxed text-white/85">
-          We optimize {profileLabel}, then manage it for {offer.managementDays} days after the optimization
-          is complete. Clear work, a clear handoff, and no automatic renewal.
-        </p>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <ul
+          class="order-2 mt-6 grid gap-x-5 gap-y-3 text-base font-medium text-heading sm:grid-cols-2 lg:order-none"
+        >
+          {
+            offer.highlights.map((item) => (
+              <li class="flex gap-2">
+                <>
+                  <span aria-hidden="true" class="font-bold text-heading">
+                    ✓
+                  </span>
+                  <span>{item}</span>
+                </>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="order-1 mt-6 lg:order-none lg:mt-8">
           <Button
-            href="#request"
+            href={ctaHref}
             variant="primary"
             size="lg"
-            class="justify-center"
-            data-offer-cta="hero">Request the {price} purchase link</Button
+            class="w-full justify-center sm:w-auto"
+            data-offer-cta={checkoutUrl ? "checkout" : "hero"}>{ctaText}</Button
           >
-          <span class="text-sm text-white/75">One-time payment · {profileLabel} verified</span>
+          <p class="mt-3 text-sm font-semibold text-heading">
+            One profile. One payment. No automatic renewal.
+          </p>
+          <p class="mt-2 max-w-md text-sm leading-relaxed text-body">{ctaHelp}</p>
         </div>
       </div>
-      <div class="rounded-3xl border border-white/20 bg-white p-7 text-heading shadow-xl sm:p-9">
-        <p class="text-sm font-bold uppercase tracking-wider text-service-gbp">The offer</p>
-        <p class="mt-2 font-heading text-6xl font-extrabold text-heading">{price}</p>
-        <p class="mt-1 text-body">
-          one-time for optimization + {offer.managementDays} days of management
+      <div>
+        <GbpProofCard result={gbpProof[0]} compact={true} eager={true} />
+        <p class="mt-3 text-sm text-body">
+          Actual client reporting. Tap the screenshot to see the source.
         </p>
-        <div class="mt-6 border-t border-border-base pt-5 text-sm leading-relaxed text-body">
-          Optional continuation: <strong class="text-heading"
-            >${offer.continuationMonthlyPrice}/month</strong
-          > only if you choose it. No automatic renewal.
-        </div>
       </div>
     </div>
   </section>
 
-  <section class="bg-white px-4 py-16 sm:py-20" aria-labelledby="included-title">
+  <section class="bg-white px-4 py-12 sm:px-6 sm:py-16" aria-labelledby="included-title">
     <div class="mx-auto max-w-6xl">
-      <p class="text-sm font-bold uppercase tracking-widest text-primary">What is included</p>
-      <h2 id="included-title" class="mt-2 font-heading text-3xl font-bold text-heading sm:text-4xl">
-        Specific work on your profile
-      </h2>
-      <div class="mt-9 grid gap-5 md:grid-cols-3">
+      <div class="max-w-2xl">
+        <p class="text-sm font-bold uppercase tracking-widest text-muted">
+          The {price} profile tune-up
+        </p>
+        <h2
+          id="included-title"
+          class="mt-3 font-heading text-3xl font-bold text-heading sm:text-4xl"
+        >
+          A clearer profile. A month of work off your plate.
+        </h2>
+        <p class="mt-4 text-lg text-body">
+          You run the business. We handle the profile details, posts, and review responses.
+        </p>
+      </div>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
         {
-          [
-            { title: "Initial optimization", items: offer.optimization },
-            { title: `${offer.managementDays} days of management`, items: offer.management },
-            { title: "Tools and wrap-up", items: offer.handoff },
-          ].map((group) => (
-            <div class="rounded-2xl border border-border-base bg-background-cream p-6">
-              <h3 class="font-heading text-xl font-bold text-heading">{group.title}</h3>
-              <ul class="mt-5 space-y-4 text-body">
+          groups.map((group, i) => (
+            <article class="border-t-2 border-heading pt-6">
+              <p class="text-sm font-semibold text-muted">0{i + 1}</p>
+              <h3 class="mt-3 font-heading text-xl font-bold text-heading">{group.title}</h3>
+              <p class="mt-3 text-body">{group.description}</p>
+              <ul class="mt-5 space-y-3 text-body">
                 {group.items.map((item) => (
-                  <li class="flex gap-3">
-                    <span class="font-bold text-primary" aria-hidden="true">
+                  <li class="flex gap-2">
+                    <span aria-hidden="true" class="font-semibold text-heading">
                       ✓
                     </span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </article>
           ))
         }
       </div>
+      <p class="mt-8 border-t border-border-base pt-5 text-sm text-body">
+        Your {offer.managementDays} days start after the initial optimization. Photo updates use images
+        you provide.
+      </p>
     </div>
   </section>
 
-  <section class="bg-background-blue px-4 py-16" aria-labelledby="about-title">
-    <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_1.4fr] md:items-center">
-      <div class="rounded-2xl bg-white p-7 shadow-sm">
-        <img
-          src="/logo-lcp-320.webp"
-          width="96"
-          height="96"
-          alt="Lilos Growth"
-          class="mb-5 h-16 w-16 object-contain"
-          loading="lazy"
-        />
-        <p class="font-heading text-xl font-bold text-heading">Mike Prickett · Lilos Growth</p>
-        <p class="mt-2 text-body">Carlsbad, California</p>
-      </div>
+  <section class="bg-background-blue px-4 py-12 sm:px-6 sm:py-16" aria-labelledby="about-title">
+    <div class="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-14">
       <div>
-        <h2 id="about-title" class="font-heading text-3xl font-bold text-heading">
-          Who you will work with
+        <p class="text-sm font-bold uppercase tracking-widest text-muted">
+          Meet your point of contact
+        </p>
+        <h2 id="about-title" class="mt-3 font-heading text-3xl font-bold text-heading sm:text-4xl">
+          Hi, I’m Mike. I founded Lilos Growth.
         </h2>
         <p class="mt-5 text-lg leading-relaxed text-body">
-          Mike founded Lilos Growth to help local service businesses with their online presence. The
-          team has experience on the owner side of pest control and general contracting, and focuses
-          on practical profile, website, and local search work.
+          Our background is in running home service businesses, including pest control and general
+          contracting. We understand that your time belongs on the job, with your crew, and with
+          your customers.
         </p>
-        <p class="mt-4 text-body">
-          You can read more <a class="font-semibold text-primary underline" href="/about"
-            >about Lilos Growth</a
-          > or contact Mike at <a
-            class="font-semibold text-primary underline"
-            href="mailto:mike@lilosgrowth.com">mike@lilosgrowth.com</a
-          >.
+        <p class="mt-4 text-lg leading-relaxed text-body">
+          That’s why this offer is straightforward: specific work on your Google profile, a month of
+          management, and a clear summary of what was done.
         </p>
+        <div class="mt-6 border-l-2 border-heading pl-4">
+          <p class="font-semibold text-heading">Mike Prickett · Founder, Lilos Growth</p>
+          <a
+            href="mailto:mike@lilosgrowth.com"
+            class="mt-2 inline-block font-semibold text-heading underline underline-offset-4"
+            >mike@lilosgrowth.com</a
+          >
+        </div>
       </div>
+      <GbpProofCard result={gbpProof[1]} />
     </div>
   </section>
 
-  <section class="bg-white px-4 py-16" aria-labelledby="proof-title">
+  <section class="bg-white px-4 py-12 sm:px-6 sm:py-16" aria-labelledby="process-title">
     <div class="mx-auto max-w-6xl">
-      <h2 id="proof-title" class="font-heading text-3xl font-bold text-heading">
-        See existing profile work
+      <h2 id="process-title" class="font-heading text-3xl font-bold text-heading sm:text-4xl">
+        A simple start. We handle the work.
       </h2>
-      <p class="mt-3 max-w-3xl text-body">
-        Existing Google Business Profile screenshots show activity for two clients during
-        September–December 2025. These are historical profile metrics, not a forecast or a claim
-        that this offer caused the activity.
-      </p>
-      <div class="mt-8"><GbpProofGrid eager={true} /></div>
-      <a
-        href="/results#gbp-performance"
-        class="mt-5 inline-flex font-semibold text-primary underline"
-        >View profile examples and source screenshots</a
-      >
-    </div>
-  </section>
-
-  <section class="bg-background-cream px-4 py-16" aria-labelledby="process-title">
-    <div class="mx-auto max-w-6xl">
-      <h2 id="process-title" class="font-heading text-3xl font-bold text-heading">
-        Purchase and onboarding
-      </h2>
-      <ol class="mt-8 grid gap-5 md:grid-cols-4">
+      <ol class="mt-8 grid gap-8 md:grid-cols-3">
         {
-          [
-            [
-              "1",
-              "Request",
-              "Send your business name, city, and contact details below. A public profile link helps but is optional.",
-            ],
-            [
-              "2",
-              "Eligibility",
-              "We confirm that the profile exists and is verified, then send a secure purchase link.",
-            ],
-            [
-              "3",
-              "Payment and access",
-              "After confirmed payment, we provide instructions to invite Lilos Growth as a profile manager. Never send a password.",
-            ],
-            [
-              "4",
-              "Work and handoff",
-              `We optimize the profile, then begin the ${offer.managementDays}-day management period and share a work summary.`,
-            ],
-          ].map(([number, title, body]) => (
-            <li class="rounded-2xl border border-border-base bg-white p-6">
+          steps.map((step, i) => (
+            <li>
               <span
-                class="flex h-9 w-9 items-center justify-center rounded-full bg-primary font-bold text-white"
+                class="flex h-9 w-9 items-center justify-center rounded-full bg-heading font-bold text-white"
                 aria-hidden="true"
               >
-                {number}
+                {i + 1}
               </span>
-              <h3 class="mt-4 font-heading text-lg font-bold text-heading">{title}</h3>
-              <p class="mt-2 text-body">{body}</p>
+              <h3 class="mt-4 font-heading text-xl font-bold text-heading">{step.title}</h3>
+              <p class="mt-3 text-body">{step.body}</p>
             </li>
           ))
         }
@@ -200,188 +237,257 @@ const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profile
     </div>
   </section>
 
-  <section id="request" class="bg-white px-4 py-16" aria-labelledby="request-title">
-    <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1fr_1.1fr]">
+  <section
+    id="request"
+    class="border-y border-border-base bg-background-cream px-4 py-12 sm:px-6 sm:py-16"
+    aria-labelledby="request-title"
+  >
+    <div class="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-start lg:gap-14">
       <div>
-        <p class="text-sm font-bold uppercase tracking-widest text-primary">Start here</p>
-        <h2 id="request-title" class="mt-2 font-heading text-3xl font-bold text-heading">
-          Request your {price} purchase link
+        <p class="text-sm font-bold uppercase tracking-widest text-muted">
+          Let’s get your profile handled
+        </p>
+        <h2
+          id="request-title"
+          class="mt-3 font-heading text-3xl font-bold text-heading sm:text-4xl"
+        >
+          Optimization + {offer.managementDays} days. {price} total.
         </h2>
+        <p class="mt-5 text-lg text-body">
+          A fresh start for your existing Google profile, with the updates and review responses
+          handled for a month.
+        </p>
+        <p class="mt-4 font-semibold text-heading">One payment. No automatic renewal.</p>
         <p class="mt-4 text-body">
-          We review eligibility before sending a payment link. Submitting this form is free and does
-          not purchase the service. We will provide profile-access instructions after payment is
-          confirmed.
+          {
+            checkoutUrl
+              ? "For an existing, verified Google Business Profile. You keep ownership; we work through manager access."
+              : "Send your details below. We’ll look up your existing profile, check eligibility, and email a secure payment link. This form doesn’t take payment."
+          }
         </p>
-        <p class="mt-4 text-sm text-body">
+        <p class="mt-5 text-sm text-body">
           Questions? <a
-            class="font-semibold text-primary underline"
-            href="mailto:hello@lilosgrowth.com">Email Lilos Growth</a
-          >.
-        </p>
-      </div>
-      <form
-        id="gbp-offer-form"
-        action={formAction}
-        method="POST"
-        class="space-y-5 rounded-2xl border border-border-base bg-background-cream p-6 sm:p-8"
-      >
-        <input type="hidden" name="_subject" value="GBP $199 offer eligibility request" />
-        <input
-          type="hidden"
-          name="offer"
-          value={`GBP optimization + ${offer.managementDays} days management, ${price} one-time`}
-        />
-        <div>
-          <label for="offer-name" class="mb-2 block font-semibold text-heading">Your name</label
-          ><input
-            id="offer-name"
-            name="name"
-            type="text"
-            autocomplete="name"
-            required
-            maxlength="100"
-            class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
-          />
-        </div>
-        <div>
-          <label for="offer-email" class="mb-2 block font-semibold text-heading"
-            >Email address</label
-          ><input
-            id="offer-email"
-            name="_replyto"
-            type="email"
-            autocomplete="email"
-            required
-            maxlength="200"
-            class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
-          />
-        </div>
-        <div>
-          <label for="offer-business" class="mb-2 block font-semibold text-heading"
-            >Business name</label
-          ><input
-            id="offer-business"
-            name="business_name"
-            type="text"
-            autocomplete="organization"
-            required
-            maxlength="150"
-            class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
-          />
-        </div>
-        <div>
-          <label for="offer-city" class="mb-2 block font-semibold text-heading">Business city</label
-          ><input
-            id="offer-city"
-            name="business_city"
-            type="text"
-            autocomplete="address-level2"
-            required
-            maxlength="100"
-            class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
-          />
-        </div>
-        <div>
-          <label for="offer-profile" class="mb-2 block font-semibold text-heading"
-            >Public Google Business Profile link (optional)</label
-          ><input
-            id="offer-profile"
-            name="profile_url"
-            type="url"
-            inputmode="url"
-            placeholder="https://..."
-            maxlength="500"
-            aria-describedby="profile-help"
-            class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
-          /><p id="profile-help" class="mt-1 text-sm text-body">
-            If you have it, paste the public listing link. Do not send login details.
-          </p>
-        </div>
-        <div>
-          <label for="offer-verified" class="mb-2 block font-semibold text-heading"
-            >Is this profile already verified?</label
-          ><select
-            id="offer-verified"
-            name="verified"
-            required
-            class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
-            ><option value="">Select one</option><option value="yes">Yes</option><option
-              value="unsure">I am not sure</option
-            ><option value="no">No</option></select
+            class="font-semibold text-heading underline underline-offset-4"
+            href="mailto:mike@lilosgrowth.com">Ask Mike directly.</a
           >
-        </div>
-        <p
-          id="offer-form-status"
-          role="alert"
-          class="hidden rounded-lg border border-red-300 bg-red-50 p-3 text-sm text-red-900"
-        >
-        </p>
-        <Button type="submit" variant="primary" size="lg" fullWidth={true}
-          >Request purchase link</Button
-        >
-        <p class="text-sm text-body">
-          By submitting, you agree to our <a href="/privacy" class="text-primary underline"
-            >privacy policy</a
-          >. No payment is collected here.
-        </p>
-      </form>
-      <div
-        id="offer-form-success"
-        role="status"
-        tabindex="-1"
-        class="hidden rounded-2xl border border-green-300 bg-green-50 p-7 text-heading"
-      >
-        <h3 class="font-heading text-2xl font-bold">Your offer inquiry was submitted.</h3>
-        <p class="mt-3 text-body">
-          We’ll review the business details and follow up about eligibility and a secure purchase
-          link. No payment was taken. Please do not send a Google password.
         </p>
       </div>
+      {
+        checkoutUrl ? (
+          <div class="rounded-2xl border border-border-base bg-white p-7 shadow-sm sm:p-8">
+            <h3 class="font-heading text-2xl font-bold text-heading">
+              Your Google profile. Handled.
+            </h3>
+            <p class="mt-4 text-body">
+              Profile optimization, four weekly posts, review responses, client-supplied photo
+              updates, and a review link + QR code.
+            </p>
+            <Button
+              href={checkoutUrl}
+              variant="primary"
+              size="lg"
+              fullWidth={true}
+              class="mt-6 justify-center"
+              data-offer-cta="checkout"
+            >
+              Get the offer — {price}
+            </Button>
+            <p class="mt-4 text-sm text-body">
+              One-time payment through our checkout provider. After payment is confirmed, we’ll
+              email manager-access instructions.
+            </p>
+            <p class="mt-3 text-sm text-body">
+              Read our{" "}
+              <a href="/terms" class="underline">
+                terms
+              </a>{" "}
+              and{" "}
+              <a href="/privacy" class="underline">
+                privacy policy
+              </a>
+              .
+            </p>
+          </div>
+        ) : (
+          <>
+            <form
+              id="gbp-offer-form"
+              action={formAction}
+              method="POST"
+              class="grid gap-5 rounded-2xl border border-border-base bg-white p-6 shadow-sm sm:grid-cols-2 sm:p-8"
+            >
+              <input type="hidden" name="_subject" value={`GBP ${price} offer inquiry`} />
+              <input
+                type="hidden"
+                name="offer"
+                value={`GBP optimization + ${offer.managementDays} days management, ${price} one-time`}
+              />
+              <div>
+                <>
+                  <label for="offer-name" class="mb-2 block font-semibold text-heading">
+                    Your name
+                  </label>
+                  <input
+                    id="offer-name"
+                    name="name"
+                    type="text"
+                    autocomplete="name"
+                    required
+                    maxlength="100"
+                    class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
+                  />
+                </>
+              </div>
+              <div>
+                <>
+                  <label for="offer-email" class="mb-2 block font-semibold text-heading">
+                    Email address
+                  </label>
+                  <input
+                    id="offer-email"
+                    name="_replyto"
+                    type="email"
+                    autocomplete="email"
+                    required
+                    maxlength="200"
+                    class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
+                  />
+                </>
+              </div>
+              <div>
+                <>
+                  <label for="offer-business" class="mb-2 block font-semibold text-heading">
+                    Business name
+                  </label>
+                  <input
+                    id="offer-business"
+                    name="business_name"
+                    type="text"
+                    autocomplete="organization"
+                    required
+                    maxlength="150"
+                    class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
+                  />
+                </>
+              </div>
+              <div>
+                <>
+                  <label for="offer-city" class="mb-2 block font-semibold text-heading">
+                    Business city
+                  </label>
+                  <input
+                    id="offer-city"
+                    name="business_city"
+                    type="text"
+                    autocomplete="address-level2"
+                    required
+                    maxlength="100"
+                    class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
+                  />
+                </>
+              </div>
+              <details class="sm:col-span-2">
+                <summary class="cursor-pointer font-semibold text-heading underline underline-offset-4">
+                  Add a profile link (optional)
+                </summary>
+                <div class="mt-4">
+                  <label for="offer-profile" class="mb-2 block font-semibold text-heading">
+                    Public Google profile link
+                  </label>
+                  <input
+                    id="offer-profile"
+                    name="profile_url"
+                    type="url"
+                    inputmode="url"
+                    placeholder="https://..."
+                    maxlength="500"
+                    aria-describedby="profile-help"
+                    class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
+                  />
+                  <p id="profile-help" class="mt-2 text-sm text-body">
+                    No link handy? We can look up your business by name and city.
+                  </p>
+                </div>
+              </details>
+              <p
+                id="offer-form-status"
+                role="alert"
+                tabindex="-1"
+                class="hidden rounded-lg border border-red-300 bg-red-50 p-3 text-sm text-red-900 sm:col-span-2"
+              />
+              <div class="sm:col-span-2">
+                <Button type="submit" variant="primary" size="lg" fullWidth={true}>
+                  Get started for {price}
+                </Button>
+              </div>
+              <p class="text-sm text-body sm:col-span-2">
+                By submitting, you agree to our{" "}
+                <a href="/privacy" class="text-primary underline">
+                  privacy policy
+                </a>
+                . No payment is collected here.
+              </p>
+            </form>
+            <div
+              id="offer-form-success"
+              role="status"
+              tabindex="-1"
+              class="hidden rounded-2xl border border-green-300 bg-green-50 p-7 text-heading"
+            >
+              <h3 class="font-heading text-2xl font-bold">Thanks. Your profile request is in.</h3>
+              <p class="mt-3 text-body">
+                We’ll check your existing profile and email you about the next step. If it is
+                eligible, we’ll send a secure link to pay {price}. No payment was taken here.
+              </p>
+            </div>
+          </>
+        )
+      }
     </div>
   </section>
 
-  <section class="bg-background-blue px-4 py-16" aria-labelledby="faq-title">
+  <section class="bg-white px-4 py-12 sm:px-6 sm:py-16" aria-labelledby="faq-title">
     <div class="mx-auto max-w-3xl">
-      <h2 id="faq-title" class="font-heading text-3xl font-bold text-heading">FAQs and terms</h2>
-      <div class="mt-6 space-y-3">
+      <h2 id="faq-title" class="font-heading text-3xl font-bold text-heading">
+        A few things to know
+      </h2>
+      <div class="mt-6 divide-y divide-border-base border-y border-border-base">
         {
-          offer.faqs.map((faq) => (
-            <details class="rounded-xl border border-border-base bg-white p-5">
-              <>
-                <summary class="cursor-pointer font-semibold text-heading">{faq.question}</summary>
-                <p class="mt-3 text-body">{faq.answer}</p>
-              </>
+          faqs.map((faq) => (
+            <details class="py-5">
+              <summary class="cursor-pointer text-base font-semibold text-heading">
+                {faq.question}
+              </summary>
+              <p class="mt-3 text-base leading-relaxed text-body">{faq.answer}</p>
             </details>
           ))
         }
       </div>
-      <p class="mt-6 text-sm text-body">
-        This offer covers {profileLabel} that is already verified. It does not include verification or
-        reinstatement. Photo updates require client-provided images. Work on third-party profiles is
-        subject to Google access and policies. Read our <a
-          href="/terms"
-          class="font-semibold text-primary underline">Terms of Service</a
-        >.
+      <p class="mt-5 text-sm leading-relaxed text-body">
+        This offer covers {profileLabel} that is already verified. Verification, reinstatement, website
+        work, and ongoing SEO are outside this offer. Profile edits depend on Google access and policies.
       </p>
     </div>
   </section>
 
-  <section class="bg-secondary px-4 py-16 text-center text-white">
-    <div class="mx-auto max-w-2xl">
-      <h2 class="font-heading text-3xl font-bold !text-white">
-        Ready to get your profile reviewed?
+  <section class="bg-secondary px-4 py-12 text-white sm:px-6 sm:py-16">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="font-heading text-3xl font-bold !text-white sm:text-4xl">
+        Your next month of profile work, handled.
       </h2>
-      <p class="mt-3 text-white/80">
-        {price} one-time for optimization and {offer.managementDays} days of management. No automatic
-        renewal.
+      <p class="mt-4 text-lg text-white">
+        Optimization + {offer.managementDays} days of management. {price} one-time.
       </p>
       <Button
-        href="#request"
+        href={ctaHref}
         variant="primary"
         size="lg"
-        class="mt-7 justify-center"
-        data-offer-cta="final">Request the purchase link</Button
+        class="mt-6 justify-center"
+        data-offer-cta={checkoutUrl ? "checkout" : "final"}>{ctaText}</Button
       >
+      <p class="mt-4 text-sm text-white">
+        No automatic renewal. You keep ownership of your profile.
+      </p>
     </div>
   </section>
 </PageLayout>
@@ -397,7 +503,11 @@ const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profile
   };
 
   document.querySelectorAll<HTMLAnchorElement>("[data-offer-cta]").forEach((link) => {
-    link.addEventListener("click", () => trackOfferEvent("gbp_offer_cta_click"));
+    link.addEventListener("click", () =>
+      trackOfferEvent(
+        link.dataset.offerCta === "checkout" ? "gbp_offer_checkout_started" : "gbp_offer_cta_click"
+      )
+    );
   });
 
   const form = document.querySelector<HTMLFormElement>("#gbp-offer-form");
@@ -423,6 +533,16 @@ const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profile
       });
       if (!response.ok || !response.headers.get("content-type")?.includes("application/json")) {
         throw new Error("Form service did not confirm submission");
+      }
+      const result = await response.json();
+      if (
+        typeof result !== "object" ||
+        result === null ||
+        typeof result.next !== "string" ||
+        "error" in result ||
+        "errors" in result
+      ) {
+        throw new Error("Form service did not accept submission");
       }
       form.classList.add("hidden");
       success?.classList.remove("hidden");

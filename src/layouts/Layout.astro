@@ -34,6 +34,7 @@ export interface Props {
   lang?: string;
   bodyClass?: string;
   metadata?: MetaInput;
+  cookieBannerVariant?: "default" | "compact";
 }
 
 const {
@@ -43,6 +44,7 @@ const {
   lang = "en",
   bodyClass = "",
   metadata = {},
+  cookieBannerVariant = "default",
 } = Astro.props as Props;
 
 /** Conservative fallback titles when a page doesn't provide one */
@@ -249,7 +251,7 @@ declare global {
         } catch {}
       };
     </script>
-    <CookieBanner />
+    <CookieBanner variant={cookieBannerVariant} />
 
     <!-- Animation System Initialization -->
     <script>
