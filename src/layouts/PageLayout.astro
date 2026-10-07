@@ -1,7 +1,9 @@
 ---
 import Layout from "./Layout.astro";
 import Header from "~/components/widgets/Header.astro";
+import FocusedHeader from "~/components/widgets/FocusedHeader.astro";
 import Footer from "~/components/widgets/Footer.astro";
+import FocusedFooter from "~/components/widgets/FocusedFooter.astro";
 import FloatingCalendlyButton from "~/components/widgets/FloatingCalendlyButton.astro";
 import type { MetaData as MetaDataType } from "~/types";
 import { isRecord } from "~/utils/type-guards";
@@ -20,6 +22,11 @@ export interface Props {
   schema?: unknown[];
   noIndex?: boolean;
   showFloatingCalendly?: boolean;
+  headerVariant?: "default" | "focused";
+  footerVariant?: "default" | "focused";
+  focusedHeaderCtaHref?: string;
+  focusedHeaderCtaText?: string;
+  focusedHeaderCtaTracking?: string;
   calendlyUrl?: string; // kept for future use; not used to override FAB target
 }
 
@@ -33,6 +40,11 @@ const {
   breadcrumbs = [],
   schema: schemaExtras = [],
   showFloatingCalendly = true,
+  headerVariant = "default",
+  footerVariant = "default",
+  focusedHeaderCtaHref,
+  focusedHeaderCtaText,
+  focusedHeaderCtaTracking,
 } = props;
 
 const noIndex = props.noIndex ?? false;
@@ -156,7 +168,14 @@ const effectiveMetadata = {
 };
 ---
 
-<Layout {title} {description} {lang} {bodyClass} metadata={effectiveMetadata}>
+<Layout
+  {title}
+  {description}
+  {lang}
+  {bodyClass}
+  metadata={effectiveMetadata}
+  cookieBannerVariant={headerVariant === "focused" ? "compact" : "default"}
+>
   <a
     href="#main"
     class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:left-2 focus-visible:top-2 focus-visible:z-[1000] focus-visible:rounded-full focus-visible:bg-white focus-visible:px-4 focus-visible:py-2 focus-visible:text-secondary focus-visible:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
@@ -164,13 +183,23 @@ const effectiveMetadata = {
     Skip to content
   </a>
 
-  <Header />
+  {
+    headerVariant === "focused" ? (
+      <FocusedHeader
+        ctaHref={focusedHeaderCtaHref}
+        ctaText={focusedHeaderCtaText}
+        ctaTracking={focusedHeaderCtaTracking}
+      />
+    ) : (
+      <Header />
+    )
+  }
 
   <main id="main" class="flex-1 focus:outline-none" tabindex="-1">
     <slot />
   </main>
 
-  <Footer />
+  {footerVariant === "focused" ? <FocusedFooter /> : <Footer />}
 
   {
     schemaNodes.map((node) => (

@@ -1,16 +1,50 @@
 ---
 /* Simple consent banner: stores choice in localStorage and emits an event. */
+interface Props {
+  variant?: "default" | "compact";
+}
+const { variant = "default" } = Astro.props;
+const compact = variant === "compact";
 ---
 
-<div id="cookie-banner" class="fixed inset-x-0 bottom-0 z-50 hidden bg-gray-900 text-white">
-  <div class="mx-auto flex w-full max-w-5xl items-center gap-3 p-4 text-sm">
+<div
+  id="cookie-banner"
+  class:list={[
+    "fixed z-50 hidden",
+    compact
+      ? "bottom-4 left-4 right-4 rounded-xl border border-border-base bg-white text-heading shadow-lg sm:left-auto sm:w-[25rem]"
+      : "inset-x-0 bottom-0 bg-gray-900 text-white",
+  ]}
+>
+  <div
+    class:list={[
+      "p-4",
+      compact
+        ? "text-[0.8125rem] leading-relaxed"
+        : "mx-auto flex w-full max-w-5xl items-center gap-3 text-sm",
+    ]}
+  >
     <span
       >We use cookies for site functionality and analytics. You can change your preference anytime.</span
     >
-    <div class="ml-auto flex gap-2">
-      <button id="cookie-accept" class="rounded bg-white px-3 py-2 text-gray-900">Accept</button>
-      <button id="cookie-decline" class="rounded border border-white/40 px-3 py-2">Decline</button>
-      <a href="/privacy#cookies" class="underline">Learn more</a>
+    <div class:list={["flex flex-wrap items-center gap-3", compact ? "mt-3" : "ml-auto"]}>
+      <button
+        id="cookie-accept"
+        class:list={[
+          "min-h-11 rounded border px-3 py-2",
+          compact
+            ? "border-border-strong bg-white text-heading"
+            : "border-white bg-white text-gray-900",
+        ]}>Accept</button
+      >
+      <button
+        id="cookie-decline"
+        class:list={[
+          "min-h-11 rounded border px-3 py-2",
+          compact ? "border-border-strong bg-white text-heading" : "border-white/40",
+        ]}>Decline</button
+      >
+      <a href="/privacy#cookies" class="underline underline-offset-4">Learn more</a>
     </div>
   </div>
 </div>

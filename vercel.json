@@ -21,6 +21,11 @@
       "source": "/blog/",
       "destination": "/blog",
       "permanent": true
+    },
+    {
+      "source": "/google-business-profile-offer/",
+      "destination": "/google-business-profile-offer",
+      "permanent": true
     }
   ],
   "headers": [
