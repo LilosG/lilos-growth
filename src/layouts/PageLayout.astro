@@ -1,6 +1,7 @@
 ---
 import Layout from "./Layout.astro";
 import Header from "~/components/widgets/Header.astro";
+import FocusedHeader from "~/components/widgets/FocusedHeader.astro";
 import Footer from "~/components/widgets/Footer.astro";
 import FloatingCalendlyButton from "~/components/widgets/FloatingCalendlyButton.astro";
 import type { MetaData as MetaDataType } from "~/types";
@@ -20,6 +21,10 @@ export interface Props {
   schema?: unknown[];
   noIndex?: boolean;
   showFloatingCalendly?: boolean;
+  headerVariant?: "default" | "focused";
+  focusedHeaderCtaHref?: string;
+  focusedHeaderCtaText?: string;
+  focusedHeaderCtaTracking?: string;
   calendlyUrl?: string; // kept for future use; not used to override FAB target
 }
 
@@ -33,6 +38,10 @@ const {
   breadcrumbs = [],
   schema: schemaExtras = [],
   showFloatingCalendly = true,
+  headerVariant = "default",
+  focusedHeaderCtaHref,
+  focusedHeaderCtaText,
+  focusedHeaderCtaTracking,
 } = props;
 
 const noIndex = props.noIndex ?? false;
@@ -164,7 +173,17 @@ const effectiveMetadata = {
     Skip to content
   </a>
 
-  <Header />
+  {
+    headerVariant === "focused" ? (
+      <FocusedHeader
+        ctaHref={focusedHeaderCtaHref}
+        ctaText={focusedHeaderCtaText}
+        ctaTracking={focusedHeaderCtaTracking}
+      />
+    ) : (
+      <Header />
+    )
+  }
 
   <main id="main" class="flex-1 focus:outline-none" tabindex="-1">
     <slot />

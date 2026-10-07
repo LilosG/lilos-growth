@@ -1,0 +1,46 @@
+---
+import Card from "~/components/ui/Card.astro";
+import { gbpProof } from "~/data/gbpProof";
+
+interface Props {
+  eager?: boolean;
+}
+
+const { eager = false } = Astro.props;
+---
+
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+  {
+    gbpProof.map((result) => (
+      <Card as="article" class="overflow-hidden !p-0 shadow-lg">
+        <div class="border-b border-border-subtle bg-background-cream p-5 sm:p-6">
+          <div class="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h3 class="font-heading text-lg font-bold text-heading">{result.client}</h3>
+              <p class="text-sm text-muted">{result.period}</p>
+            </div>
+            <p class="font-heading text-2xl font-bold text-primary">{result.value}</p>
+          </div>
+          <p class="mt-2 text-sm font-medium text-body">{result.metric}</p>
+          {result.comparison && <p class="mt-1 text-sm text-body">{result.comparison}</p>}
+        </div>
+        <a
+          href={result.image}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Open full ${result.client} performance screenshot`}
+        >
+          <img
+            src={result.image}
+            alt={result.imageAlt}
+            class="h-auto w-full"
+            width={result.imageWidth}
+            height={result.imageHeight}
+            loading={eager ? "eager" : "lazy"}
+            decoding="async"
+          />
+        </a>
+      </Card>
+    ))
+  }
+</div>

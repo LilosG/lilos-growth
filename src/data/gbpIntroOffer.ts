@@ -23,8 +23,8 @@ export const gbpIntroOffer: GbpIntroOffer = {
   continuationMonthlyPrice: 300,
   optimization: [
     "Review your profile and local competitors",
-    "Check categories, services, description, and relevant attributes",
-    "Check hours, contact information, and service areas",
+    "Refine the primary and additional categories, services, and business description where appropriate",
+    "Correct relevant attributes, hours, contact information, and service areas where access and Google policy allow",
   ],
   management: [
     "Publish four weekly posts",

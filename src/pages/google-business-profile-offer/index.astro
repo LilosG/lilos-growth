@@ -1,6 +1,7 @@
 ---
 import PageLayout from "~/layouts/PageLayout.astro";
 import Button from "~/components/ui/Button.astro";
+import GbpProofGrid from "~/components/results/GbpProofGrid.astro";
 import { gbpIntroOffer as offer } from "~/data/gbpIntroOffer";
 
 const formAction = "https://formspree.io/f/movlbqdk";
@@ -16,6 +17,9 @@ const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profile
   title="Google Business Profile Optimization Offer | Lilos Growth"
   description="One verified Google Business Profile optimized, followed by 30 days of management for $199 one-time. See the work included and request a purchase link."
   showFloatingCalendly={false}
+  headerVariant="focused"
+  focusedHeaderCtaText="Request link"
+  focusedHeaderCtaTracking="header"
   breadcrumbs={[
     { name: "Home", item: "/" },
     { name: "Google Business Profile Offer", item: "/google-business-profile-offer/" },
@@ -28,17 +32,24 @@ const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profile
           For an existing, verified profile
         </p>
         <h1
-          class="max-w-3xl font-heading text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl"
+          class="max-w-3xl font-heading text-4xl font-extrabold leading-tight !text-white sm:text-5xl lg:text-6xl"
         >
-          Get your Google Business Profile in better shape.
+          Google Business Profile Optimization + 30 Days of Management
         </h1>
+        <p class="mt-5 font-heading text-3xl font-extrabold text-primary sm:text-4xl">
+          {price} one-time
+        </p>
         <p class="mt-5 max-w-2xl text-lg leading-relaxed text-white/85">
           We optimize {profileLabel}, then manage it for {offer.managementDays} days after the optimization
           is complete. Clear work, a clear handoff, and no automatic renewal.
         </p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <Button href="#request" variant="primary" size="lg" class="justify-center"
-            >Request the {price} purchase link</Button
+          <Button
+            href="#request"
+            variant="primary"
+            size="lg"
+            class="justify-center"
+            data-offer-cta="hero">Request the {price} purchase link</Button
           >
           <span class="text-sm text-white/75">One-time payment · {profileLabel} verified</span>
         </div>
@@ -131,10 +142,11 @@ const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profile
         See existing profile work
       </h2>
       <p class="mt-3 max-w-3xl text-body">
-        Our results page includes Google Business Profile performance screenshots for Blue Door Pest
-        Control and Carlsbad Fix It, with the time periods shown. Those examples describe past work;
-        your results may differ.
+        Existing Google Business Profile screenshots show activity for two clients during
+        September–December 2025. These are historical profile metrics, not a forecast or a claim
+        that this offer caused the activity.
       </p>
+      <div class="mt-8"><GbpProofGrid eager={true} /></div>
       <a
         href="/results#gbp-performance"
         class="mt-5 inline-flex font-semibold text-primary underline"
@@ -151,7 +163,11 @@ const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profile
       <ol class="mt-8 grid gap-5 md:grid-cols-4">
         {
           [
-            ["1", "Request", "Send your contact details and public profile link below."],
+            [
+              "1",
+              "Request",
+              "Send your business name, city, and contact details below. A public profile link helps but is optional.",
+            ],
             [
               "2",
               "Eligibility",
@@ -192,9 +208,9 @@ const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profile
           Request your {price} purchase link
         </h2>
         <p class="mt-4 text-body">
-          We check your profile before sending the payment link. Submitting this form is free and
-          does not purchase the service. We will provide profile-access instructions after payment
-          is confirmed.
+          We review eligibility before sending a payment link. Submitting this form is free and does
+          not purchase the service. We will provide profile-access instructions after payment is
+          confirmed.
         </p>
         <p class="mt-4 text-sm text-body">
           Questions? <a
@@ -204,12 +220,12 @@ const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profile
         </p>
       </div>
       <form
+        id="gbp-offer-form"
         action={formAction}
         method="POST"
         class="space-y-5 rounded-2xl border border-border-base bg-background-cream p-6 sm:p-8"
       >
         <input type="hidden" name="_subject" value="GBP $199 offer eligibility request" />
-        <input type="hidden" name="_redirect" value="https://lilosgrowth.com/thank-you" />
         <input
           type="hidden"
           name="offer"
@@ -241,20 +257,44 @@ const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profile
           />
         </div>
         <div>
+          <label for="offer-business" class="mb-2 block font-semibold text-heading"
+            >Business name</label
+          ><input
+            id="offer-business"
+            name="business_name"
+            type="text"
+            autocomplete="organization"
+            required
+            maxlength="150"
+            class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
+          />
+        </div>
+        <div>
+          <label for="offer-city" class="mb-2 block font-semibold text-heading">Business city</label
+          ><input
+            id="offer-city"
+            name="business_city"
+            type="text"
+            autocomplete="address-level2"
+            required
+            maxlength="100"
+            class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
+          />
+        </div>
+        <div>
           <label for="offer-profile" class="mb-2 block font-semibold text-heading"
-            >Public Google Business Profile link</label
+            >Public Google Business Profile link (optional)</label
           ><input
             id="offer-profile"
             name="profile_url"
             type="url"
             inputmode="url"
             placeholder="https://..."
-            required
             maxlength="500"
             aria-describedby="profile-help"
             class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-heading focus:outline-primary"
           /><p id="profile-help" class="mt-1 text-sm text-body">
-            Paste the public listing link. Do not send login details.
+            If you have it, paste the public listing link. Do not send login details.
           </p>
         </div>
         <div>
@@ -270,6 +310,12 @@ const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profile
             ><option value="no">No</option></select
           >
         </div>
+        <p
+          id="offer-form-status"
+          role="alert"
+          class="hidden rounded-lg border border-red-300 bg-red-50 p-3 text-sm text-red-900"
+        >
+        </p>
         <Button type="submit" variant="primary" size="lg" fullWidth={true}
           >Request purchase link</Button
         >
@@ -279,6 +325,18 @@ const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profile
           >. No payment is collected here.
         </p>
       </form>
+      <div
+        id="offer-form-success"
+        role="status"
+        tabindex="-1"
+        class="hidden rounded-2xl border border-green-300 bg-green-50 p-7 text-heading"
+      >
+        <h3 class="font-heading text-2xl font-bold">Your offer inquiry was submitted.</h3>
+        <p class="mt-3 text-body">
+          We’ll review the business details and follow up about eligibility and a secure purchase
+          link. No payment was taken. Please do not send a Google password.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -310,14 +368,77 @@ const profileLabel = offer.profileCount === 1 ? "one profile" : `${offer.profile
 
   <section class="bg-secondary px-4 py-16 text-center text-white">
     <div class="mx-auto max-w-2xl">
-      <h2 class="font-heading text-3xl font-bold">Ready to get your profile reviewed?</h2>
+      <h2 class="font-heading text-3xl font-bold !text-white">
+        Ready to get your profile reviewed?
+      </h2>
       <p class="mt-3 text-white/80">
         {price} one-time for optimization and {offer.managementDays} days of management. No automatic
         renewal.
       </p>
-      <Button href="#request" variant="primary" size="lg" class="mt-7 justify-center"
-        >Request the purchase link</Button
+      <Button
+        href="#request"
+        variant="primary"
+        size="lg"
+        class="mt-7 justify-center"
+        data-offer-cta="final">Request the purchase link</Button
       >
     </div>
   </section>
 </PageLayout>
+
+<script>
+  const consentKey = "lg_cookie_consent";
+  const trackOfferEvent = (name: string) => {
+    try {
+      if (localStorage.getItem(consentKey) === "accepted") window.trackEvent?.(name);
+    } catch {
+      // Analytics must never block the form.
+    }
+  };
+
+  document.querySelectorAll<HTMLAnchorElement>("[data-offer-cta]").forEach((link) => {
+    link.addEventListener("click", () => trackOfferEvent("gbp_offer_cta_click"));
+  });
+
+  const form = document.querySelector<HTMLFormElement>("#gbp-offer-form");
+  const error = document.querySelector<HTMLElement>("#offer-form-status");
+  const success = document.querySelector<HTMLElement>("#offer-form-success");
+  let submitting = false;
+
+  form?.addEventListener("submit", async (event) => {
+    if (!form.reportValidity()) return;
+    event.preventDefault();
+    if (submitting) return;
+    submitting = true;
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (submit) submit.disabled = true;
+    form.setAttribute("aria-busy", "true");
+    if (error) error.classList.add("hidden");
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      if (!response.ok || !response.headers.get("content-type")?.includes("application/json")) {
+        throw new Error("Form service did not confirm submission");
+      }
+      form.classList.add("hidden");
+      success?.classList.remove("hidden");
+      success?.focus();
+      trackOfferEvent("gbp_offer_inquiry_submitted");
+    } catch {
+      if (error) {
+        error.textContent =
+          "We could not confirm your request. Please try again or email hello@lilosgrowth.com.";
+        error.classList.remove("hidden");
+        error.focus();
+      }
+    } finally {
+      submitting = false;
+      form.removeAttribute("aria-busy");
+      if (submit) submit.disabled = false;
+    }
+  });
+</script>
