@@ -1,0 +1,21 @@
+---
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  title: string;
+  body: string;
+}
+const { title, body } = Astro.props;
+---
+
+<section aria-labelledby="guarantee-heading" class="bg-background-cream py-14">
+  <div class="mx-auto max-w-3xl px-4">
+    <div class="rounded-2xl border-2 border-primary bg-white p-8 text-center shadow-sm">
+      <Icon name="tabler:shield-check" class="mx-auto h-10 w-10 text-primary" aria-hidden="true" />
+      <h2 id="guarantee-heading" class="mt-3 font-heading text-2xl font-bold text-secondary">
+        {title}
+      </h2>
+      <p class="mt-2 text-lg text-heading">{body}</p>
+    </div>
+  </div>
+</section>

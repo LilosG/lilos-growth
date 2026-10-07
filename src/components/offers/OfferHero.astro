@@ -1,0 +1,43 @@
+---
+export interface Props {
+  title: string;
+  subhead: string;
+  primary: { text: string; href: string };
+  secondary: { text: string; href: string };
+  eyebrow?: string;
+}
+const { title, subhead, primary, secondary, eyebrow } = Astro.props;
+const btn =
+  "inline-flex h-12 items-center justify-center rounded-2xl px-7 font-heading text-base font-semibold shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-secondary";
+---
+
+<section id="hero" class="relative overflow-hidden bg-secondary pb-16 pt-14 md:pb-24 md:pt-20">
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="relative z-10 mx-auto max-w-3xl px-4 text-center">
+    {
+      eyebrow && (
+        <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">{eyebrow}</p>
+      )
+    }
+    <h1
+      class="font-heading text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl"
+    >
+      {title}
+    </h1>
+    <p class="mx-auto mt-4 max-w-2xl text-base text-white/90 md:text-lg">{subhead}</p>
+    <div class="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
+      <a href={primary.href} class={`${btn} bg-primary text-white hover:bg-primary-hover`}
+        >{primary.text}</a
+      >
+      <a
+        href={secondary.href}
+        class={`${btn} bg-white/10 text-white ring-1 ring-white/30 hover:bg-white/20`}
+        >{secondary.text}</a
+      >
+    </div>
+  </div>
+</section>

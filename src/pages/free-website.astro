@@ -1,0 +1,144 @@
+---
+import PageLayout from "~/layouts/PageLayout.astro";
+import OfferHero from "~/components/offers/OfferHero.astro";
+import ProofStrip from "~/components/offers/ProofStrip.astro";
+import IncludedList from "~/components/offers/IncludedList.astro";
+import OfferPricing from "~/components/offers/OfferPricing.astro";
+import Guarantee from "~/components/offers/Guarantee.astro";
+import HowItWorks from "~/components/offers/HowItWorks.astro";
+import OfferLeadForm from "~/components/offers/OfferLeadForm.astro";
+import OfferFAQ from "~/components/offers/OfferFAQ.astro";
+import StickyMobileCTA from "~/components/offers/StickyMobileCTA.astro";
+import { website as offer } from "~/data/offers";
+
+const title = "Free Website Program for Home-Service Pros";
+const description =
+  "We build your website free, with a page for every service and every town you serve. Keep it ranking for $499/mo, rate locked. Apply in 2 minutes.";
+
+// Client site screenshots (public/images/case-studies). Wheyland Electric is not included.
+const sites = [
+  {
+    src: "/images/case-studies/blue-door-screenshot.webp",
+    alt: "Blue Door Pest Control website",
+    width: 894,
+    height: 768,
+  },
+  {
+    src: "/images/case-studies/carlsbad-fixit-screenshot.webp",
+    alt: "Carlsbad Fix It website",
+    width: 894,
+    height: 768,
+  },
+  {
+    src: "/images/case-studies/carlsbad-home-screenshot.webp",
+    alt: "Carlsbad Home Services website",
+    width: 894,
+    height: 768,
+  },
+  {
+    src: "/images/case-studies/tamarack-screenshot.webp",
+    alt: "Tamarack Restoration website",
+    width: 894,
+    height: 768,
+  },
+];
+
+const faqs = [
+  {
+    q: "Is the website really free?",
+    a: "Yes. The build is free with the monthly or prepaid plan.",
+  },
+  {
+    q: "Who owns the site?",
+    a: "You do once your term is complete. Monthly clients who leave early keep it for $1,000.",
+  },
+  {
+    q: "How long does it take?",
+    a: "4–6 weeks. 14 days on prepaid plans.",
+  },
+  {
+    q: "Do you lock my rate?",
+    a: "Yes. Your rate is locked for as long as you stay.",
+  },
+];
+---
+
+<PageLayout
+  {title}
+  {description}
+  noIndex
+  minimal
+  minimalCta={{ text: "Apply now", href: "#apply" }}
+>
+  <OfferHero
+    title="Apply for a free website"
+    subhead="For home-service businesses in North County. We build it free — a page for every service and every town you serve. You keep it ranking for $499/mo, locked."
+    primary={{ text: "See plans", href: "#pricing" }}
+    secondary={{ text: "Apply in 2 minutes", href: "#apply" }}
+  />
+
+  <ProofStrip
+    text="Sites we've built for local home-service businesses"
+    images={sites}
+    heading="Client websites"
+  />
+
+  <IncludedList title="What you get" items={offer.includes} />
+
+  <OfferPricing {offer} />
+
+  <Guarantee {...offer.guarantee} />
+
+  <HowItWorks steps={["Apply", "We design your homepage preview", "Approve and launch"]} />
+
+  <OfferLeadForm
+    id="apply"
+    title="Apply for your free website"
+    intro="Two minutes. We'll send your homepage preview and a time to talk."
+    source="free-website: application"
+    submitLabel="Submit my application"
+    successMessage="Application received — we'll send your homepage preview and a time to talk."
+    fields={[
+      {
+        name: "trade",
+        label: "Your trade",
+        placeholder: "Plumbing, HVAC, roofing…",
+        required: true,
+      },
+      {
+        name: "cities_served",
+        label: "Cities served",
+        placeholder: "Carlsbad, Oceanside, Vista…",
+        required: true,
+      },
+      {
+        name: "current_website",
+        label: "Current website",
+        type: "url",
+        autocomplete: "url",
+        placeholder: "https://",
+      },
+      { name: "name", label: "Your name", autocomplete: "name", required: true },
+      { name: "email", label: "Email", type: "email", autocomplete: "email", required: true },
+      { name: "mobile", label: "Mobile", type: "tel", autocomplete: "tel", required: true },
+    ]}
+  />
+
+  <OfferFAQ items={faqs} />
+
+  <section aria-labelledby="final-cta-heading" class="bg-secondary py-14 text-center">
+    <div class="mx-auto max-w-2xl px-4">
+      <h2 id="final-cta-heading" class="font-heading text-3xl font-bold text-white">
+        Get a free website that ranks
+      </h2>
+      <p class="mt-2 text-white/90">$499/mo, locked. Or prepay 6 months and get 1 month free.</p>
+      <a
+        href="#pricing"
+        class="mt-6 inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-7 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
+        >See plans</a
+      >
+    </div>
+  </section>
+
+  <StickyMobileCTA label="See plans" detail="$499/mo" />
+</PageLayout>

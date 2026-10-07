@@ -1,0 +1,161 @@
+---
+import { Icon } from "astro-icon/components";
+import type { Offer } from "~/data/offers";
+
+export interface Props {
+  offer: Offer;
+  id?: string;
+  title?: string;
+}
+const { offer, id = "pricing", title = "Pick your plan" } = Astro.props;
+---
+
+<section id={id} aria-labelledby={`${id}-heading`} class="bg-background-cream py-16 md:py-20">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2
+      id={`${id}-heading`}
+      class="text-center font-heading text-3xl font-bold text-secondary md:text-4xl"
+    >
+      {title}
+    </h2>
+    <p class="mt-2 text-center text-body">{offer.name}</p>
+
+    <div data-offer-pricing data-default={offer.defaultPlan} data-offer={offer.id}>
+      <!-- Runs before first paint of the cards: marks JS as available so the toggle collapses them. -->
+      <script is:inline>
+        document.currentScript.parentElement.setAttribute("data-js", "");
+      </script>
+
+      <div class="plan-toggle mt-8 justify-center">
+        <div
+          role="group"
+          aria-label="Billing term"
+          class="inline-flex rounded-full border border-gray-300 bg-white p-1 shadow-sm"
+        >
+          {
+            offer.plans.map((p) => (
+              <button
+                type="button"
+                data-plan-tab={p.id}
+                aria-pressed="false"
+                class="rounded-full px-4 py-2 font-heading text-sm font-semibold text-heading transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 aria-pressed:bg-secondary aria-pressed:text-white sm:px-6"
+              >
+                {p.tabLabel}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="plan-grid mt-10 grid gap-6 md:grid-cols-3">
+        {
+          offer.plans.map((p) => (
+            <article
+              data-plan-card={p.id}
+              aria-label={`${p.tabLabel} plan`}
+              class:list={[
+                "plan-card relative flex flex-col rounded-2xl border bg-white p-6 shadow-sm",
+                p.popular ? "border-2 border-primary shadow-md" : "border-gray-200",
+              ]}
+            >
+              {p.popular && (
+                <span class="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary px-4 py-1 text-xs font-bold uppercase tracking-wide text-white">
+                  Most popular
+                </span>
+              )}
+              <h3 class="font-heading text-lg font-semibold text-secondary">{p.tabLabel}</h3>
+              <p class="mt-2 font-heading text-4xl font-extrabold text-heading">
+                {p.priceDisplay}
+                <span class="text-base font-semibold text-muted">{p.cadence}</span>
+              </p>
+              <p class="mt-2 text-sm font-semibold text-heading">{p.equals}</p>
+              {p.terms && <p class="mt-1 text-sm text-body">{p.terms}</p>}
+              {p.note && <p class="mt-1 text-sm text-body">{p.note}</p>}
+              {p.bonus && (
+                <p class="mt-4 flex items-start gap-2 rounded-xl bg-background-cream px-3 py-2 text-sm text-heading">
+                  <Icon
+                    name="tabler:gift"
+                    class="mt-0.5 h-5 w-5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
+                  <span>
+                    <span class="font-semibold">Prepay bonus:</span> {p.bonus}
+                  </span>
+                </p>
+              )}
+              <a
+                href={p.checkoutUrl}
+                data-checkout
+                data-plan={p.id}
+                data-value={p.price}
+                data-offer={offer.id}
+                class="mt-6 inline-flex h-12 items-center justify-center rounded-xl bg-primary px-6 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 md:mt-auto"
+              >
+                {p.ctaLabel}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .plan-toggle {
+    display: none;
+  }
+  [data-offer-pricing][data-js] .plan-toggle {
+    display: flex;
+  }
+  [data-offer-pricing][data-js] .plan-grid {
+    display: block;
+    max-width: 26rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  [data-offer-pricing][data-js] .plan-card[data-inactive] {
+    display: none;
+  }
+</style>
+
+<script>
+  const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"];
+
+  document.querySelectorAll<HTMLElement>("[data-offer-pricing]").forEach((root) => {
+    const tabs = root.querySelectorAll<HTMLButtonElement>("[data-plan-tab]");
+    const cards = root.querySelectorAll<HTMLElement>("[data-plan-card]");
+
+    const select = (plan: string) => {
+      tabs.forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.planTab === plan)));
+      cards.forEach((c) => {
+        if (c.dataset.planCard === plan) c.removeAttribute("data-inactive");
+        else c.setAttribute("data-inactive", "");
+      });
+    };
+    tabs.forEach((t) => t.addEventListener("click", () => select(t.dataset.planTab ?? "")));
+    select(root.dataset.default ?? "6mo");
+  });
+
+  // Pass the visitor's UTM / click-id params through to checkout links.
+  const incoming = new URLSearchParams(window.location.search);
+  document.querySelectorAll<HTMLAnchorElement>("a[data-checkout]").forEach((a) => {
+    try {
+      const url = new URL(a.getAttribute("href") ?? "", window.location.origin);
+      let changed = false;
+      UTM_KEYS.forEach((k) => {
+        const v = incoming.get(k);
+        if (v && !url.searchParams.has(k)) {
+          url.searchParams.set(k, v);
+          changed = true;
+        }
+      });
+      if (changed) {
+        const internal = url.origin === window.location.origin;
+        a.href = internal ? url.pathname + url.search + url.hash : url.toString();
+      }
+    } catch {
+      /* leave href untouched */
+    }
+  });
+</script>

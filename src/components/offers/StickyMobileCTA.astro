@@ -1,0 +1,55 @@
+---
+export interface Props {
+  /** id of the hero section; bar appears once it has scrolled out of view */
+  heroId?: string;
+  /** id of the pricing section; bar hides while pricing is on screen */
+  targetId?: string;
+  label: string;
+  detail: string;
+}
+const { heroId = "hero", targetId = "pricing", label, detail } = Astro.props;
+---
+
+<div
+  data-sticky-cta
+  data-hero={heroId}
+  data-target={targetId}
+  class="invisible fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-gray-200 bg-white px-4 py-3 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] transition duration-200 md:hidden"
+>
+  <a
+    href={`#${targetId}`}
+    class="flex h-12 items-center justify-between gap-3 rounded-xl bg-primary px-5 font-heading text-base font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+  >
+    <span>{label}</span>
+    <span class="text-sm font-medium text-white/90">{detail}</span>
+  </a>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-sticky-cta]").forEach((bar) => {
+    const hero = document.getElementById(bar.dataset.hero ?? "hero");
+    const target = document.getElementById(bar.dataset.target ?? "pricing");
+    if (!hero || !("IntersectionObserver" in window)) return;
+
+    let pastHero = false;
+    let onPricing = false;
+    const update = () => {
+      const show = pastHero && !onPricing;
+      bar.classList.toggle("invisible", !show);
+      bar.classList.toggle("translate-y-full", !show);
+    };
+
+    new IntersectionObserver(([e]) => {
+      // Past the hero = hero is off-screen above the viewport
+      pastHero = !e.isIntersecting && e.boundingClientRect.bottom < 0;
+      update();
+    }).observe(hero);
+
+    if (target) {
+      new IntersectionObserver(([e]) => {
+        onPricing = e.isIntersecting;
+        update();
+      }).observe(target);
+    }
+  });
+</script>
