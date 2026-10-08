@@ -6,12 +6,15 @@ export interface Props {
   line: string;
   guarantee: { title: string; body: string };
   phone: string;
+  /** Pre-filled text message body */
+  smsBody?: string;
   /** Override the default buttons (See plans / Text Mike) */
   primary?: { text: string; href: string };
   secondary?: { text: string; href: string };
 }
-const { title, line, guarantee, phone, primary, secondary } = Astro.props;
-const secondaryBtn = secondary ?? { text: "Text Mike", href: `sms:${phone}` };
+const { title, line, guarantee, phone, smsBody, primary, secondary } = Astro.props;
+const smsHref = `sms:${phone}${smsBody ? `?&body=${encodeURIComponent(smsBody)}` : ""}`;
+const secondaryBtn = secondary ?? { text: "Text Mike", href: smsHref };
 // When custom buttons replace the default pair, Text Mike stays as a text link after them.
 const showTextLink = Boolean(secondary);
 ---
@@ -43,7 +46,7 @@ const showTextLink = Boolean(secondary);
         {
           showTextLink && (
             <a
-              href={`sms:${phone}`}
+              href={smsHref}
               class="inline-flex min-h-11 items-center justify-center px-2 font-heading text-base font-semibold text-white underline underline-offset-4 transition hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               Text Mike

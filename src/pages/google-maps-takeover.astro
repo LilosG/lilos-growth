@@ -64,17 +64,17 @@ const faqs = [
   minimalCta={{ text: "Get a free map scan", href: "#map-scan" }}
 >
   <OfferHero
-    eyebrow="Google Maps management"
+    eyebrow="Google Maps management for home-service businesses"
     titleBefore="Who's beating you on "
     highlight="Google Maps?"
-    subhead="We fix your Google profile in week one, then run it every month. $199/mo, locked for as long as you stay."
+    subhead="Plumbing, HVAC, electrical, roofing, restoration and more. We fix your Google profile in week one, then run it every month so you own your leads. $199/mo, locked for as long as you stay."
     priceChip="$199/mo · rate locked"
     priceCompare="$300/mo"
     primary={{ text: "Get a free map scan", href: "#map-scan" }}
     secondary={{ text: "See plans", href: "#pricing" }}
+    guaranteeNote="Day-90 guarantee: if your map grid isn't better at day 90, your next month is free."
     trust={[
       { icon: "tabler:users", text: "220+ sites built" },
-      { icon: "tabler:shield-check", text: "Day-90 guarantee" },
     ]}
   >
     <figure class="overflow-hidden rounded-3xl border border-white/15 bg-white/[0.07] p-0 shadow-2xl backdrop-blur md:p-5">
@@ -168,13 +168,14 @@ const faqs = [
     ]}
   />
 
-  <OfferFAQ items={faqs} phone="+18587222920" />
+  <OfferFAQ items={faqs} phone="+18587222920" smsBody="Hi Mike, I have a question about the Google Maps Takeover." />
 
   <FinalCta
     title="Ready to take over the map?"
     line="$199/mo, locked. Or prepay 6 months and get 1 month free."
     guarantee={offer.guarantee}
     phone="+18587222920"
+    smsBody="Hi Mike, I have a question about the Google Maps Takeover."
     primary={{ text: "Get a free map scan", href: "#map-scan" }}
     secondary={{ text: "See plans", href: "#pricing" }}
   />

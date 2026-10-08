@@ -8,8 +8,11 @@ export interface Props {
   title?: string;
   /** sms: number in E.164, e.g. +18587222920 */
   phone: string;
+  /** Pre-filled text message body */
+  smsBody?: string;
 }
-const { items, title = "Questions, answered", phone } = Astro.props;
+const { items, title = "Questions, answered", phone, smsBody } = Astro.props;
+const smsHref = `sms:${phone}${smsBody ? `?&body=${encodeURIComponent(smsBody)}` : ""}`;
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -34,7 +37,7 @@ const faqSchema = {
       </h2>
       <p class="mt-4 text-base text-gray-700 md:text-lg">
         Still unsure? <a
-          href={`sms:${phone}`}
+          href={smsHref}
           class="ml-1 inline-flex min-h-11 items-center rounded-xl border-2 border-primary px-4 font-heading font-semibold text-primary transition hover:bg-primary hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >Text Mike.</a
         >

@@ -13,8 +13,10 @@ export interface Props {
   primary: { text: string; href: string };
   secondary: { text: string; href: string };
   trust: { icon: string; text: string }[];
+  /** Short guarantee line shown directly under the hero buttons */
+  guaranteeNote?: string;
 }
-const { eyebrow, titleBefore, highlight, titleAfter, subhead, priceChip, priceCompare, primary, secondary, trust } =
+const { eyebrow, titleBefore, highlight, titleAfter, subhead, priceChip, priceCompare, primary, secondary, trust, guaranteeNote } =
   Astro.props;
 const btn =
   "inline-flex h-12 items-center justify-center rounded-2xl px-7 font-heading text-base font-semibold shadow transition duration-200 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-secondary";
@@ -61,6 +63,14 @@ const btn =
           >{secondary.text}</a
         >
       </div>
+      {
+        guaranteeNote && (
+          <p class="mx-auto mt-4 flex max-w-xl items-start justify-center gap-2 text-sm text-gray-300 lg:mx-0 lg:justify-start">
+            <Icon name="tabler:shield-check" class="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+            <span>{guaranteeNote}</span>
+          </p>
+        )
+      }
       <ul
         class="mt-8 flex flex-col items-center gap-x-6 gap-y-3 text-base text-gray-300 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start"
       >

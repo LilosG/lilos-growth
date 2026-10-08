@@ -91,14 +91,14 @@ const faqs = [
     eyebrow="Free website program"
     titleBefore="Apply for a "
     highlight="free website"
-    subhead="For home-service businesses. We build it free — a page for every service and every town you serve. You keep it ranking for $499/mo, locked."
+    subhead="For home-service businesses. We build it free — a page for every service and every town you serve. You keep it ranking and own your leads for $499/mo, locked."
     priceChip="$499/mo · rate locked"
     priceCompare="$750/mo"
     primary={{ text: "See plans", href: "#pricing" }}
     secondary={{ text: "Apply in 2 minutes", href: "#apply" }}
+    guaranteeNote="Day-90 guarantee: if your map grid isn't better at day 90, your next month is free."
     trust={[
       { icon: "tabler:users", text: "220+ sites built" },
-      { icon: "tabler:shield-check", text: "Day-90 guarantee" },
     ]}
   >
     <DeviceMockup
@@ -118,6 +118,7 @@ const faqs = [
       <h2 id="sites-heading" class="mt-3 text-center font-heading text-3xl font-extrabold tracking-tight text-secondary md:text-5xl">
         Sites we've built for local home-service businesses
       </h2>
+      <p class="mt-3 text-center text-base text-gray-700 md:text-lg">We build for home-service businesses nationwide.</p>
       <ul class="mt-12 grid gap-12 lg:grid-cols-3 lg:gap-8">
         {sites.map((site) => (
           <li>
@@ -171,26 +172,28 @@ const faqs = [
         required: true,
         half: true,
       },
+      { name: "mobile", label: "Mobile", type: "tel", autocomplete: "tel", required: true },
+      { name: "name", label: "Your name", autocomplete: "name", required: true, half: true, step: 2 },
+      { name: "email", label: "Email", type: "email", autocomplete: "email", required: true, half: true, step: 2 },
       {
         name: "current_website",
         label: "Current website",
         type: "url",
         autocomplete: "url",
         placeholder: "https://",
+        step: 2,
       },
-      { name: "name", label: "Your name", autocomplete: "name", required: true, half: true },
-      { name: "mobile", label: "Mobile", type: "tel", autocomplete: "tel", required: true, half: true },
-      { name: "email", label: "Email", type: "email", autocomplete: "email", required: true },
     ]}
   />
 
-  <OfferFAQ items={faqs} phone="+18587222920" />
+  <OfferFAQ items={faqs} phone="+18587222920" smsBody="Hi Mike, I have a question about the Free Website Program." />
 
   <FinalCta
     title="Get a free website that ranks"
     line="$499/mo, locked. Or prepay 6 months and get 1 month free."
     guarantee={offer.guarantee}
     phone="+18587222920"
+    smsBody="Hi Mike, I have a question about the Free Website Program."
   />
 
   <StickyMobileCTA label="See plans" detail="$499/mo" />

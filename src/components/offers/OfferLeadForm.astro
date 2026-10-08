@@ -14,6 +14,8 @@ export interface Field {
   hint?: string;
   /** Render at half width on sm+ screens */
   half?: boolean;
+  /** 2 = shown after "Continue" (two-step forms). Omit for single-step. */
+  step?: 1 | 2;
 }
 export interface Props {
   id: string;
@@ -29,6 +31,8 @@ export interface Props {
 }
 const { id, title, intro, bullets = [], eyebrow = "Get started", fields, submitLabel, successMessage, source } =
   Astro.props;
+const twoStep = fields.some((f) => f.step === 2);
+const ordered = twoStep ? [...fields.filter((f) => f.step !== 2), ...fields.filter((f) => f.step === 2)] : fields;
 const FORMSPREE = "https://formspree.io/f/movlbqdk";
 const input =
   "block h-12 w-full rounded-xl border border-gray-300 bg-white px-4 text-base text-heading transition focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary";
@@ -71,6 +75,7 @@ const input =
         method="POST"
         action={FORMSPREE}
         data-offer-form
+        data-two-step={twoStep ? "" : undefined}
         data-source={source}
         class="grid gap-5 rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm sm:grid-cols-2 sm:p-8"
       >
@@ -87,8 +92,15 @@ const input =
         />
 
         {
-          fields.map((f) => (
-            <div class:list={[f.half ? "" : "sm:col-span-2"]}>
+          twoStep && (
+            <p data-step-label class="hidden text-sm font-semibold text-primary sm:col-span-2" aria-live="polite">
+              Step 1 of 2
+            </p>
+          )
+        }
+        {
+          ordered.map((f) => (
+            <div data-step={f.step === 2 ? "2" : "1"} class:list={[f.half ? "" : "sm:col-span-2"]}>
               <label for={`${id}-${f.name}`} class="mb-1.5 block text-sm font-semibold text-heading">
                 {f.label}
                 {!f.required && <span class="font-normal text-muted"> (optional)</span>}
@@ -107,7 +119,19 @@ const input =
           ))
         }
 
+        {
+          twoStep && (
+            <button
+              type="button"
+              data-step-next
+              class="hidden h-14 w-full items-center justify-center rounded-xl bg-primary px-8 font-heading text-lg font-semibold text-white shadow transition hover:-translate-y-0.5 hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:col-span-2"
+            >
+              Continue
+            </button>
+          )
+        }
         <button
+          data-step-submit
           type="submit"
           class="flex h-14 w-full items-center justify-center rounded-xl bg-primary px-8 font-heading text-lg font-semibold text-white shadow transition hover:-translate-y-0.5 hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-60 sm:col-span-2"
         >
@@ -176,6 +200,35 @@ const input =
     s.onload = init;
     document.head.appendChild(s);
   }
+
+  // Two-step forms: show step-1 fields + Continue; reveal step 2 after step 1 validates.
+  // Without JS every field and the submit button stay visible.
+  document.querySelectorAll<HTMLFormElement>("form[data-offer-form][data-two-step]").forEach((form) => {
+    const step2 = form.querySelectorAll<HTMLElement>('[data-step="2"]');
+    const step1Inputs = form.querySelectorAll<HTMLInputElement>('[data-step="1"] input');
+    const next = form.querySelector<HTMLButtonElement>("[data-step-next]");
+    const submit = form.querySelector<HTMLButtonElement>("[data-step-submit]");
+    const label = form.querySelector<HTMLElement>("[data-step-label]");
+    step2.forEach((el) => el.classList.add("hidden"));
+    submit?.classList.add("hidden");
+    next?.classList.remove("hidden");
+    next?.classList.add("flex");
+    label?.classList.remove("hidden");
+    next?.addEventListener("click", () => {
+      for (const input of step1Inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          return;
+        }
+      }
+      step2.forEach((el) => el.classList.remove("hidden"));
+      submit?.classList.remove("hidden");
+      next.classList.add("hidden");
+      next.classList.remove("flex");
+      if (label) label.textContent = "Step 2 of 2";
+      form.querySelector<HTMLInputElement>('[data-step="2"] input')?.focus();
+    });
+  });
 
   document.querySelectorAll<HTMLFormElement>("form[data-offer-form]").forEach((form) => {
     const wrap = form.parentElement;
