@@ -9,6 +9,7 @@ const out = path.join(path.dirname(fileURLToPath(import.meta.url)), "../public/i
 const sites = [
   { slug: "tamarack", url: "https://www.tamarackrestoration.com" },
   { slug: "carlsbadfixit", url: "https://www.carlsbadfixit.com" },
+  { slug: "wheyland", url: "https://wheylandelectric.com" },
 ];
 const views = [
   { name: "desktop", width: 1440, height: 900, mobile: false },

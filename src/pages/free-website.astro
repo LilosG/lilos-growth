@@ -27,6 +27,13 @@ const sites = [
     desktop: "/images/landers/carlsbadfixit-desktop.webp",
     mobile: "/images/landers/carlsbadfixit-mobile.webp",
   },
+  {
+    name: "Wheyland Electric",
+    city: "Carlsbad, CA",
+    caption: "300+ pages — every service, every city.",
+    desktop: "/images/landers/wheyland-desktop.webp",
+    mobile: "/images/landers/wheyland-mobile.webp",
+  },
 ];
 
 const included = [
@@ -96,12 +103,13 @@ const faqs = [
       <h2 id="sites-heading" class="mt-3 text-center font-heading text-3xl font-bold text-secondary md:text-4xl">
         Sites we've built for local home-service businesses
       </h2>
-      <ul class="mt-14 grid gap-14 md:grid-cols-2 md:gap-10">
+      <ul class="mt-14 grid gap-14 lg:grid-cols-3 lg:gap-8">
         {sites.map((site) => (
           <li>
             <DeviceMockup desktopSrc={site.desktop} mobileSrc={site.mobile} alt={`${site.name} website`} />
             <p class="mt-4 text-center font-heading text-xl font-bold text-secondary">{site.name}</p>
             <p class="text-center text-sm text-body">{site.city}</p>
+            {site.caption && <p class="mt-1 text-center text-sm font-semibold text-heading">{site.caption}</p>}
           </li>
         ))}
       </ul>
@@ -152,8 +160,8 @@ const faqs = [
         placeholder: "https://",
       },
       { name: "name", label: "Your name", autocomplete: "name", required: true, half: true },
-      { name: "email", label: "Email", type: "email", autocomplete: "email", required: true },
       { name: "mobile", label: "Mobile", type: "tel", autocomplete: "tel", required: true, half: true },
+      { name: "email", label: "Email", type: "email", autocomplete: "email", required: true },
     ]}
   />
 
