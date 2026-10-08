@@ -1,0 +1,21 @@
+---
+import { getPermalink } from "~/utils/permalinks";
+
+const year = new Date().getFullYear();
+const link =
+  "inline-flex min-h-11 items-center rounded underline-offset-4 hover:text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary";
+---
+
+<footer class="border-t-2 border-primary bg-secondary text-white/80">
+  <div
+    class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-3 text-[13px] md:text-sm sm:flex-row md:px-6"
+  >
+    <p>&copy; {year} Lilos Growth, LLC</p>
+    <nav aria-label="Legal">
+      <ul class="flex gap-5">
+        <li><a href={getPermalink("/privacy-policy")} class={link}>Privacy Policy</a></li>
+        <li><a href={getPermalink("/terms")} class={link}>Terms</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>

@@ -1,0 +1,56 @@
+---
+import Guarantee from "./Guarantee.astro";
+
+export interface Props {
+  title: string;
+  line: string;
+  guarantee: { title: string; body: string };
+  phone: string;
+  /** Override the default buttons (See plans / Text Mike) */
+  primary?: { text: string; href: string };
+  secondary?: { text: string; href: string };
+}
+const { title, line, guarantee, phone, primary, secondary } = Astro.props;
+const secondaryBtn = secondary ?? { text: "Text Mike", href: `sms:${phone}` };
+// When custom buttons replace the default pair, Text Mike stays as a text link after them.
+const showTextLink = Boolean(secondary);
+---
+
+<section aria-labelledby="final-cta-heading" class="bg-secondary-dark py-16 md:py-20">
+  <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+    <div>
+      <h2
+        id="final-cta-heading"
+        class="font-heading text-3xl font-extrabold tracking-tight text-white md:text-5xl"
+      >
+        {title}
+      </h2>
+      <p class="mt-4 text-base text-gray-300 md:text-lg">{line}</p>
+    </div>
+    <div>
+      <Guarantee {...guarantee} class="mt-0" />
+      <div class="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+        <a
+          href={primary?.href ?? "#pricing"}
+          class="inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-8 font-heading text-base font-semibold text-white shadow transition duration-200 hover:-translate-y-0.5 hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-dark"
+          >{primary?.text ?? "See plans"}</a
+        >
+        <a
+          href={secondaryBtn.href}
+          class="inline-flex h-12 items-center justify-center rounded-2xl px-6 font-heading text-base font-semibold text-white ring-1 ring-white/30 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          >{secondaryBtn.text}</a
+        >
+        {
+          showTextLink && (
+            <a
+              href={`sms:${phone}`}
+              class="inline-flex min-h-11 items-center justify-center px-2 font-heading text-base font-semibold text-white underline underline-offset-4 transition hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              Text Mike
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

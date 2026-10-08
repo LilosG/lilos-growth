@@ -39,6 +39,7 @@ export default defineConfig({
         })();
 
         if (pathname.startsWith("/offers/")) return false;
+        if (pathname === "/google-maps-takeover" || pathname === "/free-website") return false;
         if (pathname.startsWith("/blog/tag/")) return false;
         if (pathname.startsWith("/blog/category/")) return false;
         if (/^\/blog\/\d+$/.test(pathname)) return false;

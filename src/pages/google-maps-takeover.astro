@@ -1,0 +1,197 @@
+---
+import PageLayout from "~/layouts/PageLayout.astro";
+import OfferHero from "~/components/offers/OfferHero.astro";
+import ProofBand from "~/components/offers/ProofBand.astro";
+import Image from "~/components/common/Image.astro";
+import IncludedList from "~/components/offers/IncludedList.astro";
+import OfferPricing from "~/components/offers/OfferPricing.astro";
+import HowItWorks from "~/components/offers/HowItWorks.astro";
+import OfferLeadForm from "~/components/offers/OfferLeadForm.astro";
+import OfferFAQ from "~/components/offers/OfferFAQ.astro";
+import FinalCta from "~/components/offers/FinalCta.astro";
+import StickyMobileCTA from "~/components/offers/StickyMobileCTA.astro";
+import { takeover as offer } from "~/data/offers";
+
+const title = "Google Maps Takeover: Fix Your Google Profile";
+const description =
+  "We optimize your Google Business Profile in week one, then run it every month. $199/mo, rate locked. If your map grid isn't better at day 90, your next month is free.";
+
+const included = [
+  { icon: "tabler:adjustments", title: offer.includes[0], detail: "We rebuild your profile's categories, services, description and photos in the first week." },
+  { icon: "tabler:speakerphone", title: offer.includes[1], detail: "Fresh posts every week so Google sees an active business." },
+  { icon: "tabler:message-circle", title: offer.includes[2], detail: "Every review gets a reply, so customers see you're paying attention." },
+  { icon: "tabler:qrcode", title: offer.includes[3], detail: "Make it easy for happy customers to leave a review in seconds." },
+  { icon: "tabler:map-search", title: offer.includes[4], detail: "See where you rank across your service area, every month." },
+];
+
+const faqs = [
+  {
+    q: "What do you need from me to get started?",
+    a: "Manager access to your Google Business Profile (a 2-minute invite; we send the steps) and any photos you'd like used. We never need your Google password.",
+  },
+  {
+    q: "What do you change in week one?",
+    a: "Categories, services, description, hours, service areas, attributes, photos and Q&A, plus a review link and QR code. You get a list of every change.",
+  },
+  {
+    q: "How soon will I see a difference?",
+    a: "Changes usually show up in your map grid within weeks; competitive keywords take longer. Your monthly grid report shows exactly where you stand.",
+  },
+  {
+    q: "How does the day-90 guarantee work?",
+    a: "If your map grid isn't better at day 90 than on day one, your next month is free. It requires profile access and that you send review requests to customers.",
+  },
+  {
+    q: "Can I cancel?",
+    a: "Monthly plans cancel anytime after the 3-month minimum. Prepaid plans run their full term.",
+  },
+  {
+    q: "What does \"rate locked\" mean?",
+    a: "Your monthly price never goes up for as long as you stay.",
+  },
+  {
+    q: "Do I still own my Google profile?",
+    a: "Always. We're added as a manager; you stay the owner and can remove us anytime.",
+  },
+];
+---
+
+<PageLayout
+  {title}
+  {description}
+  noIndex
+  minimal
+  minimalCta={{ text: "Get a free map scan", href: "#map-scan" }}
+>
+  <OfferHero
+    eyebrow="Google Maps management"
+    titleBefore="Who's beating you on "
+    highlight="Google Maps?"
+    subhead="We fix your Google profile in week one, then run it every month. $199/mo, locked for as long as you stay."
+    priceChip="$199/mo · rate locked"
+    primary={{ text: "Get a free map scan", href: "#map-scan" }}
+    secondary={{ text: "See plans", href: "#pricing" }}
+    trust={[
+      { icon: "tabler:users", text: "220+ sites built" },
+      { icon: "tabler:shield-check", text: "Day-90 guarantee" },
+    ]}
+  >
+    <figure class="overflow-hidden rounded-3xl border border-white/15 bg-white/[0.07] p-0 shadow-2xl backdrop-blur md:p-5">
+      <p class="px-4 pb-3 pt-4 text-center text-xs font-bold uppercase tracking-wider text-white sm:text-sm md:px-0 md:pt-0">
+        Every point in the top 3
+      </p>
+      <button
+        type="button"
+        data-grid-open
+        class="block w-full cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-white md:cursor-default"
+        aria-label="Enlarge the real client map grid"
+      >
+        <Image
+          src="/images/landers/grid-after.png"
+          alt="Real client Google Maps rank grid, every point ranked 1 to 3"
+          width={1922}
+          height={1800}
+          loading="eager"
+          class="mx-auto h-auto max-h-[28rem] w-full object-cover md:rounded-xl"
+          sizes="(min-width: 1024px) 560px, 90vw"
+        />
+      </button>
+      <p class="mt-2 text-center text-sm font-semibold text-white md:hidden">Tap to enlarge</p>
+      <figcaption class="px-4 pb-4 pt-2 text-center text-sm text-white/75 md:mt-1 md:p-0 md:pt-2">
+        Real client map grid
+      </figcaption>
+    </figure>
+    <dialog
+      data-grid-dialog
+      class="m-auto max-h-[92vh] w-[96vw] max-w-3xl overflow-auto rounded-2xl bg-secondary-dark p-0 backdrop:bg-black/80"
+    >
+      <form method="dialog" class="sticky top-0 z-10 flex justify-end bg-secondary-dark/90 p-2">
+        <button
+          class="inline-flex min-h-11 items-center rounded-xl bg-white px-5 font-heading text-base font-semibold text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          autofocus>Close</button
+        >
+      </form>
+      <img
+        src="/images/landers/grid-after.png"
+        alt="Real client Google Maps rank grid, every point ranked 1 to 3, full size"
+        width="1922"
+        height="1800"
+        loading="lazy"
+        class="h-auto w-full"
+      />
+    </dialog>
+  </OfferHero>
+
+  <ProofBand
+    stats={[
+      { value: "220+", label: "sites built" },
+      { value: "49/49", label: "grid points in the top 3 for a client" },
+      { value: "24 hrs", label: "from sign-up to work starting" },
+    ]}
+  />
+
+  <IncludedList
+    intro="We rebuild your Google profile in week one, then manage it every month. You get a list of every change and a map-rank grid report each month."
+    cta={{ text: "See plans", href: "#pricing" }}
+    items={included}
+  />
+
+  <OfferPricing {offer} />
+
+  <HowItWorks
+    steps={[
+      { title: "Choose a plan", desc: "Monthly or prepaid, rate locked either way." },
+      { title: "Give us profile access", desc: "A 2-minute manager invite. We send the steps." },
+      { title: "We start within 24 hours", desc: "Week-one fixes first, then monthly management." },
+    ]}
+  />
+
+  <OfferLeadForm
+    id="map-scan"
+    title="Get a free map scan"
+    eyebrow="Free map scan"
+    bullets={["Free map scan, no payment required", "Your current map grid within 24 hours", "We never need your Google password"]}
+    intro="Tell us where you work. We'll send your current map grid so you can see who's beating you."
+    source="google-maps-takeover: free map scan"
+    submitLabel="Get my free map scan"
+    successMessage="Got it — your map grid arrives within 24 hours."
+    fields={[
+      {
+        name: "business_name",
+        label: "Business name",
+        autocomplete: "organization",
+        required: true,
+      },
+      { name: "name", label: "Your name", autocomplete: "name", required: true, half: true },
+      { name: "mobile", label: "Mobile", type: "tel", autocomplete: "tel", required: true, half: true },
+    ]}
+  />
+
+  <OfferFAQ items={faqs} phone="+18587222920" />
+
+  <FinalCta
+    title="Ready to take over the map?"
+    line="$199/mo, locked. Or prepay 6 months and get 1 month free."
+    guarantee={offer.guarantee}
+    phone="+18587222920"
+    primary={{ text: "Get a free map scan", href: "#map-scan" }}
+    secondary={{ text: "See plans", href: "#pricing" }}
+  />
+
+  <StickyMobileCTA
+    label="Get a free map scan"
+    href="#map-scan"
+    secondary={{ text: "See plans", href: "#pricing" }}
+  />
+</PageLayout>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>("[data-grid-dialog]");
+  const mobile = window.matchMedia("(max-width: 767px)");
+  document.querySelector("[data-grid-open]")?.addEventListener("click", () => {
+    if (mobile.matches && dialog && !dialog.open) dialog.showModal();
+  });
+  dialog?.addEventListener("click", (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+</script>

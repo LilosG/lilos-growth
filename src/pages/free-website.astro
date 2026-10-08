@@ -1,0 +1,196 @@
+---
+import PageLayout from "~/layouts/PageLayout.astro";
+import OfferHero from "~/components/offers/OfferHero.astro";
+import DeviceMockup from "~/components/offers/DeviceMockup.astro";
+import IncludedList from "~/components/offers/IncludedList.astro";
+import OfferPricing from "~/components/offers/OfferPricing.astro";
+import HowItWorks from "~/components/offers/HowItWorks.astro";
+import OfferLeadForm from "~/components/offers/OfferLeadForm.astro";
+import OfferFAQ from "~/components/offers/OfferFAQ.astro";
+import FinalCta from "~/components/offers/FinalCta.astro";
+import StickyMobileCTA from "~/components/offers/StickyMobileCTA.astro";
+import { website as offer } from "~/data/offers";
+
+const title = "Free Website Program for Home-Service Pros";
+const description =
+  "We build your website free, with a page for every service and every town you serve. Keep it ranking for $499/mo, rate locked. Apply in 2 minutes.";
+
+const sites = [
+  {
+    name: "Tamarack Restoration",
+    city: "Carlsbad, CA",
+    caption: "287 pages — every service, every city, every insurance carrier.",
+    desktop: "/images/landers/tamarack-desktop.webp",
+    mobile: "/images/landers/tamarack-mobile.webp",
+  },
+  {
+    name: "Carlsbad Fix It",
+    city: "Carlsbad, CA",
+    caption: "120+ pages — every service, every city.",
+    desktop: "/images/landers/carlsbadfixit-desktop.webp",
+    mobile: "/images/landers/carlsbadfixit-mobile.webp",
+  },
+  {
+    name: "Wheyland Electric",
+    city: "Carlsbad, CA",
+    caption: "300+ pages — every service, every city.",
+    desktop: "/images/landers/wheyland-desktop.webp",
+    mobile: "/images/landers/wheyland-mobile.webp",
+  },
+];
+
+const included = [
+  { icon: "tabler:world", title: offer.includes[0], detail: "Every service and every town you serve gets its own page." },
+  { icon: "tabler:code", title: offer.includes[1], detail: "Structured data that helps Google understand your business." },
+  { icon: "tabler:sparkles", title: offer.includes[2], detail: "Built so AI assistants and search engines can read and cite you." },
+  { icon: "tabler:phone-check", title: offer.includes[3], detail: "Know which calls and form fills your site is producing." },
+  { icon: "tabler:map-pin", title: offer.includes[4], detail: "Profile optimization, weekly posts, review replies and map-rank reports." },
+  { icon: "tabler:trending-up", title: offer.includes[5], detail: "Ongoing work every month to keep your pages ranking." },
+];
+
+const faqs = [
+  {
+    q: "Is the website really free?",
+    a: "Yes. There's no build fee. You pay for the plan that keeps it ranking: $499/mo, or prepaid.",
+  },
+  {
+    q: "How many pages will I get?",
+    a: "A page for every service you offer and every city you serve, agreed with you before we start.",
+  },
+  {
+    q: "How long does it take to launch?",
+    a: "4–6 weeks once we have your information, or 14 days on prepaid plans.",
+  },
+  {
+    q: "What do I need to provide?",
+    a: "Your list of services and cities, photos of your work and your logo if you have one. We write the copy.",
+  },
+  {
+    q: "Who owns the website?",
+    a: "You do once your term is complete. Monthly clients who leave early can keep the site for $1,000.",
+  },
+  {
+    q: "Can I keep my current domain?",
+    a: "Yes. We connect your existing domain or help you register one.",
+  },
+  {
+    q: "What does \"rate locked\" mean?",
+    a: "Your monthly price never goes up for as long as you stay.",
+  },
+];
+---
+
+<PageLayout
+  {title}
+  {description}
+  noIndex
+  minimal
+  minimalCta={{ text: "Apply now", href: "#apply" }}
+>
+  <OfferHero
+    eyebrow="Free website program"
+    titleBefore="Apply for a "
+    highlight="free website"
+    subhead="For home-service businesses. We build it free — a page for every service and every town you serve. You keep it ranking for $499/mo, locked."
+    priceChip="$499/mo · rate locked"
+    primary={{ text: "See plans", href: "#pricing" }}
+    secondary={{ text: "Apply in 2 minutes", href: "#apply" }}
+    trust={[
+      { icon: "tabler:users", text: "220+ sites built" },
+      { icon: "tabler:shield-check", text: "Day-90 guarantee" },
+    ]}
+  >
+    <DeviceMockup
+      desktopSrc={sites[2].desktop}
+      mobileSrc={sites[2].mobile}
+      alt={`${sites[2].name} website`}
+      eager
+    >
+      <span class="absolute -left-2 top-6 hidden sm:block rounded-xl bg-white px-3 py-2 text-xs font-bold text-secondary shadow-xl sm:-left-6 sm:text-sm">A page for every service</span>
+      <span class="absolute -left-2 bottom-16 hidden sm:block rounded-xl bg-primary px-3 py-2 text-xs font-bold text-white shadow-xl sm:-left-6 sm:text-sm">A page for every town</span>
+    </DeviceMockup>
+  </OfferHero>
+
+  <section aria-labelledby="sites-heading" class="bg-slate-50 py-16 md:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-xs font-bold uppercase tracking-[0.18em] text-primary">Our work</p>
+      <h2 id="sites-heading" class="mt-3 text-center font-heading text-3xl font-extrabold tracking-tight text-secondary md:text-5xl">
+        Sites we've built for local home-service businesses
+      </h2>
+      <ul class="mt-12 grid gap-12 lg:grid-cols-3 lg:gap-8">
+        {sites.map((site) => (
+          <li>
+            <DeviceMockup desktopSrc={site.desktop} mobileSrc={site.mobile} alt={`${site.name} website`} />
+            <p class="mt-4 text-center font-heading text-xl font-bold text-secondary">{site.name}</p>
+            <p class="text-center text-base text-gray-700">{site.city}</p>
+            {site.caption && <p class="mt-1 text-center text-base font-semibold text-heading">{site.caption}</p>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <IncludedList
+    intro="We build a page for every service and every town you serve, then keep it ranking every month. You see your homepage preview before you decide anything."
+    cta={{ text: "See plans", href: "#pricing" }}
+    items={included}
+  />
+
+  <OfferPricing {offer} />
+
+  <HowItWorks
+    steps={[
+      { title: "Apply", desc: "Two minutes, no payment yet." },
+      { title: "We design your homepage preview", desc: "You see it before you decide anything." },
+      { title: "Approve and launch", desc: "A page for every service and every town you serve." },
+    ]}
+  />
+
+  <OfferLeadForm
+    id="apply"
+    title="Apply for your free website"
+    eyebrow="Apply"
+    bullets={["Two minutes, no payment yet", "You see your homepage preview before you decide anything", "A page for every service and every town you serve"]}
+    intro="Two minutes. We'll send your homepage preview and a time to talk."
+    source="free-website: application"
+    submitLabel="Submit my application"
+    successMessage="Application received — we'll send your homepage preview and a time to talk."
+    fields={[
+      {
+        name: "trade",
+        label: "Your trade",
+        placeholder: "Plumbing, HVAC, roofing…",
+        required: true,
+        half: true,
+      },
+      {
+        name: "cities_served",
+        label: "Cities served",
+        placeholder: "The towns you serve",
+        required: true,
+        half: true,
+      },
+      {
+        name: "current_website",
+        label: "Current website",
+        type: "url",
+        autocomplete: "url",
+        placeholder: "https://",
+      },
+      { name: "name", label: "Your name", autocomplete: "name", required: true, half: true },
+      { name: "mobile", label: "Mobile", type: "tel", autocomplete: "tel", required: true, half: true },
+      { name: "email", label: "Email", type: "email", autocomplete: "email", required: true },
+    ]}
+  />
+
+  <OfferFAQ items={faqs} phone="+18587222920" />
+
+  <FinalCta
+    title="Get a free website that ranks"
+    line="$499/mo, locked. Or prepay 6 months and get 1 month free."
+    guarantee={offer.guarantee}
+    phone="+18587222920"
+  />
+
+  <StickyMobileCTA label="See plans" detail="$499/mo" />
+</PageLayout>

@@ -1,0 +1,39 @@
+---
+import Image from "~/components/common/Image.astro";
+
+export interface ProofImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+export interface Props {
+  text: string;
+  images: ProofImage[];
+  heading?: string;
+}
+const { text, images, heading = "Proof" } = Astro.props;
+---
+
+<section aria-labelledby="proof-heading" class="border-b border-gray-100 bg-background-cream py-12">
+  <div class="mx-auto max-w-5xl px-4">
+    <h2 id="proof-heading" class="sr-only">{heading}</h2>
+    <p class="text-center font-heading text-lg font-bold text-heading md:text-xl">{text}</p>
+    <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+      {
+        images.map((img) => (
+          <li class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+            <Image
+              src={img.src}
+              alt={img.alt}
+              width={img.width}
+              height={img.height}
+              class="h-auto w-full"
+              sizes="(min-width: 640px) 50vw, 100vw"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

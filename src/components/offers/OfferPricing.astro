@@ -1,0 +1,216 @@
+---
+import { Icon } from "astro-icon/components";
+import Guarantee from "./Guarantee.astro";
+import type { Offer, PlanId } from "~/data/offers";
+
+export interface Props {
+  offer: Offer;
+  id?: string;
+  title?: string;
+}
+const { offer, id = "pricing", title = "Pick your plan" } = Astro.props;
+
+// Desktop order: longest term first, 6-month card in the middle.
+const order: PlanId[] = ["12mo", "6mo", "monthly"];
+const plans = order.flatMap((pid) => offer.plans.filter((p) => p.id === pid));
+
+const perLine: Record<PlanId, string> = {
+  monthly: "per month",
+  "6mo": "per 6 months",
+  "12mo": "per 12 months",
+};
+
+// Short restatements of the offer's own "includes" list.
+const checks: Record<string, string[]> = {
+  takeover: [
+    "Week-1 profile optimization",
+    "Weekly Google posts",
+    "Review responses",
+    "Monthly map-rank grid report",
+  ],
+  website: [
+    "Site with a page per service and city",
+    "Schema markup + AI-search ready",
+    "Call + form tracking",
+    "Monthly local SEO",
+  ],
+};
+const list = checks[offer.id] ?? [];
+const bonusItems = (b?: string) => (b ? b.split(" + ") : []);
+const freeMonths: Partial<Record<PlanId, string>> = { "6mo": "1 month free", "12mo": "2 months free" };
+---
+
+<section id={id} aria-labelledby={`${id}-heading`} class="bg-slate-50 py-16 md:py-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <p class="text-center text-xs font-bold uppercase tracking-[0.18em] text-primary">Pricing</p>
+    <h2
+      id={`${id}-heading`}
+      class="mt-3 text-center font-heading text-3xl font-extrabold tracking-tight text-secondary md:text-5xl"
+    >
+      {title}
+    </h2>
+    <p class="mt-3 text-center text-base text-gray-700 md:text-lg">{offer.name}</p>
+
+    <div data-offer-pricing data-default={offer.defaultPlan} data-offer={offer.id}>
+      <!-- Runs before first paint of the cards: marks JS as available so the toggle collapses them below md. -->
+      <script is:inline>
+        document.currentScript.parentElement.setAttribute("data-js", "");
+      </script>
+
+      <div class="plan-toggle mt-8 justify-center md:hidden">
+        <div
+          role="group"
+          aria-label="Billing term"
+          class="inline-flex rounded-full border border-gray-300 bg-white p-1 shadow-sm"
+        >
+          {
+            offer.plans.map((p) => (
+              <button
+                type="button"
+                data-plan-tab={p.id}
+                aria-pressed="false"
+                class="min-h-11 rounded-full px-4 py-2 font-heading text-sm font-semibold text-heading transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 aria-pressed:bg-secondary aria-pressed:text-white sm:px-6"
+              >
+                {p.tabLabel}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="plan-grid mt-12 grid items-stretch gap-8 md:grid-cols-3 md:gap-6 md:pt-4">
+        {
+          plans.map((p) => (
+            <article
+              data-plan-card={p.id}
+              aria-label={`${p.tabLabel} plan`}
+              class:list={[
+                "plan-card relative flex flex-col rounded-2xl border bg-white p-7 transition duration-200",
+                p.popular
+                  ? "z-10 border-2 border-primary shadow-xl md:scale-105 md:hover:shadow-2xl"
+                  : "border-slate-200 shadow-sm hover:-translate-y-1 hover:shadow-lg",
+              ]}
+            >
+              {p.popular && (
+                <span class="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary px-4 py-1 text-xs font-bold uppercase tracking-wide text-white shadow">
+                  Most popular
+                </span>
+              )}
+              <h3 class="font-heading text-lg font-semibold text-secondary">{p.tabLabel}</h3>
+              <p class="mt-3 font-heading text-5xl font-extrabold tracking-tight text-heading">
+                {p.priceDisplay}
+              </p>
+              <p class="mt-1 text-sm font-semibold text-gray-600">{perLine[p.id]}</p>
+              <p class="mt-4 text-[15px] font-semibold text-heading">{p.equals}</p>
+              {p.terms && <p class="mt-1 text-[15px] text-gray-700">{p.terms}</p>}
+              {p.note && <p class="mt-1 text-[15px] text-gray-700">{p.note}</p>}
+              <div class="mb-7 mt-5 flex-1 border-t border-slate-200 pt-5">
+                {p.id !== "monthly" && (
+                  <p class="mb-3 text-sm font-bold text-secondary">Everything in Monthly, plus:</p>
+                )}
+                <ul class="space-y-2.5">
+                  {(p.id === "monthly"
+                    ? list
+                    : [...bonusItems(p.bonus), freeMonths[p.id] ?? ""].filter(Boolean)
+                  ).map((c) => (
+                    <li class="flex items-start gap-2 text-[15px] text-gray-800">
+                      <Icon
+                        name="tabler:circle-check-filled"
+                        class="mt-0.5 h-5 w-5 shrink-0 text-primary"
+                        aria-hidden="true"
+                      />
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a
+                href={p.checkoutUrl}
+                data-checkout
+                data-plan={p.id}
+                data-value={p.price}
+                data-offer={offer.id}
+                class:list={[
+                  "inline-flex h-12 w-full items-center justify-center rounded-xl px-6 font-heading text-base font-semibold shadow transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ",
+                  p.popular
+                    ? "bg-primary text-white hover:bg-primary-hover"
+                    : "bg-secondary text-white hover:bg-secondary-hover",
+                ]}
+              >
+                {p.ctaLabel}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+
+      <Guarantee {...offer.guarantee} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .plan-toggle {
+    display: none;
+  }
+  [data-offer-pricing][data-js] .plan-toggle {
+    display: flex;
+  }
+  @media (min-width: 768px) {
+    [data-offer-pricing][data-js] .plan-toggle {
+      display: none;
+    }
+  }
+  @media (max-width: 767.98px) {
+    [data-offer-pricing][data-js] .plan-grid {
+      display: block;
+      max-width: 26rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    [data-offer-pricing][data-js] .plan-card[data-inactive] {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"];
+
+  document.querySelectorAll<HTMLElement>("[data-offer-pricing]").forEach((root) => {
+    const tabs = root.querySelectorAll<HTMLButtonElement>("[data-plan-tab]");
+    const cards = root.querySelectorAll<HTMLElement>("[data-plan-card]");
+
+    const select = (plan: string) => {
+      tabs.forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.planTab === plan)));
+      cards.forEach((c) => {
+        if (c.dataset.planCard === plan) c.removeAttribute("data-inactive");
+        else c.setAttribute("data-inactive", "");
+      });
+    };
+    tabs.forEach((t) => t.addEventListener("click", () => select(t.dataset.planTab ?? "")));
+    select(root.dataset.default ?? "6mo");
+  });
+
+  // Pass the visitor's UTM / click-id params through to checkout links.
+  const incoming = new URLSearchParams(window.location.search);
+  document.querySelectorAll<HTMLAnchorElement>("a[data-checkout]").forEach((a) => {
+    try {
+      const url = new URL(a.getAttribute("href") ?? "", window.location.origin);
+      let changed = false;
+      UTM_KEYS.forEach((k) => {
+        const v = incoming.get(k);
+        if (v && !url.searchParams.has(k)) {
+          url.searchParams.set(k, v);
+          changed = true;
+        }
+      });
+      if (changed) {
+        const internal = url.origin === window.location.origin;
+        a.href = internal ? url.pathname + url.search + url.hash : url.toString();
+      }
+    } catch {
+      /* leave href untouched */
+    }
+  });
+</script>

@@ -1,0 +1,50 @@
+---
+import Image from "~/components/common/Image.astro";
+
+export interface Props {
+  desktopSrc: string;
+  mobileSrc: string;
+  alt: string;
+  /** Eager-load (above the fold) */
+  eager?: boolean;
+}
+const { desktopSrc, mobileSrc, alt, eager = false } = Astro.props;
+const loading = eager ? "eager" : "lazy";
+---
+
+<div class="relative mx-auto w-full max-w-xl pb-8 pr-6 sm:pr-10">
+  <!-- Laptop -->
+  <div class="rounded-t-2xl border border-gray-700 bg-gray-800 p-2 pb-0 shadow-2xl sm:p-3 sm:pb-0">
+    <div class="overflow-hidden rounded-t-lg bg-white">
+      <Image
+        src={desktopSrc}
+        alt={`${alt} on desktop`}
+        width={1440}
+        height={900}
+        class="block h-auto w-full"
+        {loading}
+        sizes="(min-width: 1024px) 560px, 90vw"
+      />
+    </div>
+  </div>
+  <div class="relative h-3 rounded-b-2xl bg-gradient-to-b from-gray-300 to-gray-400 sm:h-4">
+    <div class="absolute left-1/2 top-0 h-1.5 w-1/5 -translate-x-1/2 rounded-b-lg bg-gray-500/70"></div>
+  </div>
+  <!-- Phone -->
+  <div
+    class="absolute bottom-0 right-0 w-[26%] rounded-[1.25rem] border-[3px] border-gray-800 bg-gray-800 p-0.5 shadow-2xl sm:rounded-3xl sm:border-4"
+  >
+    <div class="overflow-hidden rounded-2xl bg-white">
+      <Image
+        src={mobileSrc}
+        alt={`${alt} on mobile`}
+        width={390}
+        height={844}
+        class="block h-auto w-full"
+        {loading}
+        sizes="150px"
+      />
+    </div>
+  </div>
+  <slot />
+</div>

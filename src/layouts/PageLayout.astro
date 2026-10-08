@@ -3,6 +3,8 @@ import Layout from "./Layout.astro";
 import Header from "~/components/widgets/Header.astro";
 import Footer from "~/components/widgets/Footer.astro";
 import FloatingCalendlyButton from "~/components/widgets/FloatingCalendlyButton.astro";
+import MinimalHeader from "~/components/offers/MinimalHeader.astro";
+import MinimalFooter from "~/components/offers/MinimalFooter.astro";
 import type { MetaData as MetaDataType } from "~/types";
 import { isRecord } from "~/utils/type-guards";
 
@@ -21,6 +23,9 @@ export interface Props {
   noIndex?: boolean;
   showFloatingCalendly?: boolean;
   calendlyUrl?: string; // kept for future use; not used to override FAB target
+  /** Landing-page chrome: logo + one CTA header, legal-only footer, no floating button. */
+  minimal?: boolean;
+  minimalCta?: { text: string; href: string };
 }
 
 const props = Astro.props as Props;
@@ -33,6 +38,8 @@ const {
   breadcrumbs = [],
   schema: schemaExtras = [],
   showFloatingCalendly = true,
+  minimal = false,
+  minimalCta,
 } = props;
 
 const noIndex = props.noIndex ?? false;
@@ -156,7 +163,7 @@ const effectiveMetadata = {
 };
 ---
 
-<Layout {title} {description} {lang} {bodyClass} metadata={effectiveMetadata}>
+<Layout {title} {description} {lang} {bodyClass} metadata={effectiveMetadata} compactCookie={minimal}>
   <a
     href="#main"
     class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:left-2 focus-visible:top-2 focus-visible:z-[1000] focus-visible:rounded-full focus-visible:bg-white focus-visible:px-4 focus-visible:py-2 focus-visible:text-secondary focus-visible:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
@@ -164,13 +171,13 @@ const effectiveMetadata = {
     Skip to content
   </a>
 
-  <Header />
+  {minimal ? <MinimalHeader cta={minimalCta} /> : <Header />}
 
   <main id="main" class="flex-1 focus:outline-none" tabindex="-1">
     <slot />
   </main>
 
-  <Footer />
+  {minimal ? <MinimalFooter /> : <Footer />}
 
   {
     schemaNodes.map((node) => (
@@ -192,7 +199,7 @@ const effectiveMetadata = {
     });
   </script>
 
-  {showFloatingCalendly && <FloatingCalendlyButton href="/contact#book" label="Book a Call" />}
+  {showFloatingCalendly && !minimal && <FloatingCalendlyButton href="/contact#book" label="Book a Call" />}
 
   <style is:global>
     :root {

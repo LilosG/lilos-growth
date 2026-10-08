@@ -1,0 +1,87 @@
+---
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  eyebrow: string;
+  titleBefore?: string;
+  highlight: string;
+  titleAfter?: string;
+  subhead: string;
+  priceChip: string;
+  primary: { text: string; href: string };
+  secondary: { text: string; href: string };
+  trust: { icon: string; text: string }[];
+}
+const { eyebrow, titleBefore, highlight, titleAfter, subhead, priceChip, primary, secondary, trust } =
+  Astro.props;
+const btn =
+  "inline-flex h-12 items-center justify-center rounded-2xl px-7 font-heading text-base font-semibold shadow transition duration-200 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-secondary";
+---
+
+<section
+  id="hero"
+  class="hero relative flex items-center overflow-hidden bg-secondary-dark pb-16 pt-28 md:min-h-[80vh] md:pb-20 md:pt-32"
+>
+  <div class="hero-glow absolute inset-0" aria-hidden="true"></div>
+  <div class="hero-grid absolute inset-0" aria-hidden="true"></div>
+  <div
+    class="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8"
+  >
+    <div class="text-center lg:text-left">
+      <p class="text-xs font-bold uppercase tracking-[0.18em] text-primary md:text-sm">{eyebrow}</p>
+      <h1
+        class="mt-4 font-heading font-extrabold leading-[1.05] tracking-tight text-white"
+        style="font-size: clamp(2.5rem, 5vw, 4rem)"
+      >
+        {titleBefore}<span class="text-primary">{highlight}</span>{titleAfter}
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-base text-gray-300 md:text-lg lg:mx-0">{subhead}</p>
+      <p
+        class="mt-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white"
+      >
+        {priceChip}
+      </p>
+      <div class="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center lg:justify-start">
+        <a href={primary.href} class={`${btn} bg-primary text-white hover:bg-primary-hover`}
+          >{primary.text}</a
+        >
+        <a
+          href={secondary.href}
+          class={`${btn} bg-transparent text-white ring-2 ring-white/60 hover:bg-white/10`}
+          >{secondary.text}</a
+        >
+      </div>
+      <ul
+        class="mt-8 flex flex-col items-center gap-x-6 gap-y-3 text-base text-gray-300 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start"
+      >
+        {
+          trust.map((t) => (
+            <li class="flex items-center gap-2">
+              <Icon name={t.icon} class="h-5 w-5 text-primary" aria-hidden="true" />
+              {t.text}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="relative mx-auto w-full max-w-lg lg:max-w-none">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-glow {
+    background:
+      radial-gradient(60% 60% at 80% 30%, rgba(245, 107, 42, 0.22), transparent 70%),
+      radial-gradient(50% 50% at 10% 90%, rgba(255, 255, 255, 0.07), transparent 70%);
+  }
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+  }
+</style>
