@@ -1,13 +1,14 @@
 ---
 import PageLayout from "~/layouts/PageLayout.astro";
 import OfferHero from "~/components/offers/OfferHero.astro";
-import StatBand from "~/components/offers/StatBand.astro";
+import ProofBand from "~/components/offers/ProofBand.astro";
 import Image from "~/components/common/Image.astro";
 import IncludedList from "~/components/offers/IncludedList.astro";
 import OfferPricing from "~/components/offers/OfferPricing.astro";
 import HowItWorks from "~/components/offers/HowItWorks.astro";
 import OfferLeadForm from "~/components/offers/OfferLeadForm.astro";
 import OfferFAQ from "~/components/offers/OfferFAQ.astro";
+import FinalCta from "~/components/offers/FinalCta.astro";
 import StickyMobileCTA from "~/components/offers/StickyMobileCTA.astro";
 import { takeover as offer } from "~/data/offers";
 
@@ -25,20 +26,32 @@ const included = [
 
 const faqs = [
   {
-    q: "What access do you need?",
-    a: "Manager access to your Google Business Profile. You add us from your profile settings, and we never need your Google password.",
+    q: "What do you need from me to get started?",
+    a: "Manager access to your Google Business Profile (a 2-minute invite; we send the steps) and any photos you'd like used. We never need your Google password.",
   },
   {
-    q: "What happens in week one?",
-    a: "We run a full optimization of your Google Business Profile: categories, services, description, photos, and the details Google uses to rank you on the map. Weekly posts and review responses start right after.",
+    q: "What do you change in week one?",
+    a: "Categories, services, description, hours, service areas, attributes, photos and Q&A, plus a review link and QR code. You get a list of every change.",
+  },
+  {
+    q: "How soon will I see a difference?",
+    a: "Changes usually show up in your map grid within weeks; competitive keywords take longer. Your monthly grid report shows exactly where you stand.",
+  },
+  {
+    q: "How does the day-90 guarantee work?",
+    a: "If your map grid isn't better at day 90 than on day one, your next month is free. It requires profile access and that you send review requests to customers.",
   },
   {
     q: "Can I cancel?",
     a: "Monthly plans cancel anytime after the 3-month minimum. Prepaid plans run their full term.",
   },
   {
-    q: "Do you lock my rate?",
-    a: "Yes. Your rate is locked for as long as you stay.",
+    q: "What does \"rate locked\" mean?",
+    a: "Your monthly price never goes up for as long as you stay.",
+  },
+  {
+    q: "Do I still own my Google profile?",
+    a: "Always. We're added as a manager; you stay the owner and can remove us anytime.",
   },
 ];
 ---
@@ -83,16 +96,19 @@ const faqs = [
     </figure>
   </OfferHero>
 
-  <StatBand
-    eyebrow="Why Lilos Growth"
+  <ProofBand
     stats={[
-      { icon: "tabler:users", title: "17 active clients" },
-      { icon: "tabler:map-pin", title: "Carlsbad-based, not outsourced" },
-      { icon: "tabler:chart-dots", title: "Map tracked every month" },
+      { value: "17", label: "active local clients" },
+      { value: "49/49", label: "grid points in the top 3 for a North County client" },
+      { value: "48 hrs", label: "from sign-up to work starting" },
     ]}
   />
 
-  <IncludedList title="What you get" items={included} />
+  <IncludedList
+    intro="We rebuild your Google profile in week one, then manage it every month. You get a list of every change and a map-rank grid report each month."
+    cta={{ text: "See plans", href: "#pricing" }}
+    items={included}
+  />
 
   <OfferPricing {offer} />
 
@@ -127,21 +143,14 @@ const faqs = [
     ]}
   />
 
-  <OfferFAQ items={faqs} />
+  <OfferFAQ items={faqs} phone="+18587222920" />
 
-  <section aria-labelledby="final-cta-heading" class="bg-secondary-dark py-20 text-center md:py-28">
-    <div class="mx-auto max-w-2xl px-4">
-      <h2 id="final-cta-heading" class="font-heading text-3xl font-bold text-white">
-        Ready to take over the map?
-      </h2>
-      <p class="mt-2 text-white/90">$199/mo, locked. Or prepay 6 months and get 1 month free.</p>
-      <a
-        href="#pricing"
-        class="mt-6 inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-7 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
-        >See plans</a
-      >
-    </div>
-  </section>
+  <FinalCta
+    title="Ready to take over the map?"
+    line="$199/mo, locked. Or prepay 6 months and get 1 month free."
+    guarantee={offer.guarantee}
+    phone="+18587222920"
+  />
 
   <StickyMobileCTA label="See plans" detail="$199/mo" />
 </PageLayout>

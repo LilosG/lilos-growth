@@ -20,12 +20,12 @@ const btn =
 
 <section
   id="hero"
-  class="hero relative flex items-center overflow-hidden bg-secondary-dark py-16 md:min-h-[80vh] md:py-24"
+  class="hero relative flex items-center overflow-hidden bg-secondary-dark pb-16 pt-28 md:min-h-[80vh] md:pb-20 md:pt-32"
 >
   <div class="hero-glow absolute inset-0" aria-hidden="true"></div>
   <div class="hero-grid absolute inset-0" aria-hidden="true"></div>
   <div
-    class="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 px-4 lg:grid-cols-2 lg:gap-10"
+    class="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8"
   >
     <div class="text-center lg:text-left">
       <p class="text-xs font-bold uppercase tracking-[0.18em] text-primary md:text-sm">{eyebrow}</p>
@@ -35,7 +35,7 @@ const btn =
       >
         {titleBefore}<span class="text-primary">{highlight}</span>{titleAfter}
       </h1>
-      <p class="mx-auto mt-5 max-w-xl text-base text-white/85 md:text-lg lg:mx-0">{subhead}</p>
+      <p class="mx-auto mt-5 max-w-xl text-base text-gray-300 md:text-lg lg:mx-0">{subhead}</p>
       <p
         class="mt-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white"
       >
@@ -52,7 +52,7 @@ const btn =
         >
       </div>
       <ul
-        class="mt-8 flex flex-col items-center gap-x-6 gap-y-3 text-sm text-white/80 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start"
+        class="mt-8 flex flex-col items-center gap-x-6 gap-y-3 text-base text-gray-300 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start"
       >
         {
           trust.map((t) => (

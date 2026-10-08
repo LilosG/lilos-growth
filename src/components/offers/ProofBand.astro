@@ -1,0 +1,21 @@
+---
+export interface Props {
+  stats: { value: string; label: string }[];
+}
+const { stats } = Astro.props;
+---
+
+<section aria-label="Proof" class="border-t border-white/10 bg-secondary py-12 md:py-16">
+  <dl class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 md:grid-cols-3 md:gap-8 lg:px-8">
+    {
+      stats.map((s) => (
+        <div class="text-center md:text-left">
+          <dd class="font-heading text-5xl font-extrabold tracking-tight text-white md:text-6xl">
+            {s.value}
+          </dd>
+          <dt class="mt-2 text-base text-gray-300 md:text-lg">{s.label}</dt>
+        </div>
+      ))
+    }
+  </dl>
+</section>

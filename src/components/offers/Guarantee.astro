@@ -4,15 +4,17 @@ import { Icon } from "astro-icon/components";
 export interface Props {
   title: string;
   body: string;
+  class?: string;
 }
-const { title, body } = Astro.props;
+const { title, body, class: cls = "mt-10" } = Astro.props;
 ---
 
 <div
-  class="mx-auto mt-12 flex max-w-3xl flex-col items-center gap-3 rounded-2xl border border-primary/40 bg-white px-6 py-3 text-center shadow-sm sm:flex-row sm:text-left"
+  data-guarantee
+  class:list={["mx-auto flex max-w-3xl flex-col items-center gap-3 rounded-2xl border border-primary/40 bg-white px-6 py-3 text-center shadow-sm sm:flex-row sm:text-left", cls]}
 >
   <Icon name="tabler:shield-check" class="h-7 w-7 shrink-0 text-primary" aria-hidden="true" />
-  <p class="text-sm text-heading md:text-base">
+  <p class="text-[15px] text-heading md:text-base">
     <span class="font-heading font-bold text-secondary">{title}:</span>
     {body}
   </p>

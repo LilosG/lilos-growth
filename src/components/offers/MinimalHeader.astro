@@ -5,27 +5,42 @@ export interface Props {
 const { cta = { text: "Book a Call", href: "/contact#book" } } = Astro.props;
 ---
 
-<header class="sticky top-0 z-50 border-b border-gray-200 bg-white">
+<header
+  data-offer-header
+  class="group fixed inset-x-0 top-0 z-50 border-b border-transparent bg-transparent transition duration-200 data-[scrolled]:border-slate-200 data-[scrolled]:bg-white data-[scrolled]:shadow-md"
+>
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="flex h-16 items-center justify-between md:h-20">
+    <div class="flex h-[72px] items-center justify-between md:h-20">
       <a
         href="/"
         class="flex shrink-0 items-center rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         aria-label="Lilos Growth home"
       >
-        <img
-          src="/logo-lcp-320.webp"
-          alt="Lilos Growth"
-          class="logo--halo h-14 w-auto md:h-16"
-          width="48"
-          height="48"
-        />
+        <span class="relative block h-11 w-24 overflow-hidden">
+          <img
+            src="/logo-lcp-320.webp"
+            alt="Lilos Growth"
+            class="absolute max-w-none brightness-0 invert transition group-data-[scrolled]:brightness-100 group-data-[scrolled]:invert-0"
+            style="width:139.5px;height:139.5px;left:-23px;top:-46.6px"
+            width="140"
+            height="140"
+          />
+        </span>
       </a>
       <a
         href={cta.href}
-        class="inline-flex items-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        class="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         >{cta.text}</a
       >
     </div>
   </div>
 </header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-offer-header]");
+  if (header) {
+    const update = () => header.toggleAttribute("data-scrolled", window.scrollY > 80);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  }
+</script>

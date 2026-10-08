@@ -36,18 +36,20 @@ const checks: Record<string, string[]> = {
   ],
 };
 const list = checks[offer.id] ?? [];
+const bonusItems = (b?: string) => (b ? b.split(" + ") : []);
+const freeMonths: Partial<Record<PlanId, string>> = { "6mo": "1 month free", "12mo": "2 months free" };
 ---
 
-<section id={id} aria-labelledby={`${id}-heading`} class="bg-background-cream py-20 md:py-28">
-  <div class="mx-auto max-w-6xl px-4">
+<section id={id} aria-labelledby={`${id}-heading`} class="bg-slate-50 py-16 md:py-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <p class="text-center text-xs font-bold uppercase tracking-[0.18em] text-primary">Pricing</p>
     <h2
       id={`${id}-heading`}
-      class="mt-3 text-center font-heading text-3xl font-bold text-secondary md:text-4xl"
+      class="mt-3 text-center font-heading text-3xl font-extrabold tracking-tight text-secondary md:text-5xl"
     >
       {title}
     </h2>
-    <p class="mt-2 text-center text-body">{offer.name}</p>
+    <p class="mt-3 text-center text-base text-gray-700 md:text-lg">{offer.name}</p>
 
     <div data-offer-pricing data-default={offer.defaultPlan} data-offer={offer.id}>
       <!-- Runs before first paint of the cards: marks JS as available so the toggle collapses them below md. -->
@@ -86,7 +88,7 @@ const list = checks[offer.id] ?? [];
                 "plan-card relative flex flex-col rounded-2xl border bg-white p-7 transition duration-200",
                 p.popular
                   ? "z-10 border-2 border-primary shadow-xl md:scale-105 md:hover:shadow-2xl"
-                  : "border-gray-200 shadow-sm hover:-translate-y-1 hover:shadow-lg",
+                  : "border-slate-200 shadow-sm hover:-translate-y-1 hover:shadow-lg",
               ]}
             >
               {p.popular && (
@@ -98,34 +100,30 @@ const list = checks[offer.id] ?? [];
               <p class="mt-3 font-heading text-5xl font-extrabold tracking-tight text-heading">
                 {p.priceDisplay}
               </p>
-              <p class="mt-1 text-sm font-semibold text-muted">{perLine[p.id]}</p>
-              <p class="mt-4 text-sm font-semibold text-heading">{p.equals}</p>
-              {p.terms && <p class="mt-1 text-sm text-body">{p.terms}</p>}
-              {p.note && <p class="mt-1 text-sm text-body">{p.note}</p>}
-              {p.bonus && (
-                <p class="mt-4 flex items-start gap-2 rounded-xl bg-primary/10 px-3 py-2 text-sm text-heading">
-                  <Icon
-                    name="tabler:gift"
-                    class="mt-0.5 h-5 w-5 shrink-0 text-primary"
-                    aria-hidden="true"
-                  />
-                  <span>
-                    <span class="font-semibold">Prepay bonus:</span> {p.bonus}
-                  </span>
-                </p>
-              )}
-              <ul class="mb-7 mt-5 space-y-2 border-t border-gray-100 pt-5">
-                {list.map((c) => (
-                  <li class="flex items-start gap-2 text-sm text-heading">
-                    <Icon
-                      name="tabler:circle-check-filled"
-                      class="mt-0.5 h-5 w-5 shrink-0 text-primary"
-                      aria-hidden="true"
-                    />
-                    {c}
-                  </li>
-                ))}
-              </ul>
+              <p class="mt-1 text-sm font-semibold text-gray-600">{perLine[p.id]}</p>
+              <p class="mt-4 text-[15px] font-semibold text-heading">{p.equals}</p>
+              {p.terms && <p class="mt-1 text-[15px] text-gray-700">{p.terms}</p>}
+              {p.note && <p class="mt-1 text-[15px] text-gray-700">{p.note}</p>}
+              <div class="mb-7 mt-5 flex-1 border-t border-slate-200 pt-5">
+                {p.id !== "monthly" && (
+                  <p class="mb-3 text-sm font-bold text-secondary">Everything in Monthly, plus:</p>
+                )}
+                <ul class="space-y-2.5">
+                  {(p.id === "monthly"
+                    ? list
+                    : [...bonusItems(p.bonus), freeMonths[p.id] ?? ""].filter(Boolean)
+                  ).map((c) => (
+                    <li class="flex items-start gap-2 text-[15px] text-gray-800">
+                      <Icon
+                        name="tabler:circle-check-filled"
+                        class="mt-0.5 h-5 w-5 shrink-0 text-primary"
+                        aria-hidden="true"
+                      />
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+              </div>
               <a
                 href={p.checkoutUrl}
                 data-checkout
@@ -133,7 +131,7 @@ const list = checks[offer.id] ?? [];
                 data-value={p.price}
                 data-offer={offer.id}
                 class:list={[
-                  "inline-flex h-12 w-full items-center justify-center rounded-xl px-6 font-heading text-base font-semibold shadow transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 md:mt-auto",
+                  "inline-flex h-12 w-full items-center justify-center rounded-xl px-6 font-heading text-base font-semibold shadow transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ",
                   p.popular
                     ? "bg-primary text-white hover:bg-primary-hover"
                     : "bg-secondary text-white hover:bg-secondary-hover",

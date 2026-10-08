@@ -7,6 +7,7 @@ import OfferPricing from "~/components/offers/OfferPricing.astro";
 import HowItWorks from "~/components/offers/HowItWorks.astro";
 import OfferLeadForm from "~/components/offers/OfferLeadForm.astro";
 import OfferFAQ from "~/components/offers/OfferFAQ.astro";
+import FinalCta from "~/components/offers/FinalCta.astro";
 import StickyMobileCTA from "~/components/offers/StickyMobileCTA.astro";
 import { website as offer } from "~/data/offers";
 
@@ -48,19 +49,31 @@ const included = [
 const faqs = [
   {
     q: "Is the website really free?",
-    a: "Yes. The build is free with the monthly or prepaid plan.",
+    a: "Yes. There's no build fee. You pay for the plan that keeps it ranking: $499/mo, or prepaid.",
   },
   {
-    q: "Who owns the site?",
-    a: "You do once your term is complete. Monthly clients who leave early keep it for $1,000.",
+    q: "How many pages will I get?",
+    a: "A page for every service you offer and every city you serve, agreed with you before we start.",
   },
   {
-    q: "How long does it take?",
-    a: "4–6 weeks. 14 days on prepaid plans.",
+    q: "How long does it take to launch?",
+    a: "4–6 weeks once we have your information, or 14 days on prepaid plans.",
   },
   {
-    q: "Do you lock my rate?",
-    a: "Yes. Your rate is locked for as long as you stay.",
+    q: "What do I need to provide?",
+    a: "Your list of services and cities, photos of your work and your logo if you have one. We write the copy.",
+  },
+  {
+    q: "Who owns the website?",
+    a: "You do once your term is complete. Monthly clients who leave early can keep the site for $1,000.",
+  },
+  {
+    q: "Can I keep my current domain?",
+    a: "Yes. We connect your existing domain or help you register one.",
+  },
+  {
+    q: "What does \"rate locked\" mean?",
+    a: "Your monthly price never goes up for as long as you stay.",
   },
 ];
 ---
@@ -97,26 +110,30 @@ const faqs = [
     </DeviceMockup>
   </OfferHero>
 
-  <section aria-labelledby="sites-heading" class="bg-background-cream py-20 md:py-28">
-    <div class="mx-auto max-w-6xl px-4">
+  <section aria-labelledby="sites-heading" class="bg-slate-50 py-16 md:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <p class="text-center text-xs font-bold uppercase tracking-[0.18em] text-primary">Our work</p>
-      <h2 id="sites-heading" class="mt-3 text-center font-heading text-3xl font-bold text-secondary md:text-4xl">
+      <h2 id="sites-heading" class="mt-3 text-center font-heading text-3xl font-extrabold tracking-tight text-secondary md:text-5xl">
         Sites we've built for local home-service businesses
       </h2>
-      <ul class="mt-14 grid gap-14 lg:grid-cols-3 lg:gap-8">
+      <ul class="mt-12 grid gap-12 lg:grid-cols-3 lg:gap-8">
         {sites.map((site) => (
           <li>
             <DeviceMockup desktopSrc={site.desktop} mobileSrc={site.mobile} alt={`${site.name} website`} />
             <p class="mt-4 text-center font-heading text-xl font-bold text-secondary">{site.name}</p>
-            <p class="text-center text-sm text-body">{site.city}</p>
-            {site.caption && <p class="mt-1 text-center text-sm font-semibold text-heading">{site.caption}</p>}
+            <p class="text-center text-base text-gray-700">{site.city}</p>
+            {site.caption && <p class="mt-1 text-center text-base font-semibold text-heading">{site.caption}</p>}
           </li>
         ))}
       </ul>
     </div>
   </section>
 
-  <IncludedList title="What you get" items={included} />
+  <IncludedList
+    intro="We build a page for every service and every town you serve, then keep it ranking every month. You see your homepage preview before you decide anything."
+    cta={{ text: "See plans", href: "#pricing" }}
+    items={included}
+  />
 
   <OfferPricing {offer} />
 
@@ -165,21 +182,14 @@ const faqs = [
     ]}
   />
 
-  <OfferFAQ items={faqs} />
+  <OfferFAQ items={faqs} phone="+18587222920" />
 
-  <section aria-labelledby="final-cta-heading" class="bg-secondary-dark py-20 text-center md:py-28">
-    <div class="mx-auto max-w-2xl px-4">
-      <h2 id="final-cta-heading" class="font-heading text-3xl font-bold text-white">
-        Get a free website that ranks
-      </h2>
-      <p class="mt-2 text-white/90">$499/mo, locked. Or prepay 6 months and get 1 month free.</p>
-      <a
-        href="#pricing"
-        class="mt-6 inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-7 font-heading text-base font-semibold text-white shadow transition hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
-        >See plans</a
-      >
-    </div>
-  </section>
+  <FinalCta
+    title="Get a free website that ranks"
+    line="$499/mo, locked. Or prepay 6 months and get 1 month free."
+    guarantee={offer.guarantee}
+    phone="+18587222920"
+  />
 
   <StickyMobileCTA label="See plans" detail="$499/mo" />
 </PageLayout>
