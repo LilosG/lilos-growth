@@ -86,23 +86,22 @@ const faqs = [
   minimalCta={{ text: "Apply now", href: "#apply" }}
 >
   <OfferHero
-    eyebrow="Free website program · North County"
+    eyebrow="Free website program"
     titleBefore="Apply for a "
     highlight="free website"
-    subhead="For home-service businesses in North County. We build it free — a page for every service and every town you serve. You keep it ranking for $499/mo, locked."
+    subhead="For home-service businesses. We build it free — a page for every service and every town you serve. You keep it ranking for $499/mo, locked."
     priceChip="$499/mo · rate locked"
     primary={{ text: "See plans", href: "#pricing" }}
     secondary={{ text: "Apply in 2 minutes", href: "#apply" }}
     trust={[
-      { icon: "tabler:users", text: "17 active clients" },
-      { icon: "tabler:map-pin", text: "Based in Carlsbad" },
+      { icon: "tabler:users", text: "220+ sites built" },
       { icon: "tabler:shield-check", text: "Day-90 guarantee" },
     ]}
   >
     <DeviceMockup
-      desktopSrc={sites[0].desktop}
-      mobileSrc={sites[0].mobile}
-      alt={`${sites[0].name} website`}
+      desktopSrc={sites[2].desktop}
+      mobileSrc={sites[2].mobile}
+      alt={`${sites[2].name} website`}
       eager
     >
       <span class="absolute -left-2 top-6 hidden sm:block rounded-xl bg-white px-3 py-2 text-xs font-bold text-secondary shadow-xl sm:-left-6 sm:text-sm">A page for every service</span>
@@ -165,7 +164,7 @@ const faqs = [
       {
         name: "cities_served",
         label: "Cities served",
-        placeholder: "Carlsbad, Oceanside, Vista…",
+        placeholder: "The towns you serve",
         required: true,
         half: true,
       },
