@@ -1,43 +1,87 @@
 ---
+import { Icon } from "astro-icon/components";
+
 export interface Props {
-  title: string;
+  eyebrow: string;
+  titleBefore?: string;
+  highlight: string;
+  titleAfter?: string;
   subhead: string;
+  priceChip: string;
   primary: { text: string; href: string };
   secondary: { text: string; href: string };
-  eyebrow?: string;
+  trust: { icon: string; text: string }[];
 }
-const { title, subhead, primary, secondary, eyebrow } = Astro.props;
+const { eyebrow, titleBefore, highlight, titleAfter, subhead, priceChip, primary, secondary, trust } =
+  Astro.props;
 const btn =
-  "inline-flex h-12 items-center justify-center rounded-2xl px-7 font-heading text-base font-semibold shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-secondary";
+  "inline-flex h-12 items-center justify-center rounded-2xl px-7 font-heading text-base font-semibold shadow transition duration-200 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-secondary";
 ---
 
-<section id="hero" class="relative overflow-hidden bg-secondary pb-16 pt-14 md:pb-24 md:pt-20">
+<section
+  id="hero"
+  class="hero relative flex items-center overflow-hidden bg-secondary-dark py-16 md:min-h-[80vh] md:py-24"
+>
+  <div class="hero-glow absolute inset-0" aria-hidden="true"></div>
+  <div class="hero-grid absolute inset-0" aria-hidden="true"></div>
   <div
-    class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary-light"
-    aria-hidden="true"
+    class="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 px-4 lg:grid-cols-2 lg:gap-10"
   >
-  </div>
-  <div class="relative z-10 mx-auto max-w-3xl px-4 text-center">
-    {
-      eyebrow && (
-        <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">{eyebrow}</p>
-      )
-    }
-    <h1
-      class="font-heading text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl"
-    >
-      {title}
-    </h1>
-    <p class="mx-auto mt-4 max-w-2xl text-base text-white/90 md:text-lg">{subhead}</p>
-    <div class="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
-      <a href={primary.href} class={`${btn} bg-primary text-white hover:bg-primary-hover`}
-        >{primary.text}</a
+    <div class="text-center lg:text-left">
+      <p class="text-xs font-bold uppercase tracking-[0.18em] text-primary md:text-sm">{eyebrow}</p>
+      <h1
+        class="mt-4 font-heading font-extrabold leading-[1.05] tracking-tight text-white"
+        style="font-size: clamp(2.5rem, 5vw, 4rem)"
       >
-      <a
-        href={secondary.href}
-        class={`${btn} bg-white/10 text-white ring-1 ring-white/30 hover:bg-white/20`}
-        >{secondary.text}</a
+        {titleBefore}<span class="text-primary">{highlight}</span>{titleAfter}
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-base text-white/85 md:text-lg lg:mx-0">{subhead}</p>
+      <p
+        class="mt-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white"
       >
+        {priceChip}
+      </p>
+      <div class="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center lg:justify-start">
+        <a href={primary.href} class={`${btn} bg-primary text-white hover:bg-primary-hover`}
+          >{primary.text}</a
+        >
+        <a
+          href={secondary.href}
+          class={`${btn} bg-white/10 text-white ring-1 ring-white/30 hover:bg-white/20`}
+          >{secondary.text}</a
+        >
+      </div>
+      <ul
+        class="mt-8 flex flex-col items-center gap-x-6 gap-y-3 text-sm text-white/80 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start"
+      >
+        {
+          trust.map((t) => (
+            <li class="flex items-center gap-2">
+              <Icon name={t.icon} class="h-5 w-5 text-primary" aria-hidden="true" />
+              {t.text}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="relative mx-auto w-full max-w-lg lg:max-w-none">
+      <slot />
     </div>
   </div>
 </section>
+
+<style>
+  .hero-glow {
+    background:
+      radial-gradient(60% 60% at 80% 30%, rgba(245, 107, 42, 0.22), transparent 70%),
+      radial-gradient(50% 50% at 10% 90%, rgba(255, 255, 255, 0.07), transparent 70%);
+  }
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+  }
+</style>

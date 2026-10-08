@@ -1,10 +1,10 @@
 ---
 import PageLayout from "~/layouts/PageLayout.astro";
 import OfferHero from "~/components/offers/OfferHero.astro";
-import ProofStrip from "~/components/offers/ProofStrip.astro";
+import StatBand from "~/components/offers/StatBand.astro";
+import MapGridVisual from "~/components/offers/MapGridVisual.astro";
 import IncludedList from "~/components/offers/IncludedList.astro";
 import OfferPricing from "~/components/offers/OfferPricing.astro";
-import Guarantee from "~/components/offers/Guarantee.astro";
 import HowItWorks from "~/components/offers/HowItWorks.astro";
 import OfferLeadForm from "~/components/offers/OfferLeadForm.astro";
 import OfferFAQ from "~/components/offers/OfferFAQ.astro";
@@ -15,19 +15,12 @@ const title = "Google Maps Takeover: Fix Your Google Profile";
 const description =
   "We optimize your Google Business Profile in week one, then run it every month. $199/mo, rate locked. If your map grid isn't better at day 90, your next month is free.";
 
-const proofImages = [
-  {
-    src: "/images/results/blue-door-gbp.png",
-    alt: "Blue Door Pest Control Google Business Profile results",
-    width: 2048,
-    height: 1091,
-  },
-  {
-    src: "/images/results/carlsbad-fixit-gbp.png",
-    alt: "Carlsbad Fix It Google Business Profile results",
-    width: 2048,
-    height: 1127,
-  },
+const included = [
+  { icon: "tabler:adjustments", title: offer.includes[0], detail: "We rebuild your profile's categories, services, description and photos in the first week." },
+  { icon: "tabler:speakerphone", title: offer.includes[1], detail: "Fresh posts every week so Google sees an active business." },
+  { icon: "tabler:message-circle", title: offer.includes[2], detail: "Every review gets a reply, so customers see you're paying attention." },
+  { icon: "tabler:qrcode", title: offer.includes[3], detail: "Make it easy for happy customers to leave a review in seconds." },
+  { icon: "tabler:map-search", title: offer.includes[4], detail: "See where you rank across your service area, every month." },
 ];
 
 const faqs = [
@@ -58,29 +51,48 @@ const faqs = [
   minimalCta={{ text: "See plans", href: "#pricing" }}
 >
   <OfferHero
-    title="Who's beating you on Google Maps?"
+    eyebrow="Google Maps management · North County"
+    titleBefore="Who's beating you on "
+    highlight="Google Maps?"
     subhead="We fix your Google profile in week one, then run it every month. $199/mo, locked for as long as you stay."
+    priceChip="$199/mo · rate locked"
     primary={{ text: "See plans", href: "#pricing" }}
     secondary={{ text: "Get a free map scan", href: "#map-scan" }}
+    trust={[
+      { icon: "tabler:users", text: "17 active clients" },
+      { icon: "tabler:map-pin", text: "Based in Carlsbad" },
+      { icon: "tabler:shield-check", text: "Day-90 guarantee" },
+    ]}
+  >
+    <MapGridVisual />
+  </OfferHero>
+
+  <StatBand
+    eyebrow="Why Lilos Growth"
+    stats={[
+      { icon: "tabler:users", title: "17 active clients" },
+      { icon: "tabler:map-pin", title: "Carlsbad-based, not outsourced" },
+      { icon: "tabler:chart-dots", title: "Map tracked every month" },
+    ]}
   />
 
-  <ProofStrip
-    text="17 local businesses managed from Carlsbad, CA"
-    images={proofImages}
-    heading="Client results"
-  />
-
-  <IncludedList title="What you get" items={offer.includes} />
+  <IncludedList title="What you get" items={included} />
 
   <OfferPricing {offer} />
 
-  <Guarantee {...offer.guarantee} />
-
-  <HowItWorks steps={["Choose a plan", "Give us profile access", "We start within 48 hours"]} />
+  <HowItWorks
+    steps={[
+      { title: "Choose a plan", desc: "Monthly or prepaid, rate locked either way." },
+      { title: "Give us profile access", desc: "A 2-minute manager invite. We send the steps." },
+      { title: "We start within 48 hours", desc: "Week-one fixes first, then monthly management." },
+    ]}
+  />
 
   <OfferLeadForm
     id="map-scan"
     title="Get a free map scan"
+    eyebrow="Free map scan"
+    bullets={["Free map scan, no payment required", "Your current map grid within 24 hours", "We never need your Google password"]}
     intro="Tell us where you work. We'll send your current map grid so you can see who's beating you."
     source="google-maps-takeover: free map scan"
     submitLabel="Get my free map scan"
@@ -92,16 +104,16 @@ const faqs = [
         autocomplete: "organization",
         required: true,
       },
-      { name: "city", label: "City", autocomplete: "address-level2", required: true },
-      { name: "name", label: "Your name", autocomplete: "name", required: true },
-      { name: "email", label: "Email", type: "email", autocomplete: "email", required: true },
-      { name: "mobile", label: "Mobile", type: "tel", autocomplete: "tel", required: true },
+      { name: "name", label: "Your name", autocomplete: "name", required: true, half: true },
+      { name: "mobile", label: "Mobile", type: "tel", autocomplete: "tel", required: true, half: true },
+      { name: "email", label: "Email", type: "email", autocomplete: "email", required: true, half: true },
+      { name: "city", label: "City", autocomplete: "address-level2", required: true, half: true },
     ]}
   />
 
   <OfferFAQ items={faqs} />
 
-  <section aria-labelledby="final-cta-heading" class="bg-secondary py-14 text-center">
+  <section aria-labelledby="final-cta-heading" class="bg-secondary-dark py-20 text-center md:py-28">
     <div class="mx-auto max-w-2xl px-4">
       <h2 id="final-cta-heading" class="font-heading text-3xl font-bold text-white">
         Ready to take over the map?

@@ -12,91 +12,124 @@ export interface Field {
   required?: boolean;
   placeholder?: string;
   hint?: string;
+  /** Render at half width on sm+ screens */
+  half?: boolean;
 }
 export interface Props {
   id: string;
   title: string;
   intro?: string;
+  bullets?: string[];
+  eyebrow?: string;
   fields: Field[];
   submitLabel: string;
   successMessage: string;
   /** Sent to Formspree so submissions are identifiable */
   source: string;
 }
-const { id, title, intro, fields, submitLabel, successMessage, source } = Astro.props;
+const { id, title, intro, bullets = [], eyebrow = "Get started", fields, submitLabel, successMessage, source } =
+  Astro.props;
 const FORMSPREE = "https://formspree.io/f/movlbqdk";
 const input =
-  "block w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-heading focus:outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary";
+  "block h-12 w-full rounded-xl border border-gray-300 bg-white px-4 text-base text-heading transition focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary";
 ---
 
-<section id={id} aria-labelledby={`${id}-heading`} class="bg-white py-16 md:py-20">
-  <div class="mx-auto max-w-xl px-4">
-    <h2
-      id={`${id}-heading`}
-      class="text-center font-heading text-3xl font-bold text-secondary md:text-4xl"
-    >
-      {title}
-    </h2>
-    {intro && <p class="mt-3 text-center text-body">{intro}</p>}
-
-    <form
-      method="POST"
-      action={FORMSPREE}
-      data-offer-form
-      data-source={source}
-      class="mt-8 space-y-5 rounded-2xl border border-gray-200 bg-background-cream p-6 shadow-sm"
-    >
-      <input type="hidden" name="_redirect" value="https://lilosgrowth.com/thank-you" />
-      <input type="hidden" name="_subject" value={`New lead: ${source}`} />
-      <input type="hidden" name="source" value={source} />
-      <input
-        type="text"
-        name="_gotcha"
-        tabindex="-1"
-        autocomplete="off"
-        class="hidden"
-        aria-hidden="true"
-      />
-
-      {
-        fields.map((f) => (
-          <div>
-            <label for={`${id}-${f.name}`} class="mb-1 block text-sm font-semibold text-heading">
-              {f.label}
-              {!f.required && <span class="font-normal text-muted"> (optional)</span>}
-            </label>
-            <input
-              id={`${id}-${f.name}`}
-              name={f.name === "email" ? "_replyto" : f.name}
-              type={f.type ?? "text"}
-              autocomplete={f.autocomplete}
-              placeholder={f.placeholder}
-              required={f.required}
-              class={input}
-            />
-            {f.hint && <p class="mt-1 text-xs text-muted">{f.hint}</p>}
-          </div>
-        ))
-      }
-
-      <button
-        type="submit"
-        class="flex w-full items-center justify-center rounded-xl bg-primary px-8 py-4 font-heading text-lg font-semibold text-white shadow transition hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-60"
+<section id={id} aria-labelledby={`${id}-heading`} class="bg-white py-20 md:py-28">
+  <div class="mx-auto grid max-w-6xl items-start gap-12 px-4 lg:grid-cols-5 lg:gap-16">
+    <div class="lg:col-span-2 lg:pt-4">
+      <p class="text-xs font-bold uppercase tracking-[0.18em] text-primary">{eyebrow}</p>
+      <h2
+        id={`${id}-heading`}
+        class="mt-3 font-heading text-3xl font-bold text-secondary md:text-4xl"
       >
-        {submitLabel}
-      </button>
-      <p data-form-error role="alert" class="hidden text-center text-sm font-semibold text-red-700">
-        Something went wrong. Please try again or email hello@lilosgrowth.com.
-      </p>
-    </form>
+        {title}
+      </h2>
+      {intro && <p class="mt-4 text-lg text-body">{intro}</p>}
+      {
+        bullets.length > 0 && (
+          <ul class="mt-8 space-y-4">
+            {bullets.map((b) => (
+              <li class="flex items-start gap-3 text-heading">
+                <svg
+                  class="mt-0.5 h-6 w-6 shrink-0 text-primary"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.7 8.3-5.5 5.5a1 1 0 0 1-1.4 0l-2.5-2.5a1 1 0 1 1 1.4-1.4l1.8 1.8 4.8-4.8a1 1 0 0 1 1.4 1.4Z" />
+                </svg>
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
 
-    <div
-      data-form-success
-      role="status"
-      tabindex="-1"
-      class="mt-8 hidden rounded-2xl border-2 border-primary bg-white p-8 text-center font-heading text-xl font-semibold text-heading focus:outline-none"
-    >
-      {successMessage}
+    <div class="lg:col-span-3">
+      <form
+        method="POST"
+        action={FORMSPREE}
+        data-offer-form
+        data-source={source}
+        class="grid gap-5 rounded-3xl border border-gray-200 bg-background-cream p-6 shadow-lg sm:grid-cols-2 sm:p-8"
+      >
+        <input type="hidden" name="_redirect" value="https://lilosgrowth.com/thank-you" />
+        <input type="hidden" name="_subject" value={`New lead: ${source}`} />
+        <input type="hidden" name="source" value={source} />
+        <input
+          type="text"
+          name="_gotcha"
+          tabindex="-1"
+          autocomplete="off"
+          class="hidden"
+          aria-hidden="true"
+        />
+
+        {
+          fields.map((f) => (
+            <div class:list={[f.half ? "" : "sm:col-span-2"]}>
+              <label for={`${id}-${f.name}`} class="mb-1.5 block text-sm font-semibold text-heading">
+                {f.label}
+                {!f.required && <span class="font-normal text-muted"> (optional)</span>}
+              </label>
+              <input
+                id={`${id}-${f.name}`}
+                name={f.name === "email" ? "_replyto" : f.name}
+                type={f.type ?? "text"}
+                autocomplete={f.autocomplete}
+                placeholder={f.placeholder}
+                required={f.required}
+                class={input}
+              />
+              {f.hint && <p class="mt-1 text-xs text-muted">{f.hint}</p>}
+            </div>
+          ))
+        }
+
+        <button
+          type="submit"
+          class="flex h-14 w-full items-center justify-center rounded-xl bg-primary px-8 font-heading text-lg font-semibold text-white shadow transition hover:-translate-y-0.5 hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-60 sm:col-span-2"
+        >
+          {submitLabel}
+        </button>
+        <p
+          data-form-error
+          role="alert"
+          class="hidden text-center text-sm font-semibold text-red-700 sm:col-span-2"
+        >
+          Something went wrong. Please try again or email hello@lilosgrowth.com.
+        </p>
+      </form>
+
+      <div
+        data-form-success
+        role="status"
+        tabindex="-1"
+        class="hidden rounded-3xl border-2 border-primary bg-white p-8 text-center font-heading text-xl font-semibold text-heading focus:outline-none"
+      >
+        {successMessage}
+      </div>
     </div>
   </div>
 </section>

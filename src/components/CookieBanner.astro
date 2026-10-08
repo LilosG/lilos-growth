@@ -1,13 +1,31 @@
 ---
 /* Simple consent banner: stores choice in localStorage and emits an event. */
+export interface Props {
+  /** Compact bottom-left card instead of a full-width bar (landing pages). */
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
 ---
 
-<div id="cookie-banner" class="fixed inset-x-0 bottom-0 z-50 hidden bg-gray-900 text-white">
-  <div class="mx-auto flex w-full max-w-5xl items-center gap-3 p-4 text-sm">
+<div
+  id="cookie-banner"
+  class:list={[
+    "fixed z-50 hidden bg-gray-900 text-white",
+    compact
+      ? "bottom-4 left-4 right-4 max-w-sm rounded-2xl border border-white/10 shadow-2xl sm:right-auto"
+      : "inset-x-0 bottom-0",
+  ]}
+>
+  <div
+    class:list={[
+      "mx-auto flex w-full text-sm",
+      compact ? "flex-col items-start gap-3 p-4" : "max-w-5xl items-center gap-3 p-4",
+    ]}
+  >
     <span
       >We use cookies for site functionality and analytics. You can change your preference anytime.</span
     >
-    <div class="ml-auto flex gap-2">
+    <div class:list={["flex flex-wrap items-center gap-2", compact ? "" : "ml-auto"]}>
       <button id="cookie-accept" class="rounded bg-white px-3 py-2 text-gray-900">Accept</button>
       <button id="cookie-decline" class="rounded border border-white/40 px-3 py-2">Decline</button>
       <a href="/privacy-policy#cookies" class="underline">Learn more</a>

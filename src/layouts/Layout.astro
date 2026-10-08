@@ -34,6 +34,8 @@ export interface Props {
   lang?: string;
   bodyClass?: string;
   metadata?: MetaInput;
+  /** Compact cookie card (landing pages) */
+  compactCookie?: boolean;
 }
 
 const {
@@ -43,6 +45,7 @@ const {
   lang = "en",
   bodyClass = "",
   metadata = {},
+  compactCookie = false,
 } = Astro.props as Props;
 
 /** Conservative fallback titles when a page doesn't provide one */
@@ -257,7 +260,7 @@ declare global {
         } catch {}
       };
     </script>
-    <CookieBanner />
+    <CookieBanner compact={compactCookie} />
 
     <!-- Animation System Initialization -->
     <script>
