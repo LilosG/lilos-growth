@@ -22,6 +22,10 @@ export interface OfferPlan {
   terms?: string;
   /** Prepay bonus line (prepay plans only) */
   bonus?: string;
+  /** Regular price for the same service, shown crossed out (from src/data/packages.ts) */
+  compareAt?: string;
+  /** Savings line shown next to the crossed-out price */
+  savings?: string;
   /** Extra note, e.g. early-exit terms */
   note?: string;
   popular?: boolean;
@@ -90,6 +94,8 @@ export const takeover: Offer = {
       tabLabel: "Monthly",
       price: 199,
       priceDisplay: "$199",
+      compareAt: "$300",
+      savings: "Save $101/mo",
       cadence: "/mo",
       equals: "3-month minimum, then cancel anytime",
       terms: "Rate locked as long as you stay.",
@@ -102,6 +108,8 @@ export const takeover: Offer = {
       tabLabel: "6 months",
       price: 995,
       priceDisplay: "$995",
+      compareAt: "$1,800",
+      savings: "Save $805",
       cadence: " for 6 months",
       equals: "5 months' price, 6 months of service (1 month free)",
       bonus: "10 extra photo posts",
@@ -115,6 +123,8 @@ export const takeover: Offer = {
       tabLabel: "12 months",
       price: 1990,
       priceDisplay: "$1,990",
+      compareAt: "$3,600",
+      savings: "Save $1,610",
       cadence: " for 12 months",
       equals: "10 months' price, 12 months of service (2 months free)",
       bonus: "10 extra photo posts",
@@ -146,6 +156,8 @@ export const website: Offer = {
       tabLabel: "Monthly",
       price: 499,
       priceDisplay: "$499",
+      compareAt: "$750",
+      savings: "Save $251/mo + $1,250 build fee waived",
       cadence: "/mo",
       equals: "6-month minimum, then cancel anytime",
       terms: "Rate locked as long as you stay.",
@@ -159,6 +171,8 @@ export const website: Offer = {
       tabLabel: "6 months",
       price: 2495,
       priceDisplay: "$2,495",
+      compareAt: "$5,750",
+      savings: "Save $3,255",
       cadence: " for 6 months",
       equals: "5 months' price, 6 months of service (1 month free)",
       bonus: "Launch in 14 days instead of 4–6 weeks + 5 extra city pages",
@@ -172,6 +186,8 @@ export const website: Offer = {
       tabLabel: "12 months",
       price: 4990,
       priceDisplay: "$4,990",
+      compareAt: "$10,250",
+      savings: "Save $5,260",
       cadence: " for 12 months",
       equals: "10 months' price, 12 months of service (2 months free)",
       bonus: "Launch in 14 days instead of 4–6 weeks + 5 extra city pages",

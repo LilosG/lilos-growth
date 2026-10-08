@@ -8,11 +8,13 @@ export interface Props {
   titleAfter?: string;
   subhead: string;
   priceChip: string;
+  /** Regular price shown crossed out inside the chip, e.g. "$300/mo" */
+  priceCompare?: string;
   primary: { text: string; href: string };
   secondary: { text: string; href: string };
   trust: { icon: string; text: string }[];
 }
-const { eyebrow, titleBefore, highlight, titleAfter, subhead, priceChip, primary, secondary, trust } =
+const { eyebrow, titleBefore, highlight, titleAfter, subhead, priceChip, priceCompare, primary, secondary, trust } =
   Astro.props;
 const btn =
   "inline-flex h-12 items-center justify-center rounded-2xl px-7 font-heading text-base font-semibold shadow transition duration-200 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-secondary";
@@ -39,6 +41,14 @@ const btn =
       <p
         class="mt-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white"
       >
+        {
+          priceCompare && (
+            <s class="mr-2 font-normal text-gray-400">
+              <span class="sr-only">Regular price </span>
+              {priceCompare}
+            </s>
+          )
+        }
         {priceChip}
       </p>
       <div class="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center lg:justify-start">
