@@ -6,8 +6,12 @@ export interface Props {
   line: string;
   guarantee: { title: string; body: string };
   phone: string;
+  /** Override the default buttons (See plans / Text Mike) */
+  primary?: { text: string; href: string };
+  secondary?: { text: string; href: string };
 }
-const { title, line, guarantee, phone } = Astro.props;
+const { title, line, guarantee, phone, primary, secondary } = Astro.props;
+const secondaryBtn = secondary ?? { text: "Text Mike", href: `sms:${phone}` };
 ---
 
 <section aria-labelledby="final-cta-heading" class="bg-secondary-dark py-16 md:py-20">
@@ -25,14 +29,14 @@ const { title, line, guarantee, phone } = Astro.props;
       <Guarantee {...guarantee} class="mt-0" />
       <div class="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
         <a
-          href="#pricing"
+          href={primary?.href ?? "#pricing"}
           class="inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-8 font-heading text-base font-semibold text-white shadow transition duration-200 hover:-translate-y-0.5 hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-dark"
-          >See plans</a
+          >{primary?.text ?? "See plans"}</a
         >
         <a
-          href={`sms:${phone}`}
+          href={secondaryBtn.href}
           class="inline-flex h-12 items-center justify-center rounded-2xl px-6 font-heading text-base font-semibold text-white ring-1 ring-white/30 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-          >Text Mike</a
+          >{secondaryBtn.text}</a
         >
       </div>
     </div>

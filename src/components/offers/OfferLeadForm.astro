@@ -126,15 +126,57 @@ const input =
         data-form-success
         role="status"
         tabindex="-1"
-        class="hidden rounded-3xl border-2 border-primary bg-white p-8 text-center font-heading text-xl font-semibold text-heading focus:outline-none"
+        class="hidden rounded-3xl border-2 border-primary bg-white p-6 text-center focus:outline-none sm:p-8"
       >
-        {successMessage}
+        <p class="font-heading text-xl font-semibold text-heading">{successMessage}</p>
+        <div data-booking class="mt-6 border-t border-slate-200 pt-6">
+          <p class="font-heading text-lg font-semibold text-secondary">
+            Pick a time to go over it — 15 minutes.
+          </p>
+          <div data-booking-mount class="mt-4"></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <script>
+  // Same Calendly inline widget /contact#book uses; loaded only after a confirmed submission.
+  const CALENDLY_URL =
+    "https://calendly.com/mprickett-bluedoorsp/30min?text_color=1f2d3d&primary_color=f56b2a";
+  type CalendlyWindow = Window & {
+    Calendly?: { initInlineWidgets?: () => void };
+    __calendlyLoaded?: boolean;
+  };
+  function mountBooking(success?: HTMLElement | null) {
+    const mount = success?.querySelector<HTMLElement>("[data-booking-mount]");
+    if (!mount || mount.childElementCount) return;
+    const w = window as CalendlyWindow;
+    if (!document.querySelector('link[href*="assets.calendly.com/assets/external/widget.css"]')) {
+      const css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = "https://assets.calendly.com/assets/external/widget.css";
+      document.head.appendChild(css);
+    }
+    const widget = document.createElement("div");
+    widget.className = "calendly-inline-widget overflow-hidden rounded-2xl border border-gray-100 bg-white";
+    widget.dataset.url = CALENDLY_URL;
+    widget.style.cssText = "min-width:320px;height:700px;";
+    mount.appendChild(widget);
+    const init = () => w.Calendly?.initInlineWidgets?.();
+    if (w.Calendly) return init();
+    const existing = document.querySelector('script[src*="assets.calendly.com/assets/external/widget.js"]');
+    if (existing) {
+      existing.addEventListener("load", init);
+      return;
+    }
+    const s = document.createElement("script");
+    s.src = "https://assets.calendly.com/assets/external/widget.js";
+    s.async = true;
+    s.onload = init;
+    document.head.appendChild(s);
+  }
+
   document.querySelectorAll<HTMLFormElement>("form[data-offer-form]").forEach((form) => {
     const wrap = form.parentElement;
     const success = wrap?.querySelector<HTMLElement>("[data-form-success]");
@@ -155,6 +197,7 @@ const input =
         form.classList.add("hidden");
         success?.classList.remove("hidden");
         success?.focus();
+        mountBooking(success);
         (window as unknown as { trackEvent?: (n: string, d?: object) => void }).trackEvent?.(
           "offer_lead_submit",
           { source: form.dataset.source }

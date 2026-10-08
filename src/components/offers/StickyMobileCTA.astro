@@ -5,9 +5,13 @@ export interface Props {
   /** id of the pricing section; bar hides while pricing is on screen */
   targetId?: string;
   label: string;
-  detail: string;
+  detail?: string;
+  /** Primary button destination (defaults to the pricing section) */
+  href?: string;
+  /** Optional outlined secondary button */
+  secondary?: { text: string; href: string };
 }
-const { heroId = "hero", targetId = "pricing", label, detail } = Astro.props;
+const { heroId = "hero", targetId = "pricing", label, detail, href, secondary } = Astro.props;
 ---
 
 <div
@@ -16,13 +20,25 @@ const { heroId = "hero", targetId = "pricing", label, detail } = Astro.props;
   data-target={targetId}
   class="invisible fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-gray-200 bg-white px-4 py-3 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] transition duration-200 md:hidden"
 >
-  <a
-    href={`#${targetId}`}
-    class="flex h-12 items-center justify-between gap-3 rounded-xl bg-primary px-5 font-heading text-base font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-  >
-    <span>{label}</span>
-    <span class="text-sm font-medium text-white/90">{detail}</span>
-  </a>
+  <div class="flex items-center gap-2">
+    <a
+      href={href ?? `#${targetId}`}
+      class="flex h-12 flex-1 items-center justify-between gap-3 rounded-xl bg-primary px-5 font-heading text-base font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+    >
+      <span>{label}</span>
+      {detail && <span class="text-sm font-medium text-white/90">{detail}</span>}
+    </a>
+    {
+      secondary && (
+        <a
+          href={secondary.href}
+          class="flex h-12 shrink-0 items-center justify-center rounded-xl border-2 border-secondary px-4 font-heading text-base font-semibold text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        >
+          {secondary.text}
+        </a>
+      )
+    }
+  </div>
 </div>
 
 <script>
