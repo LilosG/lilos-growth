@@ -6,7 +6,7 @@ export interface FaqItem {
 export interface Props {
   items: FaqItem[];
   title?: string;
-  /** tel: number in E.164, e.g. +18587222920 */
+  /** sms: number in E.164, e.g. +18587222920 */
   phone: string;
 }
 const { items, title = "Questions, answered", phone } = Astro.props;
@@ -34,7 +34,7 @@ const faqSchema = {
       </h2>
       <p class="mt-4 text-base text-gray-700 md:text-lg">
         Still unsure? <a
-          href={`tel:${phone}`}
+          href={`sms:${phone}`}
           class="font-semibold text-primary underline underline-offset-4 hover:text-primary-hover"
           >Text Mike.</a
         >
