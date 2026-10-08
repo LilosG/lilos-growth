@@ -12,6 +12,8 @@ export interface Props {
 }
 const { title, line, guarantee, phone, primary, secondary } = Astro.props;
 const secondaryBtn = secondary ?? { text: "Text Mike", href: `sms:${phone}` };
+// When custom buttons replace the default pair, Text Mike stays as a text link after them.
+const showTextLink = Boolean(secondary);
 ---
 
 <section aria-labelledby="final-cta-heading" class="bg-secondary-dark py-16 md:py-20">
@@ -38,6 +40,16 @@ const secondaryBtn = secondary ?? { text: "Text Mike", href: `sms:${phone}` };
           class="inline-flex h-12 items-center justify-center rounded-2xl px-6 font-heading text-base font-semibold text-white ring-1 ring-white/30 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >{secondaryBtn.text}</a
         >
+        {
+          showTextLink && (
+            <a
+              href={`sms:${phone}`}
+              class="inline-flex min-h-11 items-center justify-center px-2 font-heading text-base font-semibold text-white underline underline-offset-4 transition hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              Text Mike
+            </a>
+          )
+        }
       </div>
     </div>
   </div>
