@@ -24,11 +24,11 @@ export const locations: LocationData[] = [
     city: "San Diego",
     state: "California",
     stateAbbr: "CA",
-    title: "Local SEO for San Diego Businesses",
+    title: "San Diego Local SEO Agency & Services | Lilos Growth",
     description:
-      "San Diego's home service market is competitive. We help local businesses rank in the Map Pack and organic search across San Diego County — from Chula Vista to Oceanside.",
+      "Local SEO services for San Diego businesses: Google Business Profile optimization, technical SEO, content, and websites designed to earn qualified inquiries.",
     intro:
-      "San Diego County spans 4,200 square miles and 18 incorporated cities — and every one of them has local businesses competing for the same Map Pack spots. Whether you're a plumber in Carlsbad, an HVAC company in El Cajon, or a restoration company serving North County, your customers find you through Google. We've built local SEO strategies for San Diego-area home service businesses for years, and we understand the competitive landscape city by city — from the dense competition in Mission Valley to the lower-hanging fruit in Ramona and Fallbrook.",
+      "Lilos Growth helps San Diego businesses compete for the searches that bring customers through the door, onto the phone, or to a booking page. Our work spans local trades, restaurants and hospitality, and specialized service businesses. We start with your market, current search visibility, and the actions customers need to take — then build a practical plan for your website and Google Business Profile.",
     neighborhoods: [
       "Carlsbad",
       "Oceanside",
@@ -55,29 +55,31 @@ export const locations: LocationData[] = [
       "Landscaping",
       "Painters",
       "Party Rentals",
+      "Restaurants & Hospitality",
+      "Specialized Commercial Services",
     ],
     whyCity:
-      "San Diego's year-round mild climate drives steady demand for home services — HVAC is less seasonal than inland markets, pest control is active year-round, and the strong real estate market keeps remodeling and contracting work flowing. The county's spread-out geography means local intent is strong: a homeowner in Oceanside searches for an 'Oceanside plumber' before a generic 'San Diego plumber'. We build city-level targeting across the entire county, not just one-size-fits-all optimization.",
+      "San Diego businesses compete across distinct neighborhoods, cities, and customer needs. A North County electrician, a Little Italy restaurant, and a specialist supplier may all need local discovery, but they do not need identical service pages, business categories, or conversion paths. We use search data and actual service areas to decide where dedicated pages, GBP improvements, technical fixes, and local references will be useful. We do not manufacture city pages or promise a specific Map Pack position.",
     faqs: [
       {
-        question: "Do you work with businesses across all of San Diego County?",
+        question: "What does local SEO for a San Diego business include?",
         answer:
-          "Yes — North County (Carlsbad, Oceanside, Vista, San Marcos, Escondido), South Bay (Chula Vista, National City), East County (El Cajon, La Mesa, Santee), and the city of San Diego itself. We build city-level pages for each area you serve.",
+          "It starts with an audit of your website, Google Business Profile, search queries, competitors, and inquiry paths. The work may include technical fixes, service-page improvements, profile optimization, accurate citations, relevant local references, and measurement.",
       },
       {
-        question: "How competitive is local SEO in San Diego?",
+        question: "Do you only work with home service and trade companies?",
         answer:
-          "Highly competitive in the core city and beach communities, moderately competitive in suburbs, and less competitive in outlying areas like Ramona and Fallbrook. We identify the most winnable opportunities in your specific service area first.",
+          "No. Trades and home services are an important part of our experience, but we also work with hospitality businesses and specialized commercial companies. Each engagement is scoped to the actual business and its customers.",
       },
       {
-        question: "Can you help a home service business rank in North County specifically?",
+        question: "Can you support businesses throughout San Diego County?",
         answer:
-          "Absolutely. North County San Diego (Carlsbad, Oceanside, Vista, San Marcos) is where a significant portion of our client base operates. We understand the local competitive landscape and which citation sources and local links carry the most weight there.",
+          "Yes. We work with businesses in San Diego and North County, including Carlsbad, Oceanside, Encinitas, Vista, and San Marcos. Geographic targeting depends on where the business genuinely operates and serves customers.",
       },
       {
-        question: "Do San Diego businesses need different SEO than businesses in LA or Las Vegas?",
+        question: "Can you guarantee a top-three Google Maps position?",
         answer:
-          "The fundamentals are the same, but market density, competitor strength, and city-level targeting vary significantly. San Diego's neighborhood-level search intent is strong — 'Carlsbad HVAC' performs differently than 'San Diego HVAC' and we account for both.",
+          "No agency can guarantee a particular ranking. We focus on accurate local business information, useful content, sound technical foundations, and transparent reporting on search visibility and inquiries.",
       },
     ],
     geo: { latitude: 32.7157, longitude: -117.1611 },
