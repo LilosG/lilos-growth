@@ -452,8 +452,8 @@ const locationServices = isLocation
               Areas We Serve in {location!.city}
             </h2>
             <p class="mx-auto mb-10 max-w-xl text-base text-muted">
-              We build city-level SEO targeting for each community in your service area — not just
-              broad metro optimization.
+              We assess your real service area and where your customers search before recommending
+              location-specific content or Google Business Profile improvements.
             </p>
             <div class="flex flex-wrap justify-center gap-3">
               {location!.neighborhoods.map((neighborhood) => (
@@ -469,13 +469,15 @@ const locationServices = isLocation
           <div class="mx-auto max-w-5xl px-6">
             <div class="mb-14 text-center">
               <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
-                Trades We Serve
+                Industries We Work With
               </p>
               <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
                 Industries We Serve in {location!.city}
               </h2>
               <p class="mt-4 text-base text-muted">
-                Local SEO for home service and trade businesses across the {location!.city} metro.
+                {location!.slug === "local-seo-san-diego"
+                  ? "Local search strategies for trades, restaurants and hospitality, and specialized service businesses in San Diego County."
+                  : `Local SEO for home service and trade businesses across the ${location!.city} metro.`}
               </p>
             </div>
             <div class="flex flex-wrap justify-center gap-3">
@@ -510,8 +512,41 @@ const locationServices = isLocation
               The {location!.city} Local Search Market
             </h2>
             <p class="text-lg leading-relaxed text-body">{location!.whyCity}</p>
+            {location!.slug === "local-seo-san-diego" && (
+              <p class="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-body">
+                The goal is qualified discovery, not pages made to target every city. We connect
+                search demand to the services you actually provide and the ways customers contact you.
+              </p>
+            )}
           </div>
         </section>
+
+        {location!.slug === "local-seo-san-diego" && (
+          <section class="border-t border-gray-100 bg-white py-20" aria-label="San Diego project experience">
+            <div class="mx-auto max-w-5xl px-6">
+              <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+                Local Experience
+              </p>
+              <h2 class="mb-5 font-heading text-3xl font-extrabold text-heading md:text-4xl">
+                Search strategies informed by real San Diego projects
+              </h2>
+              <p class="max-w-3xl text-base leading-relaxed text-body">
+                Our work includes websites and local search foundations for electrical contractors,
+                restoration businesses, and hospitality venues. The right approach varies by
+                customer intent: emergency calls, scheduled projects, reservations, and inquiries
+                require different content and conversion paths.
+              </p>
+              <div class="mt-8 flex flex-wrap gap-4">
+                <a href="/results/wheyland-electric" class="font-semibold text-primary underline underline-offset-4">
+                  View an electrical contractor project
+                </a>
+                <a href="/results" class="font-semibold text-primary underline underline-offset-4">
+                  Explore client results
+                </a>
+              </div>
+            </div>
+          </section>
+        )}
 
         <section
           id="services"
