@@ -451,21 +451,23 @@ export const description =
         Local SEO Built Around Your Industry
       </h2>
       <p class="mb-8 max-w-2xl text-base leading-relaxed text-body">
-        Different industries compete for different searches. Explore how we approach local visibility
-        for your services, customers, and market.
+        Different industries compete for different searches. Explore how we approach local
+        visibility for your services, customers, and market.
       </p>
       <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {industries.map((industry) => (
-          <a
-            href={`/${industry.slug}`}
-            class="group flex items-center justify-between rounded-xl border border-border-base px-5 py-4 font-semibold text-heading transition hover:border-primary hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-          >
-            <span>{industry.name}</span>
-            <span aria-hidden="true" class="text-primary transition group-hover:translate-x-1"
-              >→</span
+        {
+          industries.map((industry) => (
+            <a
+              href={`/${industry.slug}`}
+              class="group flex items-center justify-between rounded-xl border border-border-base px-5 py-4 font-semibold text-heading transition hover:border-primary hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
-          </a>
-        ))}
+              <span>{industry.name}</span>
+              <span aria-hidden="true" class="text-primary transition group-hover:translate-x-1">
+                →
+              </span>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -498,9 +500,7 @@ export const description =
                 </span>
                 <span class="text-sm text-body">/mo</span>
               </div>
-              <p class="mt-2 text-sm text-muted">
-                Setup month: ${pkg.setupPrice.toLocaleString()}
-              </p>
+              <p class="mt-2 text-sm text-muted">Setup month: ${pkg.setupPrice.toLocaleString()}</p>
             </div>
           ))
         }
