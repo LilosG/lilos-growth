@@ -48,6 +48,26 @@
       "permanent": true
     },
     {
+      "source": "/blog/local-seo-for-roofing-companies-guide",
+      "destination": "/blog/local-seo-for-roofing-company-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/roofing-company-local-seo-marketing-guide",
+      "destination": "/blog/local-seo-for-roofing-company-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/roofing-company-local-seo-services-guide",
+      "destination": "/blog/local-seo-for-roofing-company-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/roofing-local-seo-services-guide",
+      "destination": "/blog/local-seo-for-roofing-company-guide",
+      "permanent": true
+    },
+    {
       "source": "/blog/",
       "destination": "/blog",
       "permanent": true
