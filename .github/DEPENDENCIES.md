@@ -1,6 +1,6 @@
 # Dependency and runtime maintenance policy
 
-**Baseline:** Node.js 22.x, aligned across `package.json`, the npm lockfile root, GitHub Actions and Vercel. The exact patch release can change for Node 22 security updates.
+**Baseline:** Node.js 22.23.4 or newer within major 22, aligned across `package.json`, the npm lockfile root, GitHub Actions and Vercel. The exact patch release can change for Node 22 security updates.
 
 ## Dependency update process
 

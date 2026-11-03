@@ -4,7 +4,7 @@
   "description": "AstroWind: A free template using Astro 5.0 and Tailwind CSS. Astro starter theme.",
   "type": "module",
   "engines": {
-    "node": "22.x"
+    "node": ">=22.23.4 <23"
   },
   "scripts": {
     "dev": "astro dev",
