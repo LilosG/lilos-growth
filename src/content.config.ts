@@ -10,7 +10,7 @@ const ImageObj = z.object({
 });
 
 const blog = defineCollection({
-  loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}", ignore: ["**/_*"] }),
+  loader: glob({ base: "./src/content/blog", pattern: "**/[^_]*.{md,mdx}" }),
   schema: z.object({
     title: z.string(),
     description: z.string().max(160),
@@ -26,7 +26,7 @@ const blog = defineCollection({
     image: z.union([z.string(), ImageObj]).optional(),
     imageAlt: z.string().optional(),
     draft: z.boolean().optional().default(false),
-    canonical: z.string().url().optional(),
+    canonical: z.url().optional(),
     faq: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
     faqs: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
     serviceAreas: z.array(z.string()).optional().default([]),
@@ -41,7 +41,7 @@ const authors = defineCollection({
     role: z.string().optional(),
     bio: z.string().optional(),
     avatar: z.union([z.string(), ImageObj]).optional(),
-    url: z.string().url().optional(),
+    url: z.url().optional(),
     twitter: z.string().optional(),
     linkedin: z.string().optional(),
   }),

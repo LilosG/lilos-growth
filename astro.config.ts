@@ -103,9 +103,10 @@ export default defineConfig({
   ],
 
   markdown: {
-    processor: unified(),
-    remarkPlugins: [readingTimeRemarkPlugin],
-    rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
+    processor: unified({
+      remarkPlugins: [readingTimeRemarkPlugin],
+      rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
+    }),
     syntaxHighlight: "shiki",
     shikiConfig: {
       // Map ```astro fences to HTML highlighting to avoid Shiki warnings without adding deps
