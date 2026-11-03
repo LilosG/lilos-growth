@@ -4,6 +4,9 @@ on:
     branches: [security/astro7-platform-migration-2026-11-03]
     paths:
       - .github/workflows/astro7-migration.yml
+      - src/content.config.ts
+      - src/components/common/Metadata.astro
+      - astro.config.ts
 permissions:
   contents: write
 jobs:
