@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 
-const output = path.resolve("dist/client");
+const output = path.resolve("dist");
 
 function read(relative) {
   const location = path.join(output, relative);
@@ -11,6 +11,9 @@ function read(relative) {
   assert.ok(value.trim().length > 0, `Empty generated file: ${relative}`);
   return value;
 }
+
+const renderedPages = fs.readdirSync(output, { recursive: true }).filter((filename) => String(filename).endsWith(".html"));
+assert.ok(renderedPages.length >= 200, `Unexpectedly small static site: ${renderedPages.length} pages`);
 
 const homepage = read("index.html");
 const blogIndex = read("blog/index.html");

@@ -7,8 +7,6 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
-import compress from "astro-compress";
-import vercel from "@astrojs/vercel";
 import { unified } from "@astrojs/markdown-remark";
 
 import astrowind from "./vendor/integration";
@@ -24,7 +22,6 @@ export default defineConfig({
   trailingSlash: "never",
   site: "https://lilosgrowth.com",
   output: "static",
-  adapter: vercel(),
 
   integrations: [
     sitemap({
@@ -73,31 +70,6 @@ export default defineConfig({
           "database",
         ],
       },
-    }),
-    compress({
-      CSS: true,
-      HTML: {
-        "html-minifier-terser": {
-          removeAttributeQuotes: false,
-          collapseWhitespace: true,
-          removeComments: true,
-          minifyCSS: true,
-          minifyJS: true,
-        },
-      },
-      Image: {
-        sharp: true,
-      },
-      JavaScript: {
-        terser: {
-          compress: {
-            drop_console: true,
-            drop_debugger: true,
-          },
-        },
-      },
-      SVG: false,
-      Logger: 1,
     }),
     astrowind({ config: "./src/config.yaml" }),
   ],
