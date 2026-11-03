@@ -12,6 +12,12 @@
 
 ## Known technical debt
 
-The repository currently has `.npmrc` containing `legacy-peer-deps=true`. It pre-dates this change and is intentionally **not** removed in a runtime-only repair: removing it without migrating conflicting package families risks breaking installs. Resolve underlying peer ranges in a planned dependency migration, then remove the flag and verify `npm ci` without it.
+The legacy `.npmrc` peer-dependency bypass was removed as part of the verified Astro 7 platform migration. Fresh `npm ci` now resolves package peer dependencies without using `legacy-peer-deps`.
 
 The legacy Dependabot PRs **#46** (development dependencies) and **#42** (runtime dependencies) mixed major framework/package changes and must be superseded, not merged directly. The failed #46 preview reported `js-yaml` missing a default export after its v5 upgrade. That failure does not affect current production.
+
+## Astro 7 migration verification (November 2026)
+
+The isolated migration branch upgrades Astro, the Vercel adapter, MDX, Zod, Vitest, and the Content Layer API together. The incompatible AstroLib SEO package was replaced by explicit SEO tags, and Tailwind 3 is preserved through PostCSS without an unsupported Astro integration. The release gate additionally checks generated blog/RSS/sitemap files and nontrivial Tailwind CSS output.
+
+Security advisories still require scope and reachability review, even when `npm audit` reports zero critical packages. Do not assert that no vulnerabilities exist solely because of an audit count.
