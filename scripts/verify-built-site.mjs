@@ -12,6 +12,9 @@ function read(relative) {
   return value;
 }
 
+const renderedPages = fs.readdirSync(output, { recursive: true }).filter((filename) => String(filename).endsWith(".html"));
+assert.ok(renderedPages.length >= 200, `Unexpectedly small static site: ${renderedPages.length} pages`);
+
 const homepage = read("index.html");
 const blogIndex = read("blog/index.html");
 const article = read("blog/top-local-seo-agencies-roofers-san-diego-local-guide/index.html");
