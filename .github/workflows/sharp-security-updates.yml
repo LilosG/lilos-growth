@@ -42,6 +42,7 @@ jobs:
             if(c.critical>0 || c.high>4 || c.total>21)process.exitCode=1;
           }
           NODE
+      # Tests explicitly import URL from node:url for the repo ESLint Node globals policy.
       - name: Verify API guards and complete site output
         run: |
           npm run check:astro
