@@ -14,12 +14,12 @@ Scope: repository-grounded commercial SEO, lead paths, claims, and internal-link
 
 ## Verified implementation defects
 
-| Priority | Finding | Evidence | Resolution |
-| --- | --- | --- | --- |
-| P0 | All industry pricing blocks described the bundles as having “No setup fees,” despite `packages[].setupPrice` being greater than the monthly fee. | `src/pages/[slug].astro`, `src/data/packages.ts` | Disclose canonical setup-month prices on every generated industry page. |
-| P0 | Industry cross-sell advertised GBP management at $250/mo, but canonical standalone GBP is $300/mo. | `src/pages/[slug].astro`, `gbpManagement.price` | Bind price to source of truth; no price changes. |
-| P1 | Service hub omitted contextual links to dedicated industry pages. | `src/pages/services/index.astro` | Add a scannable, accessible list of all industry pages. |
-| P1 | Several industry descriptions or FAQ answers promised specific top-three rankings or 30–60-day outcomes without supporting evidence. | `src/data/industries.ts` | Replace selected explicit promises with accurate descriptions of deliverables and measurement; preserve the vertical-specific expertise. |
+| Priority | Finding                                                                                                                                          | Evidence                                         | Resolution                                                                                                                               |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| P0       | All industry pricing blocks described the bundles as having “No setup fees,” despite `packages[].setupPrice` being greater than the monthly fee. | `src/pages/[slug].astro`, `src/data/packages.ts` | Disclose canonical setup-month prices on every generated industry page.                                                                  |
+| P0       | Industry cross-sell advertised GBP management at $250/mo, but canonical standalone GBP is $300/mo.                                               | `src/pages/[slug].astro`, `gbpManagement.price`  | Bind price to source of truth; no price changes.                                                                                         |
+| P1       | Service hub omitted contextual links to dedicated industry pages.                                                                                | `src/pages/services/index.astro`                 | Add a scannable, accessible list of all industry pages.                                                                                  |
+| P1       | Several industry descriptions or FAQ answers promised specific top-three rankings or 30–60-day outcomes without supporting evidence.             | `src/data/industries.ts`                         | Replace selected explicit promises with accurate descriptions of deliverables and measurement; preserve the vertical-specific expertise. |
 
 ## Search intent mapping
 
