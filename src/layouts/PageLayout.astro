@@ -175,7 +175,14 @@ const effectiveMetadata = {
 };
 ---
 
-<Layout {title} {description} {lang} {bodyClass} metadata={effectiveMetadata} compactCookie={minimal || headerVariant === "focused"}>
+<Layout
+  {title}
+  {description}
+  {lang}
+  {bodyClass}
+  metadata={effectiveMetadata}
+  compactCookie={minimal || headerVariant === "focused"}
+>
   <a
     href="#main"
     class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:left-2 focus-visible:top-2 focus-visible:z-[1000] focus-visible:rounded-full focus-visible:bg-white focus-visible:px-4 focus-visible:py-2 focus-visible:text-secondary focus-visible:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
@@ -183,17 +190,19 @@ const effectiveMetadata = {
     Skip to content
   </a>
 
-  {minimal ? (
-    <MinimalHeader cta={minimalCta} />
-  ) : headerVariant === "focused" ? (
-    <FocusedHeader
-      ctaHref={focusedHeaderCtaHref}
-      ctaText={focusedHeaderCtaText}
-      ctaTracking={focusedHeaderCtaTracking}
-    />
-  ) : (
-    <Header />
-  )}
+  {
+    minimal ? (
+      <MinimalHeader cta={minimalCta} />
+    ) : headerVariant === "focused" ? (
+      <FocusedHeader
+        ctaHref={focusedHeaderCtaHref}
+        ctaText={focusedHeaderCtaText}
+        ctaTracking={focusedHeaderCtaTracking}
+      />
+    ) : (
+      <Header />
+    )
+  }
 
   <main id="main" class="flex-1 focus:outline-none" tabindex="-1">
     <slot />
@@ -221,7 +230,11 @@ const effectiveMetadata = {
     });
   </script>
 
-  {showFloatingCalendly && !minimal && headerVariant !== "focused" && <FloatingCalendlyButton href="/contact#book" label="Book a Call" />}
+  {
+    showFloatingCalendly && !minimal && headerVariant !== "focused" && (
+      <FloatingCalendlyButton href="/contact#book" label="Book a Call" />
+    )
+  }
 
   <style is:global>
     :root {
