@@ -34,6 +34,7 @@ jobs:
           // The legacy AstroLib packages do not declare support for Astro 7.
           delete p.dependencies['@astrolib/analytics'];
           delete p.dependencies['@astrolib/seo'];
+          delete p.devDependencies['@astrojs/tailwind'];
           Object.assign(p.devDependencies, {
             'astro':'7.4.5',
             '@astrojs/mdx':'8.1.2',
