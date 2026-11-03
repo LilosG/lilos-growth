@@ -3,7 +3,7 @@ import Layout from "~/layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
 import type { PaginateFunction, Page } from "astro";
 import BlogCard from "../../components/BlogCard.astro";
-import { toListing, getSlug, type BlogEntry } from "../../lib/blog";
+import { toListing, getSlug, getDate, type BlogEntry } from "../../lib/blog";
 import Card from "~/components/ui/Card.astro";
 import Input from "~/components/ui/Input.astro";
 import Button from "~/components/ui/Button.astro";
@@ -13,7 +13,7 @@ export async function getStaticPaths({ paginate }: { paginate: PaginateFunction 
   const entries: BlogEntry[] = await getCollection("blog");
   const ordered = toListing(entries); // newest first, drafts hidden unless LOCAL_DRAFTS=1
   const uniq = Array.from(new Map(ordered.map((p) => [p.slug, p])).values());
-  return paginate(uniq, { pageSize });
+  return paginate(uniq, { pageSize }).filter(({ props }) => props.page.currentPage > 1);
 }
 
 type PageProps = {
@@ -69,13 +69,13 @@ const tags = Array.from(
           <span
             class="mb-2 mt-3 block text-xl font-semibold uppercase tracking-wider text-primary md:text-3xl"
           >
-            For Home Service Businesses
+            For Local Businesses
           </span>
         </h1>
         <div class="mb-8 h-1.5 w-28 rounded-full bg-primary"></div>
         <p class="mb-9 max-w-lg text-lg font-medium text-white/80 md:text-xl">
-          Get more calls, book more jobs, and gain peace of mind—without tech overwhelm. Lilos
-          Growth delivers actionable marketing for local service pros.
+          Explore practical local SEO, Google Business Profile and website guidance for trades,
+          hospitality and other local businesses.
         </p>
         <div class="flex flex-wrap gap-3.5">
           <a
@@ -117,7 +117,7 @@ const tags = Array.from(
 
       <Card id="contact" class="mx-auto max-w-md flex-1 !p-10 shadow-xl md:mx-0">
         <h2 class="mb-4 text-left font-heading text-xl font-bold text-heading">
-          Free SEO Website Audit for Home Service Pros!
+          Free SEO Website Assessment
         </h2>
 
         <form method="POST" action="https://formspree.io/f/movlbqdk" class="gap-4.5 flex flex-col">
@@ -172,7 +172,7 @@ const tags = Array.from(
                 href={`/blog/${getSlug(p)}`}
                 title={p.data.title}
                 description={p.data.description}
-                datePublished={p.data.datePublished ?? p.data.pubDate}
+                datePublished={getDate(p) ?? undefined}
                 category={p.data.category}
                 tags={p.data.tags}
               />

@@ -2,7 +2,7 @@
 import Layout from "~/layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
 import BlogCard from "../../components/BlogCard.astro";
-import { toListing, getSlug, type BlogEntry } from "../../lib/blog";
+import { toListing, getSlug, getDate, type BlogEntry } from "../../lib/blog";
 
 const page = 1;
 const pageSize = 12;
@@ -43,7 +43,7 @@ const pageDescription =
       </h1>
       <p class="mx-auto max-w-2xl text-base font-medium leading-relaxed text-white/90 md:text-lg">
         Latest articles on Local SEO, Google Business Profile, websites, and growth strategies for
-        home service businesses.
+        local businesses across trades, hospitality, and other sectors.
       </p>
     </div>
   </section>
@@ -61,7 +61,7 @@ const pageDescription =
                 href={`/blog/${getSlug(p)}`}
                 title={p.data.title}
                 description={p.data.description}
-                datePublished={p.data.datePublished ?? p.data.pubDate}
+                datePublished={getDate(p) ?? undefined}
                 category={p.data.category}
                 tags={p.data.tags}
               />

@@ -61,7 +61,7 @@ const iconName = pickIconName(props.icon, props.category);
           <>
             {" "}
             •{" "}
-            <time datetime={typeof props.datePublished === "string" ? props.datePublished : ""}>
+            <time datetime={props.datePublished instanceof Date ? props.datePublished.toISOString() : props.datePublished}>
               {dateText}
             </time>
           </>
