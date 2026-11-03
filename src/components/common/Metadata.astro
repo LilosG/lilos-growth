@@ -109,30 +109,39 @@ if (typeof seoProps.description === "string") {
 }
 const finalTitle = templateValue.includes("%s")
   ? templateValue.replace("%s", seoProps.title || "")
-  : (seoProps.title || "");
+  : seoProps.title || "";
 const ogSiteName = seoProps.openGraph?.site_name ?? seoProps.openGraph?.siteName;
 ---
 
 <title>{finalTitle}</title>
 {seoProps.description && <meta name="description" content={seoProps.description} />}
 {seoProps.canonical && <link rel="canonical" href={seoProps.canonical} />}
-<meta name="robots" content={`${seoProps.noindex ? "noindex" : "index"}, ${seoProps.nofollow ? "nofollow" : "follow"}`} />
+<meta
+  name="robots"
+  content={`${seoProps.noindex ? "noindex" : "index"}, ${seoProps.nofollow ? "nofollow" : "follow"}`}
+/>
 <meta property="og:title" content={finalTitle} />
 {seoProps.description && <meta property="og:description" content={seoProps.description} />}
 <meta property="og:url" content={seoProps.openGraph?.url || seoProps.canonical} />
 <meta property="og:type" content={seoProps.openGraph?.type || "website"} />
 {ogSiteName && <meta property="og:site_name" content={ogSiteName} />}
 {seoProps.openGraph?.locale && <meta property="og:locale" content={seoProps.openGraph.locale} />}
-{seoProps.openGraph?.images?.map((image) => (
-  <>
-    <meta property="og:image" content={image.url} />
-    {image.width && <meta property="og:image:width" content={String(image.width)} />}
-    {image.height && <meta property="og:image:height" content={String(image.height)} />}
-  </>
-))}
+{
+  seoProps.openGraph?.images?.map((image) => (
+    <>
+      <meta property="og:image" content={image.url} />
+      {image.width && <meta property="og:image:width" content={String(image.width)} />}
+      {image.height && <meta property="og:image:height" content={String(image.height)} />}
+    </>
+  ))
+}
 <meta name="twitter:card" content={seoProps.twitter?.cardType || "summary"} />
 <meta name="twitter:title" content={finalTitle} />
 {seoProps.description && <meta name="twitter:description" content={seoProps.description} />}
 {seoProps.twitter?.site && <meta name="twitter:site" content={seoProps.twitter.site} />}
 {seoProps.twitter?.handle && <meta name="twitter:creator" content={seoProps.twitter.handle} />}
-{seoProps.openGraph?.images?.[0]?.url && <meta name="twitter:image" content={seoProps.openGraph.images[0].url} />}
+{
+  seoProps.openGraph?.images?.[0]?.url && (
+    <meta name="twitter:image" content={seoProps.openGraph.images[0].url} />
+  )
+}
