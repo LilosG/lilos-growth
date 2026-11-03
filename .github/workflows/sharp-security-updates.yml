@@ -1,0 +1,57 @@
+name: Compatible security dependency updates (one-shot)
+on:
+  push:
+    branches: [security/sharp-api-hardening-2026-11-03]
+    paths: [.github/workflows/sharp-security-updates.yml]
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: security/sharp-api-hardening-2026-11-03
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.4
+          cache: npm
+      - name: Update compatible packages without bypassing peer checks
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          const p=JSON.parse(fs.readFileSync("package.json","utf8"));
+          p.dependencies.limax="4.2.3";
+          p.devDependencies.sharp="0.35.5";
+          p.devDependencies["prettier-plugin-tailwindcss"]="0.8.1";
+          fs.writeFileSync("package.json",JSON.stringify(p,null,2)+String.fromCharCode(10));
+          NODE
+          npm install --legacy-peer-deps=false --no-fund
+          npm ci
+      - name: Compare npm advisories before and after upgrade
+        run: |
+          npm audit --json > /tmp/audit-after.json || test $? -eq 1
+          npm audit --omit=dev --json > /tmp/prod-after.json || test $? -eq 1
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          for(const p of ["/tmp/audit-after.json","/tmp/prod-after.json"]){
+            const c=JSON.parse(fs.readFileSync(p,"utf8")).metadata.vulnerabilities;
+            console.log(p,JSON.stringify(c));
+            if(c.critical>0 || c.high>4 || c.total>21)process.exitCode=1;
+          }
+          NODE
+      - name: Verify API guards and complete site output
+        run: |
+          npm run check:astro
+          npm run check:eslint
+          npm run check:ts
+          npx vitest run
+          npm run build
+          node scripts/verify-built-site.mjs
+      - name: Commit generated npm dependency changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "fix(security): update Sharp, Limax, and Tailwind Prettier plugin"
+          git push origin HEAD:refs/heads/security/sharp-api-hardening-2026-11-03
