@@ -30,6 +30,7 @@ jobs:
             src/pages/contact.astro \
             tests/commercial-page-integrity.test.mjs \
             audits/lilosgrowth-2026-11-03/commercial-seo-conversion-audit.md
+          # Verify source-bound prices and valid CTA targets before committing formatted files.
           npx vitest run tests/commercial-page-integrity.test.mjs
       - name: Commit format-verified changes
         run: |
