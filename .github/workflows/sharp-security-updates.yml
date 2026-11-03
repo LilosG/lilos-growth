@@ -28,6 +28,8 @@ jobs:
           NODE
           npm install --legacy-peer-deps=false --no-fund
           npm ci
+      - name: Format changed API and test source
+        run: npx prettier --write src/pages/api/places.ts tests/places-api.test.mjs
       - name: Compare npm advisories before and after upgrade
         run: |
           npm audit --json > /tmp/audit-after.json || test $? -eq 1
@@ -52,6 +54,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add package.json package-lock.json
+          git add package.json package-lock.json src/pages/api/places.ts tests/places-api.test.mjs
           git commit -m "fix(security): update Sharp, Limax, and Tailwind Prettier plugin"
           git push origin HEAD:refs/heads/security/sharp-api-hardening-2026-11-03
