@@ -20,6 +20,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+      - name: Test SEO and content regressions
+        run: npx vitest run
 
   build:
     runs-on: ubuntu-latest
