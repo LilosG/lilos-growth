@@ -12,25 +12,25 @@ Source-level inspection of the consent manager, GA4 bootstrap, shared `trackEven
 
 ## Confirmed defects and interventions
 
-| Priority | Finding | Action |
-| --- | --- | --- |
-| P0 | Shared `window.trackEvent` called Vercel Analytics and GA4 with no consent gate, despite event callers assuming consent was enforced. | Gate shared event emission on accepted `lg_cookie_consent`; return if localStorage unavailable. |
-| P0 | GA4 loader declared a local `gtag` function; other components relied on `window.gtag`, so CTA events could silently fail. | Expose `window.gtag` when consent has enabled GA4. |
-| P1 | GA4 loader could be scheduled repeatedly before the idle callback completed. | Add one-shot scheduled guard. |
-| P1 | Shared CTA delegation emitted directly to GA4 rather than the consent-aware event bridge and used `el.href` as a label, possibly forwarding query strings. | Use `window.trackEvent` and only trimmed public-facing link text / aria label, never href or form content. |
-| P1 | Contact form's `data-track-event` marker was not connected to a script; a click is not a verified inquiry. | Emit `contact_form_submit_attempt` only on a valid native submit, leaving the existing Formspree POST and redirect untouched. |
-| P1 | Calendly embed booking completion lacked an event. | Listen for the origin-checked `calendly.event_scheduled` postMessage and emit `calendly_event_scheduled` after consent. |
+| Priority | Finding                                                                                                                                                    | Action                                                                                                                        |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| P0       | Shared `window.trackEvent` called Vercel Analytics and GA4 with no consent gate, despite event callers assuming consent was enforced.                      | Gate shared event emission on accepted `lg_cookie_consent`; return if localStorage unavailable.                               |
+| P0       | GA4 loader declared a local `gtag` function; other components relied on `window.gtag`, so CTA events could silently fail.                                  | Expose `window.gtag` when consent has enabled GA4.                                                                            |
+| P1       | GA4 loader could be scheduled repeatedly before the idle callback completed.                                                                               | Add one-shot scheduled guard.                                                                                                 |
+| P1       | Shared CTA delegation emitted directly to GA4 rather than the consent-aware event bridge and used `el.href` as a label, possibly forwarding query strings. | Use `window.trackEvent` and only trimmed public-facing link text / aria label, never href or form content.                    |
+| P1       | Contact form's `data-track-event` marker was not connected to a script; a click is not a verified inquiry.                                                 | Emit `contact_form_submit_attempt` only on a valid native submit, leaving the existing Formspree POST and redirect untouched. |
+| P1       | Calendly embed booking completion lacked an event.                                                                                                         | Listen for the origin-checked `calendly.event_scheduled` postMessage and emit `calendly_event_scheduled` after consent.       |
 
 ## Event definitions and GA4 configuration
 
-| Event name | Trigger | Interpretation | GA4 key event? |
-| --- | --- | --- | --- |
-| `contact_form_submit_attempt` | Valid native contact form submit | Attempted Formspree delivery, **not** a confirmed lead | **No** |
-| `calendly_event_scheduled` | Origin-validated Calendly booking completion message | Booking completion reported by Calendly | Candidate **Yes**, after real-browser and DebugView validation |
-| `gbp_offer_cta_click` | Introductory offer CTA click with consent | Interest, not inquiry/payment | No |
-| `gbp_offer_inquiry_submitted` | Eligible Formspree JSON response indicates accepted request | Form accepted the inquiry; inbox delivery not confirmed | Candidate Yes after live delivery validation |
-| `gbp_offer_checkout_started` | Outbound hosted checkout link click | Checkout initiated, not payment | No |
-| Existing `data-evt` action events | CTA / phone / email clicks | Engagement only | No by default |
+| Event name                        | Trigger                                                     | Interpretation                                          | GA4 key event?                                                 |
+| --------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------- |
+| `contact_form_submit_attempt`     | Valid native contact form submit                            | Attempted Formspree delivery, **not** a confirmed lead  | **No**                                                         |
+| `calendly_event_scheduled`        | Origin-validated Calendly booking completion message        | Booking completion reported by Calendly                 | Candidate **Yes**, after real-browser and DebugView validation |
+| `gbp_offer_cta_click`             | Introductory offer CTA click with consent                   | Interest, not inquiry/payment                           | No                                                             |
+| `gbp_offer_inquiry_submitted`     | Eligible Formspree JSON response indicates accepted request | Form accepted the inquiry; inbox delivery not confirmed | Candidate Yes after live delivery validation                   |
+| `gbp_offer_checkout_started`      | Outbound hosted checkout link click                         | Checkout initiated, not payment                         | No                                                             |
+| Existing `data-evt` action events | CTA / phone / email clicks                                  | Engagement only                                         | No by default                                                  |
 
 Never map `contact_form_submit_attempt` or `gbp_offer_checkout_started` to `generate_lead`, `purchase`, or revenue. Do not declare a purchase event without trusted payment-provider verification. Avoid transmitting names, emails, phone numbers, message bodies, and URL query parameters to GA4 or Vercel events.
 
