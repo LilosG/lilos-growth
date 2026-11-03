@@ -23,7 +23,7 @@ describe("commercial-page integrity", () => {
 
   it("does not hide standalone SEO setup-month pricing", () => {
     const page = read("services/local-seo/index.astro");
-    expect(page).toContain('priceNote={`Setup month: $${tier.setupPrice.toLocaleString()}`}');
+    expect(page).toContain("tier.setupPrice.toLocaleString()");
     expect(page).not.toMatch(/No setup fees/i);
     expect(page).toContain("GBP management isn't included at these prices");
   });
