@@ -248,6 +248,22 @@ export const description =
       document.addEventListener("astro:page-load", onReady);
     })();
   </script>
+  <!-- Conversion events: attempts are never counted as confirmed leads. -->
+  <script is:inline>
+    (() => {
+      const form = document.querySelector('form[action="https://formspree.io/f/movlbqdk"]');
+      form?.addEventListener("submit", () => {
+        window.trackEvent?.("contact_form_submit_attempt", { form_name: "contact" });
+      });
+
+      // A completed Calendly event is a booking signal, not merely a widget open/click.
+      window.addEventListener("message", (event) => {
+        if (event.origin !== "https://calendly.com") return;
+        if (!event.data || event.data.event !== "calendly.event_scheduled") return;
+        window.trackEvent?.("calendly_event_scheduled", { booking_source: "contact_page" });
+      });
+    })();
+  </script>
 </Layout>
 
 <script src="/scripts/contact-autoscroll.js" defer is:inline></script>
