@@ -1,12 +1,13 @@
 /**
- * Places API endpoint for Review Link Generator
- * POST /api/places?q=business+name+city
- * Returns: { place_id, name, address } or { error }
+ * Public Google Places lookup for the review-link generator.
+ * Enforce bounded input and upstream timeouts before a billable API call.
  */
-
 import type { APIRoute } from "astro";
 
 export const prerender = false;
+
+const MAX_QUERY_LENGTH = 180;
+const UPSTREAM_TIMEOUT_MS = 8000;
 
 interface PlaceResult {
   place_id: string;
@@ -18,93 +19,70 @@ interface ErrorResponse {
   error: string;
 }
 
+function json(body: PlaceResult | ErrorResponse, status: number): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": "private, no-store",
+    },
+  });
+}
+
 export const GET: APIRoute = async ({ url }) => {
   const query = url.searchParams.get("q")?.trim();
 
   if (!query) {
-    return new Response(JSON.stringify({ error: "Missing search query" } satisfies ErrorResponse), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
+    return json({ error: "Missing search query" }, 400);
+  }
+  if (query.length > MAX_QUERY_LENGTH) {
+    return json({ error: "Search query is too long" }, 400);
   }
 
   const apiKey = import.meta.env.GOOGLE_PLACES_API_KEY;
-
   if (!apiKey) {
     console.error("GOOGLE_PLACES_API_KEY not configured");
-    return new Response(
-      JSON.stringify({ error: "Service temporarily unavailable" } satisfies ErrorResponse),
-      {
-        status: 503,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    return json({ error: "Service temporarily unavailable" }, 503);
   }
 
-  try {
-    // Use Places API Text Search
-    const searchUrl = new URL("https://maps.googleapis.com/maps/api/place/textsearch/json");
-    searchUrl.searchParams.set("query", query);
-    searchUrl.searchParams.set("key", apiKey);
+  const searchUrl = new URL("https://maps.googleapis.com/maps/api/place/textsearch/json");
+  searchUrl.searchParams.set("query", query);
+  searchUrl.searchParams.set("key", apiKey);
 
-    const response = await fetch(searchUrl.toString());
+  try {
+    const response = await fetch(searchUrl, {
+      headers: { Accept: "application/json" },
+      signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+    });
 
     if (!response.ok) {
-      console.error("Places API error:", response.status);
-      return new Response(
-        JSON.stringify({ error: "Search failed. Please try again." } satisfies ErrorResponse),
-        {
-          status: 502,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      console.error("Places API HTTP status:", response.status);
+      return json({ error: "Search failed. Please try again." }, 502);
     }
 
     const data = await response.json();
-
     if (data.status === "ZERO_RESULTS" || !data.results?.length) {
-      return new Response(
-        JSON.stringify({
-          error: "No matching place found. Try adding city/state or ZIP.",
-        } satisfies ErrorResponse),
-        {
-          status: 404,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      return json({ error: "No matching place found. Try adding city/state or ZIP." }, 404);
     }
-
     if (data.status !== "OK") {
-      console.error("Places API status:", data.status, data.error_message);
-      return new Response(
-        JSON.stringify({ error: "Search failed. Please try again." } satisfies ErrorResponse),
-        {
-          status: 502,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      console.error("Places API status:", data.status);
+      return json({ error: "Search failed. Please try again." }, 502);
     }
 
-    // Return the top result
     const place = data.results[0];
-    const result: PlaceResult = {
-      place_id: place.place_id,
-      name: place.name || "",
-      address: place.formatted_address || "",
-    };
-
-    return new Response(JSON.stringify(result), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
-  } catch (err) {
-    console.error("Places API fetch error:", err);
-    return new Response(
-      JSON.stringify({ error: "Something went wrong. Please try again." } satisfies ErrorResponse),
+    return json(
       {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
+        place_id: String(place.place_id || ""),
+        name: String(place.name || ""),
+        address: String(place.formatted_address || ""),
+      },
+      200
     );
+  } catch (error) {
+    if (error instanceof Error && (error.name === "TimeoutError" || error.name === "AbortError")) {
+      return json({ error: "Search timed out. Please try again." }, 504);
+    }
+    console.error("Places API request failed:", error instanceof Error ? error.name : "unknown");
+    return json({ error: "Something went wrong. Please try again." }, 500);
   }
 };
