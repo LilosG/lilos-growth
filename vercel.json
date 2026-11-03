@@ -43,6 +43,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/emergency-electrician-seo-san-marcos-guide-2",
+      "destination": "/blog/emergency-electrician-seo-san-marcos-guide",
+      "permanent": true
+    },
+    {
       "source": "/blog/",
       "destination": "/blog",
       "permanent": true
