@@ -29,7 +29,7 @@ for (const site of sites) {
     const page = await ctx.newPage();
     try {
       await page.goto(site.url, { waitUntil: "networkidle", timeout: 60000 });
-    } catch (e) {
+    } catch {
       console.warn(`networkidle timeout for ${site.url}, continuing`);
     }
     for (const b of await page.locator("button, a[role=button]").all()) {

@@ -4,9 +4,32 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 6
+    # Major framework, language, build tool and dependency upgrades are
+    # handled as planned migrations, not mixed into unattended bulk PRs.
+    # This applies to version updates; security updates remain available.
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
-      dev-dependencies:
-        dependency-type: "development"
-      production-dependencies:
-        dependency-type: "production"
+      astro-ecosystem:
+        patterns:
+          - "astro"
+          - "astro-*"
+          - "@astrojs/*"
+          - "@astrolib/*"
+        update-types: ["minor", "patch"]
+      code-quality-tooling:
+        patterns:
+          - "eslint"
+          - "eslint-*"
+          - "@eslint/*"
+          - "@typescript-eslint/*"
+          - "typescript-eslint"
+          - "typescript"
+          - "prettier"
+          - "prettier-*"
+        update-types: ["minor", "patch"]
+      other-compatible-updates:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]

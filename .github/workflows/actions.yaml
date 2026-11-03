@@ -13,13 +13,44 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run check
+      - run: npm run check:astro
+      - run: npm run check:eslint
+      - run: npm run check:ts
+      - name: Prettier on changed files (baseline ratchet)
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PUSH_BASE_SHA: ${{ github.event.before }}
+        run: |
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            BASE_SHA="$PR_BASE_SHA"
+          else
+            BASE_SHA="$PUSH_BASE_SHA"
+          fi
+          if [[ -z "$BASE_SHA" || "$BASE_SHA" =~ ^0+$ ]]; then
+            BASE_SHA="$(git rev-parse HEAD^)"
+          fi
+          mapfile -d '' changed < <(
+            git diff --name-only --diff-filter=ACMR -z "$BASE_SHA" HEAD -- \
+              '*.astro' '*.js' '*.mjs' '*.ts' '*.json' \
+              '*.yaml' '*.yml' '*.md' '*.mdx'
+          )
+          if (( ${#changed[@]} > 0 )); then
+            npx prettier --check "${changed[@]}"
+          else
+            echo "No changed files require Prettier validation."
+          fi
+      - name: Test SEO and content regressions
+        run: npx vitest run
 
   build:
     runs-on: ubuntu-latest
