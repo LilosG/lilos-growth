@@ -8,8 +8,7 @@ import FeatureCard from "~/components/sections/FeatureCard.astro";
 import { Icon } from "astro-icon/components";
 import { gbpManagement, seoTiers, packages, websiteBuilds } from "~/data/packages";
 
-export const title =
-  "Google Business Profile Optimization & Management | Lilos Growth";
+export const title = "Google Business Profile Optimization & Management | Lilos Growth";
 export const description =
   "Rank higher in the Google Map Pack and turn searches into booked jobs. Purpose-built Google Business Profile (GBP) optimization, posting, reviews, and reporting for local service pros.";
 
@@ -30,7 +29,8 @@ const trustReasons = [
   {
     icon: "tabler:tool",
     title: "Experience Across Local Industries",
-    description: "Experience with trades, hospitality, and local services, with work tailored to each market.",
+    description:
+      "Experience with trades, hospitality, and local services, with work tailored to each market.",
   },
   {
     icon: "tabler:calendar-x",
@@ -160,10 +160,11 @@ const faqs = [
         What Is Google Business Profile Optimization?
       </h2>
       <p class="mb-6 text-base text-body">
-        Your Google Business Profile is an important way nearby customers discover your business. We optimize your profile end-to-end—categories,
-        services, photos, posts, reviews, Q&amp;A, tracking—to strengthen your visibility in Maps and
-        help customers find accurate information. Structured for how search works now — Google, Maps, and AI answer engines like AI
-        Overviews and ChatGPT Search, not just classic blue links.
+        Your Google Business Profile is an important way nearby customers discover your business. We
+        optimize your profile end-to-end—categories, services, photos, posts, reviews, Q&amp;A,
+        tracking—to strengthen your visibility in Maps and help customers find accurate information.
+        Structured for how search works now — Google, Maps, and AI answer engines like AI Overviews
+        and ChatGPT Search, not just classic blue links.
       </p>
 
       <div class="flex flex-wrap justify-center gap-3">
@@ -218,7 +219,9 @@ const faqs = [
               ))
             }
           </ul>
-          <Button href="/contact#book" variant="primary" size="lg" class="w-full">Get Started</Button>
+          <Button href="/contact#book" variant="primary" size="lg" class="w-full"
+            >Get Started</Button
+          >
         </div>
         <p class="mt-4 text-center text-sm text-body">
           Already want ongoing Local SEO too? <a
@@ -244,7 +247,9 @@ const faqs = [
           <div class="text-center">
             <h3 class="font-heading text-base font-semibold text-heading md:text-lg">Local SEO</h3>
             <div class="mt-2 text-xl font-bold text-primary md:text-2xl">
-              From ${seoTiers[0].price.toLocaleString()}<span class="text-sm font-normal text-gray-500">/mo</span>
+              From ${seoTiers[0].price.toLocaleString()}<span
+                class="text-sm font-normal text-gray-500">/mo</span
+              >
             </div>
           </div>
           <ul class="mt-4 flex-1 list-disc space-y-1 pl-5 text-sm text-body">
@@ -266,7 +271,9 @@ const faqs = [
               GBP + Local SEO
             </h3>
             <div class="mt-2 text-xl font-bold text-primary md:text-2xl">
-              From ${packages[0].price.toLocaleString()}<span class="text-sm font-normal text-gray-500">/mo</span>
+              From ${packages[0].price.toLocaleString()}<span
+                class="text-sm font-normal text-gray-500">/mo</span
+              >
             </div>
           </div>
           <ul class="mt-4 flex-1 list-disc space-y-1 pl-5 text-sm text-body">
@@ -288,7 +295,11 @@ const faqs = [
               Website Build
             </h3>
             <div class="mt-2 text-xl font-bold text-primary md:text-2xl">
-              From ${websiteBuilds[0].price.toLocaleString()}<span class="text-sm font-normal text-gray-500"> one-time</span>
+              From ${websiteBuilds[0].price.toLocaleString()}<span
+                class="text-sm font-normal text-gray-500"
+              >
+                one-time</span
+              >
             </div>
           </div>
           <ul class="mt-4 flex-1 list-disc space-y-1 pl-5 text-sm text-body">
@@ -329,16 +340,26 @@ const faqs = [
   </section>
 
   <!-- RELATED LOCAL SEARCH SERVICES -->
-  <section class="border-t border-gray-100 bg-white py-12" aria-label="Related local search services">
+  <section
+    class="border-t border-gray-100 bg-white py-12"
+    aria-label="Related local search services"
+  >
     <div class="mx-auto max-w-5xl px-4">
       <h2 class="mb-3 font-heading text-xl font-bold text-heading md:text-2xl">
         Connect Your Business Profile to Your Local Search Strategy
       </h2>
       <p class="max-w-3xl text-base leading-relaxed text-body">
-        A complete local presence also depends on relevant website content and easy ways for customers to contact you.
-        Explore our <a href="/services/local-seo" class="font-semibold text-primary underline underline-offset-4">local SEO services</a>,
-        our <a href="/local-seo-san-diego" class="font-semibold text-primary underline underline-offset-4">San Diego local search approach</a>,
-        and <a href="/results" class="font-semibold text-primary underline underline-offset-4">selected client projects</a>.
+        A complete local presence also depends on relevant website content and easy ways for
+        customers to contact you. Explore our <a
+          href="/services/local-seo"
+          class="font-semibold text-primary underline underline-offset-4">local SEO services</a
+        >, our <a
+          href="/local-seo-san-diego"
+          class="font-semibold text-primary underline underline-offset-4"
+          >San Diego local search approach</a
+        >, and <a href="/results" class="font-semibold text-primary underline underline-offset-4"
+          >selected client projects</a
+        >.
       </p>
     </div>
   </section>

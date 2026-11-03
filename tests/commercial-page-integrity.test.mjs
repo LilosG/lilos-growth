@@ -17,7 +17,7 @@ describe("commercial-page integrity", () => {
     for (const page of targets) {
       const text = read(page);
       expect(text).not.toContain('href="#contact"');
-      expect(text).toContain('/contact#book');
+      expect(text).toContain("/contact#book");
     }
   });
 
