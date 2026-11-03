@@ -25,7 +25,8 @@
     "format": "prettier --write .",
     "vercel": "npx vercel",
     "deploy:prod": "npx vercel --prod",
-    "audit:blog-links": "node scripts/audit-blog-links.mjs"
+    "audit:blog-links": "node scripts/audit-blog-links.mjs",
+    "prebuild": "npm run audit:blog-links"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.12",
