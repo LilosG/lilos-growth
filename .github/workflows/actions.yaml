@@ -21,6 +21,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Dependency security baseline (informational until triaged)
+        run: node scripts/audit-dependencies.mjs
       - run: npm run check:astro
       - run: npm run check:eslint
       - run: npm run check:ts
