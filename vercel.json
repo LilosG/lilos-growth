@@ -28,6 +28,16 @@
       "permanent": true
     },
     {
+      "source": "/blog/emergency-plumber-seo-san-marcos-guide",
+      "destination": "/blog/emergency-plumber-seo-san-marcos-guide-3",
+      "permanent": true
+    },
+    {
+      "source": "/blog/emergency-plumber-seo-san-marcos-guide-2",
+      "destination": "/blog/emergency-plumber-seo-san-marcos-guide-3",
+      "permanent": true
+    },
+    {
       "source": "/blog/",
       "destination": "/blog",
       "permanent": true
