@@ -5,11 +5,11 @@ import { fileURLToPath } from "url";
 import { defineConfig } from "astro/config";
 
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
 import compress from "astro-compress";
 import vercel from "@astrojs/vercel";
+import { unified } from "@astrojs/markdown-remark";
 
 import astrowind from "./vendor/integration";
 import {
@@ -27,7 +27,6 @@ export default defineConfig({
   adapter: vercel(),
 
   integrations: [
-    tailwind({ applyBaseStyles: false }),
     sitemap({
       filter: (page) => {
         const pathname = (() => {
@@ -97,29 +96,17 @@ export default defineConfig({
           },
         },
       },
-      SVG: {
-        svgo: {
-          multipass: true,
-          plugins: [
-            {
-              name: "preset-default",
-              params: {
-                overrides: {
-                  removeViewBox: false,
-                },
-              },
-            },
-          ],
-        },
-      },
+      SVG: false,
       Logger: 1,
     }),
     astrowind({ config: "./src/config.yaml" }),
   ],
 
   markdown: {
-    remarkPlugins: [readingTimeRemarkPlugin],
-    rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
+    processor: unified({
+      remarkPlugins: [readingTimeRemarkPlugin],
+      rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
+    }),
     syntaxHighlight: "shiki",
     shikiConfig: {
       // Map ```astro fences to HTML highlighting to avoid Shiki warnings without adding deps

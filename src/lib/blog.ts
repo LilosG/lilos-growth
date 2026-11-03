@@ -55,10 +55,10 @@ export function getDateTs(entry: BlogEntry): number {
   return (getDate(entry) ?? new Date(0)).getTime();
 }
 
-/** Slug helper: prefer frontmatter `slug`, else content collection slug. */
+/** Slug helper: prefer frontmatter `slug`, else content collection ID. */
 export function getSlug(entry: BlogEntry): string {
   const fmSlug = (entry.data as Record<string, unknown>).slug;
-  return typeof fmSlug === "string" && fmSlug.trim() ? fmSlug : entry.slug;
+  return typeof fmSlug === "string" && fmSlug.trim() ? fmSlug : entry.id;
 }
 
 /** Draft flag resolver (frontmatter: draft: true). */
