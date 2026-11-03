@@ -1,0 +1,14 @@
+---
+import GbpProofCard from "./GbpProofCard.astro";
+import { gbpProof } from "~/data/gbpProof";
+
+interface Props {
+  eager?: boolean;
+}
+
+const { eager = false } = Astro.props;
+---
+
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+  {gbpProof.map((result) => <GbpProofCard {result} {eager} />)}
+</div>

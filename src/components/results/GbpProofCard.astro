@@ -1,0 +1,49 @@
+---
+import type { GbpProof } from "~/data/gbpProof";
+
+interface Props {
+  result: GbpProof;
+  compact?: boolean;
+  eager?: boolean;
+}
+
+const { result, compact = false, eager = false } = Astro.props;
+---
+
+<article class="overflow-hidden rounded-2xl border border-border-base bg-white shadow-sm">
+  <div class="p-5 sm:p-6">
+    <p class="text-sm font-semibold uppercase tracking-wider text-muted">
+      {compact ? "An example from our client work" : "Client profile"}
+    </p>
+    <h3 class="mt-2 font-heading text-xl font-bold text-heading">{result.client}</h3>
+    <p class="mt-2 text-body">{result.work}</p>
+    <div class="mt-5 flex flex-wrap items-end gap-x-4 gap-y-2 border-t border-border-base pt-4">
+      <p class="font-heading text-4xl font-extrabold text-heading">{result.value}</p>
+      <div class="pb-1">
+        <p class="font-semibold text-heading">{result.metric}</p>
+        <p class="text-sm text-body">{result.period}</p>
+        {result.comparison && <p class="text-sm font-semibold text-heading">{result.comparison}</p>}
+      </div>
+    </div>
+  </div>
+  <a
+    href={result.image}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+    aria-label={`Open full ${result.client} performance screenshot`}
+  >
+    <img
+      src={result.image}
+      alt={result.imageAlt}
+      class="h-auto w-full"
+      width={result.imageWidth}
+      height={result.imageHeight}
+      loading={eager ? "eager" : "lazy"}
+      decoding="async"
+    />
+  </a>
+  <p class="border-t border-border-base px-5 py-3 text-sm text-body sm:px-6">
+    Recorded profile activity during a broader engagement. Results vary by business.
+  </p>
+</article>
