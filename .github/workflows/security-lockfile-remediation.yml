@@ -1,0 +1,79 @@
+name: Security lockfile remediation (one-shot)
+
+on:
+  push:
+    branches:
+      - security/npm-audit-triage-2026-11-03
+    paths:
+      - .github/workflows/security-lockfile-remediation.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update-lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: security/npm-audit-triage-2026-11-03
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install the locked baseline
+        run: npm ci
+      - name: Record before audit results
+        run: |
+          npm audit --json > /tmp/audit-before.json || test $? -eq 1
+          npm audit --omit=dev --json > /tmp/audit-runtime-before.json || test $? -eq 1
+      - name: Apply lockfile-only compatible security resolutions
+        run: |
+          set +e
+          npm audit fix --package-lock-only --ignore-scripts --no-fund > /tmp/npm-audit-fix.txt 2>&1
+          status=$?
+          set -e
+          cat /tmp/npm-audit-fix.txt
+          if (( status > 1 )); then
+            echo "Audit remediation failed, exit code $status"
+            exit "$status"
+          fi
+          if ! git diff --quiet -- package.json; then
+            echo "ERROR: direct dependency manifest changed."
+            exit 1
+          fi
+          node -e 'const p=require("./package.json"), l=require("./package-lock.json"); if (p.engines.node !== "22.x" || l.packages[""].engines.node !== "22.x") process.exit(1); for (const kind of ["dependencies","devDependencies"]) if (JSON.stringify(p[kind]) !== JSON.stringify(l.packages[""][kind])) process.exit(1)'
+      - name: Compare vulnerability counts
+        run: |
+          npm audit --json > /tmp/audit-after.json || test $? -eq 1
+          npm audit --omit=dev --json > /tmp/audit-runtime-after.json || test $? -eq 1
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const read = (f) => JSON.parse(fs.readFileSync(f,"utf8")).metadata.vulnerabilities;
+            for (const mode of ["", "-runtime"]) {
+              const before = read("/tmp/audit" + mode + "-before.json");
+              const after = read("/tmp/audit" + mode + "-after.json");
+              console.log((mode || "-all").slice(1) + ": " + JSON.stringify(before) + " => " + JSON.stringify(after));
+              if (after.critical > before.critical || after.high > before.high || after.total > before.total) process.exitCode = 1;
+            }
+          '
+      - name: Verify clean install and tests
+        run: |
+          npm ci
+          npm run check:astro
+          npm run check:eslint
+          npm run check:ts
+          npx vitest run
+          npm run build
+      - name: Commit lockfile-only remediation to PR branch
+        run: |
+          if git diff --quiet -- package-lock.json; then
+            echo "No compatible lockfile changes available."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          git commit -m "fix(security): apply compatible transitive lockfile patches"
+          git push origin HEAD:refs/heads/security/npm-audit-triage-2026-11-03
