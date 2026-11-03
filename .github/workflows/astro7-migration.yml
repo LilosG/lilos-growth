@@ -44,6 +44,7 @@ jobs:
           fs.writeFileSync('package.json', JSON.stringify(p, null, 2) + String.fromCharCode(10));
           NODE
           # Re-resolve the complete major-version graph; the Astro 5 lockfile cannot satisfy Astro 7 peers.
+          # Fail closed if incompatible legacy integration imports survive the migration.
           if grep -R -n -E '@astrolib/(analytics|seo)' src vendor; then
             echo 'Legacy AstroLib import remains; migration incomplete.'
             exit 1
