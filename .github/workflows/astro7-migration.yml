@@ -40,6 +40,8 @@ jobs:
           });
           fs.writeFileSync('package.json', JSON.stringify(p, null, 2) + String.fromCharCode(10));
           NODE
+          # Re-resolve the complete major-version graph; the Astro 5 lockfile cannot satisfy Astro 7 peers.
+          rm -rf node_modules package-lock.json
           npm install --legacy-peer-deps=false --no-fund
           npm install -D --save-exact --legacy-peer-deps=false @astrojs/markdown-remark@latest
       - name: Validate codebase, content, generated pages, and regression tests
