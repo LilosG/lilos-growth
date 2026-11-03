@@ -1,6 +1,6 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { getSlug, getDate, formatDate, allowDrafts, type BlogEntry } from "../../lib/blog";
 
 // Build static paths using your canonical slug logic
@@ -19,7 +19,7 @@ if (entry.data.draft && !allowDrafts()) {
   throw new Error(`Draft post not available: ${slug}`);
 }
 
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 // Meta
 const title = entry.data.title ?? "Untitled";

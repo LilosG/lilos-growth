@@ -1,0 +1,49 @@
+name: Astro 7 migration installer (one-shot)
+on:
+  push:
+    branches: [security/astro7-platform-migration-2026-11-03]
+    paths:
+      - .github/workflows/astro7-migration.yml
+permissions:
+  contents: write
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: security/astro7-platform-migration-2026-11-03
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install compatible platform dependencies (strict peer resolution)
+        run: |
+          npm install --save-exact --legacy-peer-deps=false \
+            astro@7.4.5 @astrojs/vercel@11.0.18 @astrojs/rss@4.0.19 \
+            @astrojs/sitemap@3.7.4 astro-embed@0.14.0 \
+            astro-icon@1.2.0 zod@4.6.7
+          npm install -D --save-exact --legacy-peer-deps=false \
+            @astrojs/mdx@8.1.2 @astrojs/check@0.9.12 \
+            @astrojs/markdown-remark@latest astro-compress@2.4.3 \
+            vitest@5.1.0
+      - name: Validate codebase, content, generated pages, and regression tests
+        run: |
+          npm ci --legacy-peer-deps=false
+          npm run check:astro
+          npm run check:eslint
+          npm run check:ts
+          npx vitest run
+          npm run build
+          test -f dist/client/blog/index.html
+          test -f dist/client/sitemap-index.xml
+          test -f dist/client/rss.xml
+          find dist/client -name '*.css' -size +10k | head -n 4
+      - name: Commit npm-resolved manifest and lockfile
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "build(security): upgrade Astro 7 platform and verified dependencies"
+          git push origin HEAD:refs/heads/security/astro7-platform-migration-2026-11-03

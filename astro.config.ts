@@ -10,6 +10,7 @@ import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
 import compress from "astro-compress";
 import vercel from "@astrojs/vercel";
+import { unified } from "@astrojs/markdown-remark";
 
 import astrowind from "./vendor/integration";
 import {
@@ -97,27 +98,14 @@ export default defineConfig({
           },
         },
       },
-      SVG: {
-        svgo: {
-          multipass: true,
-          plugins: [
-            {
-              name: "preset-default",
-              params: {
-                overrides: {
-                  removeViewBox: false,
-                },
-              },
-            },
-          ],
-        },
-      },
+      SVG: false,
       Logger: 1,
     }),
     astrowind({ config: "./src/config.yaml" }),
   ],
 
   markdown: {
+    processor: unified(),
     remarkPlugins: [readingTimeRemarkPlugin],
     rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
     syntaxHighlight: "shiki",
