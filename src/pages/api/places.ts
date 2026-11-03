@@ -70,11 +70,14 @@ export const GET: APIRoute = async ({ url }) => {
     }
 
     const place = data.results[0];
-    return json({
-      place_id: String(place.place_id || ""),
-      name: String(place.name || ""),
-      address: String(place.formatted_address || ""),
-    }, 200);
+    return json(
+      {
+        place_id: String(place.place_id || ""),
+        name: String(place.name || ""),
+        address: String(place.formatted_address || ""),
+      },
+      200
+    );
   } catch (error) {
     if (error instanceof Error && (error.name === "TimeoutError" || error.name === "AbortError")) {
       return json({ error: "Search timed out. Please try again." }, 504);
