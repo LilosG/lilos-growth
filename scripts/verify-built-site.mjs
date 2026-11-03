@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 
-const output = path.resolve("dist");
+const output = path.resolve("dist/client");
 
 function read(relative) {
   const location = path.join(output, relative);

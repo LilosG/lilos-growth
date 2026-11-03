@@ -7,6 +7,7 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
+import vercel from "@astrojs/vercel";
 import { unified } from "@astrojs/markdown-remark";
 
 import astrowind from "./vendor/integration";
@@ -22,6 +23,8 @@ export default defineConfig({
   trailingSlash: "never",
   site: "https://lilosgrowth.com",
   output: "static",
+  // /api/places is rendered on demand; Vercel adapter is required.
+  adapter: vercel(),
 
   integrations: [
     sitemap({
