@@ -6,7 +6,7 @@ import Card from "~/components/ui/Card.astro";
 import CheckListItem from "~/components/ui/CheckListItem.astro";
 import FeatureCard from "~/components/sections/FeatureCard.astro";
 import { Icon } from "astro-icon/components";
-import { gbpManagement } from "~/data/packages";
+import { gbpManagement, seoTiers, packages, websiteBuilds } from "~/data/packages";
 
 export const title =
   "Google Business Profile Optimization & Management | Lilos Growth";
@@ -111,40 +111,11 @@ const faqs = [
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "How fast can you improve my Google Maps ranking?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Most clients see measurable gains in 30-60 days with consistent posting, reviews, and ongoing profile updates.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Can you optimize my profile if I already have a GBP listing?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Yes. Audits, rebuilds, and ongoing optimization are our core service.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Do you guarantee Map Pack rankings?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "No one can guarantee specific positions, but we provide consistent, data-driven work and transparent reporting.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Is there a setup fee or long contract?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "No setup fees and no long-term contracts. All plans are month-to-month.",
-          },
-        },
-      ],
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: { "@type": "Answer", text: faq.answer },
+      })),
     },
   ]}
 >
@@ -189,9 +160,9 @@ const faqs = [
         What Is Google Business Profile Optimization?
       </h2>
       <p class="mb-6 text-base text-body">
-        Your GBP is the #1 driver of local calls. We optimize your profile end-to-end—categories,
-        services, photos, posts, reviews, Q&amp;A, tracking—so you rank in the Map Pack and stay
-        there. Structured for how search works now — Google, Maps, and AI answer engines like AI
+        Your Google Business Profile is an important way nearby customers discover your business. We optimize your profile end-to-end—categories,
+        services, photos, posts, reviews, Q&amp;A, tracking—to strengthen your visibility in Maps and
+        help customers find accurate information. Structured for how search works now — Google, Maps, and AI answer engines like AI
         Overviews and ChatGPT Search, not just classic blue links.
       </p>
 
@@ -247,7 +218,7 @@ const faqs = [
               ))
             }
           </ul>
-          <Button href="#contact" variant="primary" size="lg" class="w-full">Get Started</Button>
+          <Button href="/contact#book" variant="primary" size="lg" class="w-full">Get Started</Button>
         </div>
         <p class="mt-4 text-center text-sm text-body">
           Already want ongoing Local SEO too? <a
@@ -273,7 +244,7 @@ const faqs = [
           <div class="text-center">
             <h3 class="font-heading text-base font-semibold text-heading md:text-lg">Local SEO</h3>
             <div class="mt-2 text-xl font-bold text-primary md:text-2xl">
-              From $399<span class="text-sm font-normal text-gray-500">/mo</span>
+              From ${seoTiers[0].price.toLocaleString()}<span class="text-sm font-normal text-gray-500">/mo</span>
             </div>
           </div>
           <ul class="mt-4 flex-1 list-disc space-y-1 pl-5 text-sm text-body">
@@ -295,7 +266,7 @@ const faqs = [
               GBP + Local SEO
             </h3>
             <div class="mt-2 text-xl font-bold text-primary md:text-2xl">
-              From $599<span class="text-sm font-normal text-gray-500">/mo</span>
+              From ${packages[0].price.toLocaleString()}<span class="text-sm font-normal text-gray-500">/mo</span>
             </div>
           </div>
           <ul class="mt-4 flex-1 list-disc space-y-1 pl-5 text-sm text-body">
@@ -317,7 +288,7 @@ const faqs = [
               Website Build
             </h3>
             <div class="mt-2 text-xl font-bold text-primary md:text-2xl">
-              From $1,250<span class="text-sm font-normal text-gray-500"> one-time</span>
+              From ${websiteBuilds[0].price.toLocaleString()}<span class="text-sm font-normal text-gray-500"> one-time</span>
             </div>
           </div>
           <ul class="mt-4 flex-1 list-disc space-y-1 pl-5 text-sm text-body">
@@ -403,7 +374,7 @@ const faqs = [
       <p class="mb-6 text-base text-white/90">
         Get a free GBP audit and action plan—no hard sell, just what to do next.
       </p>
-      <Button href="#contact" variant="white" size="lg"> Book My Free Audit </Button>
+      <Button href="/contact#book" variant="white" size="lg"> Book My Free Audit </Button>
     </div>
   </section>
 </Layout>

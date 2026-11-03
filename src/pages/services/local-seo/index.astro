@@ -61,7 +61,7 @@ const faqs = [
   },
   {
     question: "Do you require contracts or charge setup fees?",
-    answer: "No contracts and no setup fees. Month-to-month. Stay because it's working.",
+    answer: "No long-term contracts. SEO plans are month-to-month, with a higher setup-month price for the foundation audit and initial strategy. See the setup-month amount on each plan.",
   },
   {
     question: "Can you cover multiple cities or locations?",
@@ -91,7 +91,7 @@ const faqs = [
       "@id": "https://lilosgrowth.com/services/local-seo#service",
       name: "Local SEO Services for Local Businesses",
       description:
-        "Local SEO services including on-page optimization, service and location pages, citation building, local link acquisition, and Google Business Profile management for local businesses.",
+        "Local SEO services including on-page optimization, service and location pages, citation building, technical SEO maintenance, and local link acquisition. Google Business Profile management is available separately or in a bundled plan.",
       provider: { "@id": "https://lilosgrowth.com/#org" },
       areaServed: { "@type": "Country", name: "United States" },
       url: "https://lilosgrowth.com/services/local-seo",
@@ -99,40 +99,11 @@ const faqs = [
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "How soon will I see results from local SEO?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Most clients see measurable gains in 30-60 days. We prioritize high-impact fixes and pages first.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Do you require contracts or charge setup fees?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "No contracts and no setup fees. All plans are month-to-month.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Can you cover multiple cities or locations?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Yes. We right-size page creation and tracking for your service footprint. Multi-location fees apply.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Will I get reports and strategy time?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Every plan includes transparent monthly reporting plus scheduled strategy calls.",
-          },
-        },
-      ],
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: { "@type": "Answer", text: faq.answer },
+      })),
     },
   ]}
 >
@@ -207,7 +178,7 @@ const faqs = [
         Local SEO Plans &amp; Pricing
       </h2>
       <p class="mb-10 text-center text-base text-body">
-        Month-to-month. No setup fees. Transparent deliverables. <span class="font-semibold"
+        Month-to-month. Setup-month pricing is shown for each plan. Transparent deliverables. <span class="font-semibold"
           >No rollovers.</span
         >
       </p>
@@ -217,8 +188,9 @@ const faqs = [
           seoTiers.map((tier) => (
             <PricingCard
               title={tier.name}
-              price={`$${tier.price.toLocaleString()}`}
+              price={`${tier.price.toLocaleString()}`}
               period="mo"
+              priceNote={`Setup month: ${tier.setupPrice.toLocaleString()}`}
               featured={tier.featured}
               features={[tier.bestFor, ...tier.inclusions, "No rollovers."]}
               ctaText={tier.featured ? "Choose " + tier.name : "Get Started"}
