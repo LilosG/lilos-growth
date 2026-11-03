@@ -28,6 +28,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/restoration-company-seo-guide-2",
+      "destination": "/blog/restoration-company-seo-guide",
+      "permanent": true
+    },
+    {
       "source": "/blog/",
       "destination": "/blog",
       "permanent": true
