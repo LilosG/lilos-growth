@@ -24,7 +24,8 @@
     "fix:prettier": "prettier -w .",
     "format": "prettier --write .",
     "vercel": "npx vercel",
-    "deploy:prod": "npx vercel --prod"
+    "deploy:prod": "npx vercel --prod",
+    "audit:blog-links": "node scripts/audit-blog-links.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.12",
