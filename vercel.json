@@ -18,6 +18,16 @@
       "permanent": true
     },
     {
+      "source": "/blog/local-seo-vs-gbp-management-hvac-san-diego-comparison-guide",
+      "destination": "/blog/local-seo-vs-gbp-management-hvac-san-diego-comparison-guide-2",
+      "permanent": true
+    },
+    {
+      "source": "/blog/local-seo-vs-gbp-management-hvac-san-diego-comparison-guide-3",
+      "destination": "/blog/local-seo-vs-gbp-management-hvac-san-diego-comparison-guide-2",
+      "permanent": true
+    },
+    {
       "source": "/blog/",
       "destination": "/blog",
       "permanent": true
