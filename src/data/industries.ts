@@ -23,9 +23,9 @@ export const industries: IndustryData[] = [
     headline: "Local SEO for Plumbers",
     title: "Local SEO for Plumbers",
     description:
-      "Plumbing leads live in the Map Pack. We get your plumbing business into the top 3 for emergency and routine searches — more calls, more booked jobs, no contracts.",
+      "Plumbing leads live in the Map Pack. We improve the search foundation for emergency and routine plumbing services through GBP optimization, relevant service pages, and clearer lead paths.",
     intro:
-      "Plumbers live and die by emergency call volume. When a pipe bursts at midnight, the homeowner isn't scrolling page two — they call whoever's in the top 3 of the Map Pack. If you're not visible there for 'plumber near me' and 'emergency plumber [city]', those calls go to a competitor. We build the local presence — GBP optimization, high-intent service pages, and Map Pack signals — that puts you first when it counts.",
+      "Plumbers live and die by emergency call volume. When a pipe bursts at midnight, the homeowner isn't scrolling page two — they call whoever's in the top 3 of the Map Pack. If you're not visible there for 'plumber near me' and 'emergency plumber [city]', those calls go to a competitor. We build the local presence — GBP optimization, high-intent service pages, and Map Pack signals — designed to help customers find you when it counts.",
     painPoints: [
       "Emergency searches go to whoever ranks top 3 — invisible means zero calls",
       "Competitors with stronger GBP profiles steal jobs you should be winning",
@@ -43,7 +43,7 @@ export const industries: IndustryData[] = [
       {
         question: "How fast can a plumbing business rank in the Map Pack?",
         answer:
-          "Most plumbing clients see Map Pack movement in 30–60 days. Emergency searches in less competitive markets often move faster. We start with GBP and high-impact on-page fixes first.",
+          "Timelines vary by market, competition, and the condition of your existing site and profile. We start with a baseline, GBP improvements, and high-impact on-page fixes, then report measurable changes.",
       },
       {
         question: "Do you handle both organic and Map Pack SEO?",
@@ -68,7 +68,7 @@ export const industries: IndustryData[] = [
     headline: "Local SEO for Electricians",
     title: "Local SEO for Electricians",
     description:
-      "Electricians need to rank for both emergency calls and high-value projects. We build the local SEO presence that fills your calendar with panel upgrades, EV charger installs, and rewires.",
+      "Electricians need to rank for both emergency calls and high-value projects. We build local search visibility for panel upgrades, EV charger installations, rewiring, and other electrical services.",
     intro:
       "Electricians face a split market: homeowners searching 'electrician near me' at 9pm after a breaker trips, and contractors bidding on panel upgrades and whole-home rewires. The searches are different, the pages needed are different, and generic SEO misses both. We build a targeted presence — emergency service pages for the urgent calls and high-value project pages for the commercial work — so your business shows up when the job size actually matters.",
     painPoints: [
@@ -148,7 +148,7 @@ export const industries: IndustryData[] = [
       {
         question: "How long does it take to see results for HVAC SEO?",
         answer:
-          "Most HVAC clients see measurable ranking gains in 45–60 days. Markets with established competitors may take longer — we give you a clear baseline and timeline in the initial strategy.",
+          "SEO timelines depend on competition, the site's history, and implementation scope. We establish a baseline and track rankings, search visibility, and qualified inquiries over time.",
       },
     ],
   },
@@ -203,7 +203,7 @@ export const industries: IndustryData[] = [
     headline: "Local SEO for Roofing Companies",
     title: "Local SEO for Roofing Companies",
     description:
-      "Storm damage, replacements, and inspections — roofing has high-value searches and fierce competition. We get roofing companies into the Map Pack and ranking for the jobs that matter.",
+      "Storm damage, replacements, and inspections — roofing has high-value searches and fierce competition. We optimize roofing service pages and Google Business Profiles for the searches relevant to your work and service area.",
     intro:
       "Roofing is one of the most competitive local search markets — high average job value means every company is fighting for the same keywords. The businesses winning aren't necessarily the biggest; they're the ones with the strongest local SEO foundation: a fully optimized GBP, service pages that rank for specific roofing types and materials, and enough local authority to beat the storm-chasing competitors who show up after every weather event.",
     painPoints: [
@@ -248,7 +248,7 @@ export const industries: IndustryData[] = [
     headline: "Local SEO for Water Damage Restoration Companies",
     title: "Water Damage Restoration SEO",
     description:
-      "Water damage calls happen at 2am. Rank in the top 3 of the Map Pack for emergency restoration searches and capture the calls that competitors miss when they're not visible.",
+      "Water damage calls happen at 2am. Build stronger visibility for emergency restoration searches with clear service pages, a well-maintained Google Business Profile, and trackable contact paths.",
     intro:
       "Water damage restoration is the ultimate emergency service — a burst pipe or flooded basement generates a search within minutes and a call within seconds of clicking. There's no consideration phase. The homeowner calls whoever's first in the Map Pack. If that's not you, the job goes to a competitor while your phone sits quiet. We build the emergency-ready local presence that puts restoration companies at the top when disaster strikes: optimized GBP, fast-loading service pages, and the citation and review foundation Google trusts for high-stakes searches.",
     painPoints: [
@@ -338,7 +338,7 @@ export const industries: IndustryData[] = [
     headline: "Local SEO for Party Rental Companies",
     title: "Local SEO for Party Rental Companies",
     description:
-      "Bounce houses, tent rentals, tables and chairs — party rental searches are seasonal and local. We get rental companies ranking before the busy season so you're not scrambling for bookings.",
+      "Bounce houses, tent rentals, tables and chairs — party rental searches are seasonal and local. We help rental companies prepare service pages and Google Business Profiles ahead of seasonal demand.",
     intro:
       "Party rental bookings are driven by seasons, holidays, and school schedules — and the searches peak weeks before the event. By the time someone searches 'bounce house rental [city]' in late April, they're booking for June. If you're not already ranking, you miss the season. We build the local SEO foundation that gets party rental companies visible before peak periods: equipment-specific pages, local area targeting, and a GBP profile that turns searchers into booked reservations.",
     painPoints: [

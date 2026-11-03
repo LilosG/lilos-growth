@@ -8,7 +8,7 @@ import ProcessStep from "~/components/sections/ProcessStep.astro";
 import { Icon } from "astro-icon/components";
 import { industries, type IndustryData } from "~/data/industries";
 import { locations, type LocationData } from "~/data/locations";
-import { packages } from "~/data/packages";
+import { gbpManagement, packages } from "~/data/packages";
 
 export async function getStaticPaths() {
   const industryPaths = industries.map((industry) => ({
@@ -303,7 +303,9 @@ const locationServices = isLocation
               <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
                 Plans & Pricing
               </h2>
-              <p class="mt-4 text-base text-muted">Month-to-month. No setup fees. No rollovers.</p>
+              <p class="mt-4 text-base text-muted">
+                Month-to-month packages. Setup-month pricing is shown for each plan.
+              </p>
             </div>
             <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-3">
               {packages.map((pkg) => (
@@ -311,6 +313,7 @@ const locationServices = isLocation
                   title={pkg.name}
                   eyebrow={pkg.tagline}
                   price={String(pkg.price)}
+                  priceNote={`Setup month: $${pkg.setupPrice.toLocaleString("en-US")}`}
                   period="mo"
                   featured={pkg.featured}
                   badgeText={pkg.badge}
@@ -321,7 +324,7 @@ const locationServices = isLocation
               ))}
             </div>
             <p class="mt-8 text-center text-sm text-body-light">
-              Need just GBP management? Add it for $250/mo, or{" "}
+              Need standalone GBP management? Available for ${gbpManagement.price}/mo, or{" "}
               <a href="/packages" class="font-semibold text-primary underline">
                 view all packages
               </a>
@@ -515,14 +518,18 @@ const locationServices = isLocation
             {location!.slug === "local-seo-san-diego" && (
               <p class="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-body">
                 The goal is qualified discovery, not pages made to target every city. We connect
-                search demand to the services you actually provide and the ways customers contact you.
+                search demand to the services you actually provide and the ways customers contact
+                you.
               </p>
             )}
           </div>
         </section>
 
         {location!.slug === "local-seo-san-diego" && (
-          <section class="border-t border-gray-100 bg-white py-20" aria-label="San Diego project experience">
+          <section
+            class="border-t border-gray-100 bg-white py-20"
+            aria-label="San Diego project experience"
+          >
             <div class="mx-auto max-w-5xl px-6">
               <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
                 Local Experience
@@ -537,7 +544,10 @@ const locationServices = isLocation
                 require different content and conversion paths.
               </p>
               <div class="mt-8 flex flex-wrap gap-4">
-                <a href="/results/wheyland-electric" class="font-semibold text-primary underline underline-offset-4">
+                <a
+                  href="/results/wheyland-electric"
+                  class="font-semibold text-primary underline underline-offset-4"
+                >
                   View an electrical contractor project
                 </a>
                 <a href="/results" class="font-semibold text-primary underline underline-offset-4">

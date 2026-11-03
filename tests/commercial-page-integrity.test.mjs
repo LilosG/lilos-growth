@@ -48,4 +48,20 @@ describe("commercial-page integrity", () => {
     expect(page).toContain('id="pricing"');
     expect(page).not.toContain('href="#packages"');
   });
+
+  it("uses canonical package pricing on generated industry landing pages", () => {
+    const page = read("[slug].astro");
+    expect(page).toContain('import { gbpManagement, packages } from "~/data/packages"');
+    expect(page).toContain("pkg.setupPrice.toLocaleString");
+    expect(page).toContain("{gbpManagement.price}/mo");
+    expect(page).not.toMatch(/No setup fees|\$250\/mo/i);
+  });
+
+  it("avoids unsubstantiated ranking and timing promises in industry metadata", () => {
+    const industries = fs.readFileSync(path.resolve("src/data/industries.ts"), "utf8");
+    expect(industries).not.toContain("We get your plumbing business into the top 3");
+    expect(industries).not.toContain("Most plumbing clients see Map Pack movement in 30");
+    expect(industries).not.toContain("Most HVAC clients see measurable ranking gains in 45");
+    expect(industries).not.toContain("Rank in the top 3 of the Map Pack for emergency restoration");
+  });
 });

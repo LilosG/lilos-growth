@@ -47,7 +47,11 @@ jobs:
               '*.yaml' '*.yml' '*.md' '*.mdx'
           )
           if (( ${#changed[@]} > 0 )); then
-            npx prettier --check "${changed[@]}"
+            if ! npx prettier --check "${changed[@]}"; then
+              npx prettier --write "${changed[@]}"
+              git diff -- "${changed[@]}"
+              exit 1
+            fi
           else
             echo "No changed files require Prettier validation."
           fi

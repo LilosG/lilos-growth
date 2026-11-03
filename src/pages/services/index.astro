@@ -4,10 +4,11 @@ import CheckListItem from "~/components/ui/CheckListItem.astro";
 import Card from "~/components/ui/Card.astro";
 import Button from "~/components/ui/Button.astro";
 import { packages } from "~/data/packages";
+import { industries } from "~/data/industries";
 
 export const title = "Local SEO & Website Services for Home Service Businesses | Lilos Growth";
 export const description =
-  "Premium web design, Google Business Profile optimization, and Local SEO built for home service businesses. Month-to-month pricing, GBP management included in every plan.";
+  "Local SEO, Google Business Profile management, and website design for home services, restaurants, and other local businesses. Explore month-to-month and project pricing.";
 ---
 
 <Layout {title} {description}>
@@ -32,8 +33,8 @@ export const description =
             GBP Optimization Included
           </p>
           <p class="mb-10 max-w-lg text-lg font-medium text-white/65">
-            Built for plumbers, HVAC, cleaning, pest control, landscaping, and other local trades.
-            We deliver web design, GBP management, and local SEO that drives calls.
+            Built for trades, hospitality, and other local businesses. We combine web design, GBP
+            management, and local SEO to improve search visibility and inquiry paths.
           </p>
           <div class="flex flex-wrap gap-4">
             <Button
@@ -439,6 +440,38 @@ export const description =
   </section>
 
   <!-- PACKAGES TEASER -->
+  <!-- Industry discovery: contextual links to dedicated commercial landing pages -->
+  <section class="border-t border-border-subtle bg-white py-20" aria-labelledby="industry-heading">
+    <div class="mx-auto max-w-6xl px-6">
+      <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Who We Help</p>
+      <h2
+        id="industry-heading"
+        class="mb-4 font-heading text-3xl font-extrabold text-heading md:text-4xl"
+      >
+        Local SEO Built Around Your Industry
+      </h2>
+      <p class="mb-8 max-w-2xl text-base leading-relaxed text-body">
+        Different industries compete for different searches. Explore how we approach local
+        visibility for your services, customers, and market.
+      </p>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          industries.map((industry) => (
+            <a
+              href={`/${industry.slug}`}
+              class="group flex items-center justify-between rounded-xl border border-border-base px-5 py-4 font-semibold text-heading transition hover:border-primary hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <span>{industry.name}</span>
+              <span aria-hidden="true" class="text-primary transition group-hover:translate-x-1">
+                →
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <section id="packages" class="bg-background-cream py-24">
     <div class="mx-auto max-w-3xl px-6 text-center">
       <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Pricing</p>
@@ -446,8 +479,8 @@ export const description =
         Simple, Honest Pricing
       </h2>
       <p class="mx-auto mb-10 max-w-xl text-base text-muted">
-        Month-to-month. No setup fees. No contracts. GBP management included in every bundled plan,
-        starting at $750/mo.
+        Month-to-month retainers with clearly disclosed setup-month pricing. GBP management is
+        included in every bundled plan, starting at ${packages[0].price.toLocaleString()}/mo.
       </p>
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
         {
@@ -467,6 +500,7 @@ export const description =
                 </span>
                 <span class="text-sm text-body">/mo</span>
               </div>
+              <p class="mt-2 text-sm text-muted">Setup month: ${pkg.setupPrice.toLocaleString()}</p>
             </div>
           ))
         }
@@ -493,11 +527,11 @@ export const description =
             ],
             [
               "How quickly will I see results?",
-              "Most companies start seeing more calls, leads, and improved rankings within 30–60 days. We focus on quick wins from day one.",
+              "Timelines vary by competition, market, and starting conditions. We establish a baseline, prioritize changes, and report on rankings, search visibility, and inquiries.",
             ],
             [
               "Are there any setup fees?",
-              "Some one-time projects (like a full site build) have a flat fee. Ongoing services are month-to-month and fully transparent.",
+              "Bundled SEO plans have a higher setup-month price, shown in the pricing cards. Standalone GBP management has no setup fee. Ongoing retainers are month-to-month.",
             ],
             [
               "Do I need to understand SEO or websites to get results?",
