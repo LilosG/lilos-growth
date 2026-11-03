@@ -4,6 +4,7 @@ import CheckListItem from "~/components/ui/CheckListItem.astro";
 import Card from "~/components/ui/Card.astro";
 import Button from "~/components/ui/Button.astro";
 import { packages } from "~/data/packages";
+import { industries } from "~/data/industries";
 
 export const title = "Local SEO & Website Services for Home Service Businesses | Lilos Growth";
 export const description =
@@ -439,6 +440,31 @@ export const description =
   </section>
 
   <!-- PACKAGES TEASER -->
+  <!-- Industry discovery: contextual links to dedicated commercial landing pages -->
+  <section class="border-t border-border-subtle bg-white py-20" aria-labelledby="industry-heading">
+    <div class="mx-auto max-w-6xl px-6">
+      <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Who We Help</p>
+      <h2 id="industry-heading" class="mb-4 font-heading text-3xl font-extrabold text-heading md:text-4xl">
+        Local SEO Built Around Your Industry
+      </h2>
+      <p class="mb-8 max-w-2xl text-base leading-relaxed text-body">
+        Different industries compete for different searches. Explore how we approach local visibility
+        for your services, customers, and market.
+      </p>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {industries.map((industry) => (
+          <a
+            href={`/${industry.slug}`}
+            class="group flex items-center justify-between rounded-xl border border-border-base px-5 py-4 font-semibold text-heading transition hover:border-primary hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            <span>{industry.name}</span>
+            <span aria-hidden="true" class="text-primary transition group-hover:translate-x-1">→</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section id="packages" class="bg-background-cream py-24">
     <div class="mx-auto max-w-3xl px-6 text-center">
       <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Pricing</p>
