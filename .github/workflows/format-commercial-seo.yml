@@ -1,0 +1,46 @@
+name: Format commercial SEO batch (one-shot)
+
+on:
+  push:
+    branches: [fix/commercial-cta-pricing-integrity-2026-11-03]
+    paths: [.github/workflows/format-commercial-seo.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/commercial-cta-pricing-integrity-2026-11-03
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.4
+          cache: npm
+      - run: npm ci
+      - name: Normalize changed source, tests and audit
+        run: |
+          npx prettier --write \
+            src/pages/services/google-business-profile-optimization/index.astro \
+            src/pages/services/local-seo/index.astro \
+            src/pages/services/web-design/index.astro \
+            src/pages/contact.astro \
+            tests/commercial-page-integrity.test.mjs \
+            audits/lilosgrowth-2026-11-03/commercial-seo-conversion-audit.md
+          npx vitest run tests/commercial-page-integrity.test.mjs
+      - name: Commit format-verified changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/pages/services/google-business-profile-optimization/index.astro \
+            src/pages/services/local-seo/index.astro \
+            src/pages/services/web-design/index.astro \
+            src/pages/contact.astro \
+            tests/commercial-page-integrity.test.mjs \
+            audits/lilosgrowth-2026-11-03/commercial-seo-conversion-audit.md
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "style: format audited service conversion pages and tests"
+          git push origin HEAD:refs/heads/fix/commercial-cta-pricing-integrity-2026-11-03
