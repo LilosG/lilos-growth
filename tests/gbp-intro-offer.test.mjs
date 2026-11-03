@@ -16,7 +16,7 @@ describe("GBP introductory offer integrity", () => {
 
   it("never treats a Formspree inquiry as a payment", () => {
     const page = read("src/pages/google-business-profile-offer/index.astro");
-    expect(page).toContain('const checkoutUrl = getGbpCheckoutUrl');
+    expect(page).toContain("const checkoutUrl = getGbpCheckoutUrl");
     expect(page).toContain("gbp_offer_inquiry_submitted");
     expect(page).toContain("gbp_offer_checkout_started");
     expect(page).not.toContain("gbp_offer_purchase_completed");
