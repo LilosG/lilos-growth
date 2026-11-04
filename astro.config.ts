@@ -53,7 +53,6 @@ export default defineConfig({
         ]).has(pathname);
       },
       customPages: ["https://lilosgrowth.com/blog"],
-
     }),
     mdx(),
     icon({
