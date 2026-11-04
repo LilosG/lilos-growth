@@ -1,7 +1,7 @@
 ---
 date: 2025-10-15T02:22:52-07:00
 title: "Local Service Page Template: Write Useful, Accurate Content"
-description: "An editorial brief and QA template for a location-relevant service page, including verified service details, original evidence, internal links, and working inquiry paths."
+description: "Use this local service page brief to verify service details, write original content, connect internal links, and test customer inquiry paths."
 slug: long-tail-local-seo-guide
 category: "SEO"
 tags: ["local-seo", "long-tail", "content", "strategy", "gbp"]
