@@ -33,7 +33,7 @@ describe("Phase 5 GBP offer lead qualification and navigation", () => {
     expect(offer).toContain("const managementDays = 30");
     expect(offer).toContain("profileCount: 1");
     expect(page).toContain("No automatic renewal");
-    expect(page).toContain('action={formAction}');
+    expect(page).toContain("action={formAction}");
     expect(page).not.toContain("gbp_offer_purchase_completed");
   });
 
