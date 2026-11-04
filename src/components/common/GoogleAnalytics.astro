@@ -25,7 +25,8 @@ const inlineGA = enabled
       if (!gaId) return;
 
       function loadGa() {
-        if (window.__gaLoaded) return;
+        if (window.__gaLoaded || window.__gaScheduled) return;
+        window.__gaScheduled = true;
 
         // Use requestIdleCallback to defer GA loading until browser is idle
         const loadScript = function() {
@@ -34,9 +35,9 @@ const inlineGA = enabled
           s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(gaId);
           document.head.appendChild(s);
           window.dataLayer = window.dataLayer || [];
-          function gtag(){ dataLayer.push(arguments); }
-          gtag("js", new Date());
-          gtag("config", gaId, {
+          window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+          window.gtag("js", new Date());
+          window.gtag("config", gaId, {
             anonymize_ip: true,
             send_page_view: true
           });

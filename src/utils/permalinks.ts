@@ -42,7 +42,7 @@ export const POST_PERMALINK_PATTERN = trimSlash(BLOG_CFG?.post?.permalink || `${
 export const getCanonical = (path = ""): string | URL => {
   const base = SITE_CFG.site ?? "http://localhost";
   const url = String(new URL(path, base));
-  if (SITE_CFG.trailingSlash === false && path && url.endsWith("/")) {
+  if (SITE_CFG.trailingSlash === false && new URL(url).pathname !== "/" && url.endsWith("/")) {
     return url.slice(0, -1);
   } else if (SITE_CFG.trailingSlash === true && path && !url.endsWith("/")) {
     return url + "/";

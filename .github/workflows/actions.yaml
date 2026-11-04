@@ -55,6 +55,8 @@ jobs:
           else
             echo "No changed files require Prettier validation."
           fi
+      - name: Verify blog publication and canonical redirect integrity
+        run: node scripts/audit-blog-publication.mjs
       - name: Test SEO and content regressions
         run: npx vitest run
 

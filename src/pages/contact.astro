@@ -46,7 +46,7 @@ export const description =
         Let's Grow Your Business.<br />Get in Touch!
       </h1>
       <p class="mb-7 max-w-lg text-center text-base text-body">
-        Fill out the form below and a local search strategist will respond within 24 hours.<br />
+        Send a message and we aim to reply within 1 business day.<br />
         Call or text: <a
           data-evt="contact_phone_click"
           href="tel:+18587222920"
@@ -122,7 +122,10 @@ export const description =
         </div>
         <div>Serving local businesses across trades, hospitality, and other industries</div>
         <div class="mt-2 text-xs text-gray-400">
-          We’ll reply within 24 hours. Your info is always confidential.
+          We aim to reply within 1 business day. See our <a
+            href="/privacy"
+            class="underline underline-offset-2">Privacy Policy</a
+          > for how we handle inquiries.
         </div>
       </div>
     </div>
@@ -246,6 +249,22 @@ export const description =
       }
       // Re-bind after Astro client navigation if used
       document.addEventListener("astro:page-load", onReady);
+    })();
+  </script>
+  <!-- Conversion events: attempts are never counted as confirmed leads. -->
+  <script is:inline>
+    (() => {
+      const form = document.querySelector('form[action="https://formspree.io/f/movlbqdk"]');
+      form?.addEventListener("submit", () => {
+        window.trackEvent?.("contact_form_submit_attempt", { form_name: "contact" });
+      });
+
+      // A completed Calendly event is a booking signal, not merely a widget open/click.
+      window.addEventListener("message", (event) => {
+        if (event.origin !== "https://calendly.com") return;
+        if (!event.data || event.data.event !== "calendly.event_scheduled") return;
+        window.trackEvent?.("calendly_event_scheduled", { booking_source: "contact_page" });
+      });
     })();
   </script>
 </Layout>
