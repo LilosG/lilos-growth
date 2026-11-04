@@ -7,7 +7,7 @@ describe("commercial credibility and conversion paths", () => {
   it("avoids unsourced portfolio-wide statistics on the results page", () => {
     const page = read("src/pages/results.astro");
     expect(page).toContain("const measurementPillars =");
-    expect(page).toContain("Individual project outcomes are not guarantees");
+    expect(page.replace(/\s+/g, " ")).toContain("Individual project outcomes are not guarantees");
     expect(page).not.toContain("const agencyStats =");
     expect(page).not.toContain('label: "Client retention"');
     expect(page).not.toContain('label: "Avg lead increase"');
