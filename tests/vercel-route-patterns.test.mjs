@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import fs from "node:fs";
-import { auditVercelRoutePatterns, findMultiParameterSegments } from "../scripts/audit-vercel-route-patterns.mjs";
+import {
+  auditVercelRoutePatterns,
+  findMultiParameterSegments,
+} from "../scripts/audit-vercel-route-patterns.mjs";
 
 describe("Vercel route pattern guard", () => {
   it("rejects multiple path parameters in a single segment", () => {
