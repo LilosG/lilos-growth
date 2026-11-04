@@ -7,12 +7,12 @@ Scope: npm runtime advisory inventory and CI security regression controls; no pa
 ## Observed npm audit baseline
 
 | Category | All dependencies | Runtime dependencies (`--omit=dev`) |
-| --- | --- | --- |
-| Critical | 0 | 0 |
-| High | 3 | 3 |
-| Moderate | 17 | 3 |
-| Low | 0 | 0 |
-| Total | 20 | 6 |
+| -------- | ---------------- | ----------------------------------- |
+| Critical | 0                | 0                                   |
+| High     | 3                | 3                                   |
+| Moderate | 17               | 3                                   |
+| Low      | 0                | 0                                   |
+| Total    | 20               | 6                                   |
 
 These are npm audit dependency findings, **not** proven exploitable production routes or a count of distinct CVEs.
 
