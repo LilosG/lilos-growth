@@ -42,7 +42,10 @@ describe("blog editorial publication integrity", () => {
 
   it("flags internal links to retired article URLs without hiding their destination", () => {
     const result = reviewBlogContent({
-      posts: [post("survivor", "A useful guide"), post("referrer", "Another post", "Read [the old guide](/blog/old).")],
+      posts: [
+        post("survivor", "A useful guide"),
+        post("referrer", "Another post", "Read [the old guide](/blog/old)."),
+      ],
       redirects: [["/blog/old", "/blog/survivor"]],
     });
     expect(result.errors).toEqual([]);
