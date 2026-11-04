@@ -16,11 +16,11 @@ describe("GBP introductory offer landing page redesign", () => {
   it("keeps honest historical proof separate from the $199 package", () => {
     expect(page).toContain("not a promise of results");
     expect(page).toContain("broader engagement");
-    expect(page).toContain('href={gbpProof[0].image}');
+    expect(page).toContain("href={gbpProof[0].image}");
   });
 
   it("preserves the existing protected lead, consent and payment semantics", () => {
-    expect(page).toContain('action={formAction}');
+    expect(page).toContain("action={formAction}");
     expect(page).toContain('id="gbp-offer-form"');
     expect(page).toContain('id="offer-form-success"');
     expect(page).toContain('id="offer-form-status"');
