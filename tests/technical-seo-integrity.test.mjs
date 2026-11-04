@@ -7,7 +7,7 @@ describe("technical SEO release integrity", () => {
   it("does not fabricate sitemap lastmod dates from build time", () => {
     const config = read("astro.config.ts");
     expect(config).toContain("sitemap({");
-    expect(config).not.toContain('lastmod: new Date().toISOString()');
+    expect(config).not.toContain("lastmod: new Date().toISOString()");
     expect(config).toContain('"/thank-you"');
     expect(config).toContain('pathname.startsWith("/offers/")');
   });
