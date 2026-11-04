@@ -1,7 +1,7 @@
 ---
 date: 2025-10-13T09:36:29-07:00
 title: "Long-Tail Local SEO Strategy: Prioritize Searches That Fit Real Services"
-description: "A practical prioritization framework for local businesses: group service queries by intent, evaluate geographic relevance, collect proof, and measure qualified inquiries."
+description: "Prioritize long-tail local SEO with real services, customer intent, geographic relevance, original proof, and qualified inquiry measurement."
 slug: local-seo-long-tail-strategy
 category: "SEO"
 tags: ["local-seo", "content", "strategy", "long-tail"]
