@@ -22,9 +22,9 @@ describe("runtime audit baseline", () => {
   });
 
   it("rejects a new high-severity dependency", () => {
-    expect(evaluateRuntimeSecurity([...historical, { name: "new-package", severity: "high" }])).toEqual([
-      "New high-severity runtime dependency: new-package",
-    ]);
+    expect(
+      evaluateRuntimeSecurity([...historical, { name: "new-package", severity: "high" }])
+    ).toEqual(["New high-severity runtime dependency: new-package"]);
   });
 
   it("rejects new high-severity advisories against a grandfathered package", () => {
