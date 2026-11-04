@@ -27,7 +27,7 @@ const locationBySlug = new Map(locations.map((location) => [location.slug, locat
 export function getRelatedIndustries(slug: string) {
   return (relatedIndustrySlugs[slug] ?? [])
     .map((related) => industryBySlug.get(related))
-    .filter((industry) => industry !== undefined && industry.slug !== slug);
+    .filter((industry): industry is (typeof industries)[number] => industry !== undefined && industry.slug !== slug);
 }
 
 /** Market-specific path to the core local-SEO service and relevant industry examples. */
@@ -41,7 +41,7 @@ export function getLocationIndustryExamples(slug: string) {
         : slug === "local-seo-los-angeles"
           ? ["hvac-seo", "roofing-seo", "cleaning-company-seo"]
           : ["plumber-seo", "electrician-seo", "water-damage-restoration-seo"];
-  return examples.map((related) => industryBySlug.get(related)).filter((industry) => industry !== undefined);
+  return examples.map((related) => industryBySlug.get(related)).filter((industry): industry is (typeof industries)[number] => industry !== undefined);
 }
 
 /** Product-level pathways supported by actual published service routes. */
