@@ -36,14 +36,14 @@ The results page claimed portfolio-wide `+142%` average lead increase, `3.2×` c
 
 ## Proof artifacts requiring owner-side verification before stronger claims
 
-| Claim family | Existing source | Required evidence before endorsing or expanding |
-| --- | --- | --- |
-| Testimonials attributed to John T., Melissa R., Anthony K., Chris M., Dana L., Brandon S. | `src/data/proof.ts` | Original testimonial, identity/attribution approval, date, context, permission for publication |
-| Services aggregate +142%, 3.2× GBP, 96% CWV | `src/data/proof.ts` | Per-client denominators, observation window, aggregation methodology, raw analytics and Core Web Vitals runs |
-| Project-level lead and traffic growth | `src/data/results.ts` | Raw before/after period exports, attribution, client authorization, sample size and calculation reproducibility |
-| Park 101 GBP call and interaction growth | `src/data/results.ts` | GBP performance screenshots/exports for Feb–June 2026 and June 2025, definitions of calls and interactions |
-| Wheyland Electric marketing attribution | `src/data/results.ts` and `src/pages/results/wheyland-electric.astro` | GA4 events, form records, call tracking, launch comparison dates, client authorization |
-| GBP snapshot figures | `src/pages/results.astro` and images | Exact screenshot/source periods, context for percentages, confirmation the display matches the source |
+| Claim family                                                                              | Existing source                                                       | Required evidence before endorsing or expanding                                                                 |
+| ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Testimonials attributed to John T., Melissa R., Anthony K., Chris M., Dana L., Brandon S. | `src/data/proof.ts`                                                   | Original testimonial, identity/attribution approval, date, context, permission for publication                  |
+| Services aggregate +142%, 3.2× GBP, 96% CWV                                               | `src/data/proof.ts`                                                   | Per-client denominators, observation window, aggregation methodology, raw analytics and Core Web Vitals runs    |
+| Project-level lead and traffic growth                                                     | `src/data/results.ts`                                                 | Raw before/after period exports, attribution, client authorization, sample size and calculation reproducibility |
+| Park 101 GBP call and interaction growth                                                  | `src/data/results.ts`                                                 | GBP performance screenshots/exports for Feb–June 2026 and June 2025, definitions of calls and interactions      |
+| Wheyland Electric marketing attribution                                                   | `src/data/results.ts` and `src/pages/results/wheyland-electric.astro` | GA4 events, form records, call tracking, launch comparison dates, client authorization                          |
+| GBP snapshot figures                                                                      | `src/pages/results.astro` and images                                  | Exact screenshot/source periods, context for percentages, confirmation the display matches the source           |
 
 Those are **review items**, not findings that the figures or testimonials are false. Do not fabricate replacement metrics or quotes. Do not claim the results page's case-study statistics have been audited against source records.
 
