@@ -15,6 +15,50 @@ function read(relative) {
 const renderedPages = fs.readdirSync(output, { recursive: true }).filter((filename) => String(filename).endsWith(".html"));
 assert.ok(renderedPages.length >= 200, `Unexpectedly small static site: ${renderedPages.length} pages`);
 
+// Verify indexable commercial routes and intentional non-indexable utility routes
+// against the generated HTML, not just page-source configuration.
+const inspectedRoutes = [
+  { path: "/", file: "index.html" },
+  { path: "/services", file: "services/index.html" },
+  { path: "/services/local-seo", file: "services/local-seo/index.html" },
+  { path: "/services/web-design", file: "services/web-design/index.html" },
+  {
+    path: "/services/google-business-profile-optimization",
+    file: "services/google-business-profile-optimization/index.html",
+  },
+  { path: "/google-business-profile-offer", file: "google-business-profile-offer/index.html" },
+  { path: "/contact", file: "contact/index.html" },
+  { path: "/plumber-seo", file: "plumber-seo/index.html" },
+  { path: "/local-seo-san-diego", file: "local-seo-san-diego/index.html" },
+  { path: "/thank-you", file: "thank-you/index.html", noindex: true },
+];
+
+const canonicalHost = "https://lilosgrowth.com";
+for (const route of inspectedRoutes) {
+  const html = read(route.file);
+  const expectedCanonical = canonicalHost + (route.path === "/" ? "/" : route.path);
+  const canonicals = [...html.matchAll(/<link\s+[^>]*rel=["']canonical["'][^>]*>/gi)];
+  assert.equal(canonicals.length, 1, `Expected one canonical on ${route.path}`);
+  const canonical = canonicals[0][0].match(/href=["']([^"']+)["']/i)?.[1];
+  assert.equal(canonical, expectedCanonical, `Unexpected canonical on ${route.path}`);
+
+  const robots = html.match(/<meta\s+[^>]*name=["']robots["'][^>]*>/i)?.[0] ?? "";
+  const directives = robots.match(/content=["']([^"']+)["']/i)?.[1] ?? "";
+  assert.ok(directives, `Missing robots directives on ${route.path}`);
+  assert.match(
+    directives,
+    route.noindex ? /(?:^|[,\s])noindex(?:$|[,\s])/i : /(?:^|[,\s])index(?:$|[,\s])/i,
+    `Unexpected indexability on ${route.path}`
+  );
+
+  const jsonLd = [...html.matchAll(/<script\s+[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
+  assert.ok(jsonLd.length > 0, `Missing structured data on ${route.path}`);
+  for (const [, raw] of jsonLd) {
+    const schema = JSON.parse(raw);
+    assert.ok(schema && typeof schema === "object", `Invalid JSON-LD on ${route.path}`);
+  }
+}
+
 const homepage = read("index.html");
 const blogIndex = read("blog/index.html");
 const article = read("blog/top-local-seo-agencies-roofers-san-diego-local-guide/index.html");
@@ -46,7 +90,7 @@ const compiled = cssFiles.map((name) => fs.readFileSync(path.join(styles, name),
 assert.ok(compiled.includes(".bg-primary"), "Tailwind theme utilities did not compile");
 
 console.log("Built-site smoke validation passed:", {
-  routes: 3,
+  routes: inspectedRoutes.length,
   feeds: 2,
   cssFiles: cssFiles.length,
 });
