@@ -1,4 +1,5 @@
 import { spawnSync } from "node:child_process";
+import { evaluateRuntimeSecurity } from "./security-runtime-baseline.mjs";
 
 function audit(args) {
   const result = spawnSync("npm", ["audit", "--json", ...args], {
@@ -71,3 +72,11 @@ console.log(
   )
 );
 console.log("This is a discovery report; it does not run npm audit fix or apply major updates.");
+
+const violations = evaluateRuntimeSecurity(production.rows);
+if (violations.length) {
+  console.error("New or critical runtime security findings require triage:", JSON.stringify(violations, null, 2));
+  process.exitCode = 1;
+} else {
+  console.log("Runtime security regression gate passed (reviewed baseline findings remain open).");
+}

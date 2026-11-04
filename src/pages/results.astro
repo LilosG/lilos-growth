@@ -28,17 +28,17 @@ const gbpResults = [
   },
 ];
 
-const agencyStats = [
-  { value: "+142%", label: "Avg lead increase", sub: "Month over month" },
-  { value: "3.2×", label: "GBP calls per client", sub: "Average improvement" },
-  { value: "-38%", label: "Cost per lead", sub: "vs. paid ads baseline" },
-  { value: "96%", label: "Client retention", sub: "Long-term partnerships" },
+const measurementPillars = [
+  { label: "Search visibility", detail: "Relevant queries and landing pages" },
+  { label: "Business Profile actions", detail: "Calls and other reported interactions" },
+  { label: "Qualified inquiries", detail: "Verified contact and booking outcomes" },
+  { label: "Website experience", detail: "Performance, accessibility, and usability" },
 ];
 ---
 
 <PageLayout
   title="Client Results & Case Studies | Lilos Growth"
-  description="Real results for home service businesses: more calls, better rankings, faster websites. See how we help pest control, HVAC, restoration, and other local businesses grow."
+  description="Explore Lilos Growth client projects across trades, hospitality, and specialized businesses, including website design, GBP management, and local SEO."
 >
   <!-- HERO -->
   <section class="relative overflow-hidden bg-secondary pb-24 pt-20" aria-label="Results hero">
@@ -54,8 +54,8 @@ const agencyStats = [
         More calls. Better rankings.<br /><span class="text-primary">Real growth.</span>
       </h1>
       <p class="mb-8 max-w-2xl text-lg font-medium text-white/65">
-        We help home service businesses dominate local search with fast websites, optimized Google
-        Business Profiles, and local SEO that actually drives calls.
+        Explore selected website, Google Business Profile, and local SEO work across trades,
+        hospitality, and other local industries. Results vary by client and market.
       </p>
       <div class="flex flex-wrap gap-3">
         <span
@@ -74,16 +74,25 @@ const agencyStats = [
     </div>
   </section>
 
-  <!-- AGENCY STATS BAR -->
-  <section class="bg-white py-16">
+  <!-- MEASUREMENT FRAMEWORK: do not publish unsourced cross-client aggregates. -->
+  <section class="bg-white py-16" aria-labelledby="measurement-heading">
     <div class="mx-auto max-w-5xl px-6">
-      <div class="grid grid-cols-2 gap-5 md:grid-cols-4">
+      <h2
+        id="measurement-heading"
+        class="mb-3 text-center font-heading text-2xl font-bold text-heading"
+      >
+        What We Measure
+      </h2>
+      <p class="mx-auto mb-8 max-w-2xl text-center text-sm leading-relaxed text-body">
+        We evaluate each engagement against its own starting point and objectives. Individual
+        project outcomes are not guarantees of future results.
+      </p>
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {
-          agencyStats.map((stat) => (
-            <Card class="hover:border-primary/30 text-center shadow-sm transition hover:shadow-md">
-              <p class="font-heading text-4xl font-extrabold text-primary">{stat.value}</p>
-              <p class="mt-1 text-sm font-bold text-heading">{stat.label}</p>
-              <p class="mt-1 text-xs text-muted">{stat.sub}</p>
+          measurementPillars.map((pillar) => (
+            <Card class="border-border-base text-center shadow-sm">
+              <h3 class="font-heading text-base font-bold text-heading">{pillar.label}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-body">{pillar.detail}</p>
             </Card>
           ))
         }
@@ -203,8 +212,8 @@ const agencyStats = [
           Google Business Profile Performance
         </h2>
         <p class="mx-auto mt-4 max-w-2xl text-base text-body">
-          Real performance data from profiles we manage. Direction requests, calls, and direct
-          customer interactions.
+          Selected Business Profile reports and interaction snapshots from individual engagements.
+          These metrics describe the periods shown, not guaranteed future outcomes.
         </p>
       </div>
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
@@ -250,8 +259,7 @@ const agencyStats = [
           More Client Wins
         </p>
         <h2 class="font-heading text-3xl font-bold text-heading md:text-4xl">
-          From pest control to restoration — we help home service businesses dominate their local
-          markets
+          Projects across pest control, restoration, electrical services, hospitality, and more
         </h2>
       </div>
 
@@ -345,8 +353,8 @@ const agencyStats = [
         Ready to be our<br /><span class="text-primary">next case study?</span>
       </h2>
       <p class="mb-10 text-xl font-medium text-white/65">
-        We'll audit your GBP and site, find the 3 biggest gaps costing you calls, and map out
-        exactly what to do next — free.
+        We’ll review your website and Google Business Profile, identify practical opportunities, and
+        explain recommended next steps in an introductory conversation.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
         <Button
@@ -359,6 +367,34 @@ const agencyStats = [
           Get a Free Audit
         </Button>
         <Button href="/packages" variant="outline-white" size="lg">See Pricing</Button>
+      </div>
+    </div>
+  </section>
+  <section
+    class="border-t border-border-base bg-background-cream py-14"
+    aria-labelledby="results-next-steps"
+  >
+    <div class="mx-auto max-w-6xl px-6">
+      <h2 id="results-next-steps" class="font-heading text-2xl font-bold text-heading md:text-3xl">
+        Explore the work behind the projects
+      </h2>
+      <p class="mt-3 max-w-3xl text-base leading-relaxed text-body">
+        A project example is a starting point, not a promise of identical outcomes. Review the
+        relevant services and industry approaches to see what might fit your business.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
+        <a class="text-primary underline-offset-4 hover:underline" href="/services/local-seo">
+          Local SEO strategy
+        </a>
+        <a class="text-primary underline-offset-4 hover:underline" href="/services/web-design">
+          Website design
+        </a>
+        <a class="text-primary underline-offset-4 hover:underline" href="/electrician-seo">
+          SEO for electricians
+        </a>
+        <a class="text-primary underline-offset-4 hover:underline" href="/pest-control-seo">
+          SEO for pest control companies
+        </a>
       </div>
     </div>
   </section>

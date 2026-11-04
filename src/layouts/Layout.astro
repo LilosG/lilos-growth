@@ -241,14 +241,22 @@ declare global {
     <!-- Event bridge: window.trackEvent -> Vercel (va) & GA4 (gtag) if available -->
     <script is:inline>
       window.trackEvent = (name, data = {}) => {
+        // Do not emit analytics events unless the visitor has explicitly opted in.
+        try {
+          if (localStorage.getItem("lg_cookie_consent") !== "accepted") return;
+        } catch {
+          return;
+        }
+
+        const eventName = String(name);
         try {
           const va = /** @type {any} */ (window).va;
-          if (typeof va === "function") va("event", { name: String(name), data });
+          if (typeof va === "function") va("event", { name: eventName, data });
         } catch {}
 
         try {
           // @ts-expect-error: gtag exists only if GA loaded
-          window.gtag?.("event", String(name), data);
+          if (typeof window.gtag === "function") window.gtag("event", eventName, data);
         } catch {}
       };
     </script>

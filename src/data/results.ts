@@ -328,7 +328,7 @@ export const resultsCaseStudies: CaseStudy[] = [
       },
     ],
     blurb:
-      "GBP management only, no site rebuild. Took over the profile at the start of May 2026. Calls averaged ~208/mo across Feb-Apr (213 in May — consistent with that baseline, not a fluke low month) before jumping to 880 in June. Profile interactions followed the same pattern: ~3,161/mo average Feb-Apr, 3,523 in May, then 7,798 in June. June also beat June 2025 by +188.5% (calls) and +109.7% (interactions) — same month, year prior, so it's not a seasonal artifact.",
+      "GBP management only, no site rebuild. Took over the profile at the start of May 2026. Calls averaged ~208/mo across Feb-Apr (213 in May — consistent with that baseline, not a fluke low month) before jumping to 880 in June. Profile interactions followed the same pattern: ~3,161/mo average Feb-Apr, 3,523 in May, then 7,798 in June. June also beat June 2025 by +188.5% (calls) and +109.7% (interactions) — a useful year-over-year comparison, although seasonality and other factors cannot be excluded.",
   },
 ];
 
@@ -338,7 +338,7 @@ export const caseStudies = resultsCaseStudies;
 export const resultsFaqs: FaqItem[] = [
   {
     q: "How quickly will I see results?",
-    a: "Technical improvements (speed, structure) are immediate. Local SEO momentum typically builds over 6–12 weeks as Google re-crawls and trusts the changes.",
+    a: "Some technical fixes can be implemented promptly, but changes in search visibility and qualified inquiries depend on the market, existing site, competition, and Google’s processing. We establish a baseline and monitor outcomes rather than promise a ranking or lead timeline.",
   },
   {
     q: "Do I need to increase my ad spend?",

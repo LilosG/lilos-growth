@@ -221,12 +221,10 @@ const effectiveMetadata = {
       const el = e.target && e.target.closest ? e.target.closest("[data-evt]") : null;
       if (!el) return;
       const evt = el.getAttribute("data-evt");
-      // @ts-expect-error gtag optional
-      if (!evt || typeof window === "undefined" || typeof window.gtag !== "function") return;
-      const label =
-        el.href || el.getAttribute("aria-label") || (el.textContent ? el.textContent.trim() : "");
-      // @ts-expect-error gtag optional
-      window.gtag("event", evt, { event_category: "engagement", event_label: label });
+      if (!evt) return;
+      // Text only: never forward query strings, form values, phone numbers or email addresses.
+      const label = el.getAttribute("aria-label") || (el.textContent ? el.textContent.trim() : "");
+      window.trackEvent?.(evt, { event_category: "engagement", event_label: label.slice(0, 100) });
     });
   </script>
 
