@@ -63,7 +63,11 @@ export const automationPricing = [
     suffix: "per month from",
     description:
       "Optional post-launch oversight for an agreed workflow, with monitoring and defined maintenance coverage.",
-    features: ["Monitoring and issue triage", "Maintenance within agreed scope", "Clear change-request process"],
+    features: [
+      "Monitoring and issue triage",
+      "Maintenance within agreed scope",
+      "Clear change-request process",
+    ],
     label: "Optional ongoing service",
   },
 ] as const;
