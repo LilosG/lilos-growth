@@ -179,7 +179,11 @@ const faqs = getGbpOfferFaqs(Boolean(checkoutUrl));
           class="mt-7 rounded-xl bg-background-cream px-5 py-4 text-sm leading-relaxed text-heading"
         >
           <strong>One verified profile.</strong> You keep ownership. No subscription or automatic renewal.
-          {!checkoutUrl && <p class="mt-2 font-semibold">We confirm eligibility before requesting payment.</p>}
+          {
+            !checkoutUrl && (
+              <p class="mt-2 font-semibold">We confirm eligibility before requesting payment.</p>
+            )
+          }
         </div>
       </aside>
     </div>
@@ -224,20 +228,21 @@ const faqs = getGbpOfferFaqs(Boolean(checkoutUrl));
         </div>
       </div>
     </div>
-      <div class="mx-auto mt-8 max-w-6xl border-t border-border-base pt-6">
-        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p class="max-w-2xl text-base leading-relaxed text-body">
-            Already have a verified profile? Send your details and we’ll confirm whether this package fits.
-          </p>
-          <Button
-            href={ctaHref}
-            variant="primary"
-            size="md"
-            class="w-full shrink-0 justify-center sm:w-auto"
-            data-offer-cta={checkoutUrl ? "checkout" : "eligibility"}>{ctaText}</Button
-          >
-        </div>
+    <div class="mx-auto mt-8 max-w-6xl border-t border-border-base pt-6">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p class="max-w-2xl text-base leading-relaxed text-body">
+          Already have a verified profile? Send your details and we’ll confirm whether this package
+          fits.
+        </p>
+        <Button
+          href={ctaHref}
+          variant="primary"
+          size="md"
+          class="w-full shrink-0 justify-center sm:w-auto"
+          data-offer-cta={checkoutUrl ? "checkout" : "eligibility"}>{ctaText}</Button
+        >
       </div>
+    </div>
   </section>
 
   <section class="bg-background-cream px-4 py-14 sm:px-6 sm:py-20" aria-labelledby="included-title">
@@ -461,8 +466,12 @@ const faqs = getGbpOfferFaqs(Boolean(checkoutUrl));
               class="grid gap-5 rounded-3xl border border-border-base bg-white p-6 shadow-lg sm:grid-cols-2 sm:p-9"
             >
               <div class="sm:col-span-2">
-                <p class="text-xs font-bold uppercase tracking-widest text-muted">Quick eligibility review</p>
-                <h3 class="mt-2 font-heading text-2xl font-bold text-heading">Tell us about your business</h3>
+                <p class="text-xs font-bold uppercase tracking-widest text-muted">
+                  Quick eligibility review
+                </p>
+                <h3 class="mt-2 font-heading text-2xl font-bold text-heading">
+                  Tell us about your business
+                </h3>
                 <p class="mt-2 text-base leading-relaxed text-body">
                   Four required details. No payment or Google password needed.
                 </p>
@@ -570,7 +579,9 @@ const faqs = getGbpOfferFaqs(Boolean(checkoutUrl));
                 <Button type="submit" variant="primary" size="lg" fullWidth={true}>
                   Request my eligibility review
                 </Button>
-                <p class="mt-3 text-center text-sm text-body">We’ll check your profile before sending any payment link.</p>
+                <p class="mt-3 text-center text-sm text-body">
+                  We’ll check your profile before sending any payment link.
+                </p>
               </div>
               <p class="text-sm text-body sm:col-span-2">
                 By submitting, you agree to our{" "}
