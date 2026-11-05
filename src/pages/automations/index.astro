@@ -1,0 +1,475 @@
+---
+import Layout from "~/layouts/PageLayout.astro";
+import Button from "~/components/ui/Button.astro";
+import Card from "~/components/ui/Card.astro";
+import {
+  automationExamples,
+  automationPricing,
+  automationSteps,
+  automationFaqs,
+} from "~/data/automationServices";
+
+const title = "Custom Business Automation for Service Companies | Lilos Growth";
+const description =
+  "Custom workflow automation for service businesses: lead response, after-hours intake, permit assistance, and invoice follow-up. See starting prices and request a workflow review.";
+
+const money = (amount: number) =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(amount);
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://lilosgrowth.com/automations#service",
+  name: "Custom Business Process Automation",
+  description,
+  provider: { "@id": "https://lilosgrowth.com/#org" },
+  areaServed: { "@type": "Country", name: "United States" },
+  serviceType: "Custom workflow automation and systems integration",
+};
+---
+
+<Layout
+  {title}
+  {description}
+  schema={[serviceSchema]}
+  breadcrumbs={[
+    { name: "Home", item: "/" },
+    { name: "Custom Automations", item: "/automations" },
+  ]}
+>
+  <section
+    class="relative overflow-hidden bg-secondary px-4 py-20 text-white sm:px-6 sm:py-24 lg:py-28"
+    aria-labelledby="automation-title"
+  >
+    <div
+      class="bg-primary/10 pointer-events-none absolute -right-28 -top-32 h-96 w-96 rounded-full blur-3xl"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[minmax(0,1.18fr)_minmax(0,0.82fr)] lg:gap-16"
+    >
+      <div>
+        <p class="text-sm font-bold uppercase tracking-[0.16em] text-primary">
+          Custom workflow automation
+        </p>
+        <h1
+          id="automation-title"
+          class="mt-5 max-w-3xl font-heading text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
+        >
+          Less manual work. <span class="text-primary">More room to run your business.</span>
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-white/85 sm:text-xl">
+          We build practical automations around the way your service business actually works—from
+          responding to leads and handling calls to paperwork and payment follow-up.
+        </p>
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-white/75">
+          Built from your processes and existing tools. Designed with clear boundaries, human
+          oversight where needed, and a plan for what happens when something fails.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Button
+            href="#automation-inquiry"
+            variant="primary"
+            size="lg"
+            class="justify-center"
+            data-evt="cta_automation_hero_inquiry"
+          >
+            Discuss an automation
+          </Button>
+          <a
+            href="#automation-pricing"
+            data-evt="cta_automation_hero_pricing"
+            class="inline-flex min-h-12 items-center justify-center rounded-full border border-white/40 px-6 py-3 text-base font-bold text-white transition-colors hover:border-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            See starting prices
+          </a>
+        </div>
+        <p class="mt-5 text-sm text-white/75">
+          Start with one process. Get a written scope and fixed quote before we build.
+        </p>
+      </div>
+      <aside
+        class="rounded-3xl border border-white/15 bg-white/10 p-6 shadow-lg sm:p-8"
+        aria-label="Example business process"
+      >
+        <p class="text-xs font-bold uppercase tracking-widest text-primary">
+          What a connected workflow can look like
+        </p>
+        <ol class="mt-6 space-y-3">
+          <li class="rounded-xl border border-white/15 bg-white/10 p-4">
+            <p class="text-sm font-bold text-white">01 · A new lead arrives</p>
+            <p class="mt-1 text-sm leading-relaxed text-white/80">
+              A form, call, or booking creates a new request.
+            </p>
+          </li>
+          <li class="rounded-xl border border-white/15 bg-white/10 p-4">
+            <p class="text-sm font-bold text-white">02 · The right next step happens</p>
+            <p class="mt-1 text-sm leading-relaxed text-white/80">
+              An acknowledgement goes out, a person is notified, and the CRM is updated.
+            </p>
+          </li>
+          <li class="rounded-xl border border-white/15 bg-white/10 p-4">
+            <p class="text-sm font-bold text-white">03 · Exceptions reach a person</p>
+            <p class="mt-1 text-sm leading-relaxed text-white/80">
+              Unclear requests, failures, and approvals stay visible instead of being silently
+              skipped.
+            </p>
+          </li>
+        </ol>
+        <p class="mt-5 text-xs leading-relaxed text-white/70">
+          Illustrative workflow, not a promise that every system supports each action.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="bg-white px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="problems-title">
+    <div class="mx-auto max-w-6xl">
+      <div class="max-w-3xl">
+        <p class="text-sm font-bold uppercase tracking-widest text-primary">Where we can help</p>
+        <h2
+          id="problems-title"
+          class="mt-3 font-heading text-3xl font-extrabold leading-tight text-heading sm:text-4xl"
+        >
+          The work between the work is often what slows you down.
+        </h2>
+        <p class="mt-4 text-lg leading-relaxed text-body">
+          These are examples of automations we've worked on—not a fixed catalog. The right solution
+          starts with the bottleneck, not the software.
+        </p>
+      </div>
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {
+          automationExamples.map((example) => (
+            <Card as="article" variant="outlined" class="flex h-full flex-col rounded-2xl !p-7">
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-primary">
+                  {example.category}
+                </span>
+                <span class="text-sm font-bold text-muted">{example.number}</span>
+              </div>
+              <h3 class="mt-4 font-heading text-2xl font-bold text-heading">{example.title}</h3>
+              <p class="mt-3 flex-1 text-base leading-relaxed text-body">{example.description}</p>
+              <p class="mt-5 border-t border-border-base pt-4 text-sm leading-relaxed text-muted">
+                {example.detail}
+              </p>
+            </Card>
+          ))
+        }
+      </div>
+      <div
+        class="mt-9 rounded-2xl border border-border-base bg-background-cream p-6 sm:flex sm:items-center sm:justify-between sm:gap-8"
+      >
+        <p class="max-w-2xl text-base leading-relaxed text-heading">
+          <strong>Have a different process in mind?</strong> Scheduling, dispatch, intake, reporting,
+          handoffs, and internal workflows may also be candidates. We assess fit before proposing a build.
+        </p>
+        <a
+          href="#automation-inquiry"
+          data-evt="cta_automation_examples_inquiry"
+          class="mt-4 inline-flex shrink-0 font-bold text-heading underline decoration-primary underline-offset-4 sm:mt-0"
+          >Tell us about it</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="border-y border-border-base bg-background-cream px-4 py-16 sm:px-6 sm:py-20"
+    aria-labelledby="process-title"
+  >
+    <div class="mx-auto max-w-6xl">
+      <div class="max-w-3xl">
+        <p class="text-sm font-bold uppercase tracking-widest text-primary">Our approach</p>
+        <h2
+          id="process-title"
+          class="mt-3 font-heading text-3xl font-extrabold text-heading sm:text-4xl"
+        >
+          Built around your business, not a generic template.
+        </h2>
+        <p class="mt-4 text-lg leading-relaxed text-body">
+          A useful automation has to handle real customers, real exceptions, and the tools your team
+          already depends on.
+        </p>
+      </div>
+      <ol class="mt-10 grid gap-8 md:grid-cols-3">
+        {
+          automationSteps.map((step, index) => (
+            <li class="border-t-2 border-heading pt-6">
+              <span
+                class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-heading font-bold text-white"
+                aria-hidden="true"
+              >
+                {index + 1}
+              </span>
+              <h3 class="mt-5 font-heading text-xl font-bold text-heading">{step.title}</h3>
+              <p class="mt-3 text-base leading-relaxed text-body">{step.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="mt-8 max-w-3xl text-sm leading-relaxed text-body">
+        Approvals, consent requirements, data access, and system limitations are assessed as part of
+        scoping. A human remains responsible for regulated submissions and consequential decisions
+        where required.
+      </p>
+    </div>
+  </section>
+
+  <section
+    id="automation-pricing"
+    class="scroll-mt-24 bg-white px-4 py-16 sm:px-6 sm:py-20"
+    aria-labelledby="pricing-title"
+  >
+    <div class="mx-auto max-w-6xl">
+      <div class="max-w-3xl">
+        <p class="text-sm font-bold uppercase tracking-widest text-primary">
+          Transparent starting points
+        </p>
+        <h2
+          id="pricing-title"
+          class="mt-3 font-heading text-3xl font-extrabold text-heading sm:text-4xl"
+        >
+          Pricing guidance before the first call.
+        </h2>
+        <p class="mt-4 text-lg leading-relaxed text-body">
+          No mystery pricing, and no pretending every workflow is the same. These are starting rates
+          for clearly scoped work. We confirm the exact deliverables and fee in a written proposal.
+        </p>
+      </div>
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        {
+          automationPricing.map((plan, index) => (
+            <Card
+              as="article"
+              variant="outlined"
+              class={
+                index === 1
+                  ? "flex h-full flex-col rounded-2xl !border-primary !p-7"
+                  : "flex h-full flex-col rounded-2xl !p-7"
+              }
+            >
+              <p class="text-xs font-bold uppercase tracking-widest text-primary">{plan.label}</p>
+              <h3 class="mt-3 font-heading text-2xl font-bold text-heading">{plan.name}</h3>
+              <p class="mt-5 font-heading text-4xl font-extrabold text-heading">
+                {money(plan.price)}
+              </p>
+              <p class="mt-1 text-sm font-medium text-muted">{plan.suffix}</p>
+              <p class="mt-5 text-base leading-relaxed text-body">{plan.description}</p>
+              <ul class="mt-6 flex-1 space-y-3 border-t border-border-base pt-5">
+                {plan.features.map((feature) => (
+                  <li class="flex gap-3 text-sm leading-relaxed text-body">
+                    <span class="font-bold text-primary" aria-hidden="true">
+                      ✓
+                    </span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="#automation-inquiry"
+                data-evt="cta_automation_pricing_inquiry"
+                class="mt-7 inline-flex min-h-11 items-center justify-center rounded-full border-2 border-heading px-5 py-2 text-center font-bold text-heading transition-colors hover:bg-heading hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                Discuss your workflow
+              </a>
+            </Card>
+          ))
+        }
+      </div>
+      <p class="mt-7 max-w-4xl text-sm leading-relaxed text-body">
+        Prices shown are starting prices, not instant-purchase packages. Larger integrations, AI
+        voice, permit workflows, and custom interfaces may require a higher quote. Hosting, phone
+        minutes, messaging, AI/API usage, software licenses, and other third-party charges are not
+        included unless expressly specified. Monthly support is optional and its coverage is defined
+        separately.
+      </p>
+    </div>
+  </section>
+
+  <section
+    id="automation-inquiry"
+    class="scroll-mt-24 border-y border-border-base bg-background-blue px-4 py-16 sm:px-6 sm:py-20"
+    aria-labelledby="inquiry-title"
+  >
+    <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-widest text-primary">
+          Start with the process
+        </p>
+        <h2
+          id="inquiry-title"
+          class="mt-3 font-heading text-3xl font-extrabold leading-tight text-heading sm:text-4xl"
+        >
+          Tell us what you want off your plate.
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-body">
+          You don't need a technical specification. Describe the repetitive task, the tools
+          involved, and what a better outcome would look like. We'll discuss feasibility and a
+          sensible first scope.
+        </p>
+        <div
+          class="mt-7 rounded-xl border border-border-base bg-white p-5 text-base leading-relaxed text-body"
+        >
+          <p class="font-bold text-heading">Prefer a conversation?</p>
+          <a
+            href="/contact#book"
+            data-evt="cta_automation_book_call"
+            class="mt-2 inline-block font-semibold text-heading underline decoration-primary underline-offset-4"
+            >Book an introduction call</a
+          >
+          <p class="mt-2 text-sm">
+            No purchase or monthly commitment is required to start the discussion.
+          </p>
+        </div>
+      </div>
+      <form
+        action="https://formspree.io/f/movlbqdk"
+        method="POST"
+        class="grid gap-5 rounded-3xl border border-border-base bg-white p-6 shadow-lg sm:grid-cols-2 sm:p-8"
+        aria-label="Custom automation inquiry"
+      >
+        <input type="hidden" name="_subject" value="Custom automation inquiry — Lilos Growth" />
+        <input type="hidden" name="_redirect" value="https://lilosgrowth.com/thank-you" />
+        <input type="hidden" name="inquiry_type" value="Custom business automation" />
+        <div class="sm:col-span-2">
+          <h3 class="font-heading text-2xl font-bold text-heading">Request a workflow review</h3>
+          <p class="mt-2 text-sm leading-relaxed text-body">
+            Share only business process details—no passwords or customer records.
+          </p>
+        </div>
+        <div>
+          <label for="automation-name" class="mb-2 block font-semibold text-heading"
+            >Your name</label
+          >
+          <input
+            id="automation-name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            maxlength="100"
+            required
+            class="w-full rounded-lg border border-gray-400 px-4 py-3 text-base text-heading focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+          />
+        </div>
+        <div>
+          <label for="automation-email" class="mb-2 block font-semibold text-heading"
+            >Work email</label
+          >
+          <input
+            id="automation-email"
+            name="_replyto"
+            type="email"
+            autocomplete="email"
+            maxlength="200"
+            required
+            class="w-full rounded-lg border border-gray-400 px-4 py-3 text-base text-heading focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+          />
+        </div>
+        <div>
+          <label for="automation-business" class="mb-2 block font-semibold text-heading"
+            >Business name</label
+          >
+          <input
+            id="automation-business"
+            name="business_name"
+            type="text"
+            autocomplete="organization"
+            maxlength="150"
+            required
+            class="w-full rounded-lg border border-gray-400 px-4 py-3 text-base text-heading focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+          />
+        </div>
+        <div>
+          <label for="automation-type" class="mb-2 block font-semibold text-heading"
+            >Area of work</label
+          >
+          <select
+            id="automation-type"
+            name="workflow_area"
+            required
+            class="w-full rounded-lg border border-gray-400 bg-white px-4 py-3 text-base text-heading focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+          >
+            <option value="" disabled selected>Select a starting point</option>
+            <option value="Lead intake and follow-up">Lead intake and follow-up</option>
+            <option value="Calls and scheduling">Calls and scheduling</option>
+            <option value="Permits and paperwork">Permits and paperwork</option>
+            <option value="Invoicing and receivables">Invoicing and receivables</option>
+            <option value="Another business process">Another business process</option>
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label for="automation-process" class="mb-2 block font-semibold text-heading"
+            >What are you trying to automate?</label
+          >
+          <textarea
+            id="automation-process"
+            name="workflow_description"
+            rows="4"
+            maxlength="2500"
+            required
+            placeholder="Tell us what happens today, what's manual, and which tools you use."
+            class="w-full rounded-lg border border-gray-400 px-4 py-3 text-base text-heading focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+          ></textarea>
+        </div>
+        <div class="sm:col-span-2">
+          <Button type="submit" variant="primary" size="lg" fullWidth={true} class="justify-center">
+            Send my workflow inquiry
+          </Button>
+          <p class="mt-3 text-sm leading-relaxed text-body">
+            We'll review your request and respond about next steps. By submitting, you agree to our <a
+              href="/privacy"
+              class="font-semibold underline underline-offset-4">privacy policy</a
+            >. No payment is collected here.
+          </p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="bg-white px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="automation-faq-title">
+    <div class="mx-auto max-w-3xl">
+      <h2
+        id="automation-faq-title"
+        class="font-heading text-3xl font-extrabold text-heading sm:text-4xl"
+      >
+        Questions about custom automation
+      </h2>
+      <div class="mt-8 divide-y divide-border-base border-y border-border-base">
+        {
+          automationFaqs.map((faq) => (
+            <details class="group py-5">
+              <summary class="cursor-pointer text-base font-bold leading-relaxed text-heading focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary">
+                {faq.question}
+              </summary>
+              <p class="mt-3 text-base leading-relaxed text-body">{faq.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-secondary px-4 py-14 text-center sm:px-6 sm:py-16">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="font-heading text-3xl font-extrabold text-white sm:text-4xl">
+        There is probably a better way to handle that task.
+      </h2>
+      <p class="mt-4 text-lg text-white/85">
+        Start with the work that costs your team the most time, delays, or follow-up.
+      </p>
+      <Button
+        href="#automation-inquiry"
+        variant="primary"
+        size="lg"
+        class="mt-7 justify-center"
+        data-evt="cta_automation_final_inquiry">Explore an automation</Button
+      >
+    </div>
+  </section>
+</Layout>
