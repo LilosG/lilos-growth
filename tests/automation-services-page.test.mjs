@@ -29,7 +29,7 @@ describe("Custom automation services landing page", () => {
     expect(pricing).toContain("Speed-to-lead and follow-up");
     expect(pricing).toContain("Invoice and receivables follow-up");
     expect(pricing).toContain("jurisdiction-specific submission");
-    expect(page).toContain("human oversight");
+    expect(page).toMatch(/human\s+oversight/);
   });
 
   it("uses existing Astro layout, UI components and valid inquiry fallback", () => {
