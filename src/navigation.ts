@@ -1,6 +1,7 @@
 export const headerData = {
   links: [
     { text: "Services", href: "/services" },
+    { text: "Automations", href: "/automations" },
     { text: "Results", href: "/results" },
     { text: "Pricing", href: "/packages" },
     { text: "Tools", href: "/local-seo-tools" },
