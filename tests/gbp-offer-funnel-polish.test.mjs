@@ -12,7 +12,7 @@ describe("GBP offer inquiry funnel refinement", () => {
     expect(page).toContain("No payment today.");
     expect(page).toContain("before requesting payment.");
     expect(page).toContain("No payment is collected here.");
-    expect(page.indexOf("data-offer-cta={checkoutUrl ? \"checkout\" : \"hero\"}")).toBeLessThan(
+    expect(page.indexOf('data-offer-cta={checkoutUrl ? "checkout" : "hero"}')).toBeLessThan(
       page.indexOf('aria-label="Included services"')
     );
   });
