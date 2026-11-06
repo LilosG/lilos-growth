@@ -26,7 +26,7 @@ faqs:
 
 ## Quick Answer
 
-A local landing page should target a **single intent** like “water damage restoration in Encinitas” or “German roach treatment in Jupiter.” The winning pattern is: short, scannable **answer near the top**, then **evidence and detail** below. Mirror wording from your **GBP primary/secondary categories** and **Services** fields, and interlink to your **service hub**, **city hub**, and **related proof posts**.
+A local landing page should target a **single intent** like “water damage restoration in Encinitas” or “German roach treatment in Jupiter.” The winning pattern is: short, scannable **answer near the top**, then **evidence and detail** below. Mirror wording from your **GBP primary/secondary categories** and **Services** fields, and interlink to your **service hub**, **city hub**, and **related proof posts**. Our list of [local SEO markets](/locations) shows where we apply this approach.
 
 ---
 

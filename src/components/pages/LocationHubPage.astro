@@ -3,7 +3,9 @@ import Button from "~/components/ui/Button.astro";
 import Badge from "~/components/ui/Badge.astro";
 import ProcessStep from "~/components/sections/ProcessStep.astro";
 import { Icon } from "astro-icon/components";
-import { industries } from "~/data/industries";
+import { tradeIndustrySlugs } from "~/data/industries";
+import { getCollection } from "astro:content";
+import { getSlug, type BlogEntry } from "~/lib/blog";
 import type { LocationData } from "~/data/locations";
 import { commercialServices, getLocationIndustryExamples } from "~/data/commercialInternalLinks";
 import { industryPath, metroServicePath } from "~/lib/routes";
@@ -13,6 +15,22 @@ interface Props {
 }
 
 const { location } = Astro.props;
+
+const sanDiegoGuideSlugs = [
+  "local-seo-cost-san-diego-pricing-guide",
+  "gbp-management-cost-san-diego-contractors-pricing-guide",
+  "website-design-cost-san-diego-contractors-pricing-guide",
+  "water-damage-restoration-san-diego-seo-guide",
+];
+const sanDiegoGuides =
+  location.slug === "san-diego"
+    ? ((await getCollection("blog")) as BlogEntry[])
+        .filter((post: BlogEntry) => !post.data.draft && sanDiegoGuideSlugs.includes(getSlug(post)))
+        .sort(
+          (a: BlogEntry, b: BlogEntry) =>
+            sanDiegoGuideSlugs.indexOf(getSlug(a)) - sanDiegoGuideSlugs.indexOf(getSlug(b))
+        )
+    : [];
 
 const processSteps = [
   {
@@ -151,10 +169,10 @@ const locationServices = [
     <div class="flex flex-wrap justify-center gap-3">
       {
         location.trades.map((trade) => {
-          const match = industries.find((i) => i.name === trade || i.name.startsWith(trade));
-          return match ? (
+          const industrySlug = tradeIndustrySlugs[trade];
+          return industrySlug ? (
             <a
-              href={industryPath(match.slug)}
+              href={industryPath(industrySlug)}
               class="rounded-full border border-border-base bg-background-cream px-5 py-2.5 text-sm font-semibold text-heading transition hover:border-primary hover:text-primary hover:shadow-sm"
             >
               {trade}
@@ -218,6 +236,34 @@ const locationServices = [
             Explore client results
           </a>
         </div>
+      </div>
+    </section>
+  )
+}
+
+{
+  sanDiegoGuides.length > 0 && (
+    <section
+      class="border-t border-gray-100 bg-background-cream py-20"
+      aria-label="San Diego guides"
+    >
+      <div class="mx-auto max-w-5xl px-6">
+        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Guides</p>
+        <h2 class="mb-6 font-heading text-3xl font-extrabold text-heading md:text-4xl">
+          San Diego Guides
+        </h2>
+        <ul class="space-y-2">
+          {sanDiegoGuides.map((post: BlogEntry) => (
+            <li>
+              <a
+                href={`/blog/${getSlug(post)}`}
+                class="inline-flex rounded-md py-1 font-medium text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+              >
+                {post.data.title}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )

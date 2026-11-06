@@ -36,7 +36,7 @@ Set your Google Business Profile as **SAB** if work happens at the customer’s 
 1. **Hide your street address**.
 2. Add **service areas** (cities/ZIPs) reflecting a _reasonable drive window_ your crews actually cover.
 3. Build a small **evidence pack** (registration + job proof + vehicle/photos) to survive audits or reinstatement.
-4. Mirror those service areas on your **website structure** (city hubs + service-city pages) and keep a **quarterly change log**.
+4. Mirror those service areas on your **website structure** (city hubs + service-city pages, like the ones on our [locations overview](/locations)) and keep a **quarterly change log**.
 
 ---
 

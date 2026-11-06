@@ -1,6 +1,7 @@
 ---
 import { locationPath } from "~/lib/routes";
 import Layout from "~/layouts/PageLayout.astro";
+import MarketLinks from "~/components/sections/MarketLinks.astro";
 import CheckListItem from "~/components/ui/CheckListItem.astro";
 import Button from "~/components/ui/Button.astro";
 import Badge from "~/components/ui/Badge.astro";
@@ -319,6 +320,8 @@ const faqs = [
       </p>
     </div>
   </section>
+
+  <MarketLinks kind="web-design" />
 
   <!-- FAQ -->
   <section class="border-t border-gray-100 bg-background-cream py-16" id="faq">

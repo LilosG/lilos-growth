@@ -8,7 +8,8 @@ import PricingCard from "~/components/sections/PricingCard.astro";
 import type { IndustryData } from "~/data/industries";
 import { gbpManagement, packages } from "~/data/packages";
 import { commercialServices, getRelatedIndustries } from "~/data/commercialInternalLinks";
-import { industryPath } from "~/lib/routes";
+import { locations } from "~/data/locations";
+import { industryPath, locationPath } from "~/lib/routes";
 
 interface Props {
   industry: IndustryData;
@@ -246,6 +247,32 @@ const processSteps = [
     >
       Book My Free Audit
     </Button>
+  </div>
+</section>
+
+<section
+  class="border-t border-border-base bg-background-cream py-14"
+  aria-labelledby="industry-markets-heading"
+>
+  <div class="mx-auto max-w-6xl px-6">
+    <h2
+      id="industry-markets-heading"
+      class="font-heading text-2xl font-bold text-heading md:text-3xl"
+    >
+      Local SEO by Market
+    </h2>
+    <div class="mt-6 flex flex-wrap gap-3">
+      {
+        locations.map((market) => (
+          <a
+            href={locationPath(market.slug)}
+            class="rounded-full border border-border-base bg-white px-5 py-2.5 text-sm font-semibold text-heading transition hover:border-primary hover:text-primary hover:shadow-sm"
+          >
+            {industry.shortName} SEO in {market.city}
+          </a>
+        ))
+      }
+    </div>
   </div>
 </section>
 
