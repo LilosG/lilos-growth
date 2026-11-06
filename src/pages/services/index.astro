@@ -5,6 +5,7 @@ import Card from "~/components/ui/Card.astro";
 import Button from "~/components/ui/Button.astro";
 import { packages } from "~/data/packages";
 import { industries } from "~/data/industries";
+import { industryPath } from "~/lib/routes";
 
 export const title = "Local SEO, GBP & Website Services for Businesses | Lilos Growth";
 export const description =
@@ -506,7 +507,7 @@ export const description =
         {
           industries.map((industry) => (
             <a
-              href={`/${industry.slug}`}
+              href={industryPath(industry.slug)}
               class="group flex items-center justify-between rounded-xl border border-border-base px-5 py-4 font-semibold text-heading transition hover:border-primary hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <span>{industry.name}</span>

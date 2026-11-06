@@ -1,6 +1,20 @@
 ---
 import Logo from "../Logo.astro";
 import { getPermalink } from "~/utils/permalinks";
+import { locations } from "~/data/locations";
+import { INDUSTRIES_INDEX, LOCATIONS_INDEX, industryPath, locationPath } from "~/lib/routes";
+
+const footerIndustries = [
+  { slug: "plumbers", label: "Plumbers" },
+  { slug: "electricians", label: "Electricians" },
+  { slug: "hvac", label: "HVAC" },
+  { slug: "pest-control", label: "Pest Control" },
+  { slug: "roofing", label: "Roofing" },
+  { slug: "water-damage-restoration", label: "Restoration" },
+  { slug: "cleaning", label: "Cleaning" },
+  { slug: "party-rentals", label: "Party Rentals" },
+  { slug: "restaurants", label: "Restaurants" },
+];
 
 const footerLinkClass =
   "rounded decoration-1 underline-offset-4 hover:text-white hover:underline focus:underline focus:outline-none focus-visible:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary";
@@ -106,28 +120,17 @@ const footerLinkClass =
             Industries
           </h3>
           <ul class="space-y-2 leading-6 text-white/90">
-            <li><a href={getPermalink("/plumber-seo")} class={footerLinkClass}>Plumbers</a></li>
+            {
+              footerIndustries.map(({ slug, label }) => (
+                <li>
+                  <a href={getPermalink(industryPath(slug))} class={footerLinkClass}>
+                    {label}
+                  </a>
+                </li>
+              ))
+            }
             <li>
-              <a href={getPermalink("/electrician-seo")} class={footerLinkClass}>Electricians</a>
-            </li>
-            <li><a href={getPermalink("/hvac-seo")} class={footerLinkClass}>HVAC</a></li>
-            <li>
-              <a href={getPermalink("/pest-control-seo")} class={footerLinkClass}>Pest Control</a>
-            </li>
-            <li><a href={getPermalink("/roofing-seo")} class={footerLinkClass}>Roofing</a></li>
-            <li>
-              <a href={getPermalink("/water-damage-restoration-seo")} class={footerLinkClass}
-                >Restoration</a
-              >
-            </li>
-            <li>
-              <a href={getPermalink("/cleaning-company-seo")} class={footerLinkClass}>Cleaning</a>
-            </li>
-            <li>
-              <a href={getPermalink("/party-rental-seo")} class={footerLinkClass}>Party Rentals</a>
-            </li>
-            <li>
-              <a href={getPermalink("/restaurant-seo")} class={footerLinkClass}>Restaurants</a>
+              <a href={getPermalink(INDUSTRIES_INDEX)} class={footerLinkClass}>All industries</a>
             </li>
           </ul>
         </nav>
@@ -141,34 +144,17 @@ const footerLinkClass =
             Locations
           </h3>
           <ul class="space-y-2 leading-6 text-white/90">
+            {
+              locations.map((location) => (
+                <li>
+                  <a href={getPermalink(locationPath(location.slug))} class={footerLinkClass}>
+                    {location.city} SEO
+                  </a>
+                </li>
+              ))
+            }
             <li>
-              <a href={getPermalink("/local-seo-san-diego")} class={footerLinkClass}
-                >San Diego SEO</a
-              >
-            </li>
-            <li>
-              <a href={getPermalink("/local-seo-los-angeles")} class={footerLinkClass}
-                >Los Angeles SEO</a
-              >
-            </li>
-            <li>
-              <a href={getPermalink("/local-seo-orange-county")} class={footerLinkClass}
-                >Orange County SEO</a
-              >
-            </li>
-            <li>
-              <a href={getPermalink("/local-seo-las-vegas")} class={footerLinkClass}
-                >Las Vegas SEO</a
-              >
-            </li>
-            <li>
-              <a href={getPermalink("/local-seo-phoenix")} class={footerLinkClass}>Phoenix SEO</a>
-            </li>
-            <li>
-              <a href={getPermalink("/local-seo-dallas")} class={footerLinkClass}>Dallas SEO</a>
-            </li>
-            <li>
-              <a href={getPermalink("/locations")} class={footerLinkClass}>All locations</a>
+              <a href={getPermalink(LOCATIONS_INDEX)} class={footerLinkClass}>All locations</a>
             </li>
           </ul>
         </nav>

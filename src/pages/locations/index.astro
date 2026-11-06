@@ -3,6 +3,7 @@ import Layout from "~/layouts/PageLayout.astro";
 import Button from "~/components/ui/Button.astro";
 import { locations } from "~/data/locations";
 import { metroServices } from "~/data/metroServices";
+import { LOCATIONS_INDEX, locationPath } from "~/lib/routes";
 
 const title = "Local SEO, Web Design & GBP Markets | Lilos Growth";
 const description =
@@ -10,7 +11,7 @@ const description =
 
 const breadcrumbs = [
   { name: "Home", item: "https://lilosgrowth.com/" },
-  { name: "Markets We Serve", item: "https://lilosgrowth.com/locations" },
+  { name: "Markets We Serve", item: `https://lilosgrowth.com${LOCATIONS_INDEX}` },
 ];
 
 const markets = locations.map((location) => ({
@@ -62,20 +63,20 @@ const linkClass =
               </h2>
               <ul class="space-y-1">
                 <li>
-                  <a href={`/${location.slug}`} class={linkClass}>
+                  <a href={locationPath(location.slug)} class={linkClass}>
                     Local SEO in {location.city}
                   </a>
                 </li>
                 {webDesign && (
                   <li>
-                    <a href={`/${webDesign.slug}`} class={linkClass}>
+                    <a href={webDesign.path} class={linkClass}>
                       Web design in {location.city}
                     </a>
                   </li>
                 )}
                 {gbp && (
                   <li>
-                    <a href={`/${gbp.slug}`} class={linkClass}>
+                    <a href={gbp.path} class={linkClass}>
                       Google Business Profile in {location.city}
                     </a>
                   </li>

@@ -7,17 +7,17 @@ import { locations } from "./locations";
  * Links resolve against known, published route data at build time.
  */
 const relatedIndustrySlugs: Record<string, string[]> = {
-  "plumber-seo": ["water-damage-restoration-seo", "hvac-seo"],
-  "electrician-seo": ["hvac-seo", "plumber-seo"],
-  "hvac-seo": ["electrician-seo", "plumber-seo"],
-  "pest-control-seo": ["cleaning-company-seo", "landscaping-seo"],
-  "roofing-seo": ["water-damage-restoration-seo", "painter-seo"],
-  "water-damage-restoration-seo": ["plumber-seo", "roofing-seo"],
-  "cleaning-company-seo": ["pest-control-seo", "water-damage-restoration-seo"],
-  "party-rental-seo": ["restaurant-seo", "landscaping-seo"],
-  "landscaping-seo": ["pest-control-seo", "painter-seo"],
-  "painter-seo": ["roofing-seo", "landscaping-seo"],
-  "restaurant-seo": ["party-rental-seo", "cleaning-company-seo"],
+  plumbers: ["water-damage-restoration", "hvac"],
+  electricians: ["hvac", "plumbers"],
+  hvac: ["electricians", "plumbers"],
+  "pest-control": ["cleaning", "landscaping"],
+  roofing: ["water-damage-restoration", "painters"],
+  "water-damage-restoration": ["plumbers", "roofing"],
+  cleaning: ["pest-control", "water-damage-restoration"],
+  "party-rentals": ["restaurants", "landscaping"],
+  landscaping: ["pest-control", "painters"],
+  painters: ["roofing", "landscaping"],
+  restaurants: ["party-rentals", "cleaning"],
 };
 
 const industryBySlug = new Map(industries.map((industry) => [industry.slug, industry]));
@@ -34,17 +34,13 @@ export function getRelatedIndustries(slug: string) {
 }
 
 const locationIndustryExampleSlugs: Record<string, string[]> = {
-  "local-seo-las-vegas": ["restaurant-seo", "party-rental-seo", "hvac-seo"],
-  "local-seo-orange-county": ["electrician-seo", "pest-control-seo", "restaurant-seo"],
-  "local-seo-los-angeles": ["hvac-seo", "roofing-seo", "cleaning-company-seo"],
-  "local-seo-phoenix": ["hvac-seo", "pest-control-seo", "roofing-seo"],
-  "local-seo-dallas": ["roofing-seo", "water-damage-restoration-seo", "electrician-seo"],
+  "las-vegas": ["restaurants", "party-rentals", "hvac"],
+  "orange-county": ["electricians", "pest-control", "restaurants"],
+  "los-angeles": ["hvac", "roofing", "cleaning"],
+  phoenix: ["hvac", "pest-control", "roofing"],
+  dallas: ["roofing", "water-damage-restoration", "electricians"],
 };
-const defaultLocationIndustryExamples = [
-  "plumber-seo",
-  "electrician-seo",
-  "water-damage-restoration-seo",
-];
+const defaultLocationIndustryExamples = ["plumbers", "electricians", "water-damage-restoration"];
 
 /** Market-specific path to the core local-SEO service and relevant industry examples. */
 export function getLocationIndustryExamples(slug: string) {

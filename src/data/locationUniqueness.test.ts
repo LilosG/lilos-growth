@@ -45,7 +45,7 @@ describe("location copy uniqueness", () => {
       const pages = metroServices
         .filter((page) => page.service === service)
         .map((page) => ({
-          slug: page.slug,
+          slug: page.path,
           text: [page.intro, page.marketAngle, ...page.faqs.map((faq) => faq.answer)].join(" "),
         }));
       expect(offendingPairs(pages), `Similarity above ${THRESHOLD} for ${service}`).toEqual([]);

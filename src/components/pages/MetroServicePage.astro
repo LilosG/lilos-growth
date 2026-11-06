@@ -3,6 +3,7 @@ import Button from "~/components/ui/Button.astro";
 import Badge from "~/components/ui/Badge.astro";
 import { metroServices, type MetroServiceData, type MetroServiceKey } from "~/data/metroServices";
 import type { LocationData } from "~/data/locations";
+import { locationPath } from "~/lib/routes";
 
 interface Props {
   page: MetroServiceData;
@@ -34,16 +35,16 @@ const otherService = metroServices.find(
 
 // Fixed order, not random: the next two metros after this one in data order.
 const sameServicePages = metroServices.filter((p) => p.service === page.service);
-const currentIndex = sameServicePages.findIndex((p) => p.slug === page.slug);
+const currentIndex = sameServicePages.findIndex((p) => p.path === page.path);
 const otherMetroPages = [1, 2]
   .map((offset) => sameServicePages[(currentIndex + offset) % sameServicePages.length])
-  .filter((p) => p.slug !== page.slug);
+  .filter((p) => p.path !== page.path);
 
 const relatedLinks = [
-  { href: `/${page.locationSlug}`, label: `Local SEO in ${location.city}` },
-  ...(otherService ? [{ href: `/${otherService.slug}`, label: otherService.headline }] : []),
+  { href: locationPath(page.locationSlug), label: `Local SEO in ${location.city}` },
+  ...(otherService ? [{ href: otherService.path, label: otherService.headline }] : []),
   { href: meta.nationalHref, label: meta.nationalLabel },
-  ...otherMetroPages.map((p) => ({ href: `/${p.slug}`, label: p.headline })),
+  ...otherMetroPages.map((p) => ({ href: p.path, label: p.headline })),
 ];
 
 const linkClass =
@@ -68,7 +69,7 @@ const linkClass =
     <div class="flex flex-wrap justify-center gap-4">
       <Button
         href="/contact#book"
-        data-evt={`cta_${page.slug}_book`}
+        data-evt={`cta_${page.legacyPath.slice(1)}_book`}
         variant="primary"
         size="lg"
         icon="tabler:arrow-right"
@@ -180,7 +181,7 @@ const linkClass =
     </p>
     <Button
       href="/contact#book"
-      data-evt={`cta_${page.slug}_final`}
+      data-evt={`cta_${page.legacyPath.slice(1)}_final`}
       variant="primary"
       size="lg"
       icon="tabler:arrow-right"

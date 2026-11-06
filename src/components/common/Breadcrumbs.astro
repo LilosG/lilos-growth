@@ -1,0 +1,37 @@
+---
+export interface Crumb {
+  name: string;
+  item: string;
+}
+
+interface Props {
+  crumbs: Crumb[];
+}
+
+const { crumbs } = Astro.props;
+const toPath = (item: string) => item.replace(/^https?:\/\/[^/]+/, "") || "/";
+---
+
+<nav aria-label="Breadcrumb" class="bg-secondary px-6 pt-6">
+  <ol class="mx-auto flex max-w-6xl flex-wrap items-center gap-2 text-sm text-white/70">
+    {
+      crumbs.map((crumb, index) => (
+        <li class="flex items-center gap-2">
+          {index > 0 && <span aria-hidden="true">›</span>}
+          {index < crumbs.length - 1 ? (
+            <a
+              href={toPath(crumb.item)}
+              class="rounded underline-offset-4 hover:text-white hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+            >
+              {crumb.name}
+            </a>
+          ) : (
+            <span aria-current="page" class="text-white">
+              {crumb.name}
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>

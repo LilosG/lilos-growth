@@ -76,6 +76,151 @@
       "source": "/google-business-profile-offer/",
       "destination": "/google-business-profile-offer",
       "permanent": true
+    },
+    {
+      "source": "/local-seo-san-diego",
+      "destination": "/locations/san-diego",
+      "permanent": true
+    },
+    {
+      "source": "/local-seo-los-angeles",
+      "destination": "/locations/los-angeles",
+      "permanent": true
+    },
+    {
+      "source": "/local-seo-orange-county",
+      "destination": "/locations/orange-county",
+      "permanent": true
+    },
+    {
+      "source": "/local-seo-las-vegas",
+      "destination": "/locations/las-vegas",
+      "permanent": true
+    },
+    {
+      "source": "/local-seo-phoenix",
+      "destination": "/locations/phoenix",
+      "permanent": true
+    },
+    {
+      "source": "/local-seo-dallas",
+      "destination": "/locations/dallas",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-san-diego",
+      "destination": "/locations/san-diego/web-design",
+      "permanent": true
+    },
+    {
+      "source": "/google-business-profile-optimization-san-diego",
+      "destination": "/locations/san-diego/google-business-profile-optimization",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-los-angeles",
+      "destination": "/locations/los-angeles/web-design",
+      "permanent": true
+    },
+    {
+      "source": "/google-business-profile-optimization-los-angeles",
+      "destination": "/locations/los-angeles/google-business-profile-optimization",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-orange-county",
+      "destination": "/locations/orange-county/web-design",
+      "permanent": true
+    },
+    {
+      "source": "/google-business-profile-optimization-orange-county",
+      "destination": "/locations/orange-county/google-business-profile-optimization",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-las-vegas",
+      "destination": "/locations/las-vegas/web-design",
+      "permanent": true
+    },
+    {
+      "source": "/google-business-profile-optimization-las-vegas",
+      "destination": "/locations/las-vegas/google-business-profile-optimization",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-phoenix",
+      "destination": "/locations/phoenix/web-design",
+      "permanent": true
+    },
+    {
+      "source": "/google-business-profile-optimization-phoenix",
+      "destination": "/locations/phoenix/google-business-profile-optimization",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-dallas",
+      "destination": "/locations/dallas/web-design",
+      "permanent": true
+    },
+    {
+      "source": "/google-business-profile-optimization-dallas",
+      "destination": "/locations/dallas/google-business-profile-optimization",
+      "permanent": true
+    },
+    {
+      "source": "/plumber-seo",
+      "destination": "/industries/plumbers",
+      "permanent": true
+    },
+    {
+      "source": "/electrician-seo",
+      "destination": "/industries/electricians",
+      "permanent": true
+    },
+    {
+      "source": "/hvac-seo",
+      "destination": "/industries/hvac",
+      "permanent": true
+    },
+    {
+      "source": "/pest-control-seo",
+      "destination": "/industries/pest-control",
+      "permanent": true
+    },
+    {
+      "source": "/roofing-seo",
+      "destination": "/industries/roofing",
+      "permanent": true
+    },
+    {
+      "source": "/water-damage-restoration-seo",
+      "destination": "/industries/water-damage-restoration",
+      "permanent": true
+    },
+    {
+      "source": "/cleaning-company-seo",
+      "destination": "/industries/cleaning",
+      "permanent": true
+    },
+    {
+      "source": "/party-rental-seo",
+      "destination": "/industries/party-rentals",
+      "permanent": true
+    },
+    {
+      "source": "/landscaping-seo",
+      "destination": "/industries/landscaping",
+      "permanent": true
+    },
+    {
+      "source": "/painter-seo",
+      "destination": "/industries/painters",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-seo",
+      "destination": "/industries/restaurants",
+      "permanent": true
     }
   ],
   "headers": [

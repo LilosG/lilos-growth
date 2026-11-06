@@ -1,0 +1,409 @@
+---
+import Button from "~/components/ui/Button.astro";
+import Badge from "~/components/ui/Badge.astro";
+import ProcessStep from "~/components/sections/ProcessStep.astro";
+import { Icon } from "astro-icon/components";
+import { industries } from "~/data/industries";
+import type { LocationData } from "~/data/locations";
+import { commercialServices, getLocationIndustryExamples } from "~/data/commercialInternalLinks";
+import { industryPath, metroServicePath } from "~/lib/routes";
+
+interface Props {
+  location: LocationData;
+}
+
+const { location } = Astro.props;
+
+const processSteps = [
+  {
+    number: 1,
+    title: "Audit & Strategy",
+    description: `Baseline rankings across your ${location.city} service area, competitor analysis, and a clear roadmap tailored to your market.`,
+  },
+  {
+    number: 2,
+    title: "On-Page Fixes",
+    description:
+      "Titles, metas, headers, schema, and Core Web Vitals — the technical foundation Google needs to trust and rank your site.",
+  },
+  {
+    number: 3,
+    title: "Content",
+    description: `Service pages, neighborhood pages, and helpful content that targets high-intent ${location.city}-area searches.`,
+  },
+  {
+    number: 4,
+    title: "Citations & Links",
+    description: `NAP consistency across directories, ${location.stateAbbr}-specific citation sources, and local link acquisition.`,
+  },
+  {
+    number: 5,
+    title: "Reports & Calls",
+    description:
+      "Monthly ranking and traffic reports plus strategy calls — clear metrics, no fluff.",
+  },
+];
+
+const locationServices = [
+  {
+    title: "Local SEO",
+    description: `On-page optimization, service pages, citations, and local links to rank your ${location.city} business in organic search and the Map Pack.`,
+    href: "/services/local-seo",
+    icon: "tabler:map-pin",
+  },
+  {
+    title: "Google Business Profile",
+    description:
+      "Full GBP management — optimization, weekly posts, review replies, photos, and monthly audits.",
+    href: metroServicePath(location.slug, "google-business-profile-optimization"),
+    icon: "tabler:brand-google",
+  },
+  {
+    title: "Website Design",
+    description:
+      "Fast, conversion-focused websites built on Astro + Tailwind. The technical foundation your SEO runs on.",
+    href: metroServicePath(location.slug, "web-design"),
+    icon: "tabler:device-laptop",
+  },
+];
+---
+
+<section class="relative overflow-hidden bg-secondary pb-28 pt-20" aria-label="Hero">
+  <div
+    class="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
+    style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="relative z-10 mx-auto w-full max-w-3xl px-6 text-center">
+    <p class="mb-4 text-xs font-bold uppercase tracking-widest text-primary">
+      Local SEO · {location.city}, {location.stateAbbr}
+    </p>
+    <h1 class="mb-5 font-heading text-5xl font-extrabold leading-[1.08] text-white md:text-6xl">
+      Local SEO for {location.city} Businesses
+    </h1>
+    <p class="mb-10 text-lg font-medium leading-relaxed text-white/70">
+      {location.description}
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <Button
+        href="/contact#book"
+        data-evt={`cta_${location.legacyPath.slice(1)}_book`}
+        variant="primary"
+        size="lg"
+        icon="tabler:arrow-right"
+      >
+        Get a Free Audit
+      </Button>
+      <a
+        href="#services"
+        class="hover:bg-white/8 inline-flex items-center gap-2 rounded-full border-2 border-white/25 px-8 py-4 font-heading text-base font-bold text-white transition hover:border-white/50"
+      >
+        Our Services
+      </a>
+    </div>
+    <div class="mt-6 flex items-center justify-center gap-2">
+      <Icon name="tabler:star-filled" class="h-5 w-5 text-warning" />
+      <span class="text-sm font-semibold text-white/80"> 5-Star Rated by Local Businesses </span>
+    </div>
+  </div>
+</section>
+
+<section class="border-t border-gray-100 bg-background-cream py-24" aria-label="Markets served">
+  <div class="mx-auto max-w-5xl px-6 text-center">
+    <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Coverage</p>
+    <h2 class="mb-4 font-heading text-4xl font-extrabold text-heading md:text-5xl">
+      Areas We Serve in {location.city}
+    </h2>
+    <p class="mx-auto mb-10 max-w-xl text-base text-muted">
+      We assess your real service area and where your customers search before recommending
+      location-specific content or Google Business Profile improvements.
+    </p>
+    <div class="flex flex-wrap justify-center gap-3">
+      {
+        location.neighborhoods.map((neighborhood) => (
+          <Badge variant="secondary" size="lg">
+            {neighborhood}
+          </Badge>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="border-t border-gray-100 bg-white py-24" aria-label="Industries served">
+  <div class="mx-auto max-w-5xl px-6">
+    <div class="mb-14 text-center">
+      <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+        Industries We Work With
+      </p>
+      <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+        Industries We Serve in {location.city}
+      </h2>
+      <p class="mt-4 text-base text-muted">
+        {
+          location.slug === "san-diego"
+            ? "Local search strategies for trades, restaurants and hospitality, and specialized service businesses in San Diego County."
+            : `Local SEO for home service and trade businesses across the ${location.city} metro.`
+        }
+      </p>
+    </div>
+    <div class="flex flex-wrap justify-center gap-3">
+      {
+        location.trades.map((trade) => {
+          const match = industries.find((i) => i.name === trade || i.name.startsWith(trade));
+          return match ? (
+            <a
+              href={industryPath(match.slug)}
+              class="rounded-full border border-border-base bg-background-cream px-5 py-2.5 text-sm font-semibold text-heading transition hover:border-primary hover:text-primary hover:shadow-sm"
+            >
+              {trade}
+            </a>
+          ) : (
+            <span class="rounded-full border border-border-base bg-background-cream px-5 py-2.5 text-sm font-semibold text-heading">
+              {trade}
+            </span>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<section class="border-t border-gray-100 bg-background-cream py-24" aria-label="Market context">
+  <div class="mx-auto max-w-4xl px-6 text-center">
+    <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Market Context</p>
+    <h2 class="mb-6 font-heading text-4xl font-extrabold text-heading md:text-5xl">
+      The {location.city} Local Search Market
+    </h2>
+    <p class="text-lg leading-relaxed text-body">{location.whyCity}</p>
+    {
+      location.slug === "san-diego" && (
+        <p class="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-body">
+          The goal is qualified discovery, not pages made to target every city. We connect search
+          demand to the services you actually provide and the ways customers contact you.
+        </p>
+      )
+    }
+  </div>
+</section>
+
+{
+  location.slug === "san-diego" && (
+    <section
+      class="border-t border-gray-100 bg-white py-20"
+      aria-label="San Diego project experience"
+    >
+      <div class="mx-auto max-w-5xl px-6">
+        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+          Local Experience
+        </p>
+        <h2 class="mb-5 font-heading text-3xl font-extrabold text-heading md:text-4xl">
+          Search strategies informed by real San Diego projects
+        </h2>
+        <p class="max-w-3xl text-base leading-relaxed text-body">
+          Our work includes websites and local search foundations for electrical contractors,
+          restoration businesses, and hospitality venues. The right approach varies by customer
+          intent: emergency calls, scheduled projects, reservations, and inquiries require different
+          content and conversion paths.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a
+            href="/results/wheyland-electric"
+            class="font-semibold text-primary underline underline-offset-4"
+          >
+            View an electrical contractor project
+          </a>
+          <a href="/results" class="font-semibold text-primary underline underline-offset-4">
+            Explore client results
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<section id="services" class="border-t border-gray-100 bg-white py-24" aria-label="Services">
+  <div class="mx-auto max-w-5xl px-6">
+    <div class="mb-14 text-center">
+      <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">What We Do</p>
+      <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+        How We Help {location.city} Businesses
+      </h2>
+      <p class="mt-4 text-base text-muted">
+        Three core services, each built for local search performance.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      {
+        locationServices.map((service) => (
+          <a
+            href={service.href}
+            class="group flex flex-col rounded-2xl border border-border-base bg-background-cream p-8 transition hover:border-primary hover:shadow-md"
+          >
+            <div class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-xl">
+              <Icon name={service.icon} class="h-6 w-6 text-primary" />
+            </div>
+            <h3 class="mb-3 font-heading text-xl font-extrabold text-heading group-hover:text-primary">
+              {service.title}
+            </h3>
+            <p class="flex-1 text-sm leading-relaxed text-body">{service.description}</p>
+            <span class="mt-4 inline-flex items-center gap-1 font-heading text-sm font-bold text-primary">
+              Learn more &rarr;
+            </span>
+          </a>
+        ))
+      }
+    </div>
+    <div class="mt-10 text-center">
+      <Button href="/packages" variant="outline" size="md"> View All Plans & Pricing </Button>
+    </div>
+  </div>
+</section>
+
+<section class="border-t border-gray-100 bg-background-cream py-24" aria-label="Process">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mb-14 text-center">
+      <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">How It Works</p>
+      <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+        Our Local SEO System (5 Steps)
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-5">
+      {
+        processSteps.map((step) => (
+          <ProcessStep number={step.number} title={step.title} description={step.description} />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="border-t border-gray-100 bg-white py-24" aria-label="FAQ">
+  <div class="mx-auto max-w-3xl px-6">
+    <div class="mb-12 text-center">
+      <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">FAQ</p>
+      <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+        {location.city} Local SEO — FAQs
+      </h2>
+    </div>
+    <div class="space-y-2">
+      {
+        location.faqs.map((faq) => (
+          <details class="hover:border-primary/30 group rounded-2xl border border-border-base bg-white shadow-sm transition">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-heading text-base font-bold text-heading">
+              {faq.question}
+              <svg
+                class="h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-base leading-relaxed text-body">{faq.answer}</div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="relative overflow-hidden bg-secondary py-32" aria-label="CTA">
+  <div
+    class="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
+    style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="relative z-10 mx-auto max-w-3xl px-6 text-center">
+    <h2 class="mb-6 font-heading text-5xl font-extrabold leading-tight text-white md:text-6xl">
+      Ready to Rank Higher
+      <>
+        <br />
+        <span class="text-primary">in {location.city}?</span>
+      </>
+    </h2>
+    <p class="mb-10 text-xl font-medium text-white/70">
+      Get a free audit — no hard sell, just a clear picture of where you stand and what to fix
+      first.
+    </p>
+    <Button
+      href="/contact#book"
+      data-evt={`cta_${location.legacyPath.slice(1)}_final`}
+      variant="primary"
+      size="lg"
+      icon="tabler:arrow-right"
+    >
+      Book My Free Audit
+    </Button>
+  </div>
+</section>
+
+<section
+  class="border-t border-border-base bg-white py-14"
+  aria-labelledby="explore-related-heading"
+>
+  <div class="mx-auto max-w-6xl px-6">
+    <p class="mb-2 text-xs font-bold uppercase tracking-widest text-primary">Explore more</p>
+    <h2
+      id="explore-related-heading"
+      class="font-heading text-2xl font-bold text-heading md:text-3xl"
+    >
+      {`Explore services for ${location.city} businesses`}
+    </h2>
+    <p class="mt-3 max-w-3xl text-base leading-relaxed text-body">
+      {
+        "Start with a core service, or explore how different types of local businesses approach search visibility."
+      }
+    </p>
+    <div class="mt-8 grid gap-6 md:grid-cols-2">
+      <div>
+        <h3 class="mb-3 font-heading text-lg font-bold text-heading">
+          {"Industry strategies"}
+        </h3>
+        <ul class="space-y-2">
+          {
+            getLocationIndustryExamples(location.slug).map((related) => (
+              <li>
+                <a
+                  href={industryPath(related.slug)}
+                  class="inline-flex rounded-md py-1 font-medium text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                >
+                  {related.headline}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <h3 class="mb-3 font-heading text-lg font-bold text-heading">Core services and evidence</h3>
+        <ul class="space-y-2">
+          {
+            commercialServices.map((service) => (
+              <li>
+                <a
+                  href={service.href}
+                  class="inline-flex rounded-md py-1 font-medium text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                >
+                  {service.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a
+              href="/results"
+              class="inline-flex rounded-md py-1 font-medium text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+            >
+              Client projects and reported results
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

@@ -5,6 +5,7 @@ export interface LocationFAQ {
 
 export interface LocationData {
   slug: string;
+  legacyPath: string;
   city: string;
   state: string;
   stateAbbr: string;
@@ -20,7 +21,8 @@ export interface LocationData {
 
 export const locations: LocationData[] = [
   {
-    slug: "local-seo-san-diego",
+    slug: "san-diego",
+    legacyPath: "/local-seo-san-diego",
     city: "San Diego",
     state: "California",
     stateAbbr: "CA",
@@ -85,7 +87,8 @@ export const locations: LocationData[] = [
     geo: { latitude: 32.7157, longitude: -117.1611 },
   },
   {
-    slug: "local-seo-los-angeles",
+    slug: "los-angeles",
+    legacyPath: "/local-seo-los-angeles",
     city: "Los Angeles",
     state: "California",
     stateAbbr: "CA",
@@ -150,7 +153,8 @@ export const locations: LocationData[] = [
     geo: { latitude: 34.0522, longitude: -118.2437 },
   },
   {
-    slug: "local-seo-orange-county",
+    slug: "orange-county",
+    legacyPath: "/local-seo-orange-county",
     city: "Orange County",
     state: "California",
     stateAbbr: "CA",
@@ -215,7 +219,8 @@ export const locations: LocationData[] = [
     geo: { latitude: 33.7175, longitude: -117.8311 },
   },
   {
-    slug: "local-seo-las-vegas",
+    slug: "las-vegas",
+    legacyPath: "/local-seo-las-vegas",
     city: "Las Vegas",
     state: "Nevada",
     stateAbbr: "NV",
@@ -276,7 +281,8 @@ export const locations: LocationData[] = [
     geo: { latitude: 36.1699, longitude: -115.1398 },
   },
   {
-    slug: "local-seo-phoenix",
+    slug: "phoenix",
+    legacyPath: "/local-seo-phoenix",
     city: "Phoenix",
     state: "Arizona",
     stateAbbr: "AZ",
@@ -335,7 +341,8 @@ export const locations: LocationData[] = [
     geo: { latitude: 33.4484, longitude: -112.074 },
   },
   {
-    slug: "local-seo-dallas",
+    slug: "dallas",
+    legacyPath: "/local-seo-dallas",
     city: "Dallas",
     state: "Texas",
     stateAbbr: "TX",

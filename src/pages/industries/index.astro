@@ -1,0 +1,80 @@
+---
+import Layout from "~/layouts/PageLayout.astro";
+import Button from "~/components/ui/Button.astro";
+import { industries } from "~/data/industries";
+import { INDUSTRIES_INDEX, industryPath } from "~/lib/routes";
+
+const title = "Local SEO by Industry | Lilos Growth";
+const description =
+  "Local SEO for plumbers, electricians, HVAC, roofing, restoration, restaurants, and other local businesses. Choose your industry to see how we approach it.";
+
+const breadcrumbs = [
+  { name: "Home", item: "https://lilosgrowth.com/" },
+  { name: "Industries", item: `https://lilosgrowth.com${INDUSTRIES_INDEX}` },
+];
+
+const linkClass =
+  "inline-flex rounded-md py-1 font-medium text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary";
+---
+
+<Layout title={title} description={description} ignoreTitleTemplate breadcrumbs={breadcrumbs}>
+  <section class="relative overflow-hidden bg-secondary pb-28 pt-20" aria-label="Hero">
+    <div
+      class="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
+      style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="relative z-10 mx-auto w-full max-w-3xl px-6 text-center">
+      <p class="mb-4 text-xs font-bold uppercase tracking-widest text-primary">Industries</p>
+      <h1 class="mb-5 font-heading text-5xl font-extrabold leading-[1.08] text-white md:text-6xl">
+        Industries We Serve
+      </h1>
+      <p class="mb-10 text-lg font-medium leading-relaxed text-white/70">
+        Different industries compete for different searches. Choose yours to see how we approach
+        local search visibility for its services, customers, and market.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-gray-100 bg-white py-24" aria-label="Industries">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {
+          industries.map((industry) => (
+            <div class="flex flex-col rounded-2xl border border-border-base bg-background-cream p-8">
+              <p class="mb-2 text-xs font-bold uppercase tracking-widest text-primary">Local SEO</p>
+              <h2 class="mb-4 font-heading text-2xl font-extrabold text-heading">
+                {industry.name}
+              </h2>
+              <a href={industryPath(industry.slug)} class={linkClass}>
+                {industry.headline}
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden bg-secondary py-24" aria-label="CTA">
+    <div class="relative z-10 mx-auto max-w-3xl px-6 text-center">
+      <h2 class="mb-6 font-heading text-4xl font-extrabold leading-tight text-white md:text-5xl">
+        Don't see your industry?
+      </h2>
+      <p class="mb-10 text-lg font-medium text-white/70">
+        Get a free audit — no hard sell, just a clear picture of where you stand and what to fix
+        first.
+      </p>
+      <Button
+        href="/contact#book"
+        data-evt="cta_industries_book"
+        variant="primary"
+        size="lg"
+        icon="tabler:arrow-right"
+      >
+        Book My Free Audit
+      </Button>
+    </div>
+  </section>
+</Layout>

@@ -24,7 +24,7 @@ describe("Phase 4 commercial search intent", () => {
     expect(page).toContain("It does not renew automatically.");
     expect(page).toContain('href="#gbp-package"');
     expect(page).toContain("{gbpManagement.price}");
-    expect(page).toContain('href="/local-seo-san-diego"');
+    expect(page).toContain('locationPath("san-diego")');
   });
 
   it("avoids universal timelines and keeps displayed FAQ and schema unified", () => {

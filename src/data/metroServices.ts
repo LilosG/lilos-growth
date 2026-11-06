@@ -1,11 +1,13 @@
-import { industries } from "./industries";
+import { locationPath, metroServicePath, type MetroServiceKey } from "../lib/routes";
 import { locations } from "./locations";
 
-export type MetroServiceKey = "web-design" | "google-business-profile-optimization";
+export type { MetroServiceKey };
 
-export interface MetroServiceData {
-  slug: string;
+interface MetroServiceEntry {
+  /** Previous flat URL, kept so vercel.json can 301 it to `path`. */
+  legacyPath: string;
   service: MetroServiceKey;
+  /** Metro key, matching a `slug` in locations.ts. */
   locationSlug: string;
   title: string;
   description: string;
@@ -16,12 +18,17 @@ export interface MetroServiceData {
   faqs: { question: string; answer: string }[];
 }
 
-export const metroServices: MetroServiceData[] = [
+export interface MetroServiceData extends MetroServiceEntry {
+  /** Canonical path, derived from the route helpers. */
+  path: string;
+}
+
+const metroServiceEntries: MetroServiceEntry[] = [
   // ---------------------------------------------------------------- Web design
   {
-    slug: "web-design-san-diego",
+    legacyPath: "/web-design-san-diego",
     service: "web-design",
-    locationSlug: "local-seo-san-diego",
+    locationSlug: "san-diego",
     title: "Web Design for San Diego Businesses | Lilos Growth",
     description:
       "Fast, conversion-focused web design for San Diego businesses, built around coastal, North County, and inland service areas and the way customers reach you.",
@@ -63,9 +70,9 @@ export const metroServices: MetroServiceData[] = [
     ],
   },
   {
-    slug: "web-design-los-angeles",
+    legacyPath: "/web-design-los-angeles",
     service: "web-design",
-    locationSlug: "local-seo-los-angeles",
+    locationSlug: "los-angeles",
     title: "Web Design for Los Angeles Businesses | Lilos Growth",
     description:
       "Web design for Los Angeles businesses: fast, mobile-first sites that explain exactly which neighborhoods you serve across the Valley, Westside, and South Bay.",
@@ -107,9 +114,9 @@ export const metroServices: MetroServiceData[] = [
     ],
   },
   {
-    slug: "web-design-orange-county",
+    legacyPath: "/web-design-orange-county",
     service: "web-design",
-    locationSlug: "local-seo-orange-county",
+    locationSlug: "orange-county",
     title: "Web Design for Orange County Businesses | Lilos Growth",
     description:
       "Polished, fast web design for Orange County businesses that need to look credible to homeowners in Irvine, Newport Beach, Anaheim, and the surrounding cities.",
@@ -150,9 +157,9 @@ export const metroServices: MetroServiceData[] = [
     ],
   },
   {
-    slug: "web-design-las-vegas",
+    legacyPath: "/web-design-las-vegas",
     service: "web-design",
-    locationSlug: "local-seo-las-vegas",
+    locationSlug: "las-vegas",
     title: "Web Design for Las Vegas Businesses | Lilos Growth",
     description:
       "Web design for Las Vegas businesses: fast, mobile-ready sites built for newcomers, summer emergencies, and customers across Henderson and Summerlin.",
@@ -193,9 +200,9 @@ export const metroServices: MetroServiceData[] = [
     ],
   },
   {
-    slug: "web-design-phoenix",
+    legacyPath: "/web-design-phoenix",
     service: "web-design",
-    locationSlug: "local-seo-phoenix",
+    locationSlug: "phoenix",
     title: "Web Design for Phoenix Businesses | Lilos Growth",
     description:
       "Web design for Phoenix businesses: fast, mobile-first sites with suburb-level service content for Scottsdale, Mesa, Chandler, Gilbert, and the wider Valley.",
@@ -236,9 +243,9 @@ export const metroServices: MetroServiceData[] = [
     ],
   },
   {
-    slug: "web-design-dallas",
+    legacyPath: "/web-design-dallas",
     service: "web-design",
-    locationSlug: "local-seo-dallas",
+    locationSlug: "dallas",
     title: "Web Design for Dallas Businesses | Lilos Growth",
     description:
       "Web design for Dallas-Fort Worth businesses: fast sites with city-level service content for Plano, Frisco, Irving, Arlington, and storm-driven search demand.",
@@ -280,9 +287,9 @@ export const metroServices: MetroServiceData[] = [
   },
   // ------------------------------------------------ Google Business Profile
   {
-    slug: "google-business-profile-optimization-san-diego",
+    legacyPath: "/google-business-profile-optimization-san-diego",
     service: "google-business-profile-optimization",
-    locationSlug: "local-seo-san-diego",
+    locationSlug: "san-diego",
     title: "Google Business Profile Management in San Diego",
     description:
       "Google Business Profile management for San Diego businesses: accurate service areas, categories, photos, posts, and review replies for coast and inland.",
@@ -323,9 +330,9 @@ export const metroServices: MetroServiceData[] = [
     ],
   },
   {
-    slug: "google-business-profile-optimization-los-angeles",
+    legacyPath: "/google-business-profile-optimization-los-angeles",
     service: "google-business-profile-optimization",
-    locationSlug: "local-seo-los-angeles",
+    locationSlug: "los-angeles",
     title: "Google Business Profile Management in Los Angeles",
     description:
       "Google Business Profile management for Los Angeles businesses: neighborhood-aware service areas, categories, photos, posts, and review replies.",
@@ -366,9 +373,9 @@ export const metroServices: MetroServiceData[] = [
     ],
   },
   {
-    slug: "google-business-profile-optimization-orange-county",
+    legacyPath: "/google-business-profile-optimization-orange-county",
     service: "google-business-profile-optimization",
-    locationSlug: "local-seo-orange-county",
+    locationSlug: "orange-county",
     title: "Google Business Profile Management in Orange County",
     description:
       "Google Business Profile management for Orange County businesses: accurate cities, categories, photos, posts, and review replies for discerning homeowners.",
@@ -409,9 +416,9 @@ export const metroServices: MetroServiceData[] = [
     ],
   },
   {
-    slug: "google-business-profile-optimization-las-vegas",
+    legacyPath: "/google-business-profile-optimization-las-vegas",
     service: "google-business-profile-optimization",
-    locationSlug: "local-seo-las-vegas",
+    locationSlug: "las-vegas",
     title: "Google Business Profile Management in Las Vegas",
     description:
       "Google Business Profile management for Las Vegas businesses: accurate hours, service areas, photos, and review replies for urgent and after-hours searches.",
@@ -452,9 +459,9 @@ export const metroServices: MetroServiceData[] = [
     ],
   },
   {
-    slug: "google-business-profile-optimization-phoenix",
+    legacyPath: "/google-business-profile-optimization-phoenix",
     service: "google-business-profile-optimization",
-    locationSlug: "local-seo-phoenix",
+    locationSlug: "phoenix",
     title: "Google Business Profile Management in Phoenix",
     description:
       "Google Business Profile management for Phoenix businesses: realistic Valley service areas, categories, photos, and review replies for urgent summer searches.",
@@ -495,9 +502,9 @@ export const metroServices: MetroServiceData[] = [
     ],
   },
   {
-    slug: "google-business-profile-optimization-dallas",
+    legacyPath: "/google-business-profile-optimization-dallas",
     service: "google-business-profile-optimization",
-    locationSlug: "local-seo-dallas",
+    locationSlug: "dallas",
     title: "Google Business Profile Management in Dallas",
     description:
       "Google Business Profile management for Dallas-Fort Worth businesses: accurate service areas, categories, photos, review replies, and storm-season updates.",
@@ -539,22 +546,34 @@ export const metroServices: MetroServiceData[] = [
   },
 ];
 
+export const metroServices: MetroServiceData[] = metroServiceEntries.map((entry) => ({
+  ...entry,
+  path: metroServicePath(entry.locationSlug, entry.service),
+}));
+
 // Build-time integrity checks: fail the build rather than ship broken or colliding routes.
 const locationSlugs = new Set(locations.map((location) => location.slug));
-const industrySlugs = new Set(industries.map((industry) => industry.slug));
-const seenSlugs = new Set<string>();
+const seenPaths = new Set<string>();
+const seenLegacyPaths = new Set<string>();
 
 for (const page of metroServices) {
   if (!locationSlugs.has(page.locationSlug)) {
     throw new Error(
-      `metroServices: "${page.slug}" references unknown locationSlug "${page.locationSlug}"`
+      `metroServices: "${page.path}" references unknown locationSlug "${page.locationSlug}"`
     );
   }
-  if (locationSlugs.has(page.slug) || industrySlugs.has(page.slug)) {
-    throw new Error(`metroServices: slug "${page.slug}" collides with a location or industry slug`);
+  if (page.path === locationPath(page.locationSlug)) {
+    throw new Error(`metroServices: path "${page.path}" collides with a location hub path`);
   }
-  if (seenSlugs.has(page.slug)) {
-    throw new Error(`metroServices: duplicate slug "${page.slug}"`);
+  if (seenPaths.has(page.path) || seenLegacyPaths.has(page.legacyPath)) {
+    throw new Error(`metroServices: duplicate path or legacyPath for "${page.path}"`);
   }
-  seenSlugs.add(page.slug);
+  seenPaths.add(page.path);
+  seenLegacyPaths.add(page.legacyPath);
 }
+
+/** Display names for each service, used in breadcrumbs and eyebrows. */
+export const metroServiceLabels: Record<MetroServiceKey, string> = {
+  "web-design": "Web Design",
+  "google-business-profile-optimization": "Google Business Profile",
+};
