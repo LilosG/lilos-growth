@@ -7,6 +7,8 @@ export interface IndustryData {
   slug: string;
   legacyPath: string;
   name: string;
+  /** Singular label used in link anchors, e.g. "Plumber SEO in Phoenix". */
+  shortName: string;
   headline: string;
   title: string;
   description: string;
@@ -22,6 +24,7 @@ export const industries: IndustryData[] = [
     slug: "plumbers",
     legacyPath: "/plumber-seo",
     name: "Plumbers",
+    shortName: "Plumber",
     headline: "Local SEO for Plumbers",
     title: "Local SEO for Plumbers",
     description:
@@ -68,6 +71,7 @@ export const industries: IndustryData[] = [
     slug: "electricians",
     legacyPath: "/electrician-seo",
     name: "Electricians",
+    shortName: "Electrician",
     headline: "Local SEO for Electricians",
     title: "Local SEO for Electricians",
     description:
@@ -114,6 +118,7 @@ export const industries: IndustryData[] = [
     slug: "hvac",
     legacyPath: "/hvac-seo",
     name: "HVAC Companies",
+    shortName: "HVAC",
     headline: "Local SEO for HVAC Companies",
     title: "Local SEO for HVAC Companies",
     description:
@@ -160,6 +165,7 @@ export const industries: IndustryData[] = [
     slug: "pest-control",
     legacyPath: "/pest-control-seo",
     name: "Pest Control Companies",
+    shortName: "Pest Control",
     headline: "Local SEO for Pest Control Companies",
     title: "Local SEO for Pest Control",
     description:
@@ -206,6 +212,7 @@ export const industries: IndustryData[] = [
     slug: "roofing",
     legacyPath: "/roofing-seo",
     name: "Roofing Companies",
+    shortName: "Roofing",
     headline: "Local SEO for Roofing Companies",
     title: "Local SEO for Roofing Companies",
     description:
@@ -252,6 +259,7 @@ export const industries: IndustryData[] = [
     slug: "water-damage-restoration",
     legacyPath: "/water-damage-restoration-seo",
     name: "Water Damage Restoration",
+    shortName: "Water Damage Restoration",
     headline: "Local SEO for Water Damage Restoration Companies",
     title: "Water Damage Restoration SEO",
     description:
@@ -298,6 +306,7 @@ export const industries: IndustryData[] = [
     slug: "cleaning",
     legacyPath: "/cleaning-company-seo",
     name: "Cleaning Companies",
+    shortName: "Cleaning Company",
     headline: "Local SEO for Cleaning Companies",
     title: "Local SEO for Cleaning Companies",
     description:
@@ -344,6 +353,7 @@ export const industries: IndustryData[] = [
     slug: "party-rentals",
     legacyPath: "/party-rental-seo",
     name: "Party Rental Companies",
+    shortName: "Party Rental",
     headline: "Local SEO for Party Rental Companies",
     title: "Local SEO for Party Rental Companies",
     description:
@@ -390,6 +400,7 @@ export const industries: IndustryData[] = [
     slug: "landscaping",
     legacyPath: "/landscaping-seo",
     name: "Landscaping Companies",
+    shortName: "Landscaping",
     headline: "Local SEO for Landscaping Companies",
     title: "Local SEO for Landscaping Companies",
     description:
@@ -436,6 +447,7 @@ export const industries: IndustryData[] = [
     slug: "painters",
     legacyPath: "/painter-seo",
     name: "Painting Contractors",
+    shortName: "Painter",
     headline: "Local SEO for Painting Contractors",
     title: "Local SEO for Painting Contractors",
     description:
@@ -482,6 +494,7 @@ export const industries: IndustryData[] = [
     slug: "restaurants",
     legacyPath: "/restaurant-seo",
     name: "Restaurants & Hospitality",
+    shortName: "Restaurant",
     headline: "Local SEO for Restaurants & Hospitality",
     title: "Local SEO for Restaurants & Hospitality",
     description:
@@ -525,3 +538,18 @@ export const industries: IndustryData[] = [
     ],
   },
 ];
+
+/** Maps a location's trade label to its industry page, when one exists. */
+export const tradeIndustrySlugs: Record<string, string> = {
+  Plumbers: "plumbers",
+  Electricians: "electricians",
+  HVAC: "hvac",
+  "Pest Control": "pest-control",
+  Roofers: "roofing",
+  "Water Damage Restoration": "water-damage-restoration",
+  "Cleaning Companies": "cleaning",
+  Landscaping: "landscaping",
+  Painters: "painters",
+  "Party Rentals": "party-rentals",
+  "Restaurants & Hospitality": "restaurants",
+};

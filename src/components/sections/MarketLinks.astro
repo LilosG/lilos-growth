@@ -1,0 +1,51 @@
+---
+import { locations } from "~/data/locations";
+import { locationPath, metroServicePath } from "~/lib/routes";
+
+interface Props {
+  kind: "web-design" | "google-business-profile-optimization" | "local-seo";
+}
+
+const { kind } = Astro.props;
+
+const config = {
+  "web-design": {
+    heading: "Web Design by Market",
+    href: (metro: string) => metroServicePath(metro, "web-design"),
+    label: (city: string) => `Web design in ${city}`,
+  },
+  "google-business-profile-optimization": {
+    heading: "Google Business Profile Management by Market",
+    href: (metro: string) => metroServicePath(metro, "google-business-profile-optimization"),
+    label: (city: string) => `Google Business Profile management in ${city}`,
+  },
+  "local-seo": {
+    heading: "Local SEO by Market",
+    href: (metro: string) => locationPath(metro),
+    label: (city: string) => `${city} local SEO`,
+  },
+}[kind];
+---
+
+<section class="border-t border-gray-100 bg-white py-12" aria-labelledby={`market-links-${kind}`}>
+  <div class="mx-auto max-w-5xl px-4 text-center">
+    <h2
+      id={`market-links-${kind}`}
+      class="mb-6 font-heading text-xl font-bold text-heading md:text-2xl"
+    >
+      {config.heading}
+    </h2>
+    <div class="flex flex-wrap justify-center gap-3">
+      {
+        locations.map((location) => (
+          <a
+            href={config.href(location.slug)}
+            class="rounded-full border border-border-base bg-background-cream px-5 py-2.5 text-sm font-semibold text-heading transition hover:border-primary hover:text-primary hover:shadow-sm"
+          >
+            {config.label(location.city)}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -33,12 +33,10 @@ const otherService = metroServices.find(
   (p) => p.locationSlug === page.locationSlug && p.service !== page.service
 );
 
-// Fixed order, not random: the next two metros after this one in data order.
-const sameServicePages = metroServices.filter((p) => p.service === page.service);
-const currentIndex = sameServicePages.findIndex((p) => p.path === page.path);
-const otherMetroPages = [1, 2]
-  .map((offset) => sameServicePages[(currentIndex + offset) % sameServicePages.length])
-  .filter((p) => p.path !== page.path);
+// Fixed order, not random: every other metro for the same service, in data order.
+const otherMetroPages = metroServices.filter(
+  (p) => p.service === page.service && p.path !== page.path
+);
 
 const relatedLinks = [
   { href: locationPath(page.locationSlug), label: `Local SEO in ${location.city}` },
