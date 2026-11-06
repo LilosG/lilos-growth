@@ -50,7 +50,7 @@ describe("commercial-page integrity", () => {
   });
 
   it("uses canonical package pricing on generated industry landing pages", () => {
-    const page = read("[slug].astro");
+    const page = read("../components/pages/IndustryPage.astro");
     expect(page).toContain('import { gbpManagement, packages } from "~/data/packages"');
     expect(page).toContain("pkg.setupPrice.toLocaleString");
     expect(page).toContain("{gbpManagement.price}/mo");

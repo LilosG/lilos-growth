@@ -1,4 +1,5 @@
 ---
+import { locationPath } from "~/lib/routes";
 import Layout from "~/layouts/PageLayout.astro";
 import Button from "~/components/ui/Button.astro";
 import Badge from "~/components/ui/Badge.astro";
@@ -224,7 +225,7 @@ const faqs = [
       <p class="mt-6 max-w-3xl text-sm leading-relaxed text-body">
         Serving San Diego and North County? Read our
         <a
-          href="/local-seo-san-diego"
+          href={locationPath("san-diego")}
           class="font-semibold text-primary underline underline-offset-4"
           >San Diego local SEO approach</a
         >
@@ -418,7 +419,7 @@ const faqs = [
           href="/services/local-seo"
           class="font-semibold text-primary underline underline-offset-4">local SEO services</a
         >, our <a
-          href="/local-seo-san-diego"
+          href={locationPath("san-diego")}
           class="font-semibold text-primary underline underline-offset-4"
           >San Diego local search approach</a
         >, and <a href="/results" class="font-semibold text-primary underline underline-offset-4"

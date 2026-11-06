@@ -26,10 +26,18 @@ const inspectedRoutes = [
     path: "/services/google-business-profile-optimization",
     file: "services/google-business-profile-optimization/index.html",
   },
+  {
+    path: "/services/ai-search-optimization",
+    file: "services/ai-search-optimization/index.html",
+  },
   { path: "/google-business-profile-offer", file: "google-business-profile-offer/index.html" },
   { path: "/contact", file: "contact/index.html" },
-  { path: "/plumber-seo", file: "plumber-seo/index.html" },
-  { path: "/local-seo-san-diego", file: "local-seo-san-diego/index.html" },
+  { path: "/industries", file: "industries/index.html" },
+  { path: "/industries/plumbers", file: "industries/plumbers/index.html" },
+  { path: "/locations", file: "locations/index.html" },
+  { path: "/locations/san-diego", file: "locations/san-diego/index.html" },
+  { path: "/locations/las-vegas", file: "locations/las-vegas/index.html" },
+  { path: "/locations/las-vegas/web-design", file: "locations/las-vegas/web-design/index.html" },
   { path: "/thank-you", file: "thank-you/index.html", noindex: true },
 ];
 

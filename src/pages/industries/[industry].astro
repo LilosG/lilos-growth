@@ -1,0 +1,59 @@
+---
+import Layout from "~/layouts/PageLayout.astro";
+import Breadcrumbs from "~/components/common/Breadcrumbs.astro";
+import IndustryPage from "~/components/pages/IndustryPage.astro";
+import { industries, type IndustryData } from "~/data/industries";
+import { INDUSTRIES_INDEX, industryPath } from "~/lib/routes";
+
+export function getStaticPaths() {
+  return industries.map((industry) => ({
+    params: { industry: industry.slug },
+    props: { industry },
+  }));
+}
+
+interface Props {
+  industry: IndustryData;
+}
+
+const { industry } = Astro.props;
+const url = `https://lilosgrowth.com${industryPath(industry.slug)}`;
+
+const breadcrumbs = [
+  { name: "Home", item: "https://lilosgrowth.com/" },
+  { name: "Industries", item: `https://lilosgrowth.com${INDUSTRIES_INDEX}` },
+  { name: industry.name, item: url },
+];
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${url}#service`,
+    name: industry.headline,
+    description: industry.description,
+    provider: { "@id": "https://lilosgrowth.com/#org" },
+    areaServed: { "@type": "Country", name: "United States" },
+    url,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: industry.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  },
+];
+---
+
+<Layout
+  title={industry.title}
+  description={industry.description}
+  breadcrumbs={breadcrumbs}
+  schema={schema}
+>
+  <Breadcrumbs crumbs={breadcrumbs} />
+  <IndustryPage industry={industry} />
+</Layout>

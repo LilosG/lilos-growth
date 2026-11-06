@@ -5,6 +5,7 @@ export interface LocationFAQ {
 
 export interface LocationData {
   slug: string;
+  legacyPath: string;
   city: string;
   state: string;
   stateAbbr: string;
@@ -20,7 +21,8 @@ export interface LocationData {
 
 export const locations: LocationData[] = [
   {
-    slug: "local-seo-san-diego",
+    slug: "san-diego",
+    legacyPath: "/local-seo-san-diego",
     city: "San Diego",
     state: "California",
     stateAbbr: "CA",
@@ -85,7 +87,8 @@ export const locations: LocationData[] = [
     geo: { latitude: 32.7157, longitude: -117.1611 },
   },
   {
-    slug: "local-seo-los-angeles",
+    slug: "los-angeles",
+    legacyPath: "/local-seo-los-angeles",
     city: "Los Angeles",
     state: "California",
     stateAbbr: "CA",
@@ -150,7 +153,8 @@ export const locations: LocationData[] = [
     geo: { latitude: 34.0522, longitude: -118.2437 },
   },
   {
-    slug: "local-seo-orange-county",
+    slug: "orange-county",
+    legacyPath: "/local-seo-orange-county",
     city: "Orange County",
     state: "California",
     stateAbbr: "CA",
@@ -215,7 +219,8 @@ export const locations: LocationData[] = [
     geo: { latitude: 33.7175, longitude: -117.8311 },
   },
   {
-    slug: "local-seo-las-vegas",
+    slug: "las-vegas",
+    legacyPath: "/local-seo-las-vegas",
     city: "Las Vegas",
     state: "Nevada",
     stateAbbr: "NV",
@@ -270,9 +275,128 @@ export const locations: LocationData[] = [
       {
         question: "Do you work with Las Vegas businesses remotely?",
         answer:
-          "Yes — we're a digital-first agency. Our Las Vegas clients get the same strategy, deliverables, and reporting as our San Diego clients. Local presence is built through digital signals, not our physical location.",
+          "Yes — we're a digital-first agency. Las Vegas businesses get the same strategy, deliverables, and reporting as every other engagement. Local presence is built through digital signals, not our physical location.",
       },
     ],
     geo: { latitude: 36.1699, longitude: -115.1398 },
+  },
+  {
+    slug: "phoenix",
+    legacyPath: "/local-seo-phoenix",
+    city: "Phoenix",
+    state: "Arizona",
+    stateAbbr: "AZ",
+    title: "Local SEO for Phoenix Businesses",
+    description:
+      "Local SEO for Phoenix-area businesses: Google Business Profile management, suburb-level service pages, and websites built around how Valley customers actually search.",
+    intro:
+      "The Phoenix metro is a grid of large suburbs rather than one dense city, and customers tend to search with the name of the suburb they live in. Lilos Growth builds local search foundations for Valley businesses that start with the real service area: which suburbs the crew drives to, which services bring in the best work, and how customers prefer to reach you. From there we plan the website pages, Google Business Profile improvements, and measurement that fit that footprint.",
+    neighborhoods: [
+      "Scottsdale",
+      "Tempe",
+      "Mesa",
+      "Chandler",
+      "Gilbert",
+      "Glendale",
+      "Peoria",
+      "Surprise",
+      "Goodyear",
+      "Queen Creek",
+    ],
+    trades: [
+      "HVAC",
+      "Pest Control",
+      "Roofers",
+      "Plumbers",
+      "Electricians",
+      "Landscaping",
+      "Cleaning Companies",
+      "Painters",
+    ],
+    whyCity:
+      "Phoenix summers are long and punishing, and that shapes what people search for. A failed air conditioner, a green pool, or a scorpion in the garage is an urgent problem, so HVAC, pool, and pest businesses see searches arrive in bursts and expect to be found immediately. The Valley is also a sprawl of connected suburbs, and a homeowner in Gilbert is likely to search with Gilbert in the query, not Phoenix. Strong local visibility here means matching seasonal urgency and suburb-level search habits to the places a business genuinely serves. We do not promise a specific Map Pack position.",
+    faqs: [
+      {
+        question:
+          "Should a Phoenix business target Phoenix or individual suburbs like Mesa and Chandler?",
+        answer:
+          "Usually both, in proportion to the real service area. The Valley's suburbs are large and many customers search with their own city name, so dedicated pages for the suburbs you actually serve can match that behavior. We decide which suburbs deserve pages from search data and your crews' routes, not by listing every city on the map.",
+      },
+      {
+        question: "How does the summer heat change local SEO planning in Arizona?",
+        answer:
+          "Demand for cooling, pool, and pest services builds before and during the hot months, so useful pages and a well-maintained Google Business Profile should be in place ahead of the season. Planning the content calendar around those cycles means you are not publishing in the middle of the rush.",
+      },
+      {
+        question: "Can you help if I serve both the East Valley and the West Valley?",
+        answer:
+          "Yes. We map the service area first and then decide how to structure pages and profile information so each side of the Valley is represented accurately. If the business operates in both, we keep the content distinct rather than repeating one page with a different suburb name.",
+      },
+      {
+        question: "Do you guarantee a top Map Pack spot in Phoenix?",
+        answer:
+          "No. Nobody can guarantee a specific position in Google results. We work on accurate business information, useful service pages, sound technical foundations, and clear reporting so you can see how visibility and inquiries change over time.",
+      },
+    ],
+    geo: { latitude: 33.4484, longitude: -112.074 },
+  },
+  {
+    slug: "dallas",
+    legacyPath: "/local-seo-dallas",
+    city: "Dallas",
+    state: "Texas",
+    stateAbbr: "TX",
+    title: "Local SEO for Dallas Businesses",
+    description:
+      "Local SEO for Dallas-Fort Worth businesses: Google Business Profile management, city-by-city service pages, and websites built for the DFW metroplex.",
+    intro:
+      "Dallas-Fort Worth is a metroplex made up of many cities that each behave like their own local market. Lilos Growth helps DFW businesses sort out where customers really search, which of the surrounding cities belong in the strategy, and how to present each service clearly on the website and Google Business Profile. We begin with your actual service area and the jobs you want more of, then build a practical plan around pages, profile quality, and measurement rather than a long list of cities.",
+    neighborhoods: [
+      "Plano",
+      "Frisco",
+      "Irving",
+      "Garland",
+      "McKinney",
+      "Richardson",
+      "Arlington",
+      "Carrollton",
+      "Allen",
+      "Grand Prairie",
+    ],
+    trades: [
+      "Roofers",
+      "Water Damage Restoration",
+      "Electricians",
+      "Plumbers",
+      "HVAC",
+      "Landscaping",
+      "Painters",
+      "Cleaning Companies",
+    ],
+    whyCity:
+      "DFW is a multi-city metroplex, and customers often search by the city they live in, from Plano and Frisco in the north to Arlington and Grand Prairie in the middle. Dallas and Fort Worth also split search behavior, so a business serving both sides should not assume one page covers them. North Texas storm season adds another layer: hail and wind damage send homeowners looking for roofers and restoration companies in sudden waves after a storm. Local visibility here depends on city-level relevance and being ready before the weather arrives. We do not promise a specific Map Pack position.",
+    faqs: [
+      {
+        question: "Do I need separate pages for Dallas and Fort Worth?",
+        answer:
+          "If you serve both, usually yes. The two cities have their own neighborhoods, search habits, and competitors, and one page rarely serves both well. We look at your real service area and search data before recommending how to split the pages.",
+      },
+      {
+        question: "How should a roofing or restoration company prepare for hail season?",
+        answer:
+          "Have your service pages, Google Business Profile, and contact paths in good shape before a storm hits, since searches jump quickly afterward. We focus on clear storm-damage and emergency service pages, accurate profile details, and a fast way for homeowners to reach you.",
+      },
+      {
+        question: "Is it worth targeting suburbs like Plano, Frisco, and McKinney?",
+        answer:
+          "Often, when you genuinely serve them. Many North Dallas suburb residents search with their own city name. We recommend suburb pages only where there is real demand and you can describe the service honestly, rather than creating pages for every city in the metroplex.",
+      },
+      {
+        question: "Can you promise first-page or Map Pack rankings in DFW?",
+        answer:
+          "No. Rankings depend on many factors outside anyone's control. We commit to a clear plan, accurate local information, useful content, and transparent reporting on visibility and inquiries.",
+      },
+    ],
+    geo: { latitude: 32.7767, longitude: -96.797 },
   },
 ];

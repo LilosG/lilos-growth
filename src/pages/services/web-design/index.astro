@@ -1,4 +1,5 @@
 ---
+import { locationPath } from "~/lib/routes";
 import Layout from "~/layouts/PageLayout.astro";
 import CheckListItem from "~/components/ui/CheckListItem.astro";
 import Button from "~/components/ui/Button.astro";
@@ -309,7 +310,7 @@ const faqs = [
           href="/services/local-seo"
           class="font-semibold text-primary underline underline-offset-4">local SEO services</a
         >, review our <a
-          href="/local-seo-san-diego"
+          href={locationPath("san-diego")}
           class="font-semibold text-primary underline underline-offset-4"
           >San Diego search strategy</a
         >, or see <a href="/results" class="font-semibold text-primary underline underline-offset-4"

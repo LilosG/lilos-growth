@@ -5,6 +5,7 @@ export interface IndustryFAQ {
 
 export interface IndustryData {
   slug: string;
+  legacyPath: string;
   name: string;
   headline: string;
   title: string;
@@ -18,7 +19,8 @@ export interface IndustryData {
 
 export const industries: IndustryData[] = [
   {
-    slug: "plumber-seo",
+    slug: "plumbers",
+    legacyPath: "/plumber-seo",
     name: "Plumbers",
     headline: "Local SEO for Plumbers",
     title: "Local SEO for Plumbers",
@@ -63,7 +65,8 @@ export const industries: IndustryData[] = [
     ],
   },
   {
-    slug: "electrician-seo",
+    slug: "electricians",
+    legacyPath: "/electrician-seo",
     name: "Electricians",
     headline: "Local SEO for Electricians",
     title: "Local SEO for Electricians",
@@ -108,7 +111,8 @@ export const industries: IndustryData[] = [
     ],
   },
   {
-    slug: "hvac-seo",
+    slug: "hvac",
+    legacyPath: "/hvac-seo",
     name: "HVAC Companies",
     headline: "Local SEO for HVAC Companies",
     title: "Local SEO for HVAC Companies",
@@ -153,7 +157,8 @@ export const industries: IndustryData[] = [
     ],
   },
   {
-    slug: "pest-control-seo",
+    slug: "pest-control",
+    legacyPath: "/pest-control-seo",
     name: "Pest Control Companies",
     headline: "Local SEO for Pest Control Companies",
     title: "Local SEO for Pest Control",
@@ -198,7 +203,8 @@ export const industries: IndustryData[] = [
     ],
   },
   {
-    slug: "roofing-seo",
+    slug: "roofing",
+    legacyPath: "/roofing-seo",
     name: "Roofing Companies",
     headline: "Local SEO for Roofing Companies",
     title: "Local SEO for Roofing Companies",
@@ -243,7 +249,8 @@ export const industries: IndustryData[] = [
     ],
   },
   {
-    slug: "water-damage-restoration-seo",
+    slug: "water-damage-restoration",
+    legacyPath: "/water-damage-restoration-seo",
     name: "Water Damage Restoration",
     headline: "Local SEO for Water Damage Restoration Companies",
     title: "Water Damage Restoration SEO",
@@ -288,7 +295,8 @@ export const industries: IndustryData[] = [
     ],
   },
   {
-    slug: "cleaning-company-seo",
+    slug: "cleaning",
+    legacyPath: "/cleaning-company-seo",
     name: "Cleaning Companies",
     headline: "Local SEO for Cleaning Companies",
     title: "Local SEO for Cleaning Companies",
@@ -333,7 +341,8 @@ export const industries: IndustryData[] = [
     ],
   },
   {
-    slug: "party-rental-seo",
+    slug: "party-rentals",
+    legacyPath: "/party-rental-seo",
     name: "Party Rental Companies",
     headline: "Local SEO for Party Rental Companies",
     title: "Local SEO for Party Rental Companies",
@@ -378,7 +387,8 @@ export const industries: IndustryData[] = [
     ],
   },
   {
-    slug: "landscaping-seo",
+    slug: "landscaping",
+    legacyPath: "/landscaping-seo",
     name: "Landscaping Companies",
     headline: "Local SEO for Landscaping Companies",
     title: "Local SEO for Landscaping Companies",
@@ -423,7 +433,8 @@ export const industries: IndustryData[] = [
     ],
   },
   {
-    slug: "painter-seo",
+    slug: "painters",
+    legacyPath: "/painter-seo",
     name: "Painting Contractors",
     headline: "Local SEO for Painting Contractors",
     title: "Local SEO for Painting Contractors",
@@ -468,7 +479,8 @@ export const industries: IndustryData[] = [
     ],
   },
   {
-    slug: "restaurant-seo",
+    slug: "restaurants",
+    legacyPath: "/restaurant-seo",
     name: "Restaurants & Hospitality",
     headline: "Local SEO for Restaurants & Hospitality",
     title: "Local SEO for Restaurants & Hospitality",

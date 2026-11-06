@@ -1,0 +1,64 @@
+---
+import Layout from "~/layouts/PageLayout.astro";
+import Breadcrumbs from "~/components/common/Breadcrumbs.astro";
+import LocationHubPage from "~/components/pages/LocationHubPage.astro";
+import { locations, type LocationData } from "~/data/locations";
+import { LOCATIONS_INDEX, locationPath } from "~/lib/routes";
+
+export function getStaticPaths() {
+  return locations.map((location) => ({
+    params: { metro: location.slug },
+    props: { location },
+  }));
+}
+
+interface Props {
+  location: LocationData;
+}
+
+const { location } = Astro.props;
+const url = `https://lilosgrowth.com${locationPath(location.slug)}`;
+
+const breadcrumbs = [
+  { name: "Home", item: "https://lilosgrowth.com/" },
+  { name: "Locations", item: `https://lilosgrowth.com${LOCATIONS_INDEX}` },
+  { name: location.city, item: url },
+];
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${url}#service`,
+    name: `Local SEO for ${location.city} Businesses`,
+    description: location.description,
+    provider: { "@id": "https://lilosgrowth.com/#org" },
+    areaServed: {
+      "@type": "City",
+      name: location.city,
+      containedInPlace: { "@type": "State", name: location.state },
+    },
+    url,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: location.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  },
+];
+---
+
+<Layout
+  title={location.title}
+  description={location.description}
+  ignoreTitleTemplate={location.title.includes("Lilos Growth")}
+  breadcrumbs={breadcrumbs}
+  schema={schema}
+>
+  <Breadcrumbs crumbs={breadcrumbs} />
+  <LocationHubPage location={location} />
+</Layout>

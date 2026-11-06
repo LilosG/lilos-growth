@@ -44,12 +44,13 @@ describe("curated commercial internal linking", () => {
   });
 
   it("connects the shared landing-page template and results page", () => {
-    const landing = source("src/pages/[slug].astro");
+    const industryPage = source("src/components/pages/IndustryPage.astro");
+    const locationPage = source("src/components/pages/LocationHubPage.astro");
     const results = source("src/pages/results.astro");
-    expect(landing).toContain("getRelatedIndustries(industry!.slug)");
-    expect(landing).toContain("getLocationIndustryExamples(location!.slug)");
-    expect(landing).toContain('href="/results"');
-    expect(results).toContain('href="/electrician-seo"');
-    expect(results).toContain('href="/pest-control-seo"');
+    expect(industryPage).toContain("getRelatedIndustries(industry.slug)");
+    expect(locationPage).toContain("getLocationIndustryExamples(location.slug)");
+    expect(industryPage).toContain('href="/results"');
+    expect(results).toContain('industryPath("electricians")');
+    expect(results).toContain('industryPath("pest-control")');
   });
 });

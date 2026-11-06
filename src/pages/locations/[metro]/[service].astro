@@ -1,0 +1,72 @@
+---
+import Layout from "~/layouts/PageLayout.astro";
+import Breadcrumbs from "~/components/common/Breadcrumbs.astro";
+import MetroServicePage from "~/components/pages/MetroServicePage.astro";
+import { locations, type LocationData } from "~/data/locations";
+import { metroServices, metroServiceLabels, type MetroServiceData } from "~/data/metroServices";
+import { LOCATIONS_INDEX, locationPath } from "~/lib/routes";
+
+export function getStaticPaths() {
+  return metroServices.map((metroService) => ({
+    params: { metro: metroService.locationSlug, service: metroService.service },
+    props: {
+      metroService,
+      location: locations.find((l) => l.slug === metroService.locationSlug)!,
+    },
+  }));
+}
+
+interface Props {
+  metroService: MetroServiceData;
+  location: LocationData;
+}
+
+const { metroService, location } = Astro.props;
+const url = `https://lilosgrowth.com${metroService.path}`;
+
+const breadcrumbs = [
+  { name: "Home", item: "https://lilosgrowth.com/" },
+  { name: "Locations", item: `https://lilosgrowth.com${LOCATIONS_INDEX}` },
+  { name: location.city, item: `https://lilosgrowth.com${locationPath(location.slug)}` },
+  { name: metroServiceLabels[metroService.service], item: url },
+];
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${url}#service`,
+    name: metroService.headline,
+    serviceType:
+      metroService.service === "web-design" ? "Web design" : "Google Business Profile management",
+    description: metroService.description,
+    provider: { "@id": "https://lilosgrowth.com/#org" },
+    areaServed: {
+      "@type": "City",
+      name: location.city,
+      containedInPlace: { "@type": "State", name: location.state },
+    },
+    url,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: metroService.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  },
+];
+---
+
+<Layout
+  title={metroService.title}
+  description={metroService.description}
+  ignoreTitleTemplate
+  breadcrumbs={breadcrumbs}
+  schema={schema}
+>
+  <Breadcrumbs crumbs={breadcrumbs} />
+  <MetroServicePage page={metroService} location={location} />
+</Layout>

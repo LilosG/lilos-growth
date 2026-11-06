@@ -30,6 +30,8 @@ Publish these as standalone FAQ pages or sections, **localized per city**, and k
 - **Evidence-backed:** Photos/metrics/reviews act as proof, not fluff.
 - **Interlinkable:** FAQs route to **Service + City** pages, improving internal link structure.
 
+Answer cards are one part of broader [AI search optimization](/services/ai-search-optimization), which also covers entity data, schema, and crawler access.
+
 ---
 
 ## Research Workflow: From PAA → Calls → Answer Cards (2–3 Hours)

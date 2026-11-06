@@ -1,4 +1,5 @@
 ---
+import { industryPath } from "~/lib/routes";
 import PageLayout from "~/layouts/PageLayout.astro";
 import CaseStudyCard from "~/components/results/CaseStudyCard.astro";
 import Card from "~/components/ui/Card.astro";
@@ -389,10 +390,16 @@ const measurementPillars = [
         <a class="text-primary underline-offset-4 hover:underline" href="/services/web-design">
           Website design
         </a>
-        <a class="text-primary underline-offset-4 hover:underline" href="/electrician-seo">
+        <a
+          class="text-primary underline-offset-4 hover:underline"
+          href={industryPath("electricians")}
+        >
           SEO for electricians
         </a>
-        <a class="text-primary underline-offset-4 hover:underline" href="/pest-control-seo">
+        <a
+          class="text-primary underline-offset-4 hover:underline"
+          href={industryPath("pest-control")}
+        >
           SEO for pest control companies
         </a>
       </div>

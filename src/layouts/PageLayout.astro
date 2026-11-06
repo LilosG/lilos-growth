@@ -17,6 +17,8 @@ export interface Crumb {
 export interface Props {
   title?: string;
   description?: string;
+  /** Use when `title` already includes the brand; skips the "%s — Lilos Growth" template. */
+  ignoreTitleTemplate?: boolean;
   lang?: string;
   bodyClass?: string;
   metadata?: MetaDataType;
@@ -39,6 +41,7 @@ const props = Astro.props as Props;
 const {
   title,
   description,
+  ignoreTitleTemplate,
   lang,
   bodyClass,
   metadata,
@@ -178,6 +181,7 @@ const effectiveMetadata = {
 <Layout
   {title}
   {description}
+  {ignoreTitleTemplate}
   {lang}
   {bodyClass}
   metadata={effectiveMetadata}

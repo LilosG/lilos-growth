@@ -1,4 +1,5 @@
 ---
+import { locationPath } from "~/lib/routes";
 import Layout from "~/layouts/PageLayout.astro";
 import Button from "~/components/ui/Button.astro";
 import Badge from "~/components/ui/Badge.astro";
@@ -143,7 +144,10 @@ const faqs = [
       <p class="mb-6 text-base text-body">
         A practical, repeatable system to turn local searches into calls, bookings, and inquiries —
         built for Google, Maps, and AI answer engines like AI Overviews and ChatGPT Search, not just
-        classic blue links.
+        classic blue links. Learn more about our <a
+          href="/services/ai-search-optimization"
+          class="font-semibold text-primary underline underline-offset-4">AI search optimization</a
+        > approach.
       </p>
       <div class="flex flex-wrap justify-center gap-3">
         {
@@ -221,7 +225,7 @@ const faqs = [
       </h2>
       <p class="max-w-3xl text-base leading-relaxed text-body">
         Our <a
-          href="/local-seo-san-diego"
+          href={locationPath("san-diego")}
           class="font-semibold text-primary underline underline-offset-4"
           >San Diego local SEO services</a
         >

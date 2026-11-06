@@ -5,6 +5,7 @@ import Card from "~/components/ui/Card.astro";
 import Button from "~/components/ui/Button.astro";
 import { packages } from "~/data/packages";
 import { industries } from "~/data/industries";
+import { industryPath } from "~/lib/routes";
 
 export const title = "Local SEO, GBP & Website Services for Businesses | Lilos Growth";
 export const description =
@@ -134,14 +135,14 @@ export const description =
 
   <!-- CORE SERVICES — compact directory, links to the dedicated pages -->
   <section id="core-services" class="bg-white py-24" aria-label="Core services">
-    <div class="mx-auto max-w-5xl px-6">
+    <div class="mx-auto max-w-6xl px-6">
       <div class="mb-14 text-center">
         <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">What We Do</p>
         <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
-          Three services. Stand alone or stack together.
+          Four services. Stand alone or stack together.
         </h2>
       </div>
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
         <!-- GBP -->
         <Card class="flex flex-col !bg-background-cream">
           <div
@@ -199,7 +200,11 @@ export const description =
           </h3>
           <p class="mb-6 flex-1 text-sm leading-relaxed text-body">
             On-page fixes, service &amp; location content, citations, local link building, and AEO
-            schema for AI search. Structured for how search works now, not just classic blue links.
+            schema for <a
+              href="/services/ai-search-optimization"
+              class="font-semibold text-primary underline underline-offset-4"
+              >AI search optimization</a
+            >. Structured for how search works now, not just classic blue links.
           </p>
           <a
             href="/services/local-seo"
@@ -237,6 +242,41 @@ export const description =
             class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark"
           >
             See website pricing &rarr;
+          </a>
+        </Card>
+
+        <!-- AI Search -->
+        <Card class="flex flex-col !bg-background-cream">
+          <div
+            class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-service-seo-light px-4 py-2 text-xs font-bold uppercase tracking-wider text-service-seo"
+          >
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+              ></path></svg
+            >
+            AI Search Optimization
+          </div>
+          <h3 class="mb-3 font-heading text-xl font-extrabold text-heading">
+            Get found in AI answers
+          </h3>
+          <p class="mb-6 flex-1 text-sm leading-relaxed text-body">
+            Entity data, schema, answer-first content, and visibility tracking so your business can
+            be mentioned in Google AI Overviews, ChatGPT, Perplexity, and Gemini. Included in Growth
+            and Authority plans.
+          </p>
+          <a
+            href="/services/ai-search-optimization"
+            class="inline-flex items-center gap-1.5 font-heading text-sm font-bold text-primary transition hover:text-primary-dark"
+          >
+            See AI search optimization &rarr;
           </a>
         </Card>
       </div>
@@ -467,7 +507,7 @@ export const description =
         {
           industries.map((industry) => (
             <a
-              href={`/${industry.slug}`}
+              href={industryPath(industry.slug)}
               class="group flex items-center justify-between rounded-xl border border-border-base px-5 py-4 font-semibold text-heading transition hover:border-primary hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <span>{industry.name}</span>
