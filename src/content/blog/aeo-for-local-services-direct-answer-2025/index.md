@@ -28,6 +28,8 @@ AEO is not a buzzword; it’s a production method. Write the **answer first** (2
 4. **Evidence** – job photos with captions, meter readings, review snippets naming entities.
 5. **Distribution** – GBP Posts, social, email; point to the Answer Page with UTM.
 
+This is the production side of what we call [AI search optimization](/services/ai-search-optimization): the same entity and answer-page work, plus tracking across AI engines.
+
 ---
 
 ## 7-Step AEO Playbook (Field-Tested for Local Pros)

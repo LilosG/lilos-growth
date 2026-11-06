@@ -1,0 +1,471 @@
+---
+import Layout from "~/layouts/PageLayout.astro";
+import Button from "~/components/ui/Button.astro";
+import Card from "~/components/ui/Card.astro";
+import CheckListItem from "~/components/ui/CheckListItem.astro";
+import PricingCard from "~/components/sections/PricingCard.astro";
+import { Icon } from "astro-icon/components";
+import { packages } from "~/data/packages";
+
+export const title = "AI Search Optimization & AEO Services | Lilos Growth";
+export const description =
+  "AI search optimization for local businesses: get mentioned in Google AI Overviews, ChatGPT, Perplexity and Gemini. Entity, schema, content and tracking.";
+
+const engines = [
+  {
+    icon: "tabler:brand-google",
+    title: "Google AI Overviews and AI Mode",
+    description:
+      "Google summarizes answers directly in search results and in a conversational AI Mode. For local questions, those answers sit alongside Maps and Business Profile information, so both your site and your profile matter.",
+  },
+  {
+    icon: "tabler:message-chatbot",
+    title: "ChatGPT search",
+    description:
+      "ChatGPT can search the web and answer with linked sources. Pages it can crawl and listings that agree with each other give it something reliable to cite when someone asks for a local provider.",
+  },
+  {
+    icon: "tabler:search",
+    title: "Perplexity",
+    description:
+      "Perplexity answers questions with numbered citations. Clear, specific pages that state what you do and where you do it are easier for it to quote and attribute.",
+  },
+  {
+    icon: "tabler:sparkles",
+    title: "Gemini",
+    description:
+      "Gemini is Google's assistant. It can draw on Google's own business information as well as the open web, which makes an accurate, complete Business Profile especially useful.",
+  },
+  {
+    icon: "tabler:brand-windows",
+    title: "Microsoft Copilot",
+    description:
+      "Copilot draws on Bing's search index. Being crawlable by Bing and listed accurately in Bing Places gives Copilot the same basic facts about your business that other engines look for.",
+  },
+];
+
+const signals = [
+  {
+    title: "Entity consistency",
+    description:
+      "Engines build an understanding of your business from many sources. When your name, address, phone number, and categories are identical everywhere, the picture is clear. When they differ, engines have to guess, and they may leave you out.",
+  },
+  {
+    title: "Google Business Profile completeness and reviews",
+    description:
+      "Your profile is a primary source of business facts: services, hours, service areas, photos, and what customers say. A complete, accurate profile with genuine reviews supports both Maps results and AI answers that reference them.",
+  },
+  {
+    title: "Third-party mentions and citations",
+    description:
+      "Directories, local organizations, news mentions, and partner sites confirm that your business exists and what it does. Agreement across independent sources is a strong signal that the details are trustworthy.",
+  },
+  {
+    title: "Crawlable, answer-first content",
+    description:
+      "AI engines favor pages that answer the question plainly near the top, then add detail. Service and location pages written this way, in text that crawlers can read without scripts, are easier to quote.",
+  },
+  {
+    title: "Structured data",
+    description:
+      "Schema markup states facts in a form machines read directly: who you are, what you offer, where you serve, and what questions you answer. It does not replace good content, but it removes ambiguity.",
+  },
+  {
+    title: "Crawler access",
+    description:
+      "If a bot cannot fetch your pages, it cannot cite them. Robots.txt rules, firewall settings, and CDN bot protection sometimes block legitimate AI crawlers by accident, so access is worth checking directly.",
+  },
+];
+
+const included = [
+  "Entity, Organization, LocalBusiness, and Service schema, with sameAs links to your official profiles",
+  "Answer-first rewrites of your service and location pages",
+  "FAQ content built from real customer questions and People Also Ask",
+  "Google Business Profile alignment with your site and schema",
+  "Citation and brand-mention cleanup for consistent business data",
+  "AI crawler access review of robots.txt and firewall or CDN bot rules",
+  "AI visibility tracking across the major engines",
+];
+
+const comparison = [
+  {
+    area: "Goal",
+    traditional: "Rank pages and listings higher for target searches",
+    ai: "Be accurately mentioned and cited inside generated answers",
+  },
+  {
+    area: "Where results show",
+    traditional: "Search result pages and the Map Pack",
+    ai: "AI Overviews, AI Mode, chat answers, and cited source lists",
+  },
+  {
+    area: "What gets rewarded",
+    traditional: "Relevance, authority, links, and a strong Business Profile",
+    ai: "Consistent entity data, clear sources, and corroboration across the web",
+  },
+  {
+    area: "Content format",
+    traditional: "Keyword-targeted pages with supporting content",
+    ai: "Direct answers first, then supporting detail, steps, and FAQs",
+  },
+  {
+    area: "How it's measured",
+    traditional: "Rankings, traffic, calls, and form fills",
+    ai: "Mentions, citations, and referral traffic from AI engines",
+  },
+];
+
+const faqs = [
+  {
+    question: "What is AI search optimization?",
+    answer:
+      "AI search optimization is the work of making your business easy for AI search tools to find, understand, and recommend. It covers consistent business data, structured markup, answer-first content, third-party mentions, and crawler access, so engines like Google AI Overviews, ChatGPT, Perplexity, and Gemini can describe your business accurately.",
+  },
+  {
+    question: "Is AEO different from SEO?",
+    answer:
+      "They overlap heavily. Answer engine optimization (AEO) builds on the same foundation as SEO: crawlable pages, a strong Business Profile, and trustworthy local signals. AEO adds a focus on direct, quotable answers, entity data, and measuring whether AI engines mention you, not only where you rank.",
+  },
+  {
+    question: "What is GEO?",
+    answer:
+      "GEO stands for generative engine optimization. It is another name for the same goal as AEO: improving how generative AI tools represent and cite your business. In practice, the work is the same whichever label is used.",
+  },
+  {
+    question: "Can you guarantee my business shows up in ChatGPT or AI Overviews?",
+    answer:
+      "No. AI engines decide what to mention using their own systems, which change often and are not public, and nobody outside those companies controls them. We improve the signals within your control and track whether your business is being mentioned, but we cannot promise any specific result.",
+  },
+  {
+    question: "How long until AI engines start mentioning my business?",
+    answer:
+      "It depends on your starting point, including how consistent your business data already is, how many genuine reviews you have, and how well your pages answer questions. We do not promise a specific timeline. We set a baseline first and report on changes as they happen.",
+  },
+  {
+    question: "Do I need an llms.txt file?",
+    answer:
+      "It is optional and has low impact today. An llms.txt file can give AI tools a short guide to your site, but crawlable content and consistent entity data matter much more. We treat it as a minor extra, not a substitute for the fundamentals.",
+  },
+  {
+    question: "Is AI search optimization included in your plans?",
+    answer:
+      "Yes. The Growth and Authority plans include AI search optimization, including AEO and entity schema and AI visibility tracking, with a fuller program and a quarterly AI visibility audit in Authority.",
+  },
+];
+
+const readingList = [
+  {
+    href: "/blog/aeo-for-local-services-direct-answer-2025",
+    title: "AEO for Local Services: Make Your Content the Direct Answer in ChatGPT & Gemini",
+  },
+  {
+    href: "/blog/aeo-ready-faqs-paa-2025",
+    title: "AEO-Ready FAQs 2025: Turn PAA into Converting Answer Cards Across Cities",
+  },
+  {
+    href: "/blog/entity-first-keyword-research-local-2025",
+    title: "Entity-First Keyword Research 2025: From Services → Cities → Questions → Conversions",
+  },
+  {
+    href: "/blog/local-links-brand-mentions-2025",
+    title: "Local Links & Brand Mentions 2025: A Field Playbook for Trades",
+  },
+];
+
+const aiPlans = packages.filter((pkg) => pkg.name === "Growth" || pkg.name === "Authority");
+---
+
+<Layout
+  title={title}
+  description={description}
+  ignoreTitleTemplate
+  breadcrumbs={[
+    { name: "Home", item: "https://lilosgrowth.com/" },
+    { name: "Services", item: "https://lilosgrowth.com/services" },
+    {
+      name: "AI Search Optimization",
+      item: "https://lilosgrowth.com/services/ai-search-optimization",
+    },
+  ]}
+  schema={[
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": "https://lilosgrowth.com/services/ai-search-optimization#service",
+      name: "AI Search Optimization",
+      serviceType: "AI search optimization",
+      alternateName: ["Answer engine optimization", "AEO", "Generative engine optimization", "GEO"],
+      description,
+      provider: { "@id": "https://lilosgrowth.com/#org" },
+      areaServed: { "@type": "Country", name: "United States" },
+      url: "https://lilosgrowth.com/services/ai-search-optimization",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: { "@type": "Answer", text: faq.answer },
+      })),
+    },
+  ]}
+>
+  <!-- HERO -->
+  <section
+    class="relative flex min-h-[440px] flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-secondary to-secondary-dark pb-16 pt-12"
+  >
+    <div
+      class="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-4 px-4 text-center"
+    >
+      <h1
+        class="font-heading text-3xl font-extrabold leading-tight tracking-tight text-white md:text-5xl"
+      >
+        AI Search Optimization for Local Businesses
+      </h1>
+      <p class="max-w-2xl text-base font-medium leading-relaxed text-white/90">
+        AI search optimization, also called answer engine optimization (AEO) or generative engine
+        optimization (GEO), is the work of making your business easy for AI tools to find,
+        understand, and recommend. It combines consistent business data, structured markup, clear
+        answer-first content, and third-party mentions.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <Button href="/contact#book" data-evt="cta_ai_search_book" variant="primary" size="lg">
+          Get an AI Visibility Audit
+          <Icon name="tabler:arrow-right" class="ml-2 h-4 w-4" slot="icon-right" />
+        </Button>
+        <Button href="#plans" variant="secondary" size="lg">
+          See Plans
+          <Icon name="tabler:arrow-right" class="ml-2 h-4 w-4" slot="icon-right" />
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHERE CUSTOMERS ARE ASKING -->
+  <section class="border-t border-gray-100 bg-background-cream py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
+        Where Customers Are Asking Now
+      </h2>
+      <p class="mx-auto mb-10 max-w-2xl text-center text-base text-body">
+        People increasingly ask AI tools for local recommendations instead of scrolling a list of
+        links. Each engine surfaces businesses a little differently.
+      </p>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {
+          engines.map((engine) => (
+            <Card variant="elevated" class="flex h-full flex-col">
+              <Icon name={engine.icon} class="mb-3 h-6 w-6 text-primary" />
+              <h3 class="mb-2 font-heading text-base font-semibold text-heading md:text-lg">
+                {engine.title}
+              </h3>
+              <p class="text-sm leading-relaxed text-body">{engine.description}</p>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW AI ENGINES DECIDE -->
+  <section class="border-t border-gray-100 bg-white py-16">
+    <div class="mx-auto max-w-4xl px-4">
+      <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
+        How Do AI Engines Decide Which Businesses to Mention?
+      </h2>
+      <p class="mx-auto mb-10 max-w-2xl text-center text-base text-body">
+        No engine publishes its full criteria. These are the signals within a business's control,
+        and the ones our work focuses on.
+      </p>
+      <div class="space-y-6">
+        {
+          signals.map((signal) => (
+            <div>
+              <h3 class="mb-1 font-heading text-lg font-bold text-heading">{signal.title}</h3>
+              <p class="text-base leading-relaxed text-body">{signal.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="border-t border-gray-100 bg-background-cream py-16">
+    <div class="mx-auto max-w-4xl px-4">
+      <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
+        What's Included
+      </h2>
+      <ul class="space-y-3 text-base text-body">
+        {included.map((item) => <CheckListItem>{item}</CheckListItem>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- HOW WE MEASURE -->
+  <section class="border-t border-gray-100 bg-white py-16">
+    <div class="mx-auto max-w-4xl px-4">
+      <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
+        How We Measure It
+      </h2>
+      <p class="mb-4 text-base leading-relaxed text-body">
+        We agree on a fixed set of buyer prompts, the questions your customers would actually ask,
+        and check them across the major engines over time. For each, we record whether your business
+        is mentioned or cited and how that compares with competitors, so you can see mention and
+        citation share change rather than rely on a single snapshot.
+      </p>
+      <p class="mb-4 text-base leading-relaxed text-body">
+        We also track AI referral traffic in Google Analytics 4, looking for visits from sources
+        such as chatgpt.com, perplexity.ai, gemini.google.com, and copilot.microsoft.com, and
+        connect those visits to calls and form submissions where the data allows.
+      </p>
+      <p class="text-base leading-relaxed text-body">
+        To be plain about it: no one can guarantee that an AI engine will mention a business. We can
+        improve the signals engines rely on and show you what is changing.
+      </p>
+    </div>
+  </section>
+
+  <!-- AEO VS SEO -->
+  <section class="border-t border-gray-100 bg-background-cream py-16">
+    <div class="mx-auto max-w-5xl px-4">
+      <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
+        AEO vs. Traditional SEO
+      </h2>
+      <div class="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
+        <table class="w-full min-w-[640px] border-collapse text-left text-sm text-body">
+          <thead>
+            <tr class="border-b border-gray-200 bg-gray-50 font-heading text-heading">
+              <th scope="col" class="px-4 py-3 font-bold">Area</th>
+              <th scope="col" class="px-4 py-3 font-bold">Traditional SEO</th>
+              <th scope="col" class="px-4 py-3 font-bold">AI search optimization</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              comparison.map((row) => (
+                <tr class="border-b border-gray-100 last:border-0">
+                  <th scope="row" class="px-4 py-3 align-top font-semibold text-heading">
+                    {row.area}
+                  </th>
+                  <td class="px-4 py-3 align-top">{row.traditional}</td>
+                  <td class="px-4 py-3 align-top">{row.ai}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-6 text-base leading-relaxed text-body">
+        The two share the same foundation, which is why AI search optimization is included in our
+        SEO plans. Read about our <a
+          href="/services/local-seo"
+          class="font-semibold text-primary underline underline-offset-4">local SEO services</a
+        >.
+      </p>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section id="plans" class="border-t border-gray-100 bg-white py-16">
+    <div class="mx-auto max-w-5xl px-4">
+      <h2 class="mb-3 text-center font-heading text-xl font-bold text-heading md:text-2xl">
+        Plans That Include AI Search Optimization
+      </h2>
+      <p class="mb-10 text-center text-base text-body">
+        Month-to-month packages. Setup-month pricing is shown for each plan.
+      </p>
+      <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2">
+        {
+          aiPlans.map((pkg) => (
+            <PricingCard
+              title={pkg.name}
+              eyebrow={pkg.tagline}
+              price={String(pkg.price)}
+              priceNote={`Setup month: $${pkg.setupPrice.toLocaleString("en-US")}`}
+              period="mo"
+              featured={pkg.featured}
+              badgeText={pkg.badge}
+              features={pkg.inclusions}
+              ctaText={pkg.featured ? `Choose ${pkg.name}` : "Get Started"}
+              ctaHref="/contact#book"
+            />
+          ))
+        }
+      </div>
+      <p class="mt-8 text-center text-sm text-body-light">
+        AI search optimization is included in the Growth and Authority plans. <a
+          href="/packages"
+          class="font-semibold text-primary underline">View all packages</a
+        >.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="border-t border-gray-100 bg-background-cream py-16">
+    <div class="mx-auto max-w-3xl px-4">
+      <h2 class="mb-8 text-center font-heading text-xl font-bold text-heading md:text-2xl">
+        AI Search Optimization: FAQs
+      </h2>
+      <div class="space-y-2">
+        {
+          faqs.map((faq) => (
+            <details class="hover:border-primary/30 group rounded-2xl border border-border-base bg-white shadow-sm transition">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-heading text-base font-bold text-heading">
+                {faq.question}
+                <svg
+                  class="h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-6 text-base leading-relaxed text-body">{faq.answer}</div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FURTHER READING -->
+  <section class="border-t border-gray-100 bg-white py-12" aria-label="Further reading">
+    <div class="mx-auto max-w-4xl px-4">
+      <h2 class="mb-3 font-heading text-xl font-bold text-heading md:text-2xl">Further Reading</h2>
+      <ul class="space-y-2">
+        {
+          readingList.map((post) => (
+            <li>
+              <a
+                href={post.href}
+                class="inline-flex rounded-md py-1 font-medium text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+              >
+                {post.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-gradient-to-br from-primary to-primary-dark py-12">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+      <h2 class="mb-3 font-heading text-xl font-extrabold text-white md:text-2xl">
+        Ready to Be Found in AI Answers?
+      </h2>
+      <p class="mb-6 text-base text-white/90">
+        Get a free audit and a clear plan for what to fix first — no hard sell.
+      </p>
+      <Button href="/contact#book" data-evt="cta_ai_search_final" variant="white" size="lg">
+        Book My Free Audit
+      </Button>
+    </div>
+  </section>
+</Layout>

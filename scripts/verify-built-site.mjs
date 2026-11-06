@@ -26,6 +26,10 @@ const inspectedRoutes = [
     path: "/services/google-business-profile-optimization",
     file: "services/google-business-profile-optimization/index.html",
   },
+  {
+    path: "/services/ai-search-optimization",
+    file: "services/ai-search-optimization/index.html",
+  },
   { path: "/google-business-profile-offer", file: "google-business-profile-offer/index.html" },
   { path: "/contact", file: "contact/index.html" },
   { path: "/plumber-seo", file: "plumber-seo/index.html" },

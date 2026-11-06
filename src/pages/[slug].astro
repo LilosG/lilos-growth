@@ -246,7 +246,13 @@ const locationServices = isLocation
   : [];
 ---
 
-<Layout title={pageTitle} description={pageDescription} breadcrumbs={breadcrumbs} schema={schema}>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  ignoreTitleTemplate={isMetroService}
+  breadcrumbs={breadcrumbs}
+  schema={schema}
+>
   {
     isIndustry && (
       <>
