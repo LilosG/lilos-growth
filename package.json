@@ -26,7 +26,8 @@
     "vercel": "npx vercel",
     "deploy:prod": "npx vercel --prod",
     "audit:blog-links": "node scripts/audit-blog-links.mjs",
-    "prebuild": "npm run audit:blog-links"
+    "audit:locations": "vitest run src/data/locationUniqueness.test.ts",
+    "prebuild": "npm run audit:blog-links && npm run audit:locations"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.19",

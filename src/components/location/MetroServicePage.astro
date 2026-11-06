@@ -1,0 +1,217 @@
+---
+import Button from "~/components/ui/Button.astro";
+import Badge from "~/components/ui/Badge.astro";
+import { metroServices, type MetroServiceData, type MetroServiceKey } from "~/data/metroServices";
+import type { LocationData } from "~/data/locations";
+
+interface Props {
+  page: MetroServiceData;
+  location: LocationData;
+}
+
+const { page, location } = Astro.props;
+
+const serviceMeta: Record<
+  MetroServiceKey,
+  { label: string; nationalHref: string; nationalLabel: string }
+> = {
+  "web-design": {
+    label: "Web Design",
+    nationalHref: "/services/web-design",
+    nationalLabel: "Web design services",
+  },
+  "google-business-profile-optimization": {
+    label: "Google Business Profile",
+    nationalHref: "/services/google-business-profile-optimization",
+    nationalLabel: "Google Business Profile management",
+  },
+};
+
+const meta = serviceMeta[page.service];
+const otherService = metroServices.find(
+  (p) => p.locationSlug === page.locationSlug && p.service !== page.service
+);
+
+// Fixed order, not random: the next two metros after this one in data order.
+const sameServicePages = metroServices.filter((p) => p.service === page.service);
+const currentIndex = sameServicePages.findIndex((p) => p.slug === page.slug);
+const otherMetroPages = [1, 2]
+  .map((offset) => sameServicePages[(currentIndex + offset) % sameServicePages.length])
+  .filter((p) => p.slug !== page.slug);
+
+const relatedLinks = [
+  { href: `/${page.locationSlug}`, label: `Local SEO in ${location.city}` },
+  ...(otherService ? [{ href: `/${otherService.slug}`, label: otherService.headline }] : []),
+  { href: meta.nationalHref, label: meta.nationalLabel },
+  ...otherMetroPages.map((p) => ({ href: `/${p.slug}`, label: p.headline })),
+];
+
+const linkClass =
+  "inline-flex rounded-md py-1 font-medium text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary";
+---
+
+<section class="relative overflow-hidden bg-secondary pb-28 pt-20" aria-label="Hero">
+  <div
+    class="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
+    style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="relative z-10 mx-auto w-full max-w-3xl px-6 text-center">
+    <p class="mb-4 text-xs font-bold uppercase tracking-widest text-primary">
+      {meta.label} · {location.city}, {location.stateAbbr}
+    </p>
+    <h1 class="mb-5 font-heading text-5xl font-extrabold leading-[1.08] text-white md:text-6xl">
+      {page.headline}
+    </h1>
+    <p class="mb-10 text-lg font-medium leading-relaxed text-white/70">{page.intro}</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <Button
+        href="/contact#book"
+        data-evt={`cta_${page.slug}_book`}
+        variant="primary"
+        size="lg"
+        icon="tabler:arrow-right"
+      >
+        Get a Free Audit
+      </Button>
+    </div>
+  </div>
+</section>
+
+<section class="border-t border-gray-100 bg-background-cream py-24" aria-label="Market context">
+  <div class="mx-auto max-w-4xl px-6 text-center">
+    <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Market Context</p>
+    <h2 class="mb-6 font-heading text-4xl font-extrabold text-heading md:text-5xl">
+      Why it matters in {location.city}
+    </h2>
+    <p class="text-lg leading-relaxed text-body">{page.marketAngle}</p>
+  </div>
+</section>
+
+<section class="border-t border-gray-100 bg-white py-24" aria-label="What's included">
+  <div class="mx-auto max-w-5xl px-6 text-center">
+    <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">What's Included</p>
+    <h2 class="mb-10 font-heading text-4xl font-extrabold text-heading md:text-5xl">
+      What's included
+    </h2>
+    <div class="flex flex-wrap justify-center gap-3">
+      {
+        page.deliverables.map((item) => (
+          <Badge variant="primary" size="lg">
+            {item}
+          </Badge>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="border-t border-gray-100 bg-background-cream py-24" aria-label="Markets served">
+  <div class="mx-auto max-w-5xl px-6 text-center">
+    <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Coverage</p>
+    <h2 class="mb-4 font-heading text-4xl font-extrabold text-heading md:text-5xl">
+      Areas We Serve in {location.city}
+    </h2>
+    <p class="mx-auto mb-10 max-w-xl text-base text-muted">
+      We assess your real service area and where your customers search before recommending
+      location-specific content or Google Business Profile improvements.
+    </p>
+    <div class="flex flex-wrap justify-center gap-3">
+      {
+        location.neighborhoods.map((neighborhood) => (
+          <Badge variant="secondary" size="lg">
+            {neighborhood}
+          </Badge>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="border-t border-gray-100 bg-white py-24" aria-label="FAQ">
+  <div class="mx-auto max-w-3xl px-6">
+    <div class="mb-12 text-center">
+      <p class="mb-3 text-xs font-bold uppercase tracking-widest text-primary">FAQ</p>
+      <h2 class="font-heading text-4xl font-extrabold text-heading md:text-5xl">
+        {meta.label} in {location.city} — FAQs
+      </h2>
+    </div>
+    <div class="space-y-2">
+      {
+        page.faqs.map((faq) => (
+          <details class="hover:border-primary/30 group rounded-2xl border border-border-base bg-white shadow-sm transition">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-heading text-base font-bold text-heading">
+              {faq.question}
+              <svg
+                class="h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-base leading-relaxed text-body">{faq.answer}</div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="relative overflow-hidden bg-secondary py-32" aria-label="CTA">
+  <div
+    class="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] -translate-y-1/4 translate-x-1/3 rounded-full opacity-[0.10]"
+    style="background:radial-gradient(circle,#f56b2a 0%,transparent 65%);"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="relative z-10 mx-auto max-w-3xl px-6 text-center">
+    <h2 class="mb-6 font-heading text-5xl font-extrabold leading-tight text-white md:text-6xl">
+      Ready to Talk
+      <br />
+      <span class="text-primary">{meta.label} in {location.city}?</span>
+    </h2>
+    <p class="mb-10 text-xl font-medium text-white/70">
+      Get a free audit — no hard sell, just a clear picture of where you stand and what to fix
+      first.
+    </p>
+    <Button
+      href="/contact#book"
+      data-evt={`cta_${page.slug}_final`}
+      variant="primary"
+      size="lg"
+      icon="tabler:arrow-right"
+    >
+      Book My Free Audit
+    </Button>
+  </div>
+</section>
+
+<section
+  class="border-t border-border-base bg-white py-14"
+  aria-labelledby="metro-service-related-heading"
+>
+  <div class="mx-auto max-w-6xl px-6">
+    <p class="mb-2 text-xs font-bold uppercase tracking-widest text-primary">Related</p>
+    <h2
+      id="metro-service-related-heading"
+      class="font-heading text-2xl font-bold text-heading md:text-3xl"
+    >
+      Related pages
+    </h2>
+    <ul class="mt-6 space-y-2">
+      {
+        relatedLinks.map((link) => (
+          <li>
+            <a href={link.href} class={linkClass}>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

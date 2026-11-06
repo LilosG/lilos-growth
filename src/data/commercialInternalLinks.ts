@@ -33,17 +33,23 @@ export function getRelatedIndustries(slug: string) {
     );
 }
 
+const locationIndustryExampleSlugs: Record<string, string[]> = {
+  "local-seo-las-vegas": ["restaurant-seo", "party-rental-seo", "hvac-seo"],
+  "local-seo-orange-county": ["electrician-seo", "pest-control-seo", "restaurant-seo"],
+  "local-seo-los-angeles": ["hvac-seo", "roofing-seo", "cleaning-company-seo"],
+  "local-seo-phoenix": ["hvac-seo", "pest-control-seo", "roofing-seo"],
+  "local-seo-dallas": ["roofing-seo", "water-damage-restoration-seo", "electrician-seo"],
+};
+const defaultLocationIndustryExamples = [
+  "plumber-seo",
+  "electrician-seo",
+  "water-damage-restoration-seo",
+];
+
 /** Market-specific path to the core local-SEO service and relevant industry examples. */
 export function getLocationIndustryExamples(slug: string) {
   if (!locationBySlug.has(slug)) return [];
-  const examples =
-    slug === "local-seo-las-vegas"
-      ? ["restaurant-seo", "party-rental-seo", "hvac-seo"]
-      : slug === "local-seo-orange-county"
-        ? ["electrician-seo", "pest-control-seo", "restaurant-seo"]
-        : slug === "local-seo-los-angeles"
-          ? ["hvac-seo", "roofing-seo", "cleaning-company-seo"]
-          : ["plumber-seo", "electrician-seo", "water-damage-restoration-seo"];
+  const examples = locationIndustryExampleSlugs[slug] ?? defaultLocationIndustryExamples;
   return examples
     .map((related) => industryBySlug.get(related))
     .filter((industry): industry is (typeof industries)[number] => industry !== undefined);

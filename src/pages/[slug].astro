@@ -8,6 +8,8 @@ import ProcessStep from "~/components/sections/ProcessStep.astro";
 import { Icon } from "astro-icon/components";
 import { industries, type IndustryData } from "~/data/industries";
 import { locations, type LocationData } from "~/data/locations";
+import { metroServices, type MetroServiceData } from "~/data/metroServices";
+import MetroServicePage from "~/components/location/MetroServicePage.astro";
 import { gbpManagement, packages } from "~/data/packages";
 import {
   commercialServices,
@@ -18,38 +20,74 @@ import {
 export async function getStaticPaths() {
   const industryPaths = industries.map((industry) => ({
     params: { slug: industry.slug },
-    props: { type: "industry" as const, industry, location: undefined as LocationData | undefined },
+    props: {
+      type: "industry" as const,
+      industry,
+      location: undefined as LocationData | undefined,
+      metroService: undefined as MetroServiceData | undefined,
+    },
   }));
   const locationPaths = locations.map((location) => ({
     params: { slug: location.slug },
-    props: { type: "location" as const, location, industry: undefined as IndustryData | undefined },
+    props: {
+      type: "location" as const,
+      location,
+      industry: undefined as IndustryData | undefined,
+      metroService: undefined as MetroServiceData | undefined,
+    },
   }));
-  return [...industryPaths, ...locationPaths];
+  const metroServicePaths = metroServices.map((metroService) => ({
+    params: { slug: metroService.slug },
+    props: {
+      type: "metroService" as const,
+      metroService,
+      location: locations.find((l) => l.slug === metroService.locationSlug),
+      industry: undefined as IndustryData | undefined,
+    },
+  }));
+  return [...industryPaths, ...locationPaths, ...metroServicePaths];
 }
 
 interface Props {
-  type: "industry" | "location";
+  type: "industry" | "location" | "metroService";
   industry?: IndustryData;
   location?: LocationData;
+  metroService?: MetroServiceData;
 }
 
-const { type, industry, location } = Astro.props;
+const { type, industry, location, metroService } = Astro.props;
 
 const isIndustry = type === "industry" && industry !== undefined;
+const isMetroService =
+  type === "metroService" && metroService !== undefined && location !== undefined;
 const isLocation = type === "location" && location !== undefined;
 
-const pageTitle = isIndustry ? industry!.title : location!.title;
-const pageDescription = isIndustry ? industry!.description : location!.description;
+const pageTitle = isIndustry
+  ? industry!.title
+  : isMetroService
+    ? metroService!.title
+    : location!.title;
+const pageDescription = isIndustry
+  ? industry!.description
+  : isMetroService
+    ? metroService!.description
+    : location!.description;
 
 const breadcrumbs = isIndustry
   ? [
       { name: "Home", item: "https://lilosgrowth.com/" },
       { name: industry!.headline, item: `https://lilosgrowth.com/${industry!.slug}` },
     ]
-  : [
-      { name: "Home", item: "https://lilosgrowth.com/" },
-      { name: `Local SEO ${location!.city}`, item: `https://lilosgrowth.com/${location!.slug}` },
-    ];
+  : isMetroService
+    ? [
+        { name: "Home", item: "https://lilosgrowth.com/" },
+        { name: `Local SEO ${location!.city}`, item: `https://lilosgrowth.com/${location!.slug}` },
+        { name: metroService!.headline, item: `https://lilosgrowth.com/${metroService!.slug}` },
+      ]
+    : [
+        { name: "Home", item: "https://lilosgrowth.com/" },
+        { name: `Local SEO ${location!.city}`, item: `https://lilosgrowth.com/${location!.slug}` },
+      ];
 
 const processSteps = [
   {
@@ -129,25 +167,6 @@ const locationSchema = isLocation
       },
       {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "@id": `https://lilosgrowth.com/${location!.slug}#localbiz-city`,
-        name: "Lilos Growth",
-        description: `Local SEO agency serving ${location!.city}, ${location!.stateAbbr} businesses.`,
-        url: "https://lilosgrowth.com",
-        telephone: "+1-858-722-2920",
-        areaServed: {
-          "@type": "City",
-          name: location!.city,
-          containedInPlace: { "@type": "State", name: location!.state },
-        },
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: location!.geo.latitude,
-          longitude: location!.geo.longitude,
-        },
-      },
-      {
-        "@context": "https://schema.org",
         "@type": "FAQPage",
         mainEntity: location!.faqs.map((faq) => ({
           "@type": "Question",
@@ -158,7 +177,44 @@ const locationSchema = isLocation
     ]
   : [];
 
-const schema = isIndustry ? industrySchema : locationSchema;
+const metroServiceSchema = isMetroService
+  ? [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": `https://lilosgrowth.com/${metroService!.slug}#service`,
+        name: metroService!.headline,
+        serviceType:
+          metroService!.service === "web-design"
+            ? "Web design"
+            : "Google Business Profile management",
+        description: metroService!.description,
+        provider: { "@id": "https://lilosgrowth.com/#org" },
+        areaServed: {
+          "@type": "City",
+          name: location!.city,
+          containedInPlace: { "@type": "State", name: location!.state },
+        },
+        url: `https://lilosgrowth.com/${metroService!.slug}`,
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: metroService!.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: { "@type": "Answer", text: faq.answer },
+        })),
+      },
+    ]
+  : [];
+
+const schema = isIndustry ? industrySchema : isMetroService ? metroServiceSchema : locationSchema;
+
+const metroServiceByKey = (service: MetroServiceData["service"]) =>
+  isLocation
+    ? metroServices.find((p) => p.locationSlug === location!.slug && p.service === service)
+    : undefined;
 
 const locationServices = isLocation
   ? [
@@ -172,14 +228,18 @@ const locationServices = isLocation
         title: "Google Business Profile",
         description:
           "Full GBP management — optimization, weekly posts, review replies, photos, and monthly audits.",
-        href: "/services/google-business-profile-optimization",
+        href: metroServiceByKey("google-business-profile-optimization")
+          ? `/${metroServiceByKey("google-business-profile-optimization")!.slug}`
+          : "/services/google-business-profile-optimization",
         icon: "tabler:brand-google",
       },
       {
         title: "Website Design",
         description:
           "Fast, conversion-focused websites built on Astro + Tailwind. The technical foundation your SEO runs on.",
-        href: "/services/web-design",
+        href: metroServiceByKey("web-design")
+          ? `/${metroServiceByKey("web-design")!.slug}`
+          : "/services/web-design",
         icon: "tabler:device-laptop",
       },
     ]
@@ -404,6 +464,8 @@ const locationServices = isLocation
       </>
     )
   }
+
+  {isMetroService && <MetroServicePage page={metroService!} location={location!} />}
 
   {
     isLocation && (
@@ -693,80 +755,76 @@ const locationServices = isLocation
   }
 
   <!-- Curated, verifiable internal paths. Keep the primary conversion CTAs above unchanged. -->
-  <section
-    class="border-t border-border-base bg-white py-14"
-    aria-labelledby="explore-related-heading"
-  >
-    <div class="mx-auto max-w-6xl px-6">
-      <p class="mb-2 text-xs font-bold uppercase tracking-widest text-primary">Explore more</p>
-      <h2
-        id="explore-related-heading"
-        class="font-heading text-2xl font-bold text-heading md:text-3xl"
+  {
+    !isMetroService && (
+      <section
+        class="border-t border-border-base bg-white py-14"
+        aria-labelledby="explore-related-heading"
       >
-        {
-          isIndustry
-            ? `Related local search strategies`
-            : `Explore services for ${location!.city} businesses`
-        }
-      </h2>
-      <p class="mt-3 max-w-3xl text-base leading-relaxed text-body">
-        {
-          isIndustry
-            ? "Businesses with different services often face related local search challenges. Compare approaches or explore the services behind them."
-            : "Start with a core service, or explore how different types of local businesses approach search visibility."
-        }
-      </p>
-      <div class="mt-8 grid gap-6 md:grid-cols-2">
-        <div>
-          <h3 class="mb-3 font-heading text-lg font-bold text-heading">
-            {isIndustry ? "Related industries" : "Industry strategies"}
-          </h3>
-          <ul class="space-y-2">
-            {
-              (isIndustry
-                ? getRelatedIndustries(industry!.slug)
-                : getLocationIndustryExamples(location!.slug)
-              ).map((related) => (
+        <div class="mx-auto max-w-6xl px-6">
+          <p class="mb-2 text-xs font-bold uppercase tracking-widest text-primary">Explore more</p>
+          <h2
+            id="explore-related-heading"
+            class="font-heading text-2xl font-bold text-heading md:text-3xl"
+          >
+            {isIndustry
+              ? `Related local search strategies`
+              : `Explore services for ${location!.city} businesses`}
+          </h2>
+          <p class="mt-3 max-w-3xl text-base leading-relaxed text-body">
+            {isIndustry
+              ? "Businesses with different services often face related local search challenges. Compare approaches or explore the services behind them."
+              : "Start with a core service, or explore how different types of local businesses approach search visibility."}
+          </p>
+          <div class="mt-8 grid gap-6 md:grid-cols-2">
+            <div>
+              <h3 class="mb-3 font-heading text-lg font-bold text-heading">
+                {isIndustry ? "Related industries" : "Industry strategies"}
+              </h3>
+              <ul class="space-y-2">
+                {(isIndustry
+                  ? getRelatedIndustries(industry!.slug)
+                  : getLocationIndustryExamples(location!.slug)
+                ).map((related) => (
+                  <li>
+                    <a
+                      href={`/${related.slug}`}
+                      class="inline-flex rounded-md py-1 font-medium text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                    >
+                      {related.headline}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 class="mb-3 font-heading text-lg font-bold text-heading">
+                Core services and evidence
+              </h3>
+              <ul class="space-y-2">
+                {commercialServices.map((service) => (
+                  <li>
+                    <a
+                      href={service.href}
+                      class="inline-flex rounded-md py-1 font-medium text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                    >
+                      {service.label}
+                    </a>
+                  </li>
+                ))}
                 <li>
                   <a
-                    href={`/${related.slug}`}
+                    href="/results"
                     class="inline-flex rounded-md py-1 font-medium text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
                   >
-                    {related.headline}
+                    Client projects and reported results
                   </a>
                 </li>
-              ))
-            }
-          </ul>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div>
-          <h3 class="mb-3 font-heading text-lg font-bold text-heading">
-            Core services and evidence
-          </h3>
-          <ul class="space-y-2">
-            {
-              commercialServices.map((service) => (
-                <li>
-                  <a
-                    href={service.href}
-                    class="inline-flex rounded-md py-1 font-medium text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
-                  >
-                    {service.label}
-                  </a>
-                </li>
-              ))
-            }
-            <li>
-              <a
-                href="/results"
-                class="inline-flex rounded-md py-1 font-medium text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
-              >
-                Client projects and reported results
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+      </section>
+    )
+  }
 </Layout>

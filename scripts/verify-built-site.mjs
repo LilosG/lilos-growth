@@ -30,6 +30,7 @@ const inspectedRoutes = [
   { path: "/contact", file: "contact/index.html" },
   { path: "/plumber-seo", file: "plumber-seo/index.html" },
   { path: "/local-seo-san-diego", file: "local-seo-san-diego/index.html" },
+  { path: "/locations", file: "locations/index.html" },
   { path: "/thank-you", file: "thank-you/index.html", noindex: true },
 ];
 
