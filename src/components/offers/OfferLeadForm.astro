@@ -1,4 +1,5 @@
 ---
+import { business } from "~/data/business";
 /**
  * Lead/application form. Posts to the site's existing Formspree endpoint (same as /contact).
  * Without JS it does a normal POST + redirect to /thank-you; with JS it submits in place
@@ -142,7 +143,7 @@ const input =
           role="alert"
           class="hidden text-center text-sm font-semibold text-red-700 sm:col-span-2"
         >
-          Something went wrong. Please try again or email hello@lilosgrowth.com.
+          Something went wrong. Please try again or email {business.email}.
         </p>
       </form>
 

@@ -1,4 +1,5 @@
 ---
+import { business } from "~/data/business";
 import PageLayout from "~/layouts/PageLayout.astro";
 import OfferHero from "~/components/offers/OfferHero.astro";
 import ProofBand from "~/components/offers/ProofBand.astro";
@@ -168,13 +169,13 @@ const faqs = [
     ]}
   />
 
-  <OfferFAQ items={faqs} phone="+18587222920" smsBody="Hi Mike, I have a question about the Google Maps Takeover." />
+  <OfferFAQ items={faqs} phone={business.phoneE164} smsBody="Hi Mike, I have a question about the Google Maps Takeover." />
 
   <FinalCta
     title="Ready to take over the map?"
     line="$199/mo, locked. Or prepay 6 months and get 1 month free."
     guarantee={offer.guarantee}
-    phone="+18587222920"
+    phone={business.phoneE164}
     smsBody="Hi Mike, I have a question about the Google Maps Takeover."
     primary={{ text: "Get a free map scan", href: "#map-scan" }}
     secondary={{ text: "See plans", href: "#pricing" }}

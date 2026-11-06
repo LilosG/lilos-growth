@@ -1,6 +1,8 @@
 ---
 import Logo from "../Logo.astro";
+import { Icon } from "astro-icon/components";
 import { getPermalink } from "~/utils/permalinks";
+import { business } from "~/data/business";
 import { locations } from "~/data/locations";
 import { INDUSTRIES_INDEX, LOCATIONS_INDEX, industryPath, locationPath } from "~/lib/routes";
 
@@ -29,24 +31,50 @@ const footerLinkClass =
       <!-- Brand / Contact / CTA -->
       <section aria-labelledby="footer-brand">
         <Logo class="mb-3 w-28" />
-        <h2 id="footer-brand" class="font-heading text-xl font-bold">Lilos Growth</h2>
+        <h2 id="footer-brand" class="font-heading text-xl font-bold">{business.name}</h2>
         <p class="mt-2 text-white/85">Home Service Marketing Experts</p>
 
         <!-- Contact -->
         <div class="mt-4 space-y-1 text-[15px] leading-6 text-white/80">
           <a
             data-evt="contact_phone_click"
-            href="tel:+18587222920"
-            class="text-white/90 hover:text-white">(858) 722-2920</a
+            href={`tel:${business.phoneE164}`}
+            class="text-white/90 hover:text-white">{business.phoneDisplay}</a
           >
           <a
             data-evt="contact_email_click"
-            href="mailto:hello@lilosgrowth.com"
-            class="text-primary underline">hello@lilosgrowth.com</a
+            href={`mailto:${business.email}`}
+            class="text-primary underline">{business.email}</a
           >
-          <div class="text-white/80">Lilos Growth</div>
-          <div class="text-white/80">1440 Columbia Street, Suite 909</div>
-          <div class="text-white/80">San Diego, CA, US</div>
+          <div class="text-white/80">{business.name}</div>
+          <div class="text-white/80">{business.locality}, {business.region}</div>
+          <div class="flex items-center gap-3 pt-1">
+            <a
+              href={business.gbpUrl}
+              target="_blank"
+              rel="noopener"
+              class="text-white/90 underline underline-offset-4 hover:text-white"
+              >Find us on Google</a
+            >
+            <a
+              href={business.youtubeUrl}
+              target="_blank"
+              rel="noopener"
+              aria-label="Lilos Growth on YouTube"
+              class="text-white/80 hover:text-white"
+            >
+              <Icon name="tabler:brand-youtube" class="h-5 w-5" />
+            </a>
+            <a
+              href={business.facebookUrl}
+              target="_blank"
+              rel="noopener"
+              aria-label="Lilos Growth on Facebook"
+              class="text-white/80 hover:text-white"
+            >
+              <Icon name="tabler:brand-facebook" class="h-5 w-5" />
+            </a>
+          </div>
         </div>
 
         <!-- CTA -->

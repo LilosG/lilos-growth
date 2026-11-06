@@ -1,4 +1,5 @@
 ---
+import { business } from "~/data/business";
 import PageLayout from "~/layouts/PageLayout.astro";
 import OfferHero from "~/components/offers/OfferHero.astro";
 import DeviceMockup from "~/components/offers/DeviceMockup.astro";
@@ -186,13 +187,13 @@ const faqs = [
     ]}
   />
 
-  <OfferFAQ items={faqs} phone="+18587222920" smsBody="Hi Mike, I have a question about the Free Website Program." />
+  <OfferFAQ items={faqs} phone={business.phoneE164} smsBody="Hi Mike, I have a question about the Free Website Program." />
 
   <FinalCta
     title="Get a free website that ranks"
     line="$499/mo, locked. Or prepay 6 months and get 1 month free."
     guarantee={offer.guarantee}
-    phone="+18587222920"
+    phone={business.phoneE164}
     smsBody="Hi Mike, I have a question about the Free Website Program."
   />
 
