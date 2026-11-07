@@ -1,4 +1,5 @@
 ---
+import { business } from "~/data/business";
 import PageLayout from "~/layouts/PageLayout.astro";
 import OfferHero from "~/components/offers/OfferHero.astro";
 import DeviceMockup from "~/components/offers/DeviceMockup.astro";
@@ -40,12 +41,36 @@ const sites = [
 ];
 
 const included = [
-  { icon: "tabler:world", title: offer.includes[0], detail: "Every service and every town you serve gets its own page." },
-  { icon: "tabler:code", title: offer.includes[1], detail: "Structured data that helps Google understand your business." },
-  { icon: "tabler:sparkles", title: offer.includes[2], detail: "Built so AI assistants and search engines can read and cite you." },
-  { icon: "tabler:phone-check", title: offer.includes[3], detail: "Know which calls and form fills your site is producing." },
-  { icon: "tabler:map-pin", title: offer.includes[4], detail: "Profile optimization, weekly posts, review replies and map-rank reports." },
-  { icon: "tabler:trending-up", title: offer.includes[5], detail: "Ongoing work every month to keep your pages ranking." },
+  {
+    icon: "tabler:world",
+    title: offer.includes[0],
+    detail: "Every service and every town you serve gets its own page.",
+  },
+  {
+    icon: "tabler:code",
+    title: offer.includes[1],
+    detail: "Structured data that helps Google understand your business.",
+  },
+  {
+    icon: "tabler:sparkles",
+    title: offer.includes[2],
+    detail: "Built so AI assistants and search engines can read and cite you.",
+  },
+  {
+    icon: "tabler:phone-check",
+    title: offer.includes[3],
+    detail: "Know which calls and form fills your site is producing.",
+  },
+  {
+    icon: "tabler:map-pin",
+    title: offer.includes[4],
+    detail: "Profile optimization, weekly posts, review replies and map-rank reports.",
+  },
+  {
+    icon: "tabler:trending-up",
+    title: offer.includes[5],
+    detail: "Ongoing work every month to keep your pages ranking.",
+  },
 ];
 
 const faqs = [
@@ -74,7 +99,7 @@ const faqs = [
     a: "Yes. We connect your existing domain or help you register one.",
   },
   {
-    q: "What does \"rate locked\" mean?",
+    q: 'What does "rate locked" mean?',
     a: "Your monthly price never goes up for as long as you stay.",
   },
 ];
@@ -97,9 +122,7 @@ const faqs = [
     primary={{ text: "See plans", href: "#pricing" }}
     secondary={{ text: "Apply in 2 minutes", href: "#apply" }}
     guaranteeNote="Day-90 guarantee: if your map grid isn't better at day 90, your next month is free."
-    trust={[
-      { icon: "tabler:users", text: "220+ sites built" },
-    ]}
+    trust={[{ icon: "tabler:users", text: "220+ sites built" }]}
   >
     <DeviceMockup
       desktopSrc={sites[2].desktop}
@@ -107,27 +130,48 @@ const faqs = [
       alt={`${sites[2].name} website`}
       eager
     >
-      <span class="absolute -left-2 top-6 hidden sm:block rounded-xl bg-white px-3 py-2 text-xs font-bold text-secondary shadow-xl sm:-left-6 sm:text-sm">A page for every service</span>
-      <span class="absolute -left-2 bottom-16 hidden sm:block rounded-xl bg-primary px-3 py-2 text-xs font-bold text-white shadow-xl sm:-left-6 sm:text-sm">A page for every town</span>
+      <span
+        class="absolute -left-2 top-6 hidden rounded-xl bg-white px-3 py-2 text-xs font-bold text-secondary shadow-xl sm:-left-6 sm:block sm:text-sm"
+        >A page for every service</span
+      >
+      <span
+        class="absolute -left-2 bottom-16 hidden rounded-xl bg-primary px-3 py-2 text-xs font-bold text-white shadow-xl sm:-left-6 sm:block sm:text-sm"
+        >A page for every town</span
+      >
     </DeviceMockup>
   </OfferHero>
 
   <section aria-labelledby="sites-heading" class="bg-slate-50 py-16 md:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <p class="text-center text-xs font-bold uppercase tracking-[0.18em] text-primary">Our work</p>
-      <h2 id="sites-heading" class="mt-3 text-center font-heading text-3xl font-extrabold tracking-tight text-secondary md:text-5xl">
+      <h2
+        id="sites-heading"
+        class="mt-3 text-center font-heading text-3xl font-extrabold tracking-tight text-secondary md:text-5xl"
+      >
         Sites we've built for local home-service businesses
       </h2>
-      <p class="mt-3 text-center text-base text-gray-700 md:text-lg">We build for home-service businesses nationwide.</p>
+      <p class="mt-3 text-center text-base text-gray-700 md:text-lg">
+        We build for home-service businesses nationwide.
+      </p>
       <ul class="mt-12 grid gap-12 lg:grid-cols-3 lg:gap-8">
-        {sites.map((site) => (
-          <li>
-            <DeviceMockup desktopSrc={site.desktop} mobileSrc={site.mobile} alt={`${site.name} website`} />
-            <p class="mt-4 text-center font-heading text-xl font-bold text-secondary">{site.name}</p>
-            <p class="text-center text-base text-gray-700">{site.city}</p>
-            {site.caption && <p class="mt-1 text-center text-base font-semibold text-heading">{site.caption}</p>}
-          </li>
-        ))}
+        {
+          sites.map((site) => (
+            <li>
+              <DeviceMockup
+                desktopSrc={site.desktop}
+                mobileSrc={site.mobile}
+                alt={`${site.name} website`}
+              />
+              <p class="mt-4 text-center font-heading text-xl font-bold text-secondary">
+                {site.name}
+              </p>
+              <p class="text-center text-base text-gray-700">{site.city}</p>
+              {site.caption && (
+                <p class="mt-1 text-center text-base font-semibold text-heading">{site.caption}</p>
+              )}
+            </li>
+          ))
+        }
       </ul>
     </div>
   </section>
@@ -152,7 +196,11 @@ const faqs = [
     id="apply"
     title="Apply for your free website"
     eyebrow="Apply"
-    bullets={["Two minutes, no payment yet", "You see your homepage preview before you decide anything", "A page for every service and every town you serve"]}
+    bullets={[
+      "Two minutes, no payment yet",
+      "You see your homepage preview before you decide anything",
+      "A page for every service and every town you serve",
+    ]}
     intro="Two minutes. We'll send your homepage preview and a time to talk."
     source="free-website: application"
     submitLabel="Submit my application"
@@ -173,8 +221,23 @@ const faqs = [
         half: true,
       },
       { name: "mobile", label: "Mobile", type: "tel", autocomplete: "tel", required: true },
-      { name: "name", label: "Your name", autocomplete: "name", required: true, half: true, step: 2 },
-      { name: "email", label: "Email", type: "email", autocomplete: "email", required: true, half: true, step: 2 },
+      {
+        name: "name",
+        label: "Your name",
+        autocomplete: "name",
+        required: true,
+        half: true,
+        step: 2,
+      },
+      {
+        name: "email",
+        label: "Email",
+        type: "email",
+        autocomplete: "email",
+        required: true,
+        half: true,
+        step: 2,
+      },
       {
         name: "current_website",
         label: "Current website",
@@ -186,13 +249,17 @@ const faqs = [
     ]}
   />
 
-  <OfferFAQ items={faqs} phone="+18587222920" smsBody="Hi Mike, I have a question about the Free Website Program." />
+  <OfferFAQ
+    items={faqs}
+    phone={business.phoneE164}
+    smsBody="Hi Mike, I have a question about the Free Website Program."
+  />
 
   <FinalCta
     title="Get a free website that ranks"
     line="$499/mo, locked. Or prepay 6 months and get 1 month free."
     guarantee={offer.guarantee}
-    phone="+18587222920"
+    phone={business.phoneE164}
     smsBody="Hi Mike, I have a question about the Free Website Program."
   />
 

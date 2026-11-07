@@ -1,4 +1,5 @@
 ---
+import { business } from "~/data/business";
 /**
  * Lead/application form. Posts to the site's existing Formspree endpoint (same as /contact).
  * Without JS it does a normal POST + redirect to /thank-you; with JS it submits in place
@@ -29,17 +30,30 @@ export interface Props {
   /** Sent to Formspree so submissions are identifiable */
   source: string;
 }
-const { id, title, intro, bullets = [], eyebrow = "Get started", fields, submitLabel, successMessage, source } =
-  Astro.props;
+const {
+  id,
+  title,
+  intro,
+  bullets = [],
+  eyebrow = "Get started",
+  fields,
+  submitLabel,
+  successMessage,
+  source,
+} = Astro.props;
 const twoStep = fields.some((f) => f.step === 2);
-const ordered = twoStep ? [...fields.filter((f) => f.step !== 2), ...fields.filter((f) => f.step === 2)] : fields;
+const ordered = twoStep
+  ? [...fields.filter((f) => f.step !== 2), ...fields.filter((f) => f.step === 2)]
+  : fields;
 const FORMSPREE = "https://formspree.io/f/movlbqdk";
 const input =
   "block h-12 w-full rounded-xl border border-gray-300 bg-white px-4 text-base text-heading transition focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary";
 ---
 
 <section id={id} aria-labelledby={`${id}-heading`} class="bg-white py-16 md:py-20">
-  <div class="mx-auto grid max-w-7xl items-start gap-12 px-4 sm:px-6 lg:px-8 lg:grid-cols-5 lg:gap-16">
+  <div
+    class="mx-auto grid max-w-7xl items-start gap-12 px-4 sm:px-6 lg:grid-cols-5 lg:gap-16 lg:px-8"
+  >
     <div class="lg:col-span-2 lg:pt-4">
       <p class="text-xs font-bold uppercase tracking-[0.18em] text-primary">{eyebrow}</p>
       <h2
@@ -93,7 +107,11 @@ const input =
 
         {
           twoStep && (
-            <p data-step-label class="hidden text-sm font-semibold text-primary sm:col-span-2" aria-live="polite">
+            <p
+              data-step-label
+              class="hidden text-sm font-semibold text-primary sm:col-span-2"
+              aria-live="polite"
+            >
               Step 1 of 2
             </p>
           )
@@ -101,7 +119,10 @@ const input =
         {
           ordered.map((f) => (
             <div data-step={f.step === 2 ? "2" : "1"} class:list={[f.half ? "" : "sm:col-span-2"]}>
-              <label for={`${id}-${f.name}`} class="mb-1.5 block text-sm font-semibold text-heading">
+              <label
+                for={`${id}-${f.name}`}
+                class="mb-1.5 block text-sm font-semibold text-heading"
+              >
                 {f.label}
                 {!f.required && <span class="font-normal text-muted"> (optional)</span>}
               </label>
@@ -142,7 +163,7 @@ const input =
           role="alert"
           class="hidden text-center text-sm font-semibold text-red-700 sm:col-span-2"
         >
-          Something went wrong. Please try again or email hello@lilosgrowth.com.
+          Something went wrong. Please try again or email {business.email}.
         </p>
       </form>
 
@@ -183,13 +204,16 @@ const input =
       document.head.appendChild(css);
     }
     const widget = document.createElement("div");
-    widget.className = "calendly-inline-widget overflow-hidden rounded-2xl border border-gray-100 bg-white";
+    widget.className =
+      "calendly-inline-widget overflow-hidden rounded-2xl border border-gray-100 bg-white";
     widget.dataset.url = CALENDLY_URL;
     widget.style.cssText = "min-width:320px;height:700px;";
     mount.appendChild(widget);
     const init = () => w.Calendly?.initInlineWidgets?.();
     if (w.Calendly) return init();
-    const existing = document.querySelector('script[src*="assets.calendly.com/assets/external/widget.js"]');
+    const existing = document.querySelector(
+      'script[src*="assets.calendly.com/assets/external/widget.js"]'
+    );
     if (existing) {
       existing.addEventListener("load", init);
       return;
@@ -203,32 +227,34 @@ const input =
 
   // Two-step forms: show step-1 fields + Continue; reveal step 2 after step 1 validates.
   // Without JS every field and the submit button stay visible.
-  document.querySelectorAll<HTMLFormElement>("form[data-offer-form][data-two-step]").forEach((form) => {
-    const step2 = form.querySelectorAll<HTMLElement>('[data-step="2"]');
-    const step1Inputs = form.querySelectorAll<HTMLInputElement>('[data-step="1"] input');
-    const next = form.querySelector<HTMLButtonElement>("[data-step-next]");
-    const submit = form.querySelector<HTMLButtonElement>("[data-step-submit]");
-    const label = form.querySelector<HTMLElement>("[data-step-label]");
-    step2.forEach((el) => el.classList.add("hidden"));
-    submit?.classList.add("hidden");
-    next?.classList.remove("hidden");
-    next?.classList.add("flex");
-    label?.classList.remove("hidden");
-    next?.addEventListener("click", () => {
-      for (const input of step1Inputs) {
-        if (!input.checkValidity()) {
-          input.reportValidity();
-          return;
+  document
+    .querySelectorAll<HTMLFormElement>("form[data-offer-form][data-two-step]")
+    .forEach((form) => {
+      const step2 = form.querySelectorAll<HTMLElement>('[data-step="2"]');
+      const step1Inputs = form.querySelectorAll<HTMLInputElement>('[data-step="1"] input');
+      const next = form.querySelector<HTMLButtonElement>("[data-step-next]");
+      const submit = form.querySelector<HTMLButtonElement>("[data-step-submit]");
+      const label = form.querySelector<HTMLElement>("[data-step-label]");
+      step2.forEach((el) => el.classList.add("hidden"));
+      submit?.classList.add("hidden");
+      next?.classList.remove("hidden");
+      next?.classList.add("flex");
+      label?.classList.remove("hidden");
+      next?.addEventListener("click", () => {
+        for (const input of step1Inputs) {
+          if (!input.checkValidity()) {
+            input.reportValidity();
+            return;
+          }
         }
-      }
-      step2.forEach((el) => el.classList.remove("hidden"));
-      submit?.classList.remove("hidden");
-      next.classList.add("hidden");
-      next.classList.remove("flex");
-      if (label) label.textContent = "Step 2 of 2";
-      form.querySelector<HTMLInputElement>('[data-step="2"] input')?.focus();
+        step2.forEach((el) => el.classList.remove("hidden"));
+        submit?.classList.remove("hidden");
+        next.classList.add("hidden");
+        next.classList.remove("flex");
+        if (label) label.textContent = "Step 2 of 2";
+        form.querySelector<HTMLInputElement>('[data-step="2"] input')?.focus();
+      });
     });
-  });
 
   document.querySelectorAll<HTMLFormElement>("form[data-offer-form]").forEach((form) => {
     const wrap = form.parentElement;

@@ -4,6 +4,8 @@ description: "Terms of Service for Lilos Growth — services, billing, IP, confi
 layout: "~/layouts/MarkdownLayout.astro"
 ---
 
+import { business } from "~/data/business";
+
 _Last updated: June 15, 2026_
 
 ## Terms of Service
@@ -15,10 +17,10 @@ These Terms of Service (“**Terms**”) govern your access to and use of the we
 - **Legal Business Name:** Lilos Online LLC
 - **Business Name:** Lilos Growth
 - **Website:** lilosgrowth.com
-- **Support Email:** [hello@lilosgrowth.com](mailto:hello@lilosgrowth.com)
+- **Support Email:** <a href={`mailto:${business.email}`}>{business.email}</a>
 - **Privacy Email:** [privacy@lilosgrowth.com](mailto:privacy@lilosgrowth.com)
-- **Support Phone:** +1 (858) 722-2920
-- **Support Address:** 1440 Columbia Street, Suite 909, San Diego, CA, US
+- **Support Phone:** <a href={`tel:${business.phoneE164}`}>{business.phoneDisplay}</a>
+- **Location:** {business.locality}, {business.region}
 - **Support Hours:** Monday–Friday, 9:00 AM–6:00 PM Pacific Time
 - **Statement Descriptor:** LILOS GROWTH
 
@@ -40,19 +42,19 @@ We provide performance marketing services (e.g., local SEO, paid media strategy 
 
 ## 3) Term & Termination
 
-Unless otherwise stated in an Agreement, services are **month-to-month** and may be terminated by either party with **30 days’ written notice**. You may request cancellation by emailing [hello@lilosgrowth.com](mailto:hello@lilosgrowth.com) or by calling +1 (858) 722-2920 during support hours. To help us process your request, cancellation notices should include your name, business name if applicable, email address, phone number, service or subscription being cancelled, requested cancellation date, and any relevant invoice or payment information.
+Unless otherwise stated in an Agreement, services are **month-to-month** and may be terminated by either party with **30 days’ written notice**. You may request cancellation by emailing <a href={`mailto:${business.email}`}>{business.email}</a> or by calling <a href={`tel:${business.phoneE164}`}>{business.phoneDisplay}</a> during support hours. To help us process your request, cancellation notices should include your name, business name if applicable, email address, phone number, service or subscription being cancelled, requested cancellation date, and any relevant invoice or payment information.
 
 Cancellation stops future billing after the effective cancellation date, subject to any minimum term, notice period, outstanding invoice, committed media spend, third-party cost, or other obligation in the applicable Agreement. Cancellation does not relieve Client of paying fees incurred through the effective cancellation date, including outstanding media or third-party costs, and does not automatically refund already-processed charges unless a refund is approved under the Refund Policy below.
 
 ## 4) Refund Policy
 
-Refund requests are reviewed case-by-case. You may request a refund by contacting [hello@lilosgrowth.com](mailto:hello@lilosgrowth.com) or +1 (858) 722-2920. Refund requests should include your name, business name if applicable, email address, charge date, charge amount, reason for the request, and any supporting information.
+Refund requests are reviewed case-by-case. You may request a refund by contacting <a href={`mailto:${business.email}`}>{business.email}</a> or <a href={`tel:${business.phoneE164}`}>{business.phoneDisplay}</a>. Refund requests should include your name, business name if applicable, email address, charge date, charge amount, reason for the request, and any supporting information.
 
 Refunds may be approved for duplicate charges, billing errors, accidental overpayment, or other circumstances Lilos Growth determines appropriate. Refunds may not be available for services already provided, work already begun, completed billing periods, advertising or media spend, third-party costs, platform costs, setup fees, strategy work, consulting time, completed deliverables, or subscription charges processed before a cancellation request was received or before the effective cancellation date. Approved refunds are generally returned to the original payment method.
 
 ## 5) Billing Concerns and Dispute Prevention
 
-Customers are encouraged to contact Lilos Growth directly before initiating a dispute or chargeback. Billing concerns can be sent to [hello@lilosgrowth.com](mailto:hello@lilosgrowth.com) or handled by phone at +1 (858) 722-2920.
+Customers are encouraged to contact Lilos Growth directly before initiating a dispute or chargeback. Billing concerns can be sent to <a href={`mailto:${business.email}`}>{business.email}</a> or handled by phone at <a href={`tel:${business.phoneE164}`}>{business.phoneDisplay}</a>.
 
 Where applicable, Lilos Growth will review subscription status, cancellation history, invoices, payment records, service delivery, advertising spend, third-party costs, and customer communications. Our goal is clear billing, accessible support, and timely resolution of billing questions or concerns.
 
@@ -111,5 +113,8 @@ We may update these Terms from time to time. The “Last updated” date above r
 
 ## 19) Contact
 
-Questions about these Terms?  
-[hello@lilosgrowth.com](mailto:hello@lilosgrowth.com) • +1 (858) 722-2920 • 1440 Columbia Street, Suite 909, San Diego, CA, US
+Questions about these Terms?
+
+<a href={`mailto:${business.email}`}>{business.email}</a> •
+<a href={`tel:${business.phoneE164}`}>{business.phoneDisplay}</a> • {business.locality},
+{business.region}

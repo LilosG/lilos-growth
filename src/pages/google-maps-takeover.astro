@@ -1,4 +1,5 @@
 ---
+import { business } from "~/data/business";
 import PageLayout from "~/layouts/PageLayout.astro";
 import OfferHero from "~/components/offers/OfferHero.astro";
 import ProofBand from "~/components/offers/ProofBand.astro";
@@ -17,11 +18,32 @@ const description =
   "We optimize your Google Business Profile in week one, then run it every month. $199/mo, rate locked. If your map grid isn't better at day 90, your next month is free.";
 
 const included = [
-  { icon: "tabler:adjustments", title: offer.includes[0], detail: "We rebuild your profile's categories, services, description and photos in the first week." },
-  { icon: "tabler:speakerphone", title: offer.includes[1], detail: "Fresh posts every week so Google sees an active business." },
-  { icon: "tabler:message-circle", title: offer.includes[2], detail: "Every review gets a reply, so customers see you're paying attention." },
-  { icon: "tabler:qrcode", title: offer.includes[3], detail: "Make it easy for happy customers to leave a review in seconds." },
-  { icon: "tabler:map-search", title: offer.includes[4], detail: "See where you rank across your service area, every month." },
+  {
+    icon: "tabler:adjustments",
+    title: offer.includes[0],
+    detail:
+      "We rebuild your profile's categories, services, description and photos in the first week.",
+  },
+  {
+    icon: "tabler:speakerphone",
+    title: offer.includes[1],
+    detail: "Fresh posts every week so Google sees an active business.",
+  },
+  {
+    icon: "tabler:message-circle",
+    title: offer.includes[2],
+    detail: "Every review gets a reply, so customers see you're paying attention.",
+  },
+  {
+    icon: "tabler:qrcode",
+    title: offer.includes[3],
+    detail: "Make it easy for happy customers to leave a review in seconds.",
+  },
+  {
+    icon: "tabler:map-search",
+    title: offer.includes[4],
+    detail: "See where you rank across your service area, every month.",
+  },
 ];
 
 const faqs = [
@@ -46,7 +68,7 @@ const faqs = [
     a: "Monthly plans cancel anytime after the 3-month minimum. Prepaid plans run their full term.",
   },
   {
-    q: "What does \"rate locked\" mean?",
+    q: 'What does "rate locked" mean?',
     a: "Your monthly price never goes up for as long as you stay.",
   },
   {
@@ -73,12 +95,14 @@ const faqs = [
     primary={{ text: "Get a free map scan", href: "#map-scan" }}
     secondary={{ text: "See plans", href: "#pricing" }}
     guaranteeNote="Day-90 guarantee: if your map grid isn't better at day 90, your next month is free."
-    trust={[
-      { icon: "tabler:users", text: "220+ sites built" },
-    ]}
+    trust={[{ icon: "tabler:users", text: "220+ sites built" }]}
   >
-    <figure class="overflow-hidden rounded-3xl border border-white/15 bg-white/[0.07] p-0 shadow-2xl backdrop-blur md:p-5">
-      <p class="px-4 pb-3 pt-4 text-center text-xs font-bold uppercase tracking-wider text-white sm:text-sm md:px-0 md:pt-0">
+    <figure
+      class="overflow-hidden rounded-3xl border border-white/15 bg-white/[0.07] p-0 shadow-2xl backdrop-blur md:p-5"
+    >
+      <p
+        class="px-4 pb-3 pt-4 text-center text-xs font-bold uppercase tracking-wider text-white sm:text-sm md:px-0 md:pt-0"
+      >
         Every point in the top 3
       </p>
       <button
@@ -106,7 +130,7 @@ const faqs = [
       data-grid-dialog
       class="m-auto max-h-[92vh] w-[96vw] max-w-3xl overflow-auto rounded-2xl bg-secondary-dark p-0 backdrop:bg-black/80"
     >
-      <form method="dialog" class="sticky top-0 z-10 flex justify-end bg-secondary-dark/90 p-2">
+      <form method="dialog" class="bg-secondary-dark/90 sticky top-0 z-10 flex justify-end p-2">
         <button
           class="inline-flex min-h-11 items-center rounded-xl bg-white px-5 font-heading text-base font-semibold text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           autofocus>Close</button
@@ -151,7 +175,11 @@ const faqs = [
     id="map-scan"
     title="Get a free map scan"
     eyebrow="Free map scan"
-    bullets={["Free map scan, no payment required", "Your current map grid within 24 hours", "We never need your Google password"]}
+    bullets={[
+      "Free map scan, no payment required",
+      "Your current map grid within 24 hours",
+      "We never need your Google password",
+    ]}
     intro="Tell us where you work. We'll send your current map grid so you can see who's beating you."
     source="google-maps-takeover: free map scan"
     submitLabel="Get my free map scan"
@@ -164,17 +192,28 @@ const faqs = [
         required: true,
       },
       { name: "name", label: "Your name", autocomplete: "name", required: true, half: true },
-      { name: "mobile", label: "Mobile", type: "tel", autocomplete: "tel", required: true, half: true },
+      {
+        name: "mobile",
+        label: "Mobile",
+        type: "tel",
+        autocomplete: "tel",
+        required: true,
+        half: true,
+      },
     ]}
   />
 
-  <OfferFAQ items={faqs} phone="+18587222920" smsBody="Hi Mike, I have a question about the Google Maps Takeover." />
+  <OfferFAQ
+    items={faqs}
+    phone={business.phoneE164}
+    smsBody="Hi Mike, I have a question about the Google Maps Takeover."
+  />
 
   <FinalCta
     title="Ready to take over the map?"
     line="$199/mo, locked. Or prepay 6 months and get 1 month free."
     guarantee={offer.guarantee}
-    phone="+18587222920"
+    phone={business.phoneE164}
     smsBody="Hi Mike, I have a question about the Google Maps Takeover."
     primary={{ text: "Get a free map scan", href: "#map-scan" }}
     secondary={{ text: "See plans", href: "#pricing" }}

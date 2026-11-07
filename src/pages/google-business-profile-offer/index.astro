@@ -1,5 +1,6 @@
 ---
 import PageLayout from "~/layouts/PageLayout.astro";
+import { business } from "~/data/business";
 import Button from "~/components/ui/Button.astro";
 import { gbpIntroOffer as offer, getGbpCheckoutUrl, getGbpOfferFaqs } from "~/data/gbpIntroOffer";
 import { gbpProof } from "~/data/gbpProof";
@@ -571,6 +572,7 @@ const faqs = getGbpOfferFaqs(Boolean(checkoutUrl));
               </details>
               <p
                 id="offer-form-status"
+                data-support-email={business.email}
                 role="alert"
                 tabindex="-1"
                 class="hidden rounded-lg border border-red-300 bg-red-50 p-3 text-sm text-red-900 sm:col-span-2"
@@ -713,8 +715,7 @@ const faqs = getGbpOfferFaqs(Boolean(checkoutUrl));
       trackOfferEvent("gbp_offer_inquiry_submitted");
     } catch {
       if (error) {
-        error.textContent =
-          "We could not confirm your request. Please try again or email hello@lilosgrowth.com.";
+        error.textContent = `We could not confirm your request. Please try again or email ${error.dataset.supportEmail}.`;
         error.classList.remove("hidden");
         error.focus();
       }

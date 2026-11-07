@@ -1,6 +1,7 @@
 ---
 import Layout from "~/layouts/PageLayout.astro";
 import Button from "~/components/ui/Button.astro";
+import { business } from "~/data/business";
 
 export const title = "Contact Lilos Growth | Free Local SEO Audit & Consultation";
 export const description =
@@ -49,12 +50,12 @@ export const description =
         Send a message and we aim to reply within 1 business day.<br />
         Call or text: <a
           data-evt="contact_phone_click"
-          href="tel:+18587222920"
-          class="text-primary underline">(858) 722-2920</a
+          href={`tel:${business.phoneE164}`}
+          class="text-primary underline">{business.phoneDisplay}</a
         > &middot; Email: <a
           data-evt="contact_email_click"
-          href="mailto:hello@lilosgrowth.com"
-          class="text-primary underline">hello@lilosgrowth.com</a
+          href={`mailto:${business.email}`}
+          class="text-primary underline">{business.email}</a
         >
       </p>
 
@@ -126,8 +127,8 @@ export const description =
           <span class="font-medium text-heading">Email:</span>
           <a
             data-evt="contact_email_click"
-            href="mailto:hello@lilosgrowth.com"
-            class="ml-1 text-primary underline">hello@lilosgrowth.com</a
+            href={`mailto:${business.email}`}
+            class="ml-1 text-primary underline">{business.email}</a
           >
         </div>
         <div>Serving local businesses across trades, hospitality, and other industries</div>
@@ -277,6 +278,28 @@ export const description =
       });
     })();
   </script>
+  <!-- FIND US ON GOOGLE -->
+  <section class="border-t border-gray-100 bg-white px-4 py-16" aria-labelledby="find-on-google">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 id="find-on-google" class="mb-6 font-heading text-2xl font-bold text-heading md:text-3xl">
+        Find Lilos Growth on Google
+      </h2>
+      <iframe
+        src={business.mapEmbedSrc}
+        title="Lilos Growth on Google Maps"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+        class="aspect-video w-full rounded-2xl border-0"></iframe>
+      <a
+        href={business.gbpUrl}
+        target="_blank"
+        rel="noopener"
+        class="mt-6 inline-block font-semibold text-primary underline underline-offset-4"
+        >View Lilos Growth on Google</a
+      >
+    </div>
+  </section>
 </Layout>
 
 <script src="/scripts/contact-autoscroll.js" defer is:inline></script>
