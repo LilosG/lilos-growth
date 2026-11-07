@@ -9,7 +9,7 @@ import MinimalHeader from "~/components/offers/MinimalHeader.astro";
 import MinimalFooter from "~/components/offers/MinimalFooter.astro";
 import type { MetaData as MetaDataType } from "~/types";
 import { isRecord } from "~/utils/type-guards";
-import { business, stateNames } from "~/data/business";
+import { areaServedNode, business, stateNames } from "~/data/business";
 
 export interface Crumb {
   name: string;
@@ -95,11 +95,9 @@ const organization = {
     ...(business.postalCode ? { postalCode: business.postalCode } : {}),
     addressCountry: business.country,
   },
-  areaServed: business.areaServed.map((market) => ({
-    "@type": "City",
-    name: market.name,
-    containedInPlace: { "@type": "State", name: stateNames[market.state] },
-  })),
+  areaServed: business.areaServed.map((market) =>
+    areaServedNode(market.name, stateNames[market.state])
+  ),
   hasMap: business.gbpUrl,
   sameAs: business.sameAs,
   contactPoint: [

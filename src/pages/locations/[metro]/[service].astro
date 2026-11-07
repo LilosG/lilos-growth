@@ -3,6 +3,7 @@ import Layout from "~/layouts/PageLayout.astro";
 import Breadcrumbs from "~/components/common/Breadcrumbs.astro";
 import MetroServicePage from "~/components/pages/MetroServicePage.astro";
 import { locations, type LocationData } from "~/data/locations";
+import { areaServedNode } from "~/data/business";
 import { metroServices, metroServiceLabels, type MetroServiceData } from "~/data/metroServices";
 import { LOCATIONS_INDEX, locationPath } from "~/lib/routes";
 
@@ -41,11 +42,7 @@ const schema = [
       metroService.service === "web-design" ? "Web design" : "Google Business Profile management",
     description: metroService.description,
     provider: { "@id": "https://lilosgrowth.com/#org" },
-    areaServed: {
-      "@type": "City",
-      name: location.city,
-      containedInPlace: { "@type": "State", name: location.state },
-    },
+    areaServed: areaServedNode(location.city, location.state),
     url,
   },
   {

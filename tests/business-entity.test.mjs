@@ -63,3 +63,38 @@ describe.skipIf(pages.length === 0)("business entity (built site)", () => {
     expect(contact).toMatch(/<iframe[^>]*src="https:\/\/www\.google\.com\/maps\/embed/);
   });
 });
+
+describe.skipIf(pages.length === 0)("areaServed place types (built site)", () => {
+  const typeOf = (area) => area["@type"];
+
+  it("types Orange County as AdministrativeArea in the #org node and the other markets as City", () => {
+    const org = jsonLd(pages.find(({ file }) => file === "index.html").html).find(
+      (node) => node["@id"] === ORG_ID
+    );
+    for (const area of org.areaServed) {
+      expect(typeOf(area), area.name).toBe(
+        area.name === "Orange County" ? "AdministrativeArea" : "City"
+      );
+      expect(area.containedInPlace["@type"]).toBe("State");
+    }
+    expect(org.areaServed.find((area) => area.name === "Orange County").containedInPlace.name).toBe(
+      "California"
+    );
+  });
+
+  it("uses the same typing on the Orange County hub and its metro-service pages", () => {
+    for (const file of [
+      "locations/orange-county/index.html",
+      "locations/orange-county/web-design/index.html",
+      "locations/orange-county/google-business-profile-optimization/index.html",
+      "locations/phoenix/index.html",
+    ]) {
+      const service = jsonLd(pages.find((page) => page.file === file).html).find(
+        (node) => node["@type"] === "Service"
+      );
+      expect(typeOf(service.areaServed), file).toBe(
+        file.includes("orange-county") ? "AdministrativeArea" : "City"
+      );
+    }
+  });
+});

@@ -61,3 +61,13 @@ export const business: Business = {
     { name: "Dallas", state: "TX" },
   ],
 };
+
+/** Markets that are counties rather than cities, so schema types them as AdministrativeArea. */
+const administrativeAreas = new Set(["Orange County"]);
+
+/** Schema.org place node for a served market, contained in its state. */
+export const areaServedNode = (name: string, stateName: string) => ({
+  "@type": administrativeAreas.has(name) ? "AdministrativeArea" : "City",
+  name,
+  containedInPlace: { "@type": "State", name: stateName },
+});
